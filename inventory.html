@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory — Automobile SX</title>
+<meta name="description" content="Browse quality pre-owned vehicles at Automobile SX. Filter by make, body type, price, kilometres and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="assets/logo.png">
+</head>
+<body>
+
+<header class="site-header" id="site-header"></header>
+
+<main id="main">
+
+  <div class="page-head">
+    <div class="container">
+      <h1>Inventory</h1>
+      <p class="sub" id="page-sub">Every vehicle inspected, priced to its condition, Carfax included.</p>
+    </div>
+  </div>
+
+  <div class="container inventory-layout">
+
+    <!-- Filters -->
+    <aside class="filter-sidebar" id="filter-sidebar" aria-label="Vehicle filters">
+      <h2>Filters <button class="drawer-close" id="drawer-close" type="button" aria-label="Close filters">×</button></h2>
+
+      <div class="filter-group">
+        <div class="field">
+          <label for="f-keyword" class="visually-hidden">Keyword search</label>
+          <input type="text" id="f-keyword" placeholder="Search make, model, trim…" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h3>Make</h3>
+        <div class="check-list" id="f-makes"></div>
+      </div>
+
+      <div class="filter-group">
+        <h3>Body type</h3>
+        <div class="check-list" id="f-bodies"></div>
+      </div>
+
+      <div class="filter-group">
+        <h3>Price</h3>
+        <div class="dual-range" id="f-price-range">
+          <div class="track"></div><div class="track-fill"></div>
+          <input type="range" id="f-price-min" aria-label="Minimum price">
+          <input type="range" id="f-price-max" aria-label="Maximum price">
+        </div>
+        <div class="range-vals"><span id="f-price-min-val"></span><span id="f-price-max-val"></span></div>
+      </div>
+
+      <div class="filter-group">
+        <h3>Year</h3>
+        <div class="dual-range" id="f-year-range">
+          <div class="track"></div><div class="track-fill"></div>
+          <input type="range" id="f-year-min" aria-label="Minimum year">
+          <input type="range" id="f-year-max" aria-label="Maximum year">
+        </div>
+        <div class="range-vals"><span id="f-year-min-val"></span><span id="f-year-max-val"></span></div>
+      </div>
+
+      <div class="filter-group">
+        <h3>Max kilometres</h3>
+        <input type="range" id="f-km" aria-label="Maximum kilometres">
+        <div class="range-vals"><span></span><span id="f-km-val"></span></div>
+      </div>
+
+      <div class="filter-group">
+        <h3>Transmission</h3>
+        <div class="check-list" id="f-trans"></div>
+      </div>
+
+      <div class="filter-group">
+        <h3>Fuel</h3>
+        <div class="check-list" id="f-fuel"></div>
+      </div>
+
+      <div class="filter-group">
+        <h3>Drivetrain</h3>
+        <div class="check-list" id="f-drive"></div>
+      </div>
+    </aside>
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+
+    <!-- Results -->
+    <div>
+      <div class="inventory-toolbar">
+        <p class="result-count" id="result-count" role="status" aria-live="polite"></p>
+        <div class="toolbar-right">
+          <button class="btn btn-outline filters-open-btn" id="filters-open" type="button" aria-controls="filter-sidebar" aria-expanded="false">Filters</button>
+          <label class="visually-hidden" for="sort">Sort vehicles</label>
+          <select class="sort-select" id="sort">
+            <option value="price-asc">Price: low → high</option>
+            <option value="price-desc">Price: high → low</option>
+            <option value="km-asc">Lowest kilometres</option>
+            <option value="year-desc">Newest year</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="chip-row" id="chip-row" aria-label="Active filters"></div>
+
+      <div class="vehicle-grid" id="inventory-grid"></div>
+
+      <div class="empty-state" id="empty-state" hidden>
+        <h3>No vehicles match those filters</h3>
+        <p>Try widening the price or kilometre range, or clear everything and start over.</p>
+        <button class="btn btn-red" id="empty-reset" type="button">Reset all filters</button>
+      </div>
+
+      <div class="load-more-wrap">
+        <button class="btn btn-outline" id="load-more" type="button">Load more vehicles</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+<div class="mobile-cta-bar" id="mobile-cta-bar"></div>
+
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/inventory.js"></script>
+</body>
+</html>
