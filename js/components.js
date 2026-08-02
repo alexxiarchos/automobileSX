@@ -143,7 +143,7 @@ window.SXUI = (function () {
   function mapSVG(w, h) {
     w = w || 640; h = h || 360;
     var svg =
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Static map showing the dealership location at 2280 Lakeshore Rd E, Mississauga">' +
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Static map showing the dealership location at 2044 Avenue Chartier, Dorval">' +
       '<rect width="640" height="360" fill="#e9e6e1"/>' +
       '<g stroke="#d6d2cc" stroke-width="10" fill="none">' +
       '<path d="M-20,90 L660,60"/><path d="M-20,210 L660,190"/><path d="M-20,320 L660,330"/>' +
@@ -157,7 +157,7 @@ window.SXUI = (function () {
       '<path d="M0,-34 C-15,-34 -24,-23 -24,-11 C-24,4 0,26 0,26 C0,26 24,4 24,-11 C24,-23 15,-34 0,-34 Z" fill="#BA1D26"/>' +
       '<circle cy="-12" r="8" fill="#fff"/></g>' +
       '<text x="320" y="204" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#3c3f44">Automobile SX</text>' +
-      '<text x="320" y="222" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#6B6F76">2280 Lakeshore Rd E, Mississauga</text>' +
+      '<text x="320" y="222" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#6B6F76">2044 Avenue Chartier, Dorval</text>' +
       "</svg>";
     return svg;
   }
@@ -275,7 +275,8 @@ window.SXUI = (function () {
       '<a href="mailto:' + SX.dealer.email + '">' + SX.dealer.email + "</a></address>" +
       '<div class="footer-map" aria-hidden="true">' + mapSVG() + "</div>" +
       "</div>" +
-      "<div><h3>" + SX.t("footer.hours") + '</h3><table class="footer-hours"><tbody>' + hoursRows() + "</tbody></table></div>" +
+      "<div><h3>" + SX.t("footer.hours") + '</h3><table class="footer-hours"><tbody>' + hoursRows() + "</tbody></table>" +
+      '<p style="font-size:13px;color:var(--slate);margin:10px 0 0">' + SX.dealer.apptNote[SX.lang] + "</p></div>" +
       "<div><h3>" + SX.t("footer.quickLinks") + '</h3><ul class="footer-links">' +
       '<li><a href="inventory.html">' + SX.t("nav.inventory") + "</a></li>" +
       '<li><a href="index.html#financing">' + SX.t("nav.financing") + "</a></li>" +

@@ -27,12 +27,12 @@ SX.strings = {
     "featured.title": "Featured vehicles",
     "bodytype.title": "Browse by body type",
     "estMo": "est. {0}/mo",
-    "footer.tagline": "Family-run pre-owned dealership serving the Greater Toronto Area.",
+    "footer.tagline": "Family-run pre-owned dealership serving Dorval and Greater Montreal.",
     "footer.hours": "Hours",
     "footer.quickLinks": "Quick links",
     "footer.newArrivals": "New arrivals, weekly",
     "footer.newArrivalsSub": "One short email when fresh stock lands. No spam.",
-    "footer.taxNote": "All prices exclude HST and licensing.",
+    "footer.taxNote": "All prices exclude applicable taxes and licensing.",
     "closed": "Closed"
   },
   fr: {
@@ -55,12 +55,12 @@ SX.strings = {
     "featured.title": "Véhicules en vedette",
     "bodytype.title": "Parcourir par carrosserie",
     "estMo": "env. {0}/mois",
-    "footer.tagline": "Concessionnaire familial de véhicules d'occasion dans la région du Grand Toronto.",
+    "footer.tagline": "Concessionnaire familial de véhicules d'occasion à Dorval, dans le Grand Montréal.",
     "footer.hours": "Heures",
     "footer.quickLinks": "Liens rapides",
     "footer.newArrivals": "Nouveaux arrivages, chaque semaine",
     "footer.newArrivalsSub": "Un court courriel quand du nouveau stock arrive. Pas de pourriel.",
-    "footer.taxNote": "Les prix excluent la TVH et l'immatriculation.",
+    "footer.taxNote": "Les prix excluent les taxes applicables et l'immatriculation.",
     "closed": "Fermé"
   }
 };
@@ -75,19 +75,24 @@ SX.t = function (key) {
 /* ---------- Dealership info ---------- */
 SX.dealer = {
   name: "Automobile SX",
-  phone: "(416) 555-0184",
-  phoneHref: "tel:+14165550184",
-  email: "sales@automobilesx.ca",
-  address1: "2280 Lakeshore Rd E",
-  address2: "Mississauga, ON L5E 2P1",
+  contact: "Spiro Xiarchos",
+  phone: "514-824-9117",
+  phoneHref: "tel:+15148249117",
+  email: "Automobilesx@gmail.com",
+  address1: "2044 Avenue Chartier",
+  address2: "Dorval, QC",
+  apptNote: {
+    en: "By appointment — call to book. Reservations welcome.",
+    fr: "Sur rendez-vous — appelez pour réserver. Réservations bienvenues."
+  },
   hours: [
-    { day: "Monday", fr: "Lundi", open: "9:00", close: "19:00" },
-    { day: "Tuesday", fr: "Mardi", open: "9:00", close: "19:00" },
-    { day: "Wednesday", fr: "Mercredi", open: "9:00", close: "19:00" },
-    { day: "Thursday", fr: "Jeudi", open: "9:00", close: "19:00" },
-    { day: "Friday", fr: "Vendredi", open: "9:00", close: "18:00" },
-    { day: "Saturday", fr: "Samedi", open: "10:00", close: "17:00" },
-    { day: "Sunday", fr: "Dimanche", open: null, close: null }
+    { day: "Monday", fr: "Lundi", open: "10:00", close: "18:00" },
+    { day: "Tuesday", fr: "Mardi", open: "10:00", close: "18:00" },
+    { day: "Wednesday", fr: "Mercredi", open: "10:00", close: "18:00" },
+    { day: "Thursday", fr: "Jeudi", open: "10:00", close: "18:00" },
+    { day: "Friday", fr: "Vendredi", open: "10:00", close: "18:00" },
+    { day: "Saturday", fr: "Samedi", open: "10:00", close: "18:00" },
+    { day: "Sunday", fr: "Dimanche", open: "10:00", close: "18:00" }
   ]
 };
 
@@ -133,7 +138,7 @@ SX.vehicles = [
       exterior: ["17\" Alloy Wheels", "Roof Rails", "LED Headlights", "Fog Lights"]
     },
     desc: [
-      "A one-owner RAV4 XLE with all-wheel drive and a clean Carfax. It was traded in locally, serviced on schedule at a Toyota dealer, and shows the kind of even wear you want to see at this mileage. The 2.5L four-cylinder is Toyota's proven workhorse — nothing turbocharged, nothing fragile.",
+      "A one-owner RAV4 XLE with all-wheel drive and a clean history report. It was traded in locally, serviced on schedule at a Toyota dealer, and shows the kind of even wear you want to see at this mileage. The 2.5L four-cylinder is Toyota's proven workhorse — nothing turbocharged, nothing fragile.",
       "The XLE trim adds the moonroof, heated seats, and dual-zone climate over the base LE, and this one includes a power liftgate. New all-season tires were fitted at our 150-point inspection. Winter mats included."
     ]
   },
@@ -151,7 +156,7 @@ SX.vehicles = [
     },
     desc: [
       "The tenth-generation Civic is one of the most dependable compacts you can buy used, and this EX sedan is a clean example with highway-biased kilometres. Two owners, no accidents reported, and full service records from new.",
-      "The 1.5L turbo is quick enough to merge with confidence while sipping fuel — expect real-world numbers close to the ratings. The EX adds the moonroof and Honda Sensing, so you get adaptive cruise on the 401 without stepping up to Touring money."
+      "The 1.5L turbo is quick enough to merge with confidence while sipping fuel — expect real-world numbers close to the ratings. The EX adds the moonroof and Honda Sensing, so you get adaptive cruise on the 20 without stepping up to Touring money."
     ]
   },
   {
@@ -168,7 +173,7 @@ SX.vehicles = [
     },
     desc: [
       "A working truck that hasn't been worked to death. This XLT SuperCrew has the 3.5L EcoBoost and the tow package — rated to pull over 10,000 lb — with maintenance receipts to back up the odometer. The box liner went in on day one and the bed shows it.",
-      "Two owners, both in southern Ontario. The frame and underbody were oil-sprayed annually, which is rarer than it should be on a five-year-old truck. Fresh brakes all around at inspection."
+      "Two owners, both in the Montreal area. The frame and underbody were oil-sprayed annually, which is rarer than it should be on a five-year-old truck. Fresh brakes all around at inspection."
     ]
   },
   {
@@ -184,7 +189,7 @@ SX.vehicles = [
       exterior: ["17\" Alloy Wheels", "LED Headlights", "Rain-Sensing Wipers"]
     },
     desc: [
-      "Still under factory powertrain warranty, this CX-5 GS is the closest thing to a new car on our lot. One owner, bought and serviced in Oakville, with under 35,000 km. The Soul Red paint is the colour Mazda is famous for and it presents beautifully.",
+      "Still under factory powertrain warranty, this CX-5 GS is the closest thing to a new car on our lot. One owner, bought and serviced in Pointe-Claire, with under 35,000 km. The Soul Red paint is the colour Mazda is famous for and it presents beautifully.",
       "The GS trim hits the sweet spot: heated steering wheel, radar cruise, and Mazda's i-Activ AWD without the price of the turbo models. Drives tighter than anything else in the compact SUV class."
     ]
   },
@@ -219,7 +224,7 @@ SX.vehicles = [
     },
     desc: [
       "Cottage-country royalty. This Outback has Subaru's full-time symmetrical AWD and nearly nine inches of ground clearance, with the EyeSight camera suite handling adaptive cruise and emergency braking. Two owners and a clean history.",
-      "The kilometres are mostly highway — Toronto to Muskoka and back, by the service records. Timing chain (not belt), fresh rear brakes, and a new battery installed at inspection."
+      "The kilometres are mostly highway — Montreal to the Laurentians and back, by the service records. Timing chain (not belt), fresh rear brakes, and a new battery installed at inspection."
     ]
   },
   {
@@ -303,7 +308,7 @@ SX.vehicles = [
       exterior: ["18\" Alloy Wheels", "Rear Spoiler", "LED Headlights"]
     },
     desc: [
-      "A low-kilometre Corolla SE with the 169-hp 2.0L — the engine that made the Corolla interesting again. One owner, purchased new in Toronto, still under full factory warranty until 2025 or 60,000 km.",
+      "A low-kilometre Corolla SE with the 169-hp 2.0L — the engine that made the Corolla interesting again. One owner, purchased new in Montreal, still under full factory warranty until 2025 or 60,000 km.",
       "The SE trim brings 18-inch wheels, sport seats, and a firmer suspension tune. If you want a car you will genuinely never have to think about, this is the one on the lot."
     ]
   },
@@ -354,7 +359,7 @@ SX.vehicles = [
       exterior: ["17\" Alloy Wheels", "LED Daytime Running Lights", "Roof Rails"]
     },
     desc: [
-      "The striking fourth-generation Tucson, still under Hyundai's 5-year comprehensive warranty. One owner, no accidents reported, and equipped with Highway Driving Assist — lane centring plus adaptive cruise that genuinely reduces fatigue on the 400-series.",
+      "The striking fourth-generation Tucson, still under Hyundai's 5-year comprehensive warranty. One owner, no accidents reported, and equipped with Highway Driving Assist — lane centring plus adaptive cruise that genuinely reduces fatigue on the highway.",
       "The naturally aspirated 2.5L avoids the turbo complexity of rivals. Serviced exclusively at the selling dealer, with the paperwork in the folder."
     ]
   },
@@ -406,7 +411,7 @@ SX.vehicles = [
     },
     desc: [
       "The Crosstrek does one thing better than anything at its price: go everywhere, all year, cheaply. Full-time AWD, real ground clearance, and Subaru's EyeSight suite on a one-owner car with a clean history.",
-      "This Touring trim has the heated seats and adaptive cruise. Kilometres are honest commuting from Hamilton. Rustproofed annually — the underbody photographs like a two-year-old car."
+      "This Touring trim has the heated seats and adaptive cruise. Kilometres are honest commuting from Laval. Rustproofed annually — the underbody photographs like a two-year-old car."
     ]
   },
   {
@@ -456,7 +461,7 @@ SX.vehicles = [
       exterior: ["18\" Black Machined Wheels", "Sport Mesh Grille", "LED Headlights"]
     },
     desc: [
-      "An AWD Camry SE — Toyota reliability with genuine winter traction. One owner, bought new in Etobicoke, serviced on the button every 8,000 km. No accidents reported and the original tires were replaced with Michelin CrossClimates.",
+      "An AWD Camry SE — Toyota reliability with genuine winter traction. One owner, bought new in Lachine, serviced on the button every 8,000 km. No accidents reported and the original tires were replaced with Michelin CrossClimates.",
       "The SE's firmer suspension makes this the Camry that doesn't drive like an appliance. SofTex seats wear better than leather at this price point. Balance of factory powertrain warranty included."
     ]
   },
@@ -474,7 +479,7 @@ SX.vehicles = [
     },
     desc: [
       "A hybrid Escape that sips 5.9 L/100km in the city — where hybrids earn their keep. This SEL has AWD, leather, and a power liftgate, with one owner and a spotless history report.",
-      "Hybrid battery is covered by Ford's 8-year/160,000 km warranty, transferable to you. If your commute is stop-and-go on the Gardiner, nothing else on our lot will cost less per kilometre."
+      "Hybrid battery is covered by Ford's 8-year/160,000 km warranty, transferable to you. If your commute is stop-and-go on the Décarie, nothing else on our lot will cost less per kilometre."
     ]
   },
   {
@@ -546,11 +551,11 @@ SX.bodyTypes = ["Sedan", "SUV", "Truck", "Coupe", "Hatchback"];
 /* Testimonials — SAMPLE CONTENT */
 SX.testimonials = [
   {
-    quote: "No pressure, no games. The price on the site was the price on the paper. I drove three cars, picked the RAV4, and was out in under two hours.",
+    quote: "No pressure, no games. The price on the site was the price on the paper. I booked an appointment, drove three cars, picked the RAV4, and was out in under two hours.",
     name: "Priya S.", vehicle: "2021 Toyota RAV4"
   },
   {
-    quote: "They showed me the Carfax and the inspection sheet before I asked. My mechanic checked the car after and found nothing to argue with.",
+    quote: "They showed me the history report and the inspection sheet before I asked. My mechanic checked the car after and found nothing to argue with.",
     name: "Marco D.", vehicle: "2019 Honda CR-V"
   },
   {

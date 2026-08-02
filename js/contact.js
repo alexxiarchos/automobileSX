@@ -9,6 +9,7 @@
     return "<tr" + (h.open ? "" : ' class="closed"') + "><td>" + h.day + "</td><td>" +
       (h.open ? h.open + " – " + h.close : "Closed") + "</td></tr>";
   }).join("") + "</tbody>";
+  document.getElementById("contact-appt-note").textContent = SX.dealer.apptNote[SX.lang];
   document.getElementById("contact-map").innerHTML = SXUI.mapSVG();
 
   /* Vehicle dropdown */
@@ -96,7 +97,7 @@
     var name = fields.name.el.value.trim().split(/\s+/)[0];
     document.getElementById("success-detail").innerHTML =
       "Thanks, " + name + " — we’ll get back to you at <strong>" + fields.email.el.value.trim() +
-      "</strong> within one business day. If it’s urgent, call <a href=\"tel:+14165550184\" class=\"text-link\">(416) 555-0184</a>. (Demo only; no message was actually sent.)";
+      "</strong> within one business day. If it’s urgent, call <a href=\"" + SX.dealer.phoneHref + "\" class=\"text-link\">" + SX.dealer.phone + "</a>. (Demo only; no message was actually sent.)";
     form.hidden = true;
     var success = document.getElementById("form-success");
     success.style.display = "block";
@@ -106,10 +107,10 @@
   /* ---------- FAQ accordion ---------- */
   var faqs = [
     ["Do you offer financing?", "Yes. We work with a dozen Canadian lenders and can usually get an answer the same day, for good credit, new credit, and bruised credit alike. You'll see the real rate and the real payment before you sign anything. Bring a driver's licence and proof of income to speed things up."],
-    ["Can I trade in my car?", "Yes — and it usually saves you tax. In Ontario, HST on your next vehicle is charged on the price after your trade-in is deducted. We'll give you a written offer that's good for 7 days, with no obligation to buy from us."],
-    ["Do you deliver?", "We offer free delivery within 50 km of the lot, anywhere in the GTA. Beyond that, we charge a flat fee based on distance — ask us for a quote. You can also complete almost all paperwork before pickup so the handover takes 20 minutes."],
-    ["What's your return policy?", "Every vehicle comes with a 7-day / 500 km return policy. If it's not right for you, bring it back in the condition you bought it and we'll unwind the deal. Safety certification and a free Carfax report are included with every car."],
-    ["Do I need an appointment?", "No — walk-ins are welcome any time we're open, Monday to Saturday. That said, booking a test drive ahead means the car is fuelled, warmed up, and parked out front when you arrive."]
+    ["Can I trade in my car?", "Yes — and it usually saves you tax. In Quebec, sales tax on your next vehicle is calculated on the price after your trade-in is deducted. We'll give you a written offer with no obligation to buy from us."],
+    ["Do you deliver?", "We offer free delivery within 50 km of the lot, anywhere in the Montreal area. Beyond that, we charge a flat fee based on distance — ask us for a quote. You can also complete almost all paperwork before pickup so the handover takes 20 minutes."],
+    ["Can I reserve a vehicle?", "Yes — we're open to reservations. Call 514-824-9117 or send the form above and we'll hold the vehicle while you arrange financing or an inspection visit."],
+    ["Do I need an appointment?", "Yes — visits are by appointment, and we're open 10:00–18:00 every day, so there's always a slot that works. Call 514-824-9117 or use the form above, and the car will be fuelled, warmed up, and parked out front when you arrive."]
   ];
   document.getElementById("faq-list").innerHTML = faqs.map(function (f, i) {
     return '<div class="faq-item">' +

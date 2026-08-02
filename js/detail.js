@@ -130,7 +130,7 @@
 
   /* ---------- Rail ---------- */
   document.getElementById("r-price").textContent = SX.money(v.price);
-  document.getElementById("r-mo").textContent = SX.estMoLabel(v.price) + " · plus HST & licensing";
+  document.getElementById("r-mo").textContent = SX.estMoLabel(v.price) + " · plus taxes & licensing";
   document.getElementById("r-facts").innerHTML =
     "<li><span>Kilometres</span><span>" + v.km.toLocaleString("en-CA") + " km</span></li>" +
     "<li><span>Stock #</span><span>" + v.stock + "</span></li>" +

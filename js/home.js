@@ -51,8 +51,8 @@
     };
     var trust = [
       { icon: "inspect", h: "150-Point Inspection", p: "Mechanical, electrical, body — checked and documented before listing." },
-      { icon: "carfax", h: "Free Carfax Report", p: "Full vehicle history on every listing. Ask and it’s yours, no forms." },
-      { icon: "returns", h: "7-Day Return Policy", p: "Change your mind within 7 days or 500 km? Bring it back." },
+      { icon: "carfax", h: "History on Every Listing", p: "Full specs, kilometres and vehicle history disclosed up front." },
+      { icon: "returns", h: "By Appointment", p: "Call " + SX.dealer.phone + " to book — one-on-one, no crowds. Reservations welcome." },
       { icon: "credit", h: "Financing for All Credit", p: "A dozen Canadian lenders. Honest rates, told to you up front." }
     ];
     document.getElementById("trust-strip").innerHTML = trust.map(function (t) {
@@ -98,6 +98,7 @@
       return "<tr" + (h.open ? "" : ' class="closed"') + "><td>" + name + "</td><td>" +
         (h.open ? h.open + " – " + h.close : SX.t("closed")) + "</td></tr>";
     }).join("") + "</tbody>";
+    document.getElementById("visit-note").textContent = SX.dealer.apptNote[SX.lang];
 
     SXUI.initReveal();
   }

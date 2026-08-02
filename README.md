@@ -7,7 +7,7 @@ Front-end only. No backend, no build step, no dependencies — open `index.html`
 
 - `index.html` — home: hero + search, trust strip, featured vehicles, body-type tiles, financing estimator, trade-in, testimonials (marked as sample), visit block
 - `inventory.html` — 24-vehicle listing with working keyword/make/body/price/year/km/transmission/fuel/drivetrain filters, removable chips, live count, sorting, load-more, empty state; accepts `?make=`, `?model=`, `?body=`, `?maxPrice=` from the home search and body tiles
-- `vehicle.html?id=<id>` — gallery (arrows, keyboard, lightbox), sticky price rail (fixed bottom bar on mobile), specs, grouped features, Carfax-style history, pre-filled payment calculator, similar vehicles
+- `vehicle.html?id=<id>` — gallery (arrows, keyboard, lightbox), sticky price rail (fixed bottom bar on mobile), specs, grouped features, vehicle-history summary, pre-filled payment calculator, similar vehicles
 - `contact.html` — validated form (blur validation, disabled submit, simulated success), dealership card, map, FAQ accordion; accepts `?interest=` and `?vehicle=` to pre-fill
 
 ## Where things live
