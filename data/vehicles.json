@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:17.549Z",
+  "updatedAt": "2026-08-03T20:29:21.449Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,59 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "crv-2019",
-      "year": 2019,
-      "make": "Honda",
-      "model": "CR-V",
-      "trim": "EX-L AWD",
-      "body": "SUV",
-      "price": 26900,
-      "km": 78500,
-      "transmission": "CVT",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Modern Steel",
-      "extHex": "#54585e",
-      "intColor": "Grey leather",
-      "engine": "1.5L Turbo I4",
-      "econCity": 8.7,
-      "econHwy": 7.2,
-      "doors": 5,
-      "seats": 5,
-      "vin": "2HKRW2H84KH130275",
-      "stock": "SX-1011",
-      "features": {
-        "safety": [
-          "Honda Sensing Suite",
-          "Blind Spot Information",
-          "Rear Cross-Traffic Monitor",
-          "Backup Camera"
-        ],
-        "comfort": [
-          "Leather Seats, Heated Front",
-          "Power Tailgate",
-          "Dual-Zone Climate",
-          "Power Moonroof"
-        ],
-        "technology": [
-          "7\" Display Audio",
-          "Apple CarPlay / Android Auto",
-          "Adaptive Cruise Control"
-        ],
-        "exterior": [
-          "18\" Alloy Wheels",
-          "Roof Rails",
-          "LED Daytime Running Lights"
-        ]
-      },
-      "desc": [
-        "The CR-V EX-L pairs Honda's most practical package with leather and a power tailgate. This one has a documented service history, two owners, and the AWD system Canadians buy CR-Vs for.",
-        "All scheduled maintenance is up to date including the CVT fluid service — often skipped, and important on these. New Michelin all-seasons fitted less than 5,000 km ago."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "mustang-2019",
