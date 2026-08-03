@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:28:17.484Z",
+  "updatedAt": "2026-08-03T20:28:53.105Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,58 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "outback-2020",
-      "year": 2020,
-      "make": "Subaru",
-      "model": "Outback",
-      "trim": "Convenience",
-      "body": "SUV",
-      "price": 27800,
-      "km": 72300,
-      "transmission": "CVT",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Crystal White Pearl",
-      "extHex": "#eceae4",
-      "intColor": "Grey cloth",
-      "engine": "2.5L H4",
-      "econCity": 9,
-      "econHwy": 7.1,
-      "doors": 5,
-      "seats": 5,
-      "vin": "4S4BTACC8L3162094",
-      "stock": "SX-1013",
-      "features": {
-        "safety": [
-          "EyeSight Driver Assist",
-          "Pre-Collision Braking",
-          "Lane Departure Warning",
-          "Backup Camera"
-        ],
-        "comfort": [
-          "Heated Front Seats",
-          "Dual-Zone Climate",
-          "Raised Roof Rails"
-        ],
-        "technology": [
-          "11.6\" Tablet-Style Touchscreen",
-          "Apple CarPlay / Android Auto",
-          "Adaptive Cruise Control"
-        ],
-        "exterior": [
-          "17\" Alloy Wheels",
-          "8.7\" Ground Clearance",
-          "Roof Rails with Tie-Downs"
-        ]
-      },
-      "desc": [
-        "Cottage-country royalty. This Outback has Subaru's full-time symmetrical AWD and nearly nine inches of ground clearance, with the EyeSight camera suite handling adaptive cruise and emergency braking. Two owners and a clean history.",
-        "The kilometres are mostly highway — Montreal to the Laurentians and back, by the service records. Timing chain (not belt), fresh rear brakes, and a new battery installed at inspection."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "rogue-2021",
