@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:40.460Z",
+  "updatedAt": "2026-08-03T20:29:43.969Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,58 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "crosstrek-2021",
-      "year": 2021,
-      "make": "Subaru",
-      "model": "Crosstrek",
-      "trim": "Touring",
-      "body": "SUV",
-      "price": 26400,
-      "km": 51200,
-      "transmission": "CVT",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Horizon Blue",
-      "extHex": "#4f7fa3",
-      "intColor": "Black fabric",
-      "engine": "2.0L H4",
-      "econCity": 8.8,
-      "econHwy": 7.2,
-      "doors": 5,
-      "seats": 5,
-      "vin": "JF2GTABC4MH271946",
-      "stock": "SX-1027",
-      "features": {
-        "safety": [
-          "EyeSight Driver Assist",
-          "Pre-Collision Braking",
-          "Lane Keep Assist",
-          "Backup Camera"
-        ],
-        "comfort": [
-          "Heated Front Seats",
-          "Automatic Climate Control",
-          "Leather-Wrapped Wheel"
-        ],
-        "technology": [
-          "8\" Starlink Touchscreen",
-          "Apple CarPlay / Android Auto",
-          "Adaptive Cruise"
-        ],
-        "exterior": [
-          "17\" Alloy Wheels",
-          "Roof Rails",
-          "8.7\" Ground Clearance"
-        ]
-      },
-      "desc": [
-        "The Crosstrek does one thing better than anything at its price: go everywhere, all year, cheaply. Full-time AWD, real ground clearance, and Subaru's EyeSight suite on a one-owner car with a clean history.",
-        "This Touring trim has the heated seats and adaptive cruise. Kilometres are honest commuting from Laval. Rustproofed annually — the underbody photographs like a two-year-old car."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "altima-2020",
