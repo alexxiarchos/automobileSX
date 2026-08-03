@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:49.841Z",
+  "updatedAt": "2026-08-03T20:29:55.147Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,58 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "camry-2021",
-      "year": 2021,
-      "make": "Toyota",
-      "model": "Camry",
-      "trim": "SE AWD",
-      "body": "Sedan",
-      "price": 29700,
-      "km": 44900,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Predawn Grey Mica",
-      "extHex": "#606266",
-      "intColor": "Black SofTex",
-      "engine": "2.5L I4",
-      "econCity": 9.1,
-      "econHwy": 6.8,
-      "doors": 4,
-      "seats": 5,
-      "vin": "4T1G11BK3MU592817",
-      "stock": "SX-1044",
-      "features": {
-        "safety": [
-          "Toyota Safety Sense 2.5+",
-          "Pre-Collision with Pedestrian Detection",
-          "Lane Tracing Assist",
-          "Blind Spot Monitor"
-        ],
-        "comfort": [
-          "Heated SofTex Sport Seats",
-          "Dual-Zone Climate",
-          "Power Driver Seat"
-        ],
-        "technology": [
-          "9\" Touchscreen",
-          "Apple CarPlay / Android Auto",
-          "Full-Speed Dynamic Cruise"
-        ],
-        "exterior": [
-          "18\" Black Machined Wheels",
-          "Sport Mesh Grille",
-          "LED Headlights"
-        ]
-      },
-      "desc": [
-        "An AWD Camry SE — Toyota reliability with genuine winter traction. One owner, bought new in Lachine, serviced on the button every 8,000 km. No accidents reported and the original tires were replaced with Michelin CrossClimates.",
-        "The SE's firmer suspension makes this the Camry that doesn't drive like an appliance. SofTex seats wear better than leather at this price point. Balance of factory powertrain warranty included."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "escape-2021",
