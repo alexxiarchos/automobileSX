@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:28:03.982Z",
+  "updatedAt": "2026-08-03T20:28:08.012Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,60 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "f150-2019",
-      "year": 2019,
-      "make": "Ford",
-      "model": "F-150",
-      "trim": "XLT SuperCrew 4x4",
-      "body": "Truck",
-      "price": 33900,
-      "km": 89400,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "4x4",
-      "extColor": "Oxford White",
-      "extHex": "#e8e8e4",
-      "intColor": "Grey cloth",
-      "engine": "3.5L EcoBoost V6",
-      "econCity": 13.9,
-      "econHwy": 10.5,
-      "doors": 4,
-      "seats": 6,
-      "vin": "1FTFW1E45KFA77216",
-      "stock": "SX-1007",
-      "features": {
-        "safety": [
-          "Backup Camera",
-          "Trailer Sway Control",
-          "Curve Control",
-          "SOS Post-Crash Alert"
-        ],
-        "comfort": [
-          "Power Driver Seat",
-          "Cloth 40/20/40 Bench",
-          "Cruise Control",
-          "Power Windows & Locks"
-        ],
-        "technology": [
-          "SYNC 3 8\" Touchscreen",
-          "Apple CarPlay / Android Auto",
-          "Trailer Tow Package"
-        ],
-        "exterior": [
-          "17\" Alloy Wheels",
-          "Tailgate Step",
-          "Chrome Bumpers",
-          "Bed Liner"
-        ]
-      },
-      "desc": [
-        "A working truck that hasn't been worked to death. This XLT SuperCrew has the 3.5L EcoBoost and the tow package — rated to pull over 10,000 lb — with maintenance receipts to back up the odometer. The box liner went in on day one and the bed shows it.",
-        "Two owners, both in the Montreal area. The frame and underbody were oil-sprayed annually, which is rarer than it should be on a five-year-old truck. Fresh brakes all around at inspection."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "cx5-2022",
