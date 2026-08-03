@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:43.969Z",
+  "updatedAt": "2026-08-03T20:29:46.870Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,59 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "altima-2020",
-      "year": 2020,
-      "make": "Nissan",
-      "model": "Altima",
-      "trim": "SV AWD",
-      "body": "Sedan",
-      "price": 22700,
-      "km": 66800,
-      "transmission": "CVT",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Storm Blue",
-      "extHex": "#3e5f80",
-      "intColor": "Charcoal fabric",
-      "engine": "2.5L I4",
-      "econCity": 9.1,
-      "econHwy": 6.5,
-      "doors": 4,
-      "seats": 5,
-      "vin": "1N4BL4DW2LC214370",
-      "stock": "SX-1023",
-      "features": {
-        "safety": [
-          "Nissan Safety Shield 360",
-          "ProPILOT Assist",
-          "Rear Automatic Braking",
-          "Intelligent Around View"
-        ],
-        "comfort": [
-          "Heated Front Seats & Wheel",
-          "Dual-Zone Climate",
-          "Remote Start",
-          "Power Driver Seat"
-        ],
-        "technology": [
-          "8\" Touchscreen",
-          "Apple CarPlay / Android Auto",
-          "Intelligent Cruise Control"
-        ],
-        "exterior": [
-          "17\" Alloy Wheels",
-          "LED Headlights",
-          "Power Moonroof"
-        ]
-      },
-      "desc": [
-        "One of the few mid-size sedans you can get with all-wheel drive — and in Canada, that matters four months a year. This Altima SV has ProPILOT Assist, a moonroof, and a two-owner, accident-free history.",
-        "It's the sensible sedan for someone who doesn't want an SUV but does want winter confidence. New wiper blades, cabin filter, and a fresh oil service at inspection. Priced under the AWD Camry equivalent by a wide margin."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "grandcherokee-2019",
