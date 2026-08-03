@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:28.917Z",
+  "updatedAt": "2026-08-03T20:29:32.217Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,58 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "mazda3-2021",
-      "year": 2021,
-      "make": "Mazda",
-      "model": "Mazda3 Sport",
-      "trim": "GS",
-      "body": "Hatchback",
-      "price": 23900,
-      "km": 46100,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "FWD",
-      "extColor": "Polymetal Grey",
-      "extHex": "#5e6468",
-      "intColor": "Black fabric",
-      "engine": "2.5L I4",
-      "econCity": 9.2,
-      "econHwy": 6.9,
-      "doors": 5,
-      "seats": 5,
-      "vin": "3MZBPBBM3M1319482",
-      "stock": "SX-1032",
-      "features": {
-        "safety": [
-          "i-Activsense Suite",
-          "Smart Brake Support",
-          "Blind Spot Monitoring",
-          "Rear Cross-Traffic Alert"
-        ],
-        "comfort": [
-          "Heated Seats & Steering Wheel",
-          "Dual-Zone Climate",
-          "Rain-Sensing Wipers"
-        ],
-        "technology": [
-          "8.8\" Mazda Connect Display",
-          "Apple CarPlay / Android Auto",
-          "Radar Cruise Control"
-        ],
-        "exterior": [
-          "18\" Grey Metallic Alloys",
-          "LED Headlights & Taillights",
-          "Shark Fin Antenna"
-        ]
-      },
-      "desc": [
-        "The Mazda3 Sport hatch in Polymetal Grey — the colour that made this generation a design icon. Interior quality embarrasses cars twice the price. One owner, clean history, dealer-serviced.",
-        "The 2.5L is smooth and torquey where rivals feel strained. Practical too: the hatch swallows a bike with the seats down. New front pads and rotors at inspection."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "silverado-2020",
