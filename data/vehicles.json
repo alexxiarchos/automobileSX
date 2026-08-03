@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:13.201Z",
+  "updatedAt": "2026-08-03T20:29:17.549Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,59 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "corolla-2022",
-      "year": 2022,
-      "make": "Toyota",
-      "model": "Corolla",
-      "trim": "SE",
-      "body": "Sedan",
-      "price": 25400,
-      "km": 28900,
-      "transmission": "CVT",
-      "fuel": "Gasoline",
-      "drivetrain": "FWD",
-      "extColor": "Celestite Grey",
-      "extHex": "#8f959b",
-      "intColor": "Black sport fabric",
-      "engine": "2.0L I4",
-      "econCity": 7.7,
-      "econHwy": 5.9,
-      "doors": 4,
-      "seats": 5,
-      "vin": "5YFS4MCE2NP128463",
-      "stock": "SX-1048",
-      "tag": "Just Arrived",
-      "features": {
-        "safety": [
-          "Toyota Safety Sense 2.0",
-          "Pre-Collision System",
-          "Lane Tracing Assist",
-          "Automatic High Beams"
-        ],
-        "comfort": [
-          "Heated Sport Seats",
-          "Single-Zone Auto Climate",
-          "Sport Pedals"
-        ],
-        "technology": [
-          "8\" Touchscreen",
-          "Apple CarPlay / Android Auto",
-          "Full-Speed Adaptive Cruise"
-        ],
-        "exterior": [
-          "18\" Alloy Wheels",
-          "Rear Spoiler",
-          "LED Headlights"
-        ]
-      },
-      "desc": [
-        "A low-kilometre Corolla SE with the 169-hp 2.0L — the engine that made the Corolla interesting again. One owner, purchased new in Montreal, still under full factory warranty until 2025 or 60,000 km.",
-        "The SE trim brings 18-inch wheels, sport seats, and a firmer suspension tune. If you want a car you will genuinely never have to think about, this is the one on the lot."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "crv-2019",
