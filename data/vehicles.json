@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:27:37.208Z",
+  "updatedAt": "2026-08-03T20:28:03.982Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,59 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "civic-2020",
-      "year": 2020,
-      "make": "Honda",
-      "model": "Civic",
-      "trim": "EX Sedan",
-      "body": "Sedan",
-      "price": 24400,
-      "km": 61500,
-      "transmission": "CVT",
-      "fuel": "Gasoline",
-      "drivetrain": "FWD",
-      "extColor": "Aegean Blue",
-      "extHex": "#2b4d7e",
-      "intColor": "Grey fabric",
-      "engine": "1.5L Turbo I4",
-      "econCity": 7.6,
-      "econHwy": 6.1,
-      "doors": 4,
-      "seats": 5,
-      "vin": "2HGFC2F79LH521844",
-      "stock": "SX-1018",
-      "features": {
-        "safety": [
-          "Honda Sensing Suite",
-          "Lane Keeping Assist",
-          "Collision Mitigation Braking",
-          "Backup Camera"
-        ],
-        "comfort": [
-          "Heated Front Seats",
-          "Power Moonroof",
-          "Automatic Climate Control",
-          "Remote Start"
-        ],
-        "technology": [
-          "7\" Display Audio",
-          "Apple CarPlay / Android Auto",
-          "Adaptive Cruise Control"
-        ],
-        "exterior": [
-          "16\" Alloy Wheels",
-          "LED Daytime Running Lights",
-          "Body-Coloured Mirrors"
-        ]
-      },
-      "desc": [
-        "The tenth-generation Civic is one of the most dependable compacts you can buy used, and this EX sedan is a clean example with highway-biased kilometres. Two owners, no accidents reported, and full service records from new.",
-        "The 1.5L turbo is quick enough to merge with confidence while sipping fuel — expect real-world numbers close to the ratings. The EX adds the moonroof and Honda Sensing, so you get adaptive cruise on the 20 without stepping up to Touring money."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "f150-2019",
