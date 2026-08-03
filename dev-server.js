@@ -30,6 +30,7 @@ const server = http.createServer(function (req, res) {
 
   let file = p === "/" ? "/index.html" : decodeURIComponent(p);
   if (file.endsWith("/")) file += "index.html";
+  else if (fs.existsSync(path.join(__dirname, file)) && fs.statSync(path.join(__dirname, file)).isDirectory()) file += "/index.html";
   const abs = path.join(__dirname, file);
   if (!abs.startsWith(__dirname)) { res.statusCode = 403; return res.end(); }
   fs.readFile(abs, function (err, buf) {

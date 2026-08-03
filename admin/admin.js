@@ -25,7 +25,7 @@
   /* ---------- tiny helpers ---------- */
 
   function api(path, opts) {
-    return fetch("../api/" + path, Object.assign({ credentials: "same-origin" }, opts))
+    return fetch("/api/" + path, Object.assign({ credentials: "same-origin" }, opts))
       .then(function (r) {
         return r.json().catch(function () { return {}; }).then(function (data) {
           if (!r.ok) throw new Error(data.error || ("Request failed (" + r.status + ")"));
@@ -72,7 +72,7 @@
   }
 
   function thumbSrc(v) {
-    if (v.images && v.images.length) return "../" + v.images[0];
+    if (v.images && v.images.length) return "/" + v.images[0];
     return ""; /* handled with placeholder below */
   }
 
@@ -367,7 +367,7 @@
       item.className = "photo-item";
       item.draggable = true;
       item.innerHTML =
-        '<img src="' + (p.indexOf("data:") === 0 ? p : "../" + p) + '" alt="Photo ' + (i + 1) + '">' +
+        '<img src="' + (p.indexOf("data:") === 0 ? p : "/" + p) + '" alt="Photo ' + (i + 1) + '">' +
         (i === 0 ? '<span class="ph-main">Main</span>' : "") +
         '<div class="ph-tools">' +
         '<button type="button" data-mv="-1" aria-label="Move photo ' + (i + 1) + ' earlier">◀</button>' +
