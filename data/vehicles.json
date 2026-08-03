@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:55.147Z",
+  "updatedAt": "2026-08-03T20:29:58.722Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,60 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "escape-2021",
-      "year": 2021,
-      "make": "Ford",
-      "model": "Escape",
-      "trim": "SEL AWD Hybrid",
-      "body": "SUV",
-      "price": 28900,
-      "km": 47800,
-      "transmission": "e-CVT",
-      "fuel": "Hybrid",
-      "drivetrain": "AWD",
-      "extColor": "Star White",
-      "extHex": "#eae9e2",
-      "intColor": "Sandstone leather",
-      "engine": "2.5L I4 Hybrid",
-      "econCity": 5.9,
-      "econHwy": 6.6,
-      "doors": 5,
-      "seats": 5,
-      "vin": "1FMCU9CZ3MUB04176",
-      "stock": "SX-1038",
-      "features": {
-        "safety": [
-          "Ford Co-Pilot360",
-          "Blind Spot Information",
-          "Lane Keeping System",
-          "Pre-Collision Assist"
-        ],
-        "comfort": [
-          "Heated Leather-Trimmed Seats",
-          "Dual-Zone Climate",
-          "Power Liftgate",
-          "Remote Start"
-        ],
-        "technology": [
-          "8\" SYNC 3 Touchscreen",
-          "Apple CarPlay / Android Auto",
-          "Adaptive Cruise Control",
-          "FordPass Connect"
-        ],
-        "exterior": [
-          "18\" Machined Wheels",
-          "Roof Rails",
-          "LED Signature Lighting"
-        ]
-      },
-      "desc": [
-        "A hybrid Escape that sips 5.9 L/100km in the city — where hybrids earn their keep. This SEL has AWD, leather, and a power liftgate, with one owner and a spotless history report.",
-        "Hybrid battery is covered by Ford's 8-year/160,000 km warranty, transferable to you. If your commute is stop-and-go on the Décarie, nothing else on our lot will cost less per kilometre."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "civic-hatch-2018",
