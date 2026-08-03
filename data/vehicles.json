@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:30:07.550Z",
+  "updatedAt": "2026-08-03T20:30:10.845Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,59 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "santafe-2018",
-      "year": 2018,
-      "make": "Hyundai",
-      "model": "Santa Fe Sport",
-      "trim": "2.4 Premium AWD",
-      "body": "SUV",
-      "price": 15900,
-      "km": 106400,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Platinum Graphite",
-      "extHex": "#3f4247",
-      "intColor": "Grey fabric",
-      "engine": "2.4L I4",
-      "econCity": 11.4,
-      "econHwy": 8.7,
-      "doors": 5,
-      "seats": 5,
-      "vin": "5XYZUDLB3JG512740",
-      "stock": "SX-1008",
-      "tag": "Price Drop",
-      "features": {
-        "safety": [
-          "Blind Spot Detection",
-          "Rear Cross-Traffic Alert",
-          "Backup Camera",
-          "Downhill Brake Control"
-        ],
-        "comfort": [
-          "Heated Front & Rear Seats",
-          "Heated Steering Wheel",
-          "Dual-Zone Climate"
-        ],
-        "technology": [
-          "7\" Touchscreen",
-          "Apple CarPlay / Android Auto",
-          "Rear Parking Sensors"
-        ],
-        "exterior": [
-          "17\" Alloy Wheels",
-          "Roof Rails",
-          "Solar Glass"
-        ]
-      },
-      "desc": [
-        "Our best value in an AWD family SUV. This Santa Fe Sport has heated seats front and rear, a heated wheel, and blind spot detection — comfort features that were optional extras on rivals of this vintage.",
-        "Kilometres are high and the price is set to match. Mechanically it earned its spot on the lot: compression tested, new spark plugs, new front wheel bearings, and a full brake service. A lot of warm, safe transportation for under $18,000."
-      ],
-      "images": [],
-      "status": "available"
     }
   ]
 }
