@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:46.870Z",
+  "updatedAt": "2026-08-03T20:29:49.841Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,60 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "grandcherokee-2019",
-      "year": 2019,
-      "make": "Jeep",
-      "model": "Grand Cherokee",
-      "trim": "Limited 4x4",
-      "body": "SUV",
-      "price": 29400,
-      "km": 84600,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "4x4",
-      "extColor": "Granite Crystal",
-      "extHex": "#4d4f54",
-      "intColor": "Black leather",
-      "engine": "3.6L V6",
-      "econCity": 12.7,
-      "econHwy": 9.6,
-      "doors": 5,
-      "seats": 5,
-      "vin": "1C4RJFBG3KC748162",
-      "stock": "SX-1006",
-      "features": {
-        "safety": [
-          "Blind Spot Monitoring",
-          "Rear Cross Path Detection",
-          "ParkSense Assist",
-          "Backup Camera"
-        ],
-        "comfort": [
-          "Heated Leather Seats, Front & Rear",
-          "Heated Steering Wheel",
-          "Dual-Zone Climate",
-          "Power Liftgate",
-          "Remote Start"
-        ],
-        "technology": [
-          "8.4\" Uconnect with Navigation",
-          "Apple CarPlay / Android Auto",
-          "Alpine Audio"
-        ],
-        "exterior": [
-          "18\" Polished Wheels",
-          "Bi-Xenon Headlights",
-          "Tow Package"
-        ]
-      },
-      "desc": [
-        "The WK2 Grand Cherokee Limited blends real 4x4 capability with a leather-lined cabin — heated seats front and rear, navigation, and a power liftgate. Two owners, no accidents reported, tow package fitted from the factory.",
-        "Higher kilometres priced fairly. Our inspection replaced the front control arm bushings and both wiper cowls; the transfer case and differentials were serviced at the same time. A lot of truck for under $30k."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "camry-2021",
