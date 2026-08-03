@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:32.217Z",
+  "updatedAt": "2026-08-03T20:29:40.460Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,60 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "silverado-2020",
-      "year": 2020,
-      "make": "Chevrolet",
-      "model": "Silverado 1500",
-      "trim": "LT Crew Cab 4x4",
-      "body": "Truck",
-      "price": 36400,
-      "km": 76900,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "4x4",
-      "extColor": "Northsky Blue",
-      "extHex": "#3a5a78",
-      "intColor": "Jet Black cloth",
-      "engine": "5.3L V8",
-      "econCity": 14.9,
-      "econHwy": 10.9,
-      "doors": 4,
-      "seats": 6,
-      "vin": "3GCUYDED4LG204815",
-      "stock": "SX-1016",
-      "features": {
-        "safety": [
-          "Backup Camera",
-          "Hitch Guidance",
-          "StabiliTrak with Trailer Sway",
-          "Teen Driver Mode"
-        ],
-        "comfort": [
-          "Heated Front Seats",
-          "Dual-Zone Climate",
-          "Remote Start",
-          "10-Way Power Driver Seat"
-        ],
-        "technology": [
-          "8\" Infotainment 3 System",
-          "Apple CarPlay / Android Auto",
-          "Trailering App"
-        ],
-        "exterior": [
-          "18\" Bright Silver Wheels",
-          "CornerStep Rear Bumper",
-          "Spray-On Bedliner",
-          "Tow Package"
-        ]
-      },
-      "desc": [
-        "A 5.3L V8 Silverado LT crew cab with the trailering package and a spray-in liner. One corporate owner — a landscaping firm that maintained it on a fleet schedule, which means every service is documented to the kilometre.",
-        "It pulled a tandem-axle trailer gently, not a fifth wheel hard. Transmission fluid and transfer case serviced at 70,000 km. New tires, fresh alignment, ready to hitch up."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "crosstrek-2021",
