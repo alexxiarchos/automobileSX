@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:30:02.804Z",
+  "updatedAt": "2026-08-03T20:30:07.550Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,60 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "440i-2018",
-      "year": 2018,
-      "make": "BMW",
-      "model": "440i",
-      "trim": "xDrive Coupe M Sport",
-      "body": "Coupe",
-      "price": 41500,
-      "km": 74500,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Estoril Blue",
-      "extHex": "#2f5d9e",
-      "intColor": "Oyster leather",
-      "engine": "3.0L Turbo I6",
-      "econCity": 11.2,
-      "econHwy": 7.8,
-      "doors": 2,
-      "seats": 4,
-      "vin": "WBA4W9C58JAB92047",
-      "stock": "SX-1001",
-      "features": {
-        "safety": [
-          "Active Guard",
-          "Lane Departure Warning",
-          "Backup Camera",
-          "Park Distance Control"
-        ],
-        "comfort": [
-          "Heated Sport Seats",
-          "Dual-Zone Climate",
-          "Power Seats with Memory",
-          "Sunroof"
-        ],
-        "technology": [
-          "8.8\" iDrive with Navigation",
-          "Apple CarPlay",
-          "Harman Kardon Audio",
-          "Heads-Up Display"
-        ],
-        "exterior": [
-          "19\" M Wheels",
-          "M Sport Package",
-          "Adaptive LED Headlights"
-        ]
-      },
-      "desc": [
-        "The B58 straight-six is one of the great modern engines — 326 hp, turbine-smooth, and famously robust. This 440i coupe pairs it with xDrive and the M Sport package, in Estoril Blue over Oyster leather.",
-        "Full service history including the walnut-blasting intake service. Two adult owners, winter-stored the last three years. The heads-up display and Harman Kardon audio make it a genuinely lovely daily."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "santafe-2018",
