@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:27:24.744Z",
+  "updatedAt": "2026-08-03T20:27:37.208Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,63 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "rav4-2021",
-      "year": 2021,
-      "make": "Toyota",
-      "model": "RAV4",
-      "trim": "XLE AWD",
-      "body": "SUV",
-      "price": 32900,
-      "km": 48200,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Magnetic Grey",
-      "extHex": "#5c6066",
-      "intColor": "Black fabric",
-      "engine": "2.5L I4",
-      "econCity": 8.8,
-      "econHwy": 7,
-      "doors": 5,
-      "seats": 5,
-      "vin": "2T3P1RFV8MC418302",
-      "stock": "SX-1041",
-      "tag": "Just Arrived",
-      "features": {
-        "safety": [
-          "Toyota Safety Sense 2.0",
-          "Blind Spot Monitor",
-          "Rear Cross-Traffic Alert",
-          "Backup Camera",
-          "8 Airbags"
-        ],
-        "comfort": [
-          "Heated Front Seats",
-          "Dual-Zone Climate",
-          "Power Moonroof",
-          "Power Liftgate"
-        ],
-        "technology": [
-          "8\" Touchscreen",
-          "Apple CarPlay / Android Auto",
-          "Adaptive Cruise Control",
-          "Push-Button Start"
-        ],
-        "exterior": [
-          "17\" Alloy Wheels",
-          "Roof Rails",
-          "LED Headlights",
-          "Fog Lights"
-        ]
-      },
-      "desc": [
-        "A one-owner RAV4 XLE with all-wheel drive and a clean history report. It was traded in locally, serviced on schedule at a Toyota dealer, and shows the kind of even wear you want to see at this mileage. The 2.5L four-cylinder is Toyota's proven workhorse — nothing turbocharged, nothing fragile.",
-        "The XLE trim adds the moonroof, heated seats, and dual-zone climate over the base LE, and this one includes a power liftgate. New all-season tires were fitted at our 150-point inspection. Winter mats included."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "civic-2020",
