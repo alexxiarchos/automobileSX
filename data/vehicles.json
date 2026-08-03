@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:28:08.012Z",
+  "updatedAt": "2026-08-03T20:28:12.445Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,60 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "cx5-2022",
-      "year": 2022,
-      "make": "Mazda",
-      "model": "CX-5",
-      "trim": "GS AWD",
-      "body": "SUV",
-      "price": 31500,
-      "km": 34800,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Soul Red Crystal",
-      "extHex": "#8f1a24",
-      "intColor": "Black leatherette",
-      "engine": "2.5L I4",
-      "econCity": 9.3,
-      "econHwy": 7.6,
-      "doors": 5,
-      "seats": 5,
-      "vin": "JM3KFBCM5N0518329",
-      "stock": "SX-1052",
-      "tag": "Just Arrived",
-      "features": {
-        "safety": [
-          "i-Activsense Safety Suite",
-          "Blind Spot Monitoring",
-          "Smart City Brake Support",
-          "Rear Cross-Traffic Alert"
-        ],
-        "comfort": [
-          "Heated Seats & Steering Wheel",
-          "Dual-Zone Climate",
-          "Power Driver Seat",
-          "Leatherette Upholstery"
-        ],
-        "technology": [
-          "10.25\" Centre Display",
-          "Apple CarPlay / Android Auto",
-          "Mazda Radar Cruise Control"
-        ],
-        "exterior": [
-          "17\" Alloy Wheels",
-          "LED Headlights",
-          "Rain-Sensing Wipers"
-        ]
-      },
-      "desc": [
-        "Still under factory powertrain warranty, this CX-5 GS is the closest thing to a new car on our lot. One owner, bought and serviced in Pointe-Claire, with under 35,000 km. The Soul Red paint is the colour Mazda is famous for and it presents beautifully.",
-        "The GS trim hits the sweet spot: heated steering wheel, radar cruise, and Mazda's i-Activ AWD without the price of the turbo models. Drives tighter than anything else in the compact SUV class."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "elantra-2021",
