@@ -1,5 +1,5 @@
 /* Automobile SX — vehicle detail page */
-(function () {
+SX.ready.then(function () {
   "use strict";
 
   SXUI.init("inventory");
@@ -18,9 +18,14 @@
     '<li><a href="inventory.html?body=' + encodeURIComponent(v.body) + '">' + bodyPlural + "</a></li>" +
     '<li aria-current="page">' + title + " " + v.trim + "</li>";
 
-  document.getElementById("v-title").textContent = title + " " + v.trim;
+  document.getElementById("v-title").textContent = title + " " + (v.trim || "");
+  if (v.status === "sold") {
+    var soldTag = document.createElement("p");
+    soldTag.innerHTML = '<span class="vc-tag" style="position:static;display:inline-block">Sold</span> <span style="color:var(--slate);font-size:14px">This vehicle has found a new home — browse our current inventory below.</span>';
+    document.getElementById("v-title").after(soldTag);
+  }
   document.getElementById("v-subtitle").textContent =
-    v.extColor + " · " + SXUI.specLine(v) + " · Stock " + v.stock;
+    (v.extColor ? v.extColor + " · " : "") + SXUI.specLine(v) + (v.stock ? " · Stock " + v.stock : "");
 
   /* ---------- Gallery ---------- */
   var images = SXUI.vehicleImages(v);
@@ -29,12 +34,16 @@
   var counter = document.getElementById("gal-counter");
   var strip = document.getElementById("thumb-strip");
 
+  var hasRealPhotos = v.images && v.images.length;
+  function viewLabel(i) {
+    return hasRealPhotos ? "photo " + (i + 1) : SX.photoViews[i] + " placeholder photo";
+  }
   function altFor(i) {
-    return title + " " + v.trim + " — " + SX.photoViews[i] + " placeholder photo";
+    return title + " " + (v.trim || "") + " — " + viewLabel(i);
   }
 
   strip.innerHTML = images.map(function (src, i) {
-    return '<button type="button" role="tab" aria-label="Photo ' + (i + 1) + ": " + SX.photoViews[i] + '">' +
+    return '<button type="button" role="tab" aria-label="Photo ' + (i + 1) + '">' +
       '<img loading="lazy" src="' + src + '" alt="" width="512" height="288"></button>';
   }).join("");
   var thumbs = Array.prototype.slice.call(strip.children);
@@ -87,8 +96,9 @@
   show(0);
 
   /* ---------- Overview ---------- */
+  var descParas = Array.isArray(v.desc) ? v.desc : (v.desc ? String(v.desc).split(/\n\s*\n/) : []);
   document.getElementById("v-overview").innerHTML =
-    v.desc.map(function (p) { return "<p>" + p + "</p>"; }).join("");
+    descParas.map(function (p) { return "<p>" + p + "</p>"; }).join("") || "<p>Contact us for full details on this vehicle.</p>";
 
   /* ---------- Specs ---------- */
   var specs = [
@@ -96,15 +106,15 @@
     ["Transmission", v.transmission],
     ["Drivetrain", v.drivetrain],
     ["Fuel type", v.fuel],
-    ["Fuel economy (city)", v.econCity.toFixed(1) + " L/100 km"],
-    ["Fuel economy (highway)", v.econHwy.toFixed(1) + " L/100 km"],
+    ["Fuel economy (city)", v.econCity != null ? Number(v.econCity).toFixed(1) + " L/100 km" : null],
+    ["Fuel economy (highway)", v.econHwy != null ? Number(v.econHwy).toFixed(1) + " L/100 km" : null],
     ["Exterior colour", v.extColor],
     ["Interior", v.intColor],
-    ["Doors", String(v.doors)],
-    ["Seats", String(v.seats)],
+    ["Doors", v.doors != null ? String(v.doors) : null],
+    ["Seats", v.seats != null ? String(v.seats) : null],
     ["Kilometres", v.km.toLocaleString("en-CA") + " km"],
     ["VIN", v.vin]
-  ];
+  ].filter(function (r) { return r[1]; });
   var half = Math.ceil(specs.length / 2);
   function specTable(rows) {
     return '<table class="spec-table"><tbody>' + rows.map(function (r) {
@@ -113,15 +123,23 @@
   }
   document.getElementById("v-specs").innerHTML = specTable(specs.slice(0, half)) + specTable(specs.slice(half));
 
-  /* ---------- Features ---------- */
-  var groups = [["Safety", v.features.safety], ["Comfort", v.features.comfort], ["Technology", v.features.technology], ["Exterior", v.features.exterior]];
+  /* ---------- Features (grouped object from sample data, flat array from admin) ---------- */
+  var groups;
+  if (Array.isArray(v.features)) {
+    groups = v.features.length ? [["Features", v.features]] : [];
+  } else if (v.features) {
+    groups = [["Safety", v.features.safety], ["Comfort", v.features.comfort],
+      ["Technology", v.features.technology], ["Exterior", v.features.exterior]]
+      .filter(function (g) { return g[1] && g[1].length; });
+  } else { groups = []; }
   document.getElementById("v-features").innerHTML = groups.map(function (g) {
     return '<div class="feature-group"><h3>' + g[0] + '</h3><ul class="feature-chips">' +
       g[1].map(function (f) { return "<li>" + f + "</li>"; }).join("") + "</ul></div>";
-  }).join("");
+  }).join("") || "<p style=\"color:var(--slate)\">Feature list available at your appointment.</p>";
 
   /* ---------- History (sample, deterministic per vehicle) ---------- */
-  var owners = (v.desc[0] + v.desc[1]).indexOf("one owner") > -1 || v.desc[0].indexOf("One owner") > -1 ? 1 : 2;
+  var descJoined = descParas.join(" ");
+  var owners = /one owner/i.test(descJoined) ? 1 : 2;
   document.getElementById("v-history").innerHTML =
     '<div class="history-item"><div class="h-label">Owners</div><div class="h-value">' + owners + "</div></div>" +
     '<div class="history-item"><div class="h-label">Accidents reported</div><div class="h-value"><span class="trust-dot"></span>None</div></div>' +
@@ -134,7 +152,7 @@
   document.getElementById("r-facts").innerHTML =
     "<li><span>Kilometres</span><span>" + v.km.toLocaleString("en-CA") + " km</span></li>" +
     "<li><span>Stock #</span><span>" + v.stock + "</span></li>" +
-    "<li><span>VIN</span><span>" + v.vin + "</span></li>";
+    (v.vin ? "<li><span>VIN</span><span>" + v.vin + "</span></li>" : "");
   document.getElementById("r-testdrive").href = "contact.html?interest=test-drive&vehicle=" + v.id;
   document.getElementById("r-availability").href = "contact.html?interest=vehicle&vehicle=" + v.id;
   document.getElementById("r-preapproved").href = "contact.html?interest=financing";
@@ -163,4 +181,4 @@
   }
   var sg = document.getElementById("similar-grid");
   similar.forEach(function (o) { sg.appendChild(SXUI.vehicleCard(o)); });
-})();
+});

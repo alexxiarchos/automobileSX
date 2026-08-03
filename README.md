@@ -12,10 +12,20 @@ Front-end only. No backend, no build step, no dependencies — open `index.html`
 
 ## Where things live
 
-- `js/data.js` — all mock inventory, dealership info (phone, address, hours), finance rate, and the EN/FR string table. This is the only file to touch when swapping in real vehicles or translations.
+- `data/vehicles.json` — the vehicle inventory (single source of truth). Managed through the **/admin panel** — see `SETUP-ADMIN.md`.
+- `js/data.js` — dealership info (phone, address, hours), finance rate, the EN/FR string table, and the loader that fetches `data/vehicles.json`.
 - `js/components.js` — shared header/footer, VehicleCard, PaymentCalculator, placeholder image generator, scroll reveal
 - `js/home.js`, `js/inventory.js`, `js/detail.js`, `js/contact.js` — one script per page
 - `css/styles.css` — design tokens at the top (`:root`), then components
+
+## Admin panel
+
+`/admin` is a password-protected inventory manager (add / edit / mark sold / duplicate /
+delete vehicles, drag-and-drop photos). It commits changes to GitHub via free Vercel
+serverless functions in `/api`, and Vercel auto-deploys — no manual deployment ever.
+Setup instructions: `SETUP-ADMIN.md`. Local preview: `node dev-server.js` (the plain
+static site now loads inventory over HTTP, so double-clicking index.html no longer works —
+use the dev server or any static file server).
 
 ## Notes
 

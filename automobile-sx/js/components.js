@@ -40,7 +40,7 @@ window.SXUI = (function () {
     var wheels = { Sedan: [108, 306], SUV: [104, 302], Truck: [92, 316], Coupe: [116, 300], Hatchback: [108, 300] }[v.body] || [108, 306];
     var g =
       '<g transform="translate(56,60)' + (flip ? ' translate(400,0) scale(-1,1)' : "") + '">' +
-      '<path d="' + (BODY_PATHS[v.body] || BODY_PATHS.Sedan) + '" fill="' + v.extHex + '" stroke="rgba(255,255,255,0.28)" stroke-width="2"/>' +
+      '<path d="' + (BODY_PATHS[v.body] || BODY_PATHS.Sedan) + '" fill="' + (v.extHex || "#6c7178") + '" stroke="rgba(255,255,255,0.28)" stroke-width="2"/>' +
       '<ellipse cx="205" cy="140" rx="180" ry="9" fill="rgba(0,0,0,0.45)"/>' +
       wheelPair(wheels[0], wheels[1]) +
       "</g>";
@@ -93,8 +93,9 @@ window.SXUI = (function () {
     return "data:image/svg+xml," + encodeURIComponent(svg);
   }
 
-  /* Build one placeholder photo for a vehicle + view index */
+  /* Real photo if the vehicle has uploads; generated placeholder otherwise */
   function vehicleImage(v, i) {
+    if (v.images && v.images.length) return v.images[Math.min(i, v.images.length - 1)];
     var view = SX.photoViews[i % SX.photoViews.length];
     var inner;
     if (view === "Interior") inner = interiorScene("seats");
@@ -116,10 +117,15 @@ window.SXUI = (function () {
   }
 
   function vehicleImages(v) {
+    if (v.images && v.images.length) return v.images.slice();
     var n = SX.photoViews.length;
     var arr = [];
     for (var i = 0; i < n; i++) arr.push(vehicleImage(v, i));
     return arr;
+  }
+
+  function photoCount(v) {
+    return (v.images && v.images.length) || SX.photoViews.length;
   }
 
   function heroImage() {
@@ -334,17 +340,21 @@ window.SXUI = (function () {
     var card = document.createElement("article");
     card.className = "vehicle-card";
     var img = vehicleImage(v, 0);
+    var alt = SX.vehicleTitle(v) + " " + (v.trim || "") +
+      (v.extColor ? " in " + v.extColor : "") +
+      (v.images && v.images.length ? "" : ", placeholder photo");
+    var tag = v.status === "sold" ? "Sold" : v.tag;
     card.innerHTML =
       '<div class="vc-media">' +
-      '<img loading="lazy" src="' + img + '" alt="' + SX.vehicleTitle(v) + " " + v.trim + " in " + v.extColor + ', front three-quarter placeholder photo" width="512" height="288">' +
-      (v.tag ? '<span class="vc-tag">' + v.tag + "</span>" : "") +
-      '<span class="vc-photo-count" aria-label="' + SX.photoViews.length + ' photos">▣ ' + SX.photoViews.length + "</span>" +
+      '<img loading="lazy" src="' + img + '" alt="' + alt + '" width="512" height="288">' +
+      (tag ? '<span class="vc-tag">' + tag + "</span>" : "") +
+      '<span class="vc-photo-count" aria-label="' + photoCount(v) + ' photos">▣ ' + photoCount(v) + "</span>" +
       "</div>" +
       '<div class="vc-body">' +
       '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">' +
       "<div>" +
       '<h3 class="vc-title"><a href="vehicle.html?id=' + v.id + '">' + SX.vehicleTitle(v) + "</a></h3>" +
-      '<p class="vc-trim">' + v.trim + "</p>" +
+      '<p class="vc-trim">' + (v.trim || "") + "</p>" +
       "</div>" +
       '<button class="vc-save" type="button" aria-pressed="' + SX.saved.has(v.id) + '" aria-label="Save this vehicle">' + heartSVG(SX.saved.has(v.id)) + "</button>" +
       "</div>" +

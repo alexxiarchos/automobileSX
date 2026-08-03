@@ -104,5 +104,5 @@
   }
 
   document.addEventListener("sx:lang", render);
-  render();
+  SX.ready.then(render);
 })();

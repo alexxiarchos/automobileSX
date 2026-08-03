@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Automobile SX</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+<link rel="icon" href="../assets/logo.png">
+</head>
+<body>
+
+<header class="adm-header">
+  <div class="adm-brand">
+    <img src="../assets/logo.png" alt="" width="40" height="40">
+    <div>
+      <div class="adm-brand-name">AUTOMOBILE <span>SX</span></div>
+      <div class="adm-brand-sub">Inventory Manager</div>
+    </div>
+  </div>
+  <div class="adm-header-right" id="header-right" hidden>
+    <a href="../inventory.html" target="_blank" rel="noopener">View website ↗</a>
+    <button class="btn btn-ghost-light" id="logout-btn" type="button">Log out</button>
+  </div>
+</header>
+
+<main class="adm-main">
+
+  <!-- ============ Login ============ -->
+  <section id="screen-login" class="screen" hidden>
+    <form class="login-card" id="login-form">
+      <h1>Sign in</h1>
+      <p class="muted">Manage your vehicle listings.</p>
+      <label for="login-user">Username</label>
+      <input id="login-user" name="username" type="text" autocomplete="username" required>
+      <label for="login-pass">Password</label>
+      <input id="login-pass" name="password" type="password" autocomplete="current-password" required>
+      <p class="login-error" id="login-error" role="alert" hidden></p>
+      <button class="btn btn-red btn-lg" type="submit" id="login-btn">Sign in</button>
+    </form>
+  </section>
+
+  <!-- ============ Dashboard ============ -->
+  <section id="screen-dash" class="screen" hidden>
+    <div class="dash-top">
+      <h1>Inventory</h1>
+      <button class="btn btn-red btn-lg" id="add-btn" type="button">+ Add Vehicle</button>
+    </div>
+    <p class="muted" id="dash-count"></p>
+    <div id="dash-list" class="dash-list"></div>
+  </section>
+
+  <!-- ============ Editor ============ -->
+  <section id="screen-edit" class="screen" hidden>
+    <button class="btn btn-ghost back-btn" id="back-btn" type="button">← Back to inventory</button>
+    <h1 id="edit-title">Add Vehicle</h1>
+
+    <form id="edit-form" novalidate>
+
+      <h2>Photos</h2>
+      <div class="dropzone" id="dropzone" tabindex="0" role="button"
+           aria-label="Add photos: drag and drop or press Enter to browse">
+        <strong>Drag &amp; drop photos here</strong>
+        <span>or tap to choose from your device — first photo is the main one</span>
+        <input type="file" id="file-input" accept="image/*" multiple hidden>
+      </div>
+      <div class="photo-grid" id="photo-grid"></div>
+
+      <h2>Vehicle information</h2>
+      <div class="form-grid">
+        <div class="f"><label for="f-year">Year *</label><input id="f-year" type="number" min="1990" max="2035" inputmode="numeric"></div>
+        <div class="f"><label for="f-make">Make *</label><input id="f-make" type="text" list="makes-list" autocapitalize="words">
+          <datalist id="makes-list"><option>Toyota</option><option>Honda</option><option>Ford</option><option>Chevrolet</option><option>Mazda</option><option>Subaru</option><option>Hyundai</option><option>Nissan</option><option>BMW</option><option>Jeep</option><option>Kia</option><option>Volkswagen</option><option>Mercedes-Benz</option><option>Audi</option><option>Dodge</option><option>Ram</option><option>GMC</option><option>Lexus</option><option>Acura</option><option>Mitsubishi</option></datalist></div>
+        <div class="f"><label for="f-model">Model *</label><input id="f-model" type="text" autocapitalize="words"></div>
+        <div class="f"><label for="f-trim">Trim</label><input id="f-trim" type="text" placeholder="e.g. XLE AWD"></div>
+        <div class="f"><label for="f-price">Price (CAD) *</label><input id="f-price" type="number" min="0" step="50" inputmode="numeric" placeholder="e.g. 18900"></div>
+        <div class="f"><label for="f-km">Mileage (km) *</label><input id="f-km" type="number" min="0" step="100" inputmode="numeric" placeholder="e.g. 84000"></div>
+        <div class="f"><label for="f-vin">VIN (optional)</label><input id="f-vin" type="text" maxlength="17" autocapitalize="characters"></div>
+        <div class="f"><label for="f-extcolor">Exterior colour</label><input id="f-extcolor" type="text" placeholder="e.g. Black"></div>
+        <div class="f"><label for="f-intcolor">Interior colour</label><input id="f-intcolor" type="text" placeholder="e.g. Grey cloth"></div>
+        <div class="f"><label for="f-fuel">Fuel type</label>
+          <select id="f-fuel"><option>Gasoline</option><option>Hybrid</option><option>Diesel</option><option>Electric</option><option>Plug-in Hybrid</option></select></div>
+        <div class="f"><label for="f-trans">Transmission</label>
+          <select id="f-trans"><option>Automatic</option><option>Manual</option><option>CVT</option><option>e-CVT</option></select></div>
+        <div class="f"><label for="f-drive">Drivetrain</label>
+          <select id="f-drive"><option>FWD</option><option>AWD</option><option>RWD</option><option>4x4</option></select></div>
+        <div class="f"><label for="f-body">Body style</label>
+          <select id="f-body"><option>Sedan</option><option>SUV</option><option>Truck</option><option>Coupe</option><option>Hatchback</option></select></div>
+        <div class="f"><label for="f-engine">Engine (optional)</label><input id="f-engine" type="text" placeholder="e.g. 2.5L I4"></div>
+        <div class="f"><label for="f-tag">Homepage tag</label>
+          <select id="f-tag"><option value="">None</option><option>Just Arrived</option><option>Price Drop</option></select></div>
+      </div>
+
+      <h2>Description</h2>
+      <textarea id="f-desc" rows="7" placeholder="Describe the vehicle the way you'd tell a customer about it — condition, history, recent work, why it's a good buy."></textarea>
+
+      <h2>Features</h2>
+      <div class="feature-checks" id="feature-checks"></div>
+      <div class="f" style="margin-top:10px">
+        <label for="f-features-extra">Other features (comma-separated, optional)</label>
+        <input id="f-features-extra" type="text" placeholder="e.g. Tow package, New tires, Winter mats included">
+      </div>
+
+      <p class="edit-error" id="edit-error" role="alert" hidden></p>
+
+      <div class="edit-actions">
+        <button class="btn btn-outline btn-lg" type="button" id="save-draft-btn">Save Draft</button>
+        <button class="btn btn-red btn-lg" type="button" id="publish-btn">Publish</button>
+      </div>
+      <p class="muted" style="margin-top:10px">Draft = saved but hidden from the website. Publish = live for customers.</p>
+    </form>
+  </section>
+
+</main>
+
+<div class="toast" id="toast" role="status" hidden></div>
+<div class="busy-overlay" id="busy" hidden><div class="busy-box" id="busy-text">Working…</div></div>
+
+<script src="admin.js"></script>
+</body>
+</html>

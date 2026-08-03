@@ -1,5 +1,5 @@
 /* Automobile SX — inventory page: client-side filtering, sorting, pagination */
-(function () {
+SX.ready.then(function () {
   "use strict";
 
   SXUI.init("inventory");
@@ -255,4 +255,4 @@
   });
 
   apply();
-})();
+});

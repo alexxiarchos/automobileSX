@@ -1,5 +1,5 @@
 /* Automobile SX — contact page: validated form (simulated submit), map, FAQ */
-(function () {
+SX.ready.then(function () {
   "use strict";
 
   SXUI.init("contact");
@@ -125,4 +125,4 @@
       btn.setAttribute("aria-expanded", String(open));
     });
   });
-})();
+});
