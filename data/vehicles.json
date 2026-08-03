@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:28:56.448Z",
+  "updatedAt": "2026-08-03T20:29:01.913Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,60 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "330i-2019",
-      "year": 2019,
-      "make": "BMW",
-      "model": "330i",
-      "trim": "xDrive M Sport",
-      "body": "Sedan",
-      "price": 33400,
-      "km": 68900,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Alpine White",
-      "extHex": "#f0f0ec",
-      "intColor": "Black Vernasca leather",
-      "engine": "2.0L Turbo I4",
-      "econCity": 9.4,
-      "econHwy": 6.7,
-      "doors": 4,
-      "seats": 5,
-      "vin": "WBA5R7C55KAJ83920",
-      "stock": "SX-1004",
-      "features": {
-        "safety": [
-          "Active Guard Collision Warning",
-          "Lane Departure Warning",
-          "Backup Camera",
-          "Park Distance Control"
-        ],
-        "comfort": [
-          "Heated Sport Seats",
-          "3-Zone Climate",
-          "Power Front Seats with Memory",
-          "Sunroof"
-        ],
-        "technology": [
-          "8.8\" iDrive Display",
-          "Apple CarPlay",
-          "Navigation",
-          "Wireless Charging"
-        ],
-        "exterior": [
-          "18\" M Double-Spoke Wheels",
-          "M Aerodynamics Package",
-          "LED Headlights"
-        ]
-      },
-      "desc": [
-        "A G20-generation 3 Series with the M Sport package, in the classic Alpine White over black leather. Full BMW dealer service history, two owners, and no accidents reported. The 2.0L turbo makes 255 hp and the xDrive system puts it down in any weather.",
-        "These cars reward buyers who find a properly maintained one — and this is that car. All four brake corners were done under 10,000 km ago, and the original window sticker is in the glovebox."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "wrangler-2020",
