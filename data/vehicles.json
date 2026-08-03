@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T18:55:11.628Z",
+  "updatedAt": "2026-08-03T20:17:01.666Z",
   "vehicles": [
     {
       "id": "rav4-2021",
@@ -55,8 +55,8 @@
         "A one-owner RAV4 XLE with all-wheel drive and a clean history report. It was traded in locally, serviced on schedule at a Toyota dealer, and shows the kind of even wear you want to see at this mileage. The 2.5L four-cylinder is Toyota's proven workhorse — nothing turbocharged, nothing fragile.",
         "The XLE trim adds the moonroof, heated seats, and dual-zone climate over the base LE, and this one includes a power liftgate. New all-season tires were fitted at our 150-point inspection. Winter mats included."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "civic-2020",
@@ -108,8 +108,8 @@
         "The tenth-generation Civic is one of the most dependable compacts you can buy used, and this EX sedan is a clean example with highway-biased kilometres. Two owners, no accidents reported, and full service records from new.",
         "The 1.5L turbo is quick enough to merge with confidence while sipping fuel — expect real-world numbers close to the ratings. The EX adds the moonroof and Honda Sensing, so you get adaptive cruise on the 20 without stepping up to Touring money."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "f150-2019",
@@ -162,8 +162,8 @@
         "A working truck that hasn't been worked to death. This XLT SuperCrew has the 3.5L EcoBoost and the tow package — rated to pull over 10,000 lb — with maintenance receipts to back up the odometer. The box liner went in on day one and the bed shows it.",
         "Two owners, both in the Montreal area. The frame and underbody were oil-sprayed annually, which is rarer than it should be on a five-year-old truck. Fresh brakes all around at inspection."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "cx5-2022",
@@ -216,8 +216,8 @@
         "Still under factory powertrain warranty, this CX-5 GS is the closest thing to a new car on our lot. One owner, bought and serviced in Pointe-Claire, with under 35,000 km. The Soul Red paint is the colour Mazda is famous for and it presents beautifully.",
         "The GS trim hits the sweet spot: heated steering wheel, radar cruise, and Mazda's i-Activ AWD without the price of the turbo models. Drives tighter than anything else in the compact SUV class."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "elantra-2021",
@@ -267,8 +267,8 @@
         "Hyundai's redesigned 2021 Elantra brought a bigger cabin and wireless CarPlay, and this Preferred trim has the heated everything Canadians actually use. One owner, no accidents reported, balance of Hyundai's 5-year warranty still in effect.",
         "The 2.0L and CVT pairing won't win races but returns 5.6 L/100km on the highway — a legitimately cheap car to run. Fresh oil change, new cabin filter, and four matching tires with 80% tread."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "outback-2020",
@@ -319,8 +319,8 @@
         "Cottage-country royalty. This Outback has Subaru's full-time symmetrical AWD and nearly nine inches of ground clearance, with the EyeSight camera suite handling adaptive cruise and emergency braking. Two owners and a clean history.",
         "The kilometres are mostly highway — Montreal to the Laurentians and back, by the service records. Timing chain (not belt), fresh rear brakes, and a new battery installed at inspection."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "rogue-2021",
@@ -372,8 +372,8 @@
         "The 2021 redesign made the Rogue a genuinely nice place to sit, and this SV has ProPILOT Assist — Nissan's hands-on highway assistant that handles stop-and-go traffic. One owner, leased and returned, with dealer service history throughout.",
         "The Around View 360° camera makes this an easy vehicle to park downtown despite its size. New front brakes and a four-wheel alignment done at our inspection."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "330i-2019",
@@ -426,8 +426,8 @@
         "A G20-generation 3 Series with the M Sport package, in the classic Alpine White over black leather. Full BMW dealer service history, two owners, and no accidents reported. The 2.0L turbo makes 255 hp and the xDrive system puts it down in any weather.",
         "These cars reward buyers who find a properly maintained one — and this is that car. All four brake corners were done under 10,000 km ago, and the original window sticker is in the glovebox."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "wrangler-2020",
@@ -480,8 +480,8 @@
         "A JL Wrangler Unlimited Sahara with the hardtop, the LED package, and the Alpine stereo — optioned the way most people wish theirs was. Never off-roaded hard: the underbody is clean and the original skid plates are unmarked.",
         "The 3.6L V6 and 8-speed automatic are the drivetrain to have. Two owners, no accidents reported, and we've just installed new all-terrain tires. The soft top was never fitted; hardtop only from new."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "equinox-2019",
@@ -534,8 +534,8 @@
         "An honest family SUV at an honest price. This Equinox LT has all-wheel drive, remote start, and heated seats — the three things that matter from November to March. Recently reduced to move before our next round of arrivals.",
         "Higher kilometres, priced accordingly, and mechanically sorted: the inspection turned up worn front struts and we replaced them, along with the front brake pads and rotors. Drives like a much newer truck."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "corolla-2022",
@@ -587,8 +587,8 @@
         "A low-kilometre Corolla SE with the 169-hp 2.0L — the engine that made the Corolla interesting again. One owner, purchased new in Montreal, still under full factory warranty until 2025 or 60,000 km.",
         "The SE trim brings 18-inch wheels, sport seats, and a firmer suspension tune. If you want a car you will genuinely never have to think about, this is the one on the lot."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "crv-2019",
@@ -640,8 +640,8 @@
         "The CR-V EX-L pairs Honda's most practical package with leather and a power tailgate. This one has a documented service history, two owners, and the AWD system Canadians buy CR-Vs for.",
         "All scheduled maintenance is up to date including the CVT fluid service — often skipped, and important on these. New Michelin all-seasons fitted less than 5,000 km ago."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "mustang-2019",
@@ -693,8 +693,8 @@
         "A 460-hp Mustang GT with the 6-speed manual and the active exhaust — the configuration enthusiasts hunt for. Adult-owned, stored winters, and never modified. The Race Red paint shows a deep, unmarked finish.",
         "The Premium trim adds cooled leather and the 12-inch digital cluster. Summer tires are nearly new; the original all-seasons come with the car. An honest, unabused example of the last great V8 bargain."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "tucson-2022",
@@ -745,8 +745,8 @@
         "The striking fourth-generation Tucson, still under Hyundai's 5-year comprehensive warranty. One owner, no accidents reported, and equipped with Highway Driving Assist — lane centring plus adaptive cruise that genuinely reduces fatigue on the highway.",
         "The naturally aspirated 2.5L avoids the turbo complexity of rivals. Serviced exclusively at the selling dealer, with the paperwork in the folder."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "mazda3-2021",
@@ -797,8 +797,8 @@
         "The Mazda3 Sport hatch in Polymetal Grey — the colour that made this generation a design icon. Interior quality embarrasses cars twice the price. One owner, clean history, dealer-serviced.",
         "The 2.5L is smooth and torquey where rivals feel strained. Practical too: the hatch swallows a bike with the seats down. New front pads and rotors at inspection."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "silverado-2020",
@@ -851,8 +851,8 @@
         "A 5.3L V8 Silverado LT crew cab with the trailering package and a spray-in liner. One corporate owner — a landscaping firm that maintained it on a fleet schedule, which means every service is documented to the kilometre.",
         "It pulled a tandem-axle trailer gently, not a fifth wheel hard. Transmission fluid and transfer case serviced at 70,000 km. New tires, fresh alignment, ready to hitch up."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "crosstrek-2021",
@@ -903,8 +903,8 @@
         "The Crosstrek does one thing better than anything at its price: go everywhere, all year, cheaply. Full-time AWD, real ground clearance, and Subaru's EyeSight suite on a one-owner car with a clean history.",
         "This Touring trim has the heated seats and adaptive cruise. Kilometres are honest commuting from Laval. Rustproofed annually — the underbody photographs like a two-year-old car."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "altima-2020",
@@ -956,8 +956,8 @@
         "One of the few mid-size sedans you can get with all-wheel drive — and in Canada, that matters four months a year. This Altima SV has ProPILOT Assist, a moonroof, and a two-owner, accident-free history.",
         "It's the sensible sedan for someone who doesn't want an SUV but does want winter confidence. New wiper blades, cabin filter, and a fresh oil service at inspection. Priced under the AWD Camry equivalent by a wide margin."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "grandcherokee-2019",
@@ -1010,8 +1010,8 @@
         "The WK2 Grand Cherokee Limited blends real 4x4 capability with a leather-lined cabin — heated seats front and rear, navigation, and a power liftgate. Two owners, no accidents reported, tow package fitted from the factory.",
         "Higher kilometres priced fairly. Our inspection replaced the front control arm bushings and both wiper cowls; the transfer case and differentials were serviced at the same time. A lot of truck for under $30k."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "camry-2021",
@@ -1062,8 +1062,8 @@
         "An AWD Camry SE — Toyota reliability with genuine winter traction. One owner, bought new in Lachine, serviced on the button every 8,000 km. No accidents reported and the original tires were replaced with Michelin CrossClimates.",
         "The SE's firmer suspension makes this the Camry that doesn't drive like an appliance. SofTex seats wear better than leather at this price point. Balance of factory powertrain warranty included."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "escape-2021",
@@ -1116,61 +1116,8 @@
         "A hybrid Escape that sips 5.9 L/100km in the city — where hybrids earn their keep. This SEL has AWD, leather, and a power liftgate, with one owner and a spotless history report.",
         "Hybrid battery is covered by Ford's 8-year/160,000 km warranty, transferable to you. If your commute is stop-and-go on the Décarie, nothing else on our lot will cost less per kilometre."
       ],
-      "status": "available",
-      "images": []
-    },
-    {
-      "id": "civic-hatch-2018",
-      "year": 2018,
-      "make": "Honda",
-      "model": "Civic Hatchback",
-      "trim": "Sport Touring",
-      "body": "Hatchback",
-      "price": 19900,
-      "km": 98200,
-      "transmission": "Manual",
-      "fuel": "Gasoline",
-      "drivetrain": "FWD",
-      "extColor": "Sonic Grey Pearl",
-      "extHex": "#7a8087",
-      "intColor": "Black leather",
-      "engine": "1.5L Turbo I4",
-      "econCity": 8,
-      "econHwy": 6.2,
-      "doors": 5,
-      "seats": 5,
-      "vin": "SHHFK7H91JU405283",
-      "stock": "SX-1003",
-      "features": {
-        "safety": [
-          "Honda Sensing Suite",
-          "Collision Mitigation Braking",
-          "Road Departure Mitigation",
-          "Backup Camera"
-        ],
-        "comfort": [
-          "Heated Leather Seats, Front & Rear",
-          "Dual-Zone Climate",
-          "Power Driver Seat"
-        ],
-        "technology": [
-          "7\" Display Audio",
-          "Apple CarPlay / Android Auto",
-          "540-Watt Premium Audio",
-          "Navigation"
-        ],
-        "exterior": [
-          "18\" Gloss Black Wheels",
-          "Centre-Exit Dual Exhaust",
-          "Rear Roofline Spoiler"
-        ]
-      },
-      "desc": [
-        "A Sport Touring hatch with the 6-speed manual — rare, and getting rarer. 180 hp, leather, navigation, and the 540-watt stereo, in an accident-free two-owner example. The clutch was inspected and has plenty of life.",
-        "Kilometres are on the higher side and the price reflects it. This is the practical enthusiast's car: fits four adults and a Costco run, still fun at 7/10ths on an on-ramp."
-      ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "440i-2018",
@@ -1223,8 +1170,8 @@
         "The B58 straight-six is one of the great modern engines — 326 hp, turbine-smooth, and famously robust. This 440i coupe pairs it with xDrive and the M Sport package, in Estoril Blue over Oyster leather.",
         "Full service history including the walnut-blasting intake service. Two adult owners, winter-stored the last three years. The heads-up display and Harman Kardon audio make it a genuinely lovely daily."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     },
     {
       "id": "santafe-2018",
@@ -1276,8 +1223,8 @@
         "Our best value in an AWD family SUV. This Santa Fe Sport has heated seats front and rear, a heated wheel, and blind spot detection — comfort features that were optional extras on rivals of this vintage.",
         "Kilometres are high and the price is set to match. Mechanically it earned its spot on the lot: compression tested, new spark plugs, new front wheel bearings, and a full brake service. A lot of warm, safe transportation for under $18,000."
       ],
-      "status": "available",
-      "images": []
+      "images": [],
+      "status": "available"
     }
   ]
 }
