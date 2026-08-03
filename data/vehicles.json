@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:21.449Z",
+  "updatedAt": "2026-08-03T20:29:25.284Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,59 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "mustang-2019",
-      "year": 2019,
-      "make": "Ford",
-      "model": "Mustang",
-      "trim": "GT Premium Fastback",
-      "body": "Coupe",
-      "price": 38900,
-      "km": 45600,
-      "transmission": "Manual",
-      "fuel": "Gasoline",
-      "drivetrain": "RWD",
-      "extColor": "Race Red",
-      "extHex": "#a01820",
-      "intColor": "Ebony leather",
-      "engine": "5.0L V8",
-      "econCity": 15,
-      "econHwy": 9.8,
-      "doors": 2,
-      "seats": 4,
-      "vin": "1FA6P8CF2K5162718",
-      "stock": "SX-1002",
-      "features": {
-        "safety": [
-          "Backup Camera",
-          "Reverse Sensing",
-          "AdvanceTrac Stability Control",
-          "SOS Post-Crash Alert"
-        ],
-        "comfort": [
-          "Heated & Cooled Leather Seats",
-          "Dual-Zone Climate",
-          "Power Seats with Memory"
-        ],
-        "technology": [
-          "SYNC 3 8\" Touchscreen",
-          "12\" Digital Cluster",
-          "B&O 12-Speaker Audio",
-          "Track Apps"
-        ],
-        "exterior": [
-          "19\" Machined Wheels",
-          "Active Valve Performance Exhaust",
-          "LED Headlights"
-        ]
-      },
-      "desc": [
-        "A 460-hp Mustang GT with the 6-speed manual and the active exhaust — the configuration enthusiasts hunt for. Adult-owned, stored winters, and never modified. The Race Red paint shows a deep, unmarked finish.",
-        "The Premium trim adds cooled leather and the 12-inch digital cluster. Summer tires are nearly new; the original all-seasons come with the car. An honest, unabused example of the last great V8 bargain."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "tucson-2022",
