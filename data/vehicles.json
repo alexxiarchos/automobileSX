@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:25.284Z",
+  "updatedAt": "2026-08-03T20:29:28.917Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,58 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "tucson-2022",
-      "year": 2022,
-      "make": "Hyundai",
-      "model": "Tucson",
-      "trim": "Preferred AWD",
-      "body": "SUV",
-      "price": 30800,
-      "km": 39700,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Amazon Grey",
-      "extHex": "#6c7168",
-      "intColor": "Black fabric",
-      "engine": "2.5L I4",
-      "econCity": 9.5,
-      "econHwy": 7.2,
-      "doors": 5,
-      "seats": 5,
-      "vin": "KM8JBCA19NU037164",
-      "stock": "SX-1050",
-      "features": {
-        "safety": [
-          "Highway Driving Assist",
-          "Forward Collision-Avoidance",
-          "Blind-Spot Collision Warning",
-          "Safe Exit Warning"
-        ],
-        "comfort": [
-          "Heated Front Seats & Wheel",
-          "Dual-Zone Climate",
-          "Proximity Key with Push Start"
-        ],
-        "technology": [
-          "8\" Touchscreen",
-          "Wireless Apple CarPlay / Android Auto",
-          "Bluelink"
-        ],
-        "exterior": [
-          "17\" Alloy Wheels",
-          "LED Daytime Running Lights",
-          "Roof Rails"
-        ]
-      },
-      "desc": [
-        "The striking fourth-generation Tucson, still under Hyundai's 5-year comprehensive warranty. One owner, no accidents reported, and equipped with Highway Driving Assist — lane centring plus adaptive cruise that genuinely reduces fatigue on the highway.",
-        "The naturally aspirated 2.5L avoids the turbo complexity of rivals. Serviced exclusively at the selling dealer, with the paperwork in the folder."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "mazda3-2021",
