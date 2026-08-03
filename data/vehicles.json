@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:28:53.105Z",
+  "updatedAt": "2026-08-03T20:28:56.448Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,59 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "rogue-2021",
-      "year": 2021,
-      "make": "Nissan",
-      "model": "Rogue",
-      "trim": "SV AWD",
-      "body": "SUV",
-      "price": 28400,
-      "km": 55100,
-      "transmission": "CVT",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Gun Metallic",
-      "extHex": "#4a4d52",
-      "intColor": "Charcoal fabric",
-      "engine": "2.5L I4",
-      "econCity": 9.2,
-      "econHwy": 7.2,
-      "doors": 5,
-      "seats": 5,
-      "vin": "5N1AT3BB4MC712530",
-      "stock": "SX-1036",
-      "features": {
-        "safety": [
-          "Nissan Safety Shield 360",
-          "ProPILOT Assist",
-          "Rear Automatic Braking",
-          "Around View Monitor"
-        ],
-        "comfort": [
-          "Heated Front Seats & Wheel",
-          "Tri-Zone Climate",
-          "Power Liftgate",
-          "Remote Start"
-        ],
-        "technology": [
-          "9\" Touchscreen",
-          "Apple CarPlay / Android Auto",
-          "Wi-Fi Hotspot Capable"
-        ],
-        "exterior": [
-          "18\" Alloy Wheels",
-          "LED Headlights",
-          "Roof Rails"
-        ]
-      },
-      "desc": [
-        "The 2021 redesign made the Rogue a genuinely nice place to sit, and this SV has ProPILOT Assist — Nissan's hands-on highway assistant that handles stop-and-go traffic. One owner, leased and returned, with dealer service history throughout.",
-        "The Around View 360° camera makes this an easy vehicle to park downtown despite its size. New front brakes and a four-wheel alignment done at our inspection."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "330i-2019",
