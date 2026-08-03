@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:01.913Z",
+  "updatedAt": "2026-08-03T20:29:04.782Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,60 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "wrangler-2020",
-      "year": 2020,
-      "make": "Jeep",
-      "model": "Wrangler",
-      "trim": "Unlimited Sahara",
-      "body": "SUV",
-      "price": 37900,
-      "km": 62700,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "4x4",
-      "extColor": "Sting-Grey",
-      "extHex": "#63666a",
-      "intColor": "Black cloth",
-      "engine": "3.6L V6",
-      "econCity": 12.9,
-      "econHwy": 10.2,
-      "doors": 4,
-      "seats": 5,
-      "vin": "1C4HJXEG4LW214508",
-      "stock": "SX-1021",
-      "features": {
-        "safety": [
-          "Blind Spot Monitoring",
-          "Rear Cross Path Detection",
-          "Backup Camera",
-          "Hill Start Assist"
-        ],
-        "comfort": [
-          "Heated Seats & Steering Wheel",
-          "Dual-Zone Climate",
-          "Remote Start",
-          "Freedom Top Hardtop"
-        ],
-        "technology": [
-          "8.4\" Uconnect Touchscreen",
-          "Apple CarPlay / Android Auto",
-          "Alpine Premium Audio"
-        ],
-        "exterior": [
-          "18\" Polished Wheels",
-          "Body-Colour Fender Flares",
-          "LED Lighting Group",
-          "Tow Package"
-        ]
-      },
-      "desc": [
-        "A JL Wrangler Unlimited Sahara with the hardtop, the LED package, and the Alpine stereo — optioned the way most people wish theirs was. Never off-roaded hard: the underbody is clean and the original skid plates are unmarked.",
-        "The 3.6L V6 and 8-speed automatic are the drivetrain to have. Two owners, no accidents reported, and we've just installed new all-terrain tires. The soft top was never fitted; hardtop only from new."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "equinox-2019",
