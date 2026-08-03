@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:58.722Z",
+  "updatedAt": "2026-08-03T20:30:02.804Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,59 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "civic-hatch-2018",
-      "year": 2018,
-      "make": "Honda",
-      "model": "Civic Hatchback",
-      "trim": "Sport Touring",
-      "body": "Hatchback",
-      "price": 19900,
-      "km": 98200,
-      "transmission": "Manual",
-      "fuel": "Gasoline",
-      "drivetrain": "FWD",
-      "extColor": "Sonic Grey Pearl",
-      "extHex": "#7a8087",
-      "intColor": "Black leather",
-      "engine": "1.5L Turbo I4",
-      "econCity": 8,
-      "econHwy": 6.2,
-      "doors": 5,
-      "seats": 5,
-      "vin": "SHHFK7H91JU405283",
-      "stock": "SX-1003",
-      "features": {
-        "safety": [
-          "Honda Sensing Suite",
-          "Collision Mitigation Braking",
-          "Road Departure Mitigation",
-          "Backup Camera"
-        ],
-        "comfort": [
-          "Heated Leather Seats, Front & Rear",
-          "Dual-Zone Climate",
-          "Power Driver Seat"
-        ],
-        "technology": [
-          "7\" Display Audio",
-          "Apple CarPlay / Android Auto",
-          "540-Watt Premium Audio",
-          "Navigation"
-        ],
-        "exterior": [
-          "18\" Gloss Black Wheels",
-          "Centre-Exit Dual Exhaust",
-          "Rear Roofline Spoiler"
-        ]
-      },
-      "desc": [
-        "A Sport Touring hatch with the 6-speed manual — rare, and getting rarer. 180 hp, leather, navigation, and the 540-watt stereo, in an accident-free two-owner example. The clutch was inspected and has plenty of life.",
-        "Kilometres are on the higher side and the price reflects it. This is the practical enthusiast's car: fits four adults and a Costco run, still fun at 7/10ths on an on-ramp."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "440i-2018",
