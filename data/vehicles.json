@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:29:04.782Z",
+  "updatedAt": "2026-08-03T20:29:13.201Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,60 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "equinox-2019",
-      "year": 2019,
-      "make": "Chevrolet",
-      "model": "Equinox",
-      "trim": "LT AWD",
-      "body": "SUV",
-      "price": 19800,
-      "km": 92800,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Silver Ice",
-      "extHex": "#c3c6c9",
-      "intColor": "Jet Black fabric",
-      "engine": "1.5L Turbo I4",
-      "econCity": 9.3,
-      "econHwy": 8,
-      "doors": 5,
-      "seats": 5,
-      "vin": "2GNAXUEV3K6193357",
-      "stock": "SX-1009",
-      "tag": "Price Drop",
-      "features": {
-        "safety": [
-          "Backup Camera",
-          "Teen Driver Mode",
-          "Rear Seat Reminder",
-          "StabiliTrak"
-        ],
-        "comfort": [
-          "Heated Front Seats",
-          "Remote Start",
-          "Power Driver Seat",
-          "Deep-Tinted Glass"
-        ],
-        "technology": [
-          "7\" Infotainment",
-          "Apple CarPlay / Android Auto",
-          "4G LTE Wi-Fi Capable"
-        ],
-        "exterior": [
-          "17\" Alloy Wheels",
-          "Roof Rails",
-          "HID Headlights"
-        ]
-      },
-      "desc": [
-        "An honest family SUV at an honest price. This Equinox LT has all-wheel drive, remote start, and heated seats — the three things that matter from November to March. Recently reduced to move before our next round of arrivals.",
-        "Higher kilometres, priced accordingly, and mechanically sorted: the inspection turned up worn front struts and we replaced them, along with the front brake pads and rotors. Drives like a much newer truck."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "corolla-2022",
