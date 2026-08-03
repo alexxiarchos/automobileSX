@@ -1,33 +1,4 @@
 {
-  "updatedAt": "2026-08-03T20:30:10.845Z",
-  "vehicles": [
-    {
-      "id": "-01k4m",
-      "year": 2019,
-      "make": "Nissan",
-      "model": "Kicks",
-      "trim": "",
-      "body": "SUV",
-      "price": 10999,
-      "km": 144000,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "FWD",
-      "extColor": "",
-      "extHex": "#6c7178",
-      "intColor": "",
-      "engine": "",
-      "vin": "",
-      "stock": "SX-1053",
-      "tag": "",
-      "features": [],
-      "desc": "",
-      "images": [
-        "images/vehicles/-01k4m/msdojnda-1.jpg"
-      ],
-      "status": "available",
-      "createdAt": "2026-08-03T20:16:26.214Z",
-      "updatedAt": "2026-08-03T20:27:24.244Z"
-    }
-  ]
+  "updatedAt": "2026-08-04T00:00:00.000Z",
+  "vehicles": []
 }

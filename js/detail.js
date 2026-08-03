@@ -7,9 +7,10 @@ SX.ready.then(function () {
 
   var id = new URLSearchParams(location.search).get("id");
   var v = SX.getVehicle(id) || SX.vehicles[0];
+  if (!v) { location.replace("inventory.html"); return; }
   var title = SX.vehicleTitle(v);
 
-  document.title = title + " " + v.trim + " — Automobile SX";
+  document.title = title + " " + (v.trim || "") + " for sale | Automobile SX Dorval";
 
   /* Breadcrumb */
   var bodyPlural = { Sedan: "Sedans", SUV: "SUVs", Truck: "Trucks", Coupe: "Coupes", Hatchback: "Hatchbacks" }[v.body] || v.body;
@@ -21,7 +22,7 @@ SX.ready.then(function () {
   document.getElementById("v-title").textContent = title + " " + (v.trim || "");
   if (v.status === "sold") {
     var soldTag = document.createElement("p");
-    soldTag.innerHTML = '<span class="vc-tag" style="position:static;display:inline-block">Sold</span> <span style="color:var(--slate);font-size:14px">This vehicle has found a new home — browse our current inventory below.</span>';
+    soldTag.innerHTML = '<span class="vc-tag" style="position:static;display:inline-block">Sold</span> <span style="color:var(--slate);font-size:14px">This vehicle has found a new home. Browse our current inventory below.</span>';
     document.getElementById("v-title").after(soldTag);
   }
   document.getElementById("v-subtitle").textContent =
@@ -36,10 +37,10 @@ SX.ready.then(function () {
 
   var hasRealPhotos = v.images && v.images.length;
   function viewLabel(i) {
-    return hasRealPhotos ? "photo " + (i + 1) : SX.photoViews[i] + " placeholder photo";
+    return hasRealPhotos ? "photo " + (i + 1) : "photos coming soon";
   }
   function altFor(i) {
-    return title + " " + (v.trim || "") + " — " + viewLabel(i);
+    return title + " " + (v.trim || "") + ", " + viewLabel(i);
   }
 
   strip.innerHTML = images.map(function (src, i) {
@@ -93,6 +94,14 @@ SX.ready.then(function () {
     if (e.key === "ArrowRight" && (lbOpen || document.activeElement.closest("#gallery-main, #thumb-strip"))) show(idx + 1);
   });
 
+  if (images.length < 2) {
+    document.getElementById("gal-prev").hidden = true;
+    document.getElementById("gal-next").hidden = true;
+    document.getElementById("lb-prev").hidden = true;
+    document.getElementById("lb-next").hidden = true;
+    counter.hidden = true;
+    strip.hidden = true;
+  }
   show(0);
 
   /* ---------- Overview ---------- */
@@ -137,15 +146,6 @@ SX.ready.then(function () {
       g[1].map(function (f) { return "<li>" + f + "</li>"; }).join("") + "</ul></div>";
   }).join("") || "<p style=\"color:var(--slate)\">Feature list available at your appointment.</p>";
 
-  /* ---------- History (sample, deterministic per vehicle) ---------- */
-  var descJoined = descParas.join(" ");
-  var owners = /one owner/i.test(descJoined) ? 1 : 2;
-  document.getElementById("v-history").innerHTML =
-    '<div class="history-item"><div class="h-label">Owners</div><div class="h-value">' + owners + "</div></div>" +
-    '<div class="history-item"><div class="h-label">Accidents reported</div><div class="h-value"><span class="trust-dot"></span>None</div></div>' +
-    '<div class="history-item"><div class="h-label">Service records</div><div class="h-value">' + (8 + (v.km % 7)) + " records</div></div>" +
-    '<div class="history-item"><div class="h-label">Title</div><div class="h-value"><span class="badge-trust">✓ Clean title</span></div></div>';
-
   /* ---------- Rail ---------- */
   document.getElementById("r-price").textContent = SX.money(v.price);
   document.getElementById("r-mo").textContent = SX.estMoLabel(v.price) + " · plus taxes & licensing";
@@ -166,6 +166,38 @@ SX.ready.then(function () {
   document.getElementById("v-calculator").appendChild(
     SXUI.paymentCalculator({ price: v.price, fixedPrice: true, onLight: true })
   );
+
+  /* ---------- Structured data for search engines ---------- */
+  try {
+    var ld = {
+      "@context": "https://schema.org",
+      "@type": "Car",
+      "name": title + " " + (v.trim || ""),
+      "brand": { "@type": "Brand", "name": v.make },
+      "model": v.model,
+      "vehicleModelDate": String(v.year),
+      "mileageFromOdometer": { "@type": "QuantitativeValue", "value": v.km, "unitCode": "KMT" },
+      "bodyType": v.body,
+      "color": v.extColor || undefined,
+      "vehicleIdentificationNumber": v.vin || undefined,
+      "image": (v.images && v.images.length) ? v.images.map(function (p) { return "https://automobilesx.ca/" + p; }) : undefined,
+      "offers": {
+        "@type": "Offer",
+        "price": v.price,
+        "priceCurrency": "CAD",
+        "availability": v.status === "sold" ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
+        "seller": { "@type": "AutoDealer", "name": "Automobile SX", "telephone": "+1-514-824-9117" }
+      }
+    };
+    var ldTag = document.createElement("script");
+    ldTag.type = "application/ld+json";
+    ldTag.textContent = JSON.stringify(ld);
+    document.head.appendChild(ldTag);
+    var canon = document.createElement("link");
+    canon.rel = "canonical";
+    canon.href = "https://automobilesx.ca/vehicle.html?id=" + v.id;
+    document.head.appendChild(canon);
+  } catch (e) { /* non-critical */ }
 
   /* ---------- Similar vehicles: same body type, closest price ---------- */
   var similar = SX.vehicles

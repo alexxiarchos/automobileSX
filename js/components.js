@@ -93,39 +93,26 @@ window.SXUI = (function () {
     return "data:image/svg+xml," + encodeURIComponent(svg);
   }
 
-  /* Real photo if the vehicle has uploads; generated placeholder otherwise */
+  /* Real photo if the vehicle has uploads; a clean branded tile otherwise */
   function vehicleImage(v, i) {
     if (v.images && v.images.length) return v.images[Math.min(i, v.images.length - 1)];
-    var view = SX.photoViews[i % SX.photoViews.length];
-    var inner;
-    if (view === "Interior") inner = interiorScene("seats");
-    else if (view === "Dashboard") inner = interiorScene("dash");
-    else if (view === "Wheels") inner = interiorScene("wheels");
-    else if (view === "Cargo / Trunk") inner = interiorScene("cargo");
-    else inner = exteriorScene(v, view === "Rear 3/4");
-
     var svg =
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 288">' +
-      '<rect width="512" height="288" fill="#1d1f22"/>' +
-      '<rect y="212" width="512" height="76" fill="#17181a"/>' +
-      inner +
-      '<text x="20" y="266" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" fill="#8b8f96">' +
-      v.year + " " + v.make + " " + v.model + " — " + view + "</text>" +
-      '<text x="492" y="266" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#5a5e65">Photo placeholder</text>' +
+      '<rect width="512" height="288" fill="#141517"/>' +
+      '<rect x="216" y="118" width="80" height="3" fill="#BA1D26"/>' +
+      '<text x="256" y="152" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" letter-spacing="3" fill="#F2EFED">AUTOMOBILE SX</text>' +
+      '<text x="256" y="176" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" letter-spacing="2" fill="#6B6F76">PHOTOS COMING SOON</text>' +
       "</svg>";
     return svgURL(svg);
   }
 
   function vehicleImages(v) {
     if (v.images && v.images.length) return v.images.slice();
-    var n = SX.photoViews.length;
-    var arr = [];
-    for (var i = 0; i < n; i++) arr.push(vehicleImage(v, i));
-    return arr;
+    return [vehicleImage(v, 0)];
   }
 
   function photoCount(v) {
-    return (v.images && v.images.length) || SX.photoViews.length;
+    return (v.images && v.images.length) || 1;
   }
 
   function heroImage() {
@@ -279,7 +266,7 @@ window.SXUI = (function () {
       '<address style="font-style:normal">' + SX.dealer.address1 + "<br>" + SX.dealer.address2 + "<br>" +
       '<a href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a><br>" +
       '<a href="mailto:' + SX.dealer.email + '">' + SX.dealer.email + "</a></address>" +
-      '<div class="footer-map" aria-hidden="true">' + mapSVG() + "</div>" +
+      '<a class="footer-map" href="https://www.google.com/maps/search/?api=1&query=2044+Avenue+Chartier+Dorval+QC" target="_blank" rel="noopener" aria-label="Open Automobile SX on Google Maps">' + mapSVG() + "</a>" +
       "</div>" +
       "<div><h3>" + SX.t("footer.hours") + '</h3><table class="footer-hours"><tbody>' + hoursRows() + "</tbody></table>" +
       '<p style="font-size:13px;color:var(--slate);margin:10px 0 0">' + SX.dealer.apptNote[SX.lang] + "</p></div>" +
@@ -290,31 +277,15 @@ window.SXUI = (function () {
       '<li><a href="contact.html">' + SX.t("nav.contact") + "</a></li>" +
       '<li><a href="contact.html#faq">FAQ</a></li></ul></div>' +
       "<div><h3>" + SX.t("footer.newArrivals") + "</h3><p style=\"font-size:14px;color:var(--slate)\">" + SX.t("footer.newArrivalsSub") + "</p>" +
-      '<form class="newsletter" novalidate><label class="visually-hidden" for="nl-email">Email address</label>' +
-      '<input id="nl-email" type="email" placeholder="you@email.com" autocomplete="email">' +
-      '<button class="btn btn-red" type="submit">Sign up</button></form>' +
-      '<p class="msg" role="status"></p></div>' +
+      '<a class="btn btn-red" href="mailto:' + SX.dealer.email + '?subject=' + encodeURIComponent("New arrivals: keep me posted") + '">' + SX.t("footer.newArrivalsCta") + "</a>" +
+      '<p style="font-size:13px;color:var(--slate);margin-top:10px">' + SX.t("footer.orCall") + ' <a href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a></p></div>" +
       "</div>" +
       '<div class="footer-bottom">' +
-      "<span>© " + new Date().getFullYear() + " " + SX.dealer.name + ". Demo site — sample inventory.</span>" +
+      "<span>© " + new Date().getFullYear() + " " + SX.dealer.name + ". All rights reserved.</span>" +
       '<span><a href="#">Privacy</a> · <a href="#">Terms</a></span>' +
       "<span>" + SX.t("footer.taxNote") + "</span>" +
       "</div></div>";
 
-    var form = el.querySelector(".newsletter");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var input = form.querySelector("input");
-      var msg = el.querySelector(".msg");
-      if (!input.value || input.value.indexOf("@") < 1) {
-        msg.style.color = "var(--red)";
-        msg.textContent = "Please enter a valid email address.";
-        return;
-      }
-      msg.style.color = "var(--trust)";
-      msg.textContent = "Thanks — you’re on the list. (Demo only; nothing was sent.)";
-      input.value = "";
-    });
   }
 
   function renderMobileBar() {
@@ -342,7 +313,7 @@ window.SXUI = (function () {
     var img = vehicleImage(v, 0);
     var alt = SX.vehicleTitle(v) + " " + (v.trim || "") +
       (v.extColor ? " in " + v.extColor : "") +
-      (v.images && v.images.length ? "" : ", placeholder photo");
+      (v.images && v.images.length ? "" : ", photos coming soon");
     var tag = v.status === "sold" ? "Sold" : v.tag;
     card.innerHTML =
       '<div class="vc-media">' +

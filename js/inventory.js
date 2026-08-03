@@ -12,9 +12,14 @@ SX.ready.then(function () {
   var yearLo = Math.min.apply(null, SX.vehicles.map(function (v) { return v.year; }));
   var yearHi = Math.max.apply(null, SX.vehicles.map(function (v) { return v.year; }));
   var kmHi = Math.max.apply(null, SX.vehicles.map(function (v) { return v.km; }));
+  if (!SX.vehicles.length || !isFinite(priceLo)) {
+    priceLo = 0; priceHi = 100000; yearLo = 2010; yearHi = 2026; kmHi = 200000;
+  }
   priceLo = Math.floor(priceLo / 1000) * 1000;
   priceHi = Math.ceil(priceHi / 1000) * 1000;
   kmHi = Math.ceil(kmHi / 5000) * 5000;
+  if (priceHi <= priceLo) priceHi = priceLo + 1000;
+  if (yearHi <= yearLo) yearHi = yearLo + 1;
 
   /* In-memory filter state (no browser storage) */
   var state = {
@@ -224,7 +229,13 @@ SX.ready.then(function () {
     grid.innerHTML = "";
     results.slice(0, shown).forEach(function (v) { grid.appendChild(SXUI.vehicleCard(v)); });
 
-    document.getElementById("empty-state").hidden = results.length !== 0;
+    var empty = document.getElementById("empty-state");
+    empty.hidden = results.length !== 0;
+    if (!SX.vehicles.length) {
+      empty.querySelector("h3").textContent = "New inventory arriving";
+      empty.querySelector("p").textContent = "We are updating our listings. Call 514-824-9117 to hear what is on the lot right now.";
+      empty.querySelector("#empty-reset").style.display = "none";
+    }
     var lm = document.getElementById("load-more");
     lm.style.display = results.length > shown ? "" : "none";
     lm.textContent = "Load more vehicles (" + (results.length - shown > 0 ? results.length - shown : 0) + " remaining)";

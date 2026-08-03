@@ -133,7 +133,7 @@
     var list = $("dash-list");
     list.innerHTML = "";
     if (!vehicles.length) {
-      list.innerHTML = '<p class="muted">No vehicles yet — tap “Add Vehicle” to create your first listing.</p>';
+      list.innerHTML = '<p class="muted">No vehicles yet. Tap “Add Vehicle” to create your first listing.</p>';
       return;
     }
     vehicles.forEach(function (v, i) {
@@ -182,7 +182,7 @@
     }).then(function () {
       pendingBlobs = [];
       deletePaths = [];
-      toast(doneMsg || "Saved — the website is updating and will show changes in about a minute.", "ok");
+      toast(doneMsg || "Saved. The website is updating and will show changes in about a minute.", "ok");
     }).catch(function (e) {
       toast("Could not save: " + e.message, "err");
       throw e;
@@ -201,7 +201,7 @@
     if (!confirm("Delete the " + v.year + " " + v.make + " " + v.model + "? This cannot be undone.")) return;
     vehicles = vehicles.filter(function (o) { return o !== v; });
     (v.images || []).forEach(function (p) { deletePaths.push(p); });
-    saveAll("Delete " + v.year + " " + v.make + " " + v.model, "Deleted — website updating.").then(renderDash).catch(function () { loadInventory(); });
+    saveAll("Delete " + v.year + " " + v.make + " " + v.model, "Deleted. Website updating.").then(renderDash).catch(function () { loadInventory(); });
   }
 
   function duplicateVehicle(v) {
@@ -214,7 +214,7 @@
     copy.createdAt = new Date().toISOString();
     vehicles.unshift(copy);
     openEditor(copy, true);
-    toast("Duplicated as a draft — add photos and publish when ready.", "ok");
+    toast("Duplicated as a draft. Add photos and publish when ready.", "ok");
   }
 
   /* ---------- editor ---------- */
@@ -335,7 +335,7 @@
     saveAll((status === "draft" ? "Draft: " : "Publish: ") + label,
       status === "draft"
         ? "Draft saved. It is not visible on the website."
-        : "Published! The website is updating — your listing will be live in about a minute.")
+        : "Published! The website is updating. Your listing will be live in about a minute.")
       .then(function () { renderDash(); show("screen-dash"); })
       .catch(function () { /* stay in editor so nothing is lost */ });
   }

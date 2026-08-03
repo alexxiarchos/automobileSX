@@ -15,7 +15,7 @@ SX.ready.then(function () {
   /* Vehicle dropdown */
   var vehicleSel = document.getElementById("c-vehicle");
   vehicleSel.innerHTML = SX.vehicles.map(function (v) {
-    return '<option value="' + v.id + '">' + SX.vehicleTitle(v) + " " + v.trim + " — " + SX.money(v.price) + "</option>";
+    return '<option value="' + v.id + '">' + SX.vehicleTitle(v) + " " + v.trim + " · " + SX.money(v.price) + "</option>";
   }).join("");
 
   var interestSel = document.getElementById("c-interest");
@@ -37,7 +37,7 @@ SX.ready.then(function () {
     if (veh) {
       var v = SX.getVehicle(veh);
       if (v) document.getElementById("c-message").value =
-        "Hi — I'd like to " + (interestSel.value === "test-drive" ? "book a test drive in" : "ask about") +
+        "Hi, I'd like to " + (interestSel.value === "test-drive" ? "book a test drive in" : "ask about") +
         " the " + SX.vehicleTitle(v) + " " + v.trim + " (stock " + v.stock + ").";
     }
   })();
@@ -93,11 +93,22 @@ SX.ready.then(function () {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     if (!allOK()) return;
-    /* Simulated submission — no backend */
-    var name = fields.name.el.value.trim().split(/\s+/)[0];
-    document.getElementById("success-detail").innerHTML =
-      "Thanks, " + name + " — we’ll get back to you at <strong>" + fields.email.el.value.trim() +
-      "</strong> within one business day. If it’s urgent, call <a href=\"" + SX.dealer.phoneHref + "\" class=\"text-link\">" + SX.dealer.phone + "</a>. (Demo only; no message was actually sent.)";
+    /* No backend by design: compose the email in the visitor's own mail app */
+    var interestLabel = interestSel.options[interestSel.selectedIndex].text;
+    var lines = [
+      "Name: " + fields.name.el.value.trim(),
+      "Phone: " + fields.phone.el.value.trim(),
+      "Email: " + fields.email.el.value.trim(),
+      "Interested in: " + interestLabel
+    ];
+    if (!rowVehicle.hidden && vehicleSel.value) {
+      lines.push("Vehicle: " + vehicleSel.options[vehicleSel.selectedIndex].text);
+    }
+    lines.push("", fields.message.el.value.trim());
+    var subject = "Website inquiry: " + interestLabel;
+    location.href = "mailto:" + SX.dealer.email +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(lines.join("\n"));
     form.hidden = true;
     var success = document.getElementById("form-success");
     success.style.display = "block";
@@ -107,10 +118,10 @@ SX.ready.then(function () {
   /* ---------- FAQ accordion ---------- */
   var faqs = [
     ["Do you offer financing?", "Yes. We work with a dozen Canadian lenders and can usually get an answer the same day, for good credit, new credit, and bruised credit alike. You'll see the real rate and the real payment before you sign anything. Bring a driver's licence and proof of income to speed things up."],
-    ["Can I trade in my car?", "Yes — and it usually saves you tax. In Quebec, sales tax on your next vehicle is calculated on the price after your trade-in is deducted. We'll give you a written offer with no obligation to buy from us."],
-    ["Do you deliver?", "We offer free delivery within 50 km of the lot, anywhere in the Montreal area. Beyond that, we charge a flat fee based on distance — ask us for a quote. You can also complete almost all paperwork before pickup so the handover takes 20 minutes."],
-    ["Can I reserve a vehicle?", "Yes — we're open to reservations. Call 514-824-9117 or send the form above and we'll hold the vehicle while you arrange financing or an inspection visit."],
-    ["Do I need an appointment?", "Yes — visits are by appointment, and we're open 10:00–18:00 every day, so there's always a slot that works. Call 514-824-9117 or use the form above, and the car will be fuelled, warmed up, and parked out front when you arrive."]
+    ["Can I trade in my car?", "Yes, and it usually saves you tax. In Quebec, sales tax on your next vehicle is calculated on the price after your trade-in is deducted. You get a written offer with no obligation to buy from us."],
+    ["Do you deliver?", "We offer free delivery within 50 km of the lot, anywhere in the Montreal area. Beyond that, we charge a flat fee based on distance; ask us for a quote. You can also complete almost all paperwork before pickup so the handover takes 20 minutes."],
+    ["Can I reserve a vehicle?", "Yes, we are open to reservations. Call 514-824-9117 or send the form above and we'll hold the vehicle while you arrange financing or an inspection visit."],
+    ["Do I need an appointment?", "Yes, visits are by appointment, and we are open 10:00 to 18:00 every day, so there is always a slot that works. Call 514-824-9117 or use the form above, and the car will be fuelled, warmed up, and parked out front when you arrive."]
   ];
   document.getElementById("faq-list").innerHTML = faqs.map(function (f, i) {
     return '<div class="faq-item">' +

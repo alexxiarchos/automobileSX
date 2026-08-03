@@ -5,9 +5,9 @@
   function render() {
     SXUI.init("home");
 
-    /* Hero background */
+    /* Hero background: the real storefront */
     document.getElementById("hero-bg").innerHTML =
-      '<img src="' + SXUI.heroImage() + '" alt="A coupe parked on the Automobile SX lot at dusk (placeholder photo)">';
+      '<img src="assets/storefront-hero.jpg" alt="The Automobile SX storefront in Dorval with a vehicle parked out front" fetchpriority="high">';
 
     /* Translate simple keys */
     document.querySelectorAll("[data-t]").forEach(function (el) {
@@ -50,9 +50,9 @@
       credit: '<svg viewBox="0 0 34 34" fill="none" stroke-width="1.8"><rect x="4" y="8" width="26" height="18" rx="2"/><path d="M4 14h26M9 21h6"/></svg>'
     };
     var trust = [
-      { icon: "inspect", h: "150-Point Inspection", p: "Mechanical, electrical, body — checked and documented before listing." },
-      { icon: "carfax", h: "History on Every Listing", p: "Full specs, kilometres and vehicle history disclosed up front." },
-      { icon: "returns", h: "By Appointment", p: "Call " + SX.dealer.phone + " to book — one-on-one, no crowds. Reservations welcome." },
+      { icon: "inspect", h: "150-Point Inspection", p: "Mechanical, electrical and body, checked and documented before listing." },
+      { icon: "carfax", h: "Vente · Achat · Échange", p: "We sell, buy and trade. Full specs and kilometres disclosed up front." },
+      { icon: "returns", h: "By Appointment", p: "Call " + SX.dealer.phone + " to book. One-on-one, no crowds. Reservations welcome." },
       { icon: "credit", h: "Financing for All Credit", p: "A dozen Canadian lenders. Honest rates, told to you up front." }
     ];
     document.getElementById("trust-strip").innerHTML = trust.map(function (t) {
@@ -67,12 +67,11 @@
     grid.innerHTML = "";
     featured.forEach(function (v) { grid.appendChild(SXUI.vehicleCard(v)); });
 
-    /* Body type tiles */
+    /* Body type tiles (text-only, clean) */
     document.getElementById("body-tiles").innerHTML = SX.bodyTypes.map(function (b) {
       var count = SX.vehicles.filter(function (v) { return v.body === b; }).length;
       return '<a class="body-tile" href="inventory.html?body=' + encodeURIComponent(b) + '">' +
-        SXUI.bodyTypeIcon(b) +
-        '<div class="bt-name">' + b + '</div><div class="bt-count">' + count + " in stock</div></a>";
+        '<span class="bt-name">' + b + '</span><span class="bt-count">' + count + " in stock</span></a>";
     }).join("");
 
     /* Financing calculator */
@@ -80,16 +79,9 @@
     calcWrap.innerHTML = "";
     calcWrap.appendChild(SXUI.paymentCalculator({ price: 28000, minPrice: 12000, maxPrice: 50000 }));
 
-    /* Trade-in photo */
-    document.getElementById("trade-photo").innerHTML = SXUI.lotPhotoSVG();
-
-    /* Testimonials */
-    document.getElementById("testimonial-grid").innerHTML = SX.testimonials.map(function (t) {
-      return '<figure class="testimonial">' +
-        '<div class="stars" aria-label="5 out of 5 stars">★★★★★</div>' +
-        "<blockquote>“" + t.quote + "”</blockquote>" +
-        "<figcaption><strong>" + t.name + "</strong><span>Purchased a " + t.vehicle + "</span></figcaption></figure>";
-    }).join("");
+    /* Trade-in photo: the real lot */
+    document.getElementById("trade-photo").innerHTML =
+      '<img src="assets/storefront.jpg" alt="The Automobile SX building at 2044 Avenue Chartier, Dorval" loading="lazy">';
 
     /* Visit block */
     document.getElementById("visit-map").innerHTML = SXUI.mapSVG();

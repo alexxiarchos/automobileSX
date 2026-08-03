@@ -30,7 +30,7 @@ module.exports = async function (req, res) {
     for (const v of vehicles) {
       if (!v.id) throw new Error("A vehicle is missing its id");
       if (v.status !== "draft" && (!v.year || !v.make || !v.model || !v.price)) {
-        throw new Error((v.id || "A vehicle") + " is missing year/make/model/price — save it as a draft instead.");
+        throw new Error((v.id || "A vehicle") + " is missing year/make/model/price. Save it as a draft instead.");
       }
     }
 

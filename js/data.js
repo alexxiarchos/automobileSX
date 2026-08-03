@@ -30,8 +30,10 @@ SX.strings = {
     "footer.tagline": "Family-run pre-owned dealership serving Dorval and Greater Montreal.",
     "footer.hours": "Hours",
     "footer.quickLinks": "Quick links",
-    "footer.newArrivals": "New arrivals, weekly",
-    "footer.newArrivalsSub": "One short email when fresh stock lands. No spam.",
+    "footer.newArrivals": "New arrivals",
+    "footer.newArrivalsSub": "Want first call when fresh stock lands? Send us your email and we will keep you posted.",
+    "footer.newArrivalsCta": "Email us",
+    "footer.orCall": "Or call",
     "footer.taxNote": "All prices exclude applicable taxes and licensing.",
     "closed": "Closed"
   },
@@ -58,8 +60,10 @@ SX.strings = {
     "footer.tagline": "Concessionnaire familial de véhicules d'occasion à Dorval, dans le Grand Montréal.",
     "footer.hours": "Heures",
     "footer.quickLinks": "Liens rapides",
-    "footer.newArrivals": "Nouveaux arrivages, chaque semaine",
-    "footer.newArrivalsSub": "Un court courriel quand du nouveau stock arrive. Pas de pourriel.",
+    "footer.newArrivals": "Nouveaux arrivages",
+    "footer.newArrivalsSub": "Envoyez-nous votre courriel et nous vous aviserons des nouveaux arrivages.",
+    "footer.newArrivalsCta": "Écrivez-nous",
+    "footer.orCall": "Ou appelez le",
     "footer.taxNote": "Les prix excluent les taxes applicables et l'immatriculation.",
     "closed": "Fermé"
   }
@@ -82,8 +86,8 @@ SX.dealer = {
   address1: "2044 Avenue Chartier",
   address2: "Dorval, QC",
   apptNote: {
-    en: "By appointment — call to book. Reservations welcome.",
-    fr: "Sur rendez-vous — appelez pour réserver. Réservations bienvenues."
+    en: "By appointment. Call to book, reservations welcome.",
+    fr: "Sur rendez-vous. Appelez pour réserver, réservations bienvenues."
   },
   hours: [
     { day: "Monday", fr: "Lundi", open: "10:00", close: "18:00" },
@@ -157,19 +161,3 @@ SX.vehicleTitle = function (v) {
 };
 
 SX.bodyTypes = ["Sedan", "SUV", "Truck", "Coupe", "Hatchback"];
-
-/* Testimonials — SAMPLE CONTENT */
-SX.testimonials = [
-  {
-    quote: "No pressure, no games. The price on the site was the price on the paper. I booked an appointment, drove three cars, picked the RAV4, and was out in under two hours.",
-    name: "Priya S.", vehicle: "2021 Toyota RAV4"
-  },
-  {
-    quote: "They showed me the history report and the inspection sheet before I asked. My mechanic checked the car after and found nothing to argue with.",
-    name: "Marco D.", vehicle: "2019 Honda CR-V"
-  },
-  {
-    quote: "First car purchase in Canada and my credit history was thin. They walked me through financing options honestly and I got approved the same day.",
-    name: "Amara O.", vehicle: "2021 Hyundai Elantra"
-  }
-];
