@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T20:28:12.445Z",
+  "updatedAt": "2026-08-03T20:28:17.484Z",
   "vehicles": [
     {
       "id": "-01k4m",
@@ -28,57 +28,6 @@
       "status": "available",
       "createdAt": "2026-08-03T20:16:26.214Z",
       "updatedAt": "2026-08-03T20:27:24.244Z"
-    },
-    {
-      "id": "elantra-2021",
-      "year": 2021,
-      "make": "Hyundai",
-      "model": "Elantra",
-      "trim": "Preferred",
-      "body": "Sedan",
-      "price": 21900,
-      "km": 42600,
-      "transmission": "CVT",
-      "fuel": "Gasoline",
-      "drivetrain": "FWD",
-      "extColor": "Phantom Black",
-      "extHex": "#141518",
-      "intColor": "Grey fabric",
-      "engine": "2.0L I4",
-      "econCity": 7.5,
-      "econHwy": 5.6,
-      "doors": 4,
-      "seats": 5,
-      "vin": "KMHLM4AG3MU183774",
-      "stock": "SX-1029",
-      "features": {
-        "safety": [
-          "Forward Collision-Avoidance Assist",
-          "Lane Following Assist",
-          "Driver Attention Warning",
-          "Backup Camera"
-        ],
-        "comfort": [
-          "Heated Front Seats",
-          "Heated Steering Wheel",
-          "Automatic Climate Control"
-        ],
-        "technology": [
-          "8\" Touchscreen",
-          "Wireless Apple CarPlay / Android Auto",
-          "Bluelink Connected Services"
-        ],
-        "exterior": [
-          "16\" Alloy Wheels",
-          "LED Daytime Running Lights"
-        ]
-      },
-      "desc": [
-        "Hyundai's redesigned 2021 Elantra brought a bigger cabin and wireless CarPlay, and this Preferred trim has the heated everything Canadians actually use. One owner, no accidents reported, balance of Hyundai's 5-year warranty still in effect.",
-        "The 2.0L and CVT pairing won't win races but returns 5.6 L/100km on the highway — a legitimately cheap car to run. Fresh oil change, new cabin filter, and four matching tires with 80% tread."
-      ],
-      "images": [],
-      "status": "available"
     },
     {
       "id": "outback-2020",
