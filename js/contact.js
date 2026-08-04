@@ -117,7 +117,7 @@ SX.ready.then(function () {
 
   /* ---------- FAQ accordion ---------- */
   var faqs = [
-    ["Do you offer financing?", "Yes. We work with a dozen Canadian lenders and can usually get an answer the same day, for good credit, new credit, and bruised credit alike. You'll see the real rate and the real payment before you sign anything. Bring a driver's licence and proof of income to speed things up."],
+    ["Do you offer financing?", "Yes. We work with several lenders and can usually get an answer the same day, for good credit, new credit, and bruised credit alike. You'll see the real rate and the real payment before you sign anything. Bring a driver's licence and proof of income to speed things up."],
     ["Can I trade in my car?", "Yes, and it usually saves you tax. In Quebec, sales tax on your next vehicle is calculated on the price after your trade-in is deducted. You get a written offer with no obligation to buy from us."],
     ["Do you deliver?", "We offer free delivery within 50 km of the lot, anywhere in the Montreal area. Beyond that, we charge a flat fee based on distance; ask us for a quote. You can also complete almost all paperwork before pickup so the handover takes 20 minutes."],
     ["Can I reserve a vehicle?", "Yes, we are open to reservations. Call 514-824-9117 or send the form above and we'll hold the vehicle while you arrange financing or an inspection visit."],

@@ -50,10 +50,10 @@
       credit: '<svg viewBox="0 0 34 34" fill="none" stroke-width="1.8"><rect x="4" y="8" width="26" height="18" rx="2"/><path d="M4 14h26M9 21h6"/></svg>'
     };
     var trust = [
-      { icon: "inspect", h: "150-Point Inspection", p: "Mechanical, electrical and body, checked and documented before listing." },
-      { icon: "carfax", h: "Vente · Achat · Échange", p: "We sell, buy and trade. Full specs and kilometres disclosed up front." },
+      { icon: "inspect", h: "Personal Service", p: "You deal directly with the owner, from the first phone call to the keys in your hand." },
+      { icon: "carfax", h: "Vente · Achat · Échange", p: "We sell, buy and trade. Full specs and kilometres disclosed up front, no surprises." },
       { icon: "returns", h: "By Appointment", p: "Call " + SX.dealer.phone + " to book. One-on-one, no crowds. Reservations welcome." },
-      { icon: "credit", h: "Financing for All Credit", p: "A dozen Canadian lenders. Honest rates, told to you up front." }
+      { icon: "credit", h: "Financing for All Credit", p: "We work with several lenders. Honest rates, told to you up front." }
     ];
     document.getElementById("trust-strip").innerHTML = trust.map(function (t) {
       return '<div class="trust-item">' + ICONS[t.icon] + "<div><h3>" + t.h + "</h3><p>" + t.p + "</p></div></div>";
