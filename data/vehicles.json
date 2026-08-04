@@ -1,6 +1,52 @@
 {
-  "updatedAt": "2026-08-04T12:09:34.326Z",
+  "updatedAt": "2026-08-04T12:12:21.987Z",
   "vehicles": [
+    {
+      "id": "2017-volkswagen-golf-iftqk",
+      "year": 2017,
+      "make": "Volkswagen",
+      "model": "Golf",
+      "trim": "",
+      "body": "Hatchback",
+      "price": 6499,
+      "km": 188000,
+      "transmission": "Automatic",
+      "fuel": "Gasoline",
+      "drivetrain": "FWD",
+      "extColor": "Black",
+      "extHex": "#141518",
+      "intColor": "Grey",
+      "engine": "1.8",
+      "vin": "",
+      "stock": "SX-1012",
+      "tag": "",
+      "features": [
+        "Bluetooth",
+        "Backup Camera",
+        "Heated Seats",
+        "Cruise Control",
+        "AWD"
+      ],
+      "desc": "2017, Volkswagen golf Trendline,1.8 turbo manuelle, ac, groupe électriques\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
+      "images": [
+        "images/vehicles/2017-volkswagen-golf-iftqk/msemb93h-131.jpg",
+        "images/vehicles/2017-volkswagen-golf-iftqk/msemba8h-132.jpg",
+        "images/vehicles/2017-volkswagen-golf-iftqk/msembay5-133.jpg",
+        "images/vehicles/2017-volkswagen-golf-iftqk/msembbqj-134.jpg",
+        "images/vehicles/2017-volkswagen-golf-iftqk/msembciu-135.jpg",
+        "images/vehicles/2017-volkswagen-golf-iftqk/msembd8n-136.jpg",
+        "images/vehicles/2017-volkswagen-golf-iftqk/msembdy9-137.jpg",
+        "images/vehicles/2017-volkswagen-golf-iftqk/msembeqp-138.jpg",
+        "images/vehicles/2017-volkswagen-golf-iftqk/msembfil-139.jpg",
+        "images/vehicles/2017-volkswagen-golf-iftqk/msembg5s-140.jpg",
+        "images/vehicles/2017-volkswagen-golf-iftqk/msembgsm-141.jpg",
+        "images/vehicles/2017-volkswagen-golf-iftqk/msembhkq-142.jpg",
+        "images/vehicles/2017-volkswagen-golf-iftqk/msembiah-143.jpg"
+      ],
+      "status": "available",
+      "createdAt": "2026-08-04T12:10:04.639Z",
+      "updatedAt": "2026-08-04T12:12:21.877Z"
+    },
     {
       "id": "2016-jeep-grand-cherokee-638hq",
       "year": 2016,
