@@ -1,6 +1,52 @@
 {
-  "updatedAt": "2026-08-04T12:07:09.992Z",
+  "updatedAt": "2026-08-04T12:09:34.326Z",
   "vehicles": [
+    {
+      "id": "2016-jeep-grand-cherokee-638hq",
+      "year": 2016,
+      "make": "Jeep",
+      "model": "Grand Cherokee",
+      "trim": "",
+      "body": "SUV",
+      "price": 11999,
+      "km": 157000,
+      "transmission": "Automatic",
+      "fuel": "Gasoline",
+      "drivetrain": "AWD",
+      "extColor": "Grey",
+      "extHex": "#5c6066",
+      "intColor": "Grey",
+      "engine": "3.6",
+      "vin": "",
+      "stock": "SX-1011",
+      "tag": "",
+      "features": [
+        "Bluetooth",
+        "Heated Seats",
+        "Remote Start",
+        "Cruise Control",
+        "AWD"
+      ],
+      "desc": "2016 GRAND CHEROKEE LAREDO ,3.6K, EXCELLENTE CONDUITE, NOUVEAU FREINS AU 4 ROUE, AC, GROUPE ÉLECTRIQUES, BLUETOOTH\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
+      "images": [
+        "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7njs-118.jpg",
+        "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7onh-119.jpg",
+        "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7pfw-120.jpg",
+        "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7q5k-121.jpg",
+        "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7qsa-122.jpg",
+        "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7rhs-123.jpg",
+        "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7sab-124.jpg",
+        "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7szu-125.jpg",
+        "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7ty4-126.jpg",
+        "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7uqk-127.jpg",
+        "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7vj1-128.jpg",
+        "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7we5-129.jpg",
+        "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7x13-130.jpg"
+      ],
+      "status": "available",
+      "createdAt": "2026-08-04T12:07:36.365Z",
+      "updatedAt": "2026-08-04T12:09:34.206Z"
+    },
     {
       "id": "2017-subaru-forester-774gh",
       "year": 2017,
