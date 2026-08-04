@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-04T12:18:54.498Z",
+  "updatedAt": "2026-08-04T17:25:13.549Z",
   "vehicles": [
     {
       "id": "2014-subaru-legacy-4jxba",
@@ -30,7 +30,6 @@
       ],
       "desc": "2014 SUBARU LEGACY, 2.5L AWD, AC , SIÈGES CHAUFFANT, GROUPE ÉLECTRIQUES \n\n\nHORAIRES FLEXIBLES SUR RENDEZ-VOUS \n514-824-9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
       "images": [
-        "images/vehicles/2014-subaru-legacy-4jxba/msemjrf8-159.jpg",
         "images/vehicles/2014-subaru-legacy-4jxba/msemjsep-160.jpg",
         "images/vehicles/2014-subaru-legacy-4jxba/msemjt49-161.jpg",
         "images/vehicles/2014-subaru-legacy-4jxba/msemjtty-162.jpg",
@@ -47,7 +46,7 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:17:11.456Z",
-      "updatedAt": "2026-08-04T12:18:54.393Z"
+      "updatedAt": "2026-08-04T17:25:12.924Z"
     },
     {
       "id": "2019-volvo-xc60-zen4s",
