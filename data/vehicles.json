@@ -1,6 +1,52 @@
 {
-  "updatedAt": "2026-08-04T12:02:50.823Z",
+  "updatedAt": "2026-08-04T12:05:03.037Z",
   "vehicles": [
+    {
+      "id": "2019-suabru-impreza-62zb2",
+      "year": 2019,
+      "make": "Suabru",
+      "model": "Impreza",
+      "trim": "",
+      "body": "Hatchback",
+      "price": 8999,
+      "km": 213000,
+      "transmission": "Automatic",
+      "fuel": "Gasoline",
+      "drivetrain": "AWD",
+      "extColor": "Black",
+      "extHex": "#141518",
+      "intColor": "Grey",
+      "engine": "2.0",
+      "vin": "",
+      "stock": "SX-1009",
+      "tag": "",
+      "features": [
+        "Bluetooth",
+        "Backup Camera",
+        "Heated Seats",
+        "Cruise Control",
+        "AWD"
+      ],
+      "desc": "Financement disponible\n\nSubaru Impreza 2019\n\n5️⃣1️⃣4️⃣-8️⃣2️⃣4️⃣-9️⃣1️⃣1️⃣7️⃣\n2044 avenue Chartier Dorval \nHoraires flexible sur rendez-vous\n \n\nSièges chauffants, climatisation, groupe électrique et bien plus encore.\nUne voiture fiable, économique et agréable à conduire au quotidien.",
+      "images": [
+        "images/vehicles/2019-suabru-impreza-62zb2/msem1wze-88.jpg",
+        "images/vehicles/2019-suabru-impreza-62zb2/msem1y41-89.jpg",
+        "images/vehicles/2019-suabru-impreza-62zb2/msem1ytk-90.jpg",
+        "images/vehicles/2019-suabru-impreza-62zb2/msem1zm2-91.jpg",
+        "images/vehicles/2019-suabru-impreza-62zb2/msem20a4-92.jpg",
+        "images/vehicles/2019-suabru-impreza-62zb2/msem2118-93.jpg",
+        "images/vehicles/2019-suabru-impreza-62zb2/msem21tr-94.jpg",
+        "images/vehicles/2019-suabru-impreza-62zb2/msem22m5-95.jpg",
+        "images/vehicles/2019-suabru-impreza-62zb2/msem23ae-96.jpg",
+        "images/vehicles/2019-suabru-impreza-62zb2/msem23wt-97.jpg",
+        "images/vehicles/2019-suabru-impreza-62zb2/msem24h6-98.jpg",
+        "images/vehicles/2019-suabru-impreza-62zb2/msem253l-99.jpg",
+        "images/vehicles/2019-suabru-impreza-62zb2/msem25mx-100.jpg"
+      ],
+      "status": "available",
+      "createdAt": "2026-08-04T12:03:14.312Z",
+      "updatedAt": "2026-08-04T12:05:02.946Z"
+    },
     {
       "id": "2014-hyundai-santa-fe-1o683",
       "year": 2014,
