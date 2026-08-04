@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-04T17:25:13.549Z",
+  "updatedAt": "2026-08-04T22:45:20.361Z",
   "vehicles": [
     {
       "id": "2014-subaru-legacy-4jxba",
@@ -397,7 +397,7 @@
       "trim": "",
       "body": "SUV",
       "price": 9999,
-      "km": 191000,
+      "km": 194000,
       "transmission": "Automatic",
       "fuel": "Gasoline",
       "drivetrain": "AWD",
@@ -436,7 +436,7 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T11:56:54.576Z",
-      "updatedAt": "2026-08-04T11:58:29.095Z"
+      "updatedAt": "2026-08-04T22:45:19.774Z"
     },
     {
       "id": "2011-nissan-murano-r71ho",
