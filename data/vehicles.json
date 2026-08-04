@@ -1,6 +1,52 @@
 {
-  "updatedAt": "2026-08-04T11:54:16.347Z",
+  "updatedAt": "2026-08-04T11:56:24.561Z",
   "vehicles": [
+    {
+      "id": "2011-nissan-murano-r71ho",
+      "year": 2011,
+      "make": "Nissan",
+      "model": "Murano",
+      "trim": "",
+      "body": "SUV",
+      "price": 3999,
+      "km": 223000,
+      "transmission": "Automatic",
+      "fuel": "Gasoline",
+      "drivetrain": "AWD",
+      "extColor": "Balck",
+      "extHex": "#6c7178",
+      "intColor": "Grey",
+      "engine": "3.5",
+      "vin": "",
+      "stock": "SX-1005",
+      "tag": "",
+      "features": [
+        "Heated Seats",
+        "Sunroof",
+        "Remote Start",
+        "Cruise Control",
+        "AWD"
+      ],
+      "desc": "2011 Nissan Murano awd 3.5L roule tres bien, ac, camera de recul, groupe électriques, toit.\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2 I",
+      "images": [
+        "images/vehicles/2011-nissan-murano-r71ho/mselqmvn-31.jpg",
+        "images/vehicles/2011-nissan-murano-r71ho/mselqnto-32.jpg",
+        "images/vehicles/2011-nissan-murano-r71ho/mselqolx-33.jpg",
+        "images/vehicles/2011-nissan-murano-r71ho/mselqp9q-34.jpg",
+        "images/vehicles/2011-nissan-murano-r71ho/mselqpyf-35.jpg",
+        "images/vehicles/2011-nissan-murano-r71ho/mselqqny-36.jpg",
+        "images/vehicles/2011-nissan-murano-r71ho/mselqrgc-37.jpg",
+        "images/vehicles/2011-nissan-murano-r71ho/mselqs35-38.jpg",
+        "images/vehicles/2011-nissan-murano-r71ho/mselqssr-39.jpg",
+        "images/vehicles/2011-nissan-murano-r71ho/mselqtfq-40.jpg",
+        "images/vehicles/2011-nissan-murano-r71ho/mselqu83-41.jpg",
+        "images/vehicles/2011-nissan-murano-r71ho/mselqux7-42.jpg",
+        "images/vehicles/2011-nissan-murano-r71ho/mselqvhd-43.jpg"
+      ],
+      "status": "available",
+      "createdAt": "2026-08-04T11:54:58.675Z",
+      "updatedAt": "2026-08-04T11:56:24.474Z"
+    },
     {
       "id": "2017-subaru-outback-jcq9w",
       "year": 2017,
