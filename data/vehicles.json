@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-10T04:32:45.474Z",
+  "updatedAt": "2026-08-10T05:41:25.505Z",
   "vehicles": [
     {
       "id": "2014-subaru-legacy-4jxba",
@@ -243,7 +243,7 @@
       "updatedAt": "2026-08-04T12:07:09.895Z"
     },
     {
-      "id": "2019-suabru-impreza-62zb2",
+      "id": "2019-subaru-impreza-62zb2",
       "year": 2019,
       "make": "Subaru",
       "model": "Impreza",
@@ -286,7 +286,10 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:03:14.312Z",
-      "updatedAt": "2026-08-10T04:32:44.929Z"
+      "updatedAt": "2026-08-10T05:41:19.384Z",
+      "slugHistory": [
+        "2019-suabru-impreza-62zb2"
+      ]
     },
     {
       "id": "2014-hyundai-santa-fe-1o683",
