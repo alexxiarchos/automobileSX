@@ -93,7 +93,18 @@ const dealerSchema = () => ({
   },
   priceRange: "$$",
   areaServed: ["Dorval", "West Island", "Pointe-Claire", "Lachine", "Montréal", "Laval"],
-  availableLanguage: ["en", "fr"]
+  /* availableLanguage is not in scope for AutoDealer: schema.org defines it on
+     ContactPoint, Course, LodgingBusiness, ServiceChannel and TouristAttraction
+     only, and none of those is on AutoDealer's supertype chain
+     (Thing > Organization|Place > LocalBusiness > AutomotiveBusiness). It lives
+     on a ContactPoint instead, which is where the vocabulary puts it. The
+     telephone and email above stay on the dealer itself. */
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: DEALER.phoneE164,
+    contactType: "customer service",
+    availableLanguage: ["en", "fr"]
+  }
 });
 
 function breadcrumbSchema(items, lang) {
