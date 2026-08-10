@@ -458,7 +458,7 @@ module.exports = {
   },
 
   local: {
-    title: "Used Cars in the West Island | Dorval, Pointe-Claire, Lachine | Automobile SX",
+    title: "Used Cars in the West Island, Montreal | Automobile SX",
     description: "Used car dealership serving the West Island from Dorval: Pointe-Claire, Lachine, Pierrefonds and Kirkland. Bilingual, family-run, open seven days.",
     h1: "Used cars in the West Island",
     sub: "On Avenue Chartier in Dorval, minutes from Pointe-Claire, Lachine and Pierrefonds.",

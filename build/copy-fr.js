@@ -407,7 +407,7 @@ module.exports = {
   },
 
   g4: {
-    title: "Immatriculer une Voiture Usagée au Québec : Guide SAAQ | Automobile SX",
+    title: "Immatriculer une Voiture Usagée au Québec | Automobile SX",
     description: "Immatriculer une auto usagée achetée chez un commerçant au Québec : démarches à la SAAQ, documents, plaques, coûts et délais.",
     h1: "Immatriculer une voiture usagée au Québec",
     sub: "Ce que le commerçant gère, ce que vous apportez et quand votre plaque arrive.",
@@ -445,7 +445,7 @@ module.exports = {
   },
 
   local: {
-    title: "Autos Usagées dans l'Ouest-de-l'Île | Dorval, Pointe-Claire, Lachine",
+    title: "Autos Usagées dans l'Ouest-de-l'Île | Automobile SX",
     description: "Concessionnaire d'autos usagées desservant l'Ouest-de-l'Île depuis Dorval : Pointe-Claire, Lachine, Pierrefonds, Kirkland. Bilingue et familial.",
     h1: "Autos usagées dans l'Ouest-de-l'Île",
     sub: "Sur l'avenue Chartier à Dorval, à quelques minutes de Pointe-Claire, Lachine et Pierrefonds.",

@@ -72,7 +72,6 @@ SX.strings = {
     "footer.newArrivalsCta": "Email us",
     "footer.orCall": "Or call",
     "footer.taxNote": "All prices exclude applicable taxes and licensing.",
-    "footer.langLine": "",
     "footer.langLink": "Voir ce site en français",
     "closed": "Closed",
     /* Inventory UI */
@@ -165,7 +164,6 @@ SX.strings = {
     "footer.newArrivalsCta": "Écrivez-nous",
     "footer.orCall": "Ou appelez le",
     "footer.taxNote": "Les prix excluent les taxes applicables et l'immatriculation.",
-    "footer.langLine": "",
     "footer.langLink": "View this site in English",
     "closed": "Fermé",
     "inv.filters": "Filtres",
@@ -229,7 +227,12 @@ SX.strings = {
 
 SX.t = function (key) {
   var args = Array.prototype.slice.call(arguments, 1);
-  var s = (SX.strings[SX.lang] && SX.strings[SX.lang][key]) || SX.strings.en[key] || key;
+  /* An empty string is a legitimate translation, so test for presence rather
+     than truthiness. The old `||` chain printed the key name instead. */
+  var here = SX.strings[SX.lang];
+  var s = here && typeof here[key] === "string" ? here[key]
+    : typeof SX.strings.en[key] === "string" ? SX.strings.en[key]
+    : key;
   args.forEach(function (a, i) { s = s.split("{" + i + "}").join(a); });
   return s;
 };

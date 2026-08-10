@@ -82,7 +82,12 @@ const dealerSchema = () => ({
   },
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    /* Full schema.org enum URLs: strict validators reject the bare day names. */
+    dayOfWeek: [
+      "https://schema.org/Monday", "https://schema.org/Tuesday", "https://schema.org/Wednesday",
+      "https://schema.org/Thursday", "https://schema.org/Friday", "https://schema.org/Saturday",
+      "https://schema.org/Sunday"
+    ],
     opens: "10:00",
     closes: "18:00"
   },

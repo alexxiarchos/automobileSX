@@ -125,11 +125,11 @@ a:hover { color: var(--red); }
   height: 100%; gap: clamp(12px, 2vw, 28px);
 }
 .brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-.brand img { height: 44px; width: 44px; object-fit: cover; border-radius: 4px; }
+.brand img { height: 38px; width: auto; max-width: 104px; object-fit: contain; }
 .brand-text { line-height: 1.1; }
-.brand-text .brand-name { font-weight: 800; font-size: 17px; letter-spacing: 0.01em; color: var(--bone); }
+.brand-text .brand-name { font-weight: 800; font-size: 19px; letter-spacing: 0.01em; color: var(--bone); }
 .brand-text .brand-name span { color: var(--red); }
-.brand-text .brand-sub { font-size: 9.5px; letter-spacing: 0.14em; color: var(--slate); text-transform: uppercase; }
+.brand-text .brand-sub { font-size: 10px; letter-spacing: 0.14em; color: var(--slate); text-transform: uppercase; }
 
 .main-nav { display: flex; gap: 28px; }
 .main-nav a {
@@ -212,7 +212,7 @@ a:hover { color: var(--red); }
    stops aligning with everything below it. */
 .hero > .container { width: 100%; }
 .hero-bg { position: absolute; inset: 0; overflow: hidden; }
-.hero-bg img, .hero-bg svg { width: 100%; height: 100%; object-fit: cover; object-position: 62% 55%; }
+.hero-bg img, .hero-bg svg { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
 .hero-bg::after {
   content: ""; position: absolute; inset: 0;
   background:
@@ -637,6 +637,27 @@ input[type="range"] {
 .faq-item.open .faq-a { display: block; }
 
 /* ------- Responsive ------- */
+/* Between 1024 and 1200 the full desktop header is at its tightest: nav,
+   phone and the booking button all still show. Compress the brand and the
+   nav spacing so nothing is pushed off the edge. */
+@media (max-width: 1200px) {
+  .brand img { height: 32px; max-width: 86px; }
+  .brand-text .brand-name { font-size: 17px; }
+  .brand-text .brand-sub { font-size: 9px; }
+  .main-nav { gap: 20px; }
+  .main-nav a { font-size: 14.5px; }
+}
+/* Nav labels are longer in French, so nothing in the header may wrap. Below
+   1150 the booking button steps aside; the phone number stays, because being
+   able to see it is the point of having it there. */
+.main-nav a, .header-phone, .lang-toggle { white-space: nowrap; }
+@media (max-width: 1150px) {
+  .header-actions .btn { display: none; }
+  .main-nav { gap: 16px; }
+  .main-nav a { font-size: 14px; }
+  .brand-text .brand-sub { display: none; }
+}
+
 @media (max-width: 1023px) {
   .main-nav { display: none; }
   .nav-burger { display: block; }
@@ -886,13 +907,13 @@ input[type="range"] {
 }
 .map-frame.loaded { opacity: 1; }
 
-/* Footer: real photo of the lot, linking to directions */
-.footer-map { position: relative; display: block; max-width: 260px; margin-top: 14px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-dark); }
-.footer-map img { width: 100%; height: auto; display: block; }
+/* Footer: a compact live map of the lot, with a directions link under it */
+.footer-map { max-width: 260px; margin-top: 14px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-dark); }
+.footer-map .map-canvas { aspect-ratio: 4 / 3; min-height: 0; max-height: none; border-bottom: 1px solid var(--border-dark); }
+.footer-map .map-placeholder { font-size: 12.5px; padding: 14px; gap: 6px; }
 .footer-map-cta {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(to top, rgba(13,13,13,0.92), rgba(13,13,13,0));
-  color: var(--bone); font-size: 12.5px; font-weight: 600; padding: 18px 10px 8px;
+  display: block; padding: 9px 12px; font-size: 13px; font-weight: 600;
+  color: var(--bone); background: #131417;
 }
 .footer-map:hover .footer-map-cta { color: #fff; }
 
@@ -930,6 +951,19 @@ input[type="range"] {
 }
 
 /* --- Very small phones --- */
+/* Small phones: the brand mark and wordmark are scaled so the header still
+   fits alongside the language toggle and the menu button. */
+@media (max-width: 460px) {
+  .brand { gap: 8px; }
+  .brand img { height: 28px; max-width: 74px; }
+  .brand-text .brand-name { font-size: 15.5px; }
+  .brand-text .brand-sub { font-size: 8.5px; letter-spacing: 0.1em; }
+}
+@media (max-width: 380px) {
+  .brand img { height: 24px; max-width: 62px; }
+  .brand-text .brand-name { font-size: 14px; }
+}
+
 @media (max-width: 380px) {
   .hero-content h1 { font-size: 1.7rem; }
   .btn { padding: 11px 16px; font-size: 14.5px; }

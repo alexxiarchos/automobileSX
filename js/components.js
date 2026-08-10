@@ -33,23 +33,76 @@ window.SXUI = (function () {
 
   function photoCount(v) { return (v.images && v.images.length) || 1; }
 
+  /* Drop a live Google map into a .map-canvas element.
+     The canvas already contains a placeholder with the address and a link, so
+     if the embed never arrives the visitor still gets something useful. The
+     frame is only faded in once it loads, and is removed if it errors or has
+     not loaded within eight seconds. */
+  function mountMapFrame(canvas, addr, FR) {
+    if (!canvas) return;
+    var f = document.createElement("iframe");
+    var settled = false;
+
+    f.className = "map-frame";
+    f.title = FR ? "Carte : " + addr : "Map: " + addr;
+    f.loading = "lazy";
+    f.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+    f.setAttribute("allowfullscreen", "");
+    f.src = "https://www.google.com/maps?q=" + encodeURIComponent(addr) + "&z=16&output=embed";
+
+    function remove() { if (f.parentNode) f.parentNode.removeChild(f); }
+    function drop() {
+      if (settled) return;
+      settled = true;
+      remove();                                        /* leaves the placeholder */
+    }
+    var giveUp = setTimeout(drop, 8000);
+
+    f.addEventListener("load", function () {
+      if (settled) return;
+      settled = true;
+      clearTimeout(giveUp);
+      f.classList.add("loaded");
+    });
+    f.addEventListener("error", function () { clearTimeout(giveUp); drop(); });
+
+    canvas.appendChild(f);
+
+    /* The frame is mounted straight away, so anyone who can see a map gets one.
+       This probe only ever takes a map away: a browser error page inside a
+       cross-origin iframe still fires "load", so a blocked or unreachable
+       Google leaves a grey rectangle we cannot detect from the frame itself.
+       If the probe fails we know the embed cannot have worked, and we fall back
+       to the placeholder. If it succeeds, times out or never answers, the map
+       is left exactly as it is. Failing this way round means a strict privacy
+       setting can never hide a map that would otherwise have loaded. */
+    var probe = new Image();
+    probe.onerror = function () {
+      clearTimeout(giveUp);
+      settled = true;
+      remove();
+    };
+    probe.referrerPolicy = "no-referrer";
+    probe.src = "https://www.google.com/favicon.ico";
+  }
+
+  function mapPlaceholder(FR) {
+    return '<div class="map-canvas"><p class="map-placeholder">' +
+      (FR ? "Carte indisponible pour le moment." : "The map is unavailable right now.") +
+      ' <a href="' + SX.dealer.mapsUrl + '" target="_blank" rel="noopener">' +
+      (FR ? "Ouvrir dans Google Maps" : "Open in Google Maps") + "</a></p></div>";
+  }
+
   /* Location block: a live map on top, the address underneath.
      The address panel is real markup that is always on screen, so the block
-     is complete and useful whether or not the embed loads. The frame is only
-     revealed once it actually loads, and is given up on after a timeout, so a
-     blocked or slow embed leaves a placeholder rather than a white rectangle. */
+     is complete and useful whether or not the embed loads. */
   function mapBlock(el) {
     if (!el) return;
     var FR = SX.lang === "fr";
     var addr = SX.dealer.address1 + ", " + SX.dealer.address2;
 
     el.innerHTML =
-      '<div class="map-canvas">' +
-        '<p class="map-placeholder">' +
-          (FR ? "Carte indisponible pour le moment." : "The map is unavailable right now.") +
-          ' <a href="' + SX.dealer.mapsUrl + '" target="_blank" rel="noopener">' +
-          (FR ? "Ouvrir dans Google Maps" : "Open in Google Maps") + "</a></p>" +
-      "</div>" +
+      mapPlaceholder(FR) +
       '<div class="map-info">' +
         '<p class="map-fb-label">' + (FR ? "Nous trouver" : "Find us") + "</p>" +
         '<address class="map-fb-addr">' + SX.dealer.address1 + "<br>" + SX.dealer.address2 + "</address>" +
@@ -62,61 +115,7 @@ window.SXUI = (function () {
         "</div>" +
       "</div>";
 
-    var canvas = el.querySelector(".map-canvas");
-
-    /* A cross-origin iframe cannot be inspected, and a browser error page
-       inside one still fires "load", so we cannot tell a working map from a
-       broken rectangle after the fact. Instead we ask a cheap question first:
-       can this browser reach Google at all? A privacy extension, a blocked
-       network, an offline device or a TLS failure all fail this probe, and in
-       every one of those cases the frame would have failed too. Only if the
-       probe succeeds do we mount the map. If not, the placeholder and the
-       address panel below it are what the visitor sees. */
-    function mountMap() {
-      var f = document.createElement("iframe");
-      var settled = false;
-
-      f.className = "map-frame";
-      f.title = FR ? "Carte : " + addr : "Map: " + addr;
-      f.loading = "lazy";
-      f.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
-      f.setAttribute("allowfullscreen", "");
-      f.src = "https://www.google.com/maps?q=" + encodeURIComponent(addr) + "&z=16&output=embed";
-
-      function drop() {
-        if (settled) return;
-        settled = true;
-        if (f.parentNode) f.parentNode.removeChild(f);   /* leaves the placeholder */
-      }
-      var giveUp = setTimeout(drop, 8000);
-
-      f.addEventListener("load", function () {
-        if (settled) return;
-        settled = true;
-        clearTimeout(giveUp);
-        f.classList.add("loaded");
-      });
-      f.addEventListener("error", function () { clearTimeout(giveUp); drop(); });
-
-      canvas.appendChild(f);
-    }
-
-    var probe = new Image();
-    var answered = false;
-    var probeTimer = setTimeout(function () { answered = true; }, 5000);
-    probe.onload = function () {
-      if (answered) return;
-      answered = true;
-      clearTimeout(probeTimer);
-      mountMap();
-    };
-    probe.onerror = function () {
-      if (answered) return;
-      answered = true;
-      clearTimeout(probeTimer);       /* leave the placeholder in place */
-    };
-    probe.referrerPolicy = "no-referrer";
-    probe.src = "https://www.google.com/favicon.ico";
+    mountMapFrame(el.querySelector(".map-canvas"), addr, FR);
   }
 
   /* ============ Header ============ */
@@ -156,7 +155,7 @@ window.SXUI = (function () {
       '<a class="skip-link" href="#main">' + (SX.lang === "fr" ? "Aller au contenu principal" : "Skip to main content") + "</a>" +
       '<div class="container">' +
       '<a class="brand" href="' + SX.url("home") + '">' +
-      '<img src="/assets/logo.png" alt="Automobile SX" width="44" height="44">' +
+      '<img src="/assets/logo-mark.png" alt="Automobile SX" width="759" height="297">' +
       '<span class="brand-text"><span class="brand-name">AUTOMOBILE <span>SX</span></span><br>' +
       '<span class="brand-sub">Vente · Achat · Échange</span></span></a>' +
       '<nav class="main-nav" aria-label="' + (SX.lang === "fr" ? "Navigation principale" : "Main") + '">' + navLinks() + "</nav>" +
@@ -218,11 +217,9 @@ window.SXUI = (function () {
       '<address style="font-style:normal">' + SX.dealer.address1 + "<br>" + SX.dealer.address2 + "<br>" +
       '<a href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a><br>" +
       '<a href="mailto:' + SX.dealer.email + '">' + SX.dealer.email + "</a></address>" +
-      '<a class="footer-map" href="' + SX.dealer.mapsUrl + '" target="_blank" rel="noopener">' +
-      '<img src="/assets/storefront-thumb.jpg" alt="' +
-      (SX.lang === "fr" ? "Le commerce Automobile SX sur l\'avenue Chartier à Dorval" : "The Automobile SX lot on Avenue Chartier in Dorval") +
-      '" loading="lazy" width="520" height="377">' +
-      '<span class="footer-map-cta">' + (SX.lang === "fr" ? "Itinéraire ↗" : "Get directions ↗") + "</span></a>" +
+      '<div class="footer-map">' + mapPlaceholder(SX.lang === "fr") +
+      '<a class="footer-map-cta" href="' + SX.dealer.mapsUrl + '" target="_blank" rel="noopener">' +
+      (SX.lang === "fr" ? "Itinéraire ↗" : "Get directions ↗") + "</a></div>" +
       "</div>" +
       "<div><h3>" + SX.t("footer.hours") + '</h3><table class="footer-hours"><tbody>' + hoursRows() + "</tbody></table>" +
       '<p style="font-size:13px;color:var(--slate);margin:10px 0 0">' + SX.dealer.apptNote[SX.lang] + "</p></div>" +
@@ -230,13 +227,17 @@ window.SXUI = (function () {
       "<div><h3>" + SX.t("footer.newArrivals") + '</h3><p style="font-size:14px;color:var(--slate)">' + SX.t("footer.newArrivalsSub") + "</p>" +
       '<a class="btn btn-red" href="mailto:' + SX.dealer.email + '?subject=' + encodeURIComponent(SX.lang === "fr" ? "Nouveaux arrivages" : "New arrivals") + '">' + SX.t("footer.newArrivalsCta") + "</a>" +
       '<p style="font-size:13px;color:var(--slate);margin-top:10px">' + SX.t("footer.orCall") + ' <a href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a></p>" +
-      '<p style="font-size:13px;color:var(--slate);margin-top:14px" lang="' + (SX.lang === "en" ? "fr" : "en") + '">' + SX.t("footer.langLine") +
-      ' <a href="' + altLangUrl() + '">' + SX.t("footer.langLink") + "</a></p></div>" +
+      '<p style="font-size:13px;margin-top:14px">' +
+      '<a href="' + altLangUrl() + '" hreflang="' + (SX.lang === "en" ? "fr" : "en") + '" lang="' +
+      (SX.lang === "en" ? "fr" : "en") + '">' + SX.t("footer.langLink") + "</a></p></div>" +
       "</div>" +
       '<div class="footer-bottom">' +
       "<span>© " + new Date().getFullYear() + " " + SX.dealer.name + ".</span>" +
       "<span>" + SX.t("footer.taxNote") + "</span>" +
       "</div></div>";
+
+    mountMapFrame(el.querySelector(".footer-map .map-canvas"),
+      SX.dealer.address1 + ", " + SX.dealer.address2, SX.lang === "fr");
   }
 
   function renderMobileBar() {
