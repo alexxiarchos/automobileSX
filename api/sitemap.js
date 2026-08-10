@@ -5,7 +5,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const SITE = "https://automobilesx.ca";
+const SITE = "https://www.automobilesx.ca";
 
 const ROUTES = {
   en: {
@@ -18,7 +18,7 @@ const ROUTES = {
     g4: "/guides/registering-a-used-car-in-quebec"
   },
   fr: {
-    home: "/fr/", inventory: "/fr/inventaire", financing: "/fr/financement", sell: "/fr/vendre-votre-auto",
+    home: "/fr", inventory: "/fr/inventaire", financing: "/fr/financement", sell: "/fr/vendre-votre-auto",
     about: "/fr/a-propos", contact: "/fr/contact", faq: "/fr/faq", guides: "/fr/guides",
     local: "/fr/autos-usagees-west-island",
     g1: "/fr/guides/acheter-une-voiture-usagee-au-quebec",
@@ -58,7 +58,7 @@ async function readVehicles(req) {
     try { return JSON.parse(fs.readFileSync(file, "utf8")); } catch (e) { /* next */ }
   }
   try {
-    const host = (req && req.headers && req.headers.host) || "automobilesx.ca";
+    const host = (req && req.headers && req.headers.host) || "www.automobilesx.ca";
     const proto = /localhost|127\.0\.0\.1/.test(host) ? "http" : "https";
     const res = await fetch(proto + "://" + host + "/data/vehicles.json", { cache: "no-store" });
     if (res.ok) return await res.json();

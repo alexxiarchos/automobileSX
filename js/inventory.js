@@ -58,9 +58,12 @@ SX.ready.then(function () {
 
   checkGroup("f-makes", uniq(function (v) { return v.make; }), state.makes, function (v) { return v.make; });
   checkGroup("f-bodies", SX.bodyTypes, state.bodies, function (v) { return v.body; }, SX.bodyLabel);
-  checkGroup("f-trans", uniq(function (v) { return v.transmission; }), state.trans, function (v) { return v.transmission; });
-  checkGroup("f-fuel", uniq(function (v) { return v.fuel; }), state.fuel, function (v) { return v.fuel; });
-  checkGroup("f-drive", uniq(function (v) { return v.drivetrain; }), state.drive, function (v) { return v.drivetrain; });
+  checkGroup("f-trans", uniq(function (v) { return v.transmission; }), state.trans,
+    function (v) { return v.transmission; }, function (val) { return SX.specLabel("transmission", val); });
+  checkGroup("f-fuel", uniq(function (v) { return v.fuel; }), state.fuel,
+    function (v) { return v.fuel; }, function (val) { return SX.specLabel("fuel", val); });
+  checkGroup("f-drive", uniq(function (v) { return v.drivetrain; }), state.drive,
+    function (v) { return v.drivetrain; }, function (val) { return SX.specLabel("drivetrain", val); });
 
   var kw = document.getElementById("f-keyword");
   kw.value = state.keyword;
@@ -153,9 +156,9 @@ SX.ready.then(function () {
     if (state.kmMax < kmHi)
       chip("≤ " + state.kmMax.toLocaleString(SX.lang === "fr" ? "fr-CA" : "en-CA") + " km",
         function () { state.kmMax = kmHi; paintKm(); });
-    state.trans.forEach(function (t) { chip(t, function () { state.trans.delete(t); syncChecks("f-trans", state.trans); }); });
-    state.fuel.forEach(function (f) { chip(f, function () { state.fuel.delete(f); syncChecks("f-fuel", state.fuel); }); });
-    state.drive.forEach(function (d) { chip(d, function () { state.drive.delete(d); syncChecks("f-drive", state.drive); }); });
+    state.trans.forEach(function (t) { chip(SX.specLabel("transmission", t), function () { state.trans.delete(t); syncChecks("f-trans", state.trans); }); });
+    state.fuel.forEach(function (f) { chip(SX.specLabel("fuel", f), function () { state.fuel.delete(f); syncChecks("f-fuel", state.fuel); }); });
+    state.drive.forEach(function (d) { chip(SX.specLabel("drivetrain", d), function () { state.drive.delete(d); syncChecks("f-drive", state.drive); }); });
     return out;
   }
 

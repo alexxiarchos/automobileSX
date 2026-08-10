@@ -11,6 +11,9 @@ const blocks = require("./blocks.js");
 const ROOT = path.join(__dirname, "..");
 const COPY = { en: require("./copy-en.js"), fr: require("./copy-fr.js") };
 
+/* Stable publication date for the guide articles (they are evergreen). */
+const ARTICLE_DATE = "2026-08-04";
+
 /* Wrap a written article in the standard page-head + prose layout */
 function prosePage(T, key, extraSchema) {
   const c = T[key];
@@ -34,8 +37,11 @@ function articleSchema(T, key, lang) {
     headline: c.h1,
     description: c.description,
     inLanguage: lang === "fr" ? "fr-CA" : "en-CA",
-    mainEntityOfPage: SITE + ROUTES[lang][key],
-    author: { "@type": "Organization", name: "Automobile SX" },
+    mainEntityOfPage: { "@type": "WebPage", "@id": SITE + ROUTES[lang][key] },
+    image: [SITE + "/assets/og-image.jpg"],
+    datePublished: ARTICLE_DATE,
+    dateModified: ARTICLE_DATE,
+    author: { "@type": "Organization", name: "Automobile SX", url: SITE },
     publisher: { "@id": SITE + "/#dealer" }
   };
 }
@@ -186,8 +192,8 @@ function build() {
     body: `
   <div class="page-head">
     <div class="container">
-      <h1>That page has moved on</h1>
-      <p class="sub">Much like a good car on our lot. Here is where to go next.</p>
+      <h1>Page not found</h1>
+      <p class="sub">The page you were looking for is not here. These links will get you where you were going.</p>
     </div>
   </div>
   <div class="container section">
@@ -196,12 +202,12 @@ function build() {
         <p>Every vehicle we currently have for sale in Dorval.</p>
         <span class="link-card-cta">View inventory →</span></a>
       <a class="link-card" href="/contact"><h2>Talk to us</h2>
-        <p>Call 514-824-9117 or send a message and we will get back to you the same day.</p>
+        <p>Call 514-824-9117 or send a message and we will get back to you.</p>
         <span class="link-card-cta">Contact →</span></a>
       <a class="link-card" href="/guides"><h2>Buying guides</h2>
         <p>Taxes, the legal warranty, financing and registration in Quebec.</p>
         <span class="link-card-cta">Read the guides →</span></a>
-      <a class="link-card" href="/fr/" lang="fr"><h2>Version française</h2>
+      <a class="link-card" href="/fr" lang="fr"><h2>Version française</h2>
         <p>Ce site est aussi offert en français.</p>
         <span class="link-card-cta">Aller au site français →</span></a>
     </div>
@@ -224,6 +230,18 @@ function build() {
     });
   });
   fs.writeFileSync(path.join(ROOT, "sitemap-pages.json"), JSON.stringify(staticUrls, null, 2));
+
+  /* ---------- Shells for /api/vehicle ----------
+     api/vehicle.js resolves a vehicle URL that has no pre-rendered file yet
+     (and 301s retired addresses). Bundling the three shells it may need as
+     JSON means the function traces them automatically and never depends on
+     reading HTML off the deployment filesystem. */
+  const shells = {
+    en: fs.readFileSync(path.join(ROOT, FILES.en.vehicle), "utf8"),
+    fr: fs.readFileSync(path.join(ROOT, FILES.fr.vehicle), "utf8"),
+    notFound: fs.readFileSync(path.join(ROOT, "404.html"), "utf8")
+  };
+  fs.writeFileSync(path.join(ROOT, "api/_lib/shells.json"), JSON.stringify(shells));
 
   console.log("Generated " + written + " HTML pages and sitemap-pages.json");
 }

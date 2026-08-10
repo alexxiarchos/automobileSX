@@ -26,13 +26,13 @@ SX.ready.then(function () {
 
     var canon = document.createElement("link");
     canon.rel = "canonical";
-    canon.href = "https://automobilesx.ca" + SX.vehicleUrl(v);
+    canon.href = "https://www.automobilesx.ca" + SX.vehicleUrl(v);
     document.head.appendChild(canon);
 
     var alt = document.createElement("link");
     alt.rel = "alternate";
     alt.hreflang = SX.lang === "en" ? "fr-CA" : "en-CA";
-    alt.href = "https://automobilesx.ca" + SX.vehicleUrl(v, SX.lang === "en" ? "fr" : "en");
+    alt.href = "https://www.automobilesx.ca" + SX.vehicleUrl(v, SX.lang === "en" ? "fr" : "en");
     document.head.appendChild(alt);
     window.SX_ALT = SX.vehicleUrl(v, SX.lang === "en" ? "fr" : "en");
   }
@@ -131,9 +131,9 @@ SX.ready.then(function () {
   var locale = SX.lang === "fr" ? "fr-CA" : "en-CA";
   var specs = [
     [L.engine, v.engine],
-    [L.trans, v.transmission],
-    [L.drive, v.drivetrain],
-    [L.fuel, v.fuel],
+    [L.trans, SX.specLabel("transmission", v.transmission)],
+    [L.drive, SX.specLabel("drivetrain", v.drivetrain)],
+    [L.fuel, SX.specLabel("fuel", v.fuel)],
     [L.city, v.econCity != null ? Number(v.econCity).toFixed(1) + " L/100 km" : null],
     [L.hwy, v.econHwy != null ? Number(v.econHwy).toFixed(1) + " L/100 km" : null],
     [L.ext, v.extColor],
@@ -219,14 +219,14 @@ SX.ready.then(function () {
       "color": v.extColor || undefined,
       "vehicleIdentificationNumber": v.vin || undefined,
       "image": (v.images && v.images.length)
-        ? v.images.map(function (p) { return "https://automobilesx.ca/" + p.replace(/^\//, ""); })
+        ? v.images.map(function (p) { return "https://www.automobilesx.ca/" + p.replace(/^\//, ""); })
         : undefined,
       "offers": {
         "@type": "Offer",
         "price": v.price,
         "priceCurrency": "CAD",
         "availability": v.status === "sold" ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
-        "url": "https://automobilesx.ca" + SX.vehicleUrl(v),
+        "url": "https://www.automobilesx.ca" + SX.vehicleUrl(v),
         "seller": {
           "@type": "AutoDealer",
           "name": "Automobile SX",

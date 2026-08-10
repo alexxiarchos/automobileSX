@@ -2,7 +2,7 @@
    Every public HTML file is produced from this template so the head, header,
    footer and structured data stay identical across 28 pages and two languages. */
 
-const SITE = "https://automobilesx.ca";
+const SITE = "https://www.automobilesx.ca";
 
 const ROUTES = {
   en: {
@@ -15,7 +15,7 @@ const ROUTES = {
     g4: "/guides/registering-a-used-car-in-quebec"
   },
   fr: {
-    home: "/fr/", inventory: "/fr/inventaire", vehicle: "/fr/vehicules", financing: "/fr/financement",
+    home: "/fr", inventory: "/fr/inventaire", vehicle: "/fr/vehicules", financing: "/fr/financement",
     sell: "/fr/vendre-votre-auto", about: "/fr/a-propos", contact: "/fr/contact", faq: "/fr/faq",
     guides: "/fr/guides", local: "/fr/autos-usagees-west-island",
     g1: "/fr/guides/acheter-une-voiture-usagee-au-quebec",
@@ -57,6 +57,7 @@ const DEALER = {
   street: "2044 Avenue Chartier",
   city: "Dorval",
   region: "QC",
+  postalCode: "H9P 1H2",
   country: "CA",
   maps: "https://www.google.com/maps/search/?api=1&query=2044+Avenue+Chartier+Dorval+QC"
 };
@@ -76,6 +77,7 @@ const dealerSchema = () => ({
     streetAddress: DEALER.street,
     addressLocality: DEALER.city,
     addressRegion: DEALER.region,
+    postalCode: DEALER.postalCode,
     addressCountry: DEALER.country
   },
   openingHoursSpecification: {
@@ -99,6 +101,39 @@ function breadcrumbSchema(items, lang) {
       item: SITE + (it.route ? ROUTES[lang][it.route] : it.url)
     }))
   };
+}
+
+/* The header and footer are built by components.js at runtime. Crawlers that
+   do not execute JavaScript therefore saw a page with almost no internal
+   links, which is why an external crawl reported pages with a single inbound
+   link. This block is written into the footer element as real HTML;
+   components.js replaces it with the full footer as soon as it runs, so
+   nothing changes for a visitor, but every crawler sees the links. */
+const FOOTER_NAV = {
+  en: [
+    ["inventory", "Used car inventory"], ["financing", "Financing"],
+    ["sell", "Sell or trade your car"], ["guides", "Buying guides"],
+    ["faq", "Questions and answers"], ["local", "Used cars in the West Island"],
+    ["about", "About Automobile SX"], ["contact", "Contact and directions"]
+  ],
+  fr: [
+    ["inventory", "Inventaire de véhicules"], ["financing", "Financement"],
+    ["sell", "Vendre ou échanger votre auto"], ["guides", "Guides d'achat"],
+    ["faq", "Questions et réponses"], ["local", "Autos usagées dans le West Island"],
+    ["about", "À propos d'Automobile SX"], ["contact", "Contact et itinéraire"]
+  ]
+};
+
+function staticFooter(lang) {
+  const other = lang === "en" ? "fr" : "en";
+  const links = FOOTER_NAV[lang]
+    .map(([route, label]) => `<li><a href="${ROUTES[lang][route]}">${label}</a></li>`)
+    .join("");
+  const switchLabel = lang === "en" ? "Voir ce site en français" : "View this site in English";
+  return `<div class="container footer-static">
+<p><strong>${DEALER.name}</strong>, ${DEALER.street}, ${DEALER.city}, ${DEALER.region} ${DEALER.postalCode}. <a href="tel:${DEALER.phoneE164}">${DEALER.phone}</a></p>
+<ul>${links}<li><a href="${ROUTES[other].home}" hreflang="${other}" lang="${other}">${switchLabel}</a></li></ul>
+</div>`;
 }
 
 /**
@@ -166,7 +201,7 @@ ${page.skipCanonical ? "" : `<link rel="canonical" href="${canonical}">
 ${page.body}
 </main>
 
-<footer class="site-footer" id="site-footer"></footer>
+<footer class="site-footer" id="site-footer">${staticFooter(lang)}</footer>
 <div class="mobile-cta-bar" id="mobile-cta-bar"></div>
 
 <script src="/js/data.js"></script>

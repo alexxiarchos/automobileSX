@@ -358,7 +358,7 @@ input[type="range"] {
 
 /* ------- Visit / map ------- */
 .visit-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: stretch; }
-.map-block { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--mist); min-height: 300px; }
+.map-block { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--mist); }
 .map-block svg { width: 100%; height: 100%; display: block; }
 .hours-table { width: 100%; border-collapse: collapse; font-size: 15px; }
 .hours-table td { padding: 9px 0; border-bottom: 1px solid var(--mist); }
@@ -848,8 +848,27 @@ input[type="range"] {
 /* --- Location block: address card, with the real map laid over it once loaded --- */
 .map-block, .contact-map {
   position: relative; overflow: hidden; background: var(--ink);
-  border-radius: var(--radius); min-height: 340px;
+  border-radius: var(--radius); min-height: 0;
+  display: flex; flex-direction: column;
 }
+/* The frame sits in its own box so the address below it is never covered */
+.map-canvas {
+  position: relative; width: 100%; aspect-ratio: 16 / 10;
+  min-height: 220px; max-height: 380px; background: #15161a;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.map-placeholder {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px; text-align: center;
+  padding: 24px; margin: 0; color: var(--slate); font-size: 14px;
+}
+.map-placeholder a { color: var(--bone); text-decoration: underline; }
+.map-info {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  padding: clamp(20px, 3vw, 30px); color: var(--bone);
+}
+.map-info .map-fb-addr { font-style: normal; }
+.map-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
 .map-fallback {
   position: absolute; inset: 0; display: flex; flex-direction: column;
   align-items: flex-start; justify-content: center; gap: 4px;
@@ -914,4 +933,30 @@ input[type="range"] {
 @media (max-width: 380px) {
   .hero-content h1 { font-size: 1.7rem; }
   .btn { padding: 11px 16px; font-size: 14.5px; }
+}
+
+/* --- Links must take their contrast from the surface they sit on.
+       .text-link was hard-coded to --ink, which made it invisible inside the
+       dark page header (it only appeared on hover, when it turned red). --- */
+.text-link { color: inherit; }
+.page-head .text-link,
+.section-dark .text-link,
+.hero .text-link,
+.aside-card .text-link,
+.site-footer .text-link { color: var(--bone); }
+.page-head .text-link:hover,
+.section-dark .text-link:hover,
+.hero .text-link:hover,
+.aside-card .text-link:hover,
+.site-footer .text-link:hover { color: #fff; border-bottom-color: var(--red); }
+
+/* Crawlable footer links present in the HTML before components.js runs.
+   Replaced by the full footer on boot; styled so the brief moment it is
+   on screen looks like part of the footer rather than a bare list. */
+.footer-static { padding: 40px 0; color: var(--bone); font-size: 14px; }
+.footer-static p { margin: 0 0 14px; color: var(--slate); }
+.footer-static a { color: var(--bone); }
+.footer-static ul {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 8px 22px;
 }

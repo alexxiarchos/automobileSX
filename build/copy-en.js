@@ -27,11 +27,11 @@ const ctaCard = `
 <aside class="prose-aside">
   <div class="aside-card">
     <h2>Talk to Spiro</h2>
-    <p>No call centre, no rotating salespeople. You get the owner, in English or in French.</p>
+    <p>You deal directly with Spiro throughout the buying process, in English or in French.</p>
     <a class="btn btn-red btn-block" href="tel:+15148249117">Call ${DEALER.phone}</a>
     <a class="btn btn-outline btn-block" href="${R.contact}">Send a message</a>
     <a class="btn btn-ghost btn-block" href="${R.inventory}">Browse inventory</a>
-    <p class="aside-note">${DEALER.street}, ${DEALER.city}, ${DEALER.region}<br>Open 10:00 to 18:00, seven days a week, by appointment.</p>
+    <p class="aside-note">${DEALER.street}, ${DEALER.city}, ${DEALER.region}<br>Open 10:00 to 18:00, seven days a week.</p>
   </div>
 </aside>`;
 
@@ -63,15 +63,16 @@ module.exports = {
 
   home: {
     title: "Used Cars in Dorval, QC | Automobile SX | Vente d'Autos Usagées",
-    description: "Family-run used car dealership in Dorval, Quebec. Vente, achat, échange. Quality pre-owned vehicles, financing for all credit, personal service from the owner. Open 10 to 6, seven days a week.",
-    h1: "Quality used cars in Dorval, sold the honest way.",
-    sub: "A family-run lot on Avenue Chartier where you deal with the owner directly, in English or in French, and nobody rushes you.",
+    description: "Used cars for sale in Dorval, Quebec. Family-run dealership offering sales, purchases and trades, with financing available. Open 10 to 6, seven days.",
+    h1: "Quality used cars in Dorval",
+    sub: "A family-run dealership on Avenue Chartier. You deal directly with Spiro throughout the buying process, in English or in French.",
+    heroAlt: "The Automobile SX lot at 2044 Avenue Chartier in Dorval",
     searchAria: "Search inventory",
     whyH: "Why buy from Automobile SX",
     trust: [
       { h: "Personal service", p: "You deal directly with Spiro, from the first phone call to the keys in your hand." },
       { h: "Vente · Achat · Échange", p: "We sell, we buy, and we take trades. Kilometres and condition disclosed up front." },
-      { h: "Open seven days", p: `10:00 to 18:00 every day, by appointment. Call ${DEALER.phone} and the car is ready when you arrive.` },
+      { h: "Open seven days", p: `10:00 to 18:00 every day. Appointments are recommended, so call ${DEALER.phone} ahead and we can have the vehicle ready for you.` },
       { h: "Financing for all credit", p: "Good credit, new credit or bruised credit. We work with several lenders and show you the real numbers." }
     ],
     featuredKicker: "In stock now",
@@ -98,9 +99,9 @@ module.exports = {
 
   inventory: {
     title: "Used Cars for Sale in Dorval, QC | Automobile SX Inventory",
-    description: "Browse used cars, SUVs and trucks for sale at Automobile SX in Dorval, Quebec. Filter by make, body type, price, year and kilometres. Viewings by appointment, seven days a week.",
+    description: "Browse used cars, SUVs and trucks for sale at Automobile SX in Dorval, Quebec. Filter by make, body type, price, year and kilometres.",
     h1: "Used cars for sale in Dorval",
-    sub: `Every vehicle priced honestly, kilometres disclosed. Viewings by appointment: <a class="text-link" href="tel:+15148249117">${DEALER.phone}</a>.`,
+    sub: `Every vehicle priced honestly, with kilometres disclosed. Call <a class="text-link" href="tel:+15148249117">${DEALER.phone}</a> to arrange a viewing.`,
     note: `<h2>Looking for something we do not have?</h2>
       <p>Our stock turns over constantly and we source vehicles on request. Tell us the make, model, budget and kilometres you are after and we will watch for it. Call ${DEALER.phone} or <a class="text-link" href="${R.contact}">send us the details</a>.</p>`
   },
@@ -112,9 +113,9 @@ module.exports = {
 
   contact: {
     title: "Contact Automobile SX | Used Car Dealer in Dorval, QC",
-    description: "Contact Automobile SX in Dorval, Quebec. Book an appointment or a test drive, ask about financing, or get your trade appraised. Open 10 to 6, seven days a week.",
+    description: "Contact Automobile SX in Dorval, Quebec. Book a visit or test drive, ask about financing, or have your vehicle appraised. Open 10 to 6, seven days.",
     h1: "Contact us",
-    sub: "Ask for Spiro. We answer the same day, in English or in French.",
+    sub: "Ask for Spiro. We reply in English or in French, usually within one business day.",
     formH: "Send us a message",
     name: "Name", email: "Email", phone: "Phone", message: "Message",
     interest: "I'm interested in", whichVehicle: "Which vehicle?",
@@ -135,14 +136,14 @@ module.exports = {
 
   financing: {
     title: "Used Car Financing in Dorval, QC | All Credit | Automobile SX",
-    description: "Car loans for used vehicles in Dorval and the West Island. Good credit, bad credit, new to Canada. Learn what lenders look for, what documents to bring, and your rights under Quebec law.",
+    description: "Used car financing in Dorval and the West Island. What lenders look at, which documents to bring, and your rights under Quebec law.",
     h1: "Used car financing in Dorval",
     sub: "Good credit, bruised credit, or no Canadian credit file yet. Here is how it actually works.",
     body: `
       <p>Financing a used car should not feel like a magic trick performed behind a desk. This page explains what lenders look at, what you should bring, and what the law in Quebec guarantees you, so you can walk in knowing roughly where you stand.</p>
 
       <h2>Financing for all credit situations</h2>
-      <p>We work with several Canadian lenders rather than a single bank, which matters because their appetites differ. A file one lender declines is routinely approved by another at a workable rate. We submit where we think it fits, and we tell you what came back.</p>
+      <p>We work with several Canadian lenders rather than a single bank, because their criteria differ. We submit your file where we think it fits and tell you exactly what comes back. Rates, terms and approval are decided by the lender, not by us.</p>
       <ul>
         <li><strong>Established credit.</strong> If your file is clean, you should expect a rate in the single digits on a reasonably recent vehicle.</li>
         <li><strong>Bruised credit.</strong> Past missed payments, a consumer proposal or a discharged bankruptcy do not automatically mean no. They usually mean a higher rate, and sometimes a down payment.</li>
@@ -186,7 +187,7 @@ module.exports = {
 
   sell: {
     title: "Sell or Trade Your Car in Dorval, QC | Automobile SX",
-    description: "We buy used cars in Dorval and the West Island, and we take trade-ins. Get a straight offer with no obligation, and see how a trade-in reduces the sales tax on your next vehicle in Quebec.",
+    description: "We buy used cars in Dorval and take trade-ins. Get a written offer with no obligation, and see how a trade-in lowers the tax on your next vehicle.",
     h1: "Sell your car, or trade it in",
     sub: "A straight offer, whether or not you buy anything from us.",
     body: `
@@ -223,17 +224,17 @@ module.exports = {
 
   about: {
     title: "About Automobile SX | Family-Run Used Car Dealer in Dorval",
-    description: "Automobile SX is a family-run used car dealership at 2044 Avenue Chartier in Dorval, Quebec. Meet Spiro, learn how we price and select vehicles, and how we serve the West Island in English and French.",
+    description: "Automobile SX is a family-run used car dealership at 2044 Avenue Chartier in Dorval, Quebec, serving the West Island in English and French.",
     h1: "A small lot in Dorval, run by the person who answers the phone",
     sub: "Vente · Achat · Échange, on Avenue Chartier.",
     body: `
       <p>Automobile SX is a family-run used vehicle dealership at 2044 Avenue Chartier in Dorval. It is deliberately small. When you call, Spiro answers. When you come to look at a car, Spiro shows it to you. When you have a question three months later, you call the same number and get the same person.</p>
 
-      <h2>Why a small lot can be the better option</h2>
-      <p>Large dealerships run on volume and staff turnover. The person who sells you the car is often not there the following year. A small independent lot works differently, because reputation in the West Island travels by word of mouth and a bad deal follows you around. That is not sentiment, it is the business model.</p>
+      <h2>What working with a small dealership means</h2>
+      <p>Being small is the point. Reputation in the West Island travels by word of mouth, so repeat customers and referrals are how the business grows. That shapes how every vehicle is bought, priced and described.</p>
       <ul>
-        <li><strong>One person, start to finish.</strong> No handoff to a business office you have never met.</li>
-        <li><strong>Prices you can see.</strong> The price is on the listing. No "call for price" games.</li>
+        <li><strong>One person, start to finish.</strong> Spiro handles your file from the first call to the paperwork.</li>
+        <li><strong>Prices you can see.</strong> Every listing shows its price, kilometres and condition.</li>
         <li><strong>Bilingual service.</strong> English or French, whichever you are comfortable in.</li>
         <li><strong>Time to think.</strong> Nobody has a quota riding on you signing today.</li>
       </ul>
@@ -247,19 +248,19 @@ module.exports = {
       <p>More on how we work with buyers in the <a class="text-link" href="${R.local}">West Island</a>, or read our <a class="text-link" href="${R.faq}">frequently asked questions</a>.</p>
 
       <h2>Come by</h2>
-      <p>${DEALER.street}, ${DEALER.city}, ${DEALER.region}. Open 10:00 to 18:00 seven days a week, by appointment, so call ${DEALER.phone} first and the vehicle will be ready when you arrive.</p>`
+      <p>${DEALER.street}, ${DEALER.city}, ${DEALER.region}. Open 10:00 to 18:00 seven days a week. Calling ${DEALER.phone} ahead is recommended so the vehicle is ready when you arrive.</p>`
   },
 
   faq: {
     title: "Used Car FAQ | Buying in Dorval & Quebec | Automobile SX",
-    description: "Answers to common questions about buying a used car in Quebec: financing, trade-ins, the legal warranty, appointments, taxes, and registration at the SAAQ.",
+    description: "Answers about buying a used car in Quebec: financing, trade-ins, the legal warranty, appointments, taxes and SAAQ registration.",
     h1: "Frequently asked questions",
     sub: "The questions we actually get asked, answered plainly.",
     faqs: [
       { q: "Do I need an appointment?",
-        a: "Yes. We are open 10:00 to 18:00 seven days a week and work by appointment so you get proper attention instead of waiting around. Call 514-824-9117 or send a message and we will have the vehicle ready when you arrive." },
+        a: "Not strictly. We are open 10:00 to 18:00 seven days a week and walk-ins are welcome. Calling 514-824-9117 ahead is recommended so we can have the vehicle ready and give you our full attention when you arrive." },
       { q: "Do you offer financing?",
-        a: "Yes. We work with several Canadian lenders and can usually have an answer the same day, whether your credit is excellent, thin or damaged. You will see the rate, the term and the total cost before anything is signed. Note that in Quebec a dealer cannot require you to finance through them as a condition of the sale." },
+        a: "Yes. We work with several Canadian lenders and submit your file to the ones that suit it. You will see the rate, the term and the total cost before anything is signed. In Quebec, a dealer cannot require you to finance through them as a condition of the sale." },
       { q: "Can I trade in my car?",
         a: "Yes, and it usually saves you tax. In Quebec the sales tax on your next vehicle is calculated on the price after the trade-in value is deducted. With combined taxes around 15%, that is real money. We will appraise your vehicle with no obligation to buy from us." },
       { q: "Is there a warranty on a used car in Quebec?",
@@ -270,8 +271,6 @@ module.exports = {
         a: "Yes. Call 514-824-9117 and we will hold it while you arrange financing or book an inspection. We will tell you honestly if someone else is already in line for it." },
       { q: "Do you deliver?",
         a: "Ask us. Depending on where you are in the Montreal area we can usually work something out. Most customers prefer to pick up at the lot in Dorval so we can go through the vehicle and paperwork together." },
-      { q: "Can I change my mind after signing?",
-        a: "It depends on how you paid. If you finance through the dealer, Quebec law gives you two days to cancel the credit contract. If you pay cash or use your own bank loan, there is generally no cooling-off period, so be sure before you sign. We would rather you take an extra day to decide than regret it." },
       { q: "What do I need to register the car?",
         a: "We handle the registration paperwork with the SAAQ at delivery in most cases, so you usually leave with the car properly plated. Bring your valid Quebec driver's licence and proof of insurance." },
       { q: "Do you speak French?",
@@ -281,7 +280,7 @@ module.exports = {
 
   guides: {
     title: "Used Car Buying Guides for Quebec | Automobile SX",
-    description: "Plain-language guides to buying a used car in Quebec: taxes, the legal warranty, financing with bad credit, trade-in values, and registering your vehicle with the SAAQ.",
+    description: "Plain-language guides to buying a used car in Quebec: taxes, the legal warranty, financing, trade-in values and SAAQ registration.",
     h1: "Guides for used-car buyers in Quebec",
     sub: "What we end up explaining in person, written down so you can read it first.",
     cards: guideCards
@@ -289,7 +288,7 @@ module.exports = {
 
   g1: {
     title: "Buying a Used Car in Quebec: The Complete Guide (2026)",
-    description: "What to know before buying a used car in Quebec: GST and QST, the legal warranty categories A to D, the mandatory dealer label, inspection rights and cancellation rules.",
+    description: "What to know before buying a used car in Quebec: GST and QST, the legal warranty categories, the dealer label and inspection rights.",
     h1: "Buying a used car in Quebec",
     sub: "Taxes, the legal warranty, the dealer label, and what to check before you sign.",
     body: `
@@ -302,10 +301,10 @@ module.exports = {
       <h2>The legal warranty on a used vehicle</h2>
       <p>Quebec's Consumer Protection Act gives most used vehicles bought from a dealer a warranty of good working order, at no extra cost, based on age and kilometres. The thresholds were widened in April 2024, so older articles online understate them:</p>
       <ul>
-        <li><strong>Category A</strong> — 4 years old or less and 80,000 km or less: 6 months or 10,000 km</li>
-        <li><strong>Category B</strong> — 5 years or less and 100,000 km or less: 3 months or 5,000 km</li>
-        <li><strong>Category C</strong> — 7 years or less and 120,000 km or less: 1 month or 1,700 km</li>
-        <li><strong>Category D</strong> — over 7 years old or over 120,000 km: no good-working-order warranty</li>
+        <li><strong>Category A</strong> (4 years old or less and 80,000 km or less): 6 months or 10,000 km</li>
+        <li><strong>Category B</strong> (5 years or less and 100,000 km or less): 3 months or 5,000 km</li>
+        <li><strong>Category C</strong> (7 years or less and 120,000 km or less): 1 month or 1,700 km</li>
+        <li><strong>Category D</strong> (over 7 years old or over 120,000 km): no good-working-order warranty</li>
       </ul>
       <p>The warranty covers parts, labour and reasonable towing. It cannot be waived, not even in exchange for a lower price. And Category D does not mean unprotected: the general legal warranties of fitness for purpose and reasonable durability still apply to every vehicle sold by a merchant.</p>
 
@@ -331,7 +330,7 @@ module.exports = {
 
   g2: {
     title: "Car Financing with Bad Credit in Quebec: What to Expect",
-    description: "How used car financing works in Quebec with bad credit, thin credit or no Canadian credit history: what lenders check, realistic rates, down payments and your legal rights.",
+    description: "How used car financing works in Quebec with limited or damaged credit: what lenders check, realistic rates, and the rights you keep.",
     h1: "Car financing with bad credit in Quebec",
     sub: "What lenders actually look at, what it realistically costs, and the rights you keep.",
     body: `
@@ -379,7 +378,7 @@ module.exports = {
 
   g3: {
     title: "What Is My Trade-In Worth in Quebec? | Automobile SX",
-    description: "How used car trade-in values are set in Quebec, how much tax a trade-in saves you, and whether trading in beats selling privately.",
+    description: "How trade-in values are set in Quebec, how much tax a trade-in saves you, and when trading in beats selling privately.",
     h1: "What is my trade-in worth?",
     sub: "How the number is built, and the tax saving that makes trading competitive.",
     body: `
@@ -422,7 +421,7 @@ module.exports = {
 
   g4: {
     title: "Registering a Used Car in Quebec: SAAQ Guide | Automobile SX",
-    description: "How to register a used car bought from a dealer in Quebec: what the dealer handles, what you bring, plates, timelines, and the winter tire rule for new buyers.",
+    description: "How to register a used car bought from a dealer in Quebec: what the dealer handles, what to bring, plates, costs and timelines.",
     h1: "Registering a used car in Quebec",
     sub: "What the dealer handles, what you bring, and when your plate arrives.",
     body: `
@@ -460,7 +459,7 @@ module.exports = {
 
   local: {
     title: "Used Cars in the West Island | Dorval, Pointe-Claire, Lachine | Automobile SX",
-    description: "Used car dealership serving the West Island of Montreal from Dorval: Pointe-Claire, Lachine, Pierrefonds, Kirkland and Montréal-Ouest. Bilingual, family-run, open seven days by appointment.",
+    description: "Used car dealership serving the West Island from Dorval: Pointe-Claire, Lachine, Pierrefonds and Kirkland. Bilingual, family-run, open seven days.",
     h1: "Used cars in the West Island",
     sub: "On Avenue Chartier in Dorval, minutes from Pointe-Claire, Lachine and Pierrefonds.",
     body: `
@@ -475,10 +474,10 @@ module.exports = {
       <h2>Bilingual service, genuinely</h2>
       <p>The West Island is properly bilingual and so are we. English or French, spoken and on paper, whichever you prefer. Ce site est aussi offert en français.</p>
 
-      <h2>Why people drive past the big dealerships</h2>
-      <p>The large lots along the highway run on volume. If you want to be handled by a rotating cast and passed to a business office, they do that well. If you would rather talk to the owner, take the time you need, and get a straight answer about a car's history, that is what a small independent lot is for.</p>
+      <h2>What to expect when you visit</h2>
+      <p>You will be shown the vehicle by the owner, given the time you need, and told what we know about the car's history and condition. If a vehicle is not right for you, we would rather say so than sell it to you.</p>
       <ul>
-        <li>Open 10:00 to 18:00 seven days a week, by appointment</li>
+        <li>Open 10:00 to 18:00, seven days a week</li>
         <li>Vente, achat and échange, so you can sell us a car without buying one</li>
         <li>Financing arranged with several lenders, including for thin or damaged credit</li>
         <li>Your own mechanic is welcome to inspect anything before you commit</li>

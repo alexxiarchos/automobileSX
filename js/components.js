@@ -33,31 +33,90 @@ window.SXUI = (function () {
 
   function photoCount(v) { return (v.images && v.images.length) || 1; }
 
-  /* Location block: an honest address card, with a real interactive map laid
-     over it once the embed loads. Nothing illustrative or fake is shown. */
+  /* Location block: a live map on top, the address underneath.
+     The address panel is real markup that is always on screen, so the block
+     is complete and useful whether or not the embed loads. The frame is only
+     revealed once it actually loads, and is given up on after a timeout, so a
+     blocked or slow embed leaves a placeholder rather than a white rectangle. */
   function mapBlock(el) {
     if (!el) return;
     var FR = SX.lang === "fr";
     var addr = SX.dealer.address1 + ", " + SX.dealer.address2;
 
     el.innerHTML =
-      '<div class="map-fallback">' +
+      '<div class="map-canvas">' +
+        '<p class="map-placeholder">' +
+          (FR ? "Carte indisponible pour le moment." : "The map is unavailable right now.") +
+          ' <a href="' + SX.dealer.mapsUrl + '" target="_blank" rel="noopener">' +
+          (FR ? "Ouvrir dans Google Maps" : "Open in Google Maps") + "</a></p>" +
+      "</div>" +
+      '<div class="map-info">' +
         '<p class="map-fb-label">' + (FR ? "Nous trouver" : "Find us") + "</p>" +
-        '<p class="map-fb-addr">' + SX.dealer.address1 + "<br>" + SX.dealer.address2 + "</p>" +
+        '<address class="map-fb-addr">' + SX.dealer.address1 + "<br>" + SX.dealer.address2 + "</address>" +
         '<p class="map-fb-meta">' + SX.dealer.apptNote[SX.lang] + "</p>" +
-        '<a class="btn btn-red" href="' + SX.dealer.mapsUrl + '" target="_blank" rel="noopener">' +
-          (FR ? "Ouvrir dans Google Maps" : "Open in Google Maps") + "</a>" +
+        '<div class="map-actions">' +
+          '<a class="btn btn-red" href="' + SX.dealer.mapsUrl + '" target="_blank" rel="noopener">' +
+            (FR ? "Itinéraire" : "Get directions") + "</a>" +
+          '<a class="btn btn-outline-light" href="' + SX.dealer.phoneHref + '">' +
+            (FR ? "Appeler le " : "Call ") + SX.dealer.phone + "</a>" +
+        "</div>" +
       "</div>";
 
-    var f = document.createElement("iframe");
-    f.className = "map-frame";
-    f.title = FR ? "Carte : " + addr : "Map: " + addr;
-    f.loading = "lazy";
-    f.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
-    f.setAttribute("allowfullscreen", "");
-    f.src = "https://www.google.com/maps?q=" + encodeURIComponent(addr) + "&z=16&output=embed";
-    f.addEventListener("load", function () { f.classList.add("loaded"); });
-    el.appendChild(f);
+    var canvas = el.querySelector(".map-canvas");
+
+    /* A cross-origin iframe cannot be inspected, and a browser error page
+       inside one still fires "load", so we cannot tell a working map from a
+       broken rectangle after the fact. Instead we ask a cheap question first:
+       can this browser reach Google at all? A privacy extension, a blocked
+       network, an offline device or a TLS failure all fail this probe, and in
+       every one of those cases the frame would have failed too. Only if the
+       probe succeeds do we mount the map. If not, the placeholder and the
+       address panel below it are what the visitor sees. */
+    function mountMap() {
+      var f = document.createElement("iframe");
+      var settled = false;
+
+      f.className = "map-frame";
+      f.title = FR ? "Carte : " + addr : "Map: " + addr;
+      f.loading = "lazy";
+      f.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+      f.setAttribute("allowfullscreen", "");
+      f.src = "https://www.google.com/maps?q=" + encodeURIComponent(addr) + "&z=16&output=embed";
+
+      function drop() {
+        if (settled) return;
+        settled = true;
+        if (f.parentNode) f.parentNode.removeChild(f);   /* leaves the placeholder */
+      }
+      var giveUp = setTimeout(drop, 8000);
+
+      f.addEventListener("load", function () {
+        if (settled) return;
+        settled = true;
+        clearTimeout(giveUp);
+        f.classList.add("loaded");
+      });
+      f.addEventListener("error", function () { clearTimeout(giveUp); drop(); });
+
+      canvas.appendChild(f);
+    }
+
+    var probe = new Image();
+    var answered = false;
+    var probeTimer = setTimeout(function () { answered = true; }, 5000);
+    probe.onload = function () {
+      if (answered) return;
+      answered = true;
+      clearTimeout(probeTimer);
+      mountMap();
+    };
+    probe.onerror = function () {
+      if (answered) return;
+      answered = true;
+      clearTimeout(probeTimer);       /* leave the placeholder in place */
+    };
+    probe.referrerPolicy = "no-referrer";
+    probe.src = "https://www.google.com/favicon.ico";
   }
 
   /* ============ Header ============ */
@@ -96,8 +155,8 @@ window.SXUI = (function () {
     el.innerHTML =
       '<a class="skip-link" href="#main">' + (SX.lang === "fr" ? "Aller au contenu principal" : "Skip to main content") + "</a>" +
       '<div class="container">' +
-      '<a class="brand" href="' + SX.url("home") + '" aria-label="Automobile SX">' +
-      '<img src="/assets/logo.png" alt="" width="44" height="44">' +
+      '<a class="brand" href="' + SX.url("home") + '">' +
+      '<img src="/assets/logo.png" alt="Automobile SX" width="44" height="44">' +
       '<span class="brand-text"><span class="brand-name">AUTOMOBILE <span>SX</span></span><br>' +
       '<span class="brand-sub">Vente · Achat · Échange</span></span></a>' +
       '<nav class="main-nav" aria-label="' + (SX.lang === "fr" ? "Navigation principale" : "Main") + '">' + navLinks() + "</nav>" +
@@ -145,7 +204,8 @@ window.SXUI = (function () {
     if (!el) return;
     var links = [
       ["inventory", "nav.inventory"], ["financing", "nav.financing"], ["sell", "nav.sell"],
-      ["guides", "nav.guides"], ["faq", "nav.faq"], ["about", "nav.about"], ["contact", "nav.contact"]
+      ["guides", "nav.guides"], ["faq", "nav.faq"], ["local", "nav.local"],
+      ["about", "nav.about"], ["contact", "nav.contact"]
     ].map(function (l) {
       return '<li><a href="' + SX.url(l[0]) + '">' + SX.t(l[1]) + "</a></li>";
     }).join("");
@@ -192,7 +252,10 @@ window.SXUI = (function () {
 
   function specLine(v) {
     var km = Number(v.km || 0).toLocaleString(SX.lang === "fr" ? "fr-CA" : "en-CA");
-    return [km + " km", v.transmission, v.fuel, v.drivetrain].filter(Boolean).join(" · ");
+    return [km + " km",
+      SX.specLabel("transmission", v.transmission),
+      SX.specLabel("fuel", v.fuel),
+      SX.specLabel("drivetrain", v.drivetrain)].filter(Boolean).join(" · ");
   }
 
   function heartSVG(filled) {

@@ -62,6 +62,15 @@
     return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   }
 
+  function slugPreview() {
+    var el = document.getElementById("slug-preview");
+    if (!el) return;
+    var s = slug(document.getElementById("f-slug").value);
+    el.innerHTML = s
+      ? 'Web address: <code>/vehicles/' + s + '</code> &nbsp;·&nbsp; <code>/fr/vehicules/' + s + '</code>'
+      : "The address will be created from the year, make and model.";
+  }
+
   function nextStock() {
     var max = 1000;
     vehicles.forEach(function (v) {
@@ -208,6 +217,7 @@
     var copy = JSON.parse(JSON.stringify(v));
     copy.id = slug((v.year || "") + "-" + (v.make || "") + "-" + (v.model || "")) + "-" + Math.random().toString(36).slice(2, 7);
     copy.stock = nextStock();
+    copy.slugHistory = [];   /* a copy inherits no redirects */
     copy.vin = "";
     copy.images = [];      /* photos are per-vehicle; upload fresh ones */
     copy.status = "draft";
@@ -250,6 +260,8 @@
     $("f-body").value = v.body || "SUV";
     $("f-engine").value = v.engine || "";
     $("f-tag").value = v.tag || "";
+    $("f-slug").value = v.id || "";
+    slugPreview();
     $("f-desc").value = Array.isArray(v.desc) ? v.desc.join("\n\n") : (v.desc || "");
 
     /* features: flat array (admin) or grouped object (original sample data) */
@@ -299,8 +311,18 @@
     var hexKey = (v.extColor || "").toLowerCase().split(/\s+/).find(function (w) { return COLOR_HEX[w]; });
     v.extHex = hexKey ? COLOR_HEX[hexKey] : (v.extHex || "#6c7178");
 
+    /* Page address. Created once and then left alone: editing year, make,
+       model, price or photos never changes a live URL. It only moves when the
+       owner deliberately edits the field below, and the old address is kept in
+       slugHistory so /api/vehicle can 301 it to the new one. */
+    var typed = slug($("f-slug").value);
     if (!v.id) {
-      v.id = slug(v.year + "-" + v.make + "-" + v.model) + "-" + Math.random().toString(36).slice(2, 7);
+      v.id = typed || slug(v.year + "-" + v.make + "-" + v.model) + "-" + Math.random().toString(36).slice(2, 7);
+    } else if (typed && typed !== v.id) {
+      v.slugHistory = (v.slugHistory || []).filter(function (s) { return s !== typed; });
+      if (v.slugHistory.indexOf(v.id) === -1) v.slugHistory.push(v.id);
+      v.slugHistory = v.slugHistory.slice(-10);
+      v.id = typed;
     }
     v.updatedAt = new Date().toISOString();
     return v;
@@ -322,6 +344,25 @@
       err.hidden = false;
       return false;
     }
+
+    /* Page address: never allow an empty or already-used address */
+    var typed = slug($("f-slug").value);
+    var slugError = "";
+    if (v.id && !typed) {
+      slugError = "The page address cannot be empty. Put the old one back or type a new one.";
+    } else if (typed && typed !== v.id) {
+      var clash = vehicles.some(function (o) {
+        return o !== v && (o.id === typed || (o.slugHistory || []).indexOf(typed) !== -1);
+      });
+      if (clash) slugError = "The page address “" + typed + "” is already used by another vehicle.";
+    }
+    if (slugError) {
+      var e2 = $("edit-error");
+      e2.textContent = slugError;
+      e2.hidden = false;
+      return false;
+    }
+
     $("edit-error").hidden = true;
     return true;
   }
@@ -350,6 +391,7 @@
     saveVehicle(status);
   });
 
+  $("f-slug").addEventListener("input", slugPreview);
   $("add-btn").addEventListener("click", function () { openEditor(blankVehicle(), false); });
   $("back-btn").addEventListener("click", function () {
     if (confirm("Leave this listing? Unsaved changes will be lost.")) {

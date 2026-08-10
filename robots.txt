@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /api/
 Allow: /api/sitemap
 
-Sitemap: https://automobilesx.ca/sitemap.xml
+Sitemap: https://www.automobilesx.ca/sitemap.xml

@@ -27,11 +27,11 @@ const ctaCard = `
 <aside class="prose-aside">
   <div class="aside-card">
     <h2>Parlez à Spiro</h2>
-    <p>Pas de centre d'appels, pas de vendeurs qui changent. Vous parlez au propriétaire, en français comme en anglais.</p>
+    <p>Vous traitez directement avec Spiro tout au long de l'achat, en français comme en anglais.</p>
     <a class="btn btn-red btn-block" href="tel:+15148249117">Appeler le ${DEALER.phone}</a>
     <a class="btn btn-outline btn-block" href="${R.contact}">Envoyer un message</a>
     <a class="btn btn-ghost btn-block" href="${R.inventory}">Voir l'inventaire</a>
-    <p class="aside-note">${DEALER.street}, ${DEALER.city}, ${DEALER.region}<br>Ouvert de 10 h à 18 h, 7 jours sur 7, sur rendez-vous.</p>
+    <p class="aside-note">${DEALER.street}, ${DEALER.city}, ${DEALER.region}<br>Ouvert de 10 h à 18 h, 7 jours sur 7.</p>
   </div>
 </aside>`;
 
@@ -52,15 +52,16 @@ module.exports = {
 
   home: {
     title: "Autos Usagées à Dorval, QC | Automobile SX | Vente, Achat, Échange",
-    description: "Concessionnaire familial de voitures d'occasion à Dorval, au Québec. Vente, achat, échange. Véhicules usagés de qualité, financement pour tous les crédits, service personnalisé du propriétaire. Ouvert de 10 h à 18 h, 7 jours.",
-    h1: "Des autos usagées de qualité à Dorval, vendues honnêtement.",
-    sub: "Un commerce familial sur l'avenue Chartier où vous traitez directement avec le propriétaire, en français comme en anglais, sans pression.",
+    description: "Voitures d'occasion à vendre à Dorval, au Québec. Commerce familial : vente, achat, échange. Financement disponible. Ouvert de 10 h à 18 h, 7 jours.",
+    h1: "Autos usagées de qualité à Dorval",
+    sub: "Un commerce familial sur l'avenue Chartier. Vous traitez directement avec Spiro tout au long de l'achat, en français comme en anglais.",
+    heroAlt: "Le commerce Automobile SX au 2044 avenue Chartier à Dorval",
     searchAria: "Rechercher dans l'inventaire",
     whyH: "Pourquoi acheter chez Automobile SX",
     trust: [
       { h: "Service personnalisé", p: "Vous traitez directement avec Spiro, du premier appel jusqu'aux clés dans votre main." },
       { h: "Vente · Achat · Échange", p: "Nous vendons, nous achetons et nous prenons des reprises. Kilométrage et état divulgués d'avance." },
-      { h: "Ouvert 7 jours", p: `De 10 h à 18 h tous les jours, sur rendez-vous. Appelez le ${DEALER.phone} et le véhicule sera prêt à votre arrivée.` },
+      { h: "Ouvert 7 jours", p: `De 10 h à 18 h tous les jours. Le rendez-vous est recommandé : appelez le ${DEALER.phone} et nous préparerons le véhicule pour vous.` },
       { h: "Financement pour tous", p: "Bon crédit, crédit récent ou crédit abîmé. Nous travaillons avec plusieurs prêteurs et vous montrons les vrais chiffres." }
     ],
     featuredKicker: "En stock",
@@ -87,9 +88,9 @@ module.exports = {
 
   inventory: {
     title: "Autos Usagées à Vendre à Dorval, QC | Inventaire Automobile SX",
-    description: "Consultez les voitures, VUS et camionnettes d'occasion à vendre chez Automobile SX à Dorval, au Québec. Filtrez par marque, carrosserie, prix, année et kilométrage. Visites sur rendez-vous, 7 jours.",
+    description: "Voitures, VUS et camionnettes d'occasion à vendre chez Automobile SX à Dorval. Filtrez par marque, carrosserie, prix, année et kilométrage.",
     h1: "Autos usagées à vendre à Dorval",
-    sub: `Chaque véhicule est affiché à son juste prix, kilométrage divulgué. Visites sur rendez-vous : <a class="text-link" href="tel:+15148249117">${DEALER.phone}</a>.`,
+    sub: `Chaque véhicule est affiché à son juste prix, kilométrage divulgué. Appelez le <a class="text-link" href="tel:+15148249117">${DEALER.phone}</a> pour planifier une visite.`,
     note: `<h2>Vous ne trouvez pas ce que vous cherchez ?</h2>
       <p>Notre inventaire change constamment et nous pouvons rechercher un véhicule pour vous. Dites-nous la marque, le modèle, le budget et le kilométrage souhaités et nous allons ouvrir l'œil. Appelez le ${DEALER.phone} ou <a class="text-link" href="${R.contact}">envoyez-nous les détails</a>.</p>`
   },
@@ -101,9 +102,9 @@ module.exports = {
 
   contact: {
     title: "Contacter Automobile SX | Concessionnaire d'Autos Usagées à Dorval",
-    description: "Contactez Automobile SX à Dorval, au Québec. Prenez rendez-vous, réservez un essai routier, informez-vous sur le financement ou faites évaluer votre véhicule. Ouvert de 10 h à 18 h, 7 jours.",
+    description: "Contactez Automobile SX à Dorval, au Québec. Prenez rendez-vous, informez-vous sur le financement ou faites évaluer votre véhicule.",
     h1: "Nous joindre",
-    sub: "Demandez Spiro. Nous répondons le jour même, en français comme en anglais.",
+    sub: "Demandez Spiro. Nous répondons en français comme en anglais, généralement en un jour ouvrable.",
     formH: "Envoyez-nous un message",
     name: "Nom", email: "Courriel", phone: "Téléphone", message: "Message",
     interest: "Mon besoin", whichVehicle: "Quel véhicule ?",
@@ -122,14 +123,14 @@ module.exports = {
 
   financing: {
     title: "Financement Auto Usagée à Dorval, QC | Tous Crédits | Automobile SX",
-    description: "Prêt auto pour véhicule d'occasion à Dorval et dans l'Ouest-de-l'Île. Bon crédit, mauvais crédit, nouvel arrivant. Ce que les prêteurs regardent, les documents à apporter et vos droits au Québec.",
+    description: "Financement d'auto usagée à Dorval et dans l'Ouest-de-l'Île : critères des prêteurs, documents à apporter et vos droits au Québec.",
     h1: "Financement d'auto usagée à Dorval",
     sub: "Bon crédit, crédit abîmé ou aucun dossier de crédit canadien. Voici comment ça fonctionne vraiment.",
     body: `
       <p>Financer une voiture d'occasion ne devrait pas ressembler à un tour de magie exécuté derrière un bureau. Cette page explique ce que les prêteurs examinent, ce que vous devriez apporter et ce que la loi québécoise vous garantit.</p>
 
       <h2>Du financement pour toutes les situations</h2>
-      <p>Nous travaillons avec plusieurs prêteurs canadiens plutôt qu'avec une seule banque, et ça compte : leurs critères diffèrent. Un dossier refusé chez l'un est souvent approuvé chez l'autre à un taux raisonnable. Nous soumettons là où ça a du sens et nous vous disons ce qui revient.</p>
+      <p>Nous travaillons avec plusieurs prêteurs canadiens plutôt qu'avec une seule banque, parce que leurs critères diffèrent. Nous soumettons votre dossier là où il convient et nous vous disons exactement ce qui revient. Le taux, la durée et l'approbation relèvent du prêteur, pas de nous.</p>
       <ul>
         <li><strong>Crédit établi.</strong> Un dossier propre donne généralement un taux à un chiffre sur un véhicule assez récent.</li>
         <li><strong>Crédit abîmé.</strong> Des retards de paiement, une proposition de consommateur ou une faillite libérée ne signifient pas un refus automatique. Ça signifie habituellement un taux plus élevé, parfois une mise de fonds.</li>
@@ -173,7 +174,7 @@ module.exports = {
 
   sell: {
     title: "Vendre ou Échanger Votre Auto à Dorval, QC | Automobile SX",
-    description: "Nous achetons des voitures d'occasion à Dorval et dans l'Ouest-de-l'Île, et nous prenons des reprises. Offre claire sans obligation, et découvrez comment une reprise réduit les taxes sur votre prochain véhicule.",
+    description: "Nous achetons des autos usagées à Dorval et prenons des reprises. Offre écrite sans obligation et économie de taxes sur votre prochain véhicule.",
     h1: "Vendez votre auto, ou donnez-la en échange",
     sub: "Une offre claire, que vous achetiez chez nous ou non.",
     body: `
@@ -210,17 +211,17 @@ module.exports = {
 
   about: {
     title: "À Propos d'Automobile SX | Concessionnaire Familial à Dorval",
-    description: "Automobile SX est un commerce familial de véhicules d'occasion au 2044 avenue Chartier à Dorval. Rencontrez Spiro et découvrez comment nous choisissons nos véhicules et servons l'Ouest-de-l'Île.",
+    description: "Automobile SX est un commerce familial de véhicules d'occasion au 2044 avenue Chartier à Dorval, au service de l'Ouest-de-l'Île.",
     h1: "Un petit commerce à Dorval, dirigé par la personne qui répond au téléphone",
     sub: "Vente · Achat · Échange, sur l'avenue Chartier.",
     body: `
       <p>Automobile SX est un commerce familial de véhicules d'occasion situé au 2044 avenue Chartier, à Dorval. Il est volontairement petit. Quand vous appelez, c'est Spiro qui répond. Quand vous venez voir une auto, c'est Spiro qui vous la montre. Et si vous avez une question trois mois plus tard, vous composez le même numéro et vous parlez à la même personne.</p>
 
-      <h2>Pourquoi un petit commerce peut être le meilleur choix</h2>
-      <p>Les grands concessionnaires fonctionnent au volume et au roulement de personnel. Le vendeur qui vous a servi n'est souvent plus là l'année suivante. Un petit commerce indépendant fonctionne autrement, parce que dans l'Ouest-de-l'Île la réputation voyage de bouche à oreille et qu'une mauvaise transaction vous suit. Ce n'est pas de la sentimentalité, c'est le modèle d'affaires.</p>
+      <h2>Ce que signifie faire affaire avec un petit commerce</h2>
+      <p>Être petit, c'est justement le but. Dans l'Ouest-de-l'Île, la réputation voyage de bouche à oreille : les clients qui reviennent et les recommandations font croître l'entreprise. Cela influence la façon dont chaque véhicule est acheté, évalué et décrit.</p>
       <ul>
-        <li><strong>Une seule personne, du début à la fin.</strong> Aucun transfert vers un bureau que vous n'avez jamais vu.</li>
-        <li><strong>Des prix affichés.</strong> Le prix est sur l'annonce. Pas de « appelez pour le prix ».</li>
+        <li><strong>Une seule personne, du début à la fin.</strong> Spiro s'occupe de votre dossier, du premier appel jusqu'aux documents.</li>
+        <li><strong>Des prix affichés.</strong> Chaque annonce indique son prix, son kilométrage et son état.</li>
         <li><strong>Service bilingue.</strong> En français ou en anglais, selon votre préférence.</li>
         <li><strong>Le temps de réfléchir.</strong> Personne n'a un quota qui dépend de votre signature aujourd'hui.</li>
       </ul>
@@ -234,19 +235,19 @@ module.exports = {
       <p>Plus de détails sur notre service dans l'<a class="text-link" href="${R.local}">Ouest-de-l'Île</a>, ou consultez notre <a class="text-link" href="${R.faq}">foire aux questions</a>.</p>
 
       <h2>Passez nous voir</h2>
-      <p>${DEALER.street}, ${DEALER.city}, ${DEALER.region}. Ouvert de 10 h à 18 h 7 jours sur 7, sur rendez-vous : appelez le ${DEALER.phone} et le véhicule sera prêt à votre arrivée.</p>`
+      <p>${DEALER.street}, ${DEALER.city}, ${DEALER.region}. Ouvert de 10 h à 18 h, 7 jours sur 7. Un appel au ${DEALER.phone} à l'avance permet de préparer le véhicule pour votre arrivée.</p>`
   },
 
   faq: {
     title: "FAQ Auto Usagée | Acheter à Dorval et au Québec | Automobile SX",
-    description: "Réponses aux questions courantes sur l'achat d'une voiture d'occasion au Québec : financement, reprise, garantie légale, rendez-vous, taxes et immatriculation à la SAAQ.",
+    description: "Réponses sur l'achat d'une voiture d'occasion au Québec : financement, reprise, garantie légale, rendez-vous, taxes et immatriculation.",
     h1: "Foire aux questions",
     sub: "Les questions qu'on nous pose vraiment, avec des réponses claires.",
     faqs: [
       { q: "Faut-il un rendez-vous ?",
-        a: "Oui. Nous sommes ouverts de 10 h à 18 h 7 jours sur 7 et nous fonctionnons sur rendez-vous pour vous accorder toute notre attention plutôt que de vous faire attendre. Appelez le 514-824-9117 ou écrivez-nous, et le véhicule sera prêt à votre arrivée." },
+        a: "Pas obligatoirement. Nous sommes ouverts de 10 h à 18 h 7 jours sur 7 et les visites sans rendez-vous sont les bienvenues. Un appel au 514-824-9117 à l'avance est recommandé afin que le véhicule soit prêt et que nous puissions bien vous recevoir." },
       { q: "Offrez-vous du financement ?",
-        a: "Oui. Nous travaillons avec plusieurs prêteurs canadiens et pouvons habituellement avoir une réponse le jour même, que votre crédit soit excellent, mince ou abîmé. Vous verrez le taux, la durée et le coût total avant toute signature. À noter : au Québec, un commerçant ne peut pas exiger que vous financiez chez lui comme condition de la vente." },
+        a: "Oui. Nous travaillons avec plusieurs prêteurs canadiens et soumettons votre dossier à ceux qui conviennent. Vous verrez le taux, la durée et le coût total avant toute signature. Au Québec, un commerçant ne peut pas exiger que vous financiez chez lui comme condition de la vente." },
       { q: "Puis-je donner mon véhicule en échange ?",
         a: "Oui, et ça vous fait généralement économiser des taxes. Au Québec, les taxes sur votre prochain véhicule sont calculées sur le prix après déduction de la valeur de reprise. Avec des taxes combinées d'environ 15 %, l'économie est réelle. Nous évaluons votre véhicule sans obligation d'achat." },
       { q: "Y a-t-il une garantie sur une auto usagée au Québec ?",
@@ -257,8 +258,6 @@ module.exports = {
         a: "Oui. Appelez le 514-824-9117 et nous le garderons pendant que vous organisez votre financement ou une inspection. Nous vous dirons honnêtement si quelqu'un d'autre est déjà sur les rangs." },
       { q: "Faites-vous la livraison ?",
         a: "Demandez-nous. Selon l'endroit où vous êtes dans la région de Montréal, on peut habituellement s'arranger. La plupart des clients préfèrent venir chercher le véhicule à Dorval pour qu'on puisse passer l'auto et les documents ensemble." },
-      { q: "Puis-je changer d'idée après avoir signé ?",
-        a: "Ça dépend du mode de paiement. Si vous financez chez le commerçant, la loi québécoise vous donne deux jours pour annuler le contrat de crédit. Si vous payez comptant ou utilisez votre propre prêt bancaire, il n'y a généralement aucun délai de réflexion : soyez certain avant de signer. Nous préférons que vous preniez une journée de plus plutôt que de le regretter." },
       { q: "Que faut-il pour immatriculer le véhicule ?",
         a: "Dans la plupart des cas, nous nous occupons de l'immatriculation auprès de la SAAQ au moment de la livraison, alors vous repartez avec le véhicule correctement immatriculé. Apportez votre permis de conduire québécois valide et votre preuve d'assurance." },
       { q: "Parlez-vous anglais ?",
@@ -268,7 +267,7 @@ module.exports = {
 
   guides: {
     title: "Guides d'Achat d'Auto Usagée au Québec | Automobile SX",
-    description: "Guides en langage clair pour acheter une voiture d'occasion au Québec : taxes, garantie légale, financement avec mauvais crédit, valeur de reprise et immatriculation à la SAAQ.",
+    description: "Guides en langage clair pour acheter une voiture d'occasion au Québec : taxes, garantie légale, financement, reprise et immatriculation.",
     h1: "Guides pour acheteurs de voitures d'occasion au Québec",
     sub: "Ce que nous expliquons en personne, mis par écrit pour que vous puissiez le lire avant.",
     cards: guideCards
@@ -276,7 +275,7 @@ module.exports = {
 
   g1: {
     title: "Acheter une Voiture Usagée au Québec : le Guide Complet (2026)",
-    description: "Ce qu'il faut savoir avant d'acheter une auto usagée au Québec : TPS et TVQ, garantie légale catégories A à D, étiquette obligatoire, inspection et droit d'annulation.",
+    description: "À savoir avant d'acheter une auto usagée au Québec : TPS et TVQ, catégories de garantie légale, étiquette obligatoire et inspection.",
     h1: "Acheter une voiture usagée au Québec",
     sub: "Taxes, garantie légale, étiquette du commerçant et vérifications avant de signer.",
     body: `
@@ -289,10 +288,10 @@ module.exports = {
       <h2>La garantie légale sur un véhicule d'occasion</h2>
       <p>La Loi sur la protection du consommateur accorde à la plupart des véhicules d'occasion achetés chez un commerçant une garantie de bon fonctionnement, sans frais supplémentaires, selon l'âge et le kilométrage. Les seuils ont été élargis en avril 2024, alors les articles plus anciens en ligne les sous-estiment :</p>
       <ul>
-        <li><strong>Catégorie A</strong> — 4 ans ou moins et 80 000 km ou moins : 6 mois ou 10 000 km</li>
-        <li><strong>Catégorie B</strong> — 5 ans ou moins et 100 000 km ou moins : 3 mois ou 5 000 km</li>
-        <li><strong>Catégorie C</strong> — 7 ans ou moins et 120 000 km ou moins : 1 mois ou 1 700 km</li>
-        <li><strong>Catégorie D</strong> — plus de 7 ans ou plus de 120 000 km : aucune garantie de bon fonctionnement</li>
+        <li><strong>Catégorie A</strong> (4 ans ou moins et 80 000 km ou moins) : 6 mois ou 10 000 km</li>
+        <li><strong>Catégorie B</strong> (5 ans ou moins et 100 000 km ou moins) : 3 mois ou 5 000 km</li>
+        <li><strong>Catégorie C</strong> (7 ans ou moins et 120 000 km ou moins) : 1 mois ou 1 700 km</li>
+        <li><strong>Catégorie D</strong> (plus de 7 ans ou plus de 120 000 km) : aucune garantie de bon fonctionnement</li>
       </ul>
       <p>La garantie couvre les pièces, la main-d'œuvre et les frais raisonnables de remorquage. Elle ne peut pas être écartée, même en échange d'un rabais. Et la catégorie D ne veut pas dire sans protection : les garanties légales générales de qualité et de durabilité raisonnable s'appliquent à tout véhicule vendu par un commerçant.</p>
 
@@ -318,7 +317,7 @@ module.exports = {
 
   g2: {
     title: "Financement Auto avec Mauvais Crédit au Québec : à Quoi s'Attendre",
-    description: "Comment fonctionne le financement d'auto usagée au Québec avec un mauvais crédit, un crédit mince ou aucun historique canadien : critères des prêteurs, taux réalistes, mise de fonds et vos droits.",
+    description: "Le financement d'auto usagée au Québec avec un crédit limité ou abîmé : critères des prêteurs, taux réalistes et vos droits.",
     h1: "Financement auto avec mauvais crédit au Québec",
     sub: "Ce que les prêteurs regardent vraiment, ce que ça coûte réellement et les droits que vous conservez.",
     body: `
@@ -366,7 +365,7 @@ module.exports = {
 
   g3: {
     title: "Quelle Est la Valeur de Ma Reprise au Québec ? | Automobile SX",
-    description: "Comment la valeur de reprise d'une auto usagée est établie au Québec, combien de taxes une reprise vous fait économiser, et si la reprise bat la vente entre particuliers.",
+    description: "Comment la valeur de reprise est établie au Québec, l'économie de taxes qu'elle procure et quand la reprise bat la vente privée.",
     h1: "Quelle est la valeur de ma reprise ?",
     sub: "Comment le montant est bâti, et l'économie de taxes qui rend la reprise compétitive.",
     body: `
@@ -409,7 +408,7 @@ module.exports = {
 
   g4: {
     title: "Immatriculer une Voiture Usagée au Québec : Guide SAAQ | Automobile SX",
-    description: "Comment immatriculer une auto usagée achetée chez un commerçant au Québec : ce que le commerçant gère, ce que vous apportez, les plaques, les délais et la règle des pneus d'hiver.",
+    description: "Immatriculer une auto usagée achetée chez un commerçant au Québec : démarches à la SAAQ, documents, plaques, coûts et délais.",
     h1: "Immatriculer une voiture usagée au Québec",
     sub: "Ce que le commerçant gère, ce que vous apportez et quand votre plaque arrive.",
     body: `
@@ -447,7 +446,7 @@ module.exports = {
 
   local: {
     title: "Autos Usagées dans l'Ouest-de-l'Île | Dorval, Pointe-Claire, Lachine",
-    description: "Concessionnaire de véhicules d'occasion desservant l'Ouest-de-l'Île de Montréal depuis Dorval : Pointe-Claire, Lachine, Pierrefonds, Kirkland et Montréal-Ouest. Bilingue, familial, ouvert 7 jours sur rendez-vous.",
+    description: "Concessionnaire d'autos usagées desservant l'Ouest-de-l'Île depuis Dorval : Pointe-Claire, Lachine, Pierrefonds, Kirkland. Bilingue et familial.",
     h1: "Autos usagées dans l'Ouest-de-l'Île",
     sub: "Sur l'avenue Chartier à Dorval, à quelques minutes de Pointe-Claire, Lachine et Pierrefonds.",
     body: `
@@ -462,10 +461,10 @@ module.exports = {
       <h2>Un service réellement bilingue</h2>
       <p>L'Ouest-de-l'Île est authentiquement bilingue, et nous aussi. En français ou en anglais, à l'oral comme sur papier, selon votre préférence.</p>
 
-      <h2>Pourquoi des gens passent devant les grands concessionnaires</h2>
-      <p>Les grandes bannières le long de l'autoroute fonctionnent au volume. Si vous souhaitez être servi par une équipe qui change et être dirigé vers un bureau commercial, elles font ça très bien. Si vous préférez parler au propriétaire, prendre le temps qu'il faut et obtenir une réponse franche sur l'historique d'un véhicule, c'est à ça que sert un petit commerce indépendant.</p>
+      <h2>À quoi vous attendre lors de votre visite</h2>
+      <p>C'est le propriétaire qui vous présente le véhicule, qui vous laisse le temps qu'il faut et qui vous dit ce que nous savons de son historique et de son état. Si un véhicule ne vous convient pas, nous préférons vous le dire plutôt que de vous le vendre.</p>
       <ul>
-        <li>Ouvert de 10 h à 18 h, 7 jours sur 7, sur rendez-vous</li>
+        <li>Ouvert de 10 h à 18 h, 7 jours sur 7</li>
         <li>Vente, achat et échange : vous pouvez nous vendre un véhicule sans en acheter un</li>
         <li>Financement auprès de plusieurs prêteurs, y compris pour un crédit mince ou abîmé</li>
         <li>Votre mécanicien est bienvenu pour inspecter n'importe quel véhicule avant votre engagement</li>

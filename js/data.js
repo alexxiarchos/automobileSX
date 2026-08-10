@@ -21,7 +21,7 @@ SX.routes = {
     local: "/used-cars-west-island"
   },
   fr: {
-    home: "/fr/",
+    home: "/fr",
     inventory: "/fr/inventaire",
     vehicle: "/fr/vehicules",
     financing: "/fr/financement",
@@ -53,6 +53,7 @@ SX.strings = {
     "nav.contact": "Contact",
     "nav.guides": "Guides",
     "nav.faq": "FAQ",
+    "nav.local": "Used cars in the West Island",
     "cta.bookTestDrive": "Book a Test Drive",
     "cta.searchInventory": "Search Inventory",
     "cta.viewAll": "View all inventory →",
@@ -71,8 +72,8 @@ SX.strings = {
     "footer.newArrivalsCta": "Email us",
     "footer.orCall": "Or call",
     "footer.taxNote": "All prices exclude applicable taxes and licensing.",
-    "footer.langLine": "Ce site est aussi disponible en français.",
-    "footer.langLink": "Voir la version française",
+    "footer.langLine": "",
+    "footer.langLink": "Voir ce site en français",
     "closed": "Closed",
     /* Inventory UI */
     "inv.filters": "Filters",
@@ -145,6 +146,7 @@ SX.strings = {
     "nav.contact": "Contact",
     "nav.guides": "Guides",
     "nav.faq": "FAQ",
+    "nav.local": "Autos usagées dans le West Island",
     "cta.bookTestDrive": "Réserver un essai",
     "cta.searchInventory": "Rechercher",
     "cta.viewAll": "Voir tout l'inventaire →",
@@ -163,8 +165,8 @@ SX.strings = {
     "footer.newArrivalsCta": "Écrivez-nous",
     "footer.orCall": "Ou appelez le",
     "footer.taxNote": "Les prix excluent les taxes applicables et l'immatriculation.",
-    "footer.langLine": "This site is also available in English.",
-    "footer.langLink": "View the English version",
+    "footer.langLine": "",
+    "footer.langLink": "View this site in English",
     "closed": "Fermé",
     "inv.filters": "Filtres",
     "inv.keyword": "Marque, modèle, version…",
@@ -316,4 +318,28 @@ SX.bodyTypes = ["Sedan", "SUV", "Truck", "Coupe", "Hatchback"];
 SX.bodyLabel = function (b) {
   if (SX.lang !== "fr") return b;
   return { Sedan: "Berline", SUV: "VUS", Truck: "Camionnette", Coupe: "Coupé", Hatchback: "Hayon" }[b] || b;
+};
+
+/* Spec values are stored in English (the admin form writes them) and displayed
+   translated on the French site. Filtering and structured data keep using the
+   stored English value, so nothing about the data model changes. */
+SX.specFR = {
+  transmission: {
+    "Automatic": "Automatique", "Manual": "Manuelle",
+    "CVT": "CVT", "e-CVT": "e-CVT"
+  },
+  fuel: {
+    "Gasoline": "Essence", "Hybrid": "Hybride", "Diesel": "Diesel",
+    "Electric": "Électrique", "Plug-in Hybrid": "Hybride rechargeable"
+  },
+  drivetrain: {
+    "FWD": "Traction avant", "AWD": "Intégrale",
+    "RWD": "Propulsion", "4x4": "4x4"
+  }
+};
+
+SX.specLabel = function (kind, value) {
+  if (SX.lang !== "fr" || !value) return value;
+  var m = SX.specFR[kind];
+  return (m && m[value]) || value;
 };

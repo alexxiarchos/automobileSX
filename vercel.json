@@ -8,24 +8,14 @@
     },
     {
       "source": "/vehicles/:id",
-      "destination": "/vehicle.html"
+      "destination": "/api/vehicle?id=:id&lang=en"
     },
     {
       "source": "/fr/vehicules/:id",
-      "destination": "/fr/vehicule.html"
+      "destination": "/api/vehicle?id=:id&lang=fr"
     }
   ],
   "redirects": [
-    {
-      "source": "/vehicle",
-      "destination": "/inventory",
-      "permanent": false
-    },
-    {
-      "source": "/fr/vehicule",
-      "destination": "/fr/inventaire",
-      "permanent": false
-    },
     {
       "source": "/index",
       "destination": "/",
@@ -33,7 +23,7 @@
     },
     {
       "source": "/fr/index",
-      "destination": "/fr/",
+      "destination": "/fr",
       "permanent": true
     }
   ],
@@ -59,6 +49,9 @@
   ],
   "functions": {
     "api/sitemap.js": {
+      "includeFiles": "data/**"
+    },
+    "api/vehicle.js": {
       "includeFiles": "data/**"
     }
   }

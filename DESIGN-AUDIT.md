@@ -167,3 +167,43 @@ language toggle working, vehicle detail pages and the six-row payment disclosure
 unchanged, admin publish still writing pre-rendered pages in both languages,
 delete still removing them, sitemap still returning 32 URLs, all 30 internal
 links resolving, 404 returning the branded page, zero JavaScript errors.
+
+## Follow-up fixes (reported after deploy)
+
+### Vehicle links were falling through to the 404 page
+
+`vercel.json` was self-conflicting. With `cleanUrls: true` Vercel serves
+`vehicle.html` at `/vehicle` and redirects the `.html` form, but the rewrite
+target was written as `/vehicle.html`, and a redirect `/vehicle → /inventory`
+also existed — so the rewrite pointed at a path that was itself redirected.
+With no pre-rendered file on disk yet, `/vehicles/<id>` ended at the 404 page.
+
+Fixed by pointing the rewrites at the extensionless paths and deleting the two
+redirects that were shadowing them. A bare visit to `/vehicle` still lands on the
+inventory, because `detail.js` already redirects when no vehicle id resolves.
+
+**Why updating one car appeared to fix it:** every admin save regenerates the
+pre-rendered pages for the whole inventory, so that save put real files on disk
+and the filesystem started serving them before the broken rewrite was ever
+reached. That was the correct behaviour masking the config bug — the rewrite is
+the fallback for any vehicle that has no file yet, and it now works too.
+
+### The dev server was too forgiving to catch it
+
+It special-cased vehicle URLs instead of following Vercel's routing order, so the
+broken config passed locally. It now parses `vercel.json` and applies the real
+order: redirects → filesystem (with cleanUrls) → rewrites → filesystem → 404.
+A regression check confirms `/vehicles/<id>` returns 200 with **no** pre-rendered
+file present, which is precisely the case that was failing in production.
+
+### Phone number invisible until hover
+
+`.text-link` was hard-coded to `color: var(--ink)`, which is near-black. Inside
+the dark page header that made the link invisible; it only appeared on hover when
+it turned red. It now inherits its colour from the surface, with explicit bone on
+every dark context (page header, dark sections, hero, sidebar card, footer).
+
+### Swept for the same class of fault
+
+All 15 page types were checked at 11 widths from 1600 px down to 360 px for
+horizontal overflow and non-200 responses. None found.

@@ -3,7 +3,7 @@
    with its own title, description, price and specs already in the source.
    detail.js still runs on top for the gallery, calculator and similar vehicles. */
 
-const SITE = "https://automobilesx.ca";
+const SITE = "https://www.automobilesx.ca";
 
 const PATHS = {
   en: { dir: "vehicles", inventory: "/inventory", contact: "/contact", financing: "/financing" },
@@ -48,6 +48,52 @@ const L = {
 };
 
 const BODY_FR = { Sedan: "Berline", SUV: "VUS", Truck: "Camionnette", Coupe: "Coupé", Hatchback: "Hayon" };
+
+/* Spec values are stored in English by the admin form and displayed translated
+   on the French pages. Must stay in sync with SX.specFR in js/data.js so the
+   pre-rendered page and the script that hydrates it agree. */
+const SPEC_FR = {
+  transmission: { "Automatic": "Automatique", "Manual": "Manuelle", "CVT": "CVT", "e-CVT": "e-CVT" },
+  fuel: {
+    "Gasoline": "Essence", "Hybrid": "Hybride", "Diesel": "Diesel",
+    "Electric": "Électrique", "Plug-in Hybrid": "Hybride rechargeable"
+  },
+  drivetrain: { "FWD": "Traction avant", "AWD": "Intégrale", "RWD": "Propulsion", "4x4": "4x4" }
+};
+
+function specLabel(kind, value, lang) {
+  if (lang !== "fr" || !value) return value;
+  return (SPEC_FR[kind] && SPEC_FR[kind][value]) || value;
+}
+
+/* Same crawlable footer the generated pages carry, so a vehicle page is not a
+   dead end for a crawler that does not run JavaScript. components.js replaces
+   it with the real footer on boot. Mirrors staticFooter() in build/layout.js. */
+const FOOTER_NAV = {
+  en: [
+    ["/inventory", "Used car inventory"], ["/financing", "Financing"],
+    ["/sell-your-car", "Sell or trade your car"], ["/guides", "Buying guides"],
+    ["/faq", "Questions and answers"], ["/used-cars-west-island", "Used cars in the West Island"],
+    ["/about", "About Automobile SX"], ["/contact", "Contact and directions"]
+  ],
+  fr: [
+    ["/fr/inventaire", "Inventaire de véhicules"], ["/fr/financement", "Financement"],
+    ["/fr/vendre-votre-auto", "Vendre ou échanger votre auto"], ["/fr/guides", "Guides d'achat"],
+    ["/fr/faq", "Questions et réponses"], ["/fr/autos-usagees-west-island", "Autos usagées dans le West Island"],
+    ["/fr/a-propos", "À propos d'Automobile SX"], ["/fr/contact", "Contact et itinéraire"]
+  ]
+};
+
+function staticFooter(lang) {
+  const other = lang === "en" ? "fr" : "en";
+  const links = FOOTER_NAV[lang].map(l => `<li><a href="${l[0]}">${l[1]}</a></li>`).join("");
+  const switchLabel = lang === "en" ? "Voir ce site en français" : "View this site in English";
+  const home = lang === "en" ? "/fr" : "/";
+  return `<div class="container footer-static">
+<p><strong>Automobile SX</strong>, 2044 Avenue Chartier, Dorval, QC H9P 1H2. <a href="tel:+1-514-824-9117">514-824-9117</a></p>
+<ul>${links}<li><a href="${home}" hreflang="${other}" lang="${other}">${switchLabel}</a></li></ul>
+</div>`;
+}
 
 function esc(s) {
   return String(s == null ? "" : s)
@@ -94,7 +140,8 @@ function metaDescription(v, lang) {
   const parts = [
     t.descIntro(fullName(v), "Dorval"),
     km(v.km, lang),
-    v.transmission, v.drivetrain,
+    specLabel("transmission", v.transmission, lang),
+    specLabel("drivetrain", v.drivetrain, lang),
     money(v.price, lang)
   ].filter(Boolean);
   return parts.join(" · ").slice(0, 300);
@@ -104,9 +151,9 @@ function specRows(v, lang) {
   const t = L[lang];
   return [
     [t.engine, v.engine],
-    [t.trans, v.transmission],
-    [t.drive, v.drivetrain],
-    [t.fuel, v.fuel],
+    [t.trans, specLabel("transmission", v.transmission, lang)],
+    [t.drive, specLabel("drivetrain", v.drivetrain, lang)],
+    [t.fuel, specLabel("fuel", v.fuel, lang)],
     [t.city, v.econCity != null ? Number(v.econCity).toFixed(1) + " L/100 km" : null],
     [t.hwy, v.econHwy != null ? Number(v.econHwy).toFixed(1) + " L/100 km" : null],
     [t.ext, v.extColor],
@@ -165,6 +212,7 @@ function schema(v, lang) {
       streetAddress: "2044 Avenue Chartier",
       addressLocality: "Dorval",
       addressRegion: "QC",
+      postalCode: "H9P 1H2",
       addressCountry: "CA"
     }
   };
@@ -200,7 +248,10 @@ function renderVehiclePage(v, lang) {
     ? SITE + "/" + String(v.images[0]).replace(/^\//, "")
     : SITE + "/assets/og-image.jpg";
 
-  const subtitle = [v.extColor, km(v.km, lang), v.transmission, v.fuel, v.drivetrain]
+  const subtitle = [v.extColor, km(v.km, lang),
+    specLabel("transmission", v.transmission, lang),
+    specLabel("fuel", v.fuel, lang),
+    specLabel("drivetrain", v.drivetrain, lang)]
     .filter(Boolean).join(" · ") + (v.stock ? " · " + t.stock + " " + v.stock : "");
 
   const html = `<!DOCTYPE html>
@@ -335,7 +386,7 @@ function renderVehiclePage(v, lang) {
   </div>
 </main>
 
-<footer class="site-footer" id="site-footer"></footer>
+<footer class="site-footer" id="site-footer">${staticFooter(lang)}</footer>
 <div class="mobile-cta-bar" id="mobile-cta-bar"></div>
 
 <script src="/js/data.js"></script>

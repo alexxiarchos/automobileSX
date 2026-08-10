@@ -12,7 +12,7 @@ function homeBody(T, R) {
     <div class="hero-bg" aria-hidden="true">
       <img src="/assets/storefront-hero.jpg"
            srcset="/assets/storefront-hero-900.jpg 900w, /assets/storefront-hero.jpg 1600w"
-           sizes="100vw" alt="" fetchpriority="high" decoding="async" width="1600" height="1160">
+           sizes="100vw" alt="${T.home.heroAlt}" fetchpriority="high" decoding="async" width="1600" height="1160">
     </div>
     <div class="container">
       <div class="hero-content">
