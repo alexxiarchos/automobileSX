@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-04T22:45:20.361Z",
+  "updatedAt": "2026-08-10T03:49:16.417Z",
   "vehicles": [
     {
       "id": "2014-subaru-legacy-4jxba",
@@ -44,9 +44,9 @@
         "images/vehicles/2014-subaru-legacy-4jxba/msemk0dv-171.jpg",
         "images/vehicles/2014-subaru-legacy-4jxba/msemk10i-172.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "createdAt": "2026-08-04T12:17:11.456Z",
-      "updatedAt": "2026-08-04T17:25:12.924Z"
+      "updatedAt": "2026-08-10T03:49:10.331Z"
     },
     {
       "id": "2019-volvo-xc60-zen4s",
