@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-04T22:45:20.361Z",
+  "updatedAt": "2026-08-10T04:32:45.474Z",
   "vehicles": [
     {
       "id": "2014-subaru-legacy-4jxba",
@@ -46,7 +46,7 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:17:11.456Z",
-      "updatedAt": "2026-08-04T17:25:12.924Z"
+      "updatedAt": "2026-08-10T03:49:58.479Z"
     },
     {
       "id": "2019-volvo-xc60-zen4s",
@@ -245,7 +245,7 @@
     {
       "id": "2019-suabru-impreza-62zb2",
       "year": 2019,
-      "make": "Suabru",
+      "make": "Subaru",
       "model": "Impreza",
       "trim": "",
       "body": "Hatchback",
@@ -286,7 +286,7 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:03:14.312Z",
-      "updatedAt": "2026-08-04T12:05:02.946Z"
+      "updatedAt": "2026-08-10T04:32:44.929Z"
     },
     {
       "id": "2014-hyundai-santa-fe-1o683",
