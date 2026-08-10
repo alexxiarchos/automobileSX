@@ -1,0 +1,236 @@
+[
+  {
+    "loc": "https://automobilesx.ca/",
+    "priority": "1.0",
+    "changefreq": "weekly",
+    "alt": {
+      "en": "https://automobilesx.ca/",
+      "fr": "https://automobilesx.ca/fr/"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/inventory",
+    "priority": "0.9",
+    "changefreq": "daily",
+    "alt": {
+      "en": "https://automobilesx.ca/inventory",
+      "fr": "https://automobilesx.ca/fr/inventaire"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/financing",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/financing",
+      "fr": "https://automobilesx.ca/fr/financement"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/sell-your-car",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/sell-your-car",
+      "fr": "https://automobilesx.ca/fr/vendre-votre-auto"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/about",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/about",
+      "fr": "https://automobilesx.ca/fr/a-propos"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/contact",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/contact",
+      "fr": "https://automobilesx.ca/fr/contact"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/faq",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/faq",
+      "fr": "https://automobilesx.ca/fr/faq"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/guides",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/guides",
+      "fr": "https://automobilesx.ca/fr/guides"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/used-cars-west-island",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/used-cars-west-island",
+      "fr": "https://automobilesx.ca/fr/autos-usagees-west-island"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/guides/buying-a-used-car-in-quebec",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/guides/buying-a-used-car-in-quebec",
+      "fr": "https://automobilesx.ca/fr/guides/acheter-une-voiture-usagee-au-quebec"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/guides/car-financing-with-bad-credit-quebec",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/guides/car-financing-with-bad-credit-quebec",
+      "fr": "https://automobilesx.ca/fr/guides/financement-auto-mauvais-credit-quebec"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/guides/what-is-my-trade-in-worth-quebec",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/guides/what-is-my-trade-in-worth-quebec",
+      "fr": "https://automobilesx.ca/fr/guides/valeur-de-reprise-quebec"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/guides/registering-a-used-car-in-quebec",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/guides/registering-a-used-car-in-quebec",
+      "fr": "https://automobilesx.ca/fr/guides/immatriculer-une-voiture-usagee-quebec"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/fr/",
+    "priority": "1.0",
+    "changefreq": "weekly",
+    "alt": {
+      "en": "https://automobilesx.ca/",
+      "fr": "https://automobilesx.ca/fr/"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/fr/inventaire",
+    "priority": "0.9",
+    "changefreq": "daily",
+    "alt": {
+      "en": "https://automobilesx.ca/inventory",
+      "fr": "https://automobilesx.ca/fr/inventaire"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/fr/financement",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/financing",
+      "fr": "https://automobilesx.ca/fr/financement"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/fr/vendre-votre-auto",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/sell-your-car",
+      "fr": "https://automobilesx.ca/fr/vendre-votre-auto"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/fr/a-propos",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/about",
+      "fr": "https://automobilesx.ca/fr/a-propos"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/fr/contact",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/contact",
+      "fr": "https://automobilesx.ca/fr/contact"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/fr/faq",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/faq",
+      "fr": "https://automobilesx.ca/fr/faq"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/fr/guides",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/guides",
+      "fr": "https://automobilesx.ca/fr/guides"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/fr/autos-usagees-west-island",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/used-cars-west-island",
+      "fr": "https://automobilesx.ca/fr/autos-usagees-west-island"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/fr/guides/acheter-une-voiture-usagee-au-quebec",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/guides/buying-a-used-car-in-quebec",
+      "fr": "https://automobilesx.ca/fr/guides/acheter-une-voiture-usagee-au-quebec"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/fr/guides/financement-auto-mauvais-credit-quebec",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/guides/car-financing-with-bad-credit-quebec",
+      "fr": "https://automobilesx.ca/fr/guides/financement-auto-mauvais-credit-quebec"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/fr/guides/valeur-de-reprise-quebec",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/guides/what-is-my-trade-in-worth-quebec",
+      "fr": "https://automobilesx.ca/fr/guides/valeur-de-reprise-quebec"
+    }
+  },
+  {
+    "loc": "https://automobilesx.ca/fr/guides/immatriculer-une-voiture-usagee-quebec",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://automobilesx.ca/guides/registering-a-used-car-in-quebec",
+      "fr": "https://automobilesx.ca/fr/guides/immatriculer-une-voiture-usagee-quebec"
+    }
+  }
+]

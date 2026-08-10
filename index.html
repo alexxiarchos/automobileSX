@@ -1,53 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-CA" data-route="home">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Automobile SX | Used Cars Dorval, QC | Vente d'Autos Usagées</title>
+<title>Used Cars in Dorval, QC | Automobile SX | Vente d'Autos Usagées</title>
+<meta name="description" content="Family-run used car dealership in Dorval, Quebec. Vente, achat, échange. Quality pre-owned vehicles, financing for all credit, personal service from the owner. Open 10 to 6, seven days a week.">
 <link rel="canonical" href="https://automobilesx.ca/">
-<meta property="og:title" content="Automobile SX | Used Cars in Dorval, QC">
-<meta property="og:description" content="Family-run used car dealership in Dorval. Quality vehicles and personal service straight from the owner. Vente, achat, échange. Open 10 to 6 every day, by appointment.">
-<meta property="og:image" content="https://automobilesx.ca/assets/og-image.jpg">
-<meta property="og:url" content="https://automobilesx.ca/">
+<link rel="alternate" hreflang="en-CA" href="https://automobilesx.ca/">
+<link rel="alternate" hreflang="fr-CA" href="https://automobilesx.ca/fr/">
+<link rel="alternate" hreflang="x-default" href="https://automobilesx.ca/">
 <meta property="og:type" content="website">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AutoDealer",
-  "name": "Automobile SX",
-  "alternateName": "Automobile SX Vente d'Autos Usagées",
-  "url": "https://automobilesx.ca",
-  "logo": "https://automobilesx.ca/assets/logo.png",
-  "image": "https://automobilesx.ca/assets/og-image.jpg",
-  "telephone": "+1-514-824-9117",
-  "email": "Automobilesx@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "2044 Avenue Chartier",
-    "addressLocality": "Dorval",
-    "addressRegion": "QC",
-    "addressCountry": "CA"
-  },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-    "opens": "10:00",
-    "closes": "18:00"
-  },
-  "priceRange": "$$",
-  "areaServed": ["Dorval", "West Island", "Montreal", "Laval"]
-}
-</script>
-<meta name="description" content="Used cars in Dorval, QC. Family-run dealership: vente, achat, échange. Quality vehicles and personal service from the owner himself. Open 10 to 6 every day, by appointment. Financing for all credit.">
+<meta property="og:site_name" content="Automobile SX">
+<meta property="og:locale" content="en_CA">
+<meta property="og:title" content="Used Cars in Dorval, QC | Automobile SX | Vente d'Autos Usagées">
+<meta property="og:description" content="Family-run used car dealership in Dorval, Quebec. Vente, achat, échange. Quality pre-owned vehicles, financing for all credit, personal service from the owner. Open 10 to 6, seven days a week.">
+<meta property="og:url" content="https://automobilesx.ca/">
+<meta property="og:image" content="https://automobilesx.ca/assets/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="/css/styles.css">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#0D0D0D">
+<script>window.SX_ALT="/fr/";</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"AutoDealer","@id":"https://automobilesx.ca/#dealer","name":"Automobile SX","alternateName":"Automobile SX Vente d'Autos Usagées","url":"https://automobilesx.ca","logo":"https://automobilesx.ca/assets/logo.png","image":"https://automobilesx.ca/assets/og-image.jpg","telephone":"+1-514-824-9117","email":"Automobilesx@gmail.com","address":{"@type":"PostalAddress","streetAddress":"2044 Avenue Chartier","addressLocality":"Dorval","addressRegion":"QC","addressCountry":"CA"},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"18:00"},"priceRange":"$$","areaServed":["Dorval","West Island","Pointe-Claire","Lachine","Montréal","Laval"],"availableLanguage":["en","fr"]},{"@type":"WebSite","name":"Automobile SX","url":"https://automobilesx.ca","inLanguage":"en-CA"}]}</script>
 </head>
 <body>
 
@@ -55,129 +36,176 @@
 
 <main id="main">
 
-  <!-- Hero -->
-  <section class="hero" aria-label="Welcome">
-    <div class="hero-bg" id="hero-bg" aria-hidden="true"></div>
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero-bg" aria-hidden="true">
+      <img src="/assets/storefront-hero.jpg"
+           srcset="/assets/storefront-hero-900.jpg 900w, /assets/storefront-hero.jpg 1600w"
+           sizes="100vw" alt="" fetchpriority="high" decoding="async" width="1600" height="1160">
+    </div>
     <div class="container">
       <div class="hero-content">
         <p class="hero-kicker">Vente · Achat · Échange</p>
         <hr class="red-rule">
-        <h1 data-t="hero.title">Quality cars, personal service.</h1>
-        <p class="sub" data-t="hero.sub">A family-run lot in Dorval where you deal with the owner directly, and we go above and beyond to put you in the right vehicle.</p>
+        <h1 id="hero-h">Quality used cars in Dorval, sold the honest way.</h1>
+        <p class="sub">A family-run lot on Avenue Chartier where you deal with the owner directly, in English or in French, and nobody rushes you.</p>
       </div>
     </div>
   </section>
 
-  <!-- Overlapping search card -->
   <div class="container hero-search-wrap">
-    <form class="hero-search" id="hero-search" aria-label="Inventory search">
+    <form class="hero-search" id="hero-search" aria-label="Search inventory">
       <div class="field">
-        <label for="hs-make" data-t="search.make">Make</label>
+        <label for="hs-make">Make</label>
         <select id="hs-make" name="make"></select>
       </div>
       <div class="field">
-        <label for="hs-model" data-t="search.model">Model</label>
+        <label for="hs-model">Model</label>
         <select id="hs-model" name="model"></select>
       </div>
       <div class="field">
-        <label for="hs-price" data-t="search.maxPrice">Max Price</label>
+        <label for="hs-price">Max price</label>
         <select id="hs-price" name="maxPrice">
           <option value="">Any</option>
-          <option value="20000">$20,000</option>
-          <option value="25000">$25,000</option>
-          <option value="30000">$30,000</option>
-          <option value="35000">$35,000</option>
-          <option value="40000">$40,000</option>
-          <option value="50000">$50,000</option>
+          <option value="10000">10 000 $</option>
+          <option value="15000">15 000 $</option>
+          <option value="20000">20 000 $</option>
+          <option value="25000">25 000 $</option>
+          <option value="35000">35 000 $</option>
         </select>
       </div>
-      <button class="btn btn-red" type="submit" data-t="cta.searchInventory">Search Inventory</button>
+      <button class="btn btn-red" type="submit">Search Inventory</button>
     </form>
   </div>
 
-  <!-- Trust strip -->
-  <section class="section" aria-label="Why buy from us">
+  <section class="section" aria-labelledby="why-h">
     <div class="container">
-      <div class="trust-strip reveal" id="trust-strip"></div>
+      <h2 id="why-h" class="visually-hidden">Why buy from Automobile SX</h2>
+      <div class="trust-strip reveal">
+        
+        <div class="trust-item">
+          <div><h3>Personal service</h3><p>You deal directly with Spiro, from the first phone call to the keys in your hand.</p></div>
+        </div>
+        <div class="trust-item">
+          <div><h3>Vente · Achat · Échange</h3><p>We sell, we buy, and we take trades. Kilometres and condition disclosed up front.</p></div>
+        </div>
+        <div class="trust-item">
+          <div><h3>Open seven days</h3><p>10:00 to 18:00 every day, by appointment. Call 514-824-9117 and the car is ready when you arrive.</p></div>
+        </div>
+        <div class="trust-item">
+          <div><h3>Financing for all credit</h3><p>Good credit, new credit or bruised credit. We work with several lenders and show you the real numbers.</p></div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Featured vehicles -->
   <section class="section section-mist" aria-labelledby="featured-h">
     <div class="container">
       <div class="section-head reveal">
         <div>
-          <span class="kicker">Hand-picked this week</span>
-          <h2 id="featured-h" data-t="featured.title">Featured vehicles</h2>
+          <span class="kicker">In stock now</span>
+          <h2 id="featured-h">Used cars for sale in Dorval</h2>
         </div>
-        <a class="text-link" href="inventory.html" data-t="cta.viewAll">View all inventory →</a>
+        <a class="text-link" href="/inventory">View all inventory →</a>
       </div>
       <div class="vehicle-grid reveal" id="featured-grid"></div>
     </div>
   </section>
 
-  <!-- Browse by body type -->
   <section class="section" aria-labelledby="body-h">
     <div class="container">
-      <div class="section-head reveal">
-        <h2 id="body-h" data-t="bodytype.title">Browse by body type</h2>
-      </div>
+      <div class="section-head reveal"><h2 id="body-h">Browse by body type</h2></div>
       <div class="body-tiles reveal" id="body-tiles"></div>
     </div>
   </section>
 
-  <!-- Financing band -->
   <section class="section section-dark" id="financing" aria-labelledby="fin-h">
     <div class="container financing-band">
       <div class="reveal">
         <hr class="red-rule">
-        <h2 id="fin-h">Approved in minutes, not days.</h2>
-        <p>Good credit, new credit, or bruised credit. We work with several lenders and tell you the real number before you sign anything. No surprises, no back office games.</p>
-        <p style="margin-bottom:0"><a class="btn btn-outline-light" href="contact.html?interest=financing">Get Pre-Approved</a></p>
+        <h2 id="fin-h">Financing in Dorval, whatever your credit looks like.</h2>
+        <p>New to Canada with no credit file? Rebuilding after a rough patch? We work with several Canadian lenders and tell you the real rate and the real payment before anything gets signed.</p>
+      <p>And to be clear about your rights: in Quebec a dealer cannot make financing a condition of buying the car. If you would rather pay cash or use your own bank, that is your call.</p>
+        <p style="margin-bottom:0">
+          <a class="btn btn-outline-light" href="/financing">How financing works</a>
+        </p>
       </div>
       <div class="reveal" id="home-calculator"></div>
     </div>
   </section>
 
-  <!-- Sell or trade -->
-  <section class="section" id="trade" aria-labelledby="trade-h">
+  <section class="section" aria-labelledby="trade-h">
     <div class="container split">
-      <div class="split-media reveal" id="trade-photo" aria-hidden="false"></div>
+      <div class="split-media reveal">
+        <img src="/assets/storefront.jpg" alt="The Automobile SX lot at 2044 Avenue Chartier in Dorval" loading="lazy" width="900" height="652">
+      </div>
       <div class="reveal">
-        <span class="kicker">Sell or trade</span>
-        <h2 id="trade-h">Your car is worth real money. We’ll tell you how much.</h2>
-        <p>Bring your vehicle in, or just tell us about it, and we’ll give you a written offer with no obligation to buy anything from us. Trade-ins also reduce the tax you pay on your next vehicle, which most buyers don’t realize.</p>
-        <a class="btn btn-outline" href="contact.html?interest=trade-in">Get Your Trade-In Value</a>
+        <span class="kicker">Vente · Achat · Échange</span>
+        <h2 id="trade-h">We buy cars too, and a trade cuts your tax bill.</h2>
+        <p>Selling privately means strangers at your door and payment risk. Bring it to us instead and get a straight offer, whether or not you buy anything from us.</p>
+      <p>If you do trade against a purchase, Quebec calculates the sales tax on the price <em>after</em> your trade-in is deducted, so the saving is real money.</p>
+        <a class="btn btn-outline" href="/sell-your-car">Get your car appraised</a>
       </div>
     </div>
   </section>
 
-  <!-- Visit us -->
-  <section class="section" aria-labelledby="visit-h">
+  <section class="section section-mist" aria-labelledby="guides-h">
     <div class="container">
       <div class="section-head reveal">
-        <h2 id="visit-h">Visit the lot</h2>
+        <div>
+          <span class="kicker">Straight answers</span>
+          <h2 id="guides-h">Guides for used-car buyers in Quebec</h2>
+        </div>
+        <a class="text-link" href="/guides">All guides →</a>
       </div>
+      <div class="card-grid reveal">
+        
+        <a class="link-card" href="/guides/buying-a-used-car-in-quebec">
+          <h3>Buying a used car in Quebec</h3>
+          <p>Taxes, the legal warranty, the dealer label and what to check before you sign.</p>
+          <span class="link-card-cta">Read the guide →</span>
+        </a>
+        <a class="link-card" href="/guides/car-financing-with-bad-credit-quebec">
+          <h3>Car financing with bad credit</h3>
+          <p>What lenders look for, realistic rates, and the rights you keep in Quebec.</p>
+          <span class="link-card-cta">Read the guide →</span>
+        </a>
+        <a class="link-card" href="/guides/what-is-my-trade-in-worth-quebec">
+          <h3>What is my trade-in worth?</h3>
+          <p>How trade values are set, and the tax saving most buyers miss.</p>
+          <span class="link-card-cta">Read the guide →</span>
+        </a>
+        <a class="link-card" href="/guides/registering-a-used-car-in-quebec">
+          <h3>Registering a used car</h3>
+          <p>SAAQ paperwork, plates, and what the dealer handles for you.</p>
+          <span class="link-card-cta">Read the guide →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="visit-h">
+    <div class="container">
+      <div class="section-head reveal"><h2 id="visit-h">Visit the lot in Dorval</h2></div>
       <div class="visit-grid reveal">
         <div class="map-block" id="visit-map"></div>
         <div>
           <h3 style="margin-bottom:4px">Automobile SX</h3>
           <p style="color:var(--slate)">2044 Avenue Chartier, Dorval, QC<br>
           <a class="text-link" href="tel:+15148249117">514-824-9117</a> · Ask for Spiro</p>
+          <p style="margin-top:-6px"><a class="text-link" href="https://www.google.com/maps/search/?api=1&query=2044+Avenue+Chartier+Dorval+QC" target="_blank" rel="noopener">Get directions ↗</a></p>
           <table class="hours-table" id="visit-hours"></table>
           <p id="visit-note" style="font-size:14px;color:var(--slate);margin-top:12px"></p>
         </div>
       </div>
     </div>
   </section>
-
 </main>
 
 <footer class="site-footer" id="site-footer"></footer>
 <div class="mobile-cta-bar" id="mobile-cta-bar"></div>
 
-<script src="js/data.js"></script>
-<script src="js/components.js"></script>
-<script src="js/home.js"></script>
+<script src="/js/data.js"></script>
+<script src="/js/components.js"></script>
+<script src="/js/home.js" defer></script>
 </body>
 </html>

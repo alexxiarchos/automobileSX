@@ -19,7 +19,13 @@
   --header-h: 64px;
   --shadow-hover: 0 10px 30px rgba(13, 13, 13, 0.12);
   --transition: 150ms ease;
-  --container: 1200px;
+
+  /* One container width, used by the header and the body alike, so the logo,
+     nav and page content all sit on the same vertical lines. */
+  --container: 1280px;
+  --gutter: clamp(1.25rem, 3.5vw, 2rem);
+  --section-y: clamp(3.25rem, 5.5vw, 6rem);
+  --stack: clamp(1.75rem, 3vw, 2.75rem);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -29,8 +35,8 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: var(--font);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: clamp(1rem, 0.965rem + 0.16vw, 1.0625rem);
+  line-height: 1.62;
   color: var(--ink);
   background: var(--bone);
   -webkit-font-smoothing: antialiased;
@@ -45,7 +51,7 @@ h1, h2, h3, h4 {
   margin: 0 0 0.5em;
 }
 
-h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h1 { font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1.06; }
 h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
 h3 { font-size: 1.25rem; }
 
@@ -61,9 +67,10 @@ a:hover { color: var(--red); }
 }
 
 .container {
+  width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--gutter);
 }
 
 .visually-hidden {
@@ -115,7 +122,7 @@ a:hover { color: var(--red); }
 }
 .site-header .container {
   display: flex; align-items: center; justify-content: space-between;
-  height: 100%; gap: 16px; max-width: 1360px;
+  height: 100%; gap: clamp(12px, 2vw, 28px);
 }
 .brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 .brand img { height: 44px; width: 44px; object-fit: cover; border-radius: 4px; }
@@ -173,7 +180,7 @@ a:hover { color: var(--red); }
 .mobile-cta-bar .btn { flex: 1; }
 
 /* ------- Sections ------- */
-.section { padding: 72px 0; }
+.section { padding: var(--section-y) 0; }
 .section-dark { background: var(--ink); color: var(--bone); }
 .section-mist { background: var(--mist); }
 .section-head {
@@ -199,14 +206,22 @@ a:hover { color: var(--red); }
 /* ------- Hero ------- */
 .hero {
   position: relative; background: var(--ink); color: var(--bone);
-  min-height: 560px; display: flex; align-items: center;
+  min-height: clamp(30rem, 66vh, 44rem); display: flex; align-items: center;
 }
+/* Without this the container shrink-wraps as a flex item and the headline
+   stops aligning with everything below it. */
+.hero > .container { width: 100%; }
 .hero-bg { position: absolute; inset: 0; overflow: hidden; }
-.hero-bg img, .hero-bg svg { width: 100%; height: 100%; object-fit: cover; }
-.hero-bg::after { content: ""; position: absolute; inset: 0; background: rgba(13, 13, 13, 0.6); }
-.hero-content { position: relative; z-index: 1; max-width: 640px; padding: 96px 0 140px; }
+.hero-bg img, .hero-bg svg { width: 100%; height: 100%; object-fit: cover; object-position: 62% 55%; }
+.hero-bg::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(100deg, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.74) 42%, rgba(13,13,13,0.34) 78%),
+    linear-gradient(to top, rgba(13,13,13,0.72) 0%, rgba(13,13,13,0) 45%);
+}
+.hero-content { position: relative; z-index: 1; max-width: clamp(20rem, 46vw, 37rem); padding: clamp(4rem,9vw,7rem) 0 clamp(6rem,11vw,9rem); }
 .hero-content h1 { color: var(--bone); margin-bottom: 12px; }
-.hero-content .sub { font-size: 19px; color: var(--mist); margin: 0; }
+.hero-content .sub { font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem); color: var(--mist); margin: 0; max-width: 42ch; line-height: 1.5; }
 .hero-kicker {
   font-size: 13px; font-weight: 700; letter-spacing: 0.22em;
   text-transform: uppercase; color: var(--mist); margin: 0 0 14px;
@@ -656,4 +671,247 @@ input[type="range"] {
   .footer-main { grid-template-columns: 1fr; gap: 32px; }
   .trust-strip { grid-template-columns: 1fr; }
   .hero-search { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   Content pages, cards and the disclosure-compliant payment estimator
+   ========================================================================== */
+
+.muted-note { color: var(--slate); font-size: 15px; }
+
+/* Trust strip without icons */
+.trust-item { display: block; }
+.trust-item h3 { font-size: 16px; margin: 0 0 4px; position: relative; padding-top: 14px; }
+.trust-item h3::before {
+  content: ""; position: absolute; top: 0; left: 0;
+  width: 28px; height: 3px; background: var(--red);
+}
+.trust-item p { font-size: 14.5px; color: var(--slate); margin: 0; }
+
+/* Prose / article layout */
+.prose-layout {
+  display: grid; grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 56px; padding: 48px 0 72px; align-items: start;
+}
+.prose { max-width: 72ch; font-size: 17px; line-height: 1.72; }
+.prose h2 {
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem); margin: 40px 0 14px;
+  padding-top: 18px; border-top: 1px solid var(--mist);
+}
+.prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.prose p { margin: 0 0 1.1em; }
+.prose ul, .prose ol { margin: 0 0 1.3em; padding-left: 1.3em; }
+.prose li { margin-bottom: 0.5em; }
+.prose li strong { font-weight: 700; }
+.prose a { color: var(--ink); border-bottom: 2px solid var(--red); font-weight: 600; }
+.prose a:hover { color: var(--red); }
+.accuracy-note {
+  font-size: 13.5px; color: var(--slate); line-height: 1.6;
+  border-left: 3px solid var(--mist); padding: 12px 0 12px 16px; margin-top: 36px;
+}
+.accuracy-note a { font-weight: 600; }
+
+.prose-aside { position: sticky; top: calc(var(--header-h) + 20px); }
+.aside-card {
+  background: var(--ink); color: var(--bone); border-radius: var(--radius); padding: 26px;
+}
+.aside-card h2 { color: var(--bone); font-size: 1.15rem; margin-bottom: 8px; }
+.aside-card p { font-size: 14.5px; color: var(--mist); }
+.aside-card .btn { margin-bottom: 10px; }
+.aside-card .btn-outline { background: transparent; color: var(--bone); border-color: var(--bone); }
+.aside-card .btn-outline:hover { background: var(--bone); color: var(--ink); }
+.aside-card .btn-ghost { color: var(--mist); border: 1px solid var(--border-dark); }
+.aside-card .btn-ghost:hover { color: var(--bone); border-color: var(--slate); }
+.aside-note { font-size: 13px; color: var(--slate); margin: 14px 0 0; }
+
+/* Link cards (guides) */
+.card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.link-card {
+  display: block; background: #fff; border: 1px solid var(--mist);
+  border-radius: var(--radius); padding: 26px 26px 22px;
+  border-bottom: 3px solid transparent;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.link-card:hover {
+  transform: translateY(-2px); box-shadow: var(--shadow-hover);
+  border-bottom-color: var(--red); color: var(--ink);
+}
+.link-card h2, .link-card h3 { font-size: 1.15rem; margin: 0 0 8px; }
+.link-card p { color: var(--slate); font-size: 15px; margin: 0 0 14px; }
+.link-card-cta { font-weight: 700; font-size: 14.5px; color: var(--red); }
+
+.inventory-note {
+  margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--mist);
+  max-width: 70ch;
+}
+.inventory-note h2 { font-size: 1.15rem; margin-bottom: 8px; }
+.inventory-note p { color: var(--slate); font-size: 15px; }
+
+/* Payment estimator: total price dominant, full disclosure grouped below */
+.calc-headline {
+  border-top: 1px solid var(--border-dark); margin-top: 6px; padding-top: 18px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.calculator.on-light .calc-headline { border-top-color: var(--mist); }
+.calc-headline-label {
+  font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--slate);
+}
+.calc-price-big {
+  font-size: 40px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; color: var(--red);
+}
+.calc-disclosure {
+  margin: 18px 0 0; padding: 16px 0 0; border-top: 1px solid var(--border-dark);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; font-size: 14px;
+}
+.calculator.on-light .calc-disclosure { border-top-color: var(--mist); }
+.calc-disclosure > div { display: flex; justify-content: space-between; gap: 10px; }
+.calc-disclosure dt { color: var(--slate); margin: 0; }
+.calc-disclosure dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+.calculator .calc-disclosure dd { color: var(--bone); }
+.calculator.on-light .calc-disclosure dd { color: var(--ink); }
+
+/* FAQ page */
+.faq-list { max-width: 100%; }
+.faq-item h2 { margin: 0; border: none; padding: 0; font-size: inherit; }
+.faq-q {
+  width: 100%; background: none; border: none; font: inherit;
+  font-size: 17px; font-weight: 700; text-align: left; color: var(--ink);
+  padding: 20px 40px 20px 0; cursor: pointer; position: relative; line-height: 1.4;
+}
+
+@media (max-width: 1023px) {
+  .prose-layout { grid-template-columns: 1fr; gap: 36px; }
+  .prose-aside { position: static; }
+  .card-grid { grid-template-columns: 1fr; }
+  .calc-disclosure { grid-template-columns: 1fr; }
+}
+
+.filter-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.filter-head h2 { font-size: 16px; margin: 0; }
+
+/* ==========================================================================
+   Refinement layer — visual polish only.
+   No structural, routing or content changes; every selector below already
+   existed. Aim: less template-grid uniformity, more editorial detail.
+   ========================================================================== */
+
+/* --- Trust strip: one rule across the row with dividers, instead of four
+       identical red dashes stacked above four identical blocks. --- */
+.trust-strip {
+  gap: 0;
+  border-top: 2px solid var(--ink);
+  padding-top: 0;
+}
+.trust-item {
+  padding: clamp(18px, 2vw, 26px) clamp(16px, 2vw, 30px) 4px 0;
+}
+.trust-item + .trust-item {
+  border-left: 1px solid var(--mist);
+  padding-left: clamp(16px, 2vw, 30px);
+}
+.trust-item h3 { padding-top: 0; font-size: 1rem; letter-spacing: -0.01em; }
+.trust-item h3::before { display: none; }
+.trust-item p { font-size: 0.9rem; line-height: 1.55; }
+
+/* --- Section headings: give the eyebrow/heading pair a hairline anchor so
+       repeated sections read as a system rather than a stack of clones. --- */
+.section-head { align-items: baseline; margin-bottom: var(--stack); }
+.kicker {
+  margin-bottom: 8px; font-size: 0.75rem; letter-spacing: 0.16em; color: var(--slate);
+}
+.section-head h2 { letter-spacing: -0.025em; line-height: 1.08; }
+
+/* --- Cards: lighter resting state, real weight on hover. --- */
+.vehicle-card, .link-card, .body-tile {
+  border-color: rgba(13, 13, 13, 0.10);
+  transition: transform 180ms cubic-bezier(.2,.7,.3,1),
+              box-shadow 180ms cubic-bezier(.2,.7,.3,1),
+              border-color 180ms ease;
+}
+.vehicle-card:hover, .link-card:hover, .body-tile:hover {
+  box-shadow: 0 14px 34px -16px rgba(13, 13, 13, 0.45);
+}
+.vc-body { padding: 16px 18px 20px; }
+.vc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.vc-title { font-size: 1.02rem; line-height: 1.25; }
+.vc-price { font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.45rem); margin-top: 2px; }
+.vc-specs { font-size: 0.83rem; letter-spacing: 0.005em; }
+
+/* --- Body-type tiles: compact, less "big empty card" --- */
+.body-tile { padding: clamp(16px, 2vw, 22px) 14px; }
+.body-tile .bt-name { font-size: 1rem; }
+.body-tile .bt-count { font-size: 0.8rem; }
+
+/* --- Motion: present but restrained. --- */
+.reveal { transform: translateY(8px); transition: opacity 260ms ease, transform 260ms cubic-bezier(.2,.7,.3,1); }
+
+/* --- Location block: address card, with the real map laid over it once loaded --- */
+.map-block, .contact-map {
+  position: relative; overflow: hidden; background: var(--ink);
+  border-radius: var(--radius); min-height: 340px;
+}
+.map-fallback {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center; gap: 4px;
+  padding: clamp(24px, 4vw, 40px); color: var(--bone);
+}
+.map-fb-label {
+  font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--slate); margin: 0 0 6px;
+}
+.map-fb-addr { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 6px; line-height: 1.3; }
+.map-fb-meta { font-size: 0.9rem; color: var(--mist); margin: 0 0 18px; }
+.map-frame {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  border: 0; opacity: 0; transition: opacity 350ms ease;
+}
+.map-frame.loaded { opacity: 1; }
+
+/* Footer: real photo of the lot, linking to directions */
+.footer-map { position: relative; display: block; max-width: 260px; margin-top: 14px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-dark); }
+.footer-map img { width: 100%; height: auto; display: block; }
+.footer-map-cta {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to top, rgba(13,13,13,0.92), rgba(13,13,13,0));
+  color: var(--bone); font-size: 12.5px; font-weight: 600; padding: 18px 10px 8px;
+}
+.footer-map:hover .footer-map-cta { color: #fff; }
+
+/* --- Prose measure and rhythm --- */
+.prose { font-size: clamp(1rem, 0.96rem + 0.22vw, 1.09rem); }
+.prose h2 { letter-spacing: -0.022em; }
+
+/* --- Large screens: let the page breathe without stranding content --- */
+@media (min-width: 1600px) {
+  :root { --container: 1360px; }
+}
+
+/* --- Mobile: tighter hero, compact search card, less scroll --- */
+@media (max-width: 767px) {
+  .hero { min-height: 26rem; }
+  .hero-content { padding: 3.5rem 0 6.5rem; max-width: none; }
+  .hero-content h1 { font-size: clamp(1.85rem, 8.2vw, 2.4rem); line-height: 1.12; }
+  .hero-content .sub { font-size: 1rem; max-width: 38ch; }
+  .hero-kicker { font-size: 0.7rem; letter-spacing: 0.18em; margin-bottom: 10px; }
+
+  /* Two-up so the search card does not swallow the first screen */
+  .hero-search { padding: 16px; gap: 10px 12px; border-radius: 10px; grid-template-columns: 1fr 1fr; }
+  .hero-search .field:nth-of-type(3) { grid-column: 1 / -1; }
+  .hero-search label { margin-bottom: 4px; font-size: 12px; }
+  .hero-search select { padding: 10px 12px; }
+  .hero-search-wrap { margin-top: -56px; }
+
+  .trust-strip { border-top: none; }
+  .trust-item { padding: 16px 0; border-top: 1px solid var(--mist); }
+  .trust-item + .trust-item { border-left: none; padding-left: 0; }
+  .trust-item:first-child { border-top: 2px solid var(--ink); }
+
+  .section-head { margin-bottom: 20px; }
+  .page-head { padding: clamp(28px, 7vw, 44px) 0; }
+}
+
+/* --- Very small phones --- */
+@media (max-width: 380px) {
+  .hero-content h1 { font-size: 1.7rem; }
+  .btn { padding: 11px 16px; font-size: 14.5px; }
 }

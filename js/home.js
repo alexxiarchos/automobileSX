@@ -1,22 +1,11 @@
-/* Automobile SX — home page */
-(function () {
+/* Automobile SX — home page dynamic bits (static content lives in the HTML) */
+SX.ready.then(function () {
   "use strict";
 
-  function render() {
-    SXUI.init("home");
-
-    /* Hero background: the real storefront */
-    document.getElementById("hero-bg").innerHTML =
-      '<img src="assets/storefront-hero.jpg" alt="The Automobile SX storefront in Dorval with a vehicle parked out front" fetchpriority="high">';
-
-    /* Translate simple keys */
-    document.querySelectorAll("[data-t]").forEach(function (el) {
-      el.textContent = SX.t(el.getAttribute("data-t"));
-    });
-
-    /* Search card: makes + dependent models */
-    var makeSel = document.getElementById("hs-make");
-    var modelSel = document.getElementById("hs-model");
+  /* Search card */
+  var makeSel = document.getElementById("hs-make");
+  var modelSel = document.getElementById("hs-model");
+  if (makeSel && modelSel) {
     var makes = Array.from(new Set(SX.vehicles.map(function (v) { return v.make; }))).sort();
     makeSel.innerHTML = '<option value="">' + SX.t("search.any") + "</option>" +
       makes.map(function (m) { return '<option value="' + m + '">' + m + "</option>"; }).join("");
@@ -39,62 +28,55 @@
       if (modelSel.value) params.set("model", modelSel.value);
       var p = document.getElementById("hs-price").value;
       if (p) params.set("maxPrice", p);
-      location.href = "inventory.html" + (params.toString() ? "?" + params.toString() : "");
+      location.href = SX.url("inventory") + (params.toString() ? "?" + params.toString() : "");
     });
+  }
 
-    /* Trust strip */
-    var ICONS = {
-      inspect: '<svg viewBox="0 0 34 34" fill="none" stroke-width="1.8"><path d="M17 3l11 4v8c0 7-4.6 12.5-11 16-6.4-3.5-11-9-11-16V7l11-4z"/><path d="M11.5 17l4 4 7-8"/></svg>',
-      carfax: '<svg viewBox="0 0 34 34" fill="none" stroke-width="1.8"><rect x="6" y="4" width="22" height="26" rx="2"/><path d="M11 11h12M11 16h12M11 21h7"/></svg>',
-      returns: '<svg viewBox="0 0 34 34" fill="none" stroke-width="1.8"><path d="M6 14a12 12 0 1 1 3 9"/><path d="M6 7v7h7"/></svg>',
-      credit: '<svg viewBox="0 0 34 34" fill="none" stroke-width="1.8"><rect x="4" y="8" width="26" height="18" rx="2"/><path d="M4 14h26M9 21h6"/></svg>'
-    };
-    var trust = [
-      { icon: "inspect", h: "Personal Service", p: "You deal directly with the owner, from the first phone call to the keys in your hand." },
-      { icon: "carfax", h: "Vente · Achat · Échange", p: "We sell, buy and trade. Full specs and kilometres disclosed up front, no surprises." },
-      { icon: "returns", h: "By Appointment", p: "Call " + SX.dealer.phone + " to book. One-on-one, no crowds. Reservations welcome." },
-      { icon: "credit", h: "Financing for All Credit", p: "We work with several lenders. Honest rates, told to you up front." }
-    ];
-    document.getElementById("trust-strip").innerHTML = trust.map(function (t) {
-      return '<div class="trust-item">' + ICONS[t.icon] + "<div><h3>" + t.h + "</h3><p>" + t.p + "</p></div></div>";
-    }).join("");
-
-    /* Featured: 6 vehicles (tagged ones first, then newest) */
+  /* Featured vehicles */
+  var grid = document.getElementById("featured-grid");
+  if (grid) {
     var featured = SX.vehicles.slice().sort(function (a, b) {
       return (b.tag ? 1 : 0) - (a.tag ? 1 : 0) || b.year - a.year;
     }).slice(0, 6);
-    var grid = document.getElementById("featured-grid");
     grid.innerHTML = "";
-    featured.forEach(function (v) { grid.appendChild(SXUI.vehicleCard(v)); });
-
-    /* Body type tiles (text-only, clean) */
-    document.getElementById("body-tiles").innerHTML = SX.bodyTypes.map(function (b) {
-      var count = SX.vehicles.filter(function (v) { return v.body === b; }).length;
-      return '<a class="body-tile" href="inventory.html?body=' + encodeURIComponent(b) + '">' +
-        '<span class="bt-name">' + b + '</span><span class="bt-count">' + count + " in stock</span></a>";
-    }).join("");
-
-    /* Financing calculator */
-    var calcWrap = document.getElementById("home-calculator");
-    calcWrap.innerHTML = "";
-    calcWrap.appendChild(SXUI.paymentCalculator({ price: 28000, minPrice: 12000, maxPrice: 50000 }));
-
-    /* Trade-in photo: the real lot */
-    document.getElementById("trade-photo").innerHTML =
-      '<img src="assets/storefront.jpg" alt="The Automobile SX building at 2044 Avenue Chartier, Dorval" loading="lazy">';
-
-    /* Visit block */
-    document.getElementById("visit-map").innerHTML = SXUI.mapSVG();
-    document.getElementById("visit-hours").innerHTML = "<tbody>" + SX.dealer.hours.map(function (h) {
-      var name = SX.lang === "fr" ? h.fr : h.day;
-      return "<tr" + (h.open ? "" : ' class="closed"') + "><td>" + name + "</td><td>" +
-        (h.open ? h.open + " – " + h.close : SX.t("closed")) + "</td></tr>";
-    }).join("") + "</tbody>";
-    document.getElementById("visit-note").textContent = SX.dealer.apptNote[SX.lang];
-
-    SXUI.initReveal();
+    if (!featured.length) {
+      var msg = document.createElement("p");
+      msg.className = "muted-note";
+      msg.innerHTML = SX.t("inv.noStockBody", '<a href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a>");
+      grid.replaceWith(msg);
+    } else {
+      featured.forEach(function (v) { grid.appendChild(SXUI.vehicleCard(v)); });
+    }
   }
 
-  document.addEventListener("sx:lang", render);
-  SX.ready.then(render);
-})();
+  /* Body type tiles */
+  var tiles = document.getElementById("body-tiles");
+  if (tiles) {
+    tiles.innerHTML = SX.bodyTypes.map(function (b) {
+      var count = SX.vehicles.filter(function (v) { return v.body === b; }).length;
+      return '<a class="body-tile" href="' + SX.url("inventory") + "?body=" + encodeURIComponent(b) + '">' +
+        '<span class="bt-name">' + SX.bodyLabel(b) + '</span><span class="bt-count">' + count + " " + SX.t("inv.inStock") + "</span></a>";
+    }).join("");
+  }
+
+  /* Payment estimator */
+  var calc = document.getElementById("home-calculator");
+  if (calc) {
+    calc.innerHTML = "";
+    calc.appendChild(SXUI.paymentCalculator({ price: 18000, minPrice: 5000, maxPrice: 60000 }));
+  }
+
+  /* Hours */
+  var hours = document.getElementById("visit-hours");
+  if (hours) {
+    hours.innerHTML = "<tbody>" + SX.dealer.hours.map(function (h) {
+      return "<tr><td>" + (SX.lang === "fr" ? h.fr : h.day) + "</td><td>" + h.open + " – " + h.close + "</td></tr>";
+    }).join("") + "</tbody>";
+  }
+  var note = document.getElementById("visit-note");
+  if (note) note.textContent = SX.dealer.apptNote[SX.lang];
+
+  SXUI.mapBlock(document.getElementById("visit-map"));
+
+  SXUI.initReveal();
+});

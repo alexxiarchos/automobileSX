@@ -1,224 +1,122 @@
-/* Automobile SX — shared UI components (no dependencies, no browser storage) */
+/* Automobile SX — shared UI: header, footer, vehicle card, payment estimator.
+   No dependencies, no browser storage. All paths absolute so /fr/ pages work. */
 
 window.SXUI = (function () {
   "use strict";
 
-  /* In-memory saved-vehicle state (deliberately not persisted) */
-  SX.saved = new Set();
+  SX.saved = new Set();               /* in-memory only, by design */
 
-  /* ============ Placeholder imagery (generated SVG, data URLs) ============ */
+  /* ============ Imagery ============ */
 
-  var BODY_PATHS = {
-    /* All drawn in a 400x150 box, ground at y=132 */
-    Sedan:
-      "M28,118 C24,118 22,112 24,106 L34,98 C60,92 78,88 108,84 C136,62 168,52 210,52 C252,52 282,64 302,84 C330,88 352,94 366,100 C376,104 380,110 378,116 L372,120 L28,118 Z",
-    SUV:
-      "M26,118 C22,118 20,110 23,102 L30,88 C36,66 60,50 100,46 L250,44 C296,44 330,58 348,84 C364,90 374,98 376,108 C377,114 374,119 368,120 L26,118 Z",
-    Truck:
-      "M22,118 C18,118 17,110 20,104 L26,92 L28,64 L36,60 L150,60 L162,44 C168,38 176,36 190,36 L246,36 C258,36 264,42 268,50 L280,66 L368,70 C376,72 380,80 380,92 L378,112 C378,116 374,119 370,120 L22,118 Z",
-    Coupe:
-      "M30,116 C24,116 22,110 25,104 L40,96 C70,88 96,84 128,80 C154,58 190,48 226,50 C266,52 296,66 314,84 C338,90 356,96 366,102 C374,106 377,112 374,116 L30,116 Z",
-    Hatchback:
-      "M30,118 C24,118 22,110 25,104 L36,94 C60,88 82,84 110,80 C134,58 164,48 204,48 C240,48 268,58 288,76 C310,60 322,58 330,64 L340,86 C352,92 362,98 366,104 C372,110 370,116 364,118 L30,118 Z"
-  };
-  /* hatch: simpler custom shape below overrides */
-  BODY_PATHS.Hatchback =
-    "M30,118 C24,118 22,110 25,104 L36,94 C62,88 84,84 112,80 C136,58 168,48 208,48 C246,48 290,54 316,74 L330,86 C348,92 360,98 365,104 C371,110 368,116 362,118 L30,118 Z";
+  function svgURL(svg) { return "data:image/svg+xml," + encodeURIComponent(svg); }
 
-  function wheelPair(front, rear) {
-    return (
-      '<circle cx="' + front + '" cy="118" r="22" fill="#101113"/>' +
-      '<circle cx="' + front + '" cy="118" r="12" fill="#3a3d42"/>' +
-      '<circle cx="' + front + '" cy="118" r="5" fill="#191a1c"/>' +
-      '<circle cx="' + rear + '" cy="118" r="22" fill="#101113"/>' +
-      '<circle cx="' + rear + '" cy="118" r="12" fill="#3a3d42"/>' +
-      '<circle cx="' + rear + '" cy="118" r="5" fill="#191a1c"/>'
-    );
-  }
-
-  function exteriorScene(v, flip) {
-    var wheels = { Sedan: [108, 306], SUV: [104, 302], Truck: [92, 316], Coupe: [116, 300], Hatchback: [108, 300] }[v.body] || [108, 306];
-    var g =
-      '<g transform="translate(56,60)' + (flip ? ' translate(400,0) scale(-1,1)' : "") + '">' +
-      '<path d="' + (BODY_PATHS[v.body] || BODY_PATHS.Sedan) + '" fill="' + (v.extHex || "#6c7178") + '" stroke="rgba(255,255,255,0.28)" stroke-width="2"/>' +
-      '<ellipse cx="205" cy="140" rx="180" ry="9" fill="rgba(0,0,0,0.45)"/>' +
-      wheelPair(wheels[0], wheels[1]) +
-      "</g>";
-    return g;
-  }
-
-  function interiorScene(kind) {
-    if (kind === "dash") {
-      return (
-        '<g transform="translate(60,80)">' +
-        '<rect x="0" y="60" width="392" height="70" rx="14" fill="#26282c"/>' +
-        '<rect x="18" y="24" width="150" height="44" rx="8" fill="#1b1d20"/>' +
-        '<rect x="196" y="16" width="120" height="52" rx="8" fill="#101113"/>' +
-        '<rect x="206" y="24" width="100" height="36" rx="4" fill="#2c3038"/>' +
-        '<circle cx="86" cy="112" r="34" fill="#101113"/><circle cx="86" cy="112" r="26" fill="#1f2124"/>' +
-        "</g>"
-      );
-    }
-    if (kind === "wheels") {
-      return (
-        '<g transform="translate(200,150)">' +
-        '<circle r="78" fill="#101113"/><circle r="60" fill="#2e3136"/>' +
-        '<circle r="16" fill="#101113"/>' +
-        '<g fill="#101113"><rect x="-7" y="-58" width="14" height="44" rx="6"/><rect x="-7" y="14" width="14" height="44" rx="6"/>' +
-        '<rect x="-58" y="-7" width="44" height="14" rx="6"/><rect x="14" y="-7" width="44" height="14" rx="6"/></g>' +
-        "</g>"
-      );
-    }
-    if (kind === "cargo") {
-      return (
-        '<g transform="translate(90,84)">' +
-        '<path d="M0,120 L40,20 L280,20 L320,120 Z" fill="#232528"/>' +
-        '<path d="M40,20 L280,20 L268,64 L52,64 Z" fill="#17181a"/>' +
-        '<rect x="52" y="70" width="216" height="44" rx="6" fill="#2b2d31"/>' +
-        "</g>"
-      );
-    }
-    /* seats */
-    return (
-      '<g transform="translate(96,60)">' +
-      '<rect x="0" y="30" width="88" height="130" rx="20" fill="#232528"/>' +
-      '<rect x="10" y="8" width="68" height="44" rx="14" fill="#2b2d31"/>' +
-      '<rect x="120" y="30" width="88" height="130" rx="20" fill="#232528"/>' +
-      '<rect x="130" y="8" width="68" height="44" rx="14" fill="#2b2d31"/>' +
-      "</g>"
-    );
-  }
-
-  function svgURL(svg) {
-    return "data:image/svg+xml," + encodeURIComponent(svg);
-  }
-
-  /* Real photo if the vehicle has uploads; a clean branded tile otherwise */
+  /* Branded tile used until a vehicle has real photos */
   function vehicleImage(v, i) {
-    if (v.images && v.images.length) return v.images[Math.min(i, v.images.length - 1)];
+    if (v.images && v.images.length) return "/" + v.images[Math.min(i, v.images.length - 1)].replace(/^\//, "");
+    var label = SX.t("veh.photosSoon").toUpperCase();
     var svg =
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 288">' +
       '<rect width="512" height="288" fill="#141517"/>' +
       '<rect x="216" y="118" width="80" height="3" fill="#BA1D26"/>' +
       '<text x="256" y="152" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" letter-spacing="3" fill="#F2EFED">AUTOMOBILE SX</text>' +
-      '<text x="256" y="176" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" letter-spacing="2" fill="#6B6F76">PHOTOS COMING SOON</text>' +
+      '<text x="256" y="176" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" letter-spacing="2" fill="#6B6F76">' + label + "</text>" +
       "</svg>";
     return svgURL(svg);
   }
 
   function vehicleImages(v) {
-    if (v.images && v.images.length) return v.images.slice();
+    if (v.images && v.images.length) {
+      return v.images.map(function (p) { return "/" + p.replace(/^\//, ""); });
+    }
     return [vehicleImage(v, 0)];
   }
 
-  function photoCount(v) {
-    return (v.images && v.images.length) || 1;
+  function photoCount(v) { return (v.images && v.images.length) || 1; }
+
+  /* Location block: an honest address card, with a real interactive map laid
+     over it once the embed loads. Nothing illustrative or fake is shown. */
+  function mapBlock(el) {
+    if (!el) return;
+    var FR = SX.lang === "fr";
+    var addr = SX.dealer.address1 + ", " + SX.dealer.address2;
+
+    el.innerHTML =
+      '<div class="map-fallback">' +
+        '<p class="map-fb-label">' + (FR ? "Nous trouver" : "Find us") + "</p>" +
+        '<p class="map-fb-addr">' + SX.dealer.address1 + "<br>" + SX.dealer.address2 + "</p>" +
+        '<p class="map-fb-meta">' + SX.dealer.apptNote[SX.lang] + "</p>" +
+        '<a class="btn btn-red" href="' + SX.dealer.mapsUrl + '" target="_blank" rel="noopener">' +
+          (FR ? "Ouvrir dans Google Maps" : "Open in Google Maps") + "</a>" +
+      "</div>";
+
+    var f = document.createElement("iframe");
+    f.className = "map-frame";
+    f.title = FR ? "Carte : " + addr : "Map: " + addr;
+    f.loading = "lazy";
+    f.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+    f.setAttribute("allowfullscreen", "");
+    f.src = "https://www.google.com/maps?q=" + encodeURIComponent(addr) + "&z=16&output=embed";
+    f.addEventListener("load", function () { f.classList.add("loaded"); });
+    el.appendChild(f);
   }
 
-  function heroImage() {
-    var svg =
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">' +
-      '<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">' +
-      '<stop offset="0" stop-color="#1a1c22"/><stop offset="0.65" stop-color="#3a2f33"/><stop offset="1" stop-color="#57404a"/></linearGradient></defs>' +
-      '<rect width="1440" height="700" fill="url(#sky)"/>' +
-      '<rect y="520" width="1440" height="180" fill="#141517"/>' +
-      '<circle cx="1120" cy="470" r="150" fill="#c9a67a" opacity="0.18"/>' +
-      '<g transform="translate(760,330) scale(1.5)">' +
-      '<path d="' + BODY_PATHS.Coupe + '" fill="#0e0f11"/>' +
-      wheelPair(116, 300) +
-      '<path d="M128,80 C154,58 190,48 226,50 C260,52 286,62 304,78 L296,82 C276,68 252,58 226,56 C194,54 162,62 140,80 Z" fill="#2a2d33" opacity="0.9"/>' +
-      "</g>" +
-      '<g transform="translate(120,560)"><rect width="1200" height="3" fill="#26282c"/></g>' +
-      "</svg>";
-    return svgURL(svg);
-  }
-
-  function mapSVG(w, h) {
-    w = w || 640; h = h || 360;
-    var svg =
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Static map showing the dealership location at 2044 Avenue Chartier, Dorval">' +
-      '<rect width="640" height="360" fill="#e9e6e1"/>' +
-      '<g stroke="#d6d2cc" stroke-width="10" fill="none">' +
-      '<path d="M-20,90 L660,60"/><path d="M-20,210 L660,190"/><path d="M-20,320 L660,330"/>' +
-      '<path d="M120,-20 L150,380"/><path d="M330,-20 L320,380"/><path d="M520,-20 L560,380"/></g>' +
-      '<g stroke="#ffffff" stroke-width="16" fill="none"><path d="M-20,150 C200,140 420,170 660,130"/></g>' +
-      '<path d="M-20,150 C200,140 420,170 660,130" stroke="#cfccc6" stroke-width="2" fill="none" stroke-dasharray="14 10"/>' +
-      '<rect x="20" y="230" width="130" height="70" rx="4" fill="#dcd8d2"/>' +
-      '<rect x="420" y="40" width="150" height="90" rx="4" fill="#dcd8d2"/>' +
-      '<path d="M-20,352 L660,344 L660,360 L-20,360 Z" fill="#bcd3de"/>' +
-      '<g transform="translate(320,148)">' +
-      '<path d="M0,-34 C-15,-34 -24,-23 -24,-11 C-24,4 0,26 0,26 C0,26 24,4 24,-11 C24,-23 15,-34 0,-34 Z" fill="#BA1D26"/>' +
-      '<circle cy="-12" r="8" fill="#fff"/></g>' +
-      '<text x="320" y="204" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#3c3f44">Automobile SX</text>' +
-      '<text x="320" y="222" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#6B6F76">2044 Avenue Chartier, Dorval</text>' +
-      "</svg>";
-    return svg;
-  }
-
-  function lotPhotoSVG() {
-    /* used for the trade-in split section */
-    return (
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-label="Placeholder photo of two cars parked on the dealership lot">' +
-      '<rect width="640" height="420" fill="#26282d"/>' +
-      '<rect y="300" width="640" height="120" fill="#1b1d20"/>' +
-      '<g transform="translate(30,160) scale(0.72)"><path d="' + BODY_PATHS.SUV + '" fill="#5c6066"/>' + wheelPair(104, 302) + "</g>" +
-      '<g transform="translate(330,180) scale(0.72)"><path d="' + BODY_PATHS.Sedan + '" fill="#8f1a24"/>' + wheelPair(108, 306) + "</g>" +
-      '<text x="24" y="396" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" fill="#8b8f96">Your trade, our lot — photo placeholder</text>' +
-      "</svg>"
-    );
-  }
-
-  function bodyTypeIcon(body) {
-    return (
-      '<svg viewBox="0 0 512 200" aria-hidden="true"><g transform="translate(56,20)">' +
-      '<path d="' + (BODY_PATHS[body] || BODY_PATHS.Sedan) + '" fill="#3c3f44"/>' +
-      wheelPair.apply(null, { Sedan: [108, 306], SUV: [104, 302], Truck: [92, 316], Coupe: [116, 300], Hatchback: [108, 300] }[body] || [108, 306]) +
-      "</g></svg>"
-    );
-  }
-
-  /* ============ Header / footer / chrome ============ */
+  /* ============ Header ============ */
 
   var NAV = [
-    { key: "nav.home", href: "index.html", page: "home" },
-    { key: "nav.inventory", href: "inventory.html", page: "inventory" },
-    { key: "nav.financing", href: "index.html#financing", page: "financing" },
-    { key: "nav.about", href: "contact.html#about", page: "about" },
-    { key: "nav.contact", href: "contact.html", page: "contact" }
+    { key: "nav.inventory", route: "inventory" },
+    { key: "nav.financing", route: "financing" },
+    { key: "nav.sell", route: "sell" },
+    { key: "nav.about", route: "about" },
+    { key: "nav.contact", route: "contact" }
   ];
 
-  function navLinks(current, cls) {
+  function currentRoute() {
+    return document.documentElement.getAttribute("data-route") || "";
+  }
+
+  function navLinks() {
+    var cur = currentRoute();
     return NAV.map(function (n) {
-      var cur = n.page === current ? ' aria-current="page"' : "";
-      return '<a href="' + n.href + '"' + cur + ">" + SX.t(n.key) + "</a>";
+      var isCur = n.route === cur ? ' aria-current="page"' : "";
+      return '<a href="' + SX.url(n.route) + '"' + isCur + ">" + SX.t(n.key) + "</a>";
     }).join("");
   }
 
-  function renderHeader(current) {
+  /* The page tells us its counterpart in the other language (set in each page's head) */
+  function altLangUrl() {
+    if (window.SX_ALT) return window.SX_ALT;
+    return SX.lang === "en" ? SX.routes.fr.home : SX.routes.en.home;
+  }
+
+  function renderHeader() {
     var el = document.getElementById("site-header");
     if (!el) return;
+    var other = SX.lang === "en" ? "FR" : "EN";
+
     el.innerHTML =
-      '<a class="skip-link" href="#main">Skip to main content</a>' +
+      '<a class="skip-link" href="#main">' + (SX.lang === "fr" ? "Aller au contenu principal" : "Skip to main content") + "</a>" +
       '<div class="container">' +
-      '<a class="brand" href="index.html" aria-label="Automobile SX — home">' +
-      '<img src="assets/logo.png" alt="" width="44" height="44">' +
+      '<a class="brand" href="' + SX.url("home") + '" aria-label="Automobile SX">' +
+      '<img src="/assets/logo.png" alt="" width="44" height="44">' +
       '<span class="brand-text"><span class="brand-name">AUTOMOBILE <span>SX</span></span><br>' +
-      '<span class="brand-sub">Used Car Sales · Vente d’autos usagées</span></span></a>' +
-      '<nav class="main-nav" aria-label="Main">' + navLinks(current) + "</nav>" +
+      '<span class="brand-sub">Vente · Achat · Échange</span></span></a>' +
+      '<nav class="main-nav" aria-label="' + (SX.lang === "fr" ? "Navigation principale" : "Main") + '">' + navLinks() + "</nav>" +
       '<div class="header-actions">' +
-      '<button class="lang-toggle" type="button" aria-label="Switch language">' + (SX.lang === "en" ? "FR" : "EN") + "</button>" +
+      '<a class="lang-toggle" href="' + altLangUrl() + '" hreflang="' + (SX.lang === "en" ? "fr" : "en") + '" lang="' + (SX.lang === "en" ? "fr" : "en") + '">' + other + "</a>" +
       '<a class="header-phone" href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a>" +
-      '<a class="btn btn-red" href="contact.html?interest=test-drive">' + SX.t("cta.bookTestDrive") + "</a>" +
-      '<button class="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">' +
+      '<a class="btn btn-red" href="' + SX.url("contact") + '?interest=test-drive">' + SX.t("cta.bookTestDrive") + "</a>" +
+      '<button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">' +
       "<span></span><span></span><span></span></button>" +
       "</div></div>";
 
     var menu = document.createElement("nav");
     menu.className = "mobile-menu";
     menu.id = "mobile-menu";
-    menu.setAttribute("aria-label", "Mobile");
-    menu.innerHTML = navLinks(current) +
-      '<a class="btn btn-red" href="contact.html?interest=test-drive">' + SX.t("cta.bookTestDrive") + "</a>" +
+    menu.innerHTML =
+      navLinks() +
+      '<a href="' + SX.url("guides") + '">' + SX.t("nav.guides") + "</a>" +
+      '<a href="' + altLangUrl() + '">' + (SX.lang === "en" ? "Français" : "English") + "</a>" +
+      '<a class="btn btn-red" href="' + SX.url("contact") + '?interest=test-drive">' + SX.t("cta.bookTestDrive") + "</a>" +
       '<a class="btn btn-outline-light" href="' + SX.dealer.phoneHref + '">' + SX.t("cta.call") + " " + SX.dealer.phone + "</a>";
     el.after(menu);
 
@@ -226,66 +124,59 @@ window.SXUI = (function () {
     burger.addEventListener("click", function () {
       var open = menu.classList.toggle("open");
       burger.setAttribute("aria-expanded", String(open));
-      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       document.body.style.overflow = open ? "hidden" : "";
     });
     menu.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") {
-        menu.classList.remove("open");
-        document.body.style.overflow = "";
-      }
-    });
-
-    el.querySelector(".lang-toggle").addEventListener("click", function () {
-      SX.lang = SX.lang === "en" ? "fr" : "en";
-      document.documentElement.lang = SX.lang;
-      /* Re-render chrome; page scripts re-render their own translated bits via event */
-      renderHeader(current);
-      renderFooter();
-      renderMobileBar();
-      document.dispatchEvent(new CustomEvent("sx:lang"));
+      if (e.target.tagName === "A") { menu.classList.remove("open"); document.body.style.overflow = ""; }
     });
   }
 
-  function hoursRows(cls) {
+  /* ============ Footer ============ */
+
+  function hoursRows() {
     return SX.dealer.hours.map(function (h) {
       var name = SX.lang === "fr" ? h.fr : h.day;
-      var val = h.open ? h.open + " – " + h.close : SX.t("closed");
-      return "<tr" + (h.open ? "" : ' class="closed"') + "><td>" + name + "</td><td>" + val + "</td></tr>";
+      return "<tr><td>" + name + "</td><td>" + h.open + " – " + h.close + "</td></tr>";
     }).join("");
   }
 
   function renderFooter() {
     var el = document.getElementById("site-footer");
     if (!el) return;
+    var links = [
+      ["inventory", "nav.inventory"], ["financing", "nav.financing"], ["sell", "nav.sell"],
+      ["guides", "nav.guides"], ["faq", "nav.faq"], ["about", "nav.about"], ["contact", "nav.contact"]
+    ].map(function (l) {
+      return '<li><a href="' + SX.url(l[0]) + '">' + SX.t(l[1]) + "</a></li>";
+    }).join("");
+
     el.innerHTML =
       '<div class="container">' +
       '<div class="footer-main">' +
       "<div>" +
-      '<h3>' + SX.dealer.name + "</h3>" +
+      "<h3>" + SX.dealer.name + "</h3>" +
       '<address style="font-style:normal">' + SX.dealer.address1 + "<br>" + SX.dealer.address2 + "<br>" +
       '<a href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a><br>" +
       '<a href="mailto:' + SX.dealer.email + '">' + SX.dealer.email + "</a></address>" +
-      '<a class="footer-map" href="https://www.google.com/maps/search/?api=1&query=2044+Avenue+Chartier+Dorval+QC" target="_blank" rel="noopener" aria-label="Open Automobile SX on Google Maps">' + mapSVG() + "</a>" +
+      '<a class="footer-map" href="' + SX.dealer.mapsUrl + '" target="_blank" rel="noopener">' +
+      '<img src="/assets/storefront-thumb.jpg" alt="' +
+      (SX.lang === "fr" ? "Le commerce Automobile SX sur l\'avenue Chartier à Dorval" : "The Automobile SX lot on Avenue Chartier in Dorval") +
+      '" loading="lazy" width="520" height="377">' +
+      '<span class="footer-map-cta">' + (SX.lang === "fr" ? "Itinéraire ↗" : "Get directions ↗") + "</span></a>" +
       "</div>" +
       "<div><h3>" + SX.t("footer.hours") + '</h3><table class="footer-hours"><tbody>' + hoursRows() + "</tbody></table>" +
       '<p style="font-size:13px;color:var(--slate);margin:10px 0 0">' + SX.dealer.apptNote[SX.lang] + "</p></div>" +
-      "<div><h3>" + SX.t("footer.quickLinks") + '</h3><ul class="footer-links">' +
-      '<li><a href="inventory.html">' + SX.t("nav.inventory") + "</a></li>" +
-      '<li><a href="index.html#financing">' + SX.t("nav.financing") + "</a></li>" +
-      '<li><a href="index.html#trade">Sell or Trade</a></li>' +
-      '<li><a href="contact.html">' + SX.t("nav.contact") + "</a></li>" +
-      '<li><a href="contact.html#faq">FAQ</a></li></ul></div>' +
-      "<div><h3>" + SX.t("footer.newArrivals") + "</h3><p style=\"font-size:14px;color:var(--slate)\">" + SX.t("footer.newArrivalsSub") + "</p>" +
-      '<a class="btn btn-red" href="mailto:' + SX.dealer.email + '?subject=' + encodeURIComponent("New arrivals: keep me posted") + '">' + SX.t("footer.newArrivalsCta") + "</a>" +
-      '<p style="font-size:13px;color:var(--slate);margin-top:10px">' + SX.t("footer.orCall") + ' <a href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a></p></div>" +
+      "<div><h3>" + SX.t("footer.quickLinks") + '</h3><ul class="footer-links">' + links + "</ul></div>" +
+      "<div><h3>" + SX.t("footer.newArrivals") + '</h3><p style="font-size:14px;color:var(--slate)">' + SX.t("footer.newArrivalsSub") + "</p>" +
+      '<a class="btn btn-red" href="mailto:' + SX.dealer.email + '?subject=' + encodeURIComponent(SX.lang === "fr" ? "Nouveaux arrivages" : "New arrivals") + '">' + SX.t("footer.newArrivalsCta") + "</a>" +
+      '<p style="font-size:13px;color:var(--slate);margin-top:10px">' + SX.t("footer.orCall") + ' <a href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a></p>" +
+      '<p style="font-size:13px;color:var(--slate);margin-top:14px" lang="' + (SX.lang === "en" ? "fr" : "en") + '">' + SX.t("footer.langLine") +
+      ' <a href="' + altLangUrl() + '">' + SX.t("footer.langLink") + "</a></p></div>" +
       "</div>" +
       '<div class="footer-bottom">' +
-      "<span>© " + new Date().getFullYear() + " " + SX.dealer.name + ". All rights reserved.</span>" +
-      '<span><a href="#">Privacy</a> · <a href="#">Terms</a></span>' +
+      "<span>© " + new Date().getFullYear() + " " + SX.dealer.name + ".</span>" +
       "<span>" + SX.t("footer.taxNote") + "</span>" +
       "</div></div>";
-
   }
 
   function renderMobileBar() {
@@ -294,13 +185,14 @@ window.SXUI = (function () {
     document.body.classList.add("has-cta-bar");
     el.innerHTML =
       '<a class="btn btn-outline-light" href="' + SX.dealer.phoneHref + '">' + SX.t("cta.call") + "</a>" +
-      '<a class="btn btn-red" href="inventory.html">' + SX.t("cta.browse") + "</a>";
+      '<a class="btn btn-red" href="' + SX.url("inventory") + '">' + SX.t("cta.browse") + "</a>";
   }
 
   /* ============ Vehicle card ============ */
 
   function specLine(v) {
-    return v.km.toLocaleString("en-CA") + " km · " + v.transmission + " · " + v.fuel + " · " + v.drivetrain;
+    var km = Number(v.km || 0).toLocaleString(SX.lang === "fr" ? "fr-CA" : "en-CA");
+    return [km + " km", v.transmission, v.fuel, v.drivetrain].filter(Boolean).join(" · ");
   }
 
   function heartSVG(filled) {
@@ -310,30 +202,26 @@ window.SXUI = (function () {
   function vehicleCard(v) {
     var card = document.createElement("article");
     card.className = "vehicle-card";
-    var img = vehicleImage(v, 0);
-    var alt = SX.vehicleTitle(v) + " " + (v.trim || "") +
-      (v.extColor ? " in " + v.extColor : "") +
-      (v.images && v.images.length ? "" : ", photos coming soon");
-    var tag = v.status === "sold" ? "Sold" : v.tag;
+    var alt = SX.vehicleTitle(v) + " " + (v.trim || "") + (v.extColor ? ", " + v.extColor : "");
+    var tag = v.status === "sold" ? SX.t("veh.sold") : v.tag;
+
     card.innerHTML =
       '<div class="vc-media">' +
-      '<img loading="lazy" src="' + img + '" alt="' + alt + '" width="512" height="288">' +
+      '<img loading="lazy" src="' + vehicleImage(v, 0) + '" alt="' + alt + '" width="512" height="288">' +
       (tag ? '<span class="vc-tag">' + tag + "</span>" : "") +
-      '<span class="vc-photo-count" aria-label="' + photoCount(v) + ' photos">▣ ' + photoCount(v) + "</span>" +
+      '<span class="vc-photo-count">▣ ' + photoCount(v) + "</span>" +
       "</div>" +
       '<div class="vc-body">' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">' +
+      '<div class="vc-head">' +
       "<div>" +
-      '<h3 class="vc-title"><a href="vehicle.html?id=' + v.id + '">' + SX.vehicleTitle(v) + "</a></h3>" +
+      '<h3 class="vc-title"><a href="' + SX.vehicleUrl(v) + '">' + SX.vehicleTitle(v) + "</a></h3>" +
       '<p class="vc-trim">' + (v.trim || "") + "</p>" +
       "</div>" +
-      '<button class="vc-save" type="button" aria-pressed="' + SX.saved.has(v.id) + '" aria-label="Save this vehicle">' + heartSVG(SX.saved.has(v.id)) + "</button>" +
+      '<button class="vc-save" type="button" aria-pressed="false" aria-label="' + SX.t("veh.savedLabel") + '">' + heartSVG(false) + "</button>" +
       "</div>" +
       '<p class="vc-specs">' + specLine(v) + "</p>" +
-      '<div class="vc-price-row"><div>' +
       '<div class="vc-price">' + SX.money(v.price) + "</div>" +
-      '<div class="vc-mo">' + SX.estMoLabel(v.price) + "</div>" +
-      "</div></div></div>";
+      "</div>";
 
     card.querySelector(".vc-save").addEventListener("click", function () {
       var on = !SX.saved.has(v.id);
@@ -344,42 +232,72 @@ window.SXUI = (function () {
     return card;
   }
 
-  /* ============ Payment calculator ============ */
+  /* ============ Payment estimator ============
+     Quebec's Consumer Protection Act requires that when a periodic payment is
+     shown, the total price appears MORE prominently, and that the down payment,
+     credit rate, number of payments, credit charges and total obligation are all
+     disclosed together. This component is built to that shape. */
 
   function paymentCalculator(opts) {
     opts = opts || {};
-    var price = opts.price || 30000;
-    var minPrice = opts.minPrice || 10000;
-    var maxPrice = opts.maxPrice || 50000;
-    var down = opts.down != null ? opts.down : Math.round(price * 0.1 / 500) * 500;
-    var term = opts.term || 72;
+    var price = opts.price || 20000;
+    var minPrice = opts.minPrice || 5000;
+    var maxPrice = opts.maxPrice || 60000;
+    var down = opts.down != null ? opts.down : Math.round(price * SX.finance.defaultDownPct / 500) * 500;
+    var term = opts.term || SX.finance.defaultTermMonths;
     var fixedPrice = !!opts.fixedPrice;
+    var rate = SX.finance.rate;
 
     var wrap = document.createElement("div");
     wrap.className = "calculator" + (opts.onLight ? " on-light" : "");
     wrap.innerHTML =
       (fixedPrice ? "" :
-        '<div class="calc-row"><label>Vehicle price <output name="price-out"></output></label>' +
-        '<input type="range" name="price" min="' + minPrice + '" max="' + maxPrice + '" step="500" value="' + price + '" aria-label="Vehicle price"></div>') +
-      '<div class="calc-row"><label>Down payment <output name="down-out"></output></label>' +
-      '<input type="range" name="down" min="0" max="' + Math.min(20000, price) + '" step="500" value="' + down + '" aria-label="Down payment"></div>' +
-      '<div class="calc-row"><label>Term <output name="term-out"></output></label>' +
-      '<input type="range" name="term" min="24" max="96" step="12" value="' + term + '" aria-label="Term in months"></div>' +
-      '<div class="calc-result"><span class="calc-monthly" aria-live="polite"></span><span class="calc-per">/mo est. @ ' + SX.finance.apr.toFixed(2) + "% APR</span></div>" +
-      '<p class="calc-disclaimer">Estimate only. Taxes, licensing and fees extra. Rate and approval subject to credit; on approved credit (OAC).</p>';
+        '<div class="calc-row"><label for="calc-price">' + SX.t("calc.vehiclePrice") + ' <output name="price-out"></output></label>' +
+        '<input type="range" id="calc-price" name="price" min="' + minPrice + '" max="' + maxPrice + '" step="500" value="' + price + '"></div>') +
+      '<div class="calc-row"><label for="calc-down">' + SX.t("calc.downPayment") + ' <output name="down-out"></output></label>' +
+      '<input type="range" id="calc-down" name="down" min="0" max="' + Math.min(20000, price) + '" step="500" value="' + down + '"></div>' +
+      '<div class="calc-row"><label for="calc-term">' + SX.t("calc.term") + ' <output name="term-out"></output></label>' +
+      '<input type="range" id="calc-term" name="term" min="24" max="84" step="12" value="' + term + '"></div>' +
 
-    function $(n) { return wrap.querySelector('[name="' + n + '"]'); }
+      /* Total price is the dominant figure, as required */
+      '<div class="calc-headline">' +
+      '<span class="calc-headline-label">' + SX.t("calc.priceLabel") + "</span>" +
+      '<span class="calc-price-big" name="total-price" aria-live="polite"></span>' +
+      "</div>" +
+
+      '<dl class="calc-disclosure">' +
+      "<div><dt>" + SX.t("calc.paymentAmount") + '</dt><dd name="pay-out"></dd></div>' +
+      "<div><dt>" + SX.t("calc.downPayment") + '</dt><dd name="down2-out"></dd></div>' +
+      "<div><dt>" + SX.t("calc.creditRate") + '</dt><dd name="rate-out"></dd></div>' +
+      "<div><dt>" + SX.t("calc.numPayments") + '</dt><dd name="n-out"></dd></div>' +
+      "<div><dt>" + SX.t("calc.creditCharges") + '</dt><dd name="charges-out"></dd></div>' +
+      "<div><dt>" + SX.t("calc.totalObligation") + '</dt><dd name="oblig-out"></dd></div>' +
+      "</dl>" +
+      '<p class="calc-disclaimer">' + SX.t("calc.disclaimer", SX.num(rate)) + "</p>";
+
+    function q(n) { return wrap.querySelector('[name="' + n + '"]'); }
 
     function update() {
-      var p = fixedPrice ? price : Number($("price").value);
-      var d = Number($("down").value);
-      var t = Number($("term").value);
-      if (!fixedPrice) $("price-out").textContent = SX.money(p);
-      $("down-out").textContent = SX.money(d);
-      $("term-out").textContent = t + " months";
-      var m = SX.monthly(p, d, t);
-      wrap.querySelector(".calc-monthly").textContent = SX.money(m);
+      var p = fixedPrice ? price : Number(q("price").value);
+      var d = Math.min(Number(q("down").value), p);
+      var t = Number(q("term").value);
+      var m = SX.monthly(p, d, t, rate);
+      var totalPaid = m * t + d;
+      var charges = Math.max(totalPaid - p, 0);
+
+      if (!fixedPrice) q("price-out").textContent = SX.money(p);
+      q("down-out").textContent = SX.money(d);
+      q("term-out").textContent = SX.t("calc.months", t);
+
+      q("total-price").textContent = SX.money(p);
+      q("pay-out").textContent = SX.money(m) + " / " + SX.t("calc.monthly");
+      q("down2-out").textContent = SX.money(d);
+      q("rate-out").textContent = SX.num(rate) + " %";
+      q("n-out").textContent = String(t);
+      q("charges-out").textContent = SX.money(charges);
+      q("oblig-out").textContent = SX.money(totalPaid);
     }
+
     wrap.querySelectorAll("input").forEach(function (r) { r.addEventListener("input", update); });
     update();
     return wrap;
@@ -388,7 +306,7 @@ window.SXUI = (function () {
   /* ============ Scroll reveal ============ */
 
   function initReveal() {
-    var els = document.querySelectorAll(".reveal");
+    var els = document.querySelectorAll(".reveal:not(.in)");
     if (!("IntersectionObserver" in window)) {
       els.forEach(function (e) { e.classList.add("in"); });
       return;
@@ -397,14 +315,12 @@ window.SXUI = (function () {
       entries.forEach(function (en) {
         if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.08 });
     els.forEach(function (e) { io.observe(e); });
   }
 
-  /* ============ Init ============ */
-
-  function init(page) {
-    renderHeader(page);
+  function init() {
+    renderHeader();
     renderFooter();
     renderMobileBar();
     initReveal();
@@ -412,15 +328,19 @@ window.SXUI = (function () {
 
   return {
     init: init,
+    mapBlock: mapBlock,
     vehicleCard: vehicleCard,
     vehicleImage: vehicleImage,
     vehicleImages: vehicleImages,
-    heroImage: heroImage,
-    mapSVG: mapSVG,
-    lotPhotoSVG: lotPhotoSVG,
-    bodyTypeIcon: bodyTypeIcon,
     paymentCalculator: paymentCalculator,
     specLine: specLine,
     initReveal: initReveal
   };
+})();
+
+/* Every page boots the same way */
+(function () {
+  function boot() { SXUI.init(); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
 })();

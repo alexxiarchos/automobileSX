@@ -1,0 +1,65 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/vehicles/:id",
+      "destination": "/vehicle.html"
+    },
+    {
+      "source": "/fr/vehicules/:id",
+      "destination": "/fr/vehicule.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/vehicle",
+      "destination": "/inventory",
+      "permanent": false
+    },
+    {
+      "source": "/fr/vehicule",
+      "destination": "/fr/inventaire",
+      "permanent": false
+    },
+    {
+      "source": "/index",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/index",
+      "destination": "/fr/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/data/vehicles.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=60, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "api/sitemap.js": {
+      "includeFiles": "data/**"
+    }
+  }
+}

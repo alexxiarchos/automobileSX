@@ -81,9 +81,14 @@ function saveMockImage(relPath, base64) {
 }
 
 /* ---------- One commit: updated JSON + new image blobs + deletions ---------- */
-async function commitInventory({ json, newImages, deletePaths, message }) {
+async function commitInventory({ json, newImages, newFiles, deletePaths, message }) {
   if (MOCK) {
     fs.writeFileSync(path.join(MOCK, "data/vehicles.json"), JSON.stringify(json, null, 2));
+    (newFiles || []).forEach(function (f) {
+      const abs = path.join(MOCK, f.path);
+      fs.mkdirSync(path.dirname(abs), { recursive: true });
+      fs.writeFileSync(abs, f.content);
+    });
     (deletePaths || []).forEach(function (p) {
       const abs = path.join(MOCK, p);
       if (fs.existsSync(abs)) fs.unlinkSync(abs);
@@ -96,6 +101,23 @@ async function commitInventory({ json, newImages, deletePaths, message }) {
   const headSha = ref.object.sha;
   const headCommit = await gh("/repos/" + repo + "/git/commits/" + headSha);
 
+  /* GitHub rejects the whole commit if you try to delete a path that is not in
+     the tree, so only ask to remove files that actually exist. */
+  let existing = null;
+  if ((deletePaths || []).length) {
+    try {
+      const full = await gh("/repos/" + repo + "/git/trees/" + headCommit.tree.sha + "?recursive=1");
+      existing = new Set((full.tree || [])
+        .filter(function (n) { return n.type === "blob"; })
+        .map(function (n) { return n.path; }));
+    } catch (e) {
+      existing = null; /* could not list: fall through and skip deletions */
+    }
+  }
+  const safeDeletes = (deletePaths || []).filter(function (p) {
+    return existing ? existing.has(p) : false;
+  });
+
   const tree = [];
   tree.push({
     path: "data/vehicles.json",
@@ -106,7 +128,10 @@ async function commitInventory({ json, newImages, deletePaths, message }) {
   (newImages || []).forEach(function (img) {
     tree.push({ path: img.path, mode: "100644", type: "blob", sha: img.sha });
   });
-  (deletePaths || []).forEach(function (p) {
+  (newFiles || []).forEach(function (f) {
+    tree.push({ path: f.path, mode: "100644", type: "blob", content: f.content });
+  });
+  safeDeletes.forEach(function (p) {
     tree.push({ path: p, mode: "100644", type: "blob", sha: null });
   });
 

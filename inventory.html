@@ -1,20 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-CA" data-route="inventory">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Used Car Inventory | Automobile SX Dorval, QC</title>
-<link rel="canonical" href="https://automobilesx.ca/inventory.html">
-<meta name="description" content="Browse quality pre-owned vehicles at Automobile SX in Dorval, QC. Filter by make, body type, price and kilometres. Vente, achat, échange.">
+<title>Used Cars for Sale in Dorval, QC | Automobile SX Inventory</title>
+<meta name="description" content="Browse used cars, SUVs and trucks for sale at Automobile SX in Dorval, Quebec. Filter by make, body type, price, year and kilometres. Viewings by appointment, seven days a week.">
+<link rel="canonical" href="https://automobilesx.ca/inventory">
+<link rel="alternate" hreflang="en-CA" href="https://automobilesx.ca/inventory">
+<link rel="alternate" hreflang="fr-CA" href="https://automobilesx.ca/fr/inventaire">
+<link rel="alternate" hreflang="x-default" href="https://automobilesx.ca/inventory">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Automobile SX">
+<meta property="og:locale" content="en_CA">
+<meta property="og:title" content="Used Cars for Sale in Dorval, QC | Automobile SX Inventory">
+<meta property="og:description" content="Browse used cars, SUVs and trucks for sale at Automobile SX in Dorval, Quebec. Filter by make, body type, price, year and kilometres. Viewings by appointment, seven days a week.">
+<meta property="og:url" content="https://automobilesx.ca/inventory">
+<meta property="og:image" content="https://automobilesx.ca/assets/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="/css/styles.css">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#0D0D0D">
+<script>window.SX_ALT="/fr/inventaire";</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"AutoDealer","@id":"https://automobilesx.ca/#dealer","name":"Automobile SX","alternateName":"Automobile SX Vente d'Autos Usagées","url":"https://automobilesx.ca","logo":"https://automobilesx.ca/assets/logo.png","image":"https://automobilesx.ca/assets/og-image.jpg","telephone":"+1-514-824-9117","email":"Automobilesx@gmail.com","address":{"@type":"PostalAddress","streetAddress":"2044 Avenue Chartier","addressLocality":"Dorval","addressRegion":"QC","addressCountry":"CA"},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"18:00"},"priceRange":"$$","areaServed":["Dorval","West Island","Pointe-Claire","Lachine","Montréal","Laval"],"availableLanguage":["en","fr"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://automobilesx.ca/"},{"@type":"ListItem","position":2,"name":"Used cars for sale in Dorval","item":"https://automobilesx.ca/inventory"}]}]}</script>
 </head>
 <body>
 
@@ -24,33 +38,24 @@
 
   <div class="page-head">
     <div class="container">
-      <h1>Inventory</h1>
-      <p class="sub" id="page-sub">Quality vehicles, priced honestly. Viewings by appointment: 514-824-9117.</p>
+      <h1>Used cars for sale in Dorval</h1>
+      <p class="sub">Every vehicle priced honestly, kilometres disclosed. Viewings by appointment: <a class="text-link" href="tel:+15148249117">514-824-9117</a>.</p>
     </div>
   </div>
 
   <div class="container inventory-layout">
-
-    <!-- Filters -->
-    <aside class="filter-sidebar" id="filter-sidebar" aria-label="Vehicle filters">
-      <h2>Filters <button class="drawer-close" id="drawer-close" type="button" aria-label="Close filters">×</button></h2>
+    <aside class="filter-sidebar" id="filter-sidebar" aria-label="Filters">
+      <div class="filter-head"><h2>Filters</h2><button class="drawer-close" id="drawer-close" type="button" aria-label="Close">×</button></div>
 
       <div class="filter-group">
         <div class="field">
-          <label for="f-keyword" class="visually-hidden">Keyword search</label>
+          <label for="f-keyword" class="visually-hidden">Search make, model, trim…</label>
           <input type="text" id="f-keyword" placeholder="Search make, model, trim…" autocomplete="off">
         </div>
       </div>
 
-      <div class="filter-group">
-        <h3>Make</h3>
-        <div class="check-list" id="f-makes"></div>
-      </div>
-
-      <div class="filter-group">
-        <h3>Body type</h3>
-        <div class="check-list" id="f-bodies"></div>
-      </div>
+      <div class="filter-group"><h3>Make</h3><div class="check-list" id="f-makes"></div></div>
+      <div class="filter-group"><h3>Body type</h3><div class="check-list" id="f-bodies"></div></div>
 
       <div class="filter-group">
         <h3>Price</h3>
@@ -66,36 +71,24 @@
         <h3>Year</h3>
         <div class="dual-range" id="f-year-range">
           <div class="track"></div><div class="track-fill"></div>
-          <input type="range" id="f-year-min" aria-label="Minimum year">
-          <input type="range" id="f-year-max" aria-label="Maximum year">
+          <input type="range" id="f-year-min" aria-label="Earliest year">
+          <input type="range" id="f-year-max" aria-label="Latest year">
         </div>
         <div class="range-vals"><span id="f-year-min-val"></span><span id="f-year-max-val"></span></div>
       </div>
 
       <div class="filter-group">
         <h3>Max kilometres</h3>
-        <input type="range" id="f-km" aria-label="Maximum kilometres">
+        <input type="range" id="f-km" aria-label="Max kilometres">
         <div class="range-vals"><span></span><span id="f-km-val"></span></div>
       </div>
 
-      <div class="filter-group">
-        <h3>Transmission</h3>
-        <div class="check-list" id="f-trans"></div>
-      </div>
-
-      <div class="filter-group">
-        <h3>Fuel</h3>
-        <div class="check-list" id="f-fuel"></div>
-      </div>
-
-      <div class="filter-group">
-        <h3>Drivetrain</h3>
-        <div class="check-list" id="f-drive"></div>
-      </div>
+      <div class="filter-group"><h3>Transmission</h3><div class="check-list" id="f-trans"></div></div>
+      <div class="filter-group"><h3>Fuel</h3><div class="check-list" id="f-fuel"></div></div>
+      <div class="filter-group"><h3>Drivetrain</h3><div class="check-list" id="f-drive"></div></div>
     </aside>
     <div class="drawer-overlay" id="drawer-overlay"></div>
 
-    <!-- Results -->
     <div>
       <div class="inventory-toolbar">
         <p class="result-count" id="result-count" role="status" aria-live="polite"></p>
@@ -103,20 +96,19 @@
           <button class="btn btn-outline filters-open-btn" id="filters-open" type="button" aria-controls="filter-sidebar" aria-expanded="false">Filters</button>
           <label class="visually-hidden" for="sort">Sort vehicles</label>
           <select class="sort-select" id="sort">
-            <option value="price-asc">Price: low → high</option>
-            <option value="price-desc">Price: high → low</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
             <option value="km-asc">Lowest kilometres</option>
             <option value="year-desc">Newest year</option>
           </select>
         </div>
       </div>
 
-      <div class="chip-row" id="chip-row" aria-label="Active filters"></div>
-
+      <div class="chip-row" id="chip-row"></div>
       <div class="vehicle-grid" id="inventory-grid"></div>
 
       <div class="empty-state" id="empty-state" hidden>
-        <h3>No vehicles match those filters</h3>
+        <h2>No vehicles match those filters</h2>
         <p>Try widening the price or kilometre range, or clear everything and start over.</p>
         <button class="btn btn-red" id="empty-reset" type="button">Reset all filters</button>
       </div>
@@ -124,16 +116,20 @@
       <div class="load-more-wrap">
         <button class="btn btn-outline" id="load-more" type="button">Load more vehicles</button>
       </div>
+
+      <div class="inventory-note">
+        <h2>Looking for something we do not have?</h2>
+      <p>Our stock turns over constantly and we source vehicles on request. Tell us the make, model, budget and kilometres you are after and we will watch for it. Call 514-824-9117 or <a class="text-link" href="/contact">send us the details</a>.</p>
+      </div>
     </div>
   </div>
-
 </main>
 
 <footer class="site-footer" id="site-footer"></footer>
 <div class="mobile-cta-bar" id="mobile-cta-bar"></div>
 
-<script src="js/data.js"></script>
-<script src="js/components.js"></script>
-<script src="js/inventory.js"></script>
+<script src="/js/data.js"></script>
+<script src="/js/components.js"></script>
+<script src="/js/inventory.js" defer></script>
 </body>
 </html>

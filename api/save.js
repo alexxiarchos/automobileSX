@@ -2,7 +2,8 @@
    Vercel auto-deploys that commit, so the public site updates by itself.
    Body: { vehicles: [...], newImages: [{path, sha}], deletePaths: [...], message } */
 const { requireAuth } = require("./_lib/auth.js");
-const { commitInventory } = require("./_lib/github.js");
+const { commitInventory, readInventory } = require("./_lib/github.js");
+const { renderVehiclePages, vehiclePagePaths } = require("./_lib/vehiclePage.js");
 const readBody = require("./_lib/body.js");
 
 const MAX_VEHICLES = 200;
@@ -35,12 +36,36 @@ module.exports = async function (req, res) {
     }
 
     const json = { updatedAt: new Date().toISOString(), vehicles: vehicles };
+
+    /* Pre-render a crawlable page per published vehicle, in both languages,
+       so search engines see real titles and specs without running JavaScript. */
+    const live = vehicles.filter(function (v) { return v.status !== "draft"; });
+    const newFiles = [];
+    live.forEach(function (v) {
+      renderVehiclePages(v).forEach(function (page) {
+        newFiles.push({ path: page.path, content: page.html });
+      });
+    });
+
+    /* Remove pages for vehicles that were deleted or moved back to draft */
+    const liveIds = new Set(live.map(function (v) { return v.id; }));
+    let stalePages = [];
+    try {
+      const previous = await readInventory();
+      (previous.vehicles || []).forEach(function (v) {
+        if (v && v.id && !liveIds.has(v.id)) stalePages = stalePages.concat(vehiclePagePaths(v.id));
+      });
+    } catch (e) { /* first run, or unreadable: nothing to clean up */ }
+
+    const imageDeletes = (body.deletePaths || []).filter(function (p) {
+      return typeof p === "string" && p.indexOf("images/vehicles/") === 0;
+    });
+
     const result = await commitInventory({
       json: json,
       newImages: body.newImages || [],
-      deletePaths: (body.deletePaths || []).filter(function (p) {
-        return typeof p === "string" && p.indexOf("images/vehicles/") === 0;
-      }),
+      newFiles: newFiles,
+      deletePaths: imageDeletes.concat(stalePages),
       message: body.message || "Inventory update via admin panel"
     });
     res.statusCode = 200;

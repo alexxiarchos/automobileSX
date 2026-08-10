@@ -1,33 +1,69 @@
-/* Automobile SX — mock inventory data (front-end only, no backend)
-   All prices CAD, distances in km. Strings routed through SX.t() for later FR swap. */
+/* Automobile SX — site data, routing and translations.
+   Inventory itself lives in /data/vehicles.json (managed by /admin). */
 
 window.SX = window.SX || {};
 
-/* ---------- i18n ---------- */
-SX.lang = "en";
+/* ---------- Language: taken from the URL path, never guessed ---------- */
+SX.lang = /^\/fr(\/|$)/.test(location.pathname) ? "fr" : "en";
 
+/* ---------- Routes (one table, both languages) ---------- */
+SX.routes = {
+  en: {
+    home: "/",
+    inventory: "/inventory",
+    vehicle: "/vehicles",
+    financing: "/financing",
+    sell: "/sell-your-car",
+    about: "/about",
+    contact: "/contact",
+    faq: "/faq",
+    guides: "/guides",
+    local: "/used-cars-west-island"
+  },
+  fr: {
+    home: "/fr/",
+    inventory: "/fr/inventaire",
+    vehicle: "/fr/vehicules",
+    financing: "/fr/financement",
+    sell: "/fr/vendre-votre-auto",
+    about: "/fr/a-propos",
+    contact: "/fr/contact",
+    faq: "/fr/faq",
+    guides: "/fr/guides",
+    local: "/fr/autos-usagees-west-island"
+  }
+};
+
+SX.url = function (key, lang) {
+  return SX.routes[lang || SX.lang][key];
+};
+
+SX.vehicleUrl = function (v, lang) {
+  return SX.url("vehicle", lang) + "/" + v.id;
+};
+
+/* ---------- Translations ---------- */
 SX.strings = {
   en: {
     "nav.home": "Home",
     "nav.inventory": "Inventory",
     "nav.financing": "Financing",
+    "nav.sell": "Sell or Trade",
     "nav.about": "About",
     "nav.contact": "Contact",
+    "nav.guides": "Guides",
+    "nav.faq": "FAQ",
     "cta.bookTestDrive": "Book a Test Drive",
     "cta.searchInventory": "Search Inventory",
     "cta.viewAll": "View all inventory →",
     "cta.call": "Call",
     "cta.browse": "Browse Inventory",
-    "hero.title": "Quality cars, personal service.",
-    "hero.sub": "A family-run lot in Dorval where you deal with the owner directly, and we go above and beyond to put you in the right vehicle.",
+    "cta.checkAvailability": "Check Availability",
+    "cta.getPreApproved": "Get Pre-Approved",
     "search.make": "Make",
     "search.model": "Model",
     "search.maxPrice": "Max Price",
     "search.any": "Any",
-    "featured.title": "Featured vehicles",
-    "bodytype.title": "Browse by body type",
-    "estMo": "est. {0}/mo",
-    "footer.tagline": "Family-run pre-owned dealership serving Dorval and Greater Montreal.",
     "footer.hours": "Hours",
     "footer.quickLinks": "Quick links",
     "footer.newArrivals": "New arrivals",
@@ -35,29 +71,91 @@ SX.strings = {
     "footer.newArrivalsCta": "Email us",
     "footer.orCall": "Or call",
     "footer.taxNote": "All prices exclude applicable taxes and licensing.",
-    "closed": "Closed"
+    "footer.langLine": "Ce site est aussi disponible en français.",
+    "footer.langLink": "Voir la version française",
+    "closed": "Closed",
+    /* Inventory UI */
+    "inv.filters": "Filters",
+    "inv.keyword": "Search make, model, trim…",
+    "inv.make": "Make",
+    "inv.body": "Body type",
+    "inv.price": "Price",
+    "inv.year": "Year",
+    "inv.maxKm": "Max kilometres",
+    "inv.transmission": "Transmission",
+    "inv.fuel": "Fuel",
+    "inv.drivetrain": "Drivetrain",
+    "inv.clearAll": "Clear all",
+    "inv.showing": "Showing {0} of {1} vehicles",
+    "inv.showingMatching": "Showing {0} of {1} matching vehicles",
+    "inv.sortLabel": "Sort vehicles",
+    "inv.sortPriceAsc": "Price: low to high",
+    "inv.sortPriceDesc": "Price: high to low",
+    "inv.sortKm": "Lowest kilometres",
+    "inv.sortYear": "Newest year",
+    "inv.loadMore": "Load more vehicles",
+    "inv.loadMoreCount": "Load more vehicles ({0} remaining)",
+    "inv.emptyTitle": "No vehicles match those filters",
+    "inv.emptyBody": "Try widening the price or kilometre range, or clear everything and start over.",
+    "inv.emptyReset": "Reset all filters",
+    "inv.noStockTitle": "New inventory arriving",
+    "inv.noStockBody": "We are updating our listings. Call {0} to hear what is on the lot right now.",
+    /* Vehicle card / detail */
+    "veh.photosSoon": "Photos coming soon",
+    "veh.sold": "Sold",
+    "veh.soldNote": "This vehicle has found a new home. Browse our current inventory below.",
+    "veh.overview": "Overview",
+    "veh.specs": "Specifications",
+    "veh.features": "Features",
+    "veh.similar": "Similar vehicles",
+    "veh.estimatePayment": "Estimate your payment",
+    "veh.kilometres": "Kilometres",
+    "veh.stock": "Stock #",
+    "veh.vin": "VIN",
+    "veh.plusTaxes": "plus applicable taxes and licensing",
+    "veh.noDesc": "Call us for full details on this vehicle.",
+    "veh.featuresSoon": "Feature list available at your appointment.",
+    "veh.savedLabel": "Save this vehicle",
+    /* Payment calculator (Quebec disclosure requirements) */
+    "calc.title": "Payment estimator",
+    "calc.vehiclePrice": "Vehicle price",
+    "calc.downPayment": "Down payment",
+    "calc.term": "Term",
+    "calc.months": "{0} months",
+    "calc.creditRate": "Credit rate (annual)",
+    "calc.paymentAmount": "Estimated monthly payment",
+    "calc.numPayments": "Number of payments",
+    "calc.creditCharges": "Total credit charges",
+    "calc.totalObligation": "Total obligation",
+    "calc.monthly": "monthly",
+    "inv.inStock": "in stock",
+    "calc.disclaimer": "Illustration only, not an offer of credit. Figures exclude applicable taxes, registration and fees, and assume an annual credit rate of {0}%. Your actual rate, term and approval depend on the lender and your credit file. Financing is never a condition of purchase.",
+    "calc.priceLabel": "Total vehicle price",
+    /* Misc */
+    "bc.inventory": "Inventory",
+    "readMore": "Read the guide →"
   },
+
   fr: {
     "nav.home": "Accueil",
     "nav.inventory": "Inventaire",
     "nav.financing": "Financement",
+    "nav.sell": "Vendre ou échanger",
     "nav.about": "À propos",
     "nav.contact": "Contact",
-    "cta.bookTestDrive": "Réserver un essai routier",
-    "cta.searchInventory": "Rechercher l'inventaire",
+    "nav.guides": "Guides",
+    "nav.faq": "FAQ",
+    "cta.bookTestDrive": "Réserver un essai",
+    "cta.searchInventory": "Rechercher",
     "cta.viewAll": "Voir tout l'inventaire →",
     "cta.call": "Appeler",
     "cta.browse": "Voir l'inventaire",
-    "hero.title": "Voitures de qualité, service personnalisé.",
-    "hero.sub": "Un commerce familial à Dorval. Vous traitez directement avec le propriétaire, et nous faisons tout pour bien vous servir.",
+    "cta.checkAvailability": "Vérifier la disponibilité",
+    "cta.getPreApproved": "Obtenir une préapprobation",
     "search.make": "Marque",
     "search.model": "Modèle",
     "search.maxPrice": "Prix max",
     "search.any": "Tous",
-    "featured.title": "Véhicules en vedette",
-    "bodytype.title": "Parcourir par carrosserie",
-    "estMo": "env. {0}/mois",
-    "footer.tagline": "Concessionnaire familial de véhicules d'occasion à Dorval, dans le Grand Montréal.",
     "footer.hours": "Heures",
     "footer.quickLinks": "Liens rapides",
     "footer.newArrivals": "Nouveaux arrivages",
@@ -65,18 +163,76 @@ SX.strings = {
     "footer.newArrivalsCta": "Écrivez-nous",
     "footer.orCall": "Ou appelez le",
     "footer.taxNote": "Les prix excluent les taxes applicables et l'immatriculation.",
-    "closed": "Fermé"
+    "footer.langLine": "This site is also available in English.",
+    "footer.langLink": "View the English version",
+    "closed": "Fermé",
+    "inv.filters": "Filtres",
+    "inv.keyword": "Marque, modèle, version…",
+    "inv.make": "Marque",
+    "inv.body": "Carrosserie",
+    "inv.price": "Prix",
+    "inv.year": "Année",
+    "inv.maxKm": "Kilométrage max",
+    "inv.transmission": "Transmission",
+    "inv.fuel": "Carburant",
+    "inv.drivetrain": "Rouage",
+    "inv.clearAll": "Tout effacer",
+    "inv.showing": "{0} véhicules affichés sur {1}",
+    "inv.showingMatching": "{0} véhicules affichés sur {1} correspondants",
+    "inv.sortLabel": "Trier les véhicules",
+    "inv.sortPriceAsc": "Prix : croissant",
+    "inv.sortPriceDesc": "Prix : décroissant",
+    "inv.sortKm": "Kilométrage le plus bas",
+    "inv.sortYear": "Année la plus récente",
+    "inv.loadMore": "Voir plus de véhicules",
+    "inv.loadMoreCount": "Voir plus de véhicules ({0} restants)",
+    "inv.emptyTitle": "Aucun véhicule ne correspond à ces filtres",
+    "inv.emptyBody": "Élargissez la fourchette de prix ou de kilométrage, ou effacez tout et recommencez.",
+    "inv.emptyReset": "Réinitialiser les filtres",
+    "inv.noStockTitle": "Nouveaux véhicules à venir",
+    "inv.noStockBody": "Nos annonces sont en cours de mise à jour. Appelez le {0} pour savoir ce qui est disponible.",
+    "veh.photosSoon": "Photos à venir",
+    "veh.sold": "Vendu",
+    "veh.soldNote": "Ce véhicule a trouvé preneur. Consultez notre inventaire actuel ci-dessous.",
+    "veh.overview": "Aperçu",
+    "veh.specs": "Fiche technique",
+    "veh.features": "Équipements",
+    "veh.similar": "Véhicules semblables",
+    "veh.estimatePayment": "Estimez votre paiement",
+    "veh.kilometres": "Kilométrage",
+    "veh.stock": "N° de stock",
+    "veh.vin": "NIV",
+    "veh.plusTaxes": "plus taxes applicables et immatriculation",
+    "veh.noDesc": "Appelez-nous pour tous les détails sur ce véhicule.",
+    "veh.featuresSoon": "Liste des équipements disponible lors de votre rendez-vous.",
+    "veh.savedLabel": "Enregistrer ce véhicule",
+    "calc.title": "Estimateur de paiement",
+    "calc.vehiclePrice": "Prix du véhicule",
+    "calc.downPayment": "Mise de fonds",
+    "calc.term": "Durée",
+    "calc.months": "{0} mois",
+    "calc.creditRate": "Taux de crédit (annuel)",
+    "calc.paymentAmount": "Paiement mensuel estimé",
+    "calc.numPayments": "Nombre de paiements",
+    "calc.creditCharges": "Frais de crédit totaux",
+    "calc.totalObligation": "Obligation totale",
+    "calc.monthly": "mois",
+    "inv.inStock": "en stock",
+    "calc.disclaimer": "Illustration seulement, ce n'est pas une offre de crédit. Les montants excluent les taxes applicables, l'immatriculation et les frais, et supposent un taux de crédit annuel de {0} %. Votre taux, votre durée et votre approbation dépendent du prêteur et de votre dossier de crédit. Le financement n'est jamais une condition d'achat.",
+    "calc.priceLabel": "Prix total du véhicule",
+    "bc.inventory": "Inventaire",
+    "readMore": "Lire le guide →"
   }
 };
 
 SX.t = function (key) {
   var args = Array.prototype.slice.call(arguments, 1);
   var s = (SX.strings[SX.lang] && SX.strings[SX.lang][key]) || SX.strings.en[key] || key;
-  args.forEach(function (a, i) { s = s.replace("{" + i + "}", a); });
+  args.forEach(function (a, i) { s = s.split("{" + i + "}").join(a); });
   return s;
 };
 
-/* ---------- Dealership info ---------- */
+/* ---------- Dealership ---------- */
 SX.dealer = {
   name: "Automobile SX",
   contact: "Spiro Xiarchos",
@@ -85,6 +241,7 @@ SX.dealer = {
   email: "Automobilesx@gmail.com",
   address1: "2044 Avenue Chartier",
   address2: "Dorval, QC",
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=2044+Avenue+Chartier+Dorval+QC",
   apptNote: {
     en: "By appointment. Call to book, reservations welcome.",
     fr: "Sur rendez-vous. Appelez pour réserver, réservations bienvenues."
@@ -100,40 +257,37 @@ SX.dealer = {
   ]
 };
 
-/* ---------- Finance defaults ---------- */
-SX.finance = { apr: 7.99, defaultTermMonths: 72, defaultDownPct: 0.1 };
+/* ---------- Finance illustration defaults ---------- */
+SX.finance = { rate: 9.99, defaultTermMonths: 60, defaultDownPct: 0.1 };
 
-SX.money = function (n) {
-  return "$" + Math.round(n).toLocaleString("en-CA");
+SX.num = function (n, digits) {
+  var s = Number(n).toFixed(digits == null ? 2 : digits);
+  return SX.lang === "fr" ? s.replace(".", ",") : s;
 };
 
-SX.monthly = function (price, down, months, apr) {
+SX.money = function (n) {
+  var v = Math.round(n || 0);
+  return SX.lang === "fr"
+    ? v.toLocaleString("fr-CA").replace(/ /g, " ") + " $"
+    : "$" + v.toLocaleString("en-CA");
+};
+
+SX.monthly = function (price, down, months, rate) {
   down = down == null ? Math.round(price * SX.finance.defaultDownPct) : down;
   months = months || SX.finance.defaultTermMonths;
-  apr = apr == null ? SX.finance.apr : apr;
+  rate = rate == null ? SX.finance.rate : rate;
   var principal = Math.max(price - down, 0);
-  var r = apr / 100 / 12;
+  var r = rate / 100 / 12;
   if (principal <= 0) return 0;
   if (r === 0) return principal / months;
   return principal * r / (1 - Math.pow(1 + r, -months));
 };
 
-SX.estMoLabel = function (price) {
-  return SX.t("estMo", SX.money(SX.monthly(price)));
-};
+/* ---------- Inventory ---------- */
+SX.vehicles = [];      /* available only, for listings */
+SX.allVehicles = [];   /* available + sold, resolvable on detail pages */
 
-/* ---------- Vehicles ----------
-   24 vehicles. Fields: id, year, make, model, trim, body, price, km,
-   transmission, fuel, drivetrain, extColor, extHex, intColor, engine,
-   econCity/econHwy (L/100km), doors, seats, vin, stock, tag (optional),
-   features {safety, comfort, technology, exterior}, desc[2] */
-
-/* Vehicles now live in data/vehicles.json (managed by the /admin panel).
-   SX.ready resolves once inventory is loaded. */
-SX.vehicles = [];      /* status === "available" — shown in listings */
-SX.allVehicles = [];   /* available + sold — resolvable on detail page */
-
-SX.ready = fetch("data/vehicles.json", { cache: "no-cache" })
+SX.ready = fetch("/data/vehicles.json", { cache: "no-cache" })
   .then(function (r) {
     if (!r.ok) throw new Error("HTTP " + r.status);
     return r.json();
@@ -148,9 +302,6 @@ SX.ready = fetch("data/vehicles.json", { cache: "no-cache" })
     console.error("Could not load inventory:", e);
   });
 
-/* Photo view labels used to generate each vehicle's 7-image gallery */
-SX.photoViews = ["Front 3/4", "Side Profile", "Rear 3/4", "Interior", "Dashboard", "Wheels", "Cargo / Trunk"];
-
 SX.getVehicle = function (id) {
   return SX.allVehicles.find(function (v) { return v.id === id; }) ||
     SX.vehicles.find(function (v) { return v.id === id; });
@@ -161,3 +312,8 @@ SX.vehicleTitle = function (v) {
 };
 
 SX.bodyTypes = ["Sedan", "SUV", "Truck", "Coupe", "Hatchback"];
+
+SX.bodyLabel = function (b) {
+  if (SX.lang !== "fr") return b;
+  return { Sedan: "Berline", SUV: "VUS", Truck: "Camionnette", Coupe: "Coupé", Hatchback: "Hayon" }[b] || b;
+};
