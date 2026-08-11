@@ -247,6 +247,8 @@ SX.dealer = {
   address1: "2044 Avenue Chartier",
   address2: "Dorval, QC",
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=2044+Avenue+Chartier+Dorval+QC",
+  reviewsUrl: "https://www.google.com/maps?cid=5771215062979680514",
+  writeReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJ04zZ8dIXyUwRAplJx4V5F1A",
   apptNote: {
     en: "By appointment. Call to book, reservations welcome.",
     fr: "Sur rendez-vous. Appelez pour réserver, réservations bienvenues."

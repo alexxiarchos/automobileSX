@@ -207,6 +207,7 @@ function schema(v, lang) {
     url: SITE,
     telephone: "+1-514-824-9117",
     email: "Automobilesx@gmail.com",
+    sameAs: ["https://www.google.com/maps?cid=5771215062979680514"],
     address: {
       "@type": "PostalAddress",
       streetAddress: "2044 Avenue Chartier",

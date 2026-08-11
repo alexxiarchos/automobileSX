@@ -81,6 +81,11 @@ module.exports = {
     guidesH: "Guides pour acheteurs de voitures d'occasion au Québec",
     guidesAll: "Tous les guides →",
     guideCards,
+    reviewsKicker: "Ce que disent nos clients",
+    reviewsH: "Les avis de gens qui ont acheté ici",
+    reviewsP: "Nos avis sont sur Google, où personne ne peut les modifier sauf ceux qui les ont écrits. Si vous avez acheté une auto chez Spiro, en laisser un prend une minute et aide vraiment un petit commerce familial.",
+    reviewsWrite: "Laisser un avis Google",
+    reviewsRead: "Lire nos avis",
     visitH: "Visitez-nous à Dorval",
     askFor: "Demandez Spiro",
     directions: "Itinéraire ↗"

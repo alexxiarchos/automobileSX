@@ -994,3 +994,17 @@ input[type="range"] {
   list-style: none; margin: 0; padding: 0;
   display: flex; flex-wrap: wrap; gap: 8px 22px;
 }
+
+/* Reviews call to action. Links out to Google; nothing is stored on the site. */
+.reviews-cta {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: clamp(20px, 4vw, 48px); flex-wrap: wrap;
+}
+.reviews-cta > div:first-child { max-width: 60ch; }
+.reviews-cta p { color: var(--slate); margin: 10px 0 0; }
+.reviews-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 767px) {
+  .reviews-cta { flex-direction: column; align-items: flex-start; }
+  .reviews-actions { width: 100%; }
+  .reviews-actions .btn { flex: 1; justify-content: center; }
+}

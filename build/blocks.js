@@ -144,6 +144,31 @@ function homeBody(T, R) {
         </div>
       </div>
     </div>
+  </section>
+${reviewsBlock(T)}`;
+}
+
+/* ---------------- Reviews (link out, never scraped) ----------------
+   Google's Places policy forbids caching or storing review content, and a
+   business showing reviews it controls is ineligible for star rich results
+   anyway. So this block does the one useful thing instead: it sends people to
+   the real reviews and makes leaving one a single tap. */
+function reviewsBlock(T) {
+  return `
+  <section class="section section-mist" aria-labelledby="reviews-h">
+    <div class="container">
+      <div class="reviews-cta reveal">
+        <div>
+          <span class="kicker">${T.home.reviewsKicker}</span>
+          <h2 id="reviews-h">${T.home.reviewsH}</h2>
+          <p>${T.home.reviewsP}</p>
+        </div>
+        <div class="reviews-actions">
+          <a class="btn btn-red" href="${DEALER.writeReviewUrl}" target="_blank" rel="noopener">${T.home.reviewsWrite}</a>
+          <a class="btn btn-outline" href="${DEALER.reviewsUrl}" target="_blank" rel="noopener">${T.home.reviewsRead}</a>
+        </div>
+      </div>
+    </div>
   </section>`;
 }
 
@@ -400,7 +425,8 @@ function contactBody(T) {
       </div>
       <div class="contact-map" id="contact-map"></div>
     </div>
-  </div>`;
+  </div>
+  ${reviewsBlock(T)}`;
 }
 
 module.exports = { homeBody, inventoryBody, vehicleBody, contactBody };

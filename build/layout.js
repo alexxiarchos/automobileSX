@@ -59,7 +59,13 @@ const DEALER = {
   region: "QC",
   postalCode: "H9P 1H2",
   country: "CA",
-  maps: "https://www.google.com/maps/search/?api=1&query=2044+Avenue+Chartier+Dorval+QC"
+  maps: "https://www.google.com/maps/search/?api=1&query=2044+Avenue+Chartier+Dorval+QC",
+  /* Verified from the Google listing: the feature id in the search URL
+     (0x4cc917d2f1d98cd3:0x50177985c7499902) decodes to this place id, and the
+     low half is the CID used by the maps link. */
+  placeId: "ChIJ04zZ8dIXyUwRAplJx4V5F1A",
+  reviewsUrl: "https://www.google.com/maps?cid=5771215062979680514",
+  writeReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJ04zZ8dIXyUwRAplJx4V5F1A"
 };
 
 const dealerSchema = () => ({
@@ -92,6 +98,9 @@ const dealerSchema = () => ({
     closes: "18:00"
   },
   priceRange: "$$",
+  /* Only profiles verified to be this business. The Google listing was
+     confirmed from the feature id in the owner's own search URL. */
+  sameAs: ["https://www.google.com/maps?cid=5771215062979680514"],
   areaServed: ["Dorval", "West Island", "Pointe-Claire", "Lachine", "Montréal", "Laval"],
   /* availableLanguage is not in scope for AutoDealer: schema.org defines it on
      ContactPoint, Course, LodgingBusiness, ServiceChannel and TouristAttraction

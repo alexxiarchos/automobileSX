@@ -92,6 +92,11 @@ module.exports = {
     guidesH: "Guides for used-car buyers in Quebec",
     guidesAll: "All guides →",
     guideCards,
+    reviewsKicker: "What our customers say",
+    reviewsH: "Reviews from people who bought here",
+    reviewsP: "Our reviews live on Google, where nobody can edit them but the people who wrote them. If you have bought a car from Spiro, leaving one takes about a minute and it genuinely helps a small family business.",
+    reviewsWrite: "Leave a Google review",
+    reviewsRead: "Read our reviews",
     visitH: "Visit the lot in Dorval",
     askFor: "Ask for Spiro",
     directions: "Get directions ↗"
