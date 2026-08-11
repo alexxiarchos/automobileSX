@@ -3,6 +3,7 @@
    Body: { vehicles: [...], newImages: [{path, sha}], deletePaths: [...], message } */
 const { requireAuth } = require("./_lib/auth.js");
 const { commitInventory, readInventory } = require("./_lib/github.js");
+const { submit, changedUrls } = require("./_lib/indexnow.js");
 const { renderVehiclePages, vehiclePagePaths } = require("./_lib/vehiclePage.js");
 const readBody = require("./_lib/body.js");
 
@@ -50,9 +51,11 @@ module.exports = async function (req, res) {
     /* Remove pages for vehicles that were deleted or moved back to draft */
     const liveIds = new Set(live.map(function (v) { return v.id; }));
     let stalePages = [];
+    let previousVehicles = null;
     try {
       const previous = await readInventory();
-      (previous.vehicles || []).forEach(function (v) {
+      previousVehicles = previous.vehicles || [];
+      previousVehicles.forEach(function (v) {
         if (v && v.id && !liveIds.has(v.id)) stalePages = stalePages.concat(vehiclePagePaths(v.id));
       });
     } catch (e) { /* first run, or unreadable: nothing to clean up */ }
@@ -68,8 +71,18 @@ module.exports = async function (req, res) {
       deletePaths: imageDeletes.concat(stalePages),
       message: body.message || "Inventory update via admin panel"
     });
+    /* Ping IndexNow after the commit has succeeded, never before. Failures are
+       swallowed inside submit(), so this cannot affect the publish. */
+    let indexNow = "skipped";
+    try {
+      const urls = changedUrls(previousVehicles, vehicles);
+      indexNow = await submit(urls);
+    } catch (e) {
+      indexNow = "failed (ignored): " + e.message;
+    }
+
     res.statusCode = 200;
-    res.end(JSON.stringify(result));
+    res.end(JSON.stringify(Object.assign({}, result, { indexNow: indexNow })));
   } catch (e) {
     res.statusCode = 500;
     res.end(JSON.stringify({ error: e.message }));

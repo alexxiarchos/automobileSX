@@ -344,13 +344,7 @@ input[type="range"] {
 .split-media svg, .split-media img { width: 100%; height: auto; display: block; }
 
 /* ------- Testimonials ------- */
-/* Cards size to their own text rather than stretching to the tallest in the
-   row, so a short review does not leave dead space above its name. Keep the
-   quotes ordered shortest first so the bottom edge steps down cleanly. */
-.testimonial-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-  align-items: start;
-}
+.testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .testimonial {
   background: #fff; border: 1px solid var(--mist); border-radius: var(--radius);
   padding: 26px; display: flex; flex-direction: column; gap: 14px;
