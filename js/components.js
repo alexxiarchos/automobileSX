@@ -48,7 +48,10 @@ window.SXUI = (function () {
     f.loading = "lazy";
     f.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
     f.setAttribute("allowfullscreen", "");
-    f.src = "https://www.google.com/maps?q=" + encodeURIComponent(addr) + "&z=16&output=embed";
+    /* The official place embed Google generates for this listing. The old
+       "maps?q=...&output=embed" form is undocumented and is the one that was
+       intermittently refusing to frame. */
+    f.src = (SX.dealer.mapEmbed && SX.dealer.mapEmbed[SX.lang]) || SX.dealer.mapEmbed.en;
 
     function remove() { if (f.parentNode) f.parentNode.removeChild(f); }
     function drop() {

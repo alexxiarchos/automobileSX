@@ -208,6 +208,8 @@ function schema(v, lang) {
     telephone: "+1-514-824-9117",
     email: "Automobilesx@gmail.com",
     sameAs: ["https://www.google.com/maps?cid=5771215062979680514"],
+    geo: { "@type": "GeoCoordinates", latitude: 45.46418333788317, longitude: -73.72416031436669 },
+    hasMap: "https://www.google.com/maps?cid=5771215062979680514",
     address: {
       "@type": "PostalAddress",
       streetAddress: "2044 Avenue Chartier",

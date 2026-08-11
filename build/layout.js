@@ -64,7 +64,8 @@ const DEALER = {
      (0x4cc917d2f1d98cd3:0x50177985c7499902) decodes to this place id, and the
      low half is the CID used by the maps link. */
   placeId: "ChIJ04zZ8dIXyUwRAplJx4V5F1A",
-  reviewsUrl: "https://www.google.com/maps?cid=5771215062979680514",
+  /* Straight to the reviews list, not the profile card. */
+  reviewsUrl: "https://search.google.com/local/reviews?placeid=ChIJ04zZ8dIXyUwRAplJx4V5F1A",
   writeReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJ04zZ8dIXyUwRAplJx4V5F1A"
 };
 
@@ -97,6 +98,10 @@ const dealerSchema = () => ({
     opens: "10:00",
     closes: "18:00"
   },
+  /* Coordinates read from the !3d / !2d values in the official Google place
+     embed for this listing, so they are Google's own centre point for it. */
+  geo: { "@type": "GeoCoordinates", latitude: 45.46418333788317, longitude: -73.72416031436669 },
+  hasMap: "https://www.google.com/maps?cid=5771215062979680514",
   priceRange: "$$",
   /* Only profiles verified to be this business. The Google listing was
      confirmed from the feature id in the owner's own search URL. */

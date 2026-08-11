@@ -344,14 +344,24 @@ input[type="range"] {
 .split-media svg, .split-media img { width: 100%; height: auto; display: block; }
 
 /* ------- Testimonials ------- */
-.testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+/* Cards size to their own text rather than stretching to the tallest in the
+   row, so a short review does not leave dead space above its name. Keep the
+   quotes ordered shortest first so the bottom edge steps down cleanly. */
+.testimonial-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  align-items: start;
+}
 .testimonial {
   background: #fff; border: 1px solid var(--mist); border-radius: var(--radius);
   padding: 26px; display: flex; flex-direction: column; gap: 14px;
 }
 .stars { color: var(--red); font-size: 15px; letter-spacing: 3px; }
-.testimonial blockquote { margin: 0; font-size: 15.5px; flex: 1; }
-.testimonial figcaption { font-size: 14px; }
+/* The name follows its quote directly. With flex:1 the quote stretched to the
+   tallest card in the row, stranding the short review's name at the bottom. */
+.testimonial blockquote { margin: 0; font-size: 15.5px; flex: 0 0 auto; }
+.testimonial figcaption {
+  font-size: 14px; padding-top: 14px; border-top: 1px solid var(--mist);
+}
 .testimonial figcaption strong { display: block; }
 .testimonial figcaption span { color: var(--slate); }
 .sample-note { font-size: 12.5px; color: var(--slate); margin-top: 18px; }

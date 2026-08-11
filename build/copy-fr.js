@@ -83,7 +83,19 @@ module.exports = {
     guideCards,
     reviewsKicker: "Ce que disent nos clients",
     reviewsH: "Les avis de gens qui ont acheté ici",
-    reviewsP: "Nos avis sont sur Google, où personne ne peut les modifier sauf ceux qui les ont écrits. Si vous avez acheté une auto chez Spiro, en laisser un prend une minute et aide vraiment un petit commerce familial.",
+    reviewsP: "Nos avis sont sur Google. Si vous avez acheté une auto chez Spiro, en laisser un prend une minute et aide vraiment un petit commerce familial.",
+    /* Mêmes avis que la version anglaise, transcrits tels quels. */
+    /* Real Google reviews, transcribed verbatim. Do not reword these, and
+       remove one here if the reviewer ever deletes it on Google. */
+    reviewQuotes: [
+      { name: "Christina Koulouris",
+        text: "Had a great experience with Spiro. He always worked around my schedule, made sure that I got the best results with the car, and within a week, he had everything ready for me. He's great at was he does, but most importantly he's very reliable." },
+      { name: "Riley Starr",
+        text: "Great experience buying from Spiro. I was looking for a pretty specific year/model/transmission, and Automobiles SX happened to have one on the lot. Zero pressure sales, got all the time I needed to inspect and drive the car, have it looked at by my mechanic. Suprise, it was in good shape just like he told me, and at a very fair price. So rare to find an honest dealer in this business, would recommend to anyone." },
+      { name: "F BM",
+        text: "Spiro (owner) is truly a gentleman. I contacted him to get information about a car that had previously purchased from him by my colleague. He answered my questions honestly and patiently and also introduced me to a garage that I could go to if necessary. He truly deserves more than a 5 star review and I will definitely do business with him in the future and will introduce my friends to him as well because his patience and honesty are absolutely admirable." }
+    ],
+    reviewsVia: "via Google",
     reviewsWrite: "Laisser un avis Google",
     reviewsRead: "Lire nos avis",
     visitH: "Visitez-nous à Dorval",

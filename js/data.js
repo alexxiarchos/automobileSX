@@ -247,7 +247,11 @@ SX.dealer = {
   address1: "2044 Avenue Chartier",
   address2: "Dorval, QC",
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=2044+Avenue+Chartier+Dorval+QC",
-  reviewsUrl: "https://www.google.com/maps?cid=5771215062979680514",
+  reviewsUrl: "https://search.google.com/local/reviews?placeid=ChIJ04zZ8dIXyUwRAplJx4V5F1A",
+  mapEmbed: {
+    en: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1663.8666495540244!2d-73.72416031436669!3d45.46418333788317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc917d2f1d98cd3%3A0x50177985c7499902!2sAutomobile%20Sx!5e0!3m2!1sen!2sca!4v1786407588287!5m2!1sen!2sca",
+    fr: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1663.8666495540244!2d-73.72416031436669!3d45.46418333788317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc917d2f1d98cd3%3A0x50177985c7499902!2sAutomobile%20Sx!5e0!3m2!1sfr!2sca!4v1786407588287!5m2!1sfr!2sca"
+  },
   writeReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJ04zZ8dIXyUwRAplJx4V5F1A",
   apptNote: {
     en: "By appointment. Call to book, reservations welcome.",

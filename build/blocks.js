@@ -168,6 +168,14 @@ function reviewsBlock(T) {
           <a class="btn btn-outline" href="${DEALER.reviewsUrl}" target="_blank" rel="noopener">${T.home.reviewsRead}</a>
         </div>
       </div>
+      ${(T.home.reviewQuotes && T.home.reviewQuotes.length) ? `
+      <div class="testimonial-grid reveal">
+        ${T.home.reviewQuotes.map(q => `
+        <figure class="testimonial">
+          <blockquote>${q.text}</blockquote>
+          <figcaption><strong>${q.name}</strong><span>${T.home.reviewsVia}</span></figcaption>
+        </figure>`).join("")}
+      </div>` : ""}
     </div>
   </section>`;
 }

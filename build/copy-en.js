@@ -94,7 +94,21 @@ module.exports = {
     guideCards,
     reviewsKicker: "What our customers say",
     reviewsH: "Reviews from people who bought here",
-    reviewsP: "Our reviews live on Google, where nobody can edit them but the people who wrote them. If you have bought a car from Spiro, leaving one takes about a minute and it genuinely helps a small family business.",
+    reviewsP: "Our reviews are on Google. If you have bought a car from Spiro, leaving one takes about a minute and it genuinely helps a small family business.",
+    /* Real quotes only, transcribed from the Google reviews, newest first.
+       Leave this empty rather than inventing anything: the section renders the
+       call to action on its own when there are no quotes yet. */
+    /* Real Google reviews, transcribed verbatim. Do not reword these, and
+       remove one here if the reviewer ever deletes it on Google. */
+    reviewQuotes: [
+      { name: "Christina Koulouris",
+        text: "Had a great experience with Spiro. He always worked around my schedule, made sure that I got the best results with the car, and within a week, he had everything ready for me. He's great at was he does, but most importantly he's very reliable." },
+      { name: "Riley Starr",
+        text: "Great experience buying from Spiro. I was looking for a pretty specific year/model/transmission, and Automobiles SX happened to have one on the lot. Zero pressure sales, got all the time I needed to inspect and drive the car, have it looked at by my mechanic. Suprise, it was in good shape just like he told me, and at a very fair price. So rare to find an honest dealer in this business, would recommend to anyone." },
+      { name: "F BM",
+        text: "Spiro (owner) is truly a gentleman. I contacted him to get information about a car that had previously purchased from him by my colleague. He answered my questions honestly and patiently and also introduced me to a garage that I could go to if necessary. He truly deserves more than a 5 star review and I will definitely do business with him in the future and will introduce my friends to him as well because his patience and honesty are absolutely admirable." }
+    ],
+    reviewsVia: "via Google",
     reviewsWrite: "Leave a Google review",
     reviewsRead: "Read our reviews",
     visitH: "Visit the lot in Dorval",
