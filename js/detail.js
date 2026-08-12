@@ -114,7 +114,11 @@ SX.ready.then(function () {
   show(0);
 
   /* ---------- Overview ---------- */
-  var descParas = Array.isArray(v.desc) ? v.desc : (v.desc ? String(v.desc).split(/\n\s*\n/) : []);
+  /* The French page uses the French description when there is one, and falls
+     back to the English text rather than showing an empty overview. */
+  var descSource = (SX.lang === "fr" && v.descFr) ? v.descFr : v.desc;
+  var descParas = Array.isArray(descSource) ? descSource
+    : (descSource ? String(descSource).split(/\n\s*\n/) : []);
   document.getElementById("v-overview").innerHTML =
     descParas.filter(Boolean).map(function (p) { return "<p>" + p + "</p>"; }).join("") ||
     "<p>" + SX.t("veh.noDesc") + "</p>";
@@ -153,17 +157,18 @@ SX.ready.then(function () {
   document.getElementById("v-specs").innerHTML = specTable(specs.slice(0, half)) + specTable(specs.slice(half));
 
   /* ---------- Features ---------- */
-  var groups;
-  if (Array.isArray(v.features)) {
-    groups = v.features.length ? [[SX.t("veh.features"), v.features]] : [];
-  } else if (v.features) {
-    groups = [["Safety", v.features.safety], ["Comfort", v.features.comfort],
-      ["Technology", v.features.technology], ["Exterior", v.features.exterior]]
-      .filter(function (g) { return g[1] && g[1].length; });
-  } else { groups = []; }
+  var flatFeats = Array.isArray(v.features) ? v.features
+    : v.features ? [].concat(v.features.safety || [], v.features.comfort || [],
+        v.features.technology || [], v.features.exterior || [])
+    : [];
+  /* Grouped and translated by the shared catalogue, so a French visitor reads
+     "Caméra de recul" even though the inventory stores "Backup Camera". */
+  var groups = window.SX_FEATURES ? SX_FEATURES.grouped(flatFeats, SX.lang)
+    : (flatFeats.length ? [{ title: SX.t("veh.features"), items: flatFeats }] : []);
   document.getElementById("v-features").innerHTML = groups.map(function (g) {
-    return '<div class="feature-group"><ul class="feature-chips">' +
-      g[1].map(function (f) { return "<li>" + f + "</li>"; }).join("") + "</ul></div>";
+    return '<div class="feature-group"><h3 class="feature-group-title">' + g.title + "</h3>" +
+      '<ul class="feature-chips">' +
+      g.items.map(function (f) { return "<li>" + f + "</li>"; }).join("") + "</ul></div>";
   }).join("") || '<p style="color:var(--slate)">' + SX.t("veh.featuresSoon") + "</p>";
 
   /* ---------- Price rail (price is the dominant figure) ---------- */

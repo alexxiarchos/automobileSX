@@ -13,9 +13,12 @@
 
   var $ = function (id) { return document.getElementById(id); };
 
-  var FEATURES = ["Bluetooth", "Apple CarPlay", "Android Auto", "Backup Camera",
-    "Heated Seats", "Heated Steering Wheel", "Leather Seats", "Navigation",
-    "Sunroof", "Remote Start", "Cruise Control", "AWD"];
+  /* The catalogue, the make spellings and the draft writer are shared with the
+     public site and the VIN decoder rather than restated here. See
+     js/features.js, js/makes.js and admin/describe.js. */
+  var CAT = window.SX_FEATURES;
+  var MAKES = window.SX_MAKES;
+  var DESCRIBE = window.SX_DESCRIBE;
 
   var COLOR_HEX = { black: "#141518", white: "#eceae6", grey: "#5c6066", gray: "#5c6066",
     silver: "#c3c6c9", red: "#8f1a24", blue: "#2b4d7e", green: "#2f5741", brown: "#4a3a2e",
@@ -177,6 +180,311 @@
       list.appendChild(row);
     });
   }
+
+  /* ---------- VIN decode ---------- */
+
+  var VIN_TARGETS = {
+    year: "f-year", make: "f-make", model: "f-model", trim: "f-trim",
+    body: "f-body", drivetrain: "f-drive", fuel: "f-fuel",
+    transmission: "f-trans", engine: "f-engine", doors: "f-doors", seats: "f-seats"
+  };
+
+  var VIN_HINT = "Paste or type the VIN and it fills in the year, make, model, engine, body, drivetrain and the safety equipment by itself. Everything stays editable, and nothing you have already typed gets overwritten. No VIN? Just fill the form in below.";
+
+  var FIELD_LABELS = {
+    year: "Year", make: "Make", model: "Model", trim: "Trim", body: "Body style",
+    drivetrain: "Drivetrain", fuel: "Fuel type", transmission: "Transmission",
+    engine: "Engine", doors: "Doors", seats: "Seats", price: "Price", km: "Mileage",
+    extColor: "Exterior colour", intColor: "Interior colour"
+  };
+
+  function vinStatus(msg, cls) {
+    var el = $("vin-status");
+    el.textContent = msg;
+    el.className = "fh" + (cls ? " " + cls : "");
+  }
+
+  /* Only ever fills fields the owner has left blank. A decode can add to what
+     is on screen but never overwrite a value someone typed, so pressing Decode
+     is always safe, including on a car that is already half filled in. */
+  function applyVin(data) {
+    var filled = [], skipped = [];
+    Object.keys(VIN_TARGETS).forEach(function (key) {
+      if (!(key in data.fields)) return;
+      var el = $(VIN_TARGETS[key]);
+      if (!el) return;
+      var value = String(data.fields[key]);
+
+      if (el.tagName === "SELECT") {
+        /* A dropdown always shows something, so "is it empty" tells us nothing.
+           What matters is whether a human has chosen deliberately, which is
+           tracked on change below. An untouched dropdown is only a default and
+           the VIN knows better. */
+        var match = Array.prototype.slice.call(el.options).some(function (o) { return o.value === value; });
+        if (!match) { skipped.push(FIELD_LABELS[key] + " (" + value + " is not one of the options)"); return; }
+        if (el.dataset.touched === "1") {
+          if (el.value !== value) skipped.push(FIELD_LABELS[key] + " (you chose “" + el.value + "”)");
+          return;
+        }
+        el.value = value;
+        filled.push(FIELD_LABELS[key]);
+        return;
+      }
+      if (el.value && el.value.trim()) {
+        if (el.value.trim() !== value) skipped.push(FIELD_LABELS[key] + " (you already entered “" + el.value.trim() + "”)");
+        return;
+      }
+      el.value = value;
+      filled.push(FIELD_LABELS[key]);
+    });
+
+    $("f-vin").value = data.vin;
+    slugPreview();
+
+    /* Equipment. "Standard" for this VIN is a fact about the car, so those are
+       ticked. "Optional" only means the factory offered it, so those are offered
+       as one-tap chips instead: the car in the yard is the authority, not the
+       database. Nothing is ever unticked — a decode adds, it never takes away
+       what you already knew. */
+    var ticked = [];
+    var eq = data.features || {};
+    (eq.confirmed || []).forEach(function (f) {
+      var cb = featureBox(f);
+      if (cb && !cb.checked) { cb.checked = true; ticked.push(f); }
+    });
+    renderVinSuggestions((eq.possible || []).filter(function (f) {
+      var cb = featureBox(f);
+      return cb && !cb.checked;
+    }));
+
+    var parts = [];
+    if (filled.length) parts.push("Filled: " + filled.join(", ") + ".");
+    if (!filled.length) parts.push("Nothing to fill, every decoded field was already set.");
+    if (ticked.length) parts.push("Ticked as standard equipment: " + ticked.join(", ") + ".");
+    if (skipped.length) parts.push("Left alone: " + skipped.join("; ") + ".");
+    var missing = (data.unresolved || []).map(function (k) { return FIELD_LABELS[k] || k; });
+    if (missing.length) parts.push("The VIN cannot tell us " + missing.join(", ").toLowerCase() + " — enter those yourself.");
+    (data.caveats || []).forEach(function (c) { parts.push(c); });
+    if (data.note) parts.push("Database note: " + data.note);
+
+    var dupe = duplicateVin(data.vin);
+    if (dupe) parts.push("Careful: " + dupe + " already has this VIN.");
+
+    vinStatus(parts.join(" "), dupe ? "vin-err" : (filled.length || ticked.length) ? "vin-ok" : null);
+    updateQuality();
+  }
+
+  /* The checkbox for a catalogue label, if that label is on screen. */
+  function featureBox(label) {
+    var want = CAT.canonical(label).toLowerCase();
+    var found = null;
+    $("feature-checks").querySelectorAll("input[type=checkbox]").forEach(function (cb) {
+      if (cb.value.toLowerCase() === want) found = cb;
+    });
+    return found;
+  }
+
+  function renderVinSuggestions(list) {
+    var box = $("vin-suggest");
+    if (!list || !list.length) { box.hidden = true; box.innerHTML = ""; return; }
+    box.hidden = false;
+    box.innerHTML = '<p class="fh"><strong>Was this one optioned with any of these?</strong> ' +
+      'The VIN says the factory offered them on this model but cannot say whether this car has them. ' +
+      'Check the car, then tap to add.</p><div class="chips">' +
+      list.map(function (f) {
+        return '<button type="button" class="chip" data-feature="' + escapeHtml(f) + '">+ ' + escapeHtml(f) + "</button>";
+      }).join("") + "</div>";
+  }
+
+  $("vin-suggest").addEventListener("click", function (e) {
+    var f = e.target.getAttribute && e.target.getAttribute("data-feature");
+    if (!f) return;
+    var cb = featureBox(f);
+    if (cb) cb.checked = true;
+    e.target.remove();
+    if (!$("vin-suggest").querySelector(".chip")) $("vin-suggest").hidden = true;
+    updateQuality();
+  });
+
+  function duplicateVin(vin) {
+    var v = String(vin || "").trim().toUpperCase();
+    if (!v) return "";
+    var hit = null;
+    vehicles.forEach(function (o) {
+      if (o !== editing && String(o.vin || "").toUpperCase() === v) hit = o;
+    });
+    return hit ? (hit.year + " " + hit.make + " " + hit.model + " (stock " + (hit.stock || "—") + ")") : "";
+  }
+
+  ["f-body", "f-drive", "f-fuel", "f-trans"].forEach(function (id) {
+    $(id).addEventListener("change", function () { $(id).dataset.touched = "1"; });
+  });
+
+  function runDecode() {
+    var vin = $("f-vin").value.trim();
+    if (!vin) { vinStatus("Enter a VIN first.", "vin-err"); return; }
+    $("vin-decode").disabled = true;
+    vinStatus("Looking up " + vin.toUpperCase() + "…");
+    api("vin?vin=" + encodeURIComponent(vin))
+      .then(applyVin)
+      .catch(function (e) { vinStatus(e.message, "vin-err"); })
+      .finally(function () { $("vin-decode").disabled = false; });
+  }
+
+  $("vin-decode").addEventListener("click", runDecode);
+
+  /* Pressing Enter in a lone text field would submit the form in some browsers,
+     which here means nothing useful. It decodes instead. */
+  $("f-vin").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") { e.preventDefault(); runDecode(); }
+  });
+
+  /* A pasted VIN is 17 characters and always complete, so there is nothing to
+     be gained by making the owner press a second button. Typing it by hand
+     triggers the same thing on the seventeenth character. Decoding twice for
+     the same number is suppressed so an accidental re-paste is free. */
+  var lastDecoded = "";
+  $("f-vin").addEventListener("input", function () {
+    var vin = $("f-vin").value.trim().toUpperCase();
+    if (vin.length === 17 && vin !== lastDecoded) { lastDecoded = vin; runDecode(); }
+  });
+
+  /* ---------- description drafts ---------- */
+
+  function currentFeatures() {
+    var feats = [];
+    $("feature-checks").querySelectorAll("input:checked").forEach(function (cb) { feats.push(cb.value); });
+    $("f-features-extra").value.split(",").forEach(function (x) {
+      x = x.trim();
+      if (x) feats.push(x);
+    });
+    return feats;
+  }
+
+  /* What the draft writer needs: the form as it stands right now, not the last
+     saved copy. Reading the DOM rather than calling collectForm() keeps this
+     free of side effects — pressing the button must not create a page address
+     or bump updatedAt on a car you were only looking at. */
+  function formSnapshot() {
+    return {
+      id: editing && editing.id ? editing.id : slug($("f-year").value + "-" + $("f-make").value + "-" + $("f-model").value),
+      year: Number($("f-year").value) || "",
+      make: $("f-make").value.trim(),
+      model: $("f-model").value.trim(),
+      trim: $("f-trim").value.trim(),
+      body: $("f-body").value,
+      km: Number($("f-km").value) || 0,
+      engine: $("f-engine").value.trim(),
+      transmission: $("f-trans").value,
+      drivetrain: $("f-drive").value,
+      fuel: $("f-fuel").value,
+      doors: Number($("f-doors").value) || "",
+      seats: Number($("f-seats").value) || "",
+      extColor: $("f-extcolor").value.trim(),
+      intColor: $("f-intcolor").value.trim(),
+      features: currentFeatures()
+    };
+  }
+
+  $("desc-draft").addEventListener("click", function () {
+    var v = formSnapshot();
+    if (!v.year || !v.make || !v.model) {
+      toast("Fill in the year, make and model first — the draft is written from them.", "err");
+      return;
+    }
+    var notes = { ownership: $("f-ownership").value, work: $("f-work").value.trim() };
+    var filled = [];
+
+    [["f-desc", "en", "English"], ["f-descfr", "fr", "French"]].forEach(function (t) {
+      var box = $(t[0]);
+      var text = DESCRIBE.draft(v, t[1], notes);
+      if (!box.value.trim()) { box.value = text; filled.push(t[2]); return; }
+      if (confirm("Replace what is written in the " + t[2] + " box with a fresh draft?\n\nYour text will be lost.")) {
+        box.value = text;
+        filled.push(t[2]);
+      }
+    });
+
+    if (filled.length) toast("Wrote the " + filled.join(" and ") + " draft. Read it through and add your own line.", "ok");
+    descHint("f-desc", "desc-count-en", "en");
+    descHint("f-descfr", "desc-count-fr", "fr");
+    updateQuality();
+  });
+
+  function descHint(id, out, lang) {
+    var n = $(id).value.trim().length;
+    var el = $(out);
+    if (!n) { el.textContent = lang === "fr" ? "Empty — the French page will fall back to the English text." : "Empty."; return; }
+    el.textContent = n + " characters" + (n < 400 ? " — a bit short. Around 400 gives search engines and buyers something to work with." : ".");
+  }
+
+  /* ---------- listing quality ---------- */
+
+  /* Not validation: none of this blocks a save. It is the difference between a
+     listing that gets found and clicked and one that does not, written down so
+     it is visible at the moment it can still be fixed. */
+  function qualityChecks() {
+    var photos = (editing && editing.images ? editing.images.length : 0);
+    var feats = currentFeatures().length;
+    var descEn = $("f-desc").value.trim().length;
+    var descFr = $("f-descfr").value.trim().length;
+
+    return [
+      photos >= 6 ? ["ok", photos + " photos"]
+        : photos > 0 ? ["warn", "Only " + photos + " photo" + (photos === 1 ? "" : "s") + " — six or more gets far more clicks"]
+        : ["bad", "No photos yet"],
+      $("f-price").value ? ["ok", "Price set"] : ["bad", "No price"],
+      $("f-km").value ? ["ok", "Mileage set"] : ["bad", "No mileage"],
+      descEn >= 400 ? ["ok", "English description written"]
+        : descEn > 0 ? ["warn", "English description is short (" + descEn + " characters)"]
+        : ["bad", "No English description"],
+      descFr > 0 ? ["ok", "French description written"]
+        : ["warn", "No French description — the French page will show the English text"],
+      feats >= 5 ? ["ok", feats + " features ticked"]
+        : feats > 0 ? ["warn", "Only " + feats + " feature" + (feats === 1 ? "" : "s") + " ticked"]
+        : ["warn", "No features ticked"],
+      $("f-vin").value.trim() ? ["ok", "VIN recorded"] : ["warn", "No VIN — buyers look for it and it fills the form for you"],
+      $("f-extcolor").value.trim() ? ["ok", "Exterior colour set"] : ["warn", "No exterior colour"],
+      $("f-engine").value.trim() ? ["ok", "Engine listed"] : ["warn", "No engine listed"]
+    ];
+  }
+
+  function updateQuality() {
+    var rows = qualityChecks();
+    var good = rows.filter(function (r) { return r[0] === "ok"; }).length;
+    $("quality").innerHTML =
+      '<p class="quality-score">' + good + " of " + rows.length + " done. " +
+      (good === rows.length ? "This listing is as complete as it gets."
+        : "Nothing here blocks publishing — it is what makes the listing work harder.") + "</p>" +
+      '<ul class="quality-list">' + rows.map(function (r) {
+        return '<li class="q-' + r[0] + '"><span aria-hidden="true">' +
+          (r[0] === "ok" ? "✓" : r[0] === "warn" ? "!" : "×") + "</span>" + escapeHtml(r[1]) + "</li>";
+      }).join("") + "</ul>";
+  }
+
+  /* One listener for the whole form rather than one per field. */
+  $("edit-form").addEventListener("input", function () { updateQuality(); });
+  $("edit-form").addEventListener("change", function () { updateQuality(); });
+  $("f-desc").addEventListener("input", function () { descHint("f-desc", "desc-count-en", "en"); });
+  $("f-descfr").addEventListener("input", function () { descHint("f-descfr", "desc-count-fr", "fr"); });
+
+  /* ---------- spelling ---------- */
+
+  /* "bmw" becomes BMW and "xc60" becomes XC60 as you leave the field, so the
+     inventory, the page title and the Marketplace listing all agree. Anything
+     the shared list is not sure about is left exactly as typed. */
+  $("f-make").addEventListener("blur", function () {
+    var fixed = MAKES.fixMake($("f-make").value);
+    if (fixed && fixed !== $("f-make").value) $("f-make").value = fixed;
+  });
+  $("f-model").addEventListener("blur", function () {
+    var fixed = MAKES.fixModel($("f-model").value);
+    if (fixed && fixed !== $("f-model").value) $("f-model").value = fixed;
+  });
+
+  $("makes-list").innerHTML = MAKES.LIST.map(function (m) {
+    return "<option>" + escapeHtml(m) + "</option>";
+  }).join("");
 
   /* ---------- share panel ---------- */
 
@@ -343,7 +651,9 @@
       id: "", year: "", make: "", model: "", trim: "", body: "SUV",
       price: "", km: "", transmission: "Automatic", fuel: "Gasoline",
       drivetrain: "FWD", extColor: "", intColor: "", engine: "", vin: "",
-      stock: nextStock(), tag: "", features: [], desc: "", images: [],
+      doors: "", seats: "", econCity: "", econHwy: "",
+      stock: nextStock(), tag: "", features: [], desc: "", descFr: "",
+      draftNotes: { ownership: "", work: "" }, images: [],
       status: "draft", createdAt: new Date().toISOString()
     };
   }
@@ -368,26 +678,79 @@
     $("f-drive").value = v.drivetrain || "FWD";
     $("f-body").value = v.body || "SUV";
     $("f-engine").value = v.engine || "";
+    $("f-doors").value = v.doors || "";
+    $("f-seats").value = v.seats || "";
+    $("f-econcity").value = v.econCity != null ? v.econCity : "";
+    $("f-econhwy").value = v.econHwy != null ? v.econHwy : "";
     $("f-tag").value = v.tag || "";
     $("f-slug").value = v.id || "";
     slugPreview();
-    $("f-desc").value = Array.isArray(v.desc) ? v.desc.join("\n\n") : (v.desc || "");
+    vinStatus(VIN_HINT);
+    $("vin-suggest").hidden = true;
+    $("vin-suggest").innerHTML = "";
+    lastDecoded = (v.vin || "").toUpperCase();
+    /* An existing vehicle's dropdowns hold real saved choices; a brand new one
+       is only showing defaults, which a decode may replace. */
+    ["f-body", "f-drive", "f-fuel", "f-trans"].forEach(function (id) {
+      if (v.id) $(id).dataset.touched = "1"; else delete $(id).dataset.touched;
+    });
+    $("f-desc").value = paragraphs(v.desc);
+    $("f-descfr").value = paragraphs(v.descFr);
+    $("f-ownership").value = (v.draftNotes && v.draftNotes.ownership) || "";
+    $("f-work").value = (v.draftNotes && v.draftNotes.work) || "";
 
-    /* features: flat array (admin) or grouped object (original sample data) */
-    var flat = Array.isArray(v.features) ? v.features.slice()
-      : v.features ? [].concat(v.features.safety || [], v.features.comfort || [], v.features.technology || [], v.features.exterior || [])
-      : [];
-    var checks = $("feature-checks");
-    checks.innerHTML = FEATURES.map(function (f) {
-      var on = flat.some(function (x) { return x.toLowerCase() === f.toLowerCase(); });
-      return '<label><input type="checkbox" value="' + f + '"' + (on ? " checked" : "") + ">" + f + "</label>";
-    }).join("");
-    $("f-features-extra").value = flat.filter(function (x) {
-      return !FEATURES.some(function (f) { return f.toLowerCase() === x.toLowerCase(); });
-    }).join(", ");
+    descHint("f-desc", "desc-count-en", "en");
+    descHint("f-descfr", "desc-count-fr", "fr");
 
+    renderFeatures(flatFeatures(v));
     renderPhotos();
+    updateQuality();
     show("screen-edit");
+  }
+
+  function paragraphs(d) {
+    return Array.isArray(d) ? d.join("\n\n") : (d || "");
+  }
+
+  /* Features arrive as a flat array from this panel, or as the grouped object
+     the original sample data used. Both flatten to the same thing. */
+  function flatFeatures(v) {
+    if (Array.isArray(v.features)) return v.features.slice();
+    if (v.features) {
+      return [].concat(v.features.safety || [], v.features.comfort || [],
+        v.features.technology || [], v.features.exterior || []);
+    }
+    return [];
+  }
+
+  /* The catalogue drawn as grouped checkboxes, with two rules:
+     - a legacy label is only shown if this vehicle already carries it, so the
+       list does not grow a "AWD" box that duplicates the drivetrain field
+     - anything typed by hand that is not in the catalogue goes back into the
+       free-text box rather than disappearing */
+  function renderFeatures(flat) {
+    var chosen = {};
+    flat.forEach(function (f) { chosen[CAT.canonical(f).toLowerCase()] = true; });
+
+    function box(f) {
+      var on = chosen[f.toLowerCase()] ? " checked" : "";
+      return '<label><input type="checkbox" value="' + escapeHtml(f) + '"' + on + ">" +
+        "<span>" + escapeHtml(f) + "</span></label>";
+    }
+
+    var html = CAT.GROUPS.map(function (g) {
+      return '<fieldset class="fgroup"><legend>' + escapeHtml(g.en) + "</legend>" +
+        '<div class="feature-checks">' + g.items.map(box).join("") + "</div></fieldset>";
+    }).join("");
+
+    var legacy = CAT.LEGACY.filter(function (f) { return chosen[f.toLowerCase()]; });
+    if (legacy.length) {
+      html += '<fieldset class="fgroup"><legend>Already on this listing</legend>' +
+        '<div class="feature-checks">' + legacy.map(box).join("") + "</div></fieldset>";
+    }
+    $("feature-checks").innerHTML = html;
+
+    $("f-features-extra").value = flat.filter(function (x) { return !CAT.isKnown(x); }).join(", ");
   }
 
   function collectForm() {
@@ -406,16 +769,16 @@
     v.drivetrain = $("f-drive").value;
     v.body = $("f-body").value;
     v.engine = $("f-engine").value.trim();
+    v.doors = Number($("f-doors").value) || "";
+    v.seats = Number($("f-seats").value) || "";
+    v.econCity = $("f-econcity").value === "" ? "" : Number($("f-econcity").value);
+    v.econHwy = $("f-econhwy").value === "" ? "" : Number($("f-econhwy").value);
     v.tag = $("f-tag").value;
     v.desc = $("f-desc").value.trim();
+    v.descFr = $("f-descfr").value.trim();
+    v.draftNotes = { ownership: $("f-ownership").value, work: $("f-work").value.trim() };
 
-    var feats = [];
-    $("feature-checks").querySelectorAll("input:checked").forEach(function (cb) { feats.push(cb.value); });
-    $("f-features-extra").value.split(",").forEach(function (x) {
-      x = x.trim();
-      if (x) feats.push(x);
-    });
-    v.features = feats;
+    v.features = currentFeatures();
 
     var hexKey = (v.extColor || "").toLowerCase().split(/\s+/).find(function (w) { return COLOR_HEX[w]; });
     v.extHex = hexKey ? COLOR_HEX[hexKey] : (v.extHex || "#6c7178");
@@ -560,6 +923,7 @@
 
       grid.appendChild(item);
     });
+    updateQuality();
   }
 
   function compressImage(file) {
@@ -640,6 +1004,15 @@
     dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.remove("dragover"); });
   });
   dz.addEventListener("drop", function (e) { addFiles(e.dataTransfer.files); });
+
+  /* Closing the tab mid-listing loses everything that is not committed, and a
+     phone that swipes the tab away by accident is not a rare event. The browser
+     shows its own wording; all we control is whether it asks at all. */
+  window.addEventListener("beforeunload", function (e) {
+    if ($("screen-edit").hidden) return;
+    e.preventDefault();
+    e.returnValue = "";
+  });
 
   boot();
 })();

@@ -63,6 +63,12 @@
     "api/vehicle.js": {
       "includeFiles": "data/**"
     },
+    "api/save.js": {
+      "includeFiles": "js/**"
+    },
+    "api/vin.js": {
+      "includeFiles": "js/**"
+    },
     "api/social.js": {
       "maxDuration": 60
     }

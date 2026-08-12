@@ -5,6 +5,10 @@
 
 const SITE = "https://www.automobilesx.ca";
 
+/* The same catalogue the admin panel ticks and the browser re-renders with, so
+   the pre-rendered French page and the hydrated one agree word for word. */
+const CATALOGUE = require("../../js/features.js");
+
 const PATHS = {
   en: { dir: "vehicles", inventory: "/inventory", contact: "/contact", financing: "/financing" },
   fr: { dir: "fr/vehicules", inventory: "/fr/inventaire", contact: "/fr/contact", financing: "/fr/financement" }
@@ -74,13 +78,15 @@ const FOOTER_NAV = {
     ["/inventory", "Used car inventory"], ["/financing", "Financing"],
     ["/sell-your-car", "Sell or trade your car"], ["/guides", "Buying guides"],
     ["/faq", "Questions and answers"], ["/used-cars-west-island", "Used cars in the West Island"],
-    ["/about", "About Automobile SX"], ["/contact", "Contact and directions"]
+    ["/about", "About Automobile SX"], ["/contact", "Contact and directions"],
+    ["/privacy", "Privacy policy"]
   ],
   fr: [
     ["/fr/inventaire", "Inventaire de véhicules"], ["/fr/financement", "Financement"],
     ["/fr/vendre-votre-auto", "Vendre ou échanger votre auto"], ["/fr/guides", "Guides d'achat"],
     ["/fr/faq", "Questions et réponses"], ["/fr/autos-usagees-west-island", "Autos usagées dans le West Island"],
-    ["/fr/a-propos", "À propos d'Automobile SX"], ["/fr/contact", "Contact et itinéraire"]
+    ["/fr/a-propos", "À propos d'Automobile SX"], ["/fr/contact", "Contact et itinéraire"],
+    ["/fr/confidentialite", "Politique de confidentialité"]
   ]
 };
 
@@ -129,9 +135,22 @@ function flatFeatures(v) {
   return [];
 }
 
-function descParagraphs(v) {
-  if (Array.isArray(v.desc)) return v.desc.filter(Boolean);
-  if (typeof v.desc === "string" && v.desc.trim()) return v.desc.split(/\n\s*\n/).filter(Boolean);
+function featuresHtml(v, lang, t) {
+  const groups = CATALOGUE.grouped(flatFeatures(v), lang);
+  if (!groups.length) return '<p style="color:var(--slate)">' + esc(t.featuresSoon) + "</p>";
+  return groups.map(g =>
+    '<div class="feature-group"><h3 class="feature-group-title">' + esc(g.title) + "</h3>" +
+    '<ul class="feature-chips">' + g.items.map(f => "<li>" + esc(f) + "</li>").join("") +
+    "</ul></div>").join("");
+}
+
+/* A French page shows the French description when the admin panel has written
+   one, and the English text when it has not — an empty overview would be worse
+   than a paragraph in the other language. */
+function descParagraphs(v, lang) {
+  const source = (lang === "fr" && v.descFr) ? v.descFr : v.desc;
+  if (Array.isArray(source)) return source.filter(Boolean);
+  if (typeof source === "string" && source.trim()) return source.split(/\n\s*\n/).filter(Boolean);
   return [];
 }
 
@@ -243,8 +262,7 @@ function renderVehiclePage(v, lang) {
   const altLang = lang === "en" ? "fr" : "en";
   const altUrl = "/" + PATHS[altLang].dir + "/" + v.id;
   const bodyLabel = lang === "fr" ? (BODY_FR[v.body] || v.body) : v.body;
-  const paras = descParagraphs(v);
-  const feats = flatFeatures(v);
+  const paras = descParagraphs(v, lang);
   const rows = specRows(v, lang);
   const half = Math.ceil(rows.length / 2);
   const ogImage = (v.images && v.images.length)
@@ -331,10 +349,7 @@ function renderVehiclePage(v, lang) {
         </section>
         <section aria-labelledby="h-features">
           <h2 id="h-features">${esc(t.features)}</h2>
-          <div id="v-features">${feats.length
-            ? '<div class="feature-group"><ul class="feature-chips">' +
-              feats.map(f => "<li>" + esc(f) + "</li>").join("") + "</ul></div>"
-            : '<p style="color:var(--slate)">' + esc(t.featuresSoon) + "</p>"}</div>
+          <div id="v-features">${featuresHtml(v, lang, t)}</div>
         </section>
         <section aria-labelledby="h-calc">
           <h2 id="h-calc">${esc(t.estimate)}</h2>
@@ -392,6 +407,7 @@ function renderVehiclePage(v, lang) {
 <footer class="site-footer" id="site-footer">${staticFooter(lang)}</footer>
 <div class="mobile-cta-bar" id="mobile-cta-bar"></div>
 
+<script src="/js/features.js"></script>
 <script src="/js/data.js"></script>
 <script src="/js/components.js"></script>
 <script src="/js/detail.js" defer></script>

@@ -205,3 +205,61 @@ textarea { resize: vertical; }
   font-size: 13px; white-space: pre-wrap; word-break: break-word;
   max-height: 7.5em; overflow: auto;
 }
+
+/* VIN decode */
+.vin-row { display: flex; gap: 8px; align-items: stretch; }
+.vin-row input { flex: 1; min-width: 0; }
+.vin-row .btn { flex: 0 0 auto; }
+.fh.vin-ok { color: #15803d; }
+.fh.vin-err { color: #b91c1c; }
+
+/* VIN card — the first thing in the editor, because filling it fills the rest */
+.vin-card {
+  background: #fff; border: 1px solid var(--mist); border-radius: 14px; padding: 16px;
+}
+.vin-card .vin-row input { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.06em; }
+.vin-suggest { margin-top: 14px; border-top: 1px solid var(--mist); padding-top: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.chip {
+  font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+  background: var(--bone); border: 1px dashed #C9C4BF; border-radius: 999px;
+  padding: 8px 14px; min-height: 40px; color: var(--ink);
+}
+.chip:hover { border-style: solid; border-color: var(--ink); background: #fff; }
+
+/* Features, grouped */
+.feature-groups { display: flex; flex-direction: column; gap: 18px; }
+.fgroup { border: 0; padding: 0; margin: 0; min-width: 0; }
+.fgroup legend {
+  padding: 0 0 8px; font-size: 12.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--slate);
+}
+
+/* Description */
+.desc-tools {
+  display: grid; grid-template-columns: 1fr 2fr auto; gap: 12px; align-items: end;
+}
+.desc-tools .btn { min-height: 46px; white-space: nowrap; }
+.desc-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+
+/* Pre-publish checklist */
+.quality { background: #fff; border: 1px solid var(--mist); border-radius: 14px; padding: 16px 18px; }
+.quality-score { margin: 0 0 10px; font-weight: 600; font-size: 14.5px; }
+.quality-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; }
+.quality-list li { display: flex; gap: 10px; align-items: baseline; font-size: 14.5px; }
+.quality-list li span { font-weight: 700; width: 14px; flex: 0 0 14px; text-align: center; }
+.q-ok span { color: var(--trust); }
+.q-warn span { color: #b45309; }
+.q-bad span { color: var(--red); }
+.q-warn, .q-bad { color: #3f4247; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+@media (max-width: 860px) {
+  .desc-tools { grid-template-columns: 1fr; }
+  .desc-pair { grid-template-columns: 1fr; }
+  .quality-list { grid-template-columns: 1fr; }
+}

@@ -65,6 +65,18 @@
 
     <form id="edit-form" novalidate>
 
+      <h2>Start with the VIN</h2>
+      <div class="vin-card">
+        <div class="vin-row">
+          <label class="visually-hidden" for="f-vin">VIN</label>
+          <input id="f-vin" type="text" maxlength="17" placeholder="17 characters, e.g. 2T3H1RFV5LC000000"
+                 autocapitalize="characters" autocorrect="off" spellcheck="false">
+          <button class="btn btn-small btn-outline" type="button" id="vin-decode">Decode</button>
+        </div>
+        <p class="fh" id="vin-status">Paste or type the VIN and it fills in the year, make, model, engine, body, drivetrain and the safety equipment by itself. Everything stays editable, and nothing you have already typed gets overwritten. No VIN? Just fill the form in below.</p>
+        <div id="vin-suggest" class="vin-suggest" hidden></div>
+      </div>
+
       <h2>Photos</h2>
       <div class="dropzone" id="dropzone" tabindex="0" role="button"
            aria-label="Add photos: drag and drop or press Enter to browse">
@@ -78,12 +90,11 @@
       <div class="form-grid">
         <div class="f"><label for="f-year">Year *</label><input id="f-year" type="number" min="1990" max="2035" inputmode="numeric"></div>
         <div class="f"><label for="f-make">Make *</label><input id="f-make" type="text" list="makes-list" autocapitalize="words">
-          <datalist id="makes-list"><option>Toyota</option><option>Honda</option><option>Ford</option><option>Chevrolet</option><option>Mazda</option><option>Subaru</option><option>Hyundai</option><option>Nissan</option><option>BMW</option><option>Jeep</option><option>Kia</option><option>Volkswagen</option><option>Mercedes-Benz</option><option>Audi</option><option>Dodge</option><option>Ram</option><option>GMC</option><option>Lexus</option><option>Acura</option><option>Mitsubishi</option></datalist></div>
+          <datalist id="makes-list"></datalist></div>
         <div class="f"><label for="f-model">Model *</label><input id="f-model" type="text" autocapitalize="words"></div>
         <div class="f"><label for="f-trim">Trim</label><input id="f-trim" type="text" placeholder="e.g. XLE AWD"></div>
         <div class="f"><label for="f-price">Price (CAD) *</label><input id="f-price" type="number" min="0" step="50" inputmode="numeric" placeholder="e.g. 18900"></div>
         <div class="f"><label for="f-km">Mileage (km) *</label><input id="f-km" type="number" min="0" step="100" inputmode="numeric" placeholder="e.g. 84000"></div>
-        <div class="f"><label for="f-vin">VIN (optional)</label><input id="f-vin" type="text" maxlength="17" autocapitalize="characters"></div>
         <div class="f"><label for="f-extcolor">Exterior colour</label><input id="f-extcolor" type="text" placeholder="e.g. Black"></div>
         <div class="f"><label for="f-intcolor">Interior colour</label><input id="f-intcolor" type="text" placeholder="e.g. Grey cloth"></div>
         <div class="f"><label for="f-fuel">Fuel type</label>
@@ -95,6 +106,10 @@
         <div class="f"><label for="f-body">Body style</label>
           <select id="f-body"><option>Sedan</option><option>SUV</option><option>Truck</option><option>Coupe</option><option>Hatchback</option></select></div>
         <div class="f"><label for="f-engine">Engine (optional)</label><input id="f-engine" type="text" placeholder="e.g. 2.5L I4"></div>
+        <div class="f"><label for="f-doors">Doors</label><input id="f-doors" type="number" min="2" max="5" inputmode="numeric" placeholder="filled by the VIN"></div>
+        <div class="f"><label for="f-seats">Seats</label><input id="f-seats" type="number" min="2" max="9" inputmode="numeric" placeholder="filled by the VIN"></div>
+        <div class="f"><label for="f-econcity">Fuel economy, city (L/100 km)</label><input id="f-econcity" type="number" min="0" max="30" step="0.1" inputmode="decimal" placeholder="optional, e.g. 9.8"></div>
+        <div class="f"><label for="f-econhwy">Fuel economy, highway (L/100 km)</label><input id="f-econhwy" type="number" min="0" max="30" step="0.1" inputmode="decimal" placeholder="optional, e.g. 7.2"></div>
         <div class="f"><label for="f-tag">Homepage tag</label>
           <select id="f-tag"><option value="">None</option><option>Just Arrived</option><option>Price Drop</option></select></div>
         <div class="f f-wide"><label for="f-slug">Page address</label>
@@ -103,15 +118,49 @@
           <span class="fh">Only change this to fix a spelling mistake. The old address keeps working and sends visitors to the new one automatically.</span></div>
       </div>
 
-      <h2>Description</h2>
-      <textarea id="f-desc" rows="7" placeholder="Describe the vehicle the way you'd tell a customer about it: condition, history, recent work, why it's a good buy."></textarea>
-
       <h2>Features</h2>
-      <div class="feature-checks" id="feature-checks"></div>
-      <div class="f" style="margin-top:10px">
-        <label for="f-features-extra">Other features (comma-separated, optional)</label>
-        <input id="f-features-extra" type="text" placeholder="e.g. Tow package, New tires, Winter mats included">
+      <p class="fh">Tick what the car actually has. These become the chips on the vehicle page, they are translated automatically on the French page, and the description draft uses them.</p>
+      <div class="feature-groups" id="feature-checks"></div>
+      <div class="f" style="margin-top:14px">
+        <label for="f-features-extra">Anything else (comma-separated)</label>
+        <input id="f-features-extra" type="text" placeholder="e.g. New brakes, Winter mats included, Two sets of keys">
       </div>
+
+      <h2>Description</h2>
+      <div class="desc-tools">
+        <div class="f">
+          <label for="f-ownership">History</label>
+          <select id="f-ownership">
+            <option value="">Not stated</option>
+            <option>One owner</option>
+            <option>Two owners</option>
+            <option>Local trade-in</option>
+            <option>Lease return</option>
+          </select>
+        </div>
+        <div class="f">
+          <label for="f-work">Recent work or what's included</label>
+          <input id="f-work" type="text" placeholder="e.g. Four new tires and a full brake service last month">
+        </div>
+        <button class="btn btn-small btn-outline" type="button" id="desc-draft">Write a first draft</button>
+      </div>
+      <p class="fh" id="desc-draft-note">The draft states only what is already in the form above, in English and in French. It never mentions the price. Add a sentence or two of your own afterwards — where the car came from, how it drives, why it is worth the money. That part is what makes a listing sell, and it is the part no database can write.</p>
+
+      <div class="desc-pair">
+        <div class="f">
+          <label for="f-desc">English</label>
+          <textarea id="f-desc" rows="9" placeholder="Describe the vehicle the way you'd tell a customer about it."></textarea>
+          <span class="fh" id="desc-count-en"></span>
+        </div>
+        <div class="f">
+          <label for="f-descfr">Français</label>
+          <textarea id="f-descfr" rows="9" lang="fr" placeholder="La version française, affichée sur les pages en français."></textarea>
+          <span class="fh" id="desc-count-fr"></span>
+        </div>
+      </div>
+
+      <h2>Before you publish</h2>
+      <div class="quality" id="quality"></div>
 
       <p class="edit-error" id="edit-error" role="alert" hidden></p>
 
@@ -157,6 +206,9 @@
 <div class="toast" id="toast" role="status" hidden></div>
 <div class="busy-overlay" id="busy" hidden><div class="busy-box" id="busy-text">Working…</div></div>
 
+<script src="/js/makes.js"></script>
+<script src="/js/features.js"></script>
+<script src="/admin/describe.js"></script>
 <script src="/admin/admin.js"></script>
 </body>
 </html>

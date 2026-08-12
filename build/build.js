@@ -125,7 +125,7 @@ function build() {
       },
       {
         route: "vehicle", title: T.vehicle.title, description: T.vehicle.description,
-        body: blocks.vehicleBody(T), scripts: ["/js/detail.js"], skipCanonical: true
+        body: blocks.vehicleBody(T), scripts: ["/js/features.js", "/js/detail.js"], skipCanonical: true
       },
       {
         route: "contact", title: T.contact.title, description: T.contact.description,
@@ -157,6 +157,11 @@ function build() {
         body: faqBody(T), scripts: ["/js/faq.js"],
         schema: [faqSchema(T, lang)],
         breadcrumb: [bcHome, { name: T.faq.h1, route: "faq" }]
+      },
+      {
+        route: "privacy", title: T.privacy.title, description: T.privacy.description,
+        ...prosePage(T, "privacy"),
+        breadcrumb: [bcHome, { name: T.privacy.h1, route: "privacy" }]
       },
       {
         route: "guides", title: T.guides.title, description: T.guides.description,
