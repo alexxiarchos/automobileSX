@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-10T06:14:34.279Z",
+  "updatedAt": "2026-08-12T20:15:32.901Z",
   "vehicles": [
     {
       "id": "2014-subaru-legacy-4jxba",
@@ -62,7 +62,7 @@
       "drivetrain": "AWD",
       "extColor": "Black",
       "extHex": "#141518",
-      "intColor": "Beowny",
+      "intColor": "Brown",
       "engine": "2.5",
       "vin": "",
       "stock": "SX-1013",
@@ -97,7 +97,7 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:13:07.748Z",
-      "updatedAt": "2026-08-04T12:15:01.181Z"
+      "updatedAt": "2026-08-12T20:15:32.321Z"
     },
     {
       "id": "2017-volkswagen-golf-iftqk",
