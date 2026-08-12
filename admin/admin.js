@@ -159,6 +159,8 @@
         "</div>" +
         '<div class="dash-actions">' +
         '<button class="btn btn-small btn-outline" data-act="edit">Edit</button>' +
+        ((v.status || "available") !== "draft"
+          ? '<button class="btn btn-small btn-outline" data-act="share">Share</button>' : "") +
         '<button class="btn btn-small btn-outline" data-act="status">' + ((v.status || "available") === "sold" ? "Mark Available" : "Mark Sold") + "</button>" +
         '<button class="btn btn-small btn-ghost" data-act="dup">Duplicate</button>' +
         '<button class="btn btn-small btn-danger-ghost" data-act="del">Delete</button>' +
@@ -167,6 +169,7 @@
         var act = e.target.getAttribute && e.target.getAttribute("data-act");
         if (!act) return;
         if (act === "edit") openEditor(v, false);
+        if (act === "share") openShare(v);
         if (act === "status") toggleStatus(v);
         if (act === "dup") duplicateVehicle(v);
         if (act === "del") deleteVehicle(v);
@@ -174,6 +177,112 @@
       list.appendChild(row);
     });
   }
+
+  /* ---------- share panel ---------- */
+
+  var shareVehicle = null;
+
+  function mpField(key, label, value) {
+    if (!value) return "";
+    var id = "mp-" + key;
+    return '<div class="mp-field"><label for="' + id + '">' + label + "</label>" +
+      '<div class="mp-val" id="' + id + '">' + escapeHtml(value) + "</div>" +
+      '<button class="btn btn-small btn-ghost" type="button" data-copy="' + id + '">Copy</button></div>';
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function openShare(v) {
+    shareVehicle = v;
+    $("share-status").textContent = "";
+    $("share-caption").value = "Loading…";
+    $("share-marketplace").innerHTML = "";
+    $("share-overlay").hidden = false;
+
+    api("social?id=" + encodeURIComponent(v.id))
+      .then(function (d) {
+        $("share-vehicle").textContent = d.title;
+        $("share-caption").value = d.caption;
+        $("share-open").href = d.url;
+        var m = d.marketplace;
+        $("share-marketplace").innerHTML =
+          mpField("title", "Title", m.title) +
+          mpField("price", "Price", m.price) +
+          mpField("year", "Year", m.year) +
+          mpField("make", "Make", m.make) +
+          mpField("model", "Model", m.model) +
+          mpField("mileage", "Mileage", m.mileage) +
+          mpField("trans", "Transmission", m.transmission) +
+          mpField("colour", "Exterior colour", m.exteriorColour) +
+          mpField("desc", "Description", m.description);
+
+        var ready = d.configured.facebook || d.configured.instagram;
+        $("share-post").disabled = !ready;
+        if (!ready) {
+          $("share-status").textContent =
+            "Direct posting is not set up yet, so copy and paste for now. See SOCIAL-SETUP.md.";
+        } else if (!d.image) {
+          $("share-status").textContent =
+            "This vehicle has no photo, so Instagram will be skipped.";
+        }
+      })
+      .catch(function (e) {
+        $("share-caption").value = "";
+        $("share-status").textContent = "Could not load: " + e.message;
+      });
+  }
+
+  function closeShare() { $("share-overlay").hidden = true; shareVehicle = null; }
+
+  $("share-close").addEventListener("click", closeShare);
+  $("share-overlay").addEventListener("click", function (e) {
+    if (e.target === $("share-overlay")) closeShare();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !$("share-overlay").hidden) closeShare();
+  });
+
+  /* One delegated handler for every Copy button in the panel */
+  $("share-overlay").addEventListener("click", function (e) {
+    var target = e.target.getAttribute && e.target.getAttribute("data-copy");
+    if (!target) return;
+    var el = $(target);
+    var text = el.value !== undefined ? el.value : el.textContent;
+    navigator.clipboard.writeText(text).then(function () {
+      var old = e.target.textContent;
+      e.target.textContent = "Copied";
+      setTimeout(function () { e.target.textContent = old; }, 1200);
+    }).catch(function () { toast("Could not copy. Select the text manually.", "err"); });
+  });
+
+  $("share-post").addEventListener("click", function () {
+    if (!shareVehicle) return;
+    if (!confirm("Post this to your Facebook Page and Instagram now?")) return;
+    busy("Posting…");
+    api("social", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: shareVehicle.id,
+        targets: ["facebook", "instagram"],
+        caption: $("share-caption").value
+      })
+    }).then(function (d) {
+      var lines = Object.keys(d.results).map(function (k) {
+        var r = d.results[k];
+        var name = k === "facebook" ? "Facebook" : "Instagram";
+        return name + ": " + (r.ok ? "posted" : "failed, " + r.error);
+      });
+      $("share-status").textContent = lines.join("  ·  ");
+      var allOk = Object.keys(d.results).every(function (k) { return d.results[k].ok; });
+      toast(allOk ? "Posted." : "Some posts failed, see the panel.", allOk ? "ok" : "err");
+    }).catch(function (e) {
+      $("share-status").textContent = "Failed: " + e.message;
+      toast("Could not post: " + e.message, "err");
+    }).finally(function () { busy(null); });
+  });
 
   /* ---------- save (one commit) ---------- */
 

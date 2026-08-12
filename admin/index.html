@@ -125,6 +125,35 @@
 
 </main>
 
+<div class="share-overlay" id="share-overlay" hidden>
+  <div class="share-panel" role="dialog" aria-modal="true" aria-labelledby="share-title">
+    <div class="share-head">
+      <h2 id="share-title">Share this vehicle</h2>
+      <button class="drawer-close" type="button" id="share-close" aria-label="Close">×</button>
+    </div>
+    <div class="share-body">
+      <p class="muted" id="share-vehicle"></p>
+
+      <h3>Facebook &amp; Instagram</h3>
+      <label class="visually-hidden" for="share-caption">Caption</label>
+      <textarea id="share-caption" rows="12"></textarea>
+      <div class="share-actions">
+        <button class="btn btn-small btn-outline" type="button" data-copy="share-caption">Copy caption</button>
+        <button class="btn btn-small btn-red" type="button" id="share-post">Post to Facebook &amp; Instagram</button>
+      </div>
+      <p class="fh" id="share-status"></p>
+
+      <h3>Facebook Marketplace</h3>
+      <p class="fh">Marketplace has no API, so this is paste-ready instead. Copy each field into the Marketplace form.</p>
+      <div id="share-marketplace"></div>
+
+      <h3>Photos</h3>
+      <p class="fh">Marketplace needs the photos uploaded from your device. Open the vehicle page and save the images, or use the originals from your phone.</p>
+      <p><a class="btn btn-small btn-outline" id="share-open" target="_blank" rel="noopener">Open the vehicle page</a></p>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast" role="status" hidden></div>
 <div class="busy-overlay" id="busy" hidden><div class="busy-box" id="busy-text">Working…</div></div>
 
