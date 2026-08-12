@@ -14,7 +14,7 @@
 
 const SITE = "https://www.automobilesx.ca";
 const GRAPH = "https://graph.facebook.com/v21.0";
-const TIMEOUT_MS = 15000;
+const TIMEOUT_MS = 20000;
 
 function cfg() {
   return {
@@ -141,14 +141,47 @@ async function postToFacebook(v, text) {
   return { id: out.id, url: out.id ? "https://www.facebook.com/" + out.id : null };
 }
 
-/* Instagram is two calls: build a container pointing at a public image, then
-   publish it. The image has to be reachable from Meta's servers, which is why
-   this runs after the car is live rather than during the save. */
+/* Meta has to fetch and process the photo between creating the container and
+   publishing it. Publishing too early returns "Media ID is not available", so
+   the container's status_code is polled until it reports FINISHED. */
+async function waitForContainer(id, token) {
+  const started = Date.now();
+  let lastStatus = "IN_PROGRESS";
+  while (Date.now() - started < 40000) {
+    const s = await call(GRAPH + "/" + id + "?fields=status_code,status&access_token=" +
+      encodeURIComponent(token));
+    lastStatus = s.status_code || lastStatus;
+    if (lastStatus === "FINISHED") return;
+    if (lastStatus === "ERROR" || lastStatus === "EXPIRED") {
+      throw new Error("Instagram could not process the photo" + (s.status ? ": " + s.status : ""));
+    }
+    await new Promise(r => setTimeout(r, 2000));
+  }
+  throw new Error("Instagram was still processing the photo after 40 seconds. Try again in a minute.");
+}
+
+/* A photo committed by a publish is not on the CDN until Vercel finishes
+   deploying, and Meta fetches the URL itself. Checking first turns a cryptic
+   Meta error into a sentence that says what to do. */
+async function imageIsReachable(url) {
+  try {
+    const res = await fetch(url, { method: "HEAD" });
+    return res.ok;
+  } catch (e) {
+    return false;
+  }
+}
+
 async function postToInstagram(v, text) {
   const c = cfg();
   if (!c.igUserId || !c.token) throw new Error("Instagram is not configured");
   const image = firstImage(v);
   if (!image) throw new Error("This vehicle has no photo, and Instagram requires one");
+
+  if (!(await imageIsReachable(image))) {
+    throw new Error("The photo is not live on the site yet (" + image +
+      "). Wait a minute for the site to finish updating, then try again.");
+  }
 
   const create = new URLSearchParams({
     image_url: image,
@@ -161,6 +194,8 @@ async function postToInstagram(v, text) {
     body: create.toString()
   });
   if (!container.id) throw new Error("Instagram did not return a container id");
+
+  await waitForContainer(container.id, c.token);
 
   const publish = new URLSearchParams({
     creation_id: container.id,

@@ -62,6 +62,9 @@
     },
     "api/vehicle.js": {
       "includeFiles": "data/**"
+    },
+    "api/social.js": {
+      "maxDuration": 60
     }
   }
 }
