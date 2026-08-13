@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T22:35:39.260Z",
+  "updatedAt": "2026-08-13T22:36:35.427Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -143,7 +143,7 @@
       "year": 2014,
       "make": "Subaru",
       "model": "Legacy",
-      "trim": "",
+      "trim": "quattro Premium, quattro Sport Premium",
       "body": "SUV",
       "price": 4999,
       "km": 214000,
@@ -154,18 +154,32 @@
       "extHex": "#5c6066",
       "intColor": "Grey",
       "engine": "2.5",
-      "vin": "",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 4,
+      "seats": 5,
+      "vin": "WA1ECCFS4JR029905",
       "stock": "SX-1014",
       "tag": "",
       "features": [
-        "Bluetooth",
+        "Backup Camera",
+        "Parking Sensors",
+        "Automatic High Beams",
         "Heated Seats",
         "Sunroof",
+        "Bluetooth",
         "Remote Start",
         "Cruise Control",
         "AWD"
       ],
       "desc": "2014 SUBARU LEGACY, 2.5L AWD, AC , SIÈGES CHAUFFANT, GROUPE ÉLECTRIQUES \n\n\nHORAIRES FLEXIBLES SUR RENDEZ-VOUS \n514-824-9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
+      "descFr": "",
+      "descMode": "manual",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
       "images": [
         "images/vehicles/2014-subaru-legacy-4jxba/msemjsep-160.jpg",
         "images/vehicles/2014-subaru-legacy-4jxba/msemjt49-161.jpg",
@@ -183,7 +197,8 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:17:11.456Z",
-      "updatedAt": "2026-08-10T03:49:58.479Z"
+      "updatedAt": "2026-08-13T22:36:35.297Z",
+      "publishedAt": "2026-08-13T22:36:35.297Z"
     },
     {
       "id": "2019-volvo-xc60-zen4s",
