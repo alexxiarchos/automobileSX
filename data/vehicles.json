@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T20:28:02.415Z",
+  "updatedAt": "2026-08-13T22:19:56.005Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -326,7 +326,21 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:07:36.365Z",
-      "updatedAt": "2026-08-04T12:09:34.206Z"
+      "updatedAt": "2026-08-04T12:09:34.206Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1134025552709632",
+          "url": "https://www.facebook.com/101868772570376_1134025552709632",
+          "at": "2026-08-13T22:19:55.382Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18130272703656689",
+          "url": "https://www.instagram.com/p/Db_y9Y4k0CR/",
+          "at": "2026-08-13T22:19:55.382Z"
+        }
+      ]
     },
     {
       "id": "2017-subaru-forester-774gh",
