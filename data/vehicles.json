@@ -1,6 +1,143 @@
 {
-  "updatedAt": "2026-08-12T20:15:32.901Z",
+  "updatedAt": "2026-08-13T22:21:44.071Z",
   "vehicles": [
+    {
+      "id": "2016-kia-sorento-lmnwf",
+      "year": 2016,
+      "make": "Kia",
+      "model": "Sorento",
+      "trim": "L / LX",
+      "body": "SUV",
+      "price": 9999,
+      "km": 156000,
+      "transmission": "Automatic",
+      "fuel": "Gasoline",
+      "drivetrain": "AWD",
+      "extColor": "Black",
+      "extHex": "#141518",
+      "intColor": "Grey",
+      "engine": "2.0L",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 4,
+      "seats": 5,
+      "vin": "5XYPGDA13GG052171",
+      "stock": "SX-1016",
+      "tag": "",
+      "features": [
+        "Backup Camera",
+        "Parking Sensors",
+        "Air Conditioning",
+        "Heated Seats",
+        "Power Driver Seat",
+        "Bluetooth",
+        "Keyless Entry",
+        "Push-Button Start",
+        "Cruise Control",
+        "Alloy Wheels"
+      ],
+      "desc": "",
+      "descFr": "",
+      "descMode": "auto",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
+      "images": [
+        "images/vehicles/2016-kia-sorento-lmnwf/msru6n0w-1.jpg",
+        "images/vehicles/2016-kia-sorento-lmnwf/msru6ok2-2.jpg",
+        "images/vehicles/2016-kia-sorento-lmnwf/msru6pfb-3.jpg",
+        "images/vehicles/2016-kia-sorento-lmnwf/msru6qal-4.jpg",
+        "images/vehicles/2016-kia-sorento-lmnwf/msru6r8x-5.jpg",
+        "images/vehicles/2016-kia-sorento-lmnwf/msru6s16-6.jpg",
+        "images/vehicles/2016-kia-sorento-lmnwf/msru6sqr-7.jpg",
+        "images/vehicles/2016-kia-sorento-lmnwf/msru6tow-8.jpg",
+        "images/vehicles/2016-kia-sorento-lmnwf/msru6uet-9.jpg",
+        "images/vehicles/2016-kia-sorento-lmnwf/msru6v11-10.jpg",
+        "images/vehicles/2016-kia-sorento-lmnwf/msru6vqi-11.jpg",
+        "images/vehicles/2016-kia-sorento-lmnwf/msru6wdg-12.jpg",
+        "images/vehicles/2016-kia-sorento-lmnwf/msru6x5u-13.jpg"
+      ],
+      "status": "available",
+      "createdAt": "2026-08-13T18:10:50.902Z",
+      "updatedAt": "2026-08-13T18:20:51.535Z",
+      "publishedAt": "2026-08-13T18:14:14.006Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1133968776048643",
+          "url": "https://www.facebook.com/101868772570376_1133968776048643",
+          "at": "2026-08-13T20:28:01.847Z"
+        },
+        {
+          "target": "instagram",
+          "id": "17954921865213124",
+          "url": "https://www.instagram.com/p/Db_mJuEEjVh/",
+          "at": "2026-08-13T20:28:01.848Z"
+        }
+      ]
+    },
+    {
+      "id": "2019-nissan-kicks-6k9ge",
+      "year": 2019,
+      "make": "Nissan",
+      "model": "Kicks",
+      "trim": "SV",
+      "body": "Hatchback",
+      "price": 10999,
+      "km": 145000,
+      "transmission": "Automatic",
+      "fuel": "Gasoline",
+      "drivetrain": "FWD",
+      "extColor": "Grey",
+      "extHex": "#5c6066",
+      "intColor": "Grey",
+      "engine": "1.6L",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 4,
+      "seats": 5,
+      "vin": "3N1CP5CUXKL478505",
+      "stock": "SX-1015",
+      "tag": "",
+      "features": [
+        "Backup Camera",
+        "Air Conditioning",
+        "Heated Seats",
+        "Touchscreen Display"
+      ],
+      "desc": "",
+      "descFr": "",
+      "descMode": "auto",
+      "descNote": "Flexible hours by appointment.\n\nCall 514-824-9117 for more information or to schedule a visit. Financing available.\n\nAutomobile SX\n2044 Avenue Chartier\nDorval, QC H9P 1H2",
+      "descNoteFr": "Horaires flexibles sur rendez-vous.\n\nAppelez le 514-824-9117 pour plus d'informations ou pour planifier une visite. Financement disponible.\n\nAutomobile SX\n2044 avenue Chartier\nDorval, QC H9P 1H2",
+      "draftNotes": {
+        "ownership": ""
+      },
+      "images": [
+        "images/vehicles/2019-nissan-kicks-6k9ge/msqy059k-1.jpg",
+        "images/vehicles/2019-nissan-kicks-6k9ge/msqy05w1-2.jpg"
+      ],
+      "status": "available",
+      "createdAt": "2026-08-13T03:08:22.042Z",
+      "updatedAt": "2026-08-13T03:22:07.318Z",
+      "publishedAt": "2026-08-13T03:22:07.318Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1133324262779761",
+          "url": "https://www.facebook.com/101868772570376_1133324262779761",
+          "at": "2026-08-13T03:23:07.368Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18106668350175568",
+          "url": "https://www.instagram.com/p/Db9w4DFHaUa/",
+          "at": "2026-08-13T03:23:07.368Z"
+        }
+      ]
+    },
     {
       "id": "2014-subaru-legacy-4jxba",
       "year": 2014,
@@ -189,7 +326,21 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:07:36.365Z",
-      "updatedAt": "2026-08-04T12:09:34.206Z"
+      "updatedAt": "2026-08-04T12:09:34.206Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1134025552709632",
+          "url": "https://www.facebook.com/101868772570376_1134025552709632",
+          "at": "2026-08-13T22:19:55.382Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18130272703656689",
+          "url": "https://www.instagram.com/p/Db_y9Y4k0CR/",
+          "at": "2026-08-13T22:19:55.382Z"
+        }
+      ]
     },
     {
       "id": "2017-subaru-forester-774gh",
@@ -240,7 +391,21 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:05:47.668Z",
-      "updatedAt": "2026-08-04T12:07:09.895Z"
+      "updatedAt": "2026-08-04T12:07:09.895Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1134025776042943",
+          "url": "https://www.facebook.com/101868772570376_1134025776042943",
+          "at": "2026-08-13T22:20:27.644Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18067858844484458",
+          "url": "https://www.instagram.com/p/Db_zA6tk9lq/",
+          "at": "2026-08-13T22:20:27.644Z"
+        }
+      ]
     },
     {
       "id": "2019-subaru-impreza-62zb2",
@@ -340,9 +505,11 @@
         "images/vehicles/2014-hyundai-santa-fe-1o683/mselza6f-86.jpg",
         "images/vehicles/2014-hyundai-santa-fe-1o683/mselzavs-87.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "createdAt": "2026-08-04T12:01:17.201Z",
-      "updatedAt": "2026-08-04T12:02:50.729Z"
+      "updatedAt": "2026-08-13T19:29:02.602Z",
+      "publishedAt": "2026-08-13T19:29:02.602Z",
+      "soldAt": "2026-08-13T19:29:02.602Z"
     },
     {
       "id": "2017-audi-a4-gc6pg",
@@ -439,7 +606,21 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T11:56:54.576Z",
-      "updatedAt": "2026-08-04T22:45:19.774Z"
+      "updatedAt": "2026-08-04T22:45:19.774Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1134026192709568",
+          "url": "https://www.facebook.com/101868772570376_1134026192709568",
+          "at": "2026-08-13T22:21:17.615Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18141754150521769",
+          "url": "https://www.instagram.com/p/Db_zHWjmt5P/",
+          "at": "2026-08-13T22:21:17.615Z"
+        }
+      ]
     },
     {
       "id": "2011-nissan-murano-r71ho",
@@ -453,10 +634,14 @@
       "transmission": "Automatic",
       "fuel": "Gasoline",
       "drivetrain": "AWD",
-      "extColor": "Balck",
-      "extHex": "#6c7178",
+      "extColor": "Black",
+      "extHex": "#141518",
       "intColor": "Grey",
       "engine": "3.5",
+      "econCity": "",
+      "econHwy": "",
+      "doors": "",
+      "seats": "",
       "vin": "",
       "stock": "SX-1005",
       "tag": "",
@@ -468,6 +653,13 @@
         "AWD"
       ],
       "desc": "2011 Nissan Murano awd 3.5L roule tres bien, ac, camera de recul, groupe électriques, toit.\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2 I",
+      "descFr": "",
+      "descMode": "manual",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
       "images": [
         "images/vehicles/2011-nissan-murano-r71ho/mselqmvn-31.jpg",
         "images/vehicles/2011-nissan-murano-r71ho/mselqnto-32.jpg",
@@ -485,7 +677,22 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T11:54:58.675Z",
-      "updatedAt": "2026-08-04T11:56:24.474Z"
+      "updatedAt": "2026-08-13T03:07:30.079Z",
+      "publishedAt": "2026-08-13T03:07:30.079Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1134026402709547",
+          "url": "https://www.facebook.com/101868772570376_1134026402709547",
+          "at": "2026-08-13T22:21:43.930Z"
+        },
+        {
+          "target": "instagram",
+          "id": "17984823474018691",
+          "url": "https://www.instagram.com/p/Db_zKsACXtw/",
+          "at": "2026-08-13T22:21:43.930Z"
+        }
+      ]
     },
     {
       "id": "2017-subaru-outback-jcq9w",
