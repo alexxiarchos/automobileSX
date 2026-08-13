@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T22:36:35.427Z",
+  "updatedAt": "2026-08-13T22:37:45.361Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -276,7 +276,7 @@
       "year": 2017,
       "make": "Volkswagen",
       "model": "Golf",
-      "trim": "",
+      "trim": "S",
       "body": "Hatchback",
       "price": 6499,
       "km": 188000,
@@ -287,17 +287,28 @@
       "extHex": "#141518",
       "intColor": "Grey",
       "engine": "1.8",
-      "vin": "",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 2,
+      "seats": "",
+      "vin": "3VW817AU4HM013270",
       "stock": "SX-1012",
       "tag": "",
       "features": [
-        "Bluetooth",
         "Backup Camera",
         "Heated Seats",
+        "Bluetooth",
         "Cruise Control",
         "AWD"
       ],
       "desc": "2017, Volkswagen golf Trendline,1.8 turbo manuelle, ac, groupe électriques\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
+      "descFr": "",
+      "descMode": "manual",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
       "images": [
         "images/vehicles/2017-volkswagen-golf-iftqk/msemb93h-131.jpg",
         "images/vehicles/2017-volkswagen-golf-iftqk/msemba8h-132.jpg",
@@ -315,7 +326,8 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:10:04.639Z",
-      "updatedAt": "2026-08-04T12:12:21.877Z"
+      "updatedAt": "2026-08-13T22:37:45.238Z",
+      "publishedAt": "2026-08-13T22:37:45.238Z"
     },
     {
       "id": "2016-jeep-grand-cherokee-638hq",
