@@ -1,6 +1,53 @@
 {
-  "updatedAt": "2026-08-13T03:07:38.712Z",
+  "updatedAt": "2026-08-13T03:22:15.844Z",
   "vehicles": [
+    {
+      "id": "2019-nissan-kicks-6k9ge",
+      "year": 2019,
+      "make": "Nissan",
+      "model": "Kicks",
+      "trim": "SV",
+      "body": "Hatchback",
+      "price": 10999,
+      "km": 145000,
+      "transmission": "Automatic",
+      "fuel": "Gasoline",
+      "drivetrain": "FWD",
+      "extColor": "Grey",
+      "extHex": "#5c6066",
+      "intColor": "Grey",
+      "engine": "1.6L",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 4,
+      "seats": 5,
+      "vin": "3N1CP5CUXKL478505",
+      "stock": "SX-1015",
+      "tag": "",
+      "features": [
+        "Backup Camera",
+        "Air Conditioning",
+        "Heated Seats",
+        "Touchscreen Display"
+      ],
+      "desc": "",
+      "descFr": "",
+      "descMode": "auto",
+      "descNote": "Flexible hours by appointment.\n\nCall 514-824-9117 for more information or to schedule a visit. Financing available.\n\nAutomobile SX\n2044 Avenue Chartier\nDorval, QC H9P 1H2",
+      "descNoteFr": "Horaires flexibles sur rendez-vous.\n\nAppelez le 514-824-9117 pour plus d'informations ou pour planifier une visite. Financement disponible.\n\nAutomobile SX\n2044 avenue Chartier\nDorval, QC H9P 1H2",
+      "draftNotes": {
+        "ownership": ""
+      },
+      "images": [
+        "images/vehicles/2019-nissan-kicks-6k9ge/msqy059k-1.jpg",
+        "images/vehicles/2019-nissan-kicks-6k9ge/msqy05w1-2.jpg"
+      ],
+      "status": "available",
+      "createdAt": "2026-08-13T03:08:22.042Z",
+      "updatedAt": "2026-08-13T03:22:07.318Z",
+      "publishedAt": "2026-08-13T03:22:07.318Z",
+      "posts": []
+    },
     {
       "id": "2014-subaru-legacy-4jxba",
       "year": 2014,
