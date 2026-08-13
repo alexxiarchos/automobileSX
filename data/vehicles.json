@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T22:42:57.283Z",
+  "updatedAt": "2026-08-13T22:45:04.695Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -603,7 +603,7 @@
       "year": 2017,
       "make": "Audi",
       "model": "A4",
-      "trim": "",
+      "trim": "quattro Premium",
       "body": "Sedan",
       "price": 12999,
       "km": 148000,
@@ -614,18 +614,29 @@
       "extHex": "#2b4d7e",
       "intColor": "Black",
       "engine": "2.0",
-      "vin": "",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 4,
+      "seats": "",
+      "vin": "WAUANAF49HN014299",
       "stock": "SX-1007",
       "tag": "",
       "features": [
-        "Bluetooth",
         "Heated Seats",
         "Leather Seats",
         "Sunroof",
+        "Bluetooth",
         "Cruise Control",
         "AWD"
       ],
-      "desc": "Financement disponible!\n\n\n\n5️⃣1️⃣4️⃣-8️⃣2️⃣4️⃣-9️⃣1️⃣1️⃣7️⃣\n\n2044 avenue Chartier Dorval \n\nHoraires flexibles sur rendez-vous \n \n\nAudi A4 2017 – Moteur 2,0 L Turbo\n\nÉlégante, performante et très bien entretenue!\n\n✔ Sièges en cuir chauffants\n✔ Toit ouvrant panoramique\n✔ Climatisation\n✔ Groupe électrique\n✔ Confort et plaisir de conduite exceptionnels\n\nNe manquez pas cette belle opportunité! Contactez-nous dès aujourd’hui pour plus d’informations ou pour planifier un essai routier.",
+      "desc": "This is a 2017 Audi A4 quattro Premium, a four-door sedan with 148,000 km on it. It has a 2.0 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in blue with black inside. It is equipped with heated seats, leather seats, sunroof, Bluetooth, cruise control and AWD.\n\nIt is on the lot in Dorval now and can be seen seven days a week by appointment.",
+      "descFr": "Voici cet Audi A4 quattro Premium 2017, une berline à quatre portes avec 148 000 km au compteur. Il est doté d'un moteur 2.0, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur bleu et intérieur en noir. Équipements notables : sièges chauffants, sièges en cuir, toit ouvrant, Bluetooth, régulateur de vitesse et rouage intégral.\n\nLe véhicule est présentement sur place à Dorval et peut être vu sept jours sur sept, sur rendez-vous.",
+      "descMode": "manual",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
       "images": [
         "images/vehicles/2017-audi-a4-gc6pg/mselvybn-58.jpg",
         "images/vehicles/2017-audi-a4-gc6pg/mselvzcq-59.jpg",
@@ -644,7 +655,8 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T11:58:57.539Z",
-      "updatedAt": "2026-08-04T12:00:37.433Z"
+      "updatedAt": "2026-08-13T22:45:04.559Z",
+      "publishedAt": "2026-08-13T22:45:04.559Z"
     },
     {
       "id": "2018-volkswagen-tiguan-ddnvw",
