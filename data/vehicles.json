@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T19:29:03.306Z",
+  "updatedAt": "2026-08-13T20:28:02.415Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -63,7 +63,20 @@
       "createdAt": "2026-08-13T18:10:50.902Z",
       "updatedAt": "2026-08-13T18:20:51.535Z",
       "publishedAt": "2026-08-13T18:14:14.006Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1133968776048643",
+          "url": "https://www.facebook.com/101868772570376_1133968776048643",
+          "at": "2026-08-13T20:28:01.847Z"
+        },
+        {
+          "target": "instagram",
+          "id": "17954921865213124",
+          "url": "https://www.instagram.com/p/Db_mJuEEjVh/",
+          "at": "2026-08-13T20:28:01.848Z"
+        }
+      ]
     },
     {
       "id": "2019-nissan-kicks-6k9ge",
