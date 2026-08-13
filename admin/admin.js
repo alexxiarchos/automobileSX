@@ -622,6 +622,47 @@
     updateQuality();
   });
 
+  /* Translating the half of the description that a person wrote.
+
+     Two behaviours, because there are two moments you want this. Right after
+     pressing "write a first draft" the French box already holds properly
+     written French; you then add a sentence of your own in English, select it,
+     and it is appended in French — the good French is left alone. If nothing
+     is selected, you are starting from an English description that has no
+     French counterpart at all, and the whole box is translated. */
+  $("desc-translate").addEventListener("click", function () {
+    var box = $("f-desc");
+    var selection = box.value.substring(box.selectionStart, box.selectionEnd).trim();
+    var whole = !selection;
+    var text = selection || box.value.trim();
+
+    if (!text) { toast("Write the English description first.", "err"); return; }
+    if (whole && $("f-descfr").value.trim() &&
+        !confirm("Replace the French box with a translation of the whole English box?\n\n" +
+                 "If you only want to add one sentence, cancel, select that sentence in the English box, and press this again.")) {
+      return;
+    }
+
+    busy("Translating…");
+    api("translate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: text })
+    }).then(function (d) {
+      var fr = $("f-descfr");
+      if (whole) {
+        fr.value = d.text;
+      } else {
+        fr.value = (fr.value.trim() ? fr.value.trim() + "\n\n" : "") + d.text;
+      }
+      descHint("f-descfr", "desc-count-fr", "fr");
+      updateQuality();
+      toast("Translated with " + d.provider + ". Read it through — it is a machine, and this is Quebec.", "ok");
+    }).catch(function (e) {
+      toast("Could not translate: " + e.message, "err");
+    }).finally(function () { busy(null); });
+  });
+
   function descHint(id, out, lang) {
     var n = $(id).value.trim().length;
     var el = $(out);

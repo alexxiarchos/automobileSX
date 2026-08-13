@@ -71,6 +71,9 @@
     },
     "api/social.js": {
       "maxDuration": 60
+    },
+    "api/translate.js": {
+      "maxDuration": 30
     }
   }
 }

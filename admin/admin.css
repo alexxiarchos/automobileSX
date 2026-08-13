@@ -289,3 +289,7 @@ textarea { resize: vertical; }
 }
 .post-row .fh { display: inline; margin: 0; }
 .post-row-actions { display: flex; gap: 6px; }
+
+.desc-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.desc-head label { margin-bottom: 6px; }
+.desc-head .btn { padding: 4px 8px; min-height: 0; font-size: 13px; }
