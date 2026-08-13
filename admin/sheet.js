@@ -253,14 +253,11 @@
       idBlock("opc", t.opc, DEALER.opc)
     ].filter(Boolean);
 
-    /* No photo, no frame. An empty grey box saying so is a note to the office,
-       not to the person standing at the window, and the equipment list is
-       better company for the specifications than a placeholder is. */
-    var hasPhoto = !!(v.images && v.images.length);
-    var photo = hasPhoto
-      ? '<div class="card" style="padding:0;border:0"><img class="photo" src="/' +
-        esc(String(v.images[0]).replace(/^\//, "")) + '" alt=""></div>'
-      : "";
+    /* No photograph. This sheet is taped to the car it describes, so a picture
+       of that same car taken from two metres away is the one thing on the page
+       the reader does not need: they are looking at the real thing. The QR code
+       already opens every photo for anyone who wants them, and the space it
+       frees is what buys the legal label its place on page one. */
 
     return '<div class="sheet"><div class="sheetInner">' +
 
@@ -290,9 +287,8 @@
 
       '<div class="body">' +
         '<div>' +
-          photo +
           (feats.length
-            ? '<div class="card"' + (hasPhoto ? ' style="margin-top:3mm"' : "") + '><h2 class="cardTitle">' + esc(t.equipment) + "</h2>" +
+            ? '<div class="card"><h2 class="cardTitle">' + esc(t.equipment) + "</h2>" +
               '<ul class="features">' + feats.map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") +
               "</ul></div>"
             : "") +
@@ -409,17 +405,36 @@
     });
   }
 
-  /* Photographs decide a lot of the height and they are not there yet when the
-     markup is written, so this runs again once each one has actually landed. */
+  /* Two things arrive after the markup does and both change the height, so the
+     fit is run again once each has landed.
+
+     The web font is the one that caused real trouble. Inter Tight comes from
+     Google Fonts, and until it arrives the browser lays the page out in a
+     fallback face with different metrics. Measure in that window and the answer
+     is wrong by the time the font swaps in. On a desktop on the shop wifi the
+     race is usually won by the font; on a phone on mobile data it is not, which
+     is exactly why this printed on two pages from a phone and one from a
+     laptop. document.fonts.ready settles it.
+
+     beforeprint is the belt and braces: whatever else happened, measure again
+     at the moment the print dialogue opens. */
   function fitWhenReady() {
     fitToPage();
-    var imgs = document.querySelectorAll(".sheet img");
-    Array.prototype.forEach.call(imgs, function (img) {
+
+    if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === "function") {
+      document.fonts.ready.then(fitToPage);
+    }
+    Array.prototype.forEach.call(document.querySelectorAll(".sheet img"), function (img) {
       if (img.complete) return;
       img.addEventListener("load", fitToPage);
       img.addEventListener("error", fitToPage);
     });
     window.addEventListener("beforeprint", fitToPage);
+
+    /* Safari on iOS fires no beforeprint at all, so the last word goes to a
+       timer: by two seconds the font has either arrived or it is not coming. */
+    setTimeout(fitToPage, 400);
+    setTimeout(fitToPage, 2000);
   }
 
   function render(vehicles) {
