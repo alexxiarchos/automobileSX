@@ -164,9 +164,14 @@
     var posts = Array.isArray(v.posts) ? v.posts : [];
     if (!posts.length) return { text: "not posted yet", cls: "track-none" };
     var last = posts[posts.length - 1];
+    /* A record this panel did not create cannot honestly claim which platform
+       it went to, so it says what is actually known instead of guessing. */
+    if (posts.every(function (p) { return p.manual; })) {
+      return { text: "marked as posted " + ago(last.at), cls: "track-posted" };
+    }
     var names = [];
-    if (posts.some(function (p) { return p.target === "facebook"; })) names.push("Facebook");
-    if (posts.some(function (p) { return p.target === "instagram"; })) names.push("Instagram");
+    if (posts.some(function (p) { return p.target === "facebook" && !p.manual; })) names.push("Facebook");
+    if (posts.some(function (p) { return p.target === "instagram" && !p.manual; })) names.push("Instagram");
     return {
       text: "posted to " + names.join(" and ") + " " + ago(last.at),
       cls: "track-posted"
@@ -307,11 +312,39 @@
       .filter(function (v) { return (v.status || "available") === "available"; });
   }
 
+  /* Only available stock can be selected, for the same reason it is the only
+     stock with a checkbox: the bulk actions all end in something being said in
+     public about a car you still have. */
+  function selectableIds() {
+    return vehicles
+      .filter(function (v) { return (v.status || "available") === "available"; })
+      .map(function (v) { return v.id; });
+  }
+
   function updateBulkBar() {
     var n = selectedVehicles().length;
-    $("bulk-bar").hidden = n === 0;
-    $("bulk-count").textContent = n === 1 ? "1 vehicle selected" : n + " vehicles selected";
+    var all = selectableIds().length;
+
+    /* The bar stays up whenever there is anything to select, rather than only
+       once something is. A "Select all" that appears after you have already
+       started selecting is no help to the person who wanted it. */
+    $("bulk-bar").hidden = all === 0;
+    $("bulk-count").textContent = n === 0
+      ? (all === 1 ? "1 vehicle" : all + " vehicles")
+      : (n === 1 ? "1 vehicle selected" : n + " vehicles selected");
+    $("bulk-all").textContent = (n && n >= all) ? "Select none" : "Select all";
+
+    ["bulk-post", "bulk-sheets", "bulk-mark-posted", "bulk-clear"].forEach(function (id) {
+      var el = $(id);
+      if (el) el.hidden = n === 0;
+    });
   }
+
+  $("bulk-all").addEventListener("click", function () {
+    var all = selectableIds();
+    selected = (selectedVehicles().length >= all.length) ? [] : all;
+    renderDash();
+  });
 
   /* The window sheet opens in its own tab rather than a dialog, because what
      happens next is the browser's Print menu and that wants a real page. */
@@ -327,6 +360,44 @@
   $("bulk-clear").addEventListener("click", function () {
     selected = [];
     renderDash();
+  });
+
+  /* For cars that went up on Facebook or Instagram by hand, before this panel
+     existed or from a phone. Without this the dashboard nags forever about
+     stock that was posted weeks ago, and a summary line nobody believes is
+     worse than no summary line at all.
+
+     The record is flagged manual and carries no post id, because there is no
+     real post behind it to open or to delete. Everything downstream reads
+     posts.length, so the dashboard, the never-posted count and the per vehicle
+     status all correct themselves the moment this is saved. */
+  $("bulk-mark-posted").addEventListener("click", function () {
+    var list = selectedVehicles().filter(function (v) {
+      return !(Array.isArray(v.posts) && v.posts.length);
+    });
+    if (!list.length) {
+      toast("Every selected vehicle is already marked as posted.", "err");
+      return;
+    }
+    if (!confirm("Mark these " + list.length + " as already posted?\n\n" +
+      list.map(function (v) { return "• " + [v.year, v.make, v.model].filter(Boolean).join(" "); }).join("\n") +
+      "\n\nThis only updates your own tracking. Nothing is sent to Facebook or Instagram.")) return;
+
+    var now = new Date().toISOString();
+    list.forEach(function (v) {
+      v.posts = Array.isArray(v.posts) ? v.posts : [];
+      v.posts.push({ target: "facebook", id: "", url: "", at: now, manual: true });
+    });
+
+    busy("Saving…");
+    savePostRecords("Mark " + list.length + " vehicle(s) as already posted")
+      .then(function () {
+        selected = [];
+        renderDash();
+        toast(list.length + " marked as posted.", "ok");
+      })
+      .catch(function (e) { toast("Could not save: " + e.message, "err"); })
+      .finally(function () { busy(null); });
   });
 
   /* One request per vehicle, run one after another rather than all at once.
@@ -840,13 +911,16 @@
       return;
     }
     box.innerHTML = "<h3>Already posted</h3>" + posts.map(function (p, i) {
-      var name = p.target === "facebook" ? "Facebook" : "Instagram";
+      var name = p.manual
+        ? "Marked as posted by hand"
+        : (p.target === "facebook" ? "Facebook" : "Instagram");
       return '<div class="post-row">' +
-        "<div><strong>" + name + "</strong> · " + escapeHtml(when(p.at) || "") +
+        "<div><strong>" + escapeHtml(name) + "</strong> · " + escapeHtml(when(p.at) || "") +
         ' <span class="fh">(' + ago(p.at) + ")</span></div>" +
         '<div class="post-row-actions">' +
         (p.url ? '<a class="btn btn-small btn-ghost" href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener">View</a>' : "") +
-        '<button class="btn btn-small btn-danger-ghost" type="button" data-delpost="' + i + '">Delete</button>' +
+        '<button class="btn btn-small btn-danger-ghost" type="button" data-delpost="' + i + '">' +
+        (p.manual ? "Remove" : "Delete") + "</button>" +
         "</div></div>";
     }).join("");
   }
@@ -856,6 +930,24 @@
     if (idx === null || idx === undefined || !shareVehicle) return;
     var p = (shareVehicle.posts || [])[Number(idx)];
     if (!p) return;
+
+    /* Nothing was published through this panel, so there is nothing out there
+       to delete. Asking Meta to remove a post with no id would fail, and the
+       failure would read as though a real post could not be taken down. */
+    if (p.manual) {
+      if (!confirm("Remove this record?\n\nIt only clears your own tracking. " +
+        "Nothing is deleted from Facebook or Instagram.")) return;
+      shareVehicle.posts.splice(Number(idx), 1);
+      renderShareHistory(shareVehicle);
+      $("share-status").textContent = "Record removed.";
+      busy("Saving…");
+      savePostRecords("Remove manual post record")
+        .then(renderDash)
+        .catch(function (e2) { $("share-status").textContent = "Could not save: " + e2.message; })
+        .finally(function () { busy(null); });
+      return;
+    }
+
     var name = p.target === "facebook" ? "Facebook" : "Instagram";
     if (!confirm("Delete this " + name + " post?\n\nThis removes it from " + name +
       " for good. The vehicle listing on your website is not affected.")) return;

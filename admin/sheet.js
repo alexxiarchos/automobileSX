@@ -40,7 +40,6 @@
 
   var T = {
     en: {
-      hours: "Open seven days a week, by appointment",
       km: "Kilometres", trans: "Transmission", drive: "Drivetrain", fuel: "Fuel",
       engine: "Engine", colour: "Colour", interior: "Interior", seats: "Seats",
       doors: "Doors and seats", doorsShort: "doors", seatsShort: "seats",
@@ -54,7 +53,6 @@
       missing: "That vehicle is not in the inventory."
     },
     fr: {
-      hours: "Ouvert sept jours sur sept, sur rendez-vous",
       km: "Kilométrage", trans: "Transmission", drive: "Rouage", fuel: "Carburant",
       engine: "Moteur", colour: "Couleur", interior: "Intérieur", seats: "Places",
       doors: "Portes et places", doorsShort: "portes", seatsShort: "places",
@@ -121,7 +119,8 @@
   var ICON = {
     odometer: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 12l4.5-3"/><path d="M12 3v2M21 12h-2M3 12h2"/></svg>',
     vin: '<svg viewBox="0 0 24 24"><path d="M4 6v12M7 6v12M10 7v10M13 6v12M16 7v10M20 6v12"/></svg>',
-    stock: '<svg viewBox="0 0 24 24"><path d="M5 9h14M5 15h14M10 4L8 20M16 4l-2 16"/></svg>'
+    stock: '<svg viewBox="0 0 24 24"><path d="M5 9h14M5 15h14M10 4L8 20M16 4l-2 16"/></svg>',
+    opc: '<svg viewBox="0 0 24 24"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 12h6M9 16h6"/></svg>'
   };
 
   function idBlock(icon, label, value, mono) {
@@ -163,7 +162,10 @@
     var idBlocks = [
       idBlock("odometer", t.km, v.km === "" || v.km === null || v.km === undefined ? "" : km(v.km)),
       idBlock("stock", t.stock, v.stock),
-      idBlock("vin", t.vin, v.vin ? String(v.vin).toUpperCase() : "", true)
+      idBlock("vin", t.vin, v.vin ? String(v.vin).toUpperCase() : "", true),
+      /* Sits beside the serial number because that is where a buyer already
+         looks for the numbers that identify who they are dealing with. */
+      idBlock("opc", t.opc, DEALER.opc)
     ].filter(Boolean);
 
     /* No photo, no frame. An empty grey box saying so is a note to the office,
@@ -188,12 +190,6 @@
               "<b>" + esc(DEALER.phone) + "</b></div>" +
             '<div class="row"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2c1.4 0 3 2.5 3 6h-6c0-3.5 1.6-6 3-6zM4.3 11h3.4c.05-2 .5-3.8 1.2-5.2A8 8 0 0 0 4.3 11zm0 2a8 8 0 0 0 4.6 5.2c-.7-1.4-1.15-3.2-1.2-5.2H4.3zm5.4 0h4.6c-.05 3.5-1.6 6-3 6s-2.95-2.5-3-6zm6.6 0h3.4a8 8 0 0 1-4.6 5.2c.7-1.4 1.15-3.2 1.2-5.2zm0-2c-.05-2-.5-3.8-1.2-5.2A8 8 0 0 1 19.7 11h-3.4z"/></svg>' +
               "<span>automobilesx.ca</span></div>" +
-            '<div class="row"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.6V6h-2v7.4l5 3 1-1.7z"/></svg>' +
-              "<span>" + esc(t.hours) + "</span></div>" +
-            (DEALER.opc
-              ? '<div class="row"><svg viewBox="0 0 24 24"><path d="M6 2h8l4 4v16H6zm8 0v4h4"/><path d="M9 12h6M9 16h6"/></svg>' +
-                "<span>" + esc(t.opc) + " " + esc(DEALER.opc) + "</span></div>"
-              : "") +
           "</div>" +
         "</div>" +
 

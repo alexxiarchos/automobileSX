@@ -204,9 +204,18 @@ a:hover { color: var(--red); }
 }
 
 /* ------- Hero ------- */
+/* The height follows the viewport width as well as its height, deliberately.
+   The storefront photograph is close to 4:3, so on a wide monitor a short hero
+   can only show a narrow horizontal band of it: at 2560 the old rule kept 38
+   percent of the picture, which cut the sign down to the phone number and the
+   car down to a windscreen. Growing the band with the width keeps about half
+   the photograph visible at any size, which is enough to hold the whole sign.
+   Below roughly 1900 wide the height is unchanged, because there the viewport
+   height still wins. A wider photograph is the real fix; this keeps the
+   current one from being cropped into nonsense until there is one. */
 .hero {
   position: relative; background: var(--ink); color: var(--bone);
-  min-height: clamp(30rem, 66vh, 44rem); display: flex; align-items: center;
+  min-height: clamp(30rem, max(66vh, 36vw), 58rem); display: flex; align-items: center;
 }
 /* Without this the container shrink-wraps as a flex item and the headline
    stops aligning with everything below it. */
