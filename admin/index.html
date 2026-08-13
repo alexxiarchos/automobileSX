@@ -135,6 +135,54 @@
         <input id="f-features-extra" type="text" placeholder="e.g. New brakes, Winter mats included, Two sets of keys">
       </div>
 
+      <h2>Legal label</h2>
+      <p class="fh">This is the prescribed OPC information printed on the window sheet. It is a disclosure, not sales copy: write what is true rather than what sells. Anything left blank prints as "Aucune" or "Sur demande" in French, the way the standard label does.</p>
+
+      <div class="f" style="max-width:420px">
+        <label for="f-opc-class">Warranty class</label>
+        <select id="f-opc-class"></select>
+        <span class="fh" id="opc-class-hint"></span>
+      </div>
+
+      <div class="form-grid">
+        <div class="f">
+          <label for="f-opc-prioruse">Previously used as</label>
+          <select id="f-opc-prioruse"></select>
+        </div>
+        <div class="f">
+          <label for="f-opc-priorowner">Previous owner</label>
+          <input id="f-opc-priorowner" type="text" placeholder="Leave blank for &quot;Sur demande&quot;">
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="f">
+          <label for="f-opc-extended">Additional warranty</label>
+          <input id="f-opc-extended" type="text" placeholder="Leave blank for &quot;Aucune&quot;">
+        </div>
+        <div class="f">
+          <label for="f-opc-powertrain">Powertrain warranty</label>
+          <input id="f-opc-powertrain" type="text" placeholder="Leave blank for &quot;Aucune&quot;">
+        </div>
+      </div>
+
+      <div class="f" style="max-width:420px">
+        <label for="f-opc-manufacturer">Manufacturer warranty</label>
+        <input id="f-opc-manufacturer" type="text" placeholder="Leave blank for &quot;Aucune&quot;">
+      </div>
+
+      <div class="f">
+        <label for="f-opc-repairs">Repairs since acquisition</label>
+        <textarea id="f-opc-repairs" rows="2" placeholder="e.g. Front brakes and rotors, timing belt"></textarea>
+        <span class="fh">Work done since you took the car in. This is the legal disclosure, so it is separate from the equipment list above and never appears in the sales description. Blank prints as "Aucune".</span>
+      </div>
+
+      <div class="f">
+        <label for="f-opc-remarks">Remark</label>
+        <textarea id="f-opc-remarks" rows="2" placeholder="Anything else that must be disclosed"></textarea>
+        <span class="fh">Blank prints as "Aucune".</span>
+      </div>
+
       <h2>Description</h2>
 
       <!-- ============ automatic mode ============ -->
@@ -264,6 +312,7 @@
 
 <script src="/js/makes.js"></script>
 <script src="/js/features.js"></script>
+<script src="/js/opc.js"></script>
 <script src="/js/describe.js"></script>
 <script src="/admin/admin.js"></script>
 </body>

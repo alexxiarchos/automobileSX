@@ -35,7 +35,7 @@
        it makes no promise and states no condition of sale, so it does not drag
        the prescribed label onto what is still an advertisement. Left blank it
        simply does not print, like every other empty field here. */
-    opc: ""
+    opc: "123456"
   };
 
   var T = {
@@ -135,6 +135,91 @@
     return '<div class="spec"><dt>' + esc(label) + "</dt><dd>" + esc(value) + "</dd></div>";
   }
 
+  /* ---------- the prescribed label ----------
+
+     Everything below this line is the OPC half of the sheet. It is a legal
+     disclosure and it obeys a different rule from the rest of the page: where
+     the advertisement hides a field that is empty, the label prints "Aucune".
+     A blank beside "Reparations" says nothing; "Aucune" is the disclosure. */
+
+  function opcOf(v) {
+    var o = (v && v.opc) || {};
+    return {
+      classOverride: o.classOverride || "",
+      priorUse: o.priorUse || "",
+      priorOwner: o.priorOwner || "",
+      extended: o.extended || "",
+      powertrain: o.powertrain || "",
+      manufacturer: o.manufacturer || "",
+      repairs: o.repairs || "",
+      remarks: o.remarks || ""
+    };
+  }
+
+  function opcPair(label, value) {
+    return '<div class="opcPair"><dt>' + esc(label) + "</dt><dd>" + esc(value) + "</dd></div>";
+  }
+
+  function opcBlock(v) {
+    if (!window.SX_OPC) return "";
+    var o = opcOf(v);
+    var L = SX_OPC.T[lang];
+    var code = o.classOverride || SX_OPC.classify(v.year, v.km);
+    var none = L.none;
+
+    /* Without a year or a mileage there is no class to state, and inventing one
+       is the single worst thing this file could do. The card is left off and
+       the sheet stays an advertisement until somebody fills the fields in. */
+    if (!code) return "";
+
+    var warranty =
+      '<div class="card opcCard">' +
+        '<h2 class="cardTitle">' + esc(L.warranty) + "</h2>" +
+        '<div class="opcGrid">' +
+          opcPair(L.working, L.classLabel + " " + code) +
+          opcPair(L.legal, L.yes) +
+          opcPair(L.extended, o.extended || none) +
+          opcPair(L.powertrain, o.powertrain || none) +
+          opcPair(L.manufacturer, o.manufacturer || none) +
+        "</div>" +
+      "</div>";
+
+    var priorUse = SX_OPC.priorUse(o.priorUse, lang);
+    var disclosure =
+      '<div class="opcText">' +
+        (priorUse ? "<p><b>" + esc(L.usedAs) + "</b> " + esc(priorUse) + "</p>" : "") +
+        "<p><b>" + esc(L.priorOwner) + "</b> " + esc(o.priorOwner || L.onRequest) + "</p>" +
+        '<p class="opcStatute">' + esc(SX_OPC.statute(code, lang)) + "</p>" +
+      "</div>";
+
+    var notes =
+      '<div class="card opcCard">' +
+        '<h2 class="cardTitle">' + esc(L.remark) + "</h2>" +
+        "<p>" + esc(o.remarks || none) + "</p>" +
+        '<h2 class="cardTitle" style="margin-top:4mm">' + esc(L.repairs) + "</h2>" +
+        "<p>" + esc(o.repairs || none) + "</p>" +
+      "</div>";
+
+    var acceptance =
+      '<div class="card tinted opcCard opcAccept">' +
+        '<h2 class="cardTitle">' + esc(L.acceptance) + "</h2>" +
+        "<p>" + esc(L.received) + "</p>" +
+        '<div class="opcSign">' +
+          '<div><span>' + esc(L.date) + "</span><i></i></div>" +
+          '<div><span>' + esc(L.signature) + "</span><i></i></div>" +
+        "</div>" +
+      "</div>";
+
+    /* Two columns, not four stacked cards. Full width, this block ran to
+       161mm on its own and pushed the sheet onto a second page; side by side
+       it is half that and the sheet stays one page per car, which is the whole
+       point of a window sheet. */
+    return '<div class="opc">' +
+        '<div class="opcCol">' + warranty + disclosure + "</div>" +
+        '<div class="opcCol">' + notes + acceptance + "</div>" +
+      "</div>";
+  }
+
   function sheet(v) {
     var t = T[lang];
     var url = vehicleUrl(v);
@@ -177,7 +262,7 @@
         esc(String(v.images[0]).replace(/^\//, "")) + '" alt=""></div>'
       : "";
 
-    return '<div class="sheet">' +
+    return '<div class="sheet"><div class="sheetInner">' +
 
       '<div class="top">' +
         '<div class="card brand">' +
@@ -207,7 +292,7 @@
         '<div>' +
           photo +
           (feats.length
-            ? '<div class="card"' + (hasPhoto ? ' style="margin-top:5mm"' : "") + '><h2 class="cardTitle">' + esc(t.equipment) + "</h2>" +
+            ? '<div class="card"' + (hasPhoto ? ' style="margin-top:3mm"' : "") + '><h2 class="cardTitle">' + esc(t.equipment) + "</h2>" +
               '<ul class="features">' + feats.map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") +
               "</ul></div>"
             : "") +
@@ -232,6 +317,8 @@
           : "") +
       "</div>" +
 
+      opcBlock(v) +
+
       '<div class="foot">' +
         '<div class="qr">' + SX_QR.svg(url, { quiet: 2, label: [v.year, v.make, v.model].filter(Boolean).join(" ") }) + "</div>" +
         '<div class="footText"><div class="big">' + esc(t.scan) + "</div>" +
@@ -239,7 +326,100 @@
           "<div>" + esc(t.call) + " <b>" + esc(DEALER.phone) + "</b></div></div>" +
         (v.stock ? '<div class="stock">' + esc(t.stock) + "<b>" + esc(v.stock) + "</b></div>" : "") +
       "</div>" +
-    "</div>";
+    "</div></div>";
+  }
+
+  /* ---------- one car, one page ----------
+
+     A sheet with three features and no photo and a sheet with twenty two
+     features, a long trim name and a paragraph of repairs are not the same
+     height, and no fixed set of type sizes makes both of them fit. Rather than
+     tune the layout for an average car and let the loaded ones spill onto a
+     second page, each sheet measures itself after it is drawn and scales down
+     just enough to fit the page it is going on.
+
+     Zoom rather than transform: zoom reflows, so the print engine still sees a
+     box that ends where the page ends. A transform would scale the picture and
+     leave the layout believing it was full size, which is how you get a page
+     two with nothing on it.
+
+     The target is Letter, the shorter of the two papers, so a sheet that fits
+     here fits A4 as well. The floor is there because past a certain point the
+     honest answer is that it does not fit: shrinking a window sheet until a
+     buyer needs to lean in defeats the object, so it stops at 72 percent and
+     takes the second page. */
+  /* Letter is the shorter paper, A4 is the narrower one, and the sheet has to
+     survive both. So it is measured as tall as Letter allows and as narrow as
+     A4 allows, which is the worst case of each. Measuring at the on screen
+     width instead was the first attempt and it under-shrank every sheet: a
+     narrower column wraps text onto more lines, so the print was taller than
+     the thing that had just been measured. */
+  var PAGE_MM = 258;        /* Letter, 279.4mm tall less 2 x 8mm, and 5mm spare
+                               so a rounding difference between the screen and the
+                               print engine cannot cost a whole extra page */
+  var COL_MM  = 194;        /* A4,      210mm wide    less 2 x 8mm margins */
+  var MIN_ZOOM = 0.72;
+  var PX_PER_MM = 3.7795;
+
+  /* Scale with a transform rather than the zoom property. zoom is the obvious
+     tool and it does work on screen, but Chrome's print path ignores it: a
+     sheet zoomed to 0.4 still came out on two pages. A transform is honoured,
+     at the cost of not affecting layout, so the paper's height is set by hand
+     underneath it.
+
+     The width is divided by the same factor it is scaled by, so the contents
+     still fill the page edge to edge instead of shrinking into the top left
+     corner. That makes it circular, since a wider box wraps text onto fewer
+     lines and changes the height the factor was computed from. A few passes
+     settle it. */
+  function fitToPage() {
+    Array.prototype.forEach.call(document.querySelectorAll(".sheet"), function (el) {
+      var inner = el.querySelector(".sheetInner");
+      if (!inner) return;
+
+      inner.style.transform = "none";
+      inner.style.width = COL_MM + "mm";
+      inner.style.minHeight = "0";
+      el.style.height = "";
+
+      var z = 1;
+      for (var pass = 0; pass < 6; pass++) {
+        inner.style.width = (COL_MM / z) + "mm";
+        var mm = inner.scrollHeight / PX_PER_MM * z;
+        if (mm <= PAGE_MM) break;
+        var next = z * (PAGE_MM / mm);
+        if (next < MIN_ZOOM) { z = MIN_ZOOM; break; }
+        if (Math.abs(next - z) < 0.002) { z = next; break; }
+        z = next;
+      }
+
+      inner.style.minHeight = "";
+      if (z >= 0.999) {
+        inner.style.width = "";
+        inner.style.transform = "none";
+        el.style.height = "";
+        return;
+      }
+      /* The paper has to be told how tall the scaled contents are, because a
+         transform leaves the layout believing they are still full size, and a
+         box that believes that pushes its own footer onto page two. */
+      inner.style.width = (COL_MM / z) + "mm";
+      inner.style.transform = "scale(" + z.toFixed(4) + ")";
+      el.style.height = Math.ceil(inner.scrollHeight * z) + "px";
+    });
+  }
+
+  /* Photographs decide a lot of the height and they are not there yet when the
+     markup is written, so this runs again once each one has actually landed. */
+  function fitWhenReady() {
+    fitToPage();
+    var imgs = document.querySelectorAll(".sheet img");
+    Array.prototype.forEach.call(imgs, function (img) {
+      if (img.complete) return;
+      img.addEventListener("load", fitToPage);
+      img.addEventListener("error", fitToPage);
+    });
+    window.addEventListener("beforeprint", fitToPage);
   }
 
   function render(vehicles) {
@@ -258,6 +438,7 @@
     document.getElementById("sheets").innerHTML = html ||
       '<div class="sheet"><p class="missing">' + esc(T[lang].missing) + "</p></div>";
     document.documentElement.lang = lang === "fr" ? "fr-CA" : "en-CA";
+    fitWhenReady();
   }
 
   /* The public inventory file, which is what the website itself reads. No

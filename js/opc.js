@@ -67,9 +67,17 @@
 
   /* What the car was used for before. The Act names these specifically, so they
      are a closed list rather than a free text box: a dealer who types
-     "ex-taxi" into a box has still not made the prescribed disclosure. */
+     "ex-taxi" into a box has still not made the prescribed disclosure.
+
+     A passenger vehicle is the default, and there is no "not stated" option,
+     because "not stated" is not a disclosure. Almost every car on the lot was
+     somebody's own car; the ones that were not are the whole point of the
+     field, and those get picked deliberately. A listing saved before this
+     field existed resolves to the default too, which is the honest reading of
+     a blank on a car that was never a taxi. */
+  var DEFAULT_PRIOR_USE = "personal";
+
   var PRIOR_USE = [
-    { key: "", en: "Not stated", fr: "Non déclaré" },
     { key: "personal", en: "Passenger vehicle", fr: "Véhicule de promenade" },
     { key: "taxi", en: "Paid passenger transport (taxi)", fr: "Transport rémunéré de personnes (taxi)" },
     { key: "driving-school", en: "Driving school vehicle", fr: "Véhicule d'école de conduite" },
@@ -80,10 +88,14 @@
   ];
 
   function priorUse(key, lang) {
+    var k = key || DEFAULT_PRIOR_USE;
     for (var i = 0; i < PRIOR_USE.length; i++) {
-      if (PRIOR_USE[i].key === key) return lang === "fr" ? PRIOR_USE[i].fr : PRIOR_USE[i].en;
+      if (PRIOR_USE[i].key === k) return lang === "fr" ? PRIOR_USE[i].fr : PRIOR_USE[i].en;
     }
-    return "";
+    /* An unrecognised key is a typo or a value from a newer version of this
+       file. Falling back to the default beats printing the raw key on a legal
+       document, and beats printing nothing where a disclosure belongs. */
+    return lang === "fr" ? PRIOR_USE[0].fr : PRIOR_USE[0].en;
   }
 
   var T = {
@@ -170,6 +182,7 @@
 
   return {
     CLASSES: CLASSES, PRIOR_USE: PRIOR_USE, T: T,
+    DEFAULT_PRIOR_USE: DEFAULT_PRIOR_USE,
     classify: classify, terms: terms, priorUse: priorUse, statute: statute
   };
 });

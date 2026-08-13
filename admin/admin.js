@@ -91,6 +91,7 @@
   /* ---------- auth ---------- */
 
   function boot() {
+    fillOpcSelects();
     api("me").then(function () { loadInventory(); })
       .catch(function () { show("screen-login"); });
   }
@@ -1137,6 +1138,81 @@
     toast("Duplicated as a draft. Add photos and publish when ready.", "ok");
   }
 
+  /* ---------- the OPC label ---------- */
+
+  /* classOverride is empty by default, which means "use what SX_OPC works out
+     from the year and the mileage". It is only ever filled in when a human
+     disagrees with that, and the sheet prints whatever is resolved here. The
+     override exists because the Act measures age from the vehicle's mise en
+     marche and a listing only knows the model year; near a boundary those two
+     can differ, and the person signing the label should win that argument. */
+  function blankOpc() {
+    return {
+      classOverride: "", priorUse: SX_OPC.DEFAULT_PRIOR_USE, priorOwner: "",
+      extended: "", powertrain: "", manufacturer: "",
+      repairs: "", remarks: ""
+    };
+  }
+
+  function opcOf(v) {
+    var o = (v && v.opc) || {};
+    var base = blankOpc();
+    Object.keys(base).forEach(function (k) { if (o[k]) base[k] = o[k]; });
+    return base;
+  }
+
+  /* The class actually printed: the override if there is one, otherwise the
+     computed suggestion. One function so the form hint, the sheet and anything
+     built later cannot drift apart. */
+  function opcClass(v) {
+    var o = opcOf(v);
+    return o.classOverride || SX_OPC.classify(v.year, v.km);
+  }
+
+  function fillOpcSelects() {
+    var cls = $("f-opc-class");
+    cls.innerHTML = '<option value="">Work it out from the year and mileage</option>' +
+      ["A", "B", "C", "D"].map(function (c) {
+        var t = SX_OPC.terms(c);
+        return '<option value="' + c + '">Class ' + c + " · " +
+          (t ? t.months + " month" + (t.months > 1 ? "s" : "") + " or " +
+               t.km.toLocaleString("en-CA") + " km" : "no warranty of good working order") +
+          "</option>";
+      }).join("");
+
+    $("f-opc-prioruse").innerHTML = SX_OPC.PRIOR_USE.map(function (u) {
+      return '<option value="' + u.key + '">' + escapeHtml(u.en) + "</option>";
+    }).join("");
+  }
+
+  /* Recomputed as the year or the mileage is typed, so the suggestion is never
+     stale by the time it is read. */
+  function updateOpcHint() {
+    var year = Number($("f-year").value) || "";
+    var km = $("f-km").value === "" ? "" : Number($("f-km").value);
+    var guess = SX_OPC.classify(year, km);
+    var chosen = $("f-opc-class").value;
+    var hint = $("opc-class-hint");
+
+    if (!guess) {
+      hint.textContent = "Fill in the year and the mileage and this works itself out.";
+      return;
+    }
+    var t = SX_OPC.terms(guess);
+    var says = "Year and mileage give class " + guess + ", " +
+      (t ? t.months + " month" + (t.months > 1 ? "s" : "") + " or " +
+           t.km.toLocaleString("en-CA") + " km, whichever comes first." : "no warranty of good working order.");
+    hint.textContent = (chosen && chosen !== guess)
+      ? says + " You have overridden it to class " + chosen + ", and that is what prints."
+      : says;
+  }
+
+  ["f-year", "f-km", "f-opc-class"].forEach(function (id) {
+    var el = $(id);
+    if (el) el.addEventListener("input", updateOpcHint);
+    if (el) el.addEventListener("change", updateOpcHint);
+  });
+
   /* ---------- editor ---------- */
 
   function blankVehicle() {
@@ -1148,6 +1224,7 @@
       stock: nextStock(), tag: "", features: [], desc: "", descFr: "",
       descNote: "", descNoteFr: "", descMode: "auto",
       draftNotes: { ownership: "" }, images: [], posts: [],
+      opc: blankOpc(),
       status: "draft", createdAt: new Date().toISOString()
     };
   }
@@ -1191,6 +1268,17 @@
     $("f-desc").value = paragraphs(v.desc);
     $("f-descfr").value = paragraphs(v.descFr);
     $("f-ownership").value = (v.draftNotes && v.draftNotes.ownership) || "";
+
+    var o = opcOf(v);
+    $("f-opc-class").value = o.classOverride;
+    $("f-opc-prioruse").value = o.priorUse || SX_OPC.DEFAULT_PRIOR_USE;
+    $("f-opc-priorowner").value = o.priorOwner;
+    $("f-opc-extended").value = o.extended;
+    $("f-opc-powertrain").value = o.powertrain;
+    $("f-opc-manufacturer").value = o.manufacturer;
+    $("f-opc-repairs").value = o.repairs;
+    $("f-opc-remarks").value = o.remarks;
+    updateOpcHint();
 
     /* "Recent work" used to be its own field, which meant it went onto the
        French page in English. It is now part of the note, which can be
@@ -1283,6 +1371,17 @@
     v.descNoteFr = $("f-descnotefr").value.trim();
     v.descMode = descMode;
     v.draftNotes = { ownership: $("f-ownership").value };
+
+    v.opc = {
+      classOverride: $("f-opc-class").value,
+      priorUse: $("f-opc-prioruse").value,
+      priorOwner: $("f-opc-priorowner").value.trim(),
+      extended: $("f-opc-extended").value.trim(),
+      powertrain: $("f-opc-powertrain").value.trim(),
+      manufacturer: $("f-opc-manufacturer").value.trim(),
+      repairs: $("f-opc-repairs").value.trim(),
+      remarks: $("f-opc-remarks").value.trim()
+    };
 
     v.features = currentFeatures();
 

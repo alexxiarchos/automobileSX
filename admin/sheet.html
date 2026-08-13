@@ -51,86 +51,121 @@ body {
 .bar .primary { background: var(--red); border-color: var(--red); color: #fff; }
 .bar .on { background: var(--bone); color: var(--ink); }
 
+/* .sheet is the sheet of paper. .sheetInner is everything printed on it, and
+   it is a separate box so it can be scaled as a whole: a car with three
+   features and a car with twenty two are not the same height, and the inner
+   box is shrunk to fit rather than the layout being tuned for an average car
+   that does not exist. See fitToPage in sheet.js. */
 .sheet {
-  width: 210mm; min-height: 292mm; margin: 18px auto; background: #fff;
-  padding: 10mm; display: flex; flex-direction: column; gap: 5mm;
+  width: 210mm; margin: 18px auto; background: #fff; overflow: hidden;
   box-shadow: 0 6px 30px rgba(0,0,0,0.35);
+}
+.sheetInner {
+  min-height: 292mm; padding: 6mm; display: flex; flex-direction: column; gap: 3mm;
+  transform-origin: top left; background: #fff;
 }
 
 /* cards */
-.card { border: 1px solid var(--line); border-radius: 10px; padding: 6mm; background: #fff; }
+.card { border: 1px solid var(--line); border-radius: 10px; padding: 4.5mm; background: #fff; }
 .card.tinted { background: var(--bone); border-color: var(--bone); }
 .cardTitle {
-  margin: 0 0 4mm; font-size: 17px; font-weight: 800; letter-spacing: -0.01em;
+  margin: 0 0 2.5mm; font-size: 15px; font-weight: 800; letter-spacing: -0.01em;
 }
 
 /* header: identity on the left, the numbers on the right */
-.top { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; align-items: stretch; }
+.top { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; align-items: stretch; }
 
-.brand { display: flex; flex-direction: column; justify-content: center; gap: 3mm; }
+.brand { display: flex; flex-direction: column; justify-content: center; gap: 2mm; }
 .brandRow { display: flex; align-items: center; gap: 10px; }
-.brandRow img { width: 54px; height: 54px; }
-.brandName { font-weight: 800; font-size: 27px; letter-spacing: -0.02em; line-height: 1; }
+.brandRow img { width: 42px; height: 42px; }
+.brandName { font-weight: 800; font-size: 22px; letter-spacing: -0.02em; line-height: 1; }
 .brandName span { color: var(--red); }
-.brandLines { font-size: 13px; line-height: 1.6; color: #33363a; }
-.brandLines b { color: var(--ink); font-size: 15px; }
+.brandLines { font-size: 11.5px; line-height: 1.45; color: #33363a; }
+.brandLines b { color: var(--ink); font-size: 13px; }
 .brandLines .row { display: flex; gap: 7px; align-items: baseline; }
 .brandLines svg { width: 12px; height: 12px; flex: 0 0 12px; fill: var(--slate); }
 
 /* price and model, stacked and centred, biggest thing on the page */
 .headline { text-align: center; display: flex; flex-direction: column; justify-content: center; gap: 1mm; }
-.price { font-size: 46px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--red); }
+.price { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--red); }
 /* Sits under the price and stays under it: an invitation to ask, deliberately
    quieter than the number above it and carrying no rate, term or condition. */
 .finance { font-size: 12.5px; font-weight: 600; color: var(--slate); margin-top: 1.5mm; line-height: 1.3; }
-.make { font-size: 30px; font-weight: 700; letter-spacing: -0.01em; margin-top: 3mm; line-height: 1.1; }
-.model { font-size: 38px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
-.trim { font-size: 17px; font-weight: 600; color: #33363a; }
-.year { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; margin-top: 2mm; }
+.make { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin-top: 2mm; line-height: 1.1; }
+.model { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
+.trim { font-size: 14px; font-weight: 600; color: #33363a; }
+.year { font-size: 25px; font-weight: 800; letter-spacing: -0.02em; margin-top: 1mm; }
 
 /* body: equipment left, numbers and specs right */
-.body { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; align-items: start; }
+.body { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; align-items: start; }
 
-.photo { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 8px; background: var(--mist); display: block; }
+.photo { width: 100%; aspect-ratio: 2 / 1; object-fit: cover; border-radius: 8px; background: var(--mist); display: block; }
 
-.features { columns: 2; column-gap: 6mm; margin: 0; padding: 0; list-style: none; font-size: 13px; }
-.features li { break-inside: avoid; padding: 2.2px 0 2.2px 12px; position: relative; line-height: 1.35; }
+/* ---------- the prescribed OPC label ----------
+   Set smaller and quieter than the advertisement above it, on purpose. This
+   half is read once, at the point of sale, by someone who is already standing
+   at the car; the half above it has to work on a passer-by from two metres
+   away. Same page, two different jobs, and the type says which is which. */
+.opc { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; align-items: start; }
+.opcCol { display: grid; gap: 3.5mm; align-content: start; }
+.opcCard { padding: 4mm; }
+.opcCard p { margin: 0; font-size: 11px; line-height: 1.35; }
+.opcGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 4mm; }
+.opcPair dt { margin: 0; font-size: 10.5px; font-weight: 800; }
+.opcPair dd { margin: 0; font-size: 11.5px; color: #33363a; }
+.opcText { font-size: 10.5px; line-height: 1.4; padding: 0 1mm; }
+.opcText p { margin: 0 0 1.5mm; }
+.opcStatute { color: var(--slate); font-size: 9px; line-height: 1.33; }
+.opcAccept { padding-bottom: 4mm; }
+.opcSign { display: grid; gap: 3mm; margin-top: 3.5mm; }
+.opcSign div { display: flex; align-items: baseline; gap: 3mm; }
+.opcSign span { font-size: 10.5px; font-weight: 800; white-space: nowrap; }
+/* A rule to sign on, not an input: this is printed and filled in with a pen. */
+.opcSign i { flex: 1; border-bottom: 1px solid var(--ink); height: 0; }
+
+.features { columns: 2; column-gap: 6mm; margin: 0; padding: 0; list-style: none; font-size: 11.5px; }
+.features li { break-inside: avoid; padding: 1.2px 0 1.2px 11px; position: relative; line-height: 1.35; }
 .features li::before { content: ""; position: absolute; left: 0; top: 8px; width: 4px; height: 4px; background: var(--red); border-radius: 50%; }
 
 /* the identifying numbers, the way the trade writes them */
-.ids { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 5mm; margin-bottom: 5mm; }
+.ids { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 5mm; margin-bottom: 3.5mm; }
 .id { display: flex; gap: 8px; align-items: flex-start; }
 .id svg { width: 17px; height: 17px; flex: 0 0 17px; margin-top: 2px; fill: none; stroke: var(--ink); stroke-width: 1.7; }
-.id dt { margin: 0; font-size: 14px; font-weight: 800; letter-spacing: -0.01em; }
-.id dd { margin: 1px 0 0; font-size: 15px; }
+.id dt { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: -0.01em; }
+.id dd { margin: 0; font-size: 13px; }
 .id dd.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; letter-spacing: 0.03em; }
 
-.specs { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm 5mm; border-top: 1px solid var(--line); padding-top: 4mm; }
-.spec dt { margin: 0; font-size: 13px; font-weight: 800; }
-.spec dd { margin: 1px 0 0; font-size: 14px; color: #33363a; line-height: 1.35; }
+.specs { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 5mm; border-top: 1px solid var(--line); padding-top: 3mm; }
+.spec dt { margin: 0; font-size: 11.5px; font-weight: 800; }
+.spec dd { margin: 0; font-size: 12.5px; color: #33363a; line-height: 1.35; }
 
 /* footer: the thing their sticker has no answer for */
 .foot {
-  margin-top: auto; display: flex; gap: 6mm; align-items: center;
-  border: 1px solid var(--line); border-radius: 10px; padding: 4mm 6mm;
+  margin-top: auto; display: flex; gap: 5mm; align-items: center;
+  border: 1px solid var(--line); border-radius: 10px; padding: 3mm 4.5mm;
 }
-.qr { width: 32mm; height: 32mm; flex: 0 0 auto; }
+.qr { width: 22mm; height: 22mm; flex: 0 0 auto; }
 .qr svg { width: 100%; height: 100%; display: block; }
-.footText { font-size: 13.5px; line-height: 1.5; }
-.footText .big { font-size: 20px; font-weight: 800; letter-spacing: -0.01em; }
+.footText { font-size: 12px; line-height: 1.4; }
+.footText .big { font-size: 16px; font-weight: 800; letter-spacing: -0.01em; }
 .footText .url { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: #33363a; }
 .stock { margin-left: auto; text-align: right; font-size: 12px; color: var(--slate); }
-.stock b { display: block; font-size: 24px; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; }
+.stock b { display: block; font-size: 20px; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; }
 
 .missing { padding: 40px; text-align: center; color: var(--slate); }
 
 @media print {
   body { background: #fff; }
   .bar { display: none; }
-  .sheet { width: auto; min-height: 0; height: 100vh; margin: 0; padding: 0; box-shadow: none; page-break-after: always; }
+  .sheet { width: auto; height: auto; margin: 0; box-shadow: none; page-break-after: always; overflow: hidden; }
+  .sheetInner { min-height: 0; padding: 0; }
   .sheet:last-child { page-break-after: auto; }
 }
-@page { size: portrait; margin: 11mm; }
+/* 8mm rather than the usual 11: the sheet has to hold an advertisement and a
+   prescribed label on one page, and three millimetres a side is the difference
+   between one page and two on Letter. Still inside every desktop printer's
+   unprintable edge. */
+@page { size: portrait; margin: 8mm; }
 </style>
 </head>
 <body>
@@ -148,6 +183,7 @@ body {
 <script src="/js/features.js"></script>
 <script src="/js/describe.js"></script>
 <script src="/js/qr.js"></script>
+<script src="/js/opc.js"></script>
 <script src="/admin/sheet.js"></script>
 </body>
 </html>
