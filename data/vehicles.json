@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T22:39:14.453Z",
+  "updatedAt": "2026-08-13T22:40:07.446Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -406,7 +406,7 @@
       "year": 2017,
       "make": "Subaru",
       "model": "Forester",
-      "trim": "",
+      "trim": "Limited",
       "body": "SUV",
       "price": 7999,
       "km": 215000,
@@ -417,18 +417,31 @@
       "extHex": "#eceae6",
       "intColor": "Black",
       "engine": "2.5",
-      "vin": "",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 4,
+      "seats": 5,
+      "vin": "JF2SJEJC9HH562828",
       "stock": "SX-1010",
       "tag": "",
       "features": [
-        "Bluetooth",
         "Backup Camera",
+        "Blind Spot Monitoring",
+        "Automatic High Beams",
         "Heated Seats",
         "Sunroof",
+        "Bluetooth",
         "Cruise Control",
         "AWD"
       ],
       "desc": "Financement disponible\n\nSubaru Impreza 2019\n\n5️⃣1️⃣4️⃣-8️⃣2️⃣4️⃣-9️⃣1️⃣1️⃣7️⃣\n2044 avenue Chartier Dorval \nHoraires flexible sur rendez-vous\n \n\nSièges chauffants, climatisation, groupe électrique et bien plus encore.\nUne voiture fiable, économique et agréable à conduire au quotidien. aujourd’hui! Contactez-nous pour plus d’informations.",
+      "descFr": "",
+      "descMode": "manual",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
       "images": [
         "images/vehicles/2017-subaru-forester-774gh/msem4lpk-101.jpg",
         "images/vehicles/2017-subaru-forester-774gh/msem4mqr-102.jpg",
@@ -450,7 +463,8 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:05:47.668Z",
-      "updatedAt": "2026-08-04T12:07:09.895Z",
+      "updatedAt": "2026-08-13T22:40:07.320Z",
+      "publishedAt": "2026-08-13T22:40:07.320Z",
       "posts": [
         {
           "target": "facebook",
