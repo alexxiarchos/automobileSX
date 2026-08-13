@@ -130,6 +130,84 @@
     }).finally(function () { busy(null); });
   }
 
+  /* ---------- how long has this been on the site, and has it been posted ---------- */
+
+  var DAY = 86400000;
+  var STALE_DAYS = 60;
+
+  function when(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return "";
+    return d.toLocaleDateString("en-CA", { day: "numeric", month: "short", year: "numeric" });
+  }
+
+  function daysSince(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return null;
+    return Math.max(0, Math.floor((Date.now() - d.getTime()) / DAY));
+  }
+
+  function ago(iso) {
+    var n = daysSince(iso);
+    if (n === null) return "";
+    return n === 0 ? "today" : n === 1 ? "yesterday" : n + " days ago";
+  }
+
+  /* publishedAt is written the first time a car goes live. Cars listed before
+     that field existed have no such record, so the date they were created
+     stands in — with different wording, because it is a different fact. */
+  function listedAt(v) {
+    return v.publishedAt || v.createdAt || "";
+  }
+
+  function postSummary(v) {
+    var posts = Array.isArray(v.posts) ? v.posts : [];
+    if (!posts.length) return { text: "not posted yet", cls: "track-none" };
+    var last = posts[posts.length - 1];
+    var names = [];
+    if (posts.some(function (p) { return p.target === "facebook"; })) names.push("Facebook");
+    if (posts.some(function (p) { return p.target === "instagram"; })) names.push("Instagram");
+    return {
+      text: "posted to " + names.join(" and ") + " " + ago(last.at),
+      cls: "track-posted"
+    };
+  }
+
+  /* One line per row saying what has happened to this listing and when. */
+  function trackLine(v) {
+    var status = v.status || "available";
+    var parts = [];
+
+    if (status === "draft") {
+      parts.push('<span class="track-none">Draft — never published</span>');
+      return '<div class="dash-track">' + parts.join(" · ") + "</div>";
+    }
+
+    var since = listedAt(v);
+    var days = daysSince(since);
+    if (since) {
+      parts.push((v.publishedAt ? "Published " : "On the site since ") + when(since));
+    }
+
+    if (status === "sold") {
+      if (v.soldAt) {
+        parts.push("sold " + when(v.soldAt) +
+          (days !== null && daysSince(v.soldAt) !== null
+            ? " after " + (days - daysSince(v.soldAt)) + " days" : ""));
+      } else {
+        parts.push("sold");
+      }
+    } else if (days !== null) {
+      parts.push('<span class="' + (days >= STALE_DAYS ? "track-stale" : "") + '">' +
+        days + " days on the lot</span>");
+    }
+
+    var p = postSummary(v);
+    parts.push('<span class="' + p.cls + '">' + p.text + "</span>");
+
+    return '<div class="dash-track">' + parts.join(" · ") + "</div>";
+  }
+
   function statusBadge(v) {
     var s = v.status || "available";
     var label = s.charAt(0).toUpperCase() + s.slice(1);
@@ -142,32 +220,66 @@
     $("dash-count").textContent =
       counts.available + " available · " + counts.sold + " sold · " + counts.draft + " drafts";
 
+    /* The two things worth knowing at a glance without opening anything. */
+    var onSale = vehicles.filter(function (v) { return (v.status || "available") === "available"; });
+    var stale = onSale.filter(function (v) {
+      var d = daysSince(listedAt(v));
+      return d !== null && d >= STALE_DAYS;
+    });
+    var unposted = onSale.filter(function (v) { return !(v.posts && v.posts.length); });
+    var notes = [];
+    if (stale.length) notes.push(stale.length + " listed over " + STALE_DAYS + " days");
+    if (unposted.length) notes.push(unposted.length + " never posted to Facebook or Instagram");
+    $("dash-insight").textContent = notes.join(" · ");
+    $("dash-insight").hidden = !notes.length;
+
     var list = $("dash-list");
     list.innerHTML = "";
     if (!vehicles.length) {
       list.innerHTML = '<p class="muted">No vehicles yet. Tap “Add Vehicle” to create your first listing.</p>';
+      updateBulkBar();
       return;
     }
     vehicles.forEach(function (v, i) {
       var row = document.createElement("div");
+      var live = (v.status || "available") !== "draft";
+      /* A sold car can still have its old posts opened and deleted, but it must
+         not be selectable for posting: announcing a car you no longer have is
+         the one thing this button should never be able to do. */
+      var postable = (v.status || "available") === "available";
       row.className = "dash-row";
       var img = thumbSrc(v);
       row.innerHTML =
+        (postable
+          ? '<label class="dash-pick"><input type="checkbox" data-pick="1"' +
+            (selected.indexOf(v.id) !== -1 ? " checked" : "") +
+            ' aria-label="Select ' + escapeHtml((v.year || "") + " " + (v.make || "") + " " + (v.model || "")) + '"></label>'
+          : '<span class="dash-pick" aria-hidden="true"></span>') +
         (img ? '<img class="dash-thumb" src="' + img + '" alt="">'
              : '<div class="dash-thumb" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;color:var(--slate);font-size:12px">No photo</div>') +
         '<div class="dash-info">' +
         '<div class="dash-name">' + (v.year || "?") + " " + (v.make || "") + " " + (v.model || "") + (v.trim ? " · " + v.trim : "") + "</div>" +
         '<div class="dash-sub">' + money(v.price) + " · " + Number(v.km || 0).toLocaleString("en-CA") + " km · Stock " + (v.stock || "—") + "</div>" +
+        trackLine(v) +
         statusBadge(v) +
         "</div>" +
         '<div class="dash-actions">' +
         '<button class="btn btn-small btn-outline" data-act="edit">Edit</button>' +
-        ((v.status || "available") !== "draft"
-          ? '<button class="btn btn-small btn-outline" data-act="share">Share</button>' : "") +
+        (live ? '<button class="btn btn-small btn-outline" data-act="share">' +
+          ((v.posts && v.posts.length) ? "Posts" : "Share") + "</button>" : "") +
         '<button class="btn btn-small btn-outline" data-act="status">' + ((v.status || "available") === "sold" ? "Mark Available" : "Mark Sold") + "</button>" +
         '<button class="btn btn-small btn-ghost" data-act="dup">Duplicate</button>' +
         '<button class="btn btn-small btn-danger-ghost" data-act="del">Delete</button>' +
         "</div>";
+
+      row.addEventListener("change", function (e) {
+        if (!e.target.dataset || !e.target.dataset.pick) return;
+        var at = selected.indexOf(v.id);
+        if (e.target.checked && at === -1) selected.push(v.id);
+        if (!e.target.checked && at !== -1) selected.splice(at, 1);
+        updateBulkBar();
+      });
+
       row.addEventListener("click", function (e) {
         var act = e.target.getAttribute && e.target.getAttribute("data-act");
         if (!act) return;
@@ -178,6 +290,105 @@
         if (act === "del") deleteVehicle(v);
       });
       list.appendChild(row);
+    });
+    updateBulkBar();
+  }
+
+  /* ---------- posting several at once ---------- */
+
+  var selected = [];   /* vehicle ids, so the list survives a re-render */
+
+  function selectedVehicles() {
+    return selected
+      .map(function (id) { return vehicles.filter(function (v) { return v.id === id; })[0]; })
+      .filter(Boolean)
+      .filter(function (v) { return (v.status || "available") === "available"; });
+  }
+
+  function updateBulkBar() {
+    var n = selectedVehicles().length;
+    $("bulk-bar").hidden = n === 0;
+    $("bulk-count").textContent = n === 1 ? "1 vehicle selected" : n + " vehicles selected";
+  }
+
+  $("bulk-clear").addEventListener("click", function () {
+    selected = [];
+    renderDash();
+  });
+
+  /* One request per vehicle, run one after another rather than all at once.
+     Instagram needs up to forty seconds per post while it fetches and
+     processes the photo, so a single request covering five cars would run past
+     the function's time limit; and posting six things to a Page in the same
+     second is exactly what rate limiting is for. */
+  $("bulk-post").addEventListener("click", function () {
+    var list = selectedVehicles();
+    if (!list.length) return;
+    if (!confirm("Post these " + list.length + " vehicles to your Facebook Page and Instagram?\n\n" +
+      list.map(function (v) { return "• " + v.year + " " + v.make + " " + v.model; }).join("\n") +
+      "\n\nThey are posted one at a time and this can take a minute or two.")) return;
+
+    var done = [], failed = [];
+
+    function step(i) {
+      if (i >= list.length) return finish();
+      var v = list[i];
+      busy("Posting " + (i + 1) + " of " + list.length + ": " + v.year + " " + v.make + " " + v.model + "…");
+      return api("social", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: v.id, targets: ["facebook", "instagram"] })
+      }).then(function (d) {
+        var okAny = recordPosts(v, d.results);
+        var bad = Object.keys(d.results).filter(function (k) { return !d.results[k].ok; });
+        if (okAny) done.push(v);
+        bad.forEach(function (k) {
+          failed.push((v.make || "") + " " + (v.model || "") + " — " + k + ": " + d.results[k].error);
+        });
+      }).catch(function (e) {
+        failed.push((v.make || "") + " " + (v.model || "") + " — " + e.message);
+      }).then(function () { return step(i + 1); });
+    }
+
+    function finish() {
+      busy(null);
+      var after = function () {
+        selected = [];
+        renderDash();
+        if (failed.length) {
+          alert("Posted " + done.length + " of " + list.length + ".\n\nThese did not go through:\n\n" + failed.join("\n"));
+        } else {
+          toast("Posted all " + done.length + ".", "ok");
+        }
+      };
+      /* One commit for the whole batch rather than one per vehicle. */
+      if (done.length) savePostRecords("Record " + done.length + " social post(s)").then(after).catch(after);
+      else after();
+    }
+
+    step(0);
+  });
+
+  /* Writes down what was posted and where. updatedAt is deliberately not
+     touched: nothing about the vehicle page changed, so this must not look
+     like an edit to IndexNow and cause a pointless re-crawl ping. */
+  function recordPosts(v, results) {
+    var any = false;
+    v.posts = Array.isArray(v.posts) ? v.posts : [];
+    Object.keys(results || {}).forEach(function (target) {
+      var r = results[target];
+      if (!r || !r.ok) return;
+      any = true;
+      v.posts.push({ target: target, id: r.id || "", url: r.url || "", at: new Date().toISOString() });
+    });
+    return any;
+  }
+
+  function savePostRecords(message) {
+    return api("save", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ vehicles: vehicles, newImages: [], deletePaths: [], message: message })
     });
   }
 
@@ -502,11 +713,66 @@
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
+  /* Everything this app has posted about this vehicle, newest last, each one
+     with a way to look at it and a way to take it down. */
+  function renderShareHistory(v) {
+    var posts = Array.isArray(v.posts) ? v.posts : [];
+    var box = $("share-history");
+    if (!posts.length) {
+      box.innerHTML = '<p class="fh">Nothing has been posted about this vehicle yet.</p>';
+      return;
+    }
+    box.innerHTML = "<h3>Already posted</h3>" + posts.map(function (p, i) {
+      var name = p.target === "facebook" ? "Facebook" : "Instagram";
+      return '<div class="post-row">' +
+        "<div><strong>" + name + "</strong> · " + escapeHtml(when(p.at) || "") +
+        ' <span class="fh">(' + ago(p.at) + ")</span></div>" +
+        '<div class="post-row-actions">' +
+        (p.url ? '<a class="btn btn-small btn-ghost" href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener">View</a>' : "") +
+        '<button class="btn btn-small btn-danger-ghost" type="button" data-delpost="' + i + '">Delete</button>' +
+        "</div></div>";
+    }).join("");
+  }
+
+  $("share-history").addEventListener("click", function (e) {
+    var idx = e.target.getAttribute && e.target.getAttribute("data-delpost");
+    if (idx === null || idx === undefined || !shareVehicle) return;
+    var p = (shareVehicle.posts || [])[Number(idx)];
+    if (!p) return;
+    var name = p.target === "facebook" ? "Facebook" : "Instagram";
+    if (!confirm("Delete this " + name + " post?\n\nThis removes it from " + name +
+      " for good. The vehicle listing on your website is not affected.")) return;
+
+    busy("Deleting the " + name + " post…");
+    api("social", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "delete", target: p.target, postId: p.id })
+    }).then(function (d) {
+      if (!d.ok) {
+        /* Meta's own words. Its documentation contradicts itself about which
+           posts an app may remove, so the honest thing is to show what it
+           actually said rather than a guess at what it meant. */
+        $("share-status").textContent = name + " refused: " + d.error +
+          "  ·  You can still delete it in the " + name + " app.";
+        toast(name + " would not delete that post.", "err");
+        return;
+      }
+      shareVehicle.posts.splice(Number(idx), 1);
+      renderShareHistory(shareVehicle);
+      $("share-status").textContent = "Deleted from " + name + ".";
+      return savePostRecords("Remove " + p.target + " post record").then(renderDash);
+    }).catch(function (e2) {
+      $("share-status").textContent = "Could not delete: " + e2.message;
+    }).finally(function () { busy(null); });
+  });
+
   function openShare(v) {
     shareVehicle = v;
     $("share-status").textContent = "";
     $("share-caption").value = "Loading…";
     $("share-marketplace").innerHTML = "";
+    renderShareHistory(v);
     $("share-overlay").hidden = false;
 
     api("social?id=" + encodeURIComponent(v.id))
@@ -586,6 +852,13 @@
       $("share-status").textContent = lines.join("  ·  ");
       var allOk = Object.keys(d.results).every(function (k) { return d.results[k].ok; });
       toast(allOk ? "Posted." : "Some posts failed, see the panel.", allOk ? "ok" : "err");
+
+      /* Write down what went out, so the dashboard can say so and so the post
+         can be deleted from here later. */
+      if (recordPosts(shareVehicle, d.results)) {
+        renderShareHistory(shareVehicle);
+        return savePostRecords("Record social post for " + shareVehicle.id).then(renderDash);
+      }
     }).catch(function (e) {
       $("share-status").textContent = "Failed: " + e.message;
       toast("Could not post: " + e.message, "err");
@@ -619,6 +892,7 @@
     var to = (v.status || "available") === "sold" ? "available" : "sold";
     if (!confirm((to === "sold" ? "Mark as SOLD: " : "Mark as AVAILABLE: ") + v.year + " " + v.make + " " + v.model + "?")) return;
     v.status = to;
+    markLive(v, to);
     v.updatedAt = new Date().toISOString();
     saveAll("Mark " + v.make + " " + v.model + " " + to, null).then(renderDash).catch(renderDash);
   }
@@ -638,6 +912,11 @@
     copy.vin = "";
     copy.images = [];      /* photos are per-vehicle; upload fresh ones */
     copy.status = "draft";
+    /* A copy has its own history: it has never been published and nothing has
+       ever been posted about it. */
+    delete copy.publishedAt;
+    delete copy.soldAt;
+    copy.posts = [];
     copy.createdAt = new Date().toISOString();
     vehicles.unshift(copy);
     openEditor(copy, true);
@@ -653,7 +932,7 @@
       drivetrain: "FWD", extColor: "", intColor: "", engine: "", vin: "",
       doors: "", seats: "", econCity: "", econHwy: "",
       stock: nextStock(), tag: "", features: [], desc: "", descFr: "",
-      draftNotes: { ownership: "", work: "" }, images: [],
+      draftNotes: { ownership: "", work: "" }, images: [], posts: [],
       status: "draft", createdAt: new Date().toISOString()
     };
   }
@@ -790,6 +1069,13 @@
     var typed = slug($("f-slug").value);
     if (!v.id) {
       v.id = typed || slug(v.year + "-" + v.make + "-" + v.model) + "-" + Math.random().toString(36).slice(2, 7);
+      /* Show the address that was just created. Uploading a photo calls this
+         function early, because the image needs a folder to live in, and if the
+         field were left blank the next save would see an id on the vehicle, an
+         empty box on screen, and refuse to save with "the page address cannot
+         be empty" — on a listing where nobody had touched the address at all. */
+      $("f-slug").value = v.id;
+      slugPreview();
     } else if (typed && typed !== v.id) {
       v.slugHistory = (v.slugHistory || []).filter(function (s) { return s !== typed; });
       if (v.slugHistory.indexOf(v.id) === -1) v.slugHistory.push(v.id);
@@ -839,10 +1125,22 @@
     return true;
   }
 
+  /* The dates behind the tracking line. publishedAt is written once, the first
+     time a car is visible to the public, and never moved afterwards — editing a
+     price is not a new listing. soldAt only exists while the car is sold, so
+     putting one back on the market clears it rather than leaving a date that is
+     no longer true. */
+  function markLive(v, status) {
+    if (status !== "draft" && !v.publishedAt) v.publishedAt = new Date().toISOString();
+    if (status === "sold") { if (!v.soldAt) v.soldAt = new Date().toISOString(); }
+    else delete v.soldAt;
+  }
+
   function saveVehicle(status) {
     if (!validate(status === "available")) return;
     collectForm();
     editing.status = status;
+    markLive(editing, status);
     if (vehicles.indexOf(editing) === -1) vehicles.unshift(editing);
     var label = editing.year + " " + editing.make + " " + editing.model;
     saveAll((status === "draft" ? "Draft: " : "Publish: ") + label,

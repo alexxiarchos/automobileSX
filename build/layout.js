@@ -8,7 +8,7 @@ const ROUTES = {
   en: {
     home: "/", inventory: "/inventory", vehicle: "/vehicles", financing: "/financing",
     sell: "/sell-your-car", about: "/about", contact: "/contact", faq: "/faq",
-    guides: "/guides", local: "/used-cars-west-island",
+    guides: "/guides", local: "/used-cars-west-island", privacy: "/privacy",
     g1: "/guides/buying-a-used-car-in-quebec",
     g2: "/guides/car-financing-with-bad-credit-quebec",
     g3: "/guides/what-is-my-trade-in-worth-quebec",
@@ -17,7 +17,7 @@ const ROUTES = {
   fr: {
     home: "/fr", inventory: "/fr/inventaire", vehicle: "/fr/vehicules", financing: "/fr/financement",
     sell: "/fr/vendre-votre-auto", about: "/fr/a-propos", contact: "/fr/contact", faq: "/fr/faq",
-    guides: "/fr/guides", local: "/fr/autos-usagees-west-island",
+    guides: "/fr/guides", local: "/fr/autos-usagees-west-island", privacy: "/fr/confidentialite",
     g1: "/fr/guides/acheter-une-voiture-usagee-au-quebec",
     g2: "/fr/guides/financement-auto-mauvais-credit-quebec",
     g3: "/fr/guides/valeur-de-reprise-quebec",
@@ -31,7 +31,7 @@ const FILES = {
     home: "index.html", inventory: "inventory.html", vehicle: "vehicle.html",
     financing: "financing.html", sell: "sell-your-car.html", about: "about.html",
     contact: "contact.html", faq: "faq.html", guides: "guides.html",
-    local: "used-cars-west-island.html",
+    local: "used-cars-west-island.html", privacy: "privacy.html",
     g1: "guides/buying-a-used-car-in-quebec.html",
     g2: "guides/car-financing-with-bad-credit-quebec.html",
     g3: "guides/what-is-my-trade-in-worth-quebec.html",
@@ -41,7 +41,7 @@ const FILES = {
     home: "fr/index.html", inventory: "fr/inventaire.html", vehicle: "fr/vehicule.html",
     financing: "fr/financement.html", sell: "fr/vendre-votre-auto.html", about: "fr/a-propos.html",
     contact: "fr/contact.html", faq: "fr/faq.html", guides: "fr/guides.html",
-    local: "fr/autos-usagees-west-island.html",
+    local: "fr/autos-usagees-west-island.html", privacy: "fr/confidentialite.html",
     g1: "fr/guides/acheter-une-voiture-usagee-au-quebec.html",
     g2: "fr/guides/financement-auto-mauvais-credit-quebec.html",
     g3: "fr/guides/valeur-de-reprise-quebec.html",
@@ -144,13 +144,15 @@ const FOOTER_NAV = {
     ["inventory", "Used car inventory"], ["financing", "Financing"],
     ["sell", "Sell or trade your car"], ["guides", "Buying guides"],
     ["faq", "Questions and answers"], ["local", "Used cars in the West Island"],
-    ["about", "About Automobile SX"], ["contact", "Contact and directions"]
+    ["about", "About Automobile SX"], ["contact", "Contact and directions"],
+    ["privacy", "Privacy policy"]
   ],
   fr: [
     ["inventory", "Inventaire de véhicules"], ["financing", "Financement"],
     ["sell", "Vendre ou échanger votre auto"], ["guides", "Guides d'achat"],
     ["faq", "Questions et réponses"], ["local", "Autos usagées dans le West Island"],
-    ["about", "À propos d'Automobile SX"], ["contact", "Contact et itinéraire"]
+    ["about", "À propos d'Automobile SX"], ["contact", "Contact et itinéraire"],
+    ["privacy", "Politique de confidentialité"]
   ]
 };
 

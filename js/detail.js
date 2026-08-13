@@ -7,7 +7,11 @@ SX.ready.then(function () {
   /* id comes from /vehicles/<id> (or ?id= as a fallback) */
   var parts = location.pathname.replace(/\/+$/, "").split("/");
   var id = decodeURIComponent(parts[parts.length - 1] || "");
-  if (!id || id === "vehicles" || id === "vehicules") {
+  /* "vehicle"/"vehicule" are the shell templates themselves: reaching one of
+     those means the address carries no id, so fall back to the query string.
+     Cleaned URLs rewrite /vehicle.html to /vehicle, which is how the shell ends
+     up being asked for by name. */
+  if (!id || id === "vehicles" || id === "vehicules" || id === "vehicle" || id === "vehicule") {
     id = new URLSearchParams(location.search).get("id") || "";
   }
 

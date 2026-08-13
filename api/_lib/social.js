@@ -209,8 +209,57 @@ async function postToInstagram(v, text) {
   return { id: out.id, url: null };
 }
 
+/* Instagram does not give back a link when it publishes, so it is asked for
+   one. Failing to get it must not turn a successful post into a failure, so
+   this returns null rather than throwing. */
+async function instagramPermalink(id) {
+  const c = cfg();
+  try {
+    const out = await call(GRAPH + "/" + encodeURIComponent(id) +
+      "?fields=permalink&access_token=" + encodeURIComponent(c.token));
+    return out.permalink || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+/* Deleting a post we made.
+
+   Meta's own documentation disagrees with itself here: the Page feed reference
+   says a post can be deleted through the /{post-id} node, while the post node
+   reference says the operation is not available on that endpoint. Instagram's
+   media reference documents deletion as supported, but only on the Instagram
+   API with Facebook Login — which is the path this app uses — and asks for the
+   instagram_manage_contents permission, which a token issued before that
+   permission existed will not carry.
+
+   Rather than pick a side, this asks and passes Meta's own answer straight
+   through. If it refuses, the owner sees the exact reason and can delete the
+   post in the app in ten seconds instead. */
+async function deletePost(target, id) {
+  const c = cfg();
+  if (!c.token) throw new Error("Posting is not configured, so there is no token to delete with.");
+  if (!id) throw new Error("No post id");
+  if (target !== "facebook" && target !== "instagram") throw new Error("Unknown target " + target);
+
+  const url = GRAPH + "/" + encodeURIComponent(id) + "?access_token=" + encodeURIComponent(c.token);
+  try {
+    return await call(url, { method: "DELETE" });
+  } catch (e) {
+    /* Some Graph nodes only accept the POST override rather than the DELETE
+       verb. Worth one retry; if that fails too, the first message was the
+       more informative one. */
+    if (!/method|not supported|unsupported/i.test(e.message)) throw e;
+    try {
+      return await call(url + "&method=delete", { method: "POST" });
+    } catch (e2) {
+      throw e;
+    }
+  }
+}
+
 module.exports = {
   caption, marketplaceListing, configured,
-  postToFacebook, postToInstagram,
+  postToFacebook, postToInstagram, instagramPermalink, deletePost,
   vehicleUrl, firstImage, title
 };

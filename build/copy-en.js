@@ -476,6 +476,37 @@ module.exports = {
       ${accuracyNote}`
   },
 
+  privacy: {
+    title: "Privacy Policy | Automobile SX Dorval",
+    description: "How Automobile SX handles personal information. We use no analytics, no tracking and no cookies on this website.",
+    h1: "Privacy policy",
+    sub: "What we collect, what we do not, and how to reach us about it. Last updated 12 August 2026.",
+    body: `
+      <p>Automobile SX is a used car dealership at 2044 Avenue Chartier, Dorval, Quebec. This page explains what happens to personal information in connection with this website and our business. It is written to be accurate about how the site actually works rather than to cover every hypothetical.</p>
+
+      <h2>What this website collects</h2>
+      <p>Almost nothing. This site has <strong>no analytics, no advertising trackers, no marketing pixels and no cookies</strong>. We do not build profiles of visitors, and we cannot tell who you are from browsing our pages.</p>
+      <p>The contact form is worth explaining, because it does not work the way most do. When you fill it in and press send, it opens your own email application with the message prepared. Nothing is transmitted to this website, and no copy is stored here. You send us an email from your own account, exactly as if you had written to us directly.</p>
+
+      <h2>What we hold, and why</h2>
+      <p>If you email, call or text us, we hold what you chose to tell us: your name, your contact details, and whatever you said about the vehicle you are interested in. We use it to answer you and to arrange a viewing or a sale. Nothing more.</p>
+      <p>If you buy a vehicle or trade one in, we collect the information required to complete the sale and the registration, including identification and details needed by the Société de l'assurance automobile du Québec. That is a legal requirement of selling a vehicle, and those records are kept as long as the law requires.</p>
+      <p>We do not sell, rent or trade personal information to anyone.</p>
+
+      <h2>Other companies involved</h2>
+      <p>Three third parties are involved in running the site, and it is fair that you know what each one sees.</p>
+      <p><strong>Vercel</strong> hosts the website. Like any web host, its servers record standard technical information such as IP addresses when a page is requested.</p>
+      <p><strong>Google</strong> provides the fonts used for the text, and the map on the home and contact pages. Loading a font or a map means your browser contacts Google directly, so Google may receive your IP address and set its own cookies. Google's handling of that is governed by its own privacy policy. If your browser blocks Google, the site still works: the map is replaced by our address and a link.</p>
+      <p><strong>Meta</strong> is involved only if you follow a link to our Facebook or Instagram pages, at which point you are on their service and their policies apply.</p>
+
+      <h2>Your rights in Quebec</h2>
+      <p>Under Quebec's <em>Act respecting the protection of personal information in the private sector</em>, as amended by Law 25, you may ask us what personal information we hold about you, ask us to correct it if it is wrong, and ask us to stop using it, subject to the records we are legally required to keep for vehicle sales.</p>
+      <p>To make any of those requests, contact Spiro Xiarchos, who is responsible for the protection of personal information at Automobile SX, at <a class="text-link" href="mailto:Automobilesx@gmail.com">Automobilesx@gmail.com</a> or <a class="text-link" href="tel:+15148249117">514-824-9117</a>. We will respond within 30 days.</p>
+      <p>If you are not satisfied with our answer, you may complain to the Commission d'accès à l'information du Québec.</p>
+
+      <h2>Changes</h2>
+      <p>If this policy changes, the date at the top of the page changes with it.</p>`
+  },
   local: {
     title: "Used Cars in the West Island, Montreal | Automobile SX",
     description: "Used car dealership serving the West Island from Dorval: Pointe-Claire, Lachine, Pierrefonds and Kirkland. Bilingual, family-run, open seven days.",

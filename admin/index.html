@@ -55,6 +55,12 @@
       <button class="btn btn-red btn-lg" id="add-btn" type="button">+ Add Vehicle</button>
     </div>
     <p class="muted" id="dash-count"></p>
+    <p class="muted" id="dash-insight"></p>
+    <div class="bulk-bar" id="bulk-bar" hidden>
+      <span id="bulk-count"></span>
+      <button class="btn btn-small btn-red" type="button" id="bulk-post">Post to Facebook &amp; Instagram</button>
+      <button class="btn btn-small btn-ghost" type="button" id="bulk-clear">Clear selection</button>
+    </div>
     <div id="dash-list" class="dash-list"></div>
   </section>
 
@@ -182,6 +188,8 @@
     </div>
     <div class="share-body">
       <p class="muted" id="share-vehicle"></p>
+
+      <div id="share-history"></div>
 
       <h3>Facebook &amp; Instagram</h3>
       <label class="visually-hidden" for="share-caption">Caption</label>

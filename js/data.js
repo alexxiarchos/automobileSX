@@ -18,7 +18,8 @@ SX.routes = {
     contact: "/contact",
     faq: "/faq",
     guides: "/guides",
-    local: "/used-cars-west-island"
+    local: "/used-cars-west-island",
+    privacy: "/privacy"
   },
   fr: {
     home: "/fr",
@@ -30,7 +31,8 @@ SX.routes = {
     contact: "/fr/contact",
     faq: "/fr/faq",
     guides: "/fr/guides",
-    local: "/fr/autos-usagees-west-island"
+    local: "/fr/autos-usagees-west-island",
+    privacy: "/fr/confidentialite"
   }
 };
 
@@ -54,6 +56,7 @@ SX.strings = {
     "nav.guides": "Guides",
     "nav.faq": "FAQ",
     "nav.local": "Used cars in the West Island",
+    "nav.privacy": "Privacy policy",
     "cta.bookTestDrive": "Book a Test Drive",
     "cta.searchInventory": "Search Inventory",
     "cta.viewAll": "View all inventory →",
@@ -146,6 +149,7 @@ SX.strings = {
     "nav.guides": "Guides",
     "nav.faq": "FAQ",
     "nav.local": "Autos usagées dans le West Island",
+    "nav.privacy": "Politique de confidentialité",
     "cta.bookTestDrive": "Réserver un essai",
     "cta.searchInventory": "Rechercher",
     "cta.viewAll": "Voir tout l'inventaire →",

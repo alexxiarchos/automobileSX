@@ -461,6 +461,37 @@ module.exports = {
       ${accuracyNote}`
   },
 
+  privacy: {
+    title: "Politique de confidentialité | Automobile SX Dorval",
+    description: "Comment Automobile SX traite les renseignements personnels. Aucune analyse d'audience, aucun traceur et aucun témoin sur ce site.",
+    h1: "Politique de confidentialité",
+    sub: "Ce que nous recueillons, ce que nous ne recueillons pas, et comment nous joindre à ce sujet. Mise à jour le 12 août 2026.",
+    body: `
+      <p>Automobile SX est un commerce de véhicules d'occasion situé au 2044, avenue Chartier, à Dorval, au Québec. Cette page explique ce qu'il advient des renseignements personnels en lien avec ce site et notre entreprise. Elle décrit le fonctionnement réel du site plutôt que toutes les situations hypothétiques.</p>
+
+      <h2>Ce que ce site recueille</h2>
+      <p>Presque rien. Ce site n'utilise <strong>aucune analyse d'audience, aucun traceur publicitaire, aucun pixel marketing et aucun témoin (cookie)</strong>. Nous ne créons pas de profils de visiteurs et nous ne pouvons pas savoir qui vous êtes lorsque vous consultez nos pages.</p>
+      <p>Le formulaire de contact mérite une explication, car il ne fonctionne pas comme la plupart. Lorsque vous le remplissez et l'envoyez, il ouvre votre propre application de courriel avec le message préparé. Rien n'est transmis à ce site et aucune copie n'y est conservée. Vous nous écrivez depuis votre propre compte, comme si vous nous aviez écrit directement.</p>
+
+      <h2>Ce que nous conservons, et pourquoi</h2>
+      <p>Si vous nous écrivez, nous appelez ou nous envoyez un texto, nous conservons ce que vous avez choisi de nous dire : votre nom, vos coordonnées et ce que vous nous avez indiqué au sujet du véhicule qui vous intéresse. Nous nous en servons pour vous répondre et pour organiser un essai ou une vente. Rien de plus.</p>
+      <p>Si vous achetez un véhicule ou en échangez un, nous recueillons les renseignements nécessaires pour conclure la vente et l'immatriculation, y compris les pièces d'identité et les données exigées par la Société de l'assurance automobile du Québec. Il s'agit d'une obligation légale liée à la vente d'un véhicule, et ces dossiers sont conservés aussi longtemps que la loi l'exige.</p>
+      <p>Nous ne vendons, ne louons et n'échangeons aucun renseignement personnel.</p>
+
+      <h2>Les autres entreprises concernées</h2>
+      <p>Trois tiers interviennent dans le fonctionnement du site, et il est normal que vous sachiez ce que chacun voit.</p>
+      <p><strong>Vercel</strong> héberge le site. Comme tout hébergeur, ses serveurs enregistrent des renseignements techniques usuels, dont l'adresse IP, lorsqu'une page est demandée.</p>
+      <p><strong>Google</strong> fournit les polices de caractères ainsi que la carte affichée sur la page d'accueil et la page contact. Charger une police ou une carte signifie que votre navigateur communique directement avec Google, qui peut donc recevoir votre adresse IP et déposer ses propres témoins. Le traitement qu'en fait Google est régi par sa propre politique. Si votre navigateur bloque Google, le site fonctionne quand même : la carte est remplacée par notre adresse et un lien.</p>
+      <p><strong>Meta</strong> n'intervient que si vous suivez un lien vers nos pages Facebook ou Instagram; vous êtes alors sur leur service et leurs politiques s'appliquent.</p>
+
+      <h2>Vos droits au Québec</h2>
+      <p>En vertu de la <em>Loi sur la protection des renseignements personnels dans le secteur privé</em>, modifiée par la Loi 25, vous pouvez nous demander quels renseignements personnels nous détenons à votre sujet, demander leur rectification s'ils sont inexacts, et demander que nous cessions de les utiliser, sous réserve des dossiers que la loi nous oblige à conserver pour la vente de véhicules.</p>
+      <p>Pour toute demande de ce type, communiquez avec Spiro Xiarchos, responsable de la protection des renseignements personnels chez Automobile SX, à <a class="text-link" href="mailto:Automobilesx@gmail.com">Automobilesx@gmail.com</a> ou au <a class="text-link" href="tel:+15148249117">514-824-9117</a>. Nous répondrons dans les 30 jours.</p>
+      <p>Si notre réponse ne vous satisfait pas, vous pouvez porter plainte auprès de la Commission d'accès à l'information du Québec.</p>
+
+      <h2>Modifications</h2>
+      <p>Si cette politique change, la date indiquée en haut de la page change aussi.</p>`
+  },
   local: {
     title: "Autos Usagées dans l'Ouest-de-l'Île | Automobile SX",
     description: "Concessionnaire d'autos usagées desservant l'Ouest-de-l'Île depuis Dorval : Pointe-Claire, Lachine, Pierrefonds, Kirkland. Bilingue et familial.",

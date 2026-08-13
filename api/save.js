@@ -15,7 +15,7 @@ function sanitizeVehicle(v) {
     "transmission", "fuel", "drivetrain", "extColor", "extHex", "intColor",
     "engine", "econCity", "econHwy", "doors", "seats", "vin", "stock", "tag",
     "features", "desc", "descFr", "draftNotes", "images", "status",
-    "createdAt", "updatedAt", "slugHistory"];
+    "createdAt", "updatedAt", "publishedAt", "soldAt", "posts", "slugHistory"];
   const out = {};
   KEEP.forEach(function (k) { if (v[k] !== undefined) out[k] = v[k]; });
   return out;

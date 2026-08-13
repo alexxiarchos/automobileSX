@@ -207,7 +207,7 @@ window.SXUI = (function () {
     var links = [
       ["inventory", "nav.inventory"], ["financing", "nav.financing"], ["sell", "nav.sell"],
       ["guides", "nav.guides"], ["faq", "nav.faq"], ["local", "nav.local"],
-      ["about", "nav.about"], ["contact", "nav.contact"]
+      ["about", "nav.about"], ["contact", "nav.contact"], ["privacy", "nav.privacy"]
     ].map(function (l) {
       return '<li><a href="' + SX.url(l[0]) + '">' + SX.t(l[1]) + "</a></li>";
     }).join("");

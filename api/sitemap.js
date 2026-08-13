@@ -11,7 +11,7 @@ const ROUTES = {
   en: {
     home: "/", inventory: "/inventory", financing: "/financing", sell: "/sell-your-car",
     about: "/about", contact: "/contact", faq: "/faq", guides: "/guides",
-    local: "/used-cars-west-island",
+    local: "/used-cars-west-island", privacy: "/privacy",
     g1: "/guides/buying-a-used-car-in-quebec",
     g2: "/guides/car-financing-with-bad-credit-quebec",
     g3: "/guides/what-is-my-trade-in-worth-quebec",
@@ -20,7 +20,7 @@ const ROUTES = {
   fr: {
     home: "/fr", inventory: "/fr/inventaire", financing: "/fr/financement", sell: "/fr/vendre-votre-auto",
     about: "/fr/a-propos", contact: "/fr/contact", faq: "/fr/faq", guides: "/fr/guides",
-    local: "/fr/autos-usagees-west-island",
+    local: "/fr/autos-usagees-west-island", privacy: "/fr/confidentialite",
     g1: "/fr/guides/acheter-une-voiture-usagee-au-quebec",
     g2: "/fr/guides/financement-auto-mauvais-credit-quebec",
     g3: "/fr/guides/valeur-de-reprise-quebec",
@@ -70,8 +70,10 @@ module.exports = async function (req, res) {
   const parts = [];
 
   Object.keys(ROUTES.en).forEach(function (route) {
-    const priority = route === "home" ? "1.0" : route === "inventory" ? "0.9" : "0.7";
-    const freq = route === "inventory" ? "daily" : route === "home" ? "weekly" : "monthly";
+    const priority = route === "home" ? "1.0" : route === "inventory" ? "0.9"
+      : route === "privacy" ? "0.3" : "0.7";
+    const freq = route === "inventory" ? "daily" : route === "home" ? "weekly"
+      : route === "privacy" ? "yearly" : "monthly";
     const en = SITE + ROUTES.en[route];
     const fr = SITE + ROUTES.fr[route];
     parts.push(urlEntry(en, en, fr, freq, priority));

@@ -45,6 +45,21 @@ module.exports = async function (req, res) {
 
     if (req.method === "POST") {
       const body = await readBody(req, 256 * 1024);
+
+      /* Removing a post we made. Deliberately not tied to a vehicle lookup:
+         a post can outlive the listing it came from, and you should still be
+         able to take it down after the car is gone. */
+      if (body.action === "delete") {
+        try {
+          await social.deletePost(String(body.target || ""), String(body.postId || ""));
+          res.statusCode = 200;
+          return res.end(JSON.stringify({ ok: true }));
+        } catch (e) {
+          res.statusCode = 200;
+          return res.end(JSON.stringify({ ok: false, error: e.message }));
+        }
+      }
+
       const v = await findVehicle(String(body.id || ""));
       const text = (typeof body.caption === "string" && body.caption.trim())
         ? body.caption.trim()
@@ -57,8 +72,12 @@ module.exports = async function (req, res) {
          messages rather than two simultaneous timeouts. */
       for (const t of targets) {
         try {
-          if (t === "facebook") results.facebook = { ok: true, ...(await social.postToFacebook(v, text)) };
-          else if (t === "instagram") results.instagram = { ok: true, ...(await social.postToInstagram(v, text)) };
+          if (t === "facebook") {
+            results.facebook = { ok: true, ...(await social.postToFacebook(v, text)) };
+          } else if (t === "instagram") {
+            const out = await social.postToInstagram(v, text);
+            results.instagram = { ok: true, ...out, url: await social.instagramPermalink(out.id) };
+          }
         } catch (e) {
           results[t] = { ok: false, error: e.message };
         }
