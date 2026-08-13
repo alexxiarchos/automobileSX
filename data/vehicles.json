@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T22:40:07.446Z",
+  "updatedAt": "2026-08-13T22:42:57.283Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -485,7 +485,7 @@
       "year": 2019,
       "make": "Subaru",
       "model": "Impreza",
-      "trim": "",
+      "trim": "Base",
       "body": "Hatchback",
       "price": 8999,
       "km": 213000,
@@ -496,17 +496,30 @@
       "extHex": "#141518",
       "intColor": "Grey",
       "engine": "2.0",
-      "vin": "",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 5,
+      "seats": 5,
+      "vin": "4S3GTAA66K3709256",
       "stock": "SX-1009",
       "tag": "",
       "features": [
-        "Bluetooth",
         "Backup Camera",
+        "Adaptive Cruise Control",
+        "Automatic High Beams",
         "Heated Seats",
+        "Bluetooth",
         "Cruise Control",
         "AWD"
       ],
-      "desc": "Financement disponible\n\nSubaru Impreza 2019\n\n5️⃣1️⃣4️⃣-8️⃣2️⃣4️⃣-9️⃣1️⃣1️⃣7️⃣\n2044 avenue Chartier Dorval \nHoraires flexible sur rendez-vous\n \n\nSièges chauffants, climatisation, groupe électrique et bien plus encore.\nUne voiture fiable, économique et agréable à conduire au quotidien.",
+      "desc": "This is a 2019 Subaru Impreza Base, a five-door hatchback with 213,000 km on it. It has a 2.0 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in black with grey inside. It is equipped with backup camera, adaptive cruise control, automatic high beams, heated seats, Bluetooth, cruise control and AWD.\n\nYou can see it at our lot on Avenue Chartier in Dorval, seven days a week by appointment.",
+      "descFr": "Voici ce Subaru Impreza Base 2019, une voiture à hayon à cinq portes avec 213 000 km au compteur. Il est doté d'un moteur 2.0, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur noir et intérieur en gris. Équipements notables : caméra de recul, régulateur de vitesse adaptatif, feux de route automatiques, sièges chauffants, Bluetooth, régulateur de vitesse et rouage intégral.\n\nVous pouvez le voir à notre emplacement de l'avenue Chartier, à Dorval, sept jours sur sept sur rendez-vous.",
+      "descMode": "manual",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
       "images": [
         "images/vehicles/2019-suabru-impreza-62zb2/msem1wze-88.jpg",
         "images/vehicles/2019-suabru-impreza-62zb2/msem1y41-89.jpg",
@@ -524,7 +537,8 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:03:14.312Z",
-      "updatedAt": "2026-08-10T05:41:19.384Z",
+      "updatedAt": "2026-08-13T22:42:57.151Z",
+      "publishedAt": "2026-08-13T22:42:57.151Z",
       "slugHistory": [
         "2019-suabru-impreza-62zb2"
       ]
