@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T22:47:00.296Z",
+  "updatedAt": "2026-08-13T22:48:01.645Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -947,7 +947,7 @@
       "year": 2017,
       "make": "Bmw",
       "model": "X3",
-      "trim": "",
+      "trim": "xDrive28i",
       "body": "SUV",
       "price": 13999,
       "km": 131000,
@@ -957,22 +957,34 @@
       "extColor": "Blue",
       "extHex": "#2b4d7e",
       "intColor": "Black",
-      "engine": "",
-      "vin": "",
+      "engine": "2.0L 4-cyl",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 4,
+      "seats": 5,
+      "vin": "5UXWX9C35H0T23874",
       "stock": "SX-1002",
       "tag": "",
       "features": [
-        "Bluetooth",
         "Backup Camera",
+        "Automatic High Beams",
         "Heated Seats",
         "Heated Steering Wheel",
         "Leather Seats",
-        "Navigation",
         "Sunroof",
+        "Bluetooth",
+        "Navigation",
         "Cruise Control",
         "AWD"
       ],
-      "desc": "Financement disponible!\n\n5️⃣1️⃣4️⃣-8️⃣2️⃣4️⃣-9️⃣1️⃣1️⃣7️⃣\n\n2044 avenue Chartier Dorval\nHoraires flexible sur rendez-vous \n\nBMW X3 2017\n\nFreins neufs et vidange d’huile fraîchement effectuée.\n\nEntièrement équipée avec :\n\n• Navigation\n• Caméra de recul\n• Affichage tête haute (Head-Up Display)\n• Toit panoramique\n• Climatisation\n• Sièges en cuir chauffants\n\nVéhicule propre, bien entretenu et prêt à prendre la route.",
+      "desc": "The 2017 Bmw X3 xDrive28i on offer here is a four-door SUV showing 131,000 km. It has a 2.0L 4-cyl engine, an automatic transmission and all-wheel drive.\n\nIt is finished in blue with black inside. On the equipment list: backup camera, automatic high beams, heated seats, heated steering wheel, leather seats, sunroof, Bluetooth, navigation, cruise control and AWD.\n\nIt is available now in Dorval. Call 514-824-9117 to arrange a time to come and see it.",
+      "descFr": "Bmw X3 xDrive28i 2017 : un VUS à quatre portes avec 131 000 km au compteur. Il est doté d'un moteur 2.0L 4-cyl, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur bleu et intérieur en noir. Parmi les équipements : caméra de recul, feux de route automatiques, sièges chauffants, volant chauffant, sièges en cuir, toit ouvrant, Bluetooth, navigation, régulateur de vitesse et rouage intégral.\n\nIl est disponible dès maintenant à Dorval. Appelez le 514-824-9117 pour fixer un rendez-vous.",
+      "descMode": "manual",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
       "images": [
         "images/vehicles/2017-bmw-x3-cqgmi/msdvrw4n-1.jpg",
         "images/vehicles/2017-bmw-x3-cqgmi/msdvrx9t-2.jpg",
@@ -993,7 +1005,8 @@
       ],
       "status": "available",
       "createdAt": "2026-08-03T23:47:18.081Z",
-      "updatedAt": "2026-08-03T23:50:22.354Z"
+      "updatedAt": "2026-08-13T22:48:01.522Z",
+      "publishedAt": "2026-08-13T22:48:01.523Z"
     }
   ]
 }
