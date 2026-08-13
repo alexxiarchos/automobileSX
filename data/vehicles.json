@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T22:45:04.695Z",
+  "updatedAt": "2026-08-13T22:45:56.260Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -663,7 +663,7 @@
       "year": 2018,
       "make": "Volkswagen",
       "model": "Tiguan",
-      "trim": "",
+      "trim": "SE, 4Motion SEL",
       "body": "SUV",
       "price": 9999,
       "km": 194000,
@@ -674,19 +674,36 @@
       "extHex": "#eceae6",
       "intColor": "Black",
       "engine": "2.0",
-      "vin": "",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 4,
+      "seats": 7,
+      "vin": "3VV2B7AX0JM166591",
       "stock": "SX-1006",
       "tag": "",
       "features": [
-        "Bluetooth",
         "Backup Camera",
+        "Blind Spot Monitoring",
+        "Forward Collision Warning",
+        "Automatic Emergency Braking",
+        "Automatic High Beams",
         "Heated Seats",
         "Leather Seats",
+        "Third-Row Seating",
+        "Bluetooth",
         "Navigation",
+        "Push-Button Start",
         "Cruise Control",
         "AWD"
       ],
-      "desc": "Financement disponible!\n\n5️⃣1️⃣4️⃣-8️⃣2️⃣4️⃣-9️⃣1️⃣1️⃣7️⃣\n\nVolkswagen Tiguan 2018 – 2,0 L Turbo\n✅ Financement disponible�✅ Système de navigation (GPS)�✅ Sièges chauffants�✅ Caméra de recul�✅ Climatisation�✅ Groupe électrique\nVUS propre, fiable et bien entretenu. Prêt à prendre la route!\n\n2044 avenue Chartier Dorval \nHoraires flexibles sur rendez-vous \n\n📞 Contactez-nous dès aujourd’hui pour plus d’informations ou pour un essai routier.",
+      "desc": "The 2018 Volkswagen Tiguan SE, 4Motion SEL on offer here is a four-door SUV showing 194,000 km. It has a 2.0 engine, an automatic transmission and all-wheel drive. It seats seven.\n\nIt is finished in white with black inside. On the equipment list: backup camera, blind spot monitoring, forward collision warning, automatic emergency braking, automatic high beams, heated seats, leather seats, third-row seating, Bluetooth and navigation.\n\nCome by and take a look in Dorval. We are open seven days a week by appointment and you deal directly with Spiro.",
+      "descFr": "Volkswagen Tiguan SE, 4Motion SEL 2018 : un VUS à quatre portes avec 194 000 km au compteur. Il est doté d'un moteur 2.0, d'une transmission automatique et d'un rouage intégral. Il offre sept places.\n\nExtérieur blanc et intérieur en noir. Parmi les équipements : caméra de recul, surveillance des angles morts, alerte de collision avant, freinage d'urgence automatique, feux de route automatiques, sièges chauffants, sièges en cuir, troisième rangée de sièges, Bluetooth et navigation.\n\nPassez le voir à Dorval. Nous sommes ouverts sept jours sur sept sur rendez-vous et vous traitez directement avec Spiro.",
+      "descMode": "manual",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
       "images": [
         "images/vehicles/2018-volkswagen-tiguan-ddnvw/mseltho1-44.jpg",
         "images/vehicles/2018-volkswagen-tiguan-ddnvw/mseltixn-45.jpg",
@@ -705,7 +722,8 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T11:56:54.576Z",
-      "updatedAt": "2026-08-04T22:45:19.774Z",
+      "updatedAt": "2026-08-13T22:45:56.086Z",
+      "publishedAt": "2026-08-13T22:45:56.086Z",
       "posts": [
         {
           "target": "facebook",
