@@ -125,7 +125,7 @@ function build() {
       },
       {
         route: "vehicle", title: T.vehicle.title, description: T.vehicle.description,
-        body: blocks.vehicleBody(T), scripts: ["/js/features.js", "/js/detail.js"], skipCanonical: true
+        body: blocks.vehicleBody(T), scripts: ["/js/features.js", "/js/describe.js", "/js/detail.js"], skipCanonical: true
       },
       {
         route: "contact", title: T.contact.title, description: T.contact.description,

@@ -15,7 +15,7 @@
 
   /* The catalogue, the make spellings and the draft writer are shared with the
      public site and the VIN decoder rather than restated here. See
-     js/features.js, js/makes.js and admin/describe.js. */
+     js/features.js, js/makes.js and js/describe.js. */
   var CAT = window.SX_FEATURES;
   var MAKES = window.SX_MAKES;
   var DESCRIBE = window.SX_DESCRIBE;
@@ -267,6 +267,7 @@
         '<button class="btn btn-small btn-outline" data-act="edit">Edit</button>' +
         (live ? '<button class="btn btn-small btn-outline" data-act="share">' +
           ((v.posts && v.posts.length) ? "Posts" : "Share") + "</button>" : "") +
+        '<button class="btn btn-small btn-outline" data-act="sheet">Sheet</button>' +
         '<button class="btn btn-small btn-outline" data-act="status">' + ((v.status || "available") === "sold" ? "Mark Available" : "Mark Sold") + "</button>" +
         '<button class="btn btn-small btn-ghost" data-act="dup">Duplicate</button>' +
         '<button class="btn btn-small btn-danger-ghost" data-act="del">Delete</button>' +
@@ -285,6 +286,7 @@
         if (!act) return;
         if (act === "edit") openEditor(v, false);
         if (act === "share") openShare(v);
+        if (act === "sheet") openSheet([v.id]);
         if (act === "status") toggleStatus(v);
         if (act === "dup") duplicateVehicle(v);
         if (act === "del") deleteVehicle(v);
@@ -310,6 +312,17 @@
     $("bulk-bar").hidden = n === 0;
     $("bulk-count").textContent = n === 1 ? "1 vehicle selected" : n + " vehicles selected";
   }
+
+  /* The window sheet opens in its own tab rather than a dialog, because what
+     happens next is the browser's Print menu and that wants a real page. */
+  function openSheet(list) {
+    if (!list.length) return;
+    window.open("/admin/sheet.html?ids=" + encodeURIComponent(list.join(",")), "_blank", "noopener");
+  }
+
+  $("bulk-sheets").addEventListener("click", function () {
+    openSheet(selectedVehicles().map(function (v) { return v.id; }));
+  });
 
   $("bulk-clear").addEventListener("click", function () {
     selected = [];
@@ -593,81 +606,127 @@
       seats: Number($("f-seats").value) || "",
       extColor: $("f-extcolor").value.trim(),
       intColor: $("f-intcolor").value.trim(),
-      features: currentFeatures()
+      features: currentFeatures(),
+      descMode: "auto",          /* the preview always shows the template */
+      descNote: $("f-descnote").value.trim(),
+      descNoteFr: $("f-descnotefr").value.trim(),
+      draftNotes: { ownership: $("f-ownership").value }
     };
   }
 
-  $("desc-draft").addEventListener("click", function () {
+  /* ---------- the description ---------- */
+
+  var descMode = "auto";
+
+  /* Switching modes never destroys anything: the hand-written text and the
+     note live in different fields, so a listing can be flipped back and forth
+     and both are still there. */
+  function setDescMode(next, silent) {
+    descMode = next === "manual" ? "manual" : "auto";
+    $("desc-auto").hidden = descMode === "manual";
+    $("desc-manual").hidden = descMode === "auto";
+    renderDescription();
+    if (!silent) updateQuality();
+  }
+
+  $("desc-manual-on").addEventListener("click", function () {
+    /* Starting from a blank page is worse than starting from the template, so
+       an empty hand-written box is seeded with what the template would have
+       said. Anything already typed there is left alone. */
+    if (!$("f-desc").value.trim()) fillManualFromTemplate();
+    setDescMode("manual");
+    toast("This listing is now written by hand. It will not follow the template any more.", "ok");
+  });
+
+  $("desc-manual-off").addEventListener("click", function () {
+    setDescMode("auto");
+    toast("Back to the automatic description. Your hand-written text is kept in case you want it again.", "ok");
+  });
+
+  function fillManualFromTemplate() {
     var v = formSnapshot();
     if (!v.year || !v.make || !v.model) {
-      toast("Fill in the year, make and model first — the draft is written from them.", "err");
-      return;
+      toast("Fill in the year, make and model first — the template is written from them.", "err");
+      return false;
     }
-    var notes = { ownership: $("f-ownership").value, work: $("f-work").value.trim() };
-    var filled = [];
+    $("f-desc").value = DESCRIBE.text(v, "en");
+    $("f-descfr").value = DESCRIBE.text(v, "fr");
+    descHint("f-desc", "desc-count-men", 400);
+    descHint("f-descfr", "desc-count-mfr", 400);
+    return true;
+  }
 
-    [["f-desc", "en", "English"], ["f-descfr", "fr", "French"]].forEach(function (t) {
-      var box = $(t[0]);
-      var text = DESCRIBE.draft(v, t[1], notes);
-      if (!box.value.trim()) { box.value = text; filled.push(t[2]); return; }
-      if (confirm("Replace what is written in the " + t[2] + " box with a fresh draft?\n\nYour text will be lost.")) {
-        box.value = text;
-        filled.push(t[2]);
-      }
-    });
-
-    if (filled.length) toast("Wrote the " + filled.join(" and ") + " draft. Read it through and add your own line.", "ok");
-    descHint("f-desc", "desc-count-en", "en");
-    descHint("f-descfr", "desc-count-fr", "fr");
-    updateQuality();
-  });
-
-  /* Translating the half of the description that a person wrote.
-
-     Two behaviours, because there are two moments you want this. Right after
-     pressing "write a first draft" the French box already holds properly
-     written French; you then add a sentence of your own in English, select it,
-     and it is appended in French — the good French is left alone. If nothing
-     is selected, you are starting from an English description that has no
-     French counterpart at all, and the whole box is translated. */
-  $("desc-translate").addEventListener("click", function () {
-    var box = $("f-desc");
-    var selection = box.value.substring(box.selectionStart, box.selectionEnd).trim();
-    var whole = !selection;
-    var text = selection || box.value.trim();
-
-    if (!text) { toast("Write the English description first.", "err"); return; }
-    if (whole && $("f-descfr").value.trim() &&
-        !confirm("Replace the French box with a translation of the whole English box?\n\n" +
-                 "If you only want to add one sentence, cancel, select that sentence in the English box, and press this again.")) {
-      return;
-    }
-
-    busy("Translating…");
-    api("translate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: text })
-    }).then(function (d) {
-      var fr = $("f-descfr");
-      if (whole) {
-        fr.value = d.text;
-      } else {
-        fr.value = (fr.value.trim() ? fr.value.trim() + "\n\n" : "") + d.text;
-      }
-      descHint("f-descfr", "desc-count-fr", "fr");
+  $("desc-fill").addEventListener("click", function () {
+    if ($("f-desc").value.trim() &&
+        !confirm("Replace both boxes with the template text?\n\nWhat you have written will be lost.")) return;
+    if (fillManualFromTemplate()) {
+      toast("Filled from the template. It will not update by itself from here on.", "ok");
       updateQuality();
-      toast("Translated with " + d.provider + ". Read it through — it is a machine, and this is Quebec.", "ok");
-    }).catch(function (e) {
-      toast("Could not translate: " + e.message, "err");
-    }).finally(function () { busy(null); });
+    }
   });
 
-  function descHint(id, out, lang) {
+  /* The preview is the same function the website uses, given the form as it
+     stands. What is on screen is therefore not an approximation of the page —
+     it is the page. */
+  function renderDescription() {
+    if (descMode === "manual") return;
+    var v = formSnapshot();
+    ["en", "fr"].forEach(function (lang) {
+      var paras = DESCRIBE.paragraphs(v, lang);
+      $("preview-" + lang).innerHTML = paras.length
+        ? paras.map(function (p) { return "<p>" + escapeHtml(p) + "</p>"; }).join("")
+        : '<p class="fh">Fill in the year, make and model and the description writes itself.</p>';
+    });
+  }
+
+  /* Translating what a person wrote. Two behaviours, because there are two
+     moments you want it: select a sentence and only that sentence is added to
+     the French box, leaving the French already there alone; select nothing and
+     the whole box is translated. */
+  function wireTranslate(button, fromId, toId, countId) {
+    $(button).addEventListener("click", function () {
+      var box = $(fromId);
+      var selection = box.value.substring(box.selectionStart, box.selectionEnd).trim();
+      var whole = !selection;
+      var text = selection || box.value.trim();
+
+      if (!text) { toast("Write the English text first.", "err"); return; }
+      if (whole && $(toId).value.trim() &&
+          !confirm("Replace the French box with a translation of the whole English box?\n\n" +
+                   "If you only want to add one sentence, cancel, select that sentence, and press this again.")) {
+        return;
+      }
+
+      busy("Translating…");
+      api("translate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: text })
+      }).then(function (d) {
+        var fr = $(toId);
+        fr.value = whole ? d.text : (fr.value.trim() ? fr.value.trim() + "\n\n" : "") + d.text;
+        descHint(toId, countId, 0);
+        renderDescription();
+        updateQuality();
+        toast("Translated with " + d.provider + ". Read it through — it is a machine, and this is Quebec.", "ok");
+      }).catch(function (e) {
+        toast("Could not translate: " + e.message, "err");
+      }).finally(function () { busy(null); });
+    });
+  }
+
+  wireTranslate("desc-translate", "f-descnote", "f-descnotefr", "desc-count-fr");
+  wireTranslate("desc-translate-manual", "f-desc", "f-descfr", "desc-count-mfr");
+
+  /* target = 0 means "no length to aim for": the note is an addition to a
+     description that is already complete without it. */
+  function descHint(id, out, target) {
     var n = $(id).value.trim().length;
     var el = $(out);
-    if (!n) { el.textContent = lang === "fr" ? "Empty — the French page will fall back to the English text." : "Empty."; return; }
-    el.textContent = n + " characters" + (n < 400 ? " — a bit short. Around 400 gives search engines and buyers something to work with." : ".");
+    if (!el) return;
+    if (!n) { el.textContent = target ? "Empty." : "Empty — the template alone will be used."; return; }
+    el.textContent = n + " characters" +
+      (target && n < target ? " — a bit short. Around " + target + " gives search engines and buyers something to work with." : ".");
   }
 
   /* ---------- listing quality ---------- */
@@ -678,8 +737,18 @@
   function qualityChecks() {
     var photos = (editing && editing.images ? editing.images.length : 0);
     var feats = currentFeatures().length;
-    var descEn = $("f-desc").value.trim().length;
-    var descFr = $("f-descfr").value.trim().length;
+
+    /* Measured on the composed description, not on a text box. In automatic
+       mode the template already supplies several hundred characters, so what
+       matters is whether anything of Spiro's own has been added to it — that
+       is the part that differs from every other listing, and the part a search
+       engine has not already seen on a hundred other dealer sites. */
+    var snapshot = formSnapshot();
+    var auto = descMode === "auto";
+    var descEn = auto ? DESCRIBE.text(snapshot, "en").length : $("f-desc").value.trim().length;
+    var descFr = auto ? DESCRIBE.text(snapshot, "fr").length : $("f-descfr").value.trim().length;
+    var ownEn = auto ? $("f-descnote").value.trim().length : 0;
+    var ownFr = auto ? $("f-descnotefr").value.trim().length : 0;
 
     return [
       photos >= 6 ? ["ok", photos + " photos"]
@@ -687,11 +756,16 @@
         : ["bad", "No photos yet"],
       $("f-price").value ? ["ok", "Price set"] : ["bad", "No price"],
       $("f-km").value ? ["ok", "Mileage set"] : ["bad", "No mileage"],
-      descEn >= 400 ? ["ok", "English description written"]
+      descEn >= 400 ? ["ok", "English description is " + descEn + " characters"]
         : descEn > 0 ? ["warn", "English description is short (" + descEn + " characters)"]
         : ["bad", "No English description"],
-      descFr > 0 ? ["ok", "French description written"]
-        : ["warn", "No French description — the French page will show the English text"],
+      descFr >= 400 ? ["ok", "French description is " + descFr + " characters"]
+        : descFr > 0 ? ["warn", "French description is short (" + descFr + " characters)"]
+        : ["bad", "No French description"],
+      !auto ? ["ok", "Written by hand rather than from the template"]
+        : ownEn && ownFr ? ["ok", "Your own words added, in both languages"]
+        : ownEn ? ["warn", "Your own words are English only — translate them for the French page"]
+        : ["warn", "Nothing of your own yet — a line only you could write is what sets this listing apart"],
       feats >= 5 ? ["ok", feats + " features ticked"]
         : feats > 0 ? ["warn", "Only " + feats + " feature" + (feats === 1 ? "" : "s") + " ticked"]
         : ["warn", "No features ticked"],
@@ -715,10 +789,12 @@
   }
 
   /* One listener for the whole form rather than one per field. */
-  $("edit-form").addEventListener("input", function () { updateQuality(); });
-  $("edit-form").addEventListener("change", function () { updateQuality(); });
-  $("f-desc").addEventListener("input", function () { descHint("f-desc", "desc-count-en", "en"); });
-  $("f-descfr").addEventListener("input", function () { descHint("f-descfr", "desc-count-fr", "fr"); });
+  $("edit-form").addEventListener("input", function () { renderDescription(); updateQuality(); });
+  $("edit-form").addEventListener("change", function () { renderDescription(); updateQuality(); });
+  [["f-descnote", "desc-count-en", 0], ["f-descnotefr", "desc-count-fr", 0],
+   ["f-desc", "desc-count-men", 400], ["f-descfr", "desc-count-mfr", 400]].forEach(function (t) {
+    $(t[0]).addEventListener("input", function () { descHint(t[0], t[1], t[2]); });
+  });
 
   /* ---------- spelling ---------- */
 
@@ -973,7 +1049,8 @@
       drivetrain: "FWD", extColor: "", intColor: "", engine: "", vin: "",
       doors: "", seats: "", econCity: "", econHwy: "",
       stock: nextStock(), tag: "", features: [], desc: "", descFr: "",
-      draftNotes: { ownership: "", work: "" }, images: [], posts: [],
+      descNote: "", descNoteFr: "", descMode: "auto",
+      draftNotes: { ownership: "" }, images: [], posts: [],
       status: "draft", createdAt: new Date().toISOString()
     };
   }
@@ -1017,10 +1094,19 @@
     $("f-desc").value = paragraphs(v.desc);
     $("f-descfr").value = paragraphs(v.descFr);
     $("f-ownership").value = (v.draftNotes && v.draftNotes.ownership) || "";
-    $("f-work").value = (v.draftNotes && v.draftNotes.work) || "";
 
-    descHint("f-desc", "desc-count-en", "en");
-    descHint("f-descfr", "desc-count-fr", "fr");
+    /* "Recent work" used to be its own field, which meant it went onto the
+       French page in English. It is now part of the note, which can be
+       translated properly, so anything already stored is folded in. */
+    var legacyWork = (v.draftNotes && v.draftNotes.work) || "";
+    $("f-descnote").value = [legacyWork, paragraphs(v.descNote)].filter(Boolean).join("\n\n");
+    $("f-descnotefr").value = paragraphs(v.descNoteFr);
+
+    descHint("f-descnote", "desc-count-en", 0);
+    descHint("f-descnotefr", "desc-count-fr", 0);
+    descHint("f-desc", "desc-count-men", 400);
+    descHint("f-descfr", "desc-count-mfr", 400);
+    setDescMode(DESCRIBE.mode(v), true);
 
     renderFeatures(flatFeatures(v));
     renderPhotos();
@@ -1096,7 +1182,10 @@
     v.tag = $("f-tag").value;
     v.desc = $("f-desc").value.trim();
     v.descFr = $("f-descfr").value.trim();
-    v.draftNotes = { ownership: $("f-ownership").value, work: $("f-work").value.trim() };
+    v.descNote = $("f-descnote").value.trim();
+    v.descNoteFr = $("f-descnotefr").value.trim();
+    v.descMode = descMode;
+    v.draftNotes = { ownership: $("f-ownership").value };
 
     v.features = currentFeatures();
 

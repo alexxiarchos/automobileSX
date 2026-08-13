@@ -9,6 +9,10 @@ const SITE = "https://www.automobilesx.ca";
    the pre-rendered French page and the hydrated one agree word for word. */
 const CATALOGUE = require("../../js/features.js");
 
+/* The description is composed here rather than read out of a field, so a page
+   can never show a paragraph that stopped being true. See js/describe.js. */
+const DESCRIBE = require("../../js/describe.js");
+
 const PATHS = {
   en: { dir: "vehicles", inventory: "/inventory", contact: "/contact", financing: "/financing" },
   fr: { dir: "fr/vehicules", inventory: "/fr/inventaire", contact: "/fr/contact", financing: "/fr/financement" }
@@ -144,14 +148,8 @@ function featuresHtml(v, lang, t) {
     "</ul></div>").join("");
 }
 
-/* A French page shows the French description when the admin panel has written
-   one, and the English text when it has not — an empty overview would be worse
-   than a paragraph in the other language. */
 function descParagraphs(v, lang) {
-  const source = (lang === "fr" && v.descFr) ? v.descFr : v.desc;
-  if (Array.isArray(source)) return source.filter(Boolean);
-  if (typeof source === "string" && source.trim()) return source.split(/\n\s*\n/).filter(Boolean);
-  return [];
+  return DESCRIBE.paragraphs(v, lang);
 }
 
 function metaDescription(v, lang) {
@@ -408,6 +406,7 @@ function renderVehiclePage(v, lang) {
 <div class="mobile-cta-bar" id="mobile-cta-bar"></div>
 
 <script src="/js/features.js"></script>
+<script src="/js/describe.js"></script>
 <script src="/js/data.js"></script>
 <script src="/js/components.js"></script>
 <script src="/js/detail.js" defer></script>

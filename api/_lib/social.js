@@ -13,6 +13,7 @@
      text for it rather than pretending to automate it. */
 
 const SITE = "https://www.automobilesx.ca";
+const DESCRIBE = require("../../js/describe.js");
 const GRAPH = "https://graph.facebook.com/v21.0";
 const TIMEOUT_MS = 20000;
 
@@ -95,7 +96,7 @@ function marketplaceListing(v) {
     description: [
       title(v) + " at Automobile SX, 2044 Avenue Chartier, Dorval.",
       "",
-      (Array.isArray(v.desc) ? v.desc.join("\n\n") : (v.desc || "")).trim(),
+      DESCRIBE.text(v, "en"),
       "",
       [km(v.km), v.transmission, v.drivetrain, v.fuel].filter(Boolean).join(" · "),
       "",

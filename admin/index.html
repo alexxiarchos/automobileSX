@@ -59,6 +59,7 @@
     <div class="bulk-bar" id="bulk-bar" hidden>
       <span id="bulk-count"></span>
       <button class="btn btn-small btn-red" type="button" id="bulk-post">Post to Facebook &amp; Instagram</button>
+      <button class="btn btn-small btn-outline" type="button" id="bulk-sheets">Print window sheets</button>
       <button class="btn btn-small btn-ghost" type="button" id="bulk-clear">Clear selection</button>
     </div>
     <div id="dash-list" class="dash-list"></div>
@@ -133,8 +134,12 @@
       </div>
 
       <h2>Description</h2>
-      <div class="desc-tools">
-        <div class="f">
+
+      <!-- ============ automatic mode ============ -->
+      <div id="desc-auto">
+        <p class="fh">Every listing is written from the same template, using the fields and features above. It updates by itself — change the price, tick a feature, correct the mileage, and the description on the website follows. Your own paragraphs go in the middle and are never touched.</p>
+
+        <div class="f" style="max-width:280px;margin-bottom:14px">
           <label for="f-ownership">History</label>
           <select id="f-ownership">
             <option value="">Not stated</option>
@@ -144,28 +149,57 @@
             <option>Lease return</option>
           </select>
         </div>
-        <div class="f">
-          <label for="f-work">Recent work or what's included</label>
-          <input id="f-work" type="text" placeholder="e.g. Four new tires and a full brake service last month">
-        </div>
-        <button class="btn btn-small btn-outline" type="button" id="desc-draft">Write a first draft</button>
-      </div>
-      <p class="fh" id="desc-draft-note">The draft states only what is already in the form above, in English and in French. It never mentions the price. Add a sentence or two of your own afterwards — where the car came from, how it drives, why it is worth the money. That part is what makes a listing sell, and it is the part no database can write.</p>
 
-      <div class="desc-pair">
-        <div class="f">
-          <label for="f-desc">English</label>
-          <textarea id="f-desc" rows="9" placeholder="Describe the vehicle the way you'd tell a customer about it."></textarea>
-          <span class="fh" id="desc-count-en"></span>
-        </div>
-        <div class="f">
-          <div class="desc-head">
-            <label for="f-descfr">Français</label>
-            <button class="btn btn-small btn-ghost" type="button" id="desc-translate">Translate from English</button>
+        <div class="desc-pair">
+          <div class="f">
+            <label for="f-descnote">Your own words (English)</label>
+            <textarea id="f-descnote" rows="6" placeholder="Recent work, where it came from, how it drives, why it's worth the money. This is the part that sells the car."></textarea>
+            <span class="fh" id="desc-count-en"></span>
           </div>
-          <textarea id="f-descfr" rows="9" lang="fr" placeholder="La version française, affichée sur les pages en français."></textarea>
-          <span class="fh" id="desc-count-fr"></span>
-          <span class="fh">Select a sentence in the English box and this adds just that sentence, in French, to the end. Select nothing and it translates the whole English box. Machine translation, so read it before you publish.</span>
+          <div class="f">
+            <div class="desc-head">
+              <label for="f-descnotefr">Vos mots (français)</label>
+              <button class="btn btn-small btn-ghost" type="button" id="desc-translate">Translate from English</button>
+            </div>
+            <textarea id="f-descnotefr" rows="6" lang="fr" placeholder="La même chose en français."></textarea>
+            <span class="fh" id="desc-count-fr"></span>
+          </div>
+        </div>
+        <p class="fh">Select a sentence in the English box and Translate adds just that sentence, in French. Select nothing and it translates the whole box. Machine translation — read it before publishing.</p>
+
+        <div class="desc-preview">
+          <div class="desc-preview-head">
+            <strong>What will be on the page</strong>
+            <button class="btn btn-small btn-ghost" type="button" id="desc-manual-on">Write this one by hand instead</button>
+          </div>
+          <div class="desc-preview-pair">
+            <div><span class="fh">English</span><div id="preview-en" class="desc-preview-body"></div></div>
+            <div><span class="fh">Français</span><div id="preview-fr" class="desc-preview-body" lang="fr"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ hand-written mode ============ -->
+      <div id="desc-manual" hidden>
+        <p class="fh" id="desc-manual-note">This listing is written by hand: the template is switched off for it and the text below is used exactly as typed. Your words are kept if you switch back.</p>
+        <div class="desc-pair">
+          <div class="f">
+            <label for="f-desc">English</label>
+            <textarea id="f-desc" rows="10" placeholder="The whole description, in your own words."></textarea>
+            <span class="fh" id="desc-count-men"></span>
+          </div>
+          <div class="f">
+            <div class="desc-head">
+              <label for="f-descfr">Français</label>
+              <button class="btn btn-small btn-ghost" type="button" id="desc-translate-manual">Translate from English</button>
+            </div>
+            <textarea id="f-descfr" rows="10" lang="fr" placeholder="La version française."></textarea>
+            <span class="fh" id="desc-count-mfr"></span>
+          </div>
+        </div>
+        <div class="desc-manual-actions">
+          <button class="btn btn-small btn-outline" type="button" id="desc-fill">Fill both boxes from the template</button>
+          <button class="btn btn-small btn-ghost" type="button" id="desc-manual-off">Go back to the automatic description</button>
         </div>
       </div>
 
@@ -220,7 +254,7 @@
 
 <script src="/js/makes.js"></script>
 <script src="/js/features.js"></script>
-<script src="/admin/describe.js"></script>
+<script src="/js/describe.js"></script>
 <script src="/admin/admin.js"></script>
 </body>
 </html>

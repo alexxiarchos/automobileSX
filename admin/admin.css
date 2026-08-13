@@ -293,3 +293,23 @@ textarea { resize: vertical; }
 .desc-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
 .desc-head label { margin-bottom: 6px; }
 .desc-head .btn { padding: 4px 8px; min-height: 0; font-size: 13px; }
+
+/* Description: the live template preview */
+.desc-preview {
+  margin-top: 18px; background: #fff; border: 1px solid var(--mist);
+  border-radius: 14px; padding: 16px 18px;
+}
+.desc-preview-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 10px;
+}
+.desc-preview-head strong { font-size: 14.5px; }
+.desc-preview-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.desc-preview-body { font-size: 14.5px; margin-top: 4px; }
+.desc-preview-body p { margin: 0 0 10px; }
+.desc-preview-body p:last-child { margin-bottom: 0; }
+.desc-manual-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+
+@media (max-width: 860px) {
+  .desc-preview-pair { grid-template-columns: 1fr; }
+}

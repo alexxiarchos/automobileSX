@@ -118,11 +118,11 @@ SX.ready.then(function () {
   show(0);
 
   /* ---------- Overview ---------- */
-  /* The French page uses the French description when there is one, and falls
-     back to the English text rather than showing an empty overview. */
-  var descSource = (SX.lang === "fr" && v.descFr) ? v.descFr : v.desc;
-  var descParas = Array.isArray(descSource) ? descSource
-    : (descSource ? String(descSource).split(/\n\s*\n/) : []);
+  /* Composed from the vehicle's own fields by the shared template, exactly as
+     the pre-rendered page did a moment ago, so hydrating cannot change a word
+     of what the crawler already read. */
+  var descParas = window.SX_DESCRIBE ? SX_DESCRIBE.paragraphs(v, SX.lang)
+    : (v.desc ? String(v.desc).split(/\n\s*\n/) : []);
   document.getElementById("v-overview").innerHTML =
     descParas.filter(Boolean).map(function (p) { return "<p>" + p + "</p>"; }).join("") ||
     "<p>" + SX.t("veh.noDesc") + "</p>";
