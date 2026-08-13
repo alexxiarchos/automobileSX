@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T22:21:44.071Z",
+  "updatedAt": "2026-08-13T22:31:41.702Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -699,7 +699,7 @@
       "year": 2017,
       "make": "Subaru",
       "model": "Outback",
-      "trim": "",
+      "trim": "Premium +M/R",
       "body": "SUV",
       "price": 9999,
       "km": 191000,
@@ -710,18 +710,33 @@
       "extHex": "#eceae6",
       "intColor": "Black",
       "engine": "2.5",
-      "vin": "",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 4,
+      "seats": 5,
+      "vin": "4S4BSCDC0H3438905",
       "stock": "SX-1004",
       "tag": "",
       "features": [
-        "Bluetooth",
         "Backup Camera",
+        "Air Conditioning",
+        "Dual-Zone Climate Control",
         "Heated Seats",
         "Sunroof",
+        "Bluetooth",
         "Cruise Control",
+        "Power Liftgate",
+        "Alloy Wheels",
         "AWD"
       ],
       "desc": "Financement disponible 2017, Outback Touring, 2.5 l\n\nNouveau pneus, nouveau freins, roulent très bien, caméra de recul, Bluetooth, air climatisé , toit et groupe électrique \n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
+      "descFr": "",
+      "descMode": "manual",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
       "images": [
         "images/vehicles/2017-subaru-outback-jcq9w/mselo3f8-16.jpg",
         "images/vehicles/2017-subaru-outback-jcq9w/mselo4bq-17.jpg",
@@ -741,7 +756,8 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T11:51:51.272Z",
-      "updatedAt": "2026-08-04T11:54:16.275Z"
+      "updatedAt": "2026-08-13T22:31:41.104Z",
+      "publishedAt": "2026-08-13T22:31:41.104Z"
     },
     {
       "id": "2018-audi-q3-k6tky",
