@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T22:37:45.361Z",
+  "updatedAt": "2026-08-13T22:39:14.453Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -334,7 +334,7 @@
       "year": 2016,
       "make": "Jeep",
       "model": "Grand Cherokee",
-      "trim": "",
+      "trim": "Laredo",
       "body": "SUV",
       "price": 11999,
       "km": 157000,
@@ -345,17 +345,28 @@
       "extHex": "#5c6066",
       "intColor": "Grey",
       "engine": "3.6",
-      "vin": "",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 4,
+      "seats": "",
+      "vin": "1C4RJFAG8GC388316",
       "stock": "SX-1011",
       "tag": "",
       "features": [
-        "Bluetooth",
         "Heated Seats",
+        "Bluetooth",
         "Remote Start",
         "Cruise Control",
         "AWD"
       ],
       "desc": "2016 GRAND CHEROKEE LAREDO ,3.6K, EXCELLENTE CONDUITE, NOUVEAU FREINS AU 4 ROUE, AC, GROUPE ÉLECTRIQUES, BLUETOOTH\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
+      "descFr": "",
+      "descMode": "manual",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
       "images": [
         "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7njs-118.jpg",
         "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7onh-119.jpg",
@@ -373,7 +384,8 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:07:36.365Z",
-      "updatedAt": "2026-08-04T12:09:34.206Z",
+      "updatedAt": "2026-08-13T22:39:14.275Z",
+      "publishedAt": "2026-08-13T22:39:14.275Z",
       "posts": [
         {
           "target": "facebook",
