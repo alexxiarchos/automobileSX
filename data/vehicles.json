@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T22:20:27.796Z",
+  "updatedAt": "2026-08-13T22:21:17.714Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -606,7 +606,21 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T11:56:54.576Z",
-      "updatedAt": "2026-08-04T22:45:19.774Z"
+      "updatedAt": "2026-08-04T22:45:19.774Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1134026192709568",
+          "url": "https://www.facebook.com/101868772570376_1134026192709568",
+          "at": "2026-08-13T22:21:17.615Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18141754150521769",
+          "url": "https://www.instagram.com/p/Db_zHWjmt5P/",
+          "at": "2026-08-13T22:21:17.615Z"
+        }
+      ]
     },
     {
       "id": "2011-nissan-murano-r71ho",
