@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T23:09:56.341Z",
+  "updatedAt": "2026-08-13T23:11:13.392Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -213,7 +213,7 @@
       "id": "2019-volvo-xc60-zen4s",
       "year": 2019,
       "make": "Volvo",
-      "model": "Xc60",
+      "model": "XC60",
       "trim": "Momentum",
       "body": "SUV",
       "price": 21999,
@@ -252,7 +252,7 @@
       ],
       "desc": "Financement disponible,2019 Volvo xc 60 T6 2.0 ,momentum, navigation, caméra, de recul, toit panoramiques , siège, chauffant, ac , groupe électrique\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
       "descFr": "",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -277,7 +277,7 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:13:07.748Z",
-      "updatedAt": "2026-08-13T22:35:39.133Z",
+      "updatedAt": "2026-08-13T23:11:12.797Z",
       "publishedAt": "2026-08-13T22:35:39.133Z",
       "posts": [
         {
