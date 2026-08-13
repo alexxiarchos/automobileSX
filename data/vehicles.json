@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T03:22:15.844Z",
+  "updatedAt": "2026-08-13T03:23:15.506Z",
   "vehicles": [
     {
       "id": "2019-nissan-kicks-6k9ge",
@@ -46,7 +46,20 @@
       "createdAt": "2026-08-13T03:08:22.042Z",
       "updatedAt": "2026-08-13T03:22:07.318Z",
       "publishedAt": "2026-08-13T03:22:07.318Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1133324262779761",
+          "url": "https://www.facebook.com/101868772570376_1133324262779761",
+          "at": "2026-08-13T03:23:07.368Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18106668350175568",
+          "url": "https://www.instagram.com/p/Db9w4DFHaUa/",
+          "at": "2026-08-13T03:23:07.368Z"
+        }
+      ]
     },
     {
       "id": "2014-subaru-legacy-4jxba",
