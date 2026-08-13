@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T22:19:56.005Z",
+  "updatedAt": "2026-08-13T22:20:27.796Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -391,7 +391,21 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:05:47.668Z",
-      "updatedAt": "2026-08-04T12:07:09.895Z"
+      "updatedAt": "2026-08-04T12:07:09.895Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1134025776042943",
+          "url": "https://www.facebook.com/101868772570376_1134025776042943",
+          "at": "2026-08-13T22:20:27.644Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18067858844484458",
+          "url": "https://www.instagram.com/p/Db_zA6tk9lq/",
+          "at": "2026-08-13T22:20:27.644Z"
+        }
+      ]
     },
     {
       "id": "2019-subaru-impreza-62zb2",
