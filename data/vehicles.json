@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T22:48:01.645Z",
+  "updatedAt": "2026-08-13T23:11:13.392Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -198,13 +198,22 @@
       "status": "available",
       "createdAt": "2026-08-04T12:17:11.456Z",
       "updatedAt": "2026-08-13T22:36:35.297Z",
-      "publishedAt": "2026-08-13T22:36:35.297Z"
+      "publishedAt": "2026-08-13T22:36:35.297Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "",
+          "url": "",
+          "at": "2026-08-13T23:09:55.360Z",
+          "manual": true
+        }
+      ]
     },
     {
       "id": "2019-volvo-xc60-zen4s",
       "year": 2019,
       "make": "Volvo",
-      "model": "Xc60",
+      "model": "XC60",
       "trim": "Momentum",
       "body": "SUV",
       "price": 21999,
@@ -243,7 +252,7 @@
       ],
       "desc": "Financement disponible,2019 Volvo xc 60 T6 2.0 ,momentum, navigation, caméra, de recul, toit panoramiques , siège, chauffant, ac , groupe électrique\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
       "descFr": "",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -268,8 +277,17 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T12:13:07.748Z",
-      "updatedAt": "2026-08-13T22:35:39.133Z",
-      "publishedAt": "2026-08-13T22:35:39.133Z"
+      "updatedAt": "2026-08-13T23:11:12.797Z",
+      "publishedAt": "2026-08-13T22:35:39.133Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "",
+          "url": "",
+          "at": "2026-08-13T23:09:55.360Z",
+          "manual": true
+        }
+      ]
     },
     {
       "id": "2017-volkswagen-golf-iftqk",
@@ -327,7 +345,16 @@
       "status": "available",
       "createdAt": "2026-08-04T12:10:04.639Z",
       "updatedAt": "2026-08-13T22:37:45.238Z",
-      "publishedAt": "2026-08-13T22:37:45.238Z"
+      "publishedAt": "2026-08-13T22:37:45.238Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "",
+          "url": "",
+          "at": "2026-08-13T23:09:55.360Z",
+          "manual": true
+        }
+      ]
     },
     {
       "id": "2016-jeep-grand-cherokee-638hq",
@@ -539,6 +566,15 @@
       "createdAt": "2026-08-04T12:03:14.312Z",
       "updatedAt": "2026-08-13T22:42:57.151Z",
       "publishedAt": "2026-08-13T22:42:57.151Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "",
+          "url": "",
+          "at": "2026-08-13T23:09:55.360Z",
+          "manual": true
+        }
+      ],
       "slugHistory": [
         "2019-suabru-impreza-62zb2"
       ]
@@ -656,7 +692,16 @@
       "status": "available",
       "createdAt": "2026-08-04T11:58:57.539Z",
       "updatedAt": "2026-08-13T22:45:04.559Z",
-      "publishedAt": "2026-08-13T22:45:04.559Z"
+      "publishedAt": "2026-08-13T22:45:04.559Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "",
+          "url": "",
+          "at": "2026-08-13T23:09:55.360Z",
+          "manual": true
+        }
+      ]
     },
     {
       "id": "2018-volkswagen-tiguan-ddnvw",
@@ -874,7 +919,16 @@
       "status": "available",
       "createdAt": "2026-08-04T11:51:51.272Z",
       "updatedAt": "2026-08-13T22:31:41.104Z",
-      "publishedAt": "2026-08-13T22:31:41.104Z"
+      "publishedAt": "2026-08-13T22:31:41.104Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "",
+          "url": "",
+          "at": "2026-08-13T23:09:55.360Z",
+          "manual": true
+        }
+      ]
     },
     {
       "id": "2018-audi-q3-k6tky",
@@ -940,7 +994,16 @@
       "status": "available",
       "createdAt": "2026-08-04T11:49:56.989Z",
       "updatedAt": "2026-08-13T22:47:00.185Z",
-      "publishedAt": "2026-08-13T22:47:00.185Z"
+      "publishedAt": "2026-08-13T22:47:00.185Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "",
+          "url": "",
+          "at": "2026-08-13T23:09:55.360Z",
+          "manual": true
+        }
+      ]
     },
     {
       "id": "2017-bmw-x3-cqgmi",
@@ -1006,7 +1069,16 @@
       "status": "available",
       "createdAt": "2026-08-03T23:47:18.081Z",
       "updatedAt": "2026-08-13T22:48:01.522Z",
-      "publishedAt": "2026-08-13T22:48:01.523Z"
+      "publishedAt": "2026-08-13T22:48:01.523Z",
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "",
+          "url": "",
+          "at": "2026-08-13T23:09:55.360Z",
+          "manual": true
+        }
+      ]
     }
   ]
 }
