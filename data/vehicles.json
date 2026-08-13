@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-12T20:15:32.901Z",
+  "updatedAt": "2026-08-13T03:07:38.712Z",
   "vehicles": [
     {
       "id": "2014-subaru-legacy-4jxba",
@@ -453,10 +453,14 @@
       "transmission": "Automatic",
       "fuel": "Gasoline",
       "drivetrain": "AWD",
-      "extColor": "Balck",
-      "extHex": "#6c7178",
+      "extColor": "Black",
+      "extHex": "#141518",
       "intColor": "Grey",
       "engine": "3.5",
+      "econCity": "",
+      "econHwy": "",
+      "doors": "",
+      "seats": "",
       "vin": "",
       "stock": "SX-1005",
       "tag": "",
@@ -468,6 +472,13 @@
         "AWD"
       ],
       "desc": "2011 Nissan Murano awd 3.5L roule tres bien, ac, camera de recul, groupe électriques, toit.\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2 I",
+      "descFr": "",
+      "descMode": "manual",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
       "images": [
         "images/vehicles/2011-nissan-murano-r71ho/mselqmvn-31.jpg",
         "images/vehicles/2011-nissan-murano-r71ho/mselqnto-32.jpg",
@@ -485,7 +496,8 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T11:54:58.675Z",
-      "updatedAt": "2026-08-04T11:56:24.474Z"
+      "updatedAt": "2026-08-13T03:07:30.079Z",
+      "publishedAt": "2026-08-13T03:07:30.079Z"
     },
     {
       "id": "2017-subaru-outback-jcq9w",
