@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T22:45:56.260Z",
+  "updatedAt": "2026-08-13T22:47:00.296Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -881,7 +881,7 @@
       "year": 2018,
       "make": "Audi",
       "model": "Q3",
-      "trim": "",
+      "trim": "quattro Premium, quattro Sport Premium",
       "body": "SUV",
       "price": 13999,
       "km": 138000,
@@ -892,21 +892,34 @@
       "extHex": "#6c7178",
       "intColor": "Gria",
       "engine": "2.0",
-      "vin": "",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 4,
+      "seats": 5,
+      "vin": "WA1ECCFS4JR029905",
       "stock": "SX-1003",
       "tag": "",
       "features": [
-        "Bluetooth",
-        "Apple CarPlay",
         "Backup Camera",
+        "Parking Sensors",
+        "Automatic High Beams",
         "Heated Seats",
         "Leather Seats",
-        "Navigation",
         "Sunroof",
+        "Bluetooth",
+        "Apple CarPlay",
+        "Navigation",
         "Cruise Control",
         "AWD"
       ],
-      "desc": "Financement disponible 2018, Audi Q3 , siège en cuir chauffants ,  toit panoramique, navigation, camera de recul, ac , groupe électriques \n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
+      "desc": "This 2018 Audi Q3 quattro Premium, quattro Sport Premium is a four-door SUV with 138,000 km on the odometer. It has a 2.0 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in gris with gria inside. Equipment includes backup camera, parking sensors, automatic high beams, heated seats, leather seats, sunroof, Bluetooth, Apple CarPlay, navigation and cruise control.\n\nCome by and take a look in Dorval. We are open seven days a week by appointment and you deal directly with Spiro.",
+      "descFr": "Audi Q3 quattro Premium, quattro Sport Premium 2018, un VUS à quatre portes affichant 138 000 km au compteur. Il est doté d'un moteur 2.0, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur Gris et intérieur en Gria. L'équipement comprend : caméra de recul, capteurs de stationnement, feux de route automatiques, sièges chauffants, sièges en cuir, toit ouvrant, Bluetooth, Apple CarPlay, navigation et régulateur de vitesse.\n\nPassez le voir à Dorval. Nous sommes ouverts sept jours sur sept sur rendez-vous et vous traitez directement avec Spiro.",
+      "descMode": "manual",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
       "images": [
         "images/vehicles/2018-audi-q3-k6tky/mselkhxm-1.jpg",
         "images/vehicles/2018-audi-q3-k6tky/mselkj2c-2.jpg",
@@ -926,7 +939,8 @@
       ],
       "status": "available",
       "createdAt": "2026-08-04T11:49:56.989Z",
-      "updatedAt": "2026-08-04T11:51:43.298Z"
+      "updatedAt": "2026-08-13T22:47:00.185Z",
+      "publishedAt": "2026-08-13T22:47:00.185Z"
     },
     {
       "id": "2017-bmw-x3-cqgmi",
