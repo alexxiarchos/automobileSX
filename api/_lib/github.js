@@ -3,9 +3,9 @@
    Publishing = one git commit via the GitHub API → Vercel auto-deploys.
 
    Env vars (set in Vercel → Project → Settings → Environment Variables):
-     GITHUB_TOKEN   — fine-grained personal access token, Contents: Read+Write on this repo only
-     GITHUB_REPO    — "owner/repo", e.g. "spiro/automobile-sx"
-     GITHUB_BRANCH  — usually "main"
+     GITHUB_TOKEN   - fine-grained personal access token, Contents: Read+Write on this repo only
+     GITHUB_REPO    - "owner/repo", e.g. "spiro/automobile-sx"
+     GITHUB_BRANCH  - usually "main"
 
    Local development / testing: set SX_MOCK_DIR=/path/to/site to read/write the
    local filesystem instead of GitHub (no token needed). */

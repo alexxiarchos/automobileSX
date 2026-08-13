@@ -1,4 +1,4 @@
-/* GET the full inventory (including drafts) — admin only.
+/* GET the full inventory (including drafts) - admin only.
    Reads the latest committed data/vehicles.json from GitHub so the admin
    always edits the source of truth, not a stale deployment. */
 const { requireAuth } = require("./_lib/auth.js");

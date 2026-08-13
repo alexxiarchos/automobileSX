@@ -1,4 +1,4 @@
-/* Automobile SX — shared UI: header, footer, vehicle card, payment estimator.
+/* Automobile SX - shared UI: header, footer, vehicle card, payment estimator.
    No dependencies, no browser storage. All paths absolute so /fr/ pages work. */
 
 window.SXUI = (function () {
@@ -197,7 +197,7 @@ window.SXUI = (function () {
   function hoursRows() {
     return SX.dealer.hours.map(function (h) {
       var name = SX.lang === "fr" ? h.fr : h.day;
-      return "<tr><td>" + name + "</td><td>" + h.open + " – " + h.close + "</td></tr>";
+      return "<tr><td>" + name + "</td><td>" + h.open + " - " + h.close + "</td></tr>";
     }).join("");
   }
 

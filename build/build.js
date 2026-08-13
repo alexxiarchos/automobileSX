@@ -1,4 +1,4 @@
-/* Automobile SX — static page generator.
+/* Automobile SX - static page generator.
    Run:  node build/build.js
    Writes every public HTML page for both languages from the copy files.
    Inventory data (data/vehicles.json) and uploaded photos are never touched. */

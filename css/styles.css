@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Automobile SX — design system
+   Automobile SX - design system
    Black + red, premium restraint. Red < 8% of any screen.
    ========================================================================== */
 
@@ -636,7 +636,7 @@ input[type="range"] {
   content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
   font-size: 22px; font-weight: 400; color: var(--red);
 }
-.faq-q[aria-expanded="true"]::after { content: "–"; }
+.faq-q[aria-expanded="true"]::after { content: "-"; }
 .faq-a { display: none; padding: 0 0 20px; color: var(--slate); max-width: 680px; }
 .faq-item.open .faq-a { display: block; }
 
@@ -815,7 +815,7 @@ input[type="range"] {
 .filter-head h2 { font-size: 16px; margin: 0; }
 
 /* ==========================================================================
-   Refinement layer — visual polish only.
+   Refinement layer - visual polish only.
    No structural, routing or content changes; every selector below already
    existed. Aim: less template-grid uniformity, more editorial detail.
    ========================================================================== */

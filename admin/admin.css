@@ -1,4 +1,4 @@
-/* Automobile SX — admin panel styles (matches site branding) */
+/* Automobile SX - admin panel styles (matches site branding) */
 
 :root {
   --ink: #0D0D0D; --ink-800: #17181A; --border-dark: #242628;
@@ -213,7 +213,7 @@ textarea { resize: vertical; }
 .fh.vin-ok { color: #15803d; }
 .fh.vin-err { color: #b91c1c; }
 
-/* VIN card — the first thing in the editor, because filling it fills the rest */
+/* VIN card - the first thing in the editor, because filling it fills the rest */
 .vin-card {
   background: #fff; border: 1px solid var(--mist); border-radius: 14px; padding: 16px;
 }

@@ -1,4 +1,4 @@
-/* Automobile SX — home page dynamic bits (static content lives in the HTML) */
+/* Automobile SX - home page dynamic bits (static content lives in the HTML) */
 SX.ready.then(function () {
   "use strict";
 
@@ -70,7 +70,7 @@ SX.ready.then(function () {
   var hours = document.getElementById("visit-hours");
   if (hours) {
     hours.innerHTML = "<tbody>" + SX.dealer.hours.map(function (h) {
-      return "<tr><td>" + (SX.lang === "fr" ? h.fr : h.day) + "</td><td>" + h.open + " – " + h.close + "</td></tr>";
+      return "<tr><td>" + (SX.lang === "fr" ? h.fr : h.day) + "</td><td>" + h.open + " - " + h.close + "</td></tr>";
     }).join("") + "</tbody>";
   }
   var note = document.getElementById("visit-note");

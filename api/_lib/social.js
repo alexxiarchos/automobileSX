@@ -49,36 +49,123 @@ function firstImage(v) {
   return SITE + "/" + String(v.images[0]).replace(/^\//, "");
 }
 
-/* Facts first, no invented enthusiasm. Bilingual, because half the market is. */
-function caption(v) {
-  const specs = [km(v.km), v.transmission, v.drivetrain, v.extColor]
-    .filter(Boolean).join(" · ");
+const CATALOGUE = require("../../js/features.js");
 
-  const en = [
-    title(v) + " — " + money(v.price),
-    specs,
+/* The equipment worth naming in a caption. A shopper scrolling past decides on
+   four or five things, not on twenty, and a caption that lists every feature
+   reads as a spec sheet and gets skipped. Catalogue order puts the safety and
+   comfort items people actually search for at the front. */
+function topFeatures(v, lang, limit) {
+  const groups = CATALOGUE.grouped(v.features || [], lang);
+  let flat = [];
+  groups.forEach(g => { flat = flat.concat(g.items); });
+  return flat.slice(0, limit || 5);
+}
+
+function specLine(v, lang) {
+  const fr = lang === "fr";
+  const bits = [
+    v.km ? km(v.km) : "",
+    /* The year is the first word of the title above, so it is not repeated. */
+    v.transmission ? (fr ? FR_SPEC.transmission[v.transmission] || v.transmission : v.transmission) : "",
+    v.drivetrain ? (fr ? FR_SPEC.drivetrain[v.drivetrain] || v.drivetrain : v.drivetrain) : "",
+    v.fuel && v.fuel !== "Gasoline" ? (fr ? FR_SPEC.fuel[v.fuel] || v.fuel : v.fuel) : "",
+    v.engine || "",
+    v.extColor ? (fr ? DESCRIBE.colourFr(v.extColor) : v.extColor) : ""
+  ].filter(Boolean);
+  return bits.join(" · ");
+}
+
+const FR_SPEC = {
+  transmission: { "Automatic": "Automatique", "Manual": "Manuelle", "CVT": "CVT", "e-CVT": "e-CVT" },
+  fuel: { "Gasoline": "Essence", "Hybrid": "Hybride", "Diesel": "Diesel",
+          "Electric": "Électrique", "Plug-in Hybrid": "Hybride rechargeable" },
+  drivetrain: { "FWD": "Traction avant", "AWD": "Intégrale", "RWD": "Propulsion", "4x4": "4x4" }
+};
+
+const ADDRESS = "2044 Avenue Chartier, Dorval, QC H9P 1H2";
+const PHONE = "514-824-9117";
+
+function hashtags(v) {
+  const tags = ["#AutomobileSX", "#Dorval", "#WestIsland", "#Montreal",
+    "#UsedCars", "#AutosUsagees", "#VoitureUsagee"];
+  const clean = s => "#" + String(s).replace(/[^A-Za-z0-9]/g, "");
+  if (v.make) tags.push(clean(v.make));
+  if (v.make && v.model) tags.push(clean(v.make + v.model));
+  if (v.body) tags.push(clean(v.body));
+  return tags.join(" ");
+}
+
+/* Two captions, because the two platforms behave differently.
+
+   On a Facebook Page a URL in the text is a working link, so the post can send
+   people straight to the vehicle page. In an Instagram caption nothing is
+   clickable - not a link, not a phone number - so printing a long address there
+   wastes the most valuable lines in the post and tells the reader to do
+   something they cannot do. The Instagram version points at the profile link
+   and gives the stock number, which is what someone will quote when they call.
+
+   Both open with the facts a person needs to decide whether to keep reading:
+   year, model, price, kilometres. Instagram hides everything after roughly the
+   first line behind "more", so nothing that matters goes below it. */
+
+function captionFacebook(v) {
+  const feats = topFeatures(v, "en", 5);
+  const featsFr = topFeatures(v, "fr", 5);
+
+  return [
+    title(v) + " - " + money(v.price),
+    specLine(v, "en"),
+    feats.length ? "Includes: " + feats.join(", ") : "",
     "",
-    "Available now at Automobile SX in Dorval. Kilometres and condition disclosed up front, and you deal directly with Spiro.",
-    "Full details and photos: " + vehicleUrl(v),
-    "Call 514-824-9117 to arrange a viewing."
-  ];
-
-  const fr = [
+    "Full details and every photo: " + vehicleUrl(v),
     "",
-    "———",
+    "Automobile SX · " + ADDRESS,
+    "Call or text " + PHONE + " · open seven days a week by appointment.",
+    v.stock ? "Stock " + v.stock : "",
     "",
-    title(v) + " — " + money(v.price),
-    "Disponible chez Automobile SX à Dorval. Kilométrage et état divulgués d'avance.",
-    "Appelez le 514-824-9117 pour un rendez-vous."
-  ];
+    "· · ·",
+    "",
+    title(v) + " - " + money(v.price),
+    specLine(v, "fr"),
+    featsFr.length ? "Équipements : " + featsFr.join(", ") : "",
+    "",
+    "Tous les détails et les photos : " + vehicleUrl(v),
+    "Appelez ou textez le " + PHONE + ", sept jours sur sept sur rendez-vous.",
+    "",
+    hashtags(v)
+  ].join("\n").replace(/\n{3,}/g, "\n\n").trim();
+}
 
-  const tags = [
-    "", "",
-    "#AutomobileSX #Dorval #WestIsland #Montreal #UsedCars #AutosUsagees",
-    v.make ? "#" + String(v.make).replace(/[^A-Za-z0-9]/g, "") : ""
-  ];
+function captionInstagram(v) {
+  const feats = topFeatures(v, "en", 5);
+  const featsFr = topFeatures(v, "fr", 4);
 
-  return en.concat(fr).concat(tags).filter(l => l !== undefined).join("\n").trim();
+  return [
+    title(v) + " - " + money(v.price),
+    specLine(v, "en"),
+    feats.length ? "Includes: " + feats.join(", ") : "",
+    "",
+    /* No clickable link is possible here, so say where the link is instead of
+       printing one nobody can tap. */
+    "📍 Automobile SX · " + ADDRESS,
+    "📞 Call or text " + PHONE,
+    "🔗 Full details and every photo: link in bio" + (v.stock ? " · ask for stock " + v.stock : ""),
+    "",
+    "· · ·",
+    "",
+    title(v) + " - " + money(v.price),
+    specLine(v, "fr"),
+    featsFr.length ? "Équipements : " + featsFr.join(", ") : "",
+    "Appelez ou textez le " + PHONE + " · lien en bio pour toutes les photos.",
+    "",
+    hashtags(v)
+  ].join("\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+
+/* Kept for anything that just wants "the caption". */
+function caption(v, target) {
+  return target === "instagram" ? captionInstagram(v) : captionFacebook(v);
 }
 
 /* Marketplace is filled in by hand, so give the owner each field separately
@@ -230,7 +317,7 @@ async function instagramPermalink(id) {
    says a post can be deleted through the /{post-id} node, while the post node
    reference says the operation is not available on that endpoint. Instagram's
    media reference documents deletion as supported, but only on the Instagram
-   API with Facebook Login — which is the path this app uses — and asks for the
+   API with Facebook Login - which is the path this app uses - and asks for the
    instagram_manage_contents permission, which a token issued before that
    permission existed will not carry.
 
@@ -260,7 +347,7 @@ async function deletePost(target, id) {
 }
 
 module.exports = {
-  caption, marketplaceListing, configured,
+  caption, captionFacebook, captionInstagram, topFeatures, marketplaceListing, configured,
   postToFacebook, postToInstagram, instagramPermalink, deletePost,
   vehicleUrl, firstImage, title
 };

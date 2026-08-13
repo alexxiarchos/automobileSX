@@ -1,4 +1,4 @@
-/* GET /api/vin?vin=<17 chars>  — admin only.
+/* GET /api/vin?vin=<17 chars>  - admin only.
 
    Proxied through the server rather than called from the browser for two
    reasons: it keeps the admin page free of cross-origin surprises, and it

@@ -1,8 +1,8 @@
 /* Session auth for the admin panel.
    Credentials + secret live in Vercel environment variables:
-     ADMIN_USER      — login username
-     ADMIN_PASSWORD  — login password (use a long, unique one)
-     SESSION_SECRET  — random string used to sign session cookies (32+ chars)
+     ADMIN_USER      - login username
+     ADMIN_PASSWORD  - login password (use a long, unique one)
+     SESSION_SECRET  - random string used to sign session cookies (32+ chars)
    No database: the session is a signed, expiring token in an HttpOnly cookie. */
 
 const crypto = require("crypto");

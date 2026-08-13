@@ -37,7 +37,11 @@ module.exports = async function (req, res) {
         title: social.title(v),
         url: social.vehicleUrl(v),
         image: social.firstImage(v),
-        caption: social.caption(v),
+        caption: social.captionFacebook(v),      /* kept for older clients */
+        captions: {
+          facebook: social.captionFacebook(v),
+          instagram: social.captionInstagram(v)
+        },
         marketplace: social.marketplaceListing(v),
         configured: social.configured()
       }));
@@ -61,10 +65,17 @@ module.exports = async function (req, res) {
       }
 
       const v = await findVehicle(String(body.id || ""));
-      const text = (typeof body.caption === "string" && body.caption.trim())
-        ? body.caption.trim()
-        : social.caption(v);
       const targets = Array.isArray(body.targets) ? body.targets : [];
+
+      /* Each platform gets its own text. An override may be sent per platform,
+         or as one string for both; anything not overridden is generated. */
+      const given = body.captions && typeof body.captions === "object" ? body.captions : {};
+      function textFor(t) {
+        const own = typeof given[t] === "string" ? given[t].trim() : "";
+        if (own) return own;
+        if (typeof body.caption === "string" && body.caption.trim()) return body.caption.trim();
+        return social.caption(v, t);
+      }
       const results = {};
 
       /* Sequential on purpose: if Facebook fails on a bad token, the same
@@ -73,9 +84,9 @@ module.exports = async function (req, res) {
       for (const t of targets) {
         try {
           if (t === "facebook") {
-            results.facebook = { ok: true, ...(await social.postToFacebook(v, text)) };
+            results.facebook = { ok: true, ...(await social.postToFacebook(v, textFor("facebook"))) };
           } else if (t === "instagram") {
-            const out = await social.postToInstagram(v, text);
+            const out = await social.postToInstagram(v, textFor("instagram"));
             results.instagram = { ok: true, ...out, url: await social.instagramPermalink(out.id) };
           }
         } catch (e) {

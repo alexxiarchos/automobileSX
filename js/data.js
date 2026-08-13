@@ -1,4 +1,4 @@
-/* Automobile SX — site data, routing and translations.
+/* Automobile SX - site data, routing and translations.
    Inventory itself lives in /data/vehicles.json (managed by /admin). */
 
 window.SX = window.SX || {};

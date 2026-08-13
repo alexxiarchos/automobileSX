@@ -1,4 +1,4 @@
-/* Automobile SX — inventory listing: client-side filtering, sorting, paging */
+/* Automobile SX - inventory listing: client-side filtering, sorting, paging */
 SX.ready.then(function () {
   "use strict";
 
@@ -148,10 +148,10 @@ SX.ready.then(function () {
     state.makes.forEach(function (m) { chip(m, function () { state.makes.delete(m); syncChecks("f-makes", state.makes); }); });
     state.bodies.forEach(function (b) { chip(SX.bodyLabel(b), function () { state.bodies.delete(b); syncChecks("f-bodies", state.bodies); }); });
     if (state.priceMin > priceLo || state.priceMax < priceHi)
-      chip(SX.money(state.priceMin) + " – " + SX.money(state.priceMax),
+      chip(SX.money(state.priceMin) + " - " + SX.money(state.priceMax),
         function () { state.priceMin = priceLo; state.priceMax = priceHi; paintPrice(); });
     if (state.yearMin > yearLo || state.yearMax < yearHi)
-      chip(state.yearMin + " – " + state.yearMax,
+      chip(state.yearMin + " - " + state.yearMax,
         function () { state.yearMin = yearLo; state.yearMax = yearHi; paintYear(); });
     if (state.kmMax < kmHi)
       chip("≤ " + state.kmMax.toLocaleString(SX.lang === "fr" ? "fr-CA" : "en-CA") + " km",

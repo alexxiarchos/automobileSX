@@ -1,9 +1,9 @@
-/* Automobile SX — a QR encoder, in about two hundred lines and no dependencies.
+/* Automobile SX - a QR encoder, in about two hundred lines and no dependencies.
 
    Why write one rather than pull one in: this site has no build step and no
    package manager. Everything it runs is a file in the repository that can be
    read and understood. A window sticker needs a code that a phone can scan
-   from the far side of the glass, and that is the whole of what this does —
+   from the far side of the glass, and that is the whole of what this does -
    byte mode, error-correction level M, versions 1 to 6, which is 108 bytes of
    payload at the top end and comfortably more than any address on this site.
 
@@ -14,7 +14,7 @@
    payloads this size.
 
    Verified by generating codes and reading them back with a real decoder
-   rather than by inspection — see verify-qr.js. */
+   rather than by inspection - see verify-qr.js. */
 
 (function (root, factory) {
   if (typeof module === "object" && module.exports) module.exports = factory();
@@ -255,7 +255,7 @@
     var bits = formatBits(mask);
     /* Most significant bit first along the path: the module at (8,0) carries
        bit 14, not bit 0. Writing it the other way round produces a code that
-       is internally consistent — our own reader was perfectly happy with it —
+       is internally consistent - our own reader was perfectly happy with it -
        and that no real scanner will touch. Confirmed against a reference
        encoder rather than against ourselves. */
     function bit(i) { return (bits >> (14 - i)) & 1; }
@@ -340,7 +340,7 @@
   /**
    * svg(text, options) → an <svg> string.
    * One path for every dark module, which keeps the file small and prints
-   * crisply at any size — a raster image at sticker scale would not.
+   * crisply at any size - a raster image at sticker scale would not.
    */
   function svg(text, options) {
     options = options || {};

@@ -1,4 +1,4 @@
-/* Automobile SX — the feature catalogue.
+/* Automobile SX - the feature catalogue.
 
    One source of truth, loaded three ways:
      - the browser, on vehicle pages (detail.js) and in the admin panel
@@ -11,7 +11,7 @@
    French visitor would silently get English chips, so they live together.
 
    Adding a feature: put the English label in the right group and add its French
-   translation to FR. Never rename an existing English label — that is the key a
+   translation to FR. Never rename an existing English label - that is the key a
    saved vehicle is matched on, and renaming one would orphan every listing that
    already has it. */
 

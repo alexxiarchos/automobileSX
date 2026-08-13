@@ -1,4 +1,4 @@
-/* Automobile SX — admin panel logic (no dependencies)
+/* Automobile SX - admin panel logic (no dependencies)
    Data flow: /api/inventory → edit in memory → /api/upload per new photo →
    /api/save = one git commit → Vercel auto-deploys the public site. */
 
@@ -155,7 +155,7 @@
 
   /* publishedAt is written the first time a car goes live. Cars listed before
      that field existed have no such record, so the date they were created
-     stands in — with different wording, because it is a different fact. */
+     stands in - with different wording, because it is a different fact. */
   function listedAt(v) {
     return v.publishedAt || v.createdAt || "";
   }
@@ -179,7 +179,7 @@
     var parts = [];
 
     if (status === "draft") {
-      parts.push('<span class="track-none">Draft — never published</span>');
+      parts.push('<span class="track-none">Draft - never published</span>');
       return '<div class="dash-track">' + parts.join(" · ") + "</div>";
     }
 
@@ -259,7 +259,7 @@
              : '<div class="dash-thumb" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;color:var(--slate);font-size:12px">No photo</div>') +
         '<div class="dash-info">' +
         '<div class="dash-name">' + (v.year || "?") + " " + (v.make || "") + " " + (v.model || "") + (v.trim ? " · " + v.trim : "") + "</div>" +
-        '<div class="dash-sub">' + money(v.price) + " · " + Number(v.km || 0).toLocaleString("en-CA") + " km · Stock " + (v.stock || "—") + "</div>" +
+        '<div class="dash-sub">' + money(v.price) + " · " + Number(v.km || 0).toLocaleString("en-CA") + " km · Stock " + (v.stock || "-") + "</div>" +
         trackLine(v) +
         statusBadge(v) +
         "</div>" +
@@ -356,10 +356,10 @@
         var bad = Object.keys(d.results).filter(function (k) { return !d.results[k].ok; });
         if (okAny) done.push(v);
         bad.forEach(function (k) {
-          failed.push((v.make || "") + " " + (v.model || "") + " — " + k + ": " + d.results[k].error);
+          failed.push((v.make || "") + " " + (v.model || "") + " - " + k + ": " + d.results[k].error);
         });
       }).catch(function (e) {
-        failed.push((v.make || "") + " " + (v.model || "") + " — " + e.message);
+        failed.push((v.make || "") + " " + (v.model || "") + " - " + e.message);
       }).then(function () { return step(i + 1); });
     }
 
@@ -468,7 +468,7 @@
     /* Equipment. "Standard" for this VIN is a fact about the car, so those are
        ticked. "Optional" only means the factory offered it, so those are offered
        as one-tap chips instead: the car in the yard is the authority, not the
-       database. Nothing is ever unticked — a decode adds, it never takes away
+       database. Nothing is ever unticked - a decode adds, it never takes away
        what you already knew. */
     var ticked = [];
     var eq = data.features || {};
@@ -487,7 +487,7 @@
     if (ticked.length) parts.push("Ticked as standard equipment: " + ticked.join(", ") + ".");
     if (skipped.length) parts.push("Left alone: " + skipped.join("; ") + ".");
     var missing = (data.unresolved || []).map(function (k) { return FIELD_LABELS[k] || k; });
-    if (missing.length) parts.push("The VIN cannot tell us " + missing.join(", ").toLowerCase() + " — enter those yourself.");
+    if (missing.length) parts.push("The VIN cannot tell us " + missing.join(", ").toLowerCase() + " - enter those yourself.");
     (data.caveats || []).forEach(function (c) { parts.push(c); });
     if (data.note) parts.push("Database note: " + data.note);
 
@@ -537,7 +537,7 @@
     vehicles.forEach(function (o) {
       if (o !== editing && String(o.vin || "").toUpperCase() === v) hit = o;
     });
-    return hit ? (hit.year + " " + hit.make + " " + hit.model + " (stock " + (hit.stock || "—") + ")") : "";
+    return hit ? (hit.year + " " + hit.make + " " + hit.model + " (stock " + (hit.stock || "-") + ")") : "";
   }
 
   ["f-body", "f-drive", "f-fuel", "f-trans"].forEach(function (id) {
@@ -587,7 +587,7 @@
 
   /* What the draft writer needs: the form as it stands right now, not the last
      saved copy. Reading the DOM rather than calling collectForm() keeps this
-     free of side effects — pressing the button must not create a page address
+     free of side effects - pressing the button must not create a page address
      or bump updatedAt on a car you were only looking at. */
   function formSnapshot() {
     return {
@@ -646,7 +646,7 @@
   function fillManualFromTemplate() {
     var v = formSnapshot();
     if (!v.year || !v.make || !v.model) {
-      toast("Fill in the year, make and model first — the template is written from them.", "err");
+      toast("Fill in the year, make and model first - the template is written from them.", "err");
       return false;
     }
     $("f-desc").value = DESCRIBE.text(v, "en");
@@ -666,7 +666,7 @@
   });
 
   /* The preview is the same function the website uses, given the form as it
-     stands. What is on screen is therefore not an approximation of the page —
+     stands. What is on screen is therefore not an approximation of the page -
      it is the page. */
   function renderDescription() {
     if (descMode === "manual") return;
@@ -708,7 +708,7 @@
         descHint(toId, countId, 0);
         renderDescription();
         updateQuality();
-        toast("Translated with " + d.provider + ". Read it through — it is a machine, and this is Quebec.", "ok");
+        toast("Translated with " + d.provider + ". Read it through - it is a machine, and this is Quebec.", "ok");
       }).catch(function (e) {
         toast("Could not translate: " + e.message, "err");
       }).finally(function () { busy(null); });
@@ -724,9 +724,9 @@
     var n = $(id).value.trim().length;
     var el = $(out);
     if (!el) return;
-    if (!n) { el.textContent = target ? "Empty." : "Empty — the template alone will be used."; return; }
+    if (!n) { el.textContent = target ? "Empty." : "Empty - the template alone will be used."; return; }
     el.textContent = n + " characters" +
-      (target && n < target ? " — a bit short. Around " + target + " gives search engines and buyers something to work with." : ".");
+      (target && n < target ? " - a bit short. Around " + target + " gives search engines and buyers something to work with." : ".");
   }
 
   /* ---------- listing quality ---------- */
@@ -740,7 +740,7 @@
 
     /* Measured on the composed description, not on a text box. In automatic
        mode the template already supplies several hundred characters, so what
-       matters is whether anything of Spiro's own has been added to it — that
+       matters is whether anything of Spiro's own has been added to it - that
        is the part that differs from every other listing, and the part a search
        engine has not already seen on a hundred other dealer sites. */
     var snapshot = formSnapshot();
@@ -752,7 +752,7 @@
 
     return [
       photos >= 6 ? ["ok", photos + " photos"]
-        : photos > 0 ? ["warn", "Only " + photos + " photo" + (photos === 1 ? "" : "s") + " — six or more gets far more clicks"]
+        : photos > 0 ? ["warn", "Only " + photos + " photo" + (photos === 1 ? "" : "s") + " - six or more gets far more clicks"]
         : ["bad", "No photos yet"],
       $("f-price").value ? ["ok", "Price set"] : ["bad", "No price"],
       $("f-km").value ? ["ok", "Mileage set"] : ["bad", "No mileage"],
@@ -764,12 +764,12 @@
         : ["bad", "No French description"],
       !auto ? ["ok", "Written by hand rather than from the template"]
         : ownEn && ownFr ? ["ok", "Your own words added, in both languages"]
-        : ownEn ? ["warn", "Your own words are English only — translate them for the French page"]
-        : ["warn", "Nothing of your own yet — a line only you could write is what sets this listing apart"],
+        : ownEn ? ["warn", "Your own words are English only - translate them for the French page"]
+        : ["warn", "Nothing of your own yet - a line only you could write is what sets this listing apart"],
       feats >= 5 ? ["ok", feats + " features ticked"]
         : feats > 0 ? ["warn", "Only " + feats + " feature" + (feats === 1 ? "" : "s") + " ticked"]
         : ["warn", "No features ticked"],
-      $("f-vin").value.trim() ? ["ok", "VIN recorded"] : ["warn", "No VIN — buyers look for it and it fills the form for you"],
+      $("f-vin").value.trim() ? ["ok", "VIN recorded"] : ["warn", "No VIN - buyers look for it and it fills the form for you"],
       $("f-extcolor").value.trim() ? ["ok", "Exterior colour set"] : ["warn", "No exterior colour"],
       $("f-engine").value.trim() ? ["ok", "Engine listed"] : ["warn", "No engine listed"]
     ];
@@ -781,7 +781,7 @@
     $("quality").innerHTML =
       '<p class="quality-score">' + good + " of " + rows.length + " done. " +
       (good === rows.length ? "This listing is as complete as it gets."
-        : "Nothing here blocks publishing — it is what makes the listing work harder.") + "</p>" +
+        : "Nothing here blocks publishing - it is what makes the listing work harder.") + "</p>" +
       '<ul class="quality-list">' + rows.map(function (r) {
         return '<li class="q-' + r[0] + '"><span aria-hidden="true">' +
           (r[0] === "ok" ? "✓" : r[0] === "warn" ? "!" : "×") + "</span>" + escapeHtml(r[1]) + "</li>";
@@ -888,6 +888,7 @@
     shareVehicle = v;
     $("share-status").textContent = "";
     $("share-caption").value = "Loading…";
+    $("share-caption-ig").value = "";
     $("share-marketplace").innerHTML = "";
     renderShareHistory(v);
     $("share-overlay").hidden = false;
@@ -895,7 +896,8 @@
     api("social?id=" + encodeURIComponent(v.id))
       .then(function (d) {
         $("share-vehicle").textContent = d.title;
-        $("share-caption").value = d.caption;
+        $("share-caption").value = (d.captions && d.captions.facebook) || d.caption || "";
+        $("share-caption-ig").value = (d.captions && d.captions.instagram) || d.caption || "";
         $("share-open").href = d.url;
         var m = d.marketplace;
         $("share-marketplace").innerHTML =
@@ -958,7 +960,10 @@
       body: JSON.stringify({
         id: shareVehicle.id,
         targets: ["facebook", "instagram"],
-        caption: $("share-caption").value
+        captions: {
+          facebook: $("share-caption").value,
+          instagram: $("share-caption-ig").value
+        }
       })
     }).then(function (d) {
       var lines = Object.keys(d.results).map(function (k) {
@@ -1203,7 +1208,7 @@
          function early, because the image needs a folder to live in, and if the
          field were left blank the next save would see an id on the vehicle, an
          empty box on screen, and refuse to save with "the page address cannot
-         be empty" — on a listing where nobody had touched the address at all. */
+         be empty" - on a listing where nobody had touched the address at all. */
       $("f-slug").value = v.id;
       slugPreview();
     } else if (typed && typed !== v.id) {
@@ -1256,7 +1261,7 @@
   }
 
   /* The dates behind the tracking line. publishedAt is written once, the first
-     time a car is visible to the public, and never moved afterwards — editing a
+     time a car is visible to the public, and never moved afterwards - editing a
      price is not a new listing. soldAt only exists while the car is sold, so
      putting one back on the market clears it rather than leaving a date that is
      no longer true. */

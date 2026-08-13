@@ -1,4 +1,4 @@
-/* Automobile SX — contact form (opens the visitor's mail app; no backend) */
+/* Automobile SX - contact form (opens the visitor's mail app; no backend) */
 SX.ready.then(function () {
   "use strict";
 
@@ -8,7 +8,7 @@ SX.ready.then(function () {
   var hours = document.getElementById("contact-hours");
   if (hours) {
     hours.innerHTML = "<tbody>" + SX.dealer.hours.map(function (h) {
-      return "<tr><td>" + (FR ? h.fr : h.day) + "</td><td>" + h.open + " – " + h.close + "</td></tr>";
+      return "<tr><td>" + (FR ? h.fr : h.day) + "</td><td>" + h.open + " - " + h.close + "</td></tr>";
     }).join("") + "</tbody>";
   }
   var note = document.getElementById("contact-appt-note");

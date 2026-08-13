@@ -1,4 +1,4 @@
-/* Automobile SX — page shell generator.
+/* Automobile SX - page shell generator.
    Every public HTML file is produced from this template so the head, header,
    footer and structured data stay identical across 28 pages and two languages. */
 

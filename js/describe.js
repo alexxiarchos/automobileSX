@@ -1,8 +1,8 @@
-/* Automobile SX — the description itself.
+/* Automobile SX - the description itself.
 
    What this is: a sentence builder, not a writer. It states facts that are
-   already on the vehicle — year, make, model, trim, body, doors, kilometres,
-   engine, transmission, drivetrain, colours, ticked features — in complete
+   already on the vehicle - year, make, model, trim, body, doors, kilometres,
+   engine, transmission, drivetrain, colours, ticked features - in complete
    sentences, in English and in French. It invents nothing. If a field is
    empty, the sentence that would have used it is not written at all.
 
@@ -10,7 +10,7 @@
    this template, composed fresh each time a page is rendered, with Spiro's own
    paragraphs dropped into the middle of it. That matters because a description
    copied into a text box the day a car was listed is wrong the moment the price
-   drops, a feature is ticked or the mileage is corrected — and nobody ever
+   drops, a feature is ticked or the mileage is corrected - and nobody ever
    remembers to go back and rewrite it. Composing it on the way out means a
    listing cannot go stale.
 
@@ -30,8 +30,8 @@
      different cars do not.
 
    The draft is a starting point. The panel says so, because the sentences that
-   actually sell a car — where it came from, what was just done to it, why it is
-   worth the money — are not in any database. */
+   actually sell a car - where it came from, what was just done to it, why it is
+   worth the money - are not in any database. */
 
 (function (root, factory) {
   if (typeof module === "object" && module.exports) module.exports = factory(require("./features.js"));
@@ -148,7 +148,7 @@
 
   function pick(list, n) { return list[n % list.length]; }
 
-  /* "a, b and c" — the Oxford comma is left out, which is house style in both
+  /* "a, b and c" - the Oxford comma is left out, which is house style in both
      languages here. */
   function join(list, lang) {
     var l = list.filter(Boolean);
@@ -174,7 +174,7 @@
     }).join("");
   }
 
-  /* ce / cet — French elides before a vowel sound. Vehicles are referred to as
+  /* ce / cet - French elides before a vowel sound. Vehicles are referred to as
      masculine here ("le véhicule"), so the feminine form never comes up. */
   function dem(word) {
     return /^[aeiouâàéèêëîïôöùûüh]/i.test(String(word || "")) ? "cet" : "ce";
@@ -203,6 +203,28 @@
 
   /* ---------- the sentences ---------- */
 
+  /* English articles go by sound, not by spelling. "SUV" is spoken "ess you
+     vee", so it takes "an", and so does every acronym whose first letter is
+     spoken with a leading vowel: an LED, an RS, an XLE. The reverse trap is a
+     vowel letter said as a consonant, "a used car", "a uniform". Digits have
+     the same split: an 8 cylinder, an 18 inch, but a 6 speed. Choosing on the
+     first letter alone gets SUV wrong, and SUVs are most of the lot. */
+  var AN_ACRONYM = /^[AEFHILMNORSX](?![a-z])/;          /* SUV, LED, RS, F150 */
+  var A_VOWEL    = /^(uni|use|used|usu|eu|ewe|one|once)/i;  /* vowel spelt, consonant said */
+  var AN_HOUR    = /^(hour|honest|heir|honou?r)/i;       /* consonant spelt, vowel said */
+  var AN_DIGIT   = /^(8|11|18)(?![0-9])/;                /* eight, eleven, eighteen */
+
+  function an(word) {
+    var w = String(word || "").trim();
+    if (!w) return "a";
+    if (AN_DIGIT.test(w)) return "an";
+    if (/^[0-9]/.test(w)) return "a";
+    if (AN_ACRONYM.test(w)) return "an";
+    if (A_VOWEL.test(w)) return "a";
+    if (AN_HOUR.test(w)) return "an";
+    return /^[aeiou]/i.test(w) ? "an" : "a";
+  }
+
   function openingEn(v, n) {
     var name = [v.year, v.make, v.model, v.trim].filter(Boolean).join(" ");
     if (!name) return "";
@@ -210,17 +232,17 @@
     var doors = DOORS[v.doors] ? DOORS[v.doors].en : "";
     var fuel = FUEL[v.fuel] ? FUEL[v.fuel].en : "";
     var shape = [doors, fuel, body].filter(Boolean).join(" ");
-    var article = /^[aeiou]/i.test(shape) ? "an" : "a";
+    var article = an(shape);
     var mileage = v.km ? num(v.km, "en") + " km" : "";
 
-    if (!shape && !mileage) return "This is a " + name + ".";
+    if (!shape && !mileage) return "This is " + an(name) + " " + name + ".";
     if (!shape) return "This " + name + " has " + mileage + " on the odometer.";
     if (!mileage) return "This " + name + " is " + article + " " + shape + ".";
 
     return pick([
       "This " + name + " is " + article + " " + shape + " with " + mileage + " on the odometer.",
       "The " + name + " on offer here is " + article + " " + shape + " showing " + mileage + ".",
-      "This is a " + name + ", " + article + " " + shape + " with " + mileage + " on it."
+      "This is " + an(name) + " " + name + ", " + article + " " + shape + " with " + mileage + " on it."
     ], n);
   }
 
@@ -248,7 +270,7 @@
 
   function mechanicalEn(v) {
     var bits = [];
-    if (v.engine) bits.push("a " + v.engine + " engine");
+    if (v.engine) bits.push(an(v.engine) + " " + v.engine + " engine");
     if (TRANS[v.transmission]) bits.push(TRANS[v.transmission].en);
     if (DRIVE[v.drivetrain]) bits.push(DRIVE[v.drivetrain].en);
     if (!bits.length) return "";
@@ -383,7 +405,7 @@
   /**
    * The description for one vehicle in one language, as paragraphs.
    * Used by the admin preview, by the pre-rendered page, by the script that
-   * hydrates it and by the social captions — one function, so all four agree.
+   * hydrates it and by the social captions - one function, so all four agree.
    */
   function paragraphs(v, lang) {
     if (mode(v) === "manual") {

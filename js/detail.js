@@ -1,4 +1,4 @@
-/* Automobile SX — vehicle detail page */
+/* Automobile SX - vehicle detail page */
 SX.ready.then(function () {
   "use strict";
 
@@ -66,7 +66,7 @@ SX.ready.then(function () {
   var lightbox = document.getElementById("lightbox");
   var lbImg = document.getElementById("lb-img");
 
-  function altFor(i) { return fullName + " — " + (i + 1); }
+  function altFor(i) { return fullName + " - " + (i + 1); }
 
   strip.innerHTML = images.map(function (src, i) {
     return '<button type="button" aria-label="' + (i + 1) + '"><img loading="lazy" src="' + src + '" alt="" width="512" height="288"></button>';

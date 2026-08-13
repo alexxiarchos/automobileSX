@@ -1,9 +1,9 @@
-/* Automobile SX — make and model spelling.
+/* Automobile SX - make and model spelling.
 
    Shared by the admin panel (which tidies what is typed by hand) and by
    api/_lib/vin.js (which tidies what the VIN database returns in block
    capitals). One copy, so "BMW" cannot end up as "BMW" in one place and "Bmw"
-   in the other — which is exactly what happened before this file existed.
+   in the other - which is exactly what happened before this file existed.
 
    The make list doubles as the autocomplete in the admin form. */
 

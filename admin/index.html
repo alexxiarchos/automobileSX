@@ -137,7 +137,7 @@
 
       <!-- ============ automatic mode ============ -->
       <div id="desc-auto">
-        <p class="fh">Every listing is written from the same template, using the fields and features above. It updates by itself — change the price, tick a feature, correct the mileage, and the description on the website follows. Your own paragraphs go in the middle and are never touched.</p>
+        <p class="fh">Every listing is written from the same template, using the fields and features above. It updates by itself - change the price, tick a feature, correct the mileage, and the description on the website follows. Your own paragraphs go in the middle and are never touched.</p>
 
         <div class="f" style="max-width:280px;margin-bottom:14px">
           <label for="f-ownership">History</label>
@@ -165,7 +165,7 @@
             <span class="fh" id="desc-count-fr"></span>
           </div>
         </div>
-        <p class="fh">Select a sentence in the English box and Translate adds just that sentence, in French. Select nothing and it translates the whole box. Machine translation — read it before publishing.</p>
+        <p class="fh">Select a sentence in the English box and Translate adds just that sentence, in French. Select nothing and it translates the whole box. Machine translation - read it before publishing.</p>
 
         <div class="desc-preview">
           <div class="desc-preview-head">
@@ -229,11 +229,19 @@
 
       <div id="share-history"></div>
 
-      <h3>Facebook &amp; Instagram</h3>
-      <label class="visually-hidden" for="share-caption">Caption</label>
-      <textarea id="share-caption" rows="12"></textarea>
+      <h3>Facebook</h3>
+      <label class="visually-hidden" for="share-caption">Facebook caption</label>
+      <textarea id="share-caption" rows="11"></textarea>
+      <p class="fh">Links work in a Page post, so this one sends people straight to the vehicle page.</p>
+
+      <h3>Instagram</h3>
+      <label class="visually-hidden" for="share-caption-ig">Instagram caption</label>
+      <textarea id="share-caption-ig" rows="11" ></textarea>
+      <p class="fh">Nothing is clickable in an Instagram caption - not links, not phone numbers - so this one points at the link in your bio and gives the stock number instead of printing an address nobody can tap.</p>
+
       <div class="share-actions">
-        <button class="btn btn-small btn-outline" type="button" data-copy="share-caption">Copy caption</button>
+        <button class="btn btn-small btn-outline" type="button" data-copy="share-caption">Copy Facebook</button>
+        <button class="btn btn-small btn-outline" type="button" data-copy="share-caption-ig">Copy Instagram</button>
         <button class="btn btn-small btn-red" type="button" id="share-post">Post to Facebook &amp; Instagram</button>
       </div>
       <p class="fh" id="share-status"></p>

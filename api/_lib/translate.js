@@ -3,7 +3,7 @@
    The description generator already writes proper French for everything it
    knows as structured facts, using vocabulary chosen for Quebec: VUS,
    camionnette, rouage intégral. What it cannot write is the half only Spiro
-   can — where the car came from, what was just done to it, how it drives. That
+   can - where the car came from, what was just done to it, how it drives. That
    is what this translates.
 
    Two providers, chosen automatically:
@@ -83,7 +83,7 @@ function chunk(text, limit) {
   });
 
   /* Last resort. Splitting on spaces cannot help a run of text that contains
-     none — a long URL, say — and a chunk over the limit is rejected by the
+     none - a long URL, say - and a chunk over the limit is rejected by the
      service rather than trimmed, so it is cut by length here. Characters are
      counted one at a time because a byte count is not a character count once
      accents are involved, and cutting a letter in half would corrupt it. */
