@@ -259,9 +259,16 @@
        already opens every photo for anyone who wants them, and the space it
        frees is what buys the legal label its place on page one. */
 
+    /* Two columns that each pack from the top, rather than two rows of two.
+       As two rows, the dealer card was stretched to match the price card beside
+       it and ended up a mostly empty rectangle; packed into a column it is only
+       as tall as the address inside it, and the equipment list below simply
+       starts higher. Nothing is stretched to fit anything else. */
     return '<div class="sheet"><div class="sheetInner">' +
 
-      '<div class="top">' +
+      '<div class="main">' +
+        '<div class="col">' +
+
         '<div class="card brand">' +
           '<div class="brandRow"><img src="/assets/logo-mark.png" alt="">' +
             '<div class="brandName">AUTOMOBILE <span>SX</span></div></div>' +
@@ -275,6 +282,16 @@
           "</div>" +
         "</div>" +
 
+        (feats.length
+          ? '<div class="card"><h2 class="cardTitle">' + esc(t.equipment) + "</h2>" +
+            '<ul class="features">' + feats.map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") +
+            "</ul></div>"
+          : "") +
+
+        "</div>" +
+
+        '<div class="col">' +
+
         '<div class="card tinted headline">' +
           '<div class="price">' + esc(money(v.price)) + "</div>" +
           '<div class="finance">' + esc(t.finance) + "</div>" +
@@ -282,16 +299,6 @@
           (v.model ? '<div class="model">' + esc(v.model) + "</div>" : "") +
           (v.trim ? '<div class="trim">' + esc(v.trim) + "</div>" : "") +
           (v.year ? '<div class="year">' + esc(v.year) + "</div>" : "") +
-        "</div>" +
-      "</div>" +
-
-      '<div class="body">' +
-        '<div>' +
-          (feats.length
-            ? '<div class="card"><h2 class="cardTitle">' + esc(t.equipment) + "</h2>" +
-              '<ul class="features">' + feats.map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") +
-              "</ul></div>"
-            : "") +
         "</div>" +
 
         /* The rule between the numbers and the specifications is drawn by the
@@ -311,6 +318,8 @@
               : "") +
             "</div>"
           : "") +
+
+        "</div>" +
       "</div>" +
 
       opcBlock(v) +
@@ -389,19 +398,18 @@
         z = next;
       }
 
-      inner.style.minHeight = "";
-      if (z >= 0.999) {
-        inner.style.width = "";
-        inner.style.transform = "none";
-        el.style.height = "";
-        return;
-      }
+      /* Fill the page rather than stopping wherever the content happens to end.
+         The inner box is given exactly one page of height, which after scaling
+         is exactly one page, so the footer's margin-top:auto puts it on the
+         bottom edge where a window sheet's contact details belong instead of
+         leaving it stranded halfway up with white space underneath. */
+      inner.style.minHeight = (PAGE_MM / z) + "mm";
+      inner.style.width = (COL_MM / z) + "mm";
+      inner.style.transform = z >= 0.999 ? "none" : "scale(" + z.toFixed(4) + ")";
       /* The paper has to be told how tall the scaled contents are, because a
          transform leaves the layout believing they are still full size, and a
          box that believes that pushes its own footer onto page two. */
-      inner.style.width = (COL_MM / z) + "mm";
-      inner.style.transform = "scale(" + z.toFixed(4) + ")";
-      el.style.height = Math.ceil(inner.scrollHeight * z) + "px";
+      el.style.height = PAGE_MM + "mm";
     });
   }
 

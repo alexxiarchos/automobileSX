@@ -1103,13 +1103,69 @@
     }).finally(function () { busy(null); });
   }
 
+  /* Posts this app actually made. A record marked manual has no id behind it,
+     so there is nothing on Facebook or Instagram for us to reach. */
+  function realPosts(v) {
+    return (Array.isArray(v.posts) ? v.posts : []).filter(function (p) {
+      return p && p.id && !p.manual;
+    });
+  }
+
+  /* Offered, never automatic. Editing a live post is a public act and it should
+     be a decision, not a side effect of updating your own inventory. */
+  function offerSoldAnnouncement(v) {
+    var posts = realPosts(v);
+    if (!posts.length) return Promise.resolve();
+
+    var where = [];
+    if (posts.some(function (p) { return p.target === "facebook"; })) where.push("Facebook");
+    if (posts.some(function (p) { return p.target === "instagram"; })) where.push("Instagram");
+
+    if (!confirm("This car was posted to " + where.join(" and ") + ".\n\n" +
+      "Announce that it is sold?\n\n" +
+      "Facebook: the post is edited so SOLD appears above the original text, with a link to your inventory.\n" +
+      "Instagram: a comment is added, because Instagram does not allow a caption to be edited after posting.\n\n" +
+      "Nothing is deleted either way.")) return Promise.resolve();
+
+    busy("Updating the posts…");
+    return api("social", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "sold", id: v.id, posts: posts })
+    }).then(function (d) {
+      var results = (d && d.results) || [];
+      var good = results.filter(function (r) { return r.ok; });
+      var bad = results.filter(function (r) { return !r.ok; });
+      if (good.length) {
+        v.soldAnnouncedAt = new Date().toISOString();
+        savePostRecords("Record sold announcement for " + v.make + " " + v.model).catch(function () {});
+      }
+      if (!bad.length) { toast("Posts updated.", "ok"); return; }
+      /* Meta's own words, not a paraphrase. If the token predates
+         instagram_manage_comments this is the sentence that says so. */
+      alert("Some posts could not be updated:\n\n" +
+        bad.map(function (r) { return r.target + ": " + r.error; }).join("\n") +
+        "\n\nYou can still edit or comment on them in the app.");
+    }).catch(function (e) {
+      toast("Could not reach the posts: " + e.message, "err");
+    }).finally(function () { busy(null); });
+  }
+
   function toggleStatus(v) {
     var to = (v.status || "available") === "sold" ? "available" : "sold";
     if (!confirm((to === "sold" ? "Mark as SOLD: " : "Mark as AVAILABLE: ") + v.year + " " + v.make + " " + v.model + "?")) return;
     v.status = to;
     markLive(v, to);
     v.updatedAt = new Date().toISOString();
-    saveAll("Mark " + v.make + " " + v.model + " " + to, null).then(renderDash).catch(renderDash);
+    saveAll("Mark " + v.make + " " + v.model + " " + to, null)
+      .then(function () {
+        /* Only on the way to sold, and only once the inventory itself is
+           safely saved: a failed edit on Facebook must not leave the car
+           showing as available on the website. */
+        if (to !== "sold") return;
+        return offerSoldAnnouncement(v);
+      })
+      .then(renderDash).catch(renderDash);
   }
 
   function deleteVehicle(v) {

@@ -64,6 +64,34 @@ module.exports = async function (req, res) {
         }
       }
 
+      /* Announce a sale on the posts that are already up. One result per post
+         so the panel can say exactly which platform refused and why, rather
+         than collapsing a partial success into a single failure. */
+      if (body.action === "sold") {
+        const v = await findVehicle(String(body.id || ""));
+        const posts = Array.isArray(body.posts) ? body.posts : [];
+        const out = [];
+        for (const p of posts) {
+          const target = String(p.target || "");
+          const postId = String(p.id || "");
+          try {
+            if (target === "facebook") {
+              const r = await social.markSoldOnFacebook(v, postId);
+              out.push({ target, postId, ok: true, skipped: !!r.skipped });
+            } else if (target === "instagram") {
+              await social.markSoldOnInstagram(v, postId);
+              out.push({ target, postId, ok: true });
+            } else {
+              out.push({ target, postId, ok: false, error: "Unknown platform" });
+            }
+          } catch (e) {
+            out.push({ target, postId, ok: false, error: e.message });
+          }
+        }
+        res.statusCode = 200;
+        return res.end(JSON.stringify({ ok: out.some(function (r) { return r.ok; }), results: out }));
+      }
+
       const v = await findVehicle(String(body.id || ""));
       const targets = Array.isArray(body.targets) ? body.targets : [];
 

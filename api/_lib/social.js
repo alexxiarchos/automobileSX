@@ -324,6 +324,118 @@ async function instagramPermalink(id) {
    Rather than pick a side, this asks and passes Meta's own answer straight
    through. If it refuses, the owner sees the exact reason and can delete the
    post in the app in ten seconds instead. */
+/* ---------- announcing a sale on a post that is already up ----------
+
+   When a car sells, the post that advertised it is still live and still reads
+   as for sale. That is where the "is this still available?" messages come from,
+   and it is worth more than a fresh post: it reaches the people already looking
+   at that car rather than asking the feed for attention a second time.
+
+   The two platforms need opposite treatment, and not by preference:
+
+   Facebook can edit a published post, so the sold notice goes on top of the
+   original text where everyone sees it, carrying a real clickable link to the
+   inventory. That needs pages_manage_posts, which this app already holds to
+   publish in the first place, so it works with the token in use today.
+
+   Instagram cannot edit a caption after publishing. Not a permission problem,
+   the API has no such operation. The only way to mark a sold post is to add a
+   comment, which needs instagram_manage_comments, a permission a token issued
+   before it existed will not carry. And nothing in an Instagram comment is
+   clickable, so that text sends people to the bio and the stock number rather
+   than printing a URL nobody can tap. */
+
+/* Bilingual, like every other caption this file writes. English first then
+   French, same order and same separator as captionFacebook, because a post
+   that suddenly speaks one language reads as though somebody else wrote it. */
+function soldNotice(v, target) {
+  const name = title(v);
+  const stock = v.stock ? " Stock " + v.stock + "." : "";
+
+  if (target === "instagram") {
+    /* No URL: nothing in an Instagram comment is clickable, so a link printed
+       here is a string people have to retype. The bio is where they can tap. */
+    return [
+      "SOLD - " + name + " has found a new home." + stock,
+      "We get similar vehicles regularly, link in bio.",
+      "",
+      "VENDU - Ce véhicule a trouvé preneur." + stock,
+      "Nous recevons régulièrement des véhicules semblables, lien en bio."
+    ].join("\n");
+  }
+
+  return [
+    "SOLD - " + name + " has found a new home. Thank you!",
+    "We get similar vehicles regularly. See our current inventory: " + SITE_INVENTORY.en,
+    "",
+    "VENDU - Ce véhicule a trouvé preneur. Merci !",
+    "Nous recevons régulièrement des véhicules semblables. Voyez notre inventaire : " + SITE_INVENTORY.fr
+  ].join("\n");
+}
+
+const SITE_INVENTORY = {
+  en: "https://www.automobilesx.ca/inventory",
+  fr: "https://www.automobilesx.ca/fr/inventaire"
+};
+
+/* Prepend, never replace. The original copy is what gives the post its value
+   as proof that cars move here, and a post whose text has been swapped for two
+   lines about a car that is gone is worth less than one that still shows what
+   was sold. Read the current message first, put the notice above it. */
+async function markSoldOnFacebook(v, postId) {
+  const c = cfg();
+  if (!c.token) throw new Error("Facebook is not configured");
+  if (!postId) throw new Error("No Facebook post id on this vehicle");
+
+  const notice = soldNotice(v, "facebook");
+
+  let existing = "";
+  try {
+    const cur = await call(GRAPH + "/" + postId + "?fields=message&access_token=" +
+      encodeURIComponent(c.token), { method: "GET" });
+    existing = (cur && cur.message) || "";
+  } catch (e) {
+    /* Readable or not, the notice is still worth writing. Losing the original
+       text is the cost, and it beats leaving the post saying "for sale". */
+    existing = "";
+  }
+
+  /* Already done. Saying it twice on the same post looks like a mistake. */
+  const already = existing.indexOf("VENDU") === 0 || existing.indexOf("SOLD") === 0;
+  if (already) return { id: postId, skipped: true };
+
+  const params = new URLSearchParams({
+    message: existing ? notice + "\n\n" + existing : notice,
+    access_token: c.token
+  });
+  await call(GRAPH + "/" + postId, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: params.toString()
+  });
+  return { id: postId, edited: true };
+}
+
+/* A comment, because Instagram has no edit. Errors are passed back word for
+   word: if the token predates instagram_manage_comments, Meta's own sentence
+   explains it better than a guess would. */
+async function markSoldOnInstagram(v, mediaId) {
+  const c = cfg();
+  if (!c.token) throw new Error("Instagram is not configured");
+  if (!mediaId) throw new Error("No Instagram media id on this vehicle");
+
+  const params = new URLSearchParams({
+    message: soldNotice(v, "instagram"),
+    access_token: c.token
+  });
+  await call(GRAPH + "/" + mediaId + "/comments", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: params.toString()
+  });
+  return { id: mediaId, commented: true };
+}
+
 async function deletePost(target, id) {
   const c = cfg();
   if (!c.token) throw new Error("Posting is not configured, so there is no token to delete with.");
@@ -349,5 +461,6 @@ async function deletePost(target, id) {
 module.exports = {
   caption, captionFacebook, captionInstagram, topFeatures, marketplaceListing, configured,
   postToFacebook, postToInstagram, instagramPermalink, deletePost,
+  soldNotice, markSoldOnFacebook, markSoldOnInstagram,
   vehicleUrl, firstImage, title
 };
