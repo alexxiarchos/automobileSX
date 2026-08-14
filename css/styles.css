@@ -234,6 +234,16 @@ a:hover { color: var(--red); }
     linear-gradient(100deg, rgba(13,13,13,0.78) 0%, rgba(13,13,13,0.58) 46%, rgba(13,13,13,0.22) 80%),
     linear-gradient(to top, rgba(13,13,13,0.62) 0%, rgba(13,13,13,0) 48%);
 }
+/* The desktop outpaint creates the width the original photograph did not have,
+   but its added brick wall is not part of the real dealership. Treat that area
+   as an intentional dark copy panel instead of pretending it is storefront. */
+@media (min-width: 768px) {
+  .hero-bg::after {
+    background:
+      linear-gradient(90deg, rgba(13,13,13,0.96) 0%, rgba(13,13,13,0.91) 24%, rgba(13,13,13,0.70) 36%, rgba(13,13,13,0.32) 50%, rgba(13,13,13,0.14) 68%),
+      linear-gradient(to top, rgba(13,13,13,0.62) 0%, rgba(13,13,13,0) 48%);
+  }
+}
 .hero-content { position: relative; z-index: 1; max-width: clamp(20rem, 46vw, 37rem); padding: clamp(4rem,9vw,7rem) 0 clamp(6rem,11vw,9rem); }
 /* Insurance rather than decoration. Easing the scrim let a bright reflection
    in the shop window back into the picture, and a single letter landing on it
