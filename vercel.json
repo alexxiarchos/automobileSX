@@ -5,6 +5,10 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/api/contact",
+      "destination": "/api/stock?action=contact"
+    },
+    {
       "source": "/sitemap.xml",
       "destination": "/api/sitemap"
     },

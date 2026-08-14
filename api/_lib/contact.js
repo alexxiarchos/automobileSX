@@ -1,7 +1,7 @@
-/* Public contact-form endpoint. Sends dealership inquiries through Resend while
-   keeping API credentials server-side in Vercel environment variables. */
+/* Contact-form handler shared through api/stock.js so the Hobby deployment
+   stays within Vercel's 12-function limit. Credentials remain server-side. */
 const crypto = require("crypto");
-const readBody = require("./_lib/body.js");
+const readBody = require("./body.js");
 
 const WINDOW_MS = 15 * 60 * 1000;
 const MAX_REQUESTS = 5;
