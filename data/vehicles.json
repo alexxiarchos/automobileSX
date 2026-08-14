@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T23:11:13.392Z",
+  "updatedAt": "2026-08-14T04:03:01.833Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -927,6 +927,18 @@
           "url": "",
           "at": "2026-08-13T23:09:55.360Z",
           "manual": true
+        },
+        {
+          "target": "facebook",
+          "id": "101868772570376_1134200616025459",
+          "url": "https://www.facebook.com/101868772570376_1134200616025459",
+          "at": "2026-08-14T04:03:00.722Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18423953545199294",
+          "url": "https://www.instagram.com/p/DcAaOd5HIMy/",
+          "at": "2026-08-14T04:03:00.723Z"
         }
       ]
     },
