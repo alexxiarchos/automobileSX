@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T23:11:13.392Z",
+  "updatedAt": "2026-08-14T02:54:28.237Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -628,11 +628,10 @@
         "images/vehicles/2014-hyundai-santa-fe-1o683/mselza6f-86.jpg",
         "images/vehicles/2014-hyundai-santa-fe-1o683/mselzavs-87.jpg"
       ],
-      "status": "sold",
+      "status": "available",
       "createdAt": "2026-08-04T12:01:17.201Z",
-      "updatedAt": "2026-08-13T19:29:02.602Z",
-      "publishedAt": "2026-08-13T19:29:02.602Z",
-      "soldAt": "2026-08-13T19:29:02.602Z"
+      "updatedAt": "2026-08-14T02:54:27.476Z",
+      "publishedAt": "2026-08-13T19:29:02.602Z"
     },
     {
       "id": "2017-audi-a4-gc6pg",
