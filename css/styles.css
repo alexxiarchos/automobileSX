@@ -221,14 +221,32 @@ a:hover { color: var(--red); }
    stops aligning with everything below it. */
 .hero > .container { width: 100%; }
 .hero-bg { position: absolute; inset: 0; overflow: hidden; }
-.hero-bg img, .hero-bg svg { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
+/* The storefront half of the photograph is already in deep shade, so a heavy
+   scrim on top of it does not darken an image, it deletes one: at 0.92 the
+   left third measured 30 out of 255 with 88 per cent of its pixels under 40,
+   which is a black rectangle with a headline floating on it. Lifting the
+   shadows in the picture and easing the scrim lets the building show through,
+   so the two halves read as one photograph. The text stays well clear of the
+   contrast minimum, which is the only thing the scrim was ever for. */
+.hero-bg img, .hero-bg svg {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%;
+  filter: brightness(1.18) contrast(0.94) saturate(1.05);
+}
 .hero-bg::after {
   content: ""; position: absolute; inset: 0;
   background:
-    linear-gradient(100deg, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.74) 42%, rgba(13,13,13,0.34) 78%),
-    linear-gradient(to top, rgba(13,13,13,0.72) 0%, rgba(13,13,13,0) 45%);
+    linear-gradient(100deg, rgba(13,13,13,0.78) 0%, rgba(13,13,13,0.58) 46%, rgba(13,13,13,0.22) 80%),
+    linear-gradient(to top, rgba(13,13,13,0.62) 0%, rgba(13,13,13,0) 48%);
 }
 .hero-content { position: relative; z-index: 1; max-width: clamp(20rem, 46vw, 37rem); padding: clamp(4rem,9vw,7rem) 0 clamp(6rem,11vw,9rem); }
+/* Insurance rather than decoration. Easing the scrim let a bright reflection
+   in the shop window back into the picture, and a single letter landing on it
+   drops to about 1:1 against white. A soft shadow costs nothing visually and
+   means legibility no longer depends on what happens to sit behind any one
+   character, which also holds if the photograph is ever swapped. */
+.hero-content h1,
+.hero-content .sub,
+.hero-kicker { text-shadow: 0 1px 12px rgba(13, 13, 13, 0.55), 0 1px 2px rgba(13, 13, 13, 0.35); }
 .hero-content h1 { color: var(--bone); margin-bottom: 12px; }
 .hero-content .sub { font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem); color: var(--mist); margin: 0; max-width: 42ch; line-height: 1.5; }
 .hero-kicker {

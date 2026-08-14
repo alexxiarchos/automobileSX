@@ -6,7 +6,12 @@ const { DEALER } = require("./layout.js");
 const phoneLink = `<a href="tel:+15148249117">${DEALER.phone}</a>`;
 
 /* ---------------- Home ---------------- */
-function homeBody(T, R) {
+/* cards is the current inventory already rendered to HTML. It is passed in
+   rather than fetched here so that this file stays a pure template and the
+   same string can be produced at build time or written again later by
+   /api/save when stock changes. The sentinels below mark the region that gets
+   replaced; nothing else on the page is touched. */
+function homeBody(T, R, cards) {
   return `
   <section class="hero" aria-labelledby="hero-h">
     <div class="hero-bg" aria-hidden="true">
@@ -70,7 +75,7 @@ function homeBody(T, R) {
         </div>
         <a class="text-link" href="${R.inventory}">${T.ui.viewAll}</a>
       </div>
-      <div class="vehicle-grid reveal" id="featured-grid"></div>
+      <div class="vehicle-grid reveal" id="featured-grid"><!--SX:CARDS-->${cards || ""}<!--/SX:CARDS--></div>
     </div>
   </section>
 
@@ -181,7 +186,7 @@ function reviewsBlock(T) {
 }
 
 /* ---------------- Inventory ---------------- */
-function inventoryBody(T) {
+function inventoryBody(T, cards) {
   return `
   <div class="page-head">
     <div class="container">
@@ -252,7 +257,7 @@ function inventoryBody(T) {
       </div>
 
       <div class="chip-row" id="chip-row"></div>
-      <div class="vehicle-grid" id="inventory-grid"></div>
+      <div class="vehicle-grid" id="inventory-grid"><!--SX:CARDS-->${cards || ""}<!--/SX:CARDS--></div>
 
       <div class="empty-state" id="empty-state" hidden>
         <h2>${T.ui.emptyTitle}</h2>

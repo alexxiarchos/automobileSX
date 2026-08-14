@@ -60,6 +60,25 @@ async function readInventory() {
   return JSON.parse(Buffer.from(data.content, "base64").toString("utf8"));
 }
 
+/* ---------- Read any text file from the repo (or the mock dir) ----------
+   Used by the listing pages, which are edited in place rather than
+   regenerated: /api/save has to see the current HTML before it can swap the
+   card region inside it. Returns null when the file is not there, because a
+   missing page is a reason to skip that page, not to fail the save. */
+async function readTextFile(filePath) {
+  if (MOCK) {
+    try { return fs.readFileSync(path.join(MOCK, filePath), "utf8"); }
+    catch (e) { return null; }
+  }
+  const { repo, branch } = cfg();
+  try {
+    const data = await gh("/repos/" + repo + "/contents/" + filePath + "?ref=" + branch);
+    return Buffer.from(data.content, "base64").toString("utf8");
+  } catch (e) {
+    return null;
+  }
+}
+
 /* ---------- Store an uploaded image as a git blob; returns { sha } ---------- */
 async function createImageBlob(base64) {
   if (MOCK) {
@@ -157,4 +176,4 @@ async function commitInventory({ json, newImages, newFiles, deletePaths, message
   return { commit: commit.sha };
 }
 
-module.exports = { readInventory, createImageBlob, saveMockImage, commitInventory, MOCK: !!MOCK };
+module.exports = { readInventory, readTextFile, createImageBlob, saveMockImage, commitInventory, MOCK: !!MOCK };

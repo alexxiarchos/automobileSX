@@ -2,9 +2,10 @@
    Vercel auto-deploys that commit, so the public site updates by itself.
    Body: { vehicles: [...], newImages: [{path, sha}], deletePaths: [...], message } */
 const { requireAuth } = require("./_lib/auth.js");
-const { commitInventory, readInventory } = require("./_lib/github.js");
+const { commitInventory, readInventory, readTextFile } = require("./_lib/github.js");
 const { submit, changedUrls } = require("./_lib/indexnow.js");
 const { renderVehiclePages, vehiclePagePaths } = require("./_lib/vehiclePage.js");
+const { renderListingPages } = require("./_lib/listingPages.js");
 const readBody = require("./_lib/body.js");
 
 const MAX_VEHICLES = 200;
@@ -50,6 +51,18 @@ module.exports = async function (req, res) {
         newFiles.push({ path: page.path, content: page.html });
       });
     });
+
+    /* The inventory page and the homepage carry their cards in the HTML so a
+       crawler sees the stock and the links to it. Stock changes here, not at
+       build time, so the card region is rewritten on every save. Failing to
+       update them must never fail the save itself: the inventory JSON is the
+       source of truth and the browser still fills the grid either way. */
+    try {
+      const listing = await renderListingPages(live, readTextFile);
+      listing.forEach(function (page) {
+        newFiles.push({ path: page.path, content: page.content });
+      });
+    } catch (e) { /* listing pages left as they were */ }
 
     /* Remove pages for vehicles that were deleted or moved back to draft */
     const liveIds = new Set(live.map(function (v) { return v.id; }));

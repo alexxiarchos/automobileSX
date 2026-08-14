@@ -14,6 +14,42 @@ const COPY = { en: require("./copy-en.js"), fr: require("./copy-fr.js") };
 /* Stable publication date for the guide articles (they are evergreen). */
 const ARTICLE_DATE = "2026-08-04";
 
+/* The inventory, baked into the pages that list it.
+
+   These pages used to ship an empty grid for the browser to fill, which meant a
+   crawler saw a listing page with no listings on it and, worse, no links to the
+   vehicle pages underneath. Every one of those pages was already pre-rendered
+   and indexable; nothing pointed at them.
+
+   Read here rather than inside the templates so the templates stay pure, and
+   read defensively: data/vehicles.json is deliberately absent from the code
+   zips, so a build run against a fresh checkout has no inventory and must
+   simply produce empty grids rather than fail. The browser fills them in that
+   case exactly as it did before. */
+const HOME_FEATURED = 6;
+
+function loadVehicles() {
+  try {
+    const raw = fs.readFileSync(path.join(ROOT, "data", "vehicles.json"), "utf8");
+    return JSON.parse(raw).vehicles || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+const CARDS = (function () {
+  const cards = require(path.join(ROOT, "js", "cards.js"));
+  const vehicles = loadVehicles();
+  const out = {};
+  ["en", "fr"].forEach(function (lang) {
+    out[lang] = {
+      all: cards.grid(vehicles, lang),
+      featured: cards.grid(vehicles, lang, HOME_FEATURED)
+    };
+  });
+  return out;
+})();
+
 /* Wrap a written article in the standard page-head + prose layout */
 function prosePage(T, key, extraSchema) {
   const c = T[key];
@@ -112,7 +148,7 @@ function build() {
     const pages = [
       {
         route: "home", title: T.home.title, description: T.home.description,
-        body: blocks.homeBody(T, R), scripts: ["/js/home.js"],
+        body: blocks.homeBody(T, R, CARDS[lang].featured), scripts: ["/js/home.js"],
         schema: [{
           "@type": "WebSite", name: "Automobile SX", url: SITE,
           inLanguage: lang === "fr" ? "fr-CA" : "en-CA"
@@ -120,7 +156,7 @@ function build() {
       },
       {
         route: "inventory", title: T.inventory.title, description: T.inventory.description,
-        body: blocks.inventoryBody(T), scripts: ["/js/inventory.js"],
+        body: blocks.inventoryBody(T, CARDS[lang].all), scripts: ["/js/inventory.js"],
         breadcrumb: [bcHome, { name: T.ui.filters ? T.inventory.h1 : "Inventory", route: "inventory" }]
       },
       {
