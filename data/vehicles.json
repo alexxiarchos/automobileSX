@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-14T04:03:01.833Z",
+  "updatedAt": "2026-08-14T04:44:01.176Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -20,7 +20,7 @@
       "econCity": "",
       "econHwy": "",
       "doors": 4,
-      "seats": 5,
+      "seats": 6,
       "vin": "5XYPGDA13GG052171",
       "stock": "SX-1016",
       "tag": "",
@@ -60,8 +60,18 @@
         "images/vehicles/2016-kia-sorento-lmnwf/msru6x5u-13.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-13T18:10:50.902Z",
-      "updatedAt": "2026-08-13T18:20:51.535Z",
+      "updatedAt": "2026-08-14T04:44:00.553Z",
       "publishedAt": "2026-08-13T18:14:14.006Z",
       "posts": [
         {
