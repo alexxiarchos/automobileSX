@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-14T04:44:01.176Z",
+  "updatedAt": "2026-08-14T04:46:02.435Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -20,7 +20,7 @@
       "econCity": "",
       "econHwy": "",
       "doors": 4,
-      "seats": 6,
+      "seats": 5,
       "vin": "5XYPGDA13GG052171",
       "stock": "SX-1016",
       "tag": "",
@@ -71,7 +71,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-13T18:10:50.902Z",
-      "updatedAt": "2026-08-14T04:44:00.553Z",
+      "updatedAt": "2026-08-14T04:46:01.828Z",
       "publishedAt": "2026-08-13T18:14:14.006Z",
       "posts": [
         {
