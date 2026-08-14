@@ -21,14 +21,24 @@ const ARTICLE_DATE = "2026-08-04";
    vehicle pages underneath. Every one of those pages was already pre-rendered
    and indexable; nothing pointed at them.
 
-   Read here rather than inside the templates so the templates stay pure, and
-   read defensively: data/vehicles.json is deliberately absent from the code
-   zips, so a build run against a fresh checkout has no inventory and must
-   simply produce empty grids rather than fail. The browser fills them in that
-   case exactly as it did before. */
+   On Vercel, the admin-controlled GitHub copy is the source of truth. Never
+   bake data from the deployment checkout there: a developer may be deploying
+   code while the live inventory has moved on. A production build fails rather
+   than silently publishing a stale or empty grid if that source is unavailable.
+
+   Local builds still use data/vehicles.json when present, so development stays
+   offline-friendly and a code-only checkout can still build empty grids. */
 const HOME_FEATURED = 6;
 
-function loadVehicles() {
+async function loadVehicles() {
+  if (process.env.VERCEL) {
+    const { readInventory } = require("../api/_lib/github.js");
+    const data = await readInventory();
+    if (!data || !Array.isArray(data.vehicles)) {
+      throw new Error("Live inventory returned an invalid data shape");
+    }
+    return data.vehicles;
+  }
   try {
     const raw = fs.readFileSync(path.join(ROOT, "data", "vehicles.json"), "utf8");
     return JSON.parse(raw).vehicles || [];
@@ -37,9 +47,8 @@ function loadVehicles() {
   }
 }
 
-const CARDS = (function () {
+function renderCards(vehicles) {
   const cards = require(path.join(ROOT, "js", "cards.js"));
-  const vehicles = loadVehicles();
   const out = {};
   ["en", "fr"].forEach(function (lang) {
     out[lang] = {
@@ -48,7 +57,7 @@ const CARDS = (function () {
     };
   });
   return out;
-})();
+}
 
 /* Wrap a written article in the standard page-head + prose layout */
 function prosePage(T, key, extraSchema) {
@@ -130,7 +139,8 @@ function faqSchema(T, lang) {
   };
 }
 
-function build() {
+async function build() {
+  const CARDS = renderCards(await loadVehicles());
   let written = 0;
 
   ["en", "fr"].forEach(lang => {
@@ -287,4 +297,7 @@ function build() {
   console.log("Generated " + written + " HTML pages and sitemap-pages.json");
 }
 
-build();
+build().catch(function (error) {
+  console.error(error && error.stack ? error.stack : error);
+  process.exitCode = 1;
+});

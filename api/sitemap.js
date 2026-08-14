@@ -2,8 +2,7 @@
    published vehicle. Served at /sitemap.xml via the rewrite in vercel.json,
    so it is always current without anyone regenerating anything. */
 
-const fs = require("fs");
-const path = require("path");
+const { readInventory } = require("./_lib/github.js");
 
 const SITE = "https://www.automobilesx.ca";
 
@@ -48,23 +47,7 @@ function urlEntry(loc, altEn, altFr, changefreq, priority, lastmod) {
   ].filter(Boolean).join("\n");
 }
 
-async function readVehicles(req) {
-  /* Try the bundled file first, then fetch from whichever host is serving us. */
-  const candidates = [
-    path.join(__dirname, "..", "data", "vehicles.json"),
-    path.join(process.cwd(), "data", "vehicles.json")
-  ];
-  for (const file of candidates) {
-    try { return JSON.parse(fs.readFileSync(file, "utf8")); } catch (e) { /* next */ }
-  }
-  try {
-    const host = (req && req.headers && req.headers.host) || "www.automobilesx.ca";
-    const proto = /localhost|127\.0\.0\.1/.test(host) ? "http" : "https";
-    const res = await fetch(proto + "://" + host + "/data/vehicles.json", { cache: "no-store" });
-    if (res.ok) return await res.json();
-  } catch (e) { /* fall through */ }
-  return { vehicles: [] };
-}
+async function readVehicles() { return readInventory(); }
 
 module.exports = async function (req, res) {
   const parts = [];

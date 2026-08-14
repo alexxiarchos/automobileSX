@@ -302,7 +302,10 @@ SX.monthly = function (price, down, months, rate) {
 SX.vehicles = [];      /* available only, for listings */
 SX.allVehicles = [];   /* available + sold, resolvable on detail pages */
 
-SX.ready = fetch("/data/vehicles.json", { cache: "no-cache" })
+/* Public pages read the same GitHub-backed inventory as the admin. This keeps
+   a code deployment made from an older checkout from replacing newer stock in
+   the browser after the pre-rendered cards have loaded. */
+SX.ready = fetch("/api/stock", { cache: "no-cache" })
   .then(function (r) {
     if (!r.ok) throw new Error("HTTP " + r.status);
     return r.json();

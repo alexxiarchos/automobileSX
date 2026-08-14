@@ -14,6 +14,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const { readInventory } = require("./_lib/github.js");
 
 const BASE = { en: "/vehicles/", fr: "/fr/vehicules/" };
 
@@ -22,22 +23,7 @@ const BASE = { en: "/vehicles/", fr: "/fr/vehicules/" };
 let SHELLS = null;
 try { SHELLS = require("./_lib/shells.json"); } catch (e) { SHELLS = null; }
 
-async function readVehicles(req) {
-  const candidates = [
-    path.join(__dirname, "..", "data", "vehicles.json"),
-    path.join(process.cwd(), "data", "vehicles.json")
-  ];
-  for (const file of candidates) {
-    try { return JSON.parse(fs.readFileSync(file, "utf8")); } catch (e) { /* next */ }
-  }
-  try {
-    const host = (req && req.headers && req.headers.host) || "www.automobilesx.ca";
-    const proto = /localhost|127\.0\.0\.1/.test(host) ? "http" : "https";
-    const r = await fetch(proto + "://" + host + "/data/vehicles.json", { cache: "no-store" });
-    if (r.ok) return await r.json();
-  } catch (e) { /* fall through */ }
-  return { vehicles: [] };
-}
+async function readVehicles() { return readInventory(); }
 
 async function shell(req, which) {
   if (SHELLS && SHELLS[which]) return SHELLS[which];
