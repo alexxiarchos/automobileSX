@@ -33,65 +33,68 @@ window.SXUI = (function () {
 
   function photoCount(v) { return (v.images && v.images.length) || 1; }
 
-  /* Drop a live Google map into a .map-canvas element.
-     The canvas already contains a placeholder with the address and a link, so
-     if the embed never arrives the visitor still gets something useful. The
-     frame is only faded in once it loads, and is removed if it errors or has
-     not loaded within eight seconds. */
+  /* Drop a live Google map into a .map-canvas element when it approaches the
+     viewport. Starting the timeout at that moment matters: the footer map used
+     to time out while it was still far below the fold waiting for the browser's
+     native lazy loader, so first-time visitors often saw a false failure. */
   function mountMapFrame(canvas, addr, FR) {
     if (!canvas) return;
-    var f = document.createElement("iframe");
-    var settled = false;
+    var started = false;
+    var observer = null;
 
-    f.className = "map-frame";
-    f.title = FR ? "Carte : " + addr : "Map: " + addr;
-    f.loading = "lazy";
-    f.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
-    f.setAttribute("allowfullscreen", "");
-    /* The official place embed Google generates for this listing. The old
-       "maps?q=...&output=embed" form is undocumented and is the one that was
-       intermittently refusing to frame. */
-    f.src = (SX.dealer.mapEmbed && SX.dealer.mapEmbed[SX.lang]) || SX.dealer.mapEmbed.en;
-
-    function remove() { if (f.parentNode) f.parentNode.removeChild(f); }
-    function drop() {
-      if (settled) return;
-      settled = true;
-      remove();                                        /* leaves the placeholder */
+    function showFailure() {
+      var status = canvas.querySelector(".map-placeholder-status");
+      if (status) status.textContent = FR ? "Carte indisponible pour le moment." : "The map is unavailable right now.";
     }
-    var giveUp = setTimeout(drop, 8000);
 
-    f.addEventListener("load", function () {
-      if (settled) return;
-      settled = true;
-      clearTimeout(giveUp);
-      f.classList.add("loaded");
-    });
-    f.addEventListener("error", function () { clearTimeout(giveUp); drop(); });
+    function start() {
+      if (started) return;
+      started = true;
+      if (observer) observer.disconnect();
 
-    canvas.appendChild(f);
+      var f = document.createElement("iframe");
+      var settled = false;
+      f.className = "map-frame";
+      f.title = FR ? "Carte : " + addr : "Map: " + addr;
+      /* IntersectionObserver is the lazy loader. Once nearby, ask the browser
+         to fetch immediately rather than placing a second lazy gate in front. */
+      f.loading = "eager";
+      f.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+      f.setAttribute("allowfullscreen", "");
+      f.src = (SX.dealer.mapEmbed && SX.dealer.mapEmbed[SX.lang]) || SX.dealer.mapEmbed.en;
 
-    /* The frame is mounted straight away, so anyone who can see a map gets one.
-       This probe only ever takes a map away: a browser error page inside a
-       cross-origin iframe still fires "load", so a blocked or unreachable
-       Google leaves a grey rectangle we cannot detect from the frame itself.
-       If the probe fails we know the embed cannot have worked, and we fall back
-       to the placeholder. If it succeeds, times out or never answers, the map
-       is left exactly as it is. Failing this way round means a strict privacy
-       setting can never hide a map that would otherwise have loaded. */
-    var probe = new Image();
-    probe.onerror = function () {
-      clearTimeout(giveUp);
-      settled = true;
-      remove();
-    };
-    probe.referrerPolicy = "no-referrer";
-    probe.src = "https://www.google.com/favicon.ico";
+      function remove() { if (f.parentNode) f.parentNode.removeChild(f); }
+      function drop() {
+        if (settled) return;
+        settled = true;
+        remove();
+        showFailure();
+      }
+      var giveUp = setTimeout(drop, 15000);
+
+      f.addEventListener("load", function () {
+        if (settled) return;
+        settled = true;
+        clearTimeout(giveUp);
+        f.classList.add("loaded");
+      });
+      f.addEventListener("error", function () { clearTimeout(giveUp); drop(); });
+      canvas.appendChild(f);
+    }
+
+    if ("IntersectionObserver" in window) {
+      observer = new IntersectionObserver(function (entries) {
+        if (entries.some(function (entry) { return entry.isIntersecting; })) start();
+      }, { rootMargin: "320px 0px" });
+      observer.observe(canvas);
+    } else {
+      start();
+    }
   }
 
   function mapPlaceholder(FR) {
-    return '<div class="map-canvas"><p class="map-placeholder">' +
-      (FR ? "Carte indisponible pour le moment." : "The map is unavailable right now.") +
+    return '<div class="map-canvas"><p class="map-placeholder" aria-live="polite"><span class="map-placeholder-status">' +
+      (FR ? "Chargement de la carteâ€¦" : "Loading mapâ€¦") + '</span>' +
       ' <a href="' + SX.dealer.mapsUrl + '" target="_blank" rel="noopener">' +
       (FR ? "Ouvrir dans Google Maps" : "Open in Google Maps") + "</a></p></div>";
   }
@@ -164,7 +167,11 @@ window.SXUI = (function () {
       '<nav class="main-nav" aria-label="' + (SX.lang === "fr" ? "Navigation principale" : "Main") + '">' + navLinks() + "</nav>" +
       '<div class="header-actions">' +
       '<a class="lang-toggle" href="' + altLangUrl() + '" hreflang="' + (SX.lang === "en" ? "fr" : "en") + '" lang="' + (SX.lang === "en" ? "fr" : "en") + '">' + other + "</a>" +
-      '<a class="header-phone" href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a>" +
+      '<a class="header-phone" href="' + SX.dealer.phoneHref + '" aria-label="' +
+        (SX.lang === "fr" ? "Appelez le " : "Call ") + SX.dealer.phone + '">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.84.56 2.8.69A2 2 0 0 1 22 16.92z"/></svg>' +
+        '<span class="header-phone-label">' + (SX.lang === "fr" ? "Appelez" : "Call") + '</span>' +
+        '<span>' + SX.dealer.phone + "</span></a>" +
       '<a class="btn btn-red" href="' + SX.url("contact") + '?interest=test-drive">' + SX.t("cta.bookTestDrive") + "</a>" +
       '<button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">' +
       "<span></span><span></span><span></span></button>" +
