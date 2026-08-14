@@ -169,17 +169,46 @@ body {
 
 .missing { padding: 40px; text-align: center; color: var(--slate); }
 
+/* ---------- printing ----------
+
+   Nothing here is measured in millimetres, and that is the whole point. An
+   earlier version pinned the sheet to 194mm by 258mm and assumed 8mm margins,
+   which is fine on a desktop where those were the numbers it was tested
+   against, and wrong on a phone, where the print dialogue picks its own paper
+   and its own margins. The symptoms were exactly what you would expect from
+   guessing the page size: the content hung over the right margin and the
+   bottom fell onto a second sheet.
+
+   So the sheet is now told to be one page, whatever one page happens to be.
+   100vh in a print context is the height of the page box, and 100% is its
+   width, so A4, Letter, A5 and B5 all work without knowing which one arrived.
+
+   The 0.88 is a fixed design decision rather than something JavaScript works
+   out. The fullest listing we can produce comes to about 260mm unscaled; at
+   0.88 that is 229mm, which fits inside the printable area of every common
+   paper even when the dialogue insists on half inch margins. Widening the box
+   by the reciprocal first means it still fills the page edge to edge after
+   being scaled down. */
 @media print {
   body { background: #fff; }
   .bar { display: none; }
-  .sheet { width: auto; height: auto; margin: 0; box-shadow: none; page-break-after: always; overflow: hidden; }
-  .sheetInner { padding: 0; }
+
+  .sheet {
+    width: auto; height: 100vh; margin: 0; box-shadow: none;
+    page-break-after: always;
+  }
   .sheet:last-child { page-break-after: auto; }
+
+  .sheetInner {
+    width: 113.64%;          /* 1 / 0.88, so it fills the width once scaled */
+    min-height: 113.64vh;    /* one page tall once scaled, footer on the edge */
+    padding: 4mm;
+    transform: scale(0.88);
+    transform-origin: top left;
+  }
 }
-/* 8mm rather than the usual 11: the sheet has to hold an advertisement and a
-   prescribed label on one page, and three millimetres a side is the difference
-   between one page and two on Letter. Still inside every desktop printer's
-   unprintable edge. */
+/* Portrait, and let the dialogue keep its own margins: the layout no longer
+   depends on what they are. */
 @page { size: portrait; margin: 8mm; }
 </style>
 </head>

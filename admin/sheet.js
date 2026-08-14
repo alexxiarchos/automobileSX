@@ -35,7 +35,7 @@
        it makes no promise and states no condition of sale, so it does not drag
        the prescribed label onto what is still an advertisement. Left blank it
        simply does not print, like every other empty field here. */
-    opc: "123456"
+    opc: "2100424-1"
   };
 
   var T = {
@@ -336,114 +336,22 @@
 
   /* ---------- one car, one page ----------
 
-     A sheet with three features and no photo and a sheet with twenty two
-     features, a long trim name and a paragraph of repairs are not the same
-     height, and no fixed set of type sizes makes both of them fit. Rather than
-     tune the layout for an average car and let the loaded ones spill onto a
-     second page, each sheet measures itself after it is drawn and scales down
-     just enough to fit the page it is going on.
+     This used to be a JavaScript problem and it is now a CSS one, which is a
+     better place for it. The old version measured each sheet after rendering
+     and scaled it to fit a page whose size it had to assume, in millimetres.
+     That assumption held on the machine it was written on and broke on a
+     phone, where the print dialogue chooses its own paper and its own margins:
+     the sheet overhung the right edge and the bottom fell onto a second page.
 
-     Zoom rather than transform: zoom reflows, so the print engine still sees a
-     box that ends where the page ends. A transform would scale the picture and
-     leave the layout believing it was full size, which is how you get a page
-     two with nothing on it.
+     It also had to fight the browser for a measurement worth trusting. The web
+     font arrives late and changes every height; Chrome's print path ignores the
+     zoom property; iOS Safari never fires beforeprint. Each of those needed its
+     own workaround, and every workaround was another thing to be wrong.
 
-     The target is Letter, the shorter of the two papers, so a sheet that fits
-     here fits A4 as well. The floor is there because past a certain point the
-     honest answer is that it does not fit: shrinking a window sheet until a
-     buyer needs to lean in defeats the object, so it stops at 72 percent and
-     takes the second page. */
-  /* Letter is the shorter paper, A4 is the narrower one, and the sheet has to
-     survive both. So it is measured as tall as Letter allows and as narrow as
-     A4 allows, which is the worst case of each. Measuring at the on screen
-     width instead was the first attempt and it under-shrank every sheet: a
-     narrower column wraps text onto more lines, so the print was taller than
-     the thing that had just been measured. */
-  var PAGE_MM = 258;        /* Letter, 279.4mm tall less 2 x 8mm, and 5mm spare
-                               so a rounding difference between the screen and the
-                               print engine cannot cost a whole extra page */
-  var COL_MM  = 194;        /* A4,      210mm wide    less 2 x 8mm margins */
-  var MIN_ZOOM = 0.72;
-  var PX_PER_MM = 3.7795;
-
-  /* Scale with a transform rather than the zoom property. zoom is the obvious
-     tool and it does work on screen, but Chrome's print path ignores it: a
-     sheet zoomed to 0.4 still came out on two pages. A transform is honoured,
-     at the cost of not affecting layout, so the paper's height is set by hand
-     underneath it.
-
-     The width is divided by the same factor it is scaled by, so the contents
-     still fill the page edge to edge instead of shrinking into the top left
-     corner. That makes it circular, since a wider box wraps text onto fewer
-     lines and changes the height the factor was computed from. A few passes
-     settle it. */
-  function fitToPage() {
-    Array.prototype.forEach.call(document.querySelectorAll(".sheet"), function (el) {
-      var inner = el.querySelector(".sheetInner");
-      if (!inner) return;
-
-      inner.style.transform = "none";
-      inner.style.width = COL_MM + "mm";
-      inner.style.minHeight = "0";
-      el.style.height = "";
-
-      var z = 1;
-      for (var pass = 0; pass < 6; pass++) {
-        inner.style.width = (COL_MM / z) + "mm";
-        var mm = inner.scrollHeight / PX_PER_MM * z;
-        if (mm <= PAGE_MM) break;
-        var next = z * (PAGE_MM / mm);
-        if (next < MIN_ZOOM) { z = MIN_ZOOM; break; }
-        if (Math.abs(next - z) < 0.002) { z = next; break; }
-        z = next;
-      }
-
-      /* Fill the page rather than stopping wherever the content happens to end.
-         The inner box is given exactly one page of height, which after scaling
-         is exactly one page, so the footer's margin-top:auto puts it on the
-         bottom edge where a window sheet's contact details belong instead of
-         leaving it stranded halfway up with white space underneath. */
-      inner.style.minHeight = (PAGE_MM / z) + "mm";
-      inner.style.width = (COL_MM / z) + "mm";
-      inner.style.transform = z >= 0.999 ? "none" : "scale(" + z.toFixed(4) + ")";
-      /* The paper has to be told how tall the scaled contents are, because a
-         transform leaves the layout believing they are still full size, and a
-         box that believes that pushes its own footer onto page two. */
-      el.style.height = PAGE_MM + "mm";
-    });
-  }
-
-  /* Two things arrive after the markup does and both change the height, so the
-     fit is run again once each has landed.
-
-     The web font is the one that caused real trouble. Inter Tight comes from
-     Google Fonts, and until it arrives the browser lays the page out in a
-     fallback face with different metrics. Measure in that window and the answer
-     is wrong by the time the font swaps in. On a desktop on the shop wifi the
-     race is usually won by the font; on a phone on mobile data it is not, which
-     is exactly why this printed on two pages from a phone and one from a
-     laptop. document.fonts.ready settles it.
-
-     beforeprint is the belt and braces: whatever else happened, measure again
-     at the moment the print dialogue opens. */
-  function fitWhenReady() {
-    fitToPage();
-
-    if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === "function") {
-      document.fonts.ready.then(fitToPage);
-    }
-    Array.prototype.forEach.call(document.querySelectorAll(".sheet img"), function (img) {
-      if (img.complete) return;
-      img.addEventListener("load", fitToPage);
-      img.addEventListener("error", fitToPage);
-    });
-    window.addEventListener("beforeprint", fitToPage);
-
-    /* Safari on iOS fires no beforeprint at all, so the last word goes to a
-       timer: by two seconds the font has either arrived or it is not coming. */
-    setTimeout(fitToPage, 400);
-    setTimeout(fitToPage, 2000);
-  }
+     None of it exists any more. The print stylesheet says the sheet is one page
+     tall and one page wide, in vh and per cent, and scales the contents by a
+     fixed factor chosen so the fullest listing still fits. The browser knows
+     the paper size; asking it is more reliable than guessing. */
 
   function render(vehicles) {
     var byId = {};
@@ -461,7 +369,6 @@
     document.getElementById("sheets").innerHTML = html ||
       '<div class="sheet"><p class="missing">' + esc(T[lang].missing) + "</p></div>";
     document.documentElement.lang = lang === "fr" ? "fr-CA" : "en-CA";
-    fitWhenReady();
   }
 
   /* The public inventory file, which is what the website itself reads. No
