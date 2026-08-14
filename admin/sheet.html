@@ -31,6 +31,15 @@
   --ink: #0D0D0D; --red: #BA1D26; --bone: #F2EFED;
   --mist: #E4E1DE; --slate: #6B6F76; --line: #DCD8D4;
   --font: "Inter Tight", -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* One column definition for the whole sheet. Every band down the page uses
+     it, so the vertical join runs straight from the dealer card to the
+     signature line. It was two different splits before, and a divider that
+     moves sideways halfway down the page is the sort of thing you feel as
+     wrong well before you work out what it is. Change it here and the whole
+     sheet follows. */
+  --cols: 1fr 1fr;
+  --gap: 3.5mm;
 }
 * { box-sizing: border-box; }
 body {
@@ -81,9 +90,8 @@ body {
 
 /* Identity and equipment down the left, the price and the numbers down the
    right. Two columns that each pack from the top, so no card is stretched to
-   match the height of the one beside it. The dealer name is the same on all
-   thirty sheets and the price is not, so the price side gets the room. */
-.main { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 3.5mm; align-items: start; }
+   match the height of the one beside it. */
+.main { display: grid; grid-template-columns: var(--cols); gap: var(--gap); align-items: start; }
 .col { display: grid; gap: 3mm; align-content: start; }
 
 .brand { display: flex; flex-direction: column; gap: 2mm; padding: 4mm; }
@@ -113,8 +121,8 @@ body {
    half is read once, at the point of sale, by someone who is already standing
    at the car; the half above it has to work on a passer-by from two metres
    away. Same page, two different jobs, and the type says which is which. */
-.opc { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; align-items: start; }
-.opcCol { display: grid; gap: 3.5mm; align-content: start; }
+.opc { display: grid; grid-template-columns: var(--cols); gap: var(--gap); align-items: start; }
+.opcCol { display: grid; gap: 3mm; align-content: start; }
 .opcCard { padding: 4mm; }
 .opcCard p { margin: 0; font-size: 11px; line-height: 1.35; }
 .opcGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 4mm; }
