@@ -31,6 +31,16 @@
       "source": "/fr/index",
       "destination": "/fr",
       "permanent": true
+    },
+    {
+      "source": "/vehicle",
+      "destination": "/inventory",
+      "permanent": true
+    },
+    {
+      "source": "/fr/vehicule",
+      "destination": "/fr/inventaire",
+      "permanent": true
     }
   ],
   "headers": [

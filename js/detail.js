@@ -183,12 +183,24 @@ SX.ready.then(function () {
     (v.stock ? "<li><span>" + SX.t("veh.stock") + "</span><span>" + v.stock + "</span></li>" : "") +
     (v.vin ? "<li><span>" + SX.t("veh.vin") + "</span><span>" + v.vin + "</span></li>" : "");
 
-  document.getElementById("r-testdrive").href = SX.url("contact") + "?interest=test-drive&vehicle=" + v.id;
-  document.getElementById("r-availability").href = SX.url("contact") + "?interest=vehicle&vehicle=" + v.id;
+  var soldPrimaryLabel = SX.lang === "fr" ? "Voir les véhicules disponibles" : "View available inventory";
+  var soldSecondaryLabel = SX.lang === "fr" ? "Trouver un véhicule semblable" : "Find a similar vehicle";
+  var railPrimary = document.getElementById("r-testdrive");
+  var railSecondary = document.getElementById("r-availability");
+  railPrimary.href = v.status === "sold"
+    ? SX.url("inventory")
+    : SX.url("contact") + "?interest=test-drive&vehicle=" + v.id;
+  railPrimary.textContent = v.status === "sold" ? soldPrimaryLabel : SX.t("cta.bookTestDrive");
+  railSecondary.href = SX.url("contact") + "?interest=vehicle&vehicle=" + v.id;
+  railSecondary.textContent = v.status === "sold" ? soldSecondaryLabel : SX.t("cta.checkAvailability");
   document.getElementById("r-preapproved").href = SX.url("financing");
 
-  document.getElementById("dm-price").textContent = SX.money(v.price);
-  document.getElementById("dm-testdrive").href = SX.url("contact") + "?interest=test-drive&vehicle=" + v.id;
+  document.getElementById("dm-price").textContent = v.status === "sold" ? SX.t("veh.sold") : SX.money(v.price);
+  var mobilePrimary = document.getElementById("dm-testdrive");
+  mobilePrimary.href = v.status === "sold"
+    ? SX.url("inventory")
+    : SX.url("contact") + "?interest=test-drive&vehicle=" + v.id;
+  mobilePrimary.textContent = v.status === "sold" ? soldPrimaryLabel : SX.t("cta.bookTestDrive");
 
   /* ---------- Estimator, pre-filled ---------- */
   document.getElementById("v-calculator").appendChild(

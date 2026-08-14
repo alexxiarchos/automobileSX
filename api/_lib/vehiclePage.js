@@ -266,6 +266,9 @@ function renderVehiclePage(v, lang) {
   const altLang = lang === "en" ? "fr" : "en";
   const altUrl = "/" + PATHS[altLang].dir + "/" + v.id;
   const bodyLabel = lang === "fr" ? (BODY_FR[v.body] || v.body) : v.body;
+  const isSold = v.status === "sold";
+  const viewAvailable = lang === "fr" ? "Voir les véhicules disponibles" : "View available inventory";
+  const findSimilar = lang === "fr" ? "Trouver un véhicule semblable" : "Find a similar vehicle";
   const paras = descParagraphs(v, lang);
   const rows = specRows(v, lang);
   const half = Math.ceil(rows.length / 2);
@@ -371,8 +374,8 @@ function renderVehiclePage(v, lang) {
           ${v.stock ? `<li><span>${esc(t.stock)}</span><span>${esc(v.stock)}</span></li>` : ""}
           ${v.vin ? `<li><span>${esc(t.vin)}</span><span>${esc(v.vin)}</span></li>` : ""}
         </ul>
-        <a class="btn btn-red btn-block" id="r-testdrive" href="${P.contact}?interest=test-drive&amp;vehicle=${encodeURIComponent(v.id)}">${esc(t.bookTestDrive)}</a>
-        <a class="btn btn-outline btn-block" id="r-availability" href="${P.contact}?interest=vehicle&amp;vehicle=${encodeURIComponent(v.id)}">${esc(t.checkAvailability)}</a>
+        <a class="btn btn-red btn-block" id="r-testdrive" href="${isSold ? P.inventory : P.contact + "?interest=test-drive&amp;vehicle=" + encodeURIComponent(v.id)}">${esc(isSold ? viewAvailable : t.bookTestDrive)}</a>
+        <a class="btn btn-outline btn-block" id="r-availability" href="${P.contact}?interest=vehicle&amp;vehicle=${encodeURIComponent(v.id)}">${esc(isSold ? findSimilar : t.checkAvailability)}</a>
         <a class="text-link" id="r-preapproved" href="${P.financing}">${esc(t.getPreApproved)}</a>
       </div>
       <div class="rail-card dealer-card">
@@ -403,8 +406,8 @@ function renderVehiclePage(v, lang) {
   </div>
 
   <div class="detail-mobile-bar" id="detail-mobile-bar">
-    <div><div class="dm-price" id="dm-price">${esc(money(v.price, lang))}</div></div>
-    <a class="btn btn-red" id="dm-testdrive" href="${P.contact}?interest=test-drive&amp;vehicle=${encodeURIComponent(v.id)}">${esc(t.bookTestDrive)}</a>
+    <div><div class="dm-price" id="dm-price">${esc(isSold ? t.sold : money(v.price, lang))}</div></div>
+    <a class="btn btn-red" id="dm-testdrive" href="${isSold ? P.inventory : P.contact + "?interest=test-drive&amp;vehicle=" + encodeURIComponent(v.id)}">${esc(isSold ? viewAvailable : t.bookTestDrive)}</a>
   </div>
 </main>
 

@@ -84,6 +84,27 @@ function mapTransmission(raw) {
   return "";
 }
 
+/* vPIC occasionally returns a list of trims that were available for a VIN
+   pattern instead of the one exact trim installed on this car. A value such as
+   "L / LX" or "quattro Premium, quattro Sport Premium" is a set of choices,
+   not a defensible listing fact, so leave it for the person looking at the
+   badge/window label. */
+function safeTrim(trim, series) {
+  const exact = String(trim || "").trim().replace(/\s+/g, " ");
+  if (exact && /[,;|/]/.test(exact)) {
+    return { value: "", suggestion: exact, reason: "multiple" };
+  }
+  if (exact) return { value: exact, suggestion: "", reason: "" };
+
+  /* Series is deliberately not promoted to trim. It can describe a model
+     family or package shared by several trims, which is useful as a hint but
+     not accurate enough to publish automatically. */
+  const hint = String(series || "").trim().replace(/\s+/g, " ");
+  return hint
+    ? { value: "", suggestion: hint, reason: "series" }
+    : { value: "", suggestion: "", reason: "" };
+}
+
 /* "2.998832712" and 6 cylinders in a V becomes "3.0L V6" */
 function engineString(displacement, cylinders, configuration) {
   const parts = [];
@@ -196,11 +217,12 @@ async function decode(vin) {
   const errorCode = String(d.ErrorCode || "").split(",")[0].trim();
   const note = errorCode && errorCode !== "0" ? String(d.ErrorText || "").trim() : "";
 
+  const decodedTrim = safeTrim(d.Trim, d.Series);
   const fields = {
     year: d.ModelYear ? Number(d.ModelYear) : "",
     make: fixMake(d.Make),
     model: fixModel((d.Model || "").trim()),
-    trim: (d.Trim || d.Series || "").trim(),
+    trim: decodedTrim.value,
     body: mapBody(d.BodyClass),
     drivetrain: mapDrive(d.DriveType, d.BodyClass),
     fuel: mapFuel(d.FuelTypePrimary, d.ElectrificationLevel),
@@ -217,6 +239,11 @@ async function decode(vin) {
   /* Caveats worth showing next to the filled fields, because a value that is
      right for the database can still be wrong for the listing. */
   const caveats = [];
+  if (decodedTrim.reason === "multiple") {
+    caveats.push("The VIN database returned several possible trims (\"" + decodedTrim.suggestion + "\") instead of one exact trim, so trim was left blank. Check the badge or original window label and enter the exact trim manually.");
+  } else if (decodedTrim.reason === "series") {
+    caveats.push("The VIN database returned a series (\"" + decodedTrim.suggestion + "\"), not an exact trim, so trim was left blank. Check the badge or original window label and enter the exact trim manually.");
+  }
   const rawDrive = String(d.DriveType || "").toLowerCase();
   if (fields.drivetrain === "AWD" && (rawDrive.includes("4wd") || rawDrive.includes("4x4"))) {
     caveats.push("The database says 4WD, which it uses for both all-wheel drive and a true 4x4. Set this to 4x4 yourself if the vehicle has a low-range transfer case.");
@@ -227,6 +254,7 @@ async function decode(vin) {
 
   /* Things the VIN can never tell us, listed so the panel can say so plainly */
   const unresolved = ["price", "km", "extColor", "intColor"]
+    .concat(fields.trim ? [] : ["trim"])
     .concat(fields.body ? [] : ["body"])
     .concat(fields.drivetrain ? [] : ["drivetrain"]);
 
@@ -235,5 +263,5 @@ async function decode(vin) {
 
 module.exports = {
   decode, isPlausibleVin, fixMake, mapBody, mapDrive, mapFuel,
-  mapTransmission, engineString, equipment, EQUIPMENT
+  mapTransmission, safeTrim, engineString, equipment, EQUIPMENT
 };
