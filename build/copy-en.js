@@ -145,9 +145,11 @@ module.exports = {
     errPhone: "Please enter a phone number with at least 10 digits.",
     errMessage: "Please add a short message so we can help.",
     send: "Send message",
-    formNote: "Sending opens your email app with the message ready to go. Prefer to talk? Call " + DEALER.phone + ".",
-    successH: "Almost sent",
-    successBody: `Your email app should now be open with the message ready to send. If it did not open, write to <a class="text-link" href="mailto:${DEALER.email}">${DEALER.email}</a> or call <a class="text-link" href="tel:+15148249117">${DEALER.phone}</a>.`,
+    sending: "Sending…",
+    formNote: "Your message is sent securely to Automobile SX. Prefer to talk? Call " + DEALER.phone + ".",
+    sendError: `We could not send your message right now. Please try again, email <a class="text-link" href="mailto:${DEALER.email}">${DEALER.email}</a>, or call <a class="text-link" href="tel:+15148249117">${DEALER.phone}</a>.`,
+    successH: "Message sent",
+    successBody: "Thanks. Spiro received your message and will get back to you, usually within one business day.",
     directions: "Get directions ↗"
   },
 
@@ -480,13 +482,13 @@ module.exports = {
     title: "Privacy Policy | Automobile SX Dorval",
     description: "How Automobile SX handles personal information. We use no analytics, no tracking and no cookies on this website.",
     h1: "Privacy policy",
-    sub: "What we collect, what we do not, and how to reach us about it. Last updated 12 August 2026.",
+    sub: "What we collect, what we do not, and how to reach us about it. Last updated 14 August 2026.",
     body: `
       <p>Automobile SX is a used car dealership at 2044 Avenue Chartier, Dorval, Quebec. This page explains what happens to personal information in connection with this website and our business. It is written to be accurate about how the site actually works rather than to cover every hypothetical.</p>
 
       <h2>What this website collects</h2>
-      <p>Almost nothing. This site has <strong>no analytics, no advertising trackers, no marketing pixels and no cookies</strong>. We do not build profiles of visitors, and we cannot tell who you are from browsing our pages.</p>
-      <p>The contact form is worth explaining, because it does not work the way most do. When you fill it in and press send, it opens your own email application with the message prepared. Nothing is transmitted to this website, and no copy is stored here. You send us an email from your own account, exactly as if you had written to us directly.</p>
+      <p>This site has <strong>no analytics, no advertising trackers, no marketing pixels and no cookies</strong>. We do not build profiles of visitors, and we cannot tell who you are from browsing our pages.</p>
+      <p>When you use the contact form, the name, email address, phone number, topic, vehicle selection and message you enter are sent to Automobile SX by email. The website does not add that message to an inventory database or marketing list.</p>
 
       <h2>What we hold, and why</h2>
       <p>If you email, call or text us, we hold what you chose to tell us: your name, your contact details, and whatever you said about the vehicle you are interested in. We use it to answer you and to arrange a viewing or a sale. Nothing more.</p>
@@ -494,8 +496,9 @@ module.exports = {
       <p>We do not sell, rent or trade personal information to anyone.</p>
 
       <h2>Other companies involved</h2>
-      <p>Three third parties are involved in running the site, and it is fair that you know what each one sees.</p>
+      <p>Four third parties are involved in running the site, and it is fair that you know what each one sees.</p>
       <p><strong>Vercel</strong> hosts the website. Like any web host, its servers record standard technical information such as IP addresses when a page is requested.</p>
+      <p><strong>Resend</strong> delivers messages submitted through the contact form to our email inbox. It processes the form details for that delivery; copies then remain in our email records so we can answer your inquiry.</p>
       <p><strong>Google</strong> provides the fonts used for the text, and the map on the home and contact pages. Loading a font or a map means your browser contacts Google directly, so Google may receive your IP address and set its own cookies. Google's handling of that is governed by its own privacy policy. If your browser blocks Google, the site still works: the map is replaced by our address and a link.</p>
       <p><strong>Meta</strong> is involved only if you follow a link to our Facebook or Instagram pages, at which point you are on their service and their policies apply.</p>
 

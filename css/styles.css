@@ -639,6 +639,12 @@ input[type="range"] {
 .field-error { display: none; font-size: 13px; color: var(--red); margin-top: 5px; }
 .form-row.invalid .field-error { display: block; }
 .form-row.invalid input, .form-row.invalid select, .form-row.invalid textarea { border-color: var(--red); }
+.form-hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.form-submit-error {
+  margin-top: 16px; padding: 14px 16px; color: #721c24; background: #f8d7da;
+  border: 1px solid #f1aeb5; border-radius: 6px; font-size: 14px;
+}
+.form-submit-error[hidden] { display: none; }
 .form-success {
   display: none; background: #fff; border: 1px solid var(--mist);
   border-left: 4px solid var(--trust); border-radius: var(--radius);

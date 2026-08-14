@@ -373,19 +373,24 @@ function contactBody(T) {
       <form class="contact-form-card" id="contact-form" novalidate>
         <h2 style="font-size:1.3rem">${T.contact.formH}</h2>
 
+        <div class="form-hp" aria-hidden="true">
+          <label for="c-website">Website</label>
+          <input type="text" id="c-website" tabindex="-1" autocomplete="off">
+        </div>
+
         <div class="form-row" id="row-name">
           <label for="c-name">${T.contact.name} <span class="req">*</span></label>
-          <div class="field"><input type="text" id="c-name" autocomplete="name" required></div>
+          <div class="field"><input type="text" id="c-name" autocomplete="name" maxlength="100" required></div>
           <p class="field-error">${T.contact.errName}</p>
         </div>
         <div class="form-row" id="row-email">
           <label for="c-email">${T.contact.email} <span class="req">*</span></label>
-          <div class="field"><input type="email" id="c-email" autocomplete="email" required></div>
+          <div class="field"><input type="email" id="c-email" autocomplete="email" maxlength="254" required></div>
           <p class="field-error">${T.contact.errEmail}</p>
         </div>
         <div class="form-row" id="row-phone">
           <label for="c-phone">${T.contact.phone} <span class="req">*</span></label>
-          <div class="field"><input type="tel" id="c-phone" autocomplete="tel" required placeholder="514-555-0123"></div>
+          <div class="field"><input type="tel" id="c-phone" autocomplete="tel" maxlength="40" required placeholder="514-555-0123"></div>
           <p class="field-error">${T.contact.errPhone}</p>
         </div>
         <div class="form-row" id="row-interest">
@@ -406,12 +411,15 @@ function contactBody(T) {
         </div>
         <div class="form-row" id="row-message">
           <label for="c-message">${T.contact.message} <span class="req">*</span></label>
-          <div class="field"><textarea id="c-message" rows="6" required></textarea></div>
+          <div class="field"><textarea id="c-message" rows="6" maxlength="3000" required></textarea></div>
           <p class="field-error">${T.contact.errMessage}</p>
         </div>
 
-        <button class="btn btn-red btn-block" id="c-submit" type="submit" disabled>${T.contact.send}</button>
+        <button class="btn btn-red btn-block" id="c-submit" type="submit" data-sending="${T.contact.sending}" disabled>${T.contact.send}</button>
         <p style="font-size:12.5px;color:var(--slate);margin:12px 0 0">${T.contact.formNote}</p>
+        <div class="form-submit-error" id="form-error" role="alert" tabindex="-1" hidden>
+          ${T.contact.sendError}
+        </div>
       </form>
 
       <div class="form-success" id="form-success" role="status" tabindex="-1">

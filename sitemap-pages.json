@@ -81,6 +81,15 @@
     }
   },
   {
+    "loc": "https://www.automobilesx.ca/privacy",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://www.automobilesx.ca/privacy",
+      "fr": "https://www.automobilesx.ca/fr/confidentialite"
+    }
+  },
+  {
     "loc": "https://www.automobilesx.ca/guides/buying-a-used-car-in-quebec",
     "priority": "0.7",
     "changefreq": "monthly",
@@ -195,6 +204,15 @@
     "alt": {
       "en": "https://www.automobilesx.ca/used-cars-west-island",
       "fr": "https://www.automobilesx.ca/fr/autos-usagees-west-island"
+    }
+  },
+  {
+    "loc": "https://www.automobilesx.ca/fr/confidentialite",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://www.automobilesx.ca/privacy",
+      "fr": "https://www.automobilesx.ca/fr/confidentialite"
     }
   },
   {

@@ -1,4 +1,4 @@
-/* Automobile SX - contact form (opens the visitor's mail app; no backend) */
+/* Automobile SX - contact form */
 SX.ready.then(function () {
   "use strict";
 
@@ -54,6 +54,11 @@ SX.ready.then(function () {
 
   /* Validation */
   var submit = document.getElementById("c-submit");
+  var submitLabel = submit.textContent;
+  var errorBox = document.getElementById("form-error");
+  var submissionId = (window.crypto && typeof window.crypto.randomUUID === "function")
+    ? window.crypto.randomUUID()
+    : Date.now().toString(36) + "-" + Math.random().toString(36).slice(2);
   var fields = {
     name: { el: document.getElementById("c-name"), row: document.getElementById("row-name"),
       valid: function (v) { return v.trim().length >= 2; } },
@@ -86,26 +91,48 @@ SX.ready.then(function () {
   });
   refresh();
 
-  form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
     if (!allOK()) return;
-    var interestLabel = interestSel.options[interestSel.selectedIndex].text;
-    var lines = [
-      (FR ? "Nom : " : "Name: ") + fields.name.el.value.trim(),
-      (FR ? "Téléphone : " : "Phone: ") + fields.phone.el.value.trim(),
-      (FR ? "Courriel : " : "Email: ") + fields.email.el.value.trim(),
-      (FR ? "Sujet : " : "Interested in: ") + interestLabel
-    ];
+    var vehicleId = "";
+    var vehicleLabel = "";
     if (document.body.contains(rowVehicle) && !rowVehicle.hidden && vehicleSel.value) {
-      lines.push((FR ? "Véhicule : " : "Vehicle: ") + vehicleSel.options[vehicleSel.selectedIndex].text);
+      vehicleId = vehicleSel.value;
+      vehicleLabel = vehicleSel.options[vehicleSel.selectedIndex].text;
     }
-    lines.push("", fields.message.el.value.trim());
-    location.href = "mailto:" + SX.dealer.email +
-      "?subject=" + encodeURIComponent((FR ? "Demande du site web : " : "Website inquiry: ") + interestLabel) +
-      "&body=" + encodeURIComponent(lines.join("\n"));
-    form.hidden = true;
-    var success = document.getElementById("form-success");
-    success.style.display = "block";
-    success.focus();
+    errorBox.hidden = true;
+    submit.disabled = true;
+    submit.textContent = submit.getAttribute("data-sending") || (FR ? "Envoi…" : "Sending…");
+    form.setAttribute("aria-busy", "true");
+    try {
+      var response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fields.name.el.value.trim(),
+          email: fields.email.el.value.trim(),
+          phone: fields.phone.el.value.trim(),
+          message: fields.message.el.value.trim(),
+          interest: interestSel.value,
+          vehicleId: vehicleId,
+          vehicleLabel: vehicleLabel,
+          lang: FR ? "fr" : "en",
+          website: document.getElementById("c-website").value,
+          submissionId: submissionId
+        })
+      });
+      if (!response.ok) throw new Error("Contact request failed");
+      form.hidden = true;
+      var success = document.getElementById("form-success");
+      success.style.display = "block";
+      success.focus();
+    } catch (error) {
+      errorBox.hidden = false;
+      errorBox.focus();
+      submit.textContent = submitLabel;
+      refresh();
+    } finally {
+      form.removeAttribute("aria-busy");
+    }
   });
 });
