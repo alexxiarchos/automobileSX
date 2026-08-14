@@ -15,9 +15,14 @@ function homeBody(T, R, cards) {
   return `
   <section class="hero" aria-labelledby="hero-h">
     <div class="hero-bg" aria-hidden="true">
-      <img src="/assets/storefront-hero.jpg"
-           srcset="/assets/storefront-hero-900.jpg 900w, /assets/storefront-hero.jpg 1600w"
-           sizes="100vw" alt="${T.home.heroAlt}" fetchpriority="high" decoding="async" width="1600" height="1160">
+      <picture>
+        <source media="(min-width: 768px)"
+                srcset="/assets/storefront-hero-wide-900.jpg 900w, /assets/storefront-hero-wide.jpg 1672w"
+                sizes="100vw">
+        <img src="/assets/storefront-hero.jpg"
+             srcset="/assets/storefront-hero-900.jpg 900w, /assets/storefront-hero.jpg 1600w"
+             sizes="100vw" alt="${T.home.heroAlt}" fetchpriority="high" decoding="async" width="1600" height="1160">
+      </picture>
     </div>
     <div class="container">
       <div class="hero-content">

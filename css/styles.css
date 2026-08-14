@@ -204,15 +204,10 @@ a:hover { color: var(--red); }
 }
 
 /* ------- Hero ------- */
-/* The height follows the viewport width as well as its height, deliberately.
-   The storefront photograph is close to 4:3, so on a wide monitor a short hero
-   can only show a narrow horizontal band of it: at 2560 the old rule kept 38
-   percent of the picture, which cut the sign down to the phone number and the
-   car down to a windscreen. Growing the band with the width keeps about half
-   the photograph visible at any size, which is enough to hold the whole sign.
-   Below roughly 1900 wide the height is unchanged, because there the viewport
-   height still wins. A wider photograph is the real fix; this keeps the
-   current one from being cropped into nonsense until there is one. */
+/* Desktop gets an art-directed wide version of the storefront while phones
+   keep the original 4:3 photograph, where the tighter crop suits the screen.
+   The hero still grows modestly on very wide displays so the sign and car stay
+   legible instead of collapsing into a thin panoramic strip. */
 .hero {
   position: relative; background: var(--ink); color: var(--bone);
   min-height: clamp(30rem, max(66vh, 36vw), 58rem); display: flex; align-items: center;
@@ -221,6 +216,7 @@ a:hover { color: var(--red); }
    stops aligning with everything below it. */
 .hero > .container { width: 100%; }
 .hero-bg { position: absolute; inset: 0; overflow: hidden; }
+.hero-bg picture { display: block; width: 100%; height: 100%; }
 /* The storefront half of the photograph is already in deep shade, so a heavy
    scrim on top of it does not darken an image, it deletes one: at 0.92 the
    left third measured 30 out of 255 with 88 per cent of its pixels under 40,
@@ -229,8 +225,8 @@ a:hover { color: var(--red); }
    so the two halves read as one photograph. The text stays well clear of the
    contrast minimum, which is the only thing the scrim was ever for. */
 .hero-bg img, .hero-bg svg {
-  width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%;
-  filter: brightness(1.18) contrast(0.94) saturate(1.05);
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 48%;
+  filter: brightness(1.08) contrast(0.96) saturate(1.03);
 }
 .hero-bg::after {
   content: ""; position: absolute; inset: 0;
@@ -725,6 +721,10 @@ input[type="range"] {
   body.has-detail-bar .mobile-cta-bar { display: none; }
   .thumb-strip { grid-template-columns: repeat(4, 1fr); }
   .hero { min-height: 480px; }
+  .hero-bg img, .hero-bg svg {
+    object-position: 50% 18%;
+    filter: brightness(1.18) contrast(0.94) saturate(1.05);
+  }
   .hero-content { padding: 72px 0 120px; }
   .footer-main { grid-template-columns: 1fr; gap: 32px; }
   .trust-strip { grid-template-columns: 1fr; }
