@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-14T04:46:02.435Z",
+  "updatedAt": "2026-08-14T17:51:57.677Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -812,20 +812,21 @@
       "engine": "3.5",
       "econCity": "",
       "econHwy": "",
-      "doors": "",
+      "doors": 4,
       "seats": "",
-      "vin": "",
+      "vin": "JN8AZ1MW1BW150573",
       "stock": "SX-1005",
       "tag": "",
       "features": [
+        "Air Conditioning",
         "Heated Seats",
         "Sunroof",
         "Remote Start",
         "Cruise Control",
         "AWD"
       ],
-      "desc": "2011 Nissan Murano awd 3.5L roule tres bien, ac, camera de recul, groupe électriques, toit.\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2 I",
-      "descFr": "",
+      "desc": "The 2011 Nissan Murano on offer here is a four-door SUV showing 223,000 km. It has a 3.5 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in black with grey inside. On the equipment list: air conditioning, heated seats, sunroof, remote start, cruise control and AWD.\n\nCome by and take a look in Dorval. We are open seven days a week by appointment and you deal directly with Spiro.",
+      "descFr": "Nissan Murano 2011 : un VUS à quatre portes avec 223 000 km au compteur. Il est doté d'un moteur 3.5, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur noir et intérieur en gris. Parmi les équipements : climatisation, sièges chauffants, toit ouvrant, démarreur à distance, régulateur de vitesse et rouage intégral.\n\nPassez le voir à Dorval. Nous sommes ouverts sept jours sur sept sur rendez-vous et vous traitez directement avec Spiro.",
       "descMode": "manual",
       "descNote": "",
       "descNoteFr": "",
@@ -848,8 +849,18 @@
         "images/vehicles/2011-nissan-murano-r71ho/mselqvhd-43.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T11:54:58.675Z",
-      "updatedAt": "2026-08-13T03:07:30.079Z",
+      "updatedAt": "2026-08-14T17:51:56.784Z",
       "publishedAt": "2026-08-13T03:07:30.079Z",
       "posts": [
         {
