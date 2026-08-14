@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-14T17:51:57.677Z",
+  "updatedAt": "2026-08-14T17:53:55.801Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -168,7 +168,7 @@
       "econHwy": "",
       "doors": 4,
       "seats": 5,
-      "vin": "WA1ECCFS4JR029905",
+      "vin": "4S3BMHB66E3025293",
       "stock": "SX-1014",
       "tag": "",
       "features": [
@@ -182,8 +182,8 @@
         "Cruise Control",
         "AWD"
       ],
-      "desc": "2014 SUBARU LEGACY, 2.5L AWD, AC , SIÈGES CHAUFFANT, GROUPE ÉLECTRIQUES \n\n\nHORAIRES FLEXIBLES SUR RENDEZ-VOUS \n514-824-9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
-      "descFr": "",
+      "desc": "This 2014 Subaru Legacy quattro Premium, quattro Sport Premium is a four-door SUV with 214,000 km on the odometer. It has a 2.5 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in grey with grey inside. Equipment includes backup camera, parking sensors, automatic high beams, heated seats, sunroof, Bluetooth, remote start, cruise control and AWD.\n\nYou can see it at our lot on Avenue Chartier in Dorval, seven days a week by appointment.",
+      "descFr": "Subaru Legacy quattro Premium, quattro Sport Premium 2014, un VUS à quatre portes affichant 214 000 km au compteur. Il est doté d'un moteur 2.5, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur gris et intérieur en gris. L'équipement comprend : caméra de recul, capteurs de stationnement, feux de route automatiques, sièges chauffants, toit ouvrant, Bluetooth, démarreur à distance, régulateur de vitesse et rouage intégral.\n\nVous pouvez le voir à notre emplacement de l'avenue Chartier, à Dorval, sept jours sur sept sur rendez-vous.",
       "descMode": "manual",
       "descNote": "",
       "descNoteFr": "",
@@ -206,8 +206,18 @@
         "images/vehicles/2014-subaru-legacy-4jxba/msemk10i-172.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T12:17:11.456Z",
-      "updatedAt": "2026-08-13T22:36:35.297Z",
+      "updatedAt": "2026-08-14T17:53:55.401Z",
       "publishedAt": "2026-08-13T22:36:35.297Z",
       "posts": [
         {
