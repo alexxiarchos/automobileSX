@@ -194,9 +194,15 @@ function imageUrls(v) {
 
 function schema(v, lang) {
   const imgs = imageUrls(v);
+  const canonical = SITE + "/" + PATHS[lang].dir + "/" + v.id;
   const car = {
-    "@type": "Car",
+    "@type": ["Product", "Car"],
+    "@id": canonical + "#vehicle",
     name: fullName(v),
+    url: canonical,
+    description: metaDescription(v, lang),
+    sku: v.stock || undefined,
+    itemCondition: "https://schema.org/UsedCondition",
     brand: { "@type": "Brand", name: v.make },
     model: v.model,
     vehicleModelDate: String(v.year || ""),
@@ -213,7 +219,7 @@ function schema(v, lang) {
       price: v.price,
       priceCurrency: "CAD",
       availability: v.status === "sold" ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
-      url: SITE + "/" + PATHS[lang].dir + "/" + v.id,
+      url: canonical,
       seller: { "@id": SITE + "/#dealer" }
     }
   };

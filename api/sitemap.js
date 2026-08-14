@@ -33,7 +33,7 @@ function esc(s) {
   return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function urlEntry(loc, altEn, altFr, changefreq, priority, lastmod) {
+function urlEntry(loc, altEn, altFr, changefreq, priority, lastmod, images) {
   return [
     "  <url>",
     "    <loc>" + esc(loc) + "</loc>",
@@ -41,6 +41,9 @@ function urlEntry(loc, altEn, altFr, changefreq, priority, lastmod) {
     '    <xhtml:link rel="alternate" hreflang="fr-CA" href="' + esc(altFr) + '"/>',
     '    <xhtml:link rel="alternate" hreflang="x-default" href="' + esc(altEn) + '"/>',
     lastmod ? "    <lastmod>" + lastmod + "</lastmod>" : "",
+    ...(images || []).map(function (url) {
+      return "    <image:image><image:loc>" + esc(url) + "</image:loc></image:image>";
+    }),
     "    <changefreq>" + changefreq + "</changefreq>",
     "    <priority>" + priority + "</priority>",
     "  </url>"
@@ -66,20 +69,23 @@ module.exports = async function (req, res) {
   let data = { vehicles: [] };
   try { data = await readVehicles(req); } catch (e) { /* keep static pages */ }
 
-  const lastmod = (data.updatedAt || "").slice(0, 10) || undefined;
   (data.vehicles || [])
     .filter(function (v) { return v && v.id && v.status !== "draft"; })
     .forEach(function (v) {
       const en = SITE + VEHICLE_PATH.en + encodeURIComponent(v.id);
       const fr = SITE + VEHICLE_PATH.fr + encodeURIComponent(v.id);
       const pr = v.status === "sold" ? "0.3" : "0.8";
-      parts.push(urlEntry(en, en, fr, "weekly", pr, lastmod));
-      parts.push(urlEntry(fr, en, fr, "weekly", pr, lastmod));
+      const lastmod = (v.updatedAt || v.publishedAt || data.updatedAt || "").slice(0, 10) || undefined;
+      const images = (v.images || []).slice(0, 1000).map(function (p) {
+        return SITE + "/" + String(p).replace(/^\//, "");
+      });
+      parts.push(urlEntry(en, en, fr, "weekly", pr, lastmod, images));
+      parts.push(urlEntry(fr, en, fr, "weekly", pr, lastmod, images));
     });
 
   const xml =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' +
     parts.join("\n") + "\n</urlset>\n";
 
   res.setHeader("Content-Type", "application/xml; charset=utf-8");
