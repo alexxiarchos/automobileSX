@@ -32,8 +32,19 @@ const HOME_FEATURED = 6;
 
 async function loadVehicles() {
   if (process.env.VERCEL) {
-    const { readInventory } = require("../api/_lib/github.js");
-    const data = await readInventory();
+    /* The repository is public, so the build can read the live branch without
+       depending on an admin write token being exposed to the build process.
+       GITHUB_REPO still wins when configured; Vercel's system repository
+       variables and the known production repository are safe fallbacks. */
+    const systemRepo = process.env.VERCEL_GIT_REPO_OWNER && process.env.VERCEL_GIT_REPO_SLUG
+      ? process.env.VERCEL_GIT_REPO_OWNER + "/" + process.env.VERCEL_GIT_REPO_SLUG
+      : "";
+    const repo = process.env.GITHUB_REPO || systemRepo || "alexxiarchos/automobileSX";
+    const branch = process.env.GITHUB_BRANCH || "main";
+    const url = "https://raw.githubusercontent.com/" + repo + "/" + branch + "/data/vehicles.json";
+    const response = await fetch(url, { cache: "no-store" });
+    if (!response.ok) throw new Error("Live inventory request failed with HTTP " + response.status);
+    const data = await response.json();
     if (!data || !Array.isArray(data.vehicles)) {
       throw new Error("Live inventory returned an invalid data shape");
     }
