@@ -9,6 +9,53 @@ const { renderListingPages } = require("./_lib/listingPages.js");
 const readBody = require("./_lib/body.js");
 
 const MAX_VEHICLES = 200;
+const CONFLICT_MESSAGE = "Inventory changed since this page loaded. Reload the admin before saving so newer changes are not overwritten.";
+
+function conflictError() {
+  const err = new Error(CONFLICT_MESSAGE);
+  err.statusCode = 409;
+  err.code = "INVENTORY_CONFLICT";
+  return err;
+}
+
+function assertFreshInventory(baseUpdatedAt, currentUpdatedAt) {
+  if (!baseUpdatedAt || baseUpdatedAt !== currentUpdatedAt) throw conflictError();
+}
+
+function vinKey(vin) {
+  return String(vin || "").trim().toUpperCase().replace(/[\s-]+/g, "");
+}
+
+function duplicateVinGroups(vehicles) {
+  const groups = new Map();
+  (vehicles || []).forEach(function (v) {
+    const vin = vinKey(v && v.vin);
+    if (!vin) return;
+    if (!groups.has(vin)) groups.set(vin, []);
+    groups.get(vin).push(v);
+  });
+  return groups;
+}
+
+function duplicateVinError(vehicles, previousVehicles) {
+  const previous = duplicateVinGroups(previousVehicles);
+  const submitted = duplicateVinGroups(vehicles);
+  for (const [vin, group] of submitted) {
+    if (group.length < 2) continue;
+    const ids = group.map(function (v) { return String(v.id || ""); }).sort().join("|");
+    const oldGroup = previous.get(vin) || [];
+    const oldIds = oldGroup.map(function (v) { return String(v.id || ""); }).sort().join("|");
+    /* Do not freeze every save because of a duplicate that already exists in
+       production. The editor flags those records; the server blocks only a new
+       duplicate or another vehicle being added to an existing duplicate. */
+    if (oldGroup.length === group.length && oldIds === ids) continue;
+    const labels = group.map(function (v) {
+      return [v.year, v.make, v.model].filter(Boolean).join(" ") + " (stock " + (v.stock || "-") + ")";
+    });
+    return "VIN " + vin + " is used by both " + labels.join(" and ") + ".";
+  }
+  return "";
+}
 
 function sanitizeVehicle(v) {
   // keep only known fields; prevents junk from ballooning the JSON
@@ -30,6 +77,8 @@ module.exports = async function (req, res) {
   res.setHeader("Content-Type", "application/json");
   try {
     const body = await readBody(req, 4 * 1024 * 1024);
+    const current = await readInventory();
+    assertFreshInventory(body.baseUpdatedAt, current.updatedAt);
     const vehicles = (body.vehicles || []).slice(0, MAX_VEHICLES).map(sanitizeVehicle);
 
     // basic validation: every non-draft vehicle needs the essentials
@@ -38,6 +87,13 @@ module.exports = async function (req, res) {
       if (v.status !== "draft" && (!v.year || !v.make || !v.model || !v.price)) {
         throw new Error((v.id || "A vehicle") + " is missing year/make/model/price. Save it as a draft instead.");
       }
+    }
+
+    const vinError = duplicateVinError(vehicles, current.vehicles || []);
+    if (vinError) {
+      const err = new Error(vinError);
+      err.statusCode = 400;
+      throw err;
     }
 
     const json = { updatedAt: new Date().toISOString(), vehicles: vehicles };
@@ -67,14 +123,10 @@ module.exports = async function (req, res) {
     /* Remove pages for vehicles that were deleted or moved back to draft */
     const liveIds = new Set(live.map(function (v) { return v.id; }));
     let stalePages = [];
-    let previousVehicles = null;
-    try {
-      const previous = await readInventory();
-      previousVehicles = previous.vehicles || [];
-      previousVehicles.forEach(function (v) {
-        if (v && v.id && !liveIds.has(v.id)) stalePages = stalePages.concat(vehiclePagePaths(v.id));
-      });
-    } catch (e) { /* first run, or unreadable: nothing to clean up */ }
+    const previousVehicles = current.vehicles || [];
+    previousVehicles.forEach(function (v) {
+      if (v && v.id && !liveIds.has(v.id)) stalePages = stalePages.concat(vehiclePagePaths(v.id));
+    });
 
     const imageDeletes = (body.deletePaths || []).filter(function (p) {
       return typeof p === "string" && p.indexOf("images/vehicles/") === 0;
@@ -85,7 +137,8 @@ module.exports = async function (req, res) {
       newImages: body.newImages || [],
       newFiles: newFiles,
       deletePaths: imageDeletes.concat(stalePages),
-      message: body.message || "Inventory update via admin panel"
+      message: body.message || "Inventory update via admin panel",
+      expectedUpdatedAt: body.baseUpdatedAt
     });
     /* Ping IndexNow after the commit has succeeded, never before. Failures are
        swallowed inside submit(), so this cannot affect the publish. */
@@ -98,9 +151,11 @@ module.exports = async function (req, res) {
     }
 
     res.statusCode = 200;
-    res.end(JSON.stringify(Object.assign({}, result, { indexNow: indexNow })));
+    res.end(JSON.stringify(Object.assign({}, result, { indexNow: indexNow, updatedAt: json.updatedAt })));
   } catch (e) {
-    res.statusCode = 500;
+    res.statusCode = e.statusCode || 500;
     res.end(JSON.stringify({ error: e.message }));
   }
 };
+
+module.exports._test = { assertFreshInventory, duplicateVinError, vinKey };

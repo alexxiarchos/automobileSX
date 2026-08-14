@@ -44,7 +44,9 @@ async function gh(pathname, options) {
   }));
   if (!res.ok) {
     const body = await res.text();
-    throw new Error("GitHub API " + res.status + " on " + pathname + ": " + body.slice(0, 300));
+    const err = new Error("GitHub API " + res.status + " on " + pathname + ": " + body.slice(0, 300));
+    err.statusCode = res.status;
+    throw err;
   }
   return res.json();
 }
@@ -100,8 +102,19 @@ function saveMockImage(relPath, base64) {
 }
 
 /* ---------- One commit: updated JSON + new image blobs + deletions ---------- */
-async function commitInventory({ json, newImages, newFiles, deletePaths, message }) {
+function inventoryConflict() {
+  const err = new Error("Inventory changed since this page loaded. Reload the admin before saving so newer changes are not overwritten.");
+  err.statusCode = 409;
+  err.code = "INVENTORY_CONFLICT";
+  return err;
+}
+
+async function commitInventory({ json, newImages, newFiles, deletePaths, message, expectedUpdatedAt }) {
   if (MOCK) {
+    if (expectedUpdatedAt !== undefined) {
+      const current = await readInventory();
+      if (!expectedUpdatedAt || current.updatedAt !== expectedUpdatedAt) throw inventoryConflict();
+    }
     fs.writeFileSync(path.join(MOCK, "data/vehicles.json"), JSON.stringify(json, null, 2));
     (newFiles || []).forEach(function (f) {
       const abs = path.join(MOCK, f.path);
@@ -119,6 +132,16 @@ async function commitInventory({ json, newImages, newFiles, deletePaths, message
   const ref = await gh("/repos/" + repo + "/git/ref/heads/" + branch);
   const headSha = ref.object.sha;
   const headCommit = await gh("/repos/" + repo + "/git/commits/" + headSha);
+
+  /* Tie the save to the exact inventory version the admin loaded. Checking at
+     this final commit boundary closes the small race between the API's first
+     read and the write. The ref update below is fast-forward-only, so GitHub
+     also rejects a second writer if the branch moves while this commit builds. */
+  if (expectedUpdatedAt !== undefined) {
+    const file = await gh("/repos/" + repo + "/contents/data/vehicles.json?ref=" + encodeURIComponent(headSha));
+    const current = JSON.parse(Buffer.from(file.content, "base64").toString("utf8"));
+    if (!expectedUpdatedAt || current.updatedAt !== expectedUpdatedAt) throw inventoryConflict();
+  }
 
   /* GitHub rejects the whole commit if you try to delete a path that is not in
      the tree, so only ask to remove files that actually exist. */
@@ -168,10 +191,15 @@ async function commitInventory({ json, newImages, newFiles, deletePaths, message
     })
   });
 
-  await gh("/repos/" + repo + "/git/refs/heads/" + branch, {
-    method: "PATCH",
-    body: JSON.stringify({ sha: commit.sha })
-  });
+  try {
+    await gh("/repos/" + repo + "/git/refs/heads/" + branch, {
+      method: "PATCH",
+      body: JSON.stringify({ sha: commit.sha, force: false })
+    });
+  } catch (e) {
+    if (e.statusCode === 409 || e.statusCode === 422) throw inventoryConflict();
+    throw e;
+  }
 
   return { commit: commit.sha };
 }

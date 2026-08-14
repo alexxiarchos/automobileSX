@@ -6,6 +6,7 @@
   "use strict";
 
   var vehicles = [];        /* full inventory incl. drafts */
+  var inventoryVersion = ""; /* updatedAt from the source-of-truth inventory */
   var editing = null;       /* working copy of the vehicle in the editor */
   var isNew = false;
   var pendingBlobs = [];    /* [{path, sha}] uploaded but not yet committed */
@@ -123,6 +124,7 @@
     busy("Loading inventory…");
     api("inventory").then(function (data) {
       vehicles = data.vehicles || [];
+      inventoryVersion = data.updatedAt || "";
       renderDash();
       show("screen-dash");
     }).catch(function (e) {
@@ -473,7 +475,16 @@
     return api("save", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ vehicles: vehicles, newImages: [], deletePaths: [], message: message })
+      body: JSON.stringify({
+        vehicles: vehicles,
+        newImages: [],
+        deletePaths: [],
+        message: message,
+        baseUpdatedAt: inventoryVersion
+      })
+    }).then(function (data) {
+      inventoryVersion = data.updatedAt || inventoryVersion;
+      return data;
     });
   }
 
@@ -808,7 +819,8 @@
      it is visible at the moment it can still be fixed. */
   function qualityChecks() {
     var photos = (editing && editing.images ? editing.images.length : 0);
-    var feats = currentFeatures().length;
+    var featureList = currentFeatures();
+    var feats = featureList.length;
 
     /* Measured on the composed description, not on a text box. In automatic
        mode the template already supplies several hundred characters, so what
@@ -821,8 +833,10 @@
     var descFr = auto ? DESCRIBE.text(snapshot, "fr").length : $("f-descfr").value.trim().length;
     var ownEn = auto ? $("f-descnote").value.trim().length : 0;
     var ownFr = auto ? $("f-descnotefr").value.trim().length : 0;
+    var vin = $("f-vin").value.trim();
+    var vinClash = duplicateVin(vin);
 
-    return [
+    var rows = [
       photos >= 6 ? ["ok", photos + " photos"]
         : photos > 0 ? ["warn", "Only " + photos + " photo" + (photos === 1 ? "" : "s") + " - six or more gets far more clicks"]
         : ["bad", "No photos yet"],
@@ -841,18 +855,38 @@
       feats >= 5 ? ["ok", feats + " features ticked"]
         : feats > 0 ? ["warn", "Only " + feats + " feature" + (feats === 1 ? "" : "s") + " ticked"]
         : ["warn", "No features ticked"],
-      $("f-vin").value.trim() ? ["ok", "VIN recorded"] : ["warn", "No VIN - buyers look for it and it fills the form for you"],
+      vinClash ? ["bad", "Duplicate VIN - it is already used by " + vinClash]
+        : vin ? ["ok", "VIN recorded"] : ["warn", "No VIN - buyers look for it and it fills the form for you"],
       $("f-extcolor").value.trim() ? ["ok", "Exterior colour set"] : ["warn", "No exterior colour"],
       $("f-engine").value.trim() ? ["ok", "Engine listed"] : ["warn", "No engine listed"]
     ];
+
+    /* These are warnings, not guesses about the correct fact. They only point
+       out two fields that contradict one another so the owner can check the car. */
+    var drive = $("f-drive").value;
+    if (featureList.indexOf("AWD") !== -1 && drive && drive !== "AWD") {
+      rows.push(["warn", "AWD is ticked as a feature, but drivetrain says " + drive]);
+    }
+    if (!auto) {
+      var manualText = ($("f-desc").value + " " + $("f-descfr").value).toLowerCase();
+      var transmission = $("f-trans").value;
+      if (transmission === "Automatic" && /\bmanual(?:le)?\b/.test(manualText)) {
+        rows.push(["warn", "Description says manual, but transmission says Automatic"]);
+      } else if (transmission === "Manual" && /\bautomatic|\bautomatique/.test(manualText)) {
+        rows.push(["warn", "Description says automatic, but transmission says Manual"]);
+      }
+    }
+    return rows;
   }
 
   function updateQuality() {
     var rows = qualityChecks();
     var good = rows.filter(function (r) { return r[0] === "ok"; }).length;
+    var vinClash = duplicateVin($("f-vin").value);
     $("quality").innerHTML =
       '<p class="quality-score">' + good + " of " + rows.length + " done. " +
-      (good === rows.length ? "This listing is as complete as it gets."
+      (vinClash ? "Fix the duplicate VIN before saving."
+        : good === rows.length ? "This listing is as complete as it gets."
         : "Nothing here blocks publishing - it is what makes the listing work harder.") + "</p>" +
       '<ul class="quality-list">' + rows.map(function (r) {
         return '<li class="q-' + r[0] + '"><span aria-hidden="true">' +
@@ -1091,12 +1125,15 @@
         vehicles: vehicles,
         newImages: pendingBlobs,
         deletePaths: deletePaths,
-        message: message
+        message: message,
+        baseUpdatedAt: inventoryVersion
       })
-    }).then(function () {
+    }).then(function (data) {
+      inventoryVersion = data.updatedAt || inventoryVersion;
       pendingBlobs = [];
       deletePaths = [];
       toast(doneMsg || "Saved. The website is updating and will show changes in about a minute.", "ok");
+      return data;
     }).catch(function (e) {
       toast("Could not save: " + e.message, "err");
       throw e;
@@ -1482,6 +1519,14 @@
       var err = $("edit-error");
       err.textContent = "Please fill in: " + missing.join(", ");
       err.hidden = false;
+      return false;
+    }
+
+    var vinClash = duplicateVin($("f-vin").value);
+    if (vinClash) {
+      var vinError = $("edit-error");
+      vinError.textContent = "This VIN is already used by " + vinClash + ". Check both vehicles before saving.";
+      vinError.hidden = false;
       return false;
     }
 
