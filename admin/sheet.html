@@ -58,8 +58,13 @@ body {
    features and a car with twenty two are not the same height, and the inner
    box is shrunk to fit rather than the layout being tuned for an average car
    that does not exist. See fitToPage in sheet.js. */
+/* 194mm, not 210. The inner box is laid out at the narrowest printable width
+   of the two papers so that one measurement satisfies both, and a 210mm sheet
+   around a 194mm block left all sixteen of the spare millimetres on the right
+   hand side. The preview is the printable area, so what is on screen is what
+   comes out of the printer. */
 .sheet {
-  width: 210mm; margin: 18px auto; background: #fff; overflow: hidden;
+  width: 194mm; margin: 18px auto; background: #fff; overflow: hidden;
   box-shadow: 0 6px 30px rgba(0,0,0,0.35);
 }
 .sheetInner {
