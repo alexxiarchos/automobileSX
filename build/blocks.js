@@ -165,7 +165,7 @@ ${reviewsBlock(T)}`;
    the real reviews and makes leaving one a single tap. */
 function reviewsBlock(T) {
   return `
-  <section class="section section-mist" aria-labelledby="reviews-h">
+  <section class="section section-dark reviews-section" aria-labelledby="reviews-h">
     <div class="container">
       <div class="reviews-cta reveal">
         <div>
@@ -174,16 +174,20 @@ function reviewsBlock(T) {
           <p>${T.home.reviewsP}</p>
         </div>
         <div class="reviews-actions">
-          <a class="btn btn-red" href="${DEALER.writeReviewUrl}" target="_blank" rel="noopener">${T.home.reviewsWrite}</a>
-          <a class="btn btn-outline" href="${DEALER.reviewsUrl}" target="_blank" rel="noopener">${T.home.reviewsRead}</a>
+          <a class="btn btn-red" href="${DEALER.reviewsUrl}" target="_blank" rel="noopener">${T.home.reviewsRead}</a>
+          <a class="btn btn-outline-light" href="${DEALER.writeReviewUrl}" target="_blank" rel="noopener">${T.home.reviewsWrite}</a>
         </div>
       </div>
       ${(T.home.reviewQuotes && T.home.reviewQuotes.length) ? `
-      <div class="testimonial-grid reveal">
+      <p class="reviews-swipe-hint" id="reviews-swipe-hint">${T.home.reviewsSwipe}</p>
+      <div class="testimonial-grid reveal" role="region" aria-labelledby="reviews-h" aria-describedby="reviews-swipe-hint" tabindex="0">
         ${T.home.reviewQuotes.map(q => `
         <figure class="testimonial">
           <blockquote>${q.text}</blockquote>
-          <figcaption><strong>${q.name}</strong><span>${T.home.reviewsVia}</span></figcaption>
+          <figcaption>
+            <span class="review-source-mark" aria-hidden="true">G</span>
+            <span><strong>${q.name}</strong><span>${T.home.reviewsVia}</span></span>
+          </figcaption>
         </figure>`).join("")}
       </div>` : ""}
     </div>

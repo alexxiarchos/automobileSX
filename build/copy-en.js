@@ -92,9 +92,9 @@ module.exports = {
     guidesH: "Guides for used-car buyers in Quebec",
     guidesAll: "All guides →",
     guideCards,
-    reviewsKicker: "What our customers say",
-    reviewsH: "Reviews from people who bought here",
-    reviewsP: "Our reviews are on Google. If you have bought a car from Spiro, leaving one takes about a minute and it genuinely helps a small family business.",
+    reviewsKicker: "Google reviews",
+    reviewsH: "Straight from our customers",
+    reviewsP: "Real feedback from people who dealt directly with Spiro in Dorval. Read every review on Google, or share your experience and help a small family business.",
     /* Real quotes only, transcribed from the Google reviews, newest first.
        Leave this empty rather than inventing anything: the section renders the
        call to action on its own when there are no quotes yet. */
@@ -110,7 +110,8 @@ module.exports = {
     ],
     reviewsVia: "via Google",
     reviewsWrite: "Leave a Google review",
-    reviewsRead: "Read our reviews",
+    reviewsRead: "Read all Google reviews",
+    reviewsSwipe: "Swipe to read more reviews →",
     visitH: "Visit the lot in Dorval",
     askFor: "Ask for Spiro",
     directions: "Get directions ↗"
