@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T18:22:13.649Z",
+  "updatedAt": "2026-08-15T18:22:30.697Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -881,7 +881,7 @@
       "year": 2011,
       "make": "Nissan",
       "model": "Murano",
-      "trim": "LE",
+      "trim": "SV",
       "body": "SUV",
       "price": 3999,
       "km": 223000,
@@ -941,7 +941,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T11:54:58.675Z",
-      "updatedAt": "2026-08-15T17:54:02.522Z",
+      "updatedAt": "2026-08-15T18:22:30.064Z",
       "publishedAt": "2026-08-13T03:07:30.079Z",
       "posts": [
         {
