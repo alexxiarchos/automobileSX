@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T04:14:42.195Z",
+  "updatedAt": "2026-08-15T04:15:11.753Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -998,7 +998,7 @@
       "year": 2018,
       "make": "Audi",
       "model": "Q3",
-      "trim": "quattro Premium, quattro Sport Premium",
+      "trim": "",
       "body": "SUV",
       "price": 13999,
       "km": 138000,
@@ -1055,8 +1055,18 @@
         "images/vehicles/2018-audi-q3-k6tky/mselksdt-15.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T11:49:56.989Z",
-      "updatedAt": "2026-08-13T22:47:00.185Z",
+      "updatedAt": "2026-08-15T04:15:10.999Z",
       "publishedAt": "2026-08-13T22:47:00.185Z",
       "posts": [
         {
