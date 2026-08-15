@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T04:15:11.753Z",
+  "updatedAt": "2026-08-15T17:50:42.002Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -153,17 +153,17 @@
       "year": 2014,
       "make": "Subaru",
       "model": "Legacy",
-      "trim": "",
-      "body": "SUV",
+      "trim": "2.5i",
+      "body": "Sedan",
       "price": 4999,
       "km": 214000,
-      "transmission": "Automatic",
+      "transmission": "CVT",
       "fuel": "Gasoline",
       "drivetrain": "AWD",
       "extColor": "Grey",
       "extHex": "#5c6066",
       "intColor": "Grey",
-      "engine": "2.5L",
+      "engine": "2.5L I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -179,12 +179,11 @@
         "Sunroof",
         "Bluetooth",
         "Remote Start",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "This 2014 Subaru Legacy quattro Premium, quattro Sport Premium is a four-door SUV with 214,000 km on the odometer. It has a 2.5 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in grey with grey inside. Equipment includes backup camera, parking sensors, automatic high beams, heated seats, sunroof, Bluetooth, remote start, cruise control and AWD.\n\nYou can see it at our lot on Avenue Chartier in Dorval, seven days a week by appointment.",
       "descFr": "Subaru Legacy quattro Premium, quattro Sport Premium 2014, un VUS à quatre portes affichant 214 000 km au compteur. Il est doté d'un moteur 2.5, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur gris et intérieur en gris. L'équipement comprend : caméra de recul, capteurs de stationnement, feux de route automatiques, sièges chauffants, toit ouvrant, Bluetooth, démarreur à distance, régulateur de vitesse et rouage intégral.\n\nVous pouvez le voir à notre emplacement de l'avenue Chartier, à Dorval, sept jours sur sept sur rendez-vous.",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -217,7 +216,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T12:17:11.456Z",
-      "updatedAt": "2026-08-15T04:13:30.703Z",
+      "updatedAt": "2026-08-15T17:50:40.778Z",
       "publishedAt": "2026-08-13T22:36:35.297Z",
       "posts": [
         {
