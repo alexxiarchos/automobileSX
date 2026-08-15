@@ -101,19 +101,12 @@
      catalogue reads better lower case in running prose. */
   var PROPER = ["Apple CarPlay", "Android Auto", "Bluetooth", "Alcantara"];
 
-  var CLOSERS = {
-    en: [
-      "It is on the lot in Dorval now and can be seen seven days a week by appointment.",
-      "You can see it at our lot on Avenue Chartier in Dorval, seven days a week by appointment.",
-      "It is available now in Dorval. Call 514-824-9117 to arrange a time to come and see it.",
-      "Come by and take a look in Dorval. We are open seven days a week by appointment and you deal directly with Spiro."
-    ],
-    fr: [
-      "Le véhicule est présentement sur place à Dorval et peut être vu sept jours sur sept, sur rendez-vous.",
-      "Vous pouvez le voir à notre emplacement de l'avenue Chartier, à Dorval, sept jours sur sept sur rendez-vous.",
-      "Il est disponible dès maintenant à Dorval. Appelez le 514-824-9117 pour fixer un rendez-vous.",
-      "Passez le voir à Dorval. Nous sommes ouverts sept jours sur sept sur rendez-vous et vous traitez directement avec Spiro."
-    ]
+  /* One consistent name-address-phone block for every website listing. Accurate
+     NAP information helps a local business page; repeating keywords does not,
+     so this says the location once and moves directly to useful buyer actions. */
+  var WEBSITE_CONTACT = {
+    en: "Available at Automobile SX, 2044 Avenue Chartier, Dorval, QC H9P 1H2. Call or text 514-824-9117 to confirm availability or book a test drive. Open seven days a week by appointment. Financing is available and trade-ins are welcome.",
+    fr: "Disponible chez Automobile SX au 2044, avenue Chartier, Dorval (Québec) H9P 1H2. Appelez ou textez le 514-824-9117 pour confirmer la disponibilité ou réserver un essai routier. Ouvert sept jours sur sept sur rendez-vous. Financement disponible. Nous acceptons les véhicules en échange."
   };
 
   var OWNERSHIP = {
@@ -360,7 +353,7 @@
    * through untouched in both languages, because translating a claim about a
    * specific car is not something this file should be doing on its own.
    */
-  function draft(v, lang, notes) {
+  function draftCore(v, lang, notes) {
     var n = seed(v);
     notes = notes || {};
     var fr = lang === "fr";
@@ -387,8 +380,16 @@
        put them. They are passed through exactly as written. */
     var own = String(notes.own || "").trim();
 
-    return [first, second, third, own, pick(CLOSERS[fr ? "fr" : "en"], n)]
+    return [first, second, third, own]
       .filter(Boolean).join("\n\n");
+  }
+
+  function websiteContact(lang) {
+    return WEBSITE_CONTACT[lang === "fr" ? "fr" : "en"];
+  }
+
+  function draft(v, lang, notes) {
+    return [draftCore(v, lang, notes), websiteContact(lang)].filter(Boolean).join("\n\n");
   }
 
   /* ---------- what the pages actually print ---------- */
@@ -433,16 +434,46 @@
    * Used by the admin preview, by the pre-rendered page, by the script that
    * hydrates it and by the social captions - one function, so all four agree.
    */
-  function paragraphs(v, lang) {
+  function coreParagraphs(v, lang) {
     if (mode(v) === "manual") {
       return split(lang === "fr" ? (v.descFr || v.desc) : v.desc)
         .map(function (p) { return publicFactText(p, v); });
     }
-    return split(draft(v, lang, {
+    return split(draftCore(v, lang, {
       ownership: v.draftNotes && v.draftNotes.ownership,
       work: v.draftNotes && v.draftNotes.work,
       own: lang === "fr" ? v.descNoteFr : v.descNote
-    }));
+    })).filter(function (p) {
+      /* Older automatic notes sometimes contain a copied dealer footer. The
+         platform template owns that information now, so keep only the words
+         that are actually about this vehicle. */
+      return !genericContactParagraph(p);
+    });
+  }
+
+  function hasCompleteContact(paras) {
+    var joined = paras.join(" ");
+    return /514\D*824\D*9117/.test(joined) && /2044[^.]*Chartier/i.test(joined);
+  }
+
+  function genericContactParagraph(text) {
+    var p = String(text || "");
+    return /514\D*824\D*9117/.test(p) || /2044[\s\S]*Chartier/i.test(p) ||
+      /^(Flexible hours by appointment|Horaires flexibles sur rendez-vous)\.?$/i.test(p.trim());
+  }
+
+  function paragraphs(v, lang) {
+    var core = coreParagraphs(v, lang);
+    /* Preserve an older hand-written contact ending instead of printing the
+       phone number and address twice. Automatic listings always receive the
+       standard block above. */
+    return mode(v) === "manual" && hasCompleteContact(core)
+      ? core
+      : core.concat(websiteContact(lang));
+  }
+
+  function coreText(v, lang) {
+    return coreParagraphs(v, lang).join("\n\n");
   }
 
   function text(v, lang) {
@@ -451,6 +482,7 @@
 
   return {
     draft: draft, paragraphs: paragraphs, text: text, mode: mode,
+    coreParagraphs: coreParagraphs, coreText: coreText, websiteContact: websiteContact,
     BODY: BODY, DRIVE: DRIVE, OWNERSHIP: OWNERSHIP,
     colourFr: colourFr, featurePhrase: featurePhrase, seed: seed
   };
