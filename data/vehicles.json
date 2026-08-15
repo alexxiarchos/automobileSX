@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T17:52:59.262Z",
+  "updatedAt": "2026-08-15T17:53:09.078Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -577,17 +577,17 @@
       "year": 2019,
       "make": "Subaru",
       "model": "Impreza",
-      "trim": "Base",
+      "trim": "Convenience",
       "body": "Hatchback",
       "price": 8999,
       "km": 213000,
-      "transmission": "Automatic",
+      "transmission": "CVT",
       "fuel": "Gasoline",
       "drivetrain": "AWD",
       "extColor": "Black",
       "extHex": "#141518",
       "intColor": "Grey",
-      "engine": "2.0",
+      "engine": "2.0L I4",
       "econCity": "",
       "econHwy": "",
       "doors": 5,
@@ -601,12 +601,11 @@
         "Automatic High Beams",
         "Heated Seats",
         "Bluetooth",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "This is a 2019 Subaru Impreza Base, a five-door hatchback with 213,000 km on it. It has a 2.0 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in black with grey inside. It is equipped with backup camera, adaptive cruise control, automatic high beams, heated seats, Bluetooth, cruise control and AWD.\n\nYou can see it at our lot on Avenue Chartier in Dorval, seven days a week by appointment.",
       "descFr": "Voici ce Subaru Impreza Base 2019, une voiture à hayon à cinq portes avec 213 000 km au compteur. Il est doté d'un moteur 2.0, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur noir et intérieur en gris. Équipements notables : caméra de recul, régulateur de vitesse adaptatif, feux de route automatiques, sièges chauffants, Bluetooth, régulateur de vitesse et rouage intégral.\n\nVous pouvez le voir à notre emplacement de l'avenue Chartier, à Dorval, sept jours sur sept sur rendez-vous.",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -628,8 +627,18 @@
         "images/vehicles/2019-suabru-impreza-62zb2/msem25mx-100.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T12:03:14.312Z",
-      "updatedAt": "2026-08-13T22:42:57.151Z",
+      "updatedAt": "2026-08-15T17:53:08.289Z",
       "publishedAt": "2026-08-13T22:42:57.151Z",
       "posts": [
         {
