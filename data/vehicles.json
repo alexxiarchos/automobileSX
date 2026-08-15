@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T17:50:42.002Z",
+  "updatedAt": "2026-08-15T17:52:11.060Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -94,7 +94,7 @@
       "make": "Nissan",
       "model": "Kicks",
       "trim": "SV",
-      "body": "Hatchback",
+      "body": "SUV",
       "price": 10999,
       "km": 145000,
       "transmission": "Automatic",
@@ -103,7 +103,7 @@
       "extColor": "Grey",
       "extHex": "#5c6066",
       "intColor": "Grey",
-      "engine": "1.6L",
+      "engine": "1.6L I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -130,8 +130,18 @@
         "images/vehicles/2019-nissan-kicks-6k9ge/msqy05w1-2.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-13T03:08:22.042Z",
-      "updatedAt": "2026-08-13T03:22:07.318Z",
+      "updatedAt": "2026-08-15T17:52:10.319Z",
       "publishedAt": "2026-08-13T03:22:07.318Z",
       "posts": [
         {
