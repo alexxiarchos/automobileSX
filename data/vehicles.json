@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T17:52:33.168Z",
+  "updatedAt": "2026-08-15T17:52:43.051Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -414,11 +414,11 @@
       "km": 157000,
       "transmission": "Automatic",
       "fuel": "Gasoline",
-      "drivetrain": "AWD",
+      "drivetrain": "4x4",
       "extColor": "Grey",
       "extHex": "#5c6066",
       "intColor": "Grey",
-      "engine": "3.6",
+      "engine": "3.6L V6",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -430,12 +430,11 @@
         "Heated Seats",
         "Bluetooth",
         "Remote Start",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "2016 GRAND CHEROKEE LAREDO ,3.6K, EXCELLENTE CONDUITE, NOUVEAU FREINS AU 4 ROUE, AC, GROUPE ÉLECTRIQUES, BLUETOOTH\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
       "descFr": "",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -457,8 +456,18 @@
         "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7x13-130.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T12:07:36.365Z",
-      "updatedAt": "2026-08-13T22:39:14.275Z",
+      "updatedAt": "2026-08-15T17:52:42.298Z",
       "publishedAt": "2026-08-13T22:39:14.275Z",
       "posts": [
         {
