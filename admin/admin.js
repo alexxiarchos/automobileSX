@@ -1254,6 +1254,17 @@
     return base;
   }
 
+  function buyerInfoOf(v) {
+    var b = (v && v.buyerInfo) || {};
+    return {
+      historyReport: b.historyReport || "",
+      keys: Number(b.keys) > 0 ? Number(b.keys) : "",
+      winterTires: b.winterTires === "included" || b.winterTires === "not-included" ? b.winterTires : "",
+      work: b.work || "",
+      workFr: b.workFr || ""
+    };
+  }
+
   /* The class actually printed: the override if there is one, otherwise the
      computed suggestion. One function so the form hint, the sheet and anything
      built later cannot drift apart. */
@@ -1317,6 +1328,7 @@
       stock: nextStock(), tag: "", features: [], desc: "", descFr: "",
       descNote: "", descNoteFr: "", descMode: "auto",
       draftNotes: { ownership: "" }, images: [], posts: [],
+      buyerInfo: buyerInfoOf(),
       opc: blankOpc(),
       status: "draft", createdAt: new Date().toISOString()
     };
@@ -1347,6 +1359,12 @@
     $("f-econcity").value = v.econCity != null ? v.econCity : "";
     $("f-econhwy").value = v.econHwy != null ? v.econHwy : "";
     $("f-tag").value = v.tag || "";
+    var buyer = buyerInfoOf(v);
+    $("f-history-report").value = buyer.historyReport;
+    $("f-keys").value = buyer.keys;
+    $("f-winter-tires").value = buyer.winterTires;
+    $("f-public-work").value = buyer.work;
+    $("f-public-work-fr").value = buyer.workFr;
     $("f-slug").value = v.id || "";
     slugPreview();
     vinStatus(VIN_HINT);
@@ -1440,8 +1458,8 @@
   function collectForm() {
     var v = editing;
     v.year = Number($("f-year").value) || "";
-    v.make = $("f-make").value.trim();
-    v.model = $("f-model").value.trim();
+    v.make = MAKES.fixMake($("f-make").value);
+    v.model = MAKES.fixModel($("f-model").value);
     v.trim = $("f-trim").value.trim();
     v.price = Number($("f-price").value) || "";
     v.km = Number($("f-km").value) || 0;
@@ -1458,6 +1476,13 @@
     v.econCity = $("f-econcity").value === "" ? "" : Number($("f-econcity").value);
     v.econHwy = $("f-econhwy").value === "" ? "" : Number($("f-econhwy").value);
     v.tag = $("f-tag").value;
+    v.buyerInfo = {
+      historyReport: $("f-history-report").value.trim(),
+      keys: Number($("f-keys").value) || "",
+      winterTires: $("f-winter-tires").value,
+      work: $("f-public-work").value.trim(),
+      workFr: $("f-public-work-fr").value.trim()
+    };
     v.desc = $("f-desc").value.trim();
     v.descFr = $("f-descfr").value.trim();
     v.descNote = $("f-descnote").value.trim();
@@ -1519,6 +1544,25 @@
       var err = $("edit-error");
       err.textContent = "Please fill in: " + missing.join(", ");
       err.hidden = false;
+      return false;
+    }
+
+    /* A VIN decoder sometimes returns a list of possible trims. Publishing
+       that list as though it were one exact trim misleads buyers, so drafts may
+       keep it while the car is checked but a live listing may not. */
+    var trim = $("f-trim").value.trim();
+    if (forPublish && /[,;|/]/.test(trim)) {
+      var trimError = $("edit-error");
+      trimError.textContent = "Trim looks like several possible choices (" + trim + "). Check the badge or window label and enter one exact trim before publishing.";
+      trimError.hidden = false;
+      return false;
+    }
+
+    var historyReport = $("f-history-report").value.trim();
+    if (forPublish && historyReport && !/^https?:\/\/[^\s]+$/i.test(historyReport)) {
+      var historyError = $("edit-error");
+      historyError.textContent = "Vehicle history report must be a complete http:// or https:// link.";
+      historyError.hidden = false;
       return false;
     }
 

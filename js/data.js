@@ -340,6 +340,11 @@ SX.vehicleTitle = function (v) {
   return v.year + " " + make + " " + model;
 };
 
+SX.displayTrim = function (v) {
+  var value = v && v.trim;
+  return window.SX_MAKES && SX_MAKES.displayTrim ? SX_MAKES.displayTrim(value) : (value || "");
+};
+
 SX.bodyTypes = ["Sedan", "SUV", "Truck", "Coupe", "Hatchback"];
 
 SX.bodyLabel = function (b) {

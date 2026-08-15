@@ -564,6 +564,7 @@ input[type="range"] {
 .breadcrumb a:hover { color: var(--red); }
 
 .detail-layout { display: grid; grid-template-columns: 1fr 360px; gap: 40px; padding: 24px 0 72px; align-items: start; }
+.detail-layout > * { min-width: 0; }
 
 .gallery-main {
   position: relative; border-radius: var(--radius); overflow: hidden;
@@ -647,6 +648,11 @@ input[type="range"] {
 }
 .history-item .h-label { font-size: 13px; color: var(--slate); }
 .history-item .h-value { font-size: 17px; font-weight: 700; display: flex; align-items: center; gap: 7px; }
+.history-item .h-value a { color: var(--ink); border-bottom: 2px solid var(--red); }
+.history-note {
+  grid-column: 1 / -1; margin: 0; padding-top: 18px;
+  border-top: 1px solid var(--mist); color: var(--slate); line-height: 1.6;
+}
 .badge-trust {
   display: inline-flex; align-items: center; gap: 6px;
   background: var(--trust); color: #fff; font-size: 12.5px; font-weight: 600;
@@ -676,6 +682,10 @@ input[type="range"] {
 .field-error { display: none; font-size: 13px; color: var(--red); margin-top: 5px; }
 .form-row.invalid .field-error { display: block; }
 .form-row.invalid input, .form-row.invalid select, .form-row.invalid textarea { border-color: var(--red); }
+.contact-choice-hint {
+  margin: 0 0 14px; padding: 11px 13px; border-left: 3px solid var(--red);
+  background: var(--bone); color: var(--slate); font-size: 13.5px;
+}
 .form-hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .form-submit-error {
   margin-top: 16px; padding: 14px 16px; color: #721c24; background: #f8d7da;
@@ -761,7 +771,14 @@ input[type="range"] {
   .detail-mobile-bar { display: flex; }
   body.has-detail-bar { padding-bottom: 76px; }
   body.has-detail-bar .mobile-cta-bar { display: none; }
-  .thumb-strip { grid-template-columns: repeat(4, 1fr); }
+  /* A multi-row thumbnail grid made lazy images reserve several blank rows on
+     phones. A single horizontal filmstrip keeps the overview immediately below
+     the gallery while every photo remains one swipe away. */
+  .thumb-strip {
+    display: flex; overflow-x: auto; gap: 8px; padding: 0 0 8px;
+    scroll-snap-type: x proximity; scrollbar-width: thin;
+  }
+  .thumb-strip button { flex: 0 0 82px; scroll-snap-align: start; }
   .hero { min-height: 480px; }
   .hero-bg img, .hero-bg svg {
     object-position: 50% 18%;

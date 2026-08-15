@@ -78,5 +78,13 @@
     }).join("");
   }
 
-  return { CASING: CASING, LIST: LIST, MODEL_CAPS: MODEL_CAPS, fixMake: fixMake, fixModel: fixModel };
+  /* Some VIN responses contain a menu of possible trims instead of the trim
+     fitted to this exact car. Keep that raw value in the admin for correction,
+     but never present the menu as a verified public fact. */
+  function displayTrim(raw) {
+    var value = String(raw || "").trim();
+    return /[,;|/]/.test(value) ? "" : value;
+  }
+
+  return { CASING: CASING, LIST: LIST, MODEL_CAPS: MODEL_CAPS, fixMake: fixMake, fixModel: fixModel, displayTrim: displayTrim };
 });

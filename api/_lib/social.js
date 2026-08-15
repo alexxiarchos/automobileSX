@@ -14,6 +14,7 @@
 
 const SITE = "https://www.automobilesx.ca";
 const DESCRIBE = require("../../js/describe.js");
+const MAKES = require("../../js/makes.js");
 const GRAPH = "https://graph.facebook.com/v21.0";
 const TIMEOUT_MS = 20000;
 
@@ -39,7 +40,7 @@ function km(n) {
   return Number(n || 0).toLocaleString("en-CA") + " km";
 }
 function title(v) {
-  return [v.year, v.make, v.model, v.trim].filter(Boolean).join(" ");
+  return [v.year, MAKES.fixMake(v.make), MAKES.fixModel(v.model), MAKES.displayTrim(v.trim)].filter(Boolean).join(" ");
 }
 function vehicleUrl(v) {
   return SITE + "/vehicles/" + encodeURIComponent(v.id);
@@ -175,8 +176,8 @@ function marketplaceListing(v) {
     title: title(v),
     price: String(Math.round(Number(v.price) || 0)),
     year: String(v.year || ""),
-    make: v.make || "",
-    model: [v.model, v.trim].filter(Boolean).join(" "),
+    make: MAKES.fixMake(v.make),
+    model: [MAKES.fixModel(v.model), MAKES.displayTrim(v.trim)].filter(Boolean).join(" "),
     mileage: String(Math.round(Number(v.km) || 0)),
     transmission: v.transmission || "",
     exteriorColour: v.extColor || "",

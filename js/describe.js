@@ -34,10 +34,14 @@
    worth the money - are not in any database. */
 
 (function (root, factory) {
-  if (typeof module === "object" && module.exports) module.exports = factory(require("./features.js"));
-  else root.SX_DESCRIBE = factory(root.SX_FEATURES);
-})(typeof self !== "undefined" ? self : this, function (FEATURES) {
+  if (typeof module === "object" && module.exports) module.exports = factory(require("./features.js"), require("./makes.js"));
+  else root.SX_DESCRIBE = factory(root.SX_FEATURES, root.SX_MAKES);
+})(typeof self !== "undefined" ? self : this, function (FEATURES, MAKES) {
   "use strict";
+
+  function displayMake(value) { return MAKES ? MAKES.fixMake(value) : value; }
+  function displayModel(value) { return MAKES ? MAKES.fixModel(value) : value; }
+  function displayTrim(value) { return MAKES && MAKES.displayTrim ? MAKES.displayTrim(value) : value; }
 
   /* ---------- vocabulary ---------- */
 
@@ -226,7 +230,7 @@
   }
 
   function openingEn(v, n) {
-    var name = [v.year, v.make, v.model, v.trim].filter(Boolean).join(" ");
+    var name = [v.year, displayMake(v.make), displayModel(v.model), displayTrim(v.trim)].filter(Boolean).join(" ");
     if (!name) return "";
     var body = BODY[v.body] ? BODY[v.body].en : "";
     var doors = DOORS[v.doors] ? DOORS[v.doors].en : "";
@@ -247,7 +251,7 @@
   }
 
   function openingFr(v, n) {
-    var name = [v.make, v.model, v.trim, v.year].filter(Boolean).join(" ");
+    var name = [displayMake(v.make), displayModel(v.model), displayTrim(v.trim), v.year].filter(Boolean).join(" ");
     if (!name) return "";
     var b = BODY[v.body];
     var doors = DOORS[v.doors] ? " à " + DOORS[v.doors].fr : "";
@@ -402,6 +406,28 @@
       .map(function (s) { return s.trim(); }).filter(Boolean);
   }
 
+  function escapeRegExp(value) {
+    return String(value || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  /* Old hand-written descriptions may contain casing or multi-choice trim
+     values saved before the current guardrails existed. Correct those facts
+     for public display without rewriting the admin-controlled source text. */
+  function publicFactText(text, v) {
+    var out = String(text || "");
+    [
+      [v.make, displayMake(v.make)],
+      [v.model, displayModel(v.model)],
+      [v.trim, displayTrim(v.trim)]
+    ].forEach(function (pair) {
+      var raw = String(pair[0] || "").trim();
+      var shown = String(pair[1] || "").trim();
+      if (!raw) return;
+      out = out.replace(new RegExp(escapeRegExp(raw), "gi"), shown);
+    });
+    return out.replace(/[ \t]{2,}/g, " ").trim();
+  }
+
   /**
    * The description for one vehicle in one language, as paragraphs.
    * Used by the admin preview, by the pre-rendered page, by the script that
@@ -409,7 +435,8 @@
    */
   function paragraphs(v, lang) {
     if (mode(v) === "manual") {
-      return split(lang === "fr" ? (v.descFr || v.desc) : v.desc);
+      return split(lang === "fr" ? (v.descFr || v.desc) : v.desc)
+        .map(function (p) { return publicFactText(p, v); });
     }
     return split(draft(v, lang, {
       ownership: v.draftNotes && v.draftNotes.ownership,

@@ -13,16 +13,17 @@ const CATALOGUE = require("../../js/features.js");
    can never show a paragraph that stopped being true. See js/describe.js. */
 const DESCRIBE = require("../../js/describe.js");
 const MAKES = require("../../js/makes.js");
+const OPC = require("../../js/opc.js");
 
 const PATHS = {
-  en: { dir: "vehicles", inventory: "/inventory", contact: "/contact", financing: "/financing" },
-  fr: { dir: "fr/vehicules", inventory: "/fr/inventaire", contact: "/fr/contact", financing: "/fr/financement" }
+  en: { dir: "vehicles", inventory: "/inventory", contact: "/contact", financing: "/financing", warrantyGuide: "/guides/buying-a-used-car-in-quebec" },
+  fr: { dir: "fr/vehicules", inventory: "/fr/inventaire", contact: "/fr/contact", financing: "/fr/financement", warrantyGuide: "/fr/guides/acheter-une-voiture-usagee-au-quebec" }
 };
 
 const L = {
   en: {
     locale: "en_CA", htmlLang: "en-CA",
-    overview: "Overview", specs: "Specifications", features: "Features",
+    overview: "Overview", buyerTitle: "History and buyer confidence", specs: "Specifications", features: "Features",
     similar: "Similar vehicles", estimate: "Estimate your payment",
     bookTestDrive: "Book a Test Drive", checkAvailability: "Check Availability",
     getPreApproved: "Ask about financing", viewAll: "View all inventory →",
@@ -35,11 +36,16 @@ const L = {
     engine: "Engine", trans: "Transmission", drive: "Drivetrain", fuel: "Fuel type",
     city: "Fuel economy (city)", hwy: "Fuel economy (highway)", ext: "Exterior colour",
     intr: "Interior", doors: "Doors", seats: "Seats",
+    inspection: "Independent inspection", inspectionValue: "Welcome",
+    warranty: "Quebec warranty label", warrantyClass: "Class",
+    historyReport: "Vehicle history", viewReport: "View report ↗",
+    keys: "Keys included", winterTires: "Winter tires",
+    included: "Included", notIncluded: "Not included", recentWork: "Recent work or condition note",
     descIntro: (t, city) => `${t} available now at Automobile SX in ${city}, Quebec.`
   },
   fr: {
     locale: "fr_CA", htmlLang: "fr-CA",
-    overview: "Aperçu", specs: "Fiche technique", features: "Équipements",
+    overview: "Aperçu", buyerTitle: "Historique et confiance de l'acheteur", specs: "Fiche technique", features: "Équipements",
     similar: "Véhicules semblables", estimate: "Estimez votre paiement",
     bookTestDrive: "Réserver un essai", checkAvailability: "Vérifier la disponibilité",
     getPreApproved: "Info financement", viewAll: "Voir tout l'inventaire →",
@@ -52,6 +58,11 @@ const L = {
     engine: "Moteur", trans: "Transmission", drive: "Rouage", fuel: "Carburant",
     city: "Consommation ville", hwy: "Consommation route", ext: "Couleur extérieure",
     intr: "Intérieur", doors: "Portes", seats: "Places",
+    inspection: "Inspection indépendante", inspectionValue: "Bienvenue",
+    warranty: "Étiquette de garantie du Québec", warrantyClass: "Classe",
+    historyReport: "Historique du véhicule", viewReport: "Voir le rapport ↗",
+    keys: "Clés incluses", winterTires: "Pneus d'hiver",
+    included: "Inclus", notIncluded: "Non inclus", recentWork: "Travaux récents ou note d'état",
     descIntro: (t, city) => `${t} disponible chez Automobile SX à ${city}, au Québec.`
   }
 };
@@ -128,7 +139,7 @@ function title(v) {
 }
 
 function fullName(v) {
-  return (title(v) + " " + (v.trim || "")).trim();
+  return (title(v) + " " + MAKES.displayTrim(v.trim)).trim();
 }
 
 function flatFeatures(v) {
@@ -165,6 +176,11 @@ function metaDescription(v, lang) {
   return parts.join(" · ").slice(0, 300);
 }
 
+function positiveEconomy(value) {
+  const n = Number(value);
+  return Number.isFinite(n) && n > 0 ? n.toFixed(1) + " L/100 km" : null;
+}
+
 function specRows(v, lang) {
   const t = L[lang];
   return [
@@ -172,8 +188,8 @@ function specRows(v, lang) {
     [t.trans, specLabel("transmission", v.transmission, lang)],
     [t.drive, specLabel("drivetrain", v.drivetrain, lang)],
     [t.fuel, specLabel("fuel", v.fuel, lang)],
-    [t.city, v.econCity != null ? Number(v.econCity).toFixed(1) + " L/100 km" : null],
-    [t.hwy, v.econHwy != null ? Number(v.econHwy).toFixed(1) + " L/100 km" : null],
+    [t.city, positiveEconomy(v.econCity)],
+    [t.hwy, positiveEconomy(v.econHwy)],
     [t.ext, v.extColor],
     [t.intr, v.intColor],
     [t.doors, v.doors != null ? String(v.doors) : null],
@@ -181,6 +197,47 @@ function specRows(v, lang) {
     [t.kilometres, km(v.km, lang)],
     [t.vin, v.vin]
   ].filter(r => r[1]);
+}
+
+function safeHttpUrl(value) {
+  const url = String(value || "").trim();
+  return /^https?:\/\/[^\s]+$/i.test(url) ? url : "";
+}
+
+function buyerInfoHtml(v, lang) {
+  const t = L[lang];
+  const P = PATHS[lang];
+  const b = v.buyerInfo || {};
+  const items = [];
+  const item = (label, value) =>
+    `<div class="history-item"><div class="h-label">${esc(label)}</div><div class="h-value">${value}</div></div>`;
+
+  items.push(item(t.inspection, `<span class="trust-dot" aria-hidden="true"></span>${esc(t.inspectionValue)}`));
+
+  const warrantyClass = (v.opc && v.opc.classOverride) || OPC.classify(v.year, v.km);
+  if (warrantyClass) {
+    items.push(item(t.warranty,
+      `<a href="${P.warrantyGuide}">${esc(t.warrantyClass + " " + warrantyClass)}</a>`));
+  }
+
+  const report = safeHttpUrl(b.historyReport);
+  if (report) {
+    items.push(item(t.historyReport,
+      `<a href="${esc(report)}" target="_blank" rel="noopener noreferrer">${esc(t.viewReport)}</a>`));
+  }
+
+  const keys = Number(b.keys);
+  if (Number.isInteger(keys) && keys > 0 && keys < 10) items.push(item(t.keys, esc(String(keys))));
+
+  if (b.winterTires === "included" || b.winterTires === "not-included") {
+    items.push(item(t.winterTires, esc(b.winterTires === "included" ? t.included : t.notIncluded)));
+  }
+
+  const work = String(lang === "fr" ? (b.workFr || "") : (b.work || "")).trim();
+  const note = work
+    ? `<p class="history-note"><strong>${esc(t.recentWork)}:</strong> ${esc(work).replace(/\r?\n/g, "<br>")}</p>`
+    : "";
+  return `<div class="history-block">${items.join("")}${note}</div>`;
 }
 
 function specTable(rows) {
@@ -351,6 +408,10 @@ function renderVehiclePage(v, lang) {
             ? paras.map(p => "<p>" + esc(p) + "</p>").join("")
             : "<p>" + esc(t.noDesc) + "</p>"}</div>
         </section>
+        <section aria-labelledby="h-buyer">
+          <h2 id="h-buyer">${esc(t.buyerTitle)}</h2>
+          <div id="v-buyer">${buyerInfoHtml(v, lang)}</div>
+        </section>
         <section aria-labelledby="h-specs">
           <h2 id="h-specs">${esc(t.specs)}</h2>
           <div class="spec-cols" id="v-specs">${specTable(rows.slice(0, half))}${specTable(rows.slice(half))}</div>
@@ -415,9 +476,10 @@ function renderVehiclePage(v, lang) {
 <footer class="site-footer" id="site-footer">${staticFooter(lang)}</footer>
 <div class="mobile-cta-bar" id="mobile-cta-bar"></div>
 
+<script src="/js/makes.js"></script>
 <script src="/js/features.js"></script>
 <script src="/js/describe.js"></script>
-<script src="/js/makes.js"></script>
+<script src="/js/opc.js"></script>
 <script src="/js/data.js"></script>
 <script src="/js/components.js"></script>
 <script src="/js/detail.js" defer></script>

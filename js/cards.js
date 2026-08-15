@@ -108,7 +108,8 @@
   function card(v, lang, index, eagerCount) {
     var t = T[lang];
     var name = title(v);
-    var alt = [name, v.trim, v.extColor].filter(Boolean).join(" ").trim();
+    var trim = makes && makes.displayTrim ? makes.displayTrim(v.trim) : (v.trim || "");
+    var alt = [name, trim, v.extColor].filter(Boolean).join(" ").trim();
     var tag = (v.status === "sold") ? t.sold : (v.tag || "");
     var priorityCount = eagerCount === undefined ? 3 : eagerCount;
     var eager = (index || 0) < priorityCount;
@@ -126,7 +127,7 @@
       '<div class="vc-body">' +
         '<div class="vc-head"><div>' +
           '<h3 class="vc-title"><a href="' + esc(url(v, lang)) + '">' + esc(name) + "</a></h3>" +
-          '<p class="vc-trim">' + esc(v.trim || "") + "</p>" +
+          '<p class="vc-trim">' + esc(trim) + "</p>" +
         "</div>" +
         '<button class="vc-save" type="button" aria-pressed="false" aria-label="' +
           esc(t.saved) + '">' + HEART + "</button>" +

@@ -277,7 +277,8 @@ window.SXUI = (function () {
     opts = opts || {};
     var card = document.createElement("article");
     card.className = "vehicle-card";
-    var alt = SX.vehicleTitle(v) + " " + (v.trim || "") + (v.extColor ? ", " + v.extColor : "");
+    var trim = SX.displayTrim(v);
+    var alt = SX.vehicleTitle(v) + " " + trim + (v.extColor ? ", " + v.extColor : "");
     var tag = v.status === "sold" ? SX.t("veh.sold") : v.tag;
 
     card.innerHTML =
@@ -292,7 +293,7 @@ window.SXUI = (function () {
       '<div class="vc-head">' +
       "<div>" +
       '<h3 class="vc-title"><a href="' + SX.vehicleUrl(v) + '">' + SX.vehicleTitle(v) + "</a></h3>" +
-      '<p class="vc-trim">' + (v.trim || "") + "</p>" +
+      '<p class="vc-trim">' + trim + "</p>" +
       "</div>" +
       '<button class="vc-save" type="button" aria-pressed="false" aria-label="' + SX.t("veh.savedLabel") + '">' + heartSVG(false) + "</button>" +
       "</div>" +

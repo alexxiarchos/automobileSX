@@ -310,6 +310,10 @@ function vehicleBody(T) {
           <h2 id="h-overview">${T.ui.overview}</h2>
           <div id="v-overview"></div>
         </section>
+        <section aria-labelledby="h-buyer">
+          <h2 id="h-buyer"></h2>
+          <div id="v-buyer"></div>
+        </section>
         <section aria-labelledby="h-specs">
           <h2 id="h-specs">${T.ui.specs}</h2>
           <div class="spec-cols" id="v-specs"></div>
@@ -392,15 +396,27 @@ function contactBody(T) {
           <div class="field"><input type="text" id="c-name" autocomplete="name" maxlength="100" required></div>
           <p class="field-error">${T.contact.errName}</p>
         </div>
+        <p class="contact-choice-hint">${T.contact.contactChoice}</p>
         <div class="form-row" id="row-email">
-          <label for="c-email">${T.contact.email} <span class="req">*</span></label>
-          <div class="field"><input type="email" id="c-email" autocomplete="email" maxlength="254" required></div>
+          <label for="c-email">${T.contact.email}</label>
+          <div class="field"><input type="email" id="c-email" autocomplete="email" maxlength="254"></div>
           <p class="field-error">${T.contact.errEmail}</p>
         </div>
         <div class="form-row" id="row-phone">
-          <label for="c-phone">${T.contact.phone} <span class="req">*</span></label>
-          <div class="field"><input type="tel" id="c-phone" autocomplete="tel" maxlength="40" required placeholder="514-555-0123"></div>
+          <label for="c-phone">${T.contact.phone}</label>
+          <div class="field"><input type="tel" id="c-phone" autocomplete="tel" maxlength="40" placeholder="514-555-0123"></div>
           <p class="field-error">${T.contact.errPhone}</p>
+        </div>
+        <div class="form-row" id="row-preferred">
+          <label for="c-preferred">${T.contact.preferred}</label>
+          <div class="field">
+            <select id="c-preferred">
+              <option value="either">${T.contact.prefEither}</option>
+              <option value="call">${T.contact.prefCall}</option>
+              <option value="text">${T.contact.prefText}</option>
+              <option value="email">${T.contact.prefEmail}</option>
+            </select>
+          </div>
         </div>
         <div class="form-row" id="row-interest">
           <label for="c-interest">${T.contact.interest}</label>
