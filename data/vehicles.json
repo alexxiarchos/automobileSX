@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T04:11:16.073Z",
+  "updatedAt": "2026-08-15T04:13:31.354Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -153,7 +153,7 @@
       "year": 2014,
       "make": "Subaru",
       "model": "Legacy",
-      "trim": "quattro Premium, quattro Sport Premium",
+      "trim": "",
       "body": "SUV",
       "price": 4999,
       "km": 214000,
@@ -163,7 +163,7 @@
       "extColor": "Grey",
       "extHex": "#5c6066",
       "intColor": "Grey",
-      "engine": "2.5",
+      "engine": "2.5L",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -217,7 +217,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T12:17:11.456Z",
-      "updatedAt": "2026-08-14T17:53:55.401Z",
+      "updatedAt": "2026-08-15T04:13:30.703Z",
       "publishedAt": "2026-08-13T22:36:35.297Z",
       "posts": [
         {
