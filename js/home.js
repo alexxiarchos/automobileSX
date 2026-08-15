@@ -35,8 +35,11 @@ SX.ready.then(function () {
   /* Featured vehicles */
   var grid = document.getElementById("featured-grid");
   if (grid) {
+    /* Match the server-rendered order exactly so hydration cannot reshuffle
+       the cards after a visitor has started looking at them. */
     var featured = SX.vehicles.slice().sort(function (a, b) {
-      return (b.tag ? 1 : 0) - (a.tag ? 1 : 0) || b.year - a.year;
+      return String(b.publishedAt || b.createdAt || "")
+        .localeCompare(String(a.publishedAt || a.createdAt || ""));
     }).slice(0, 6);
     grid.innerHTML = "";
     if (!featured.length) {
@@ -45,7 +48,7 @@ SX.ready.then(function () {
       msg.innerHTML = SX.t("inv.noStockBody", '<a href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a>");
       grid.replaceWith(msg);
     } else {
-      featured.forEach(function (v) { grid.appendChild(SXUI.vehicleCard(v)); });
+      featured.forEach(function (v) { grid.appendChild(SXUI.vehicleCard(v, { eager: false })); });
     }
   }
 

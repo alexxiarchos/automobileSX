@@ -29,10 +29,10 @@ const CLOSE = "<!--/SX:CARDS-->";
 /* Which files carry a card region, and how many cards each one wants. The
    homepage shows a handful; the inventory page shows everything. */
 const TARGETS = [
-  { path: "index.html", lang: "en", limit: 6 },
-  { path: "fr/index.html", lang: "fr", limit: 6 },
-  { path: "inventory.html", lang: "en", limit: 0 },
-  { path: "fr/inventaire.html", lang: "fr", limit: 0 }
+  { path: "index.html", lang: "en", limit: 6, eagerCount: 0 },
+  { path: "fr/index.html", lang: "fr", limit: 6, eagerCount: 0 },
+  { path: "inventory.html", lang: "en", limit: 0, eagerCount: 3 },
+  { path: "fr/inventaire.html", lang: "fr", limit: 0, eagerCount: 3 }
 ];
 
 function replaceRegion(html, inner) {
@@ -56,7 +56,7 @@ async function renderListingPages(vehicles, readFile) {
     }
     if (!html) continue;
 
-    const inner = cards.grid(vehicles, t.lang, t.limit || 0);
+    const inner = cards.grid(vehicles, t.lang, t.limit || 0, t.eagerCount);
     const next = replaceRegion(html, inner);
     if (next === null || next === html) continue;   /* no fences, or no change */
     out.push({ path: t.path, content: next });

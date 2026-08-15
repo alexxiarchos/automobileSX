@@ -66,6 +66,7 @@ function validate(body) {
     name: string(body.name, 100),
     email: string(body.email, 254).toLowerCase(),
     phone: string(body.phone, 40),
+    preferred: string(body.preferred, 20) || "either",
     message: string(body.message, 3000),
     interest: string(body.interest, 30),
     vehicleId: string(body.vehicleId, 100),
@@ -74,11 +75,15 @@ function validate(body) {
     submissionId: string(body.submissionId, 100),
     website: string(body.website, 200)
   };
-  const emailOK = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email);
-  const phoneOK = data.phone.replace(/\D/g, "").length >= 10;
+  const emailOK = !data.email || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email);
+  const phoneOK = !data.phone || data.phone.replace(/\D/g, "").length >= 10;
+  const preferredOK = ["either", "call", "text", "email"].includes(data.preferred);
+  const contactOK = (data.email || data.phone) &&
+    (data.preferred !== "email" || data.email) &&
+    (!["call", "text"].includes(data.preferred) || data.phone);
   const idOK = /^[A-Za-z0-9_-]{8,100}$/.test(data.submissionId);
-  if (data.name.length < 2 || !emailOK || !phoneOK || data.message.length < 10 ||
-      !INTERESTS[data.interest] || !idOK) return null;
+  if (data.name.length < 2 || !emailOK || !phoneOK || !preferredOK || !contactOK ||
+      data.message.length < 10 || !INTERESTS[data.interest] || !idOK) return null;
   return data;
 }
 
@@ -86,10 +91,17 @@ function emailContent(data) {
   const language = data.lang === "fr" ? "Français" : "English";
   const interest = INTERESTS[data.interest][data.lang];
   const vehicle = data.vehicleLabel || data.vehicleId;
+  const preferred = {
+    either: data.lang === "fr" ? "Aucune préférence" : "No preference",
+    call: data.lang === "fr" ? "Appel téléphonique" : "Phone call",
+    text: data.lang === "fr" ? "Message texte" : "Text message",
+    email: data.lang === "fr" ? "Courriel" : "Email"
+  }[data.preferred];
   const rows = [
     ["Name / Nom", data.name],
-    ["Email / Courriel", data.email],
-    ["Phone / Téléphone", data.phone],
+    ["Email / Courriel", data.email || "—"],
+    ["Phone / Téléphone", data.phone || "—"],
+    ["Preferred reply / Réponse souhaitée", preferred],
     ["Interest / Besoin", interest],
     ["Language / Langue", language]
   ];
@@ -142,6 +154,16 @@ module.exports = async function (req, res) {
   const controller = new AbortController();
   const timeout = setTimeout(function () { controller.abort(); }, 10000);
   try {
+    const emailPayload = {
+      from,
+      to: [to],
+      subject: content.subject,
+      text: content.text,
+      html: content.html,
+      tags: [{ name: "source", value: "website-contact" }]
+    };
+    if (data.email) emailPayload.reply_to = data.email;
+
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -150,15 +172,7 @@ module.exports = async function (req, res) {
         "Idempotency-Key": "automobile-sx-contact-" + data.submissionId,
         "User-Agent": "AutomobileSX-Contact/1.0"
       },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        reply_to: data.email,
-        subject: content.subject,
-        text: content.text,
-        html: content.html,
-        tags: [{ name: "source", value: "website-contact" }]
-      }),
+      body: JSON.stringify(emailPayload),
       signal: controller.signal
     });
     const result = await response.json().catch(function () { return {}; });

@@ -7,6 +7,7 @@ const fs = require("fs");
 const path = require("path");
 const { SITE, ROUTES, FILES, DEALER, renderPage } = require("./layout.js");
 const blocks = require("./blocks.js");
+const { renderVehiclePages } = require("../api/_lib/vehiclePage.js");
 
 const ROOT = path.join(__dirname, "..");
 const COPY = { en: require("./copy-en.js"), fr: require("./copy-fr.js") };
@@ -63,8 +64,10 @@ function renderCards(vehicles) {
   const out = {};
   ["en", "fr"].forEach(function (lang) {
     out[lang] = {
-      all: cards.grid(vehicles, lang),
-      featured: cards.grid(vehicles, lang, HOME_FEATURED)
+      all: cards.grid(vehicles, lang, 0, 3),
+      /* The homepage hero is the LCP image. Its vehicle cards sit below the
+         fold, so none of them should compete with it at high priority. */
+      featured: cards.grid(vehicles, lang, HOME_FEATURED, 0)
     };
   });
   return out;
@@ -151,7 +154,8 @@ function faqSchema(T, lang) {
 }
 
 async function build() {
-  const CARDS = renderCards(await loadVehicles());
+  const vehicles = await loadVehicles();
+  const CARDS = renderCards(vehicles);
   let written = 0;
 
   ["en", "fr"].forEach(lang => {
@@ -182,7 +186,7 @@ async function build() {
       },
       {
         route: "vehicle", title: T.vehicle.title, description: T.vehicle.description,
-        body: blocks.vehicleBody(T), scripts: ["/js/features.js", "/js/describe.js", "/js/detail.js"], skipCanonical: true
+        body: blocks.vehicleBody(T), scripts: ["/js/features.js", "/js/describe.js", "/js/opc.js", "/js/detail.js"], skipCanonical: true
       },
       {
         route: "contact", title: T.contact.title, description: T.contact.description,
@@ -242,6 +246,22 @@ async function build() {
       const out = path.join(ROOT, F[p.route]);
       fs.mkdirSync(path.dirname(out), { recursive: true });
       fs.writeFileSync(out, html);
+      written++;
+    });
+  });
+
+  /* Refresh every crawlable vehicle detail page from the same inventory source
+     used above. On Vercel that source is the live admin-controlled main branch,
+     never the deployment checkout, so a code deploy can apply template and SEO
+     improvements without reverting newer inventory changes. These files are
+     deployment output only; this does not write back to the inventory source. */
+  vehicles.filter(function (v) {
+    return v && v.id && v.status !== "draft";
+  }).forEach(function (v) {
+    renderVehiclePages(v).forEach(function (page) {
+      const out = path.join(ROOT, page.path);
+      fs.mkdirSync(path.dirname(out), { recursive: true });
+      fs.writeFileSync(out, page.html);
       written++;
     });
   });

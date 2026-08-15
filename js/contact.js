@@ -21,8 +21,11 @@ SX.ready.then(function () {
   /* Vehicle dropdown */
   var vehicleSel = document.getElementById("c-vehicle");
   var rowVehicle = document.getElementById("row-vehicle");
+  function vehicleName(v) {
+    return [SX.vehicleTitle(v), SX.displayTrim(v)].filter(Boolean).join(" ");
+  }
   vehicleSel.innerHTML = SX.vehicles.map(function (v) {
-    return '<option value="' + v.id + '">' + SX.vehicleTitle(v) + " " + (v.trim || "") + " · " + SX.money(v.price) + "</option>";
+    return '<option value="' + v.id + '">' + vehicleName(v) + " · " + SX.money(v.price) + "</option>";
   }).join("");
   if (!SX.vehicles.length) rowVehicle.remove();
 
@@ -45,9 +48,9 @@ SX.ready.then(function () {
       if (v) {
         document.getElementById("c-message").value = FR
           ? "Bonjour, je souhaite " + (interestSel.value === "test-drive" ? "réserver un essai routier pour" : "avoir plus d'information sur") +
-            " la " + SX.vehicleTitle(v) + " " + (v.trim || "") + (v.stock ? " (stock " + v.stock + ")" : "") + "."
+            " la " + vehicleName(v) + (v.stock ? " (stock " + v.stock + ")" : "") + "."
           : "Hi, I'd like to " + (interestSel.value === "test-drive" ? "book a test drive in" : "ask about") +
-            " the " + SX.vehicleTitle(v) + " " + (v.trim || "") + (v.stock ? " (stock " + v.stock + ")" : "") + ".";
+            " the " + vehicleName(v) + (v.stock ? " (stock " + v.stock + ")" : "") + ".";
       }
     }
   })();
@@ -56,6 +59,7 @@ SX.ready.then(function () {
   var submit = document.getElementById("c-submit");
   var submitLabel = submit.textContent;
   var errorBox = document.getElementById("form-error");
+  var preferredSel = document.getElementById("c-preferred");
   var submissionId = (window.crypto && typeof window.crypto.randomUUID === "function")
     ? window.crypto.randomUUID()
     : Date.now().toString(36) + "-" + Math.random().toString(36).slice(2);
@@ -63,31 +67,63 @@ SX.ready.then(function () {
     name: { el: document.getElementById("c-name"), row: document.getElementById("row-name"),
       valid: function (v) { return v.trim().length >= 2; } },
     email: { el: document.getElementById("c-email"), row: document.getElementById("row-email"),
-      valid: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); } },
+      valid: function (v) { return !v.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); } },
     phone: { el: document.getElementById("c-phone"), row: document.getElementById("row-phone"),
-      valid: function (v) { return v.replace(/\D/g, "").length >= 10; } },
+      valid: function (v) { return !v.trim() || v.replace(/\D/g, "").length >= 10; } },
     message: { el: document.getElementById("c-message"), row: document.getElementById("row-message"),
       valid: function (v) { return v.trim().length >= 10; } }
   };
 
-  function allOK() { return Object.keys(fields).every(function (k) { return fields[k].valid(fields[k].el.value); }); }
+  function contactOK() {
+    var email = fields.email.el.value.trim();
+    var phone = fields.phone.el.value.trim();
+    if (!fields.email.valid(email) || !fields.phone.valid(phone) || (!email && !phone)) return false;
+    if (preferredSel.value === "email" && !email) return false;
+    if ((preferredSel.value === "call" || preferredSel.value === "text") && !phone) return false;
+    return true;
+  }
+
+  function fieldOK(key) {
+    var f = fields[key];
+    if (!f.valid(f.el.value)) return false;
+    if (key === "email" || key === "phone") return contactOK();
+    return true;
+  }
+
+  function allOK() {
+    return fields.name.valid(fields.name.el.value) && fields.message.valid(fields.message.el.value) && contactOK();
+  }
   function refresh() { submit.disabled = !allOK(); }
 
   Object.keys(fields).forEach(function (k) {
     var f = fields[k];
     f.el.addEventListener("blur", function () {
-      var ok = f.valid(f.el.value);
+      var ok = fieldOK(k);
       f.row.classList.toggle("invalid", !ok);
       f.el.setAttribute("aria-invalid", String(!ok));
       refresh();
     });
     f.el.addEventListener("input", function () {
-      if (f.row.classList.contains("invalid") && f.valid(f.el.value)) {
+      ["email", "phone"].forEach(function (contactKey) {
+        var contactField = fields[contactKey];
+        if (contactField.row.classList.contains("invalid") && fieldOK(contactKey)) {
+          contactField.row.classList.remove("invalid");
+          contactField.el.setAttribute("aria-invalid", "false");
+        }
+      });
+      if (f.row.classList.contains("invalid") && fieldOK(k)) {
         f.row.classList.remove("invalid");
         f.el.setAttribute("aria-invalid", "false");
       }
       refresh();
     });
+  });
+  preferredSel.addEventListener("change", function () {
+    ["email", "phone"].forEach(function (key) {
+      fields[key].row.classList.remove("invalid");
+      fields[key].el.setAttribute("aria-invalid", "false");
+    });
+    refresh();
   });
   refresh();
 
@@ -112,6 +148,7 @@ SX.ready.then(function () {
           name: fields.name.el.value.trim(),
           email: fields.email.el.value.trim(),
           phone: fields.phone.el.value.trim(),
+          preferred: preferredSel.value,
           message: fields.message.el.value.trim(),
           interest: interestSel.value,
           vehicleId: vehicleId,

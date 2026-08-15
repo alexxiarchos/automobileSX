@@ -135,6 +135,38 @@
         <input id="f-features-extra" type="text" placeholder="e.g. New brakes, Winter mats included, Two sets of keys">
       </div>
 
+      <h2>Buyer information</h2>
+      <p class="fh">Optional facts that help a buyer trust the listing. Blank fields stay off the public page. These fields never replace the legal label below.</p>
+      <div class="form-grid">
+        <div class="f f-wide">
+          <label for="f-history-report">Vehicle history report link</label>
+          <input id="f-history-report" type="url" inputmode="url" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="https://vhr.carfax.ca/…">
+          <span class="fh">Paste the public CARFAX or other vehicle-history report link.</span>
+        </div>
+        <div class="f">
+          <label for="f-keys">Number of keys included</label>
+          <input id="f-keys" type="number" min="1" max="9" inputmode="numeric" placeholder="e.g. 2">
+        </div>
+        <div class="f">
+          <label for="f-winter-tires">Winter tires</label>
+          <select id="f-winter-tires">
+            <option value="">Not specified</option>
+            <option value="included">Included</option>
+            <option value="not-included">Not included</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="f">
+          <label for="f-public-work">Recent work or condition note (English)</label>
+          <textarea id="f-public-work" rows="3" maxlength="500" placeholder="e.g. Front brakes and battery replaced before sale"></textarea>
+        </div>
+        <div class="f">
+          <label for="f-public-work-fr">Travaux récents ou note d'état (French)</label>
+          <textarea id="f-public-work-fr" rows="3" maxlength="500" placeholder="p. ex. Freins avant et batterie remplacés avant la vente"></textarea>
+        </div>
+      </div>
+
       <h2>Legal label</h2>
       <p class="fh">This is the prescribed OPC information printed on the window sheet. It is a disclosure, not sales copy: write what is true rather than what sells. Anything left blank prints as "Aucune" or "Sur demande" in French, the way the standard label does.</p>
 

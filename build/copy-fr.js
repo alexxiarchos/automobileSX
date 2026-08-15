@@ -125,12 +125,15 @@ module.exports = {
     sub: "Demandez Spiro. Nous répondons en français comme en anglais, généralement en un jour ouvrable.",
     formH: "Envoyez-nous un message",
     name: "Nom", email: "Courriel", phone: "Téléphone", message: "Message",
+    contactChoice: "Indiquez une adresse courriel ou un numéro de téléphone pour que Spiro puisse vous répondre. Il n'est pas nécessaire de fournir les deux.",
+    preferred: "Réponse souhaitée", prefEither: "Aucune préférence", prefCall: "Appel téléphonique",
+    prefText: "Message texte", prefEmail: "Courriel",
     interest: "Mon besoin", whichVehicle: "Quel véhicule ?",
     optGeneral: "Une question générale", optVehicle: "Un véhicule précis",
     optTestDrive: "Réserver un essai routier", optFinancing: "Le financement", optTrade: "Vendre ou échanger mon véhicule",
     errName: "Veuillez inscrire votre nom.",
-    errEmail: "Veuillez inscrire une adresse courriel valide.",
-    errPhone: "Veuillez inscrire un numéro de téléphone d'au moins 10 chiffres.",
+    errEmail: "Inscrivez une adresse courriel valide, ou laissez ce champ vide et fournissez un numéro de téléphone.",
+    errPhone: "Inscrivez un numéro d'au moins 10 chiffres, ou laissez ce champ vide et fournissez une adresse courriel.",
     errMessage: "Ajoutez un court message pour que nous puissions vous aider.",
     send: "Envoyer",
     sending: "Envoi…",
@@ -466,15 +469,24 @@ module.exports = {
 
   privacy: {
     title: "Politique de confidentialité | Automobile SX Dorval",
-    description: "Comment Automobile SX traite les renseignements personnels. Aucune analyse d'audience, aucun traceur et aucun témoin sur ce site.",
+    description: "Comment Automobile SX traite les renseignements personnels et utilise des mesures d'audience sans témoins, axées sur la confidentialité.",
     h1: "Politique de confidentialité",
     sub: "Ce que nous recueillons, ce que nous ne recueillons pas, et comment nous joindre à ce sujet. Mise à jour le 14 août 2026.",
     body: `
       <p>Automobile SX est un commerce de véhicules d'occasion situé au 2044, avenue Chartier, à Dorval, au Québec. Cette page explique ce qu'il advient des renseignements personnels en lien avec ce site et notre entreprise. Elle décrit le fonctionnement réel du site plutôt que toutes les situations hypothétiques.</p>
 
       <h2>Ce que ce site recueille</h2>
-      <p>Ce site n'utilise <strong>aucune analyse d'audience, aucun traceur publicitaire, aucun pixel marketing et aucun témoin (cookie)</strong>. Nous ne créons pas de profils de visiteurs et nous ne pouvons pas savoir qui vous êtes lorsque vous consultez nos pages.</p>
-      <p>Lorsque vous utilisez le formulaire de contact, le nom, l'adresse courriel, le numéro de téléphone, le sujet, le véhicule sélectionné et le message que vous saisissez sont transmis par courriel à Automobile SX. Le site n'ajoute pas ce message à une base de données d'inventaire ni à une liste de marketing.</p>
+      <p>Ce site n'utilise <strong>aucun traceur publicitaire, aucun pixel marketing et aucun témoin d'analyse</strong>. Nous ne créons pas de profils publicitaires et ne suivons pas les visiteurs d'un site à l'autre.</p>
+      <p>Nous utilisons Vercel Web Analytics et Speed Insights pour comprendre l'achalandage global des pages et le rendement réel du site. Ces outils peuvent traiter le chemin de la page, le site référent, le pays ou la région approximative, le type d'appareil et de navigateur, ainsi que des mesures comme la vitesse de chargement et la stabilité visuelle. Vercel indique que Web Analytics conserve des données anonymisées, n'utilise aucun témoin, n'associe pas l'activité à une adresse IP et renouvelle son empreinte de visiteur toutes les 24 heures.</p>
+      <p>Avant l'envoi d'une consultation de page, ce site retire toute la chaîne de requête et le fragment de l'adresse URL. Nous n'envoyons aux outils d'analyse aucun nom, adresse courriel, numéro de téléphone, contenu de formulaire, message ou autre détail d'une demande. Les mesures fonctionnent seulement sur le site public automobilesx.ca, jamais dans le panneau d'administration ni sur les aperçus de déploiement. Les signaux Global Privacy Control et Do Not Track du navigateur sont respectés.</p>
+      <div class="privacy-controls">
+        <p><strong>Mesure anonyme du site dans ce navigateur :</strong> <span data-metrics-status data-on="Activée" data-off="Désactivée">Activée</span></p>
+        <button class="btn btn-outline" type="button" data-metrics-opt-out>Désactiver la mesure anonyme</button>
+        <button class="btn btn-outline" type="button" data-metrics-opt-in hidden>Autoriser la mesure anonyme</button>
+        <p class="privacy-control-note">La désactivation enregistre uniquement cette préférence dans ce navigateur. Elle s'applique aux prochaines pages chargées et ne nuit pas au fonctionnement du site.</p>
+        <noscript><p class="privacy-control-note">Les mesures ne sont pas chargées lorsque JavaScript est désactivé.</p></noscript>
+      </div>
+      <p>Lorsque vous utilisez le formulaire de contact, le nom, les coordonnées, le sujet, le véhicule sélectionné, la préférence de réponse et le message que vous saisissez sont transmis par courriel à Automobile SX. Le site n'ajoute pas ce message à une base de données d'inventaire, à un service d'analyse ni à une liste de marketing.</p>
 
       <h2>Ce que nous conservons, et pourquoi</h2>
       <p>Si vous nous écrivez, nous appelez ou nous envoyez un texto, nous conservons ce que vous avez choisi de nous dire : votre nom, vos coordonnées et ce que vous nous avez indiqué au sujet du véhicule qui vous intéresse. Nous nous en servons pour vous répondre et pour organiser un essai ou une vente. Rien de plus.</p>
@@ -483,10 +495,11 @@ module.exports = {
 
       <h2>Les autres entreprises concernées</h2>
       <p>Quatre tiers interviennent dans le fonctionnement du site, et il est normal que vous sachiez ce que chacun voit.</p>
-      <p><strong>Vercel</strong> héberge le site. Comme tout hébergeur, ses serveurs enregistrent des renseignements techniques usuels, dont l'adresse IP, lorsqu'une page est demandée.</p>
+      <p><strong>Vercel</strong> héberge le site et fournit les mesures anonymes d'achalandage et de rendement décrites ci-dessus. Comme tout hébergeur, ses serveurs traitent aussi des renseignements techniques usuels, dont l'adresse IP, lorsqu'une page est demandée.</p>
       <p><strong>Resend</strong> transmet les messages soumis par le formulaire de contact à notre boîte de courriel. Ce service traite les renseignements du formulaire pour effectuer cette transmission; des copies demeurent ensuite dans nos dossiers de courriel afin que nous puissions répondre à votre demande.</p>
       <p><strong>Google</strong> fournit les polices de caractères ainsi que la carte affichée sur la page d'accueil et la page contact. Charger une police ou une carte signifie que votre navigateur communique directement avec Google, qui peut donc recevoir votre adresse IP et déposer ses propres témoins. Le traitement qu'en fait Google est régi par sa propre politique. Si votre navigateur bloque Google, le site fonctionne quand même : la carte est remplacée par notre adresse et un lien.</p>
       <p><strong>Meta</strong> n'intervient que si vous suivez un lien vers nos pages Facebook ou Instagram; vous êtes alors sur leur service et leurs politiques s'appliquent.</p>
+      <p>Ces fournisseurs de services peuvent traiter des renseignements à l'extérieur du Québec ou du Canada selon leurs propres engagements en matière de sécurité et de confidentialité.</p>
 
       <h2>Vos droits au Québec</h2>
       <p>En vertu de la <em>Loi sur la protection des renseignements personnels dans le secteur privé</em>, modifiée par la Loi 25, vous pouvez nous demander quels renseignements personnels nous détenons à votre sujet, demander leur rectification s'ils sont inexacts, et demander que nous cessions de les utiliser, sous réserve des dossiers que la loi nous oblige à conserver pour la vente de véhicules.</p>

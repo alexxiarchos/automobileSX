@@ -202,7 +202,9 @@ SX.ready.then(function () {
 
     var grid = document.getElementById("inventory-grid");
     grid.innerHTML = "";
-    results.slice(0, shown).forEach(function (v) { grid.appendChild(SXUI.vehicleCard(v)); });
+    results.slice(0, shown).forEach(function (v, i) {
+      grid.appendChild(SXUI.vehicleCard(v, { eager: i < 3 }));
+    });
 
     var empty = document.getElementById("empty-state");
     empty.hidden = results.length !== 0;

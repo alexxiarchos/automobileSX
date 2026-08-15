@@ -2,6 +2,8 @@
 SX.ready.then(function () {
   "use strict";
 
+  var FR = SX.lang === "fr";
+
   document.body.classList.add("has-detail-bar");
 
   /* id comes from /vehicles/<id> (or ?id= as a fallback) */
@@ -19,7 +21,8 @@ SX.ready.then(function () {
   if (!v) { location.replace(SX.url("inventory")); return; }
 
   var title = SX.vehicleTitle(v);
-  var fullName = title + (v.trim ? " " + v.trim : "");
+  var publicTrim = SX.displayTrim(v);
+  var fullName = title + (publicTrim ? " " + publicTrim : "");
 
   /* On a pre-rendered page the head is already correct; only fill it in
      when this template was served as a fallback. */
@@ -127,6 +130,91 @@ SX.ready.then(function () {
     descParas.filter(Boolean).map(function (p) { return "<p>" + p + "</p>"; }).join("") ||
     "<p>" + SX.t("veh.noDesc") + "</p>";
 
+  /* ---------- History and buyer confidence ---------- */
+  var buyerCopy = FR
+    ? { title: "Historique et confiance de l'acheteur", inspection: "Inspection indépendante",
+        welcome: "Bienvenue", warranty: "Étiquette de garantie du Québec", classLabel: "Classe",
+        report: "Historique du véhicule", view: "Voir le rapport ↗", keys: "Clés incluses",
+        tires: "Pneus d'hiver", included: "Inclus", notIncluded: "Non inclus",
+        work: "Travaux récents ou note d'état", guide: "/fr/guides/acheter-une-voiture-usagee-au-quebec" }
+    : { title: "History and buyer confidence", inspection: "Independent inspection",
+        welcome: "Welcome", warranty: "Quebec warranty label", classLabel: "Class",
+        report: "Vehicle history", view: "View report ↗", keys: "Keys included",
+        tires: "Winter tires", included: "Included", notIncluded: "Not included",
+        work: "Recent work or condition note", guide: "/guides/buying-a-used-car-in-quebec" };
+  var buyerHeading = document.getElementById("h-buyer");
+  var buyerTarget = document.getElementById("v-buyer");
+  if (!buyerHeading || !buyerTarget) {
+    var buyerSection = document.createElement("section");
+    buyerSection.setAttribute("aria-labelledby", "h-buyer");
+    buyerHeading = document.createElement("h2");
+    buyerHeading.id = "h-buyer";
+    buyerTarget = document.createElement("div");
+    buyerTarget.id = "v-buyer";
+    buyerSection.appendChild(buyerHeading);
+    buyerSection.appendChild(buyerTarget);
+    var specsHeading = document.getElementById("h-specs");
+    var specsSection = specsHeading && specsHeading.closest("section");
+    document.querySelector(".detail-sections").insertBefore(buyerSection, specsSection || null);
+  }
+  buyerHeading.textContent = buyerCopy.title;
+  var buyerBox = document.createElement("div");
+  buyerBox.className = "history-block";
+
+  function buyerItem(label, value, href, trusted) {
+    var item = document.createElement("div");
+    item.className = "history-item";
+    var labelEl = document.createElement("div");
+    labelEl.className = "h-label";
+    labelEl.textContent = label;
+    var valueEl = document.createElement("div");
+    valueEl.className = "h-value";
+    if (trusted) {
+      var dot = document.createElement("span");
+      dot.className = "trust-dot";
+      dot.setAttribute("aria-hidden", "true");
+      valueEl.appendChild(dot);
+    }
+    if (href) {
+      var link = document.createElement("a");
+      link.href = href;
+      link.textContent = value;
+      if (/^https?:\/\//i.test(href)) { link.target = "_blank"; link.rel = "noopener noreferrer"; }
+      valueEl.appendChild(link);
+    } else {
+      valueEl.appendChild(document.createTextNode(value));
+    }
+    item.appendChild(labelEl);
+    item.appendChild(valueEl);
+    buyerBox.appendChild(item);
+  }
+
+  buyerItem(buyerCopy.inspection, buyerCopy.welcome, "", true);
+  var warrantyClass = (v.opc && v.opc.classOverride) ||
+    (window.SX_OPC ? SX_OPC.classify(v.year, v.km) : "");
+  if (warrantyClass) buyerItem(buyerCopy.warranty, buyerCopy.classLabel + " " + warrantyClass, buyerCopy.guide);
+
+  var buyer = v.buyerInfo || {};
+  var report = String(buyer.historyReport || "").trim();
+  if (/^https?:\/\/[^\s]+$/i.test(report)) buyerItem(buyerCopy.report, buyerCopy.view, report);
+  var keyCount = Number(buyer.keys);
+  if (Number.isInteger(keyCount) && keyCount > 0 && keyCount < 10) buyerItem(buyerCopy.keys, String(keyCount));
+  if (buyer.winterTires === "included" || buyer.winterTires === "not-included") {
+    buyerItem(buyerCopy.tires, buyer.winterTires === "included" ? buyerCopy.included : buyerCopy.notIncluded);
+  }
+  var work = String(FR ? (buyer.workFr || "") : (buyer.work || "")).trim();
+  if (work) {
+    var noteEl = document.createElement("p");
+    noteEl.className = "history-note";
+    var noteLabel = document.createElement("strong");
+    noteLabel.textContent = buyerCopy.work + ": ";
+    noteEl.appendChild(noteLabel);
+    noteEl.appendChild(document.createTextNode(work));
+    buyerBox.appendChild(noteEl);
+  }
+  buyerTarget.innerHTML = "";
+  buyerTarget.appendChild(buyerBox);
+
   /* ---------- Specifications ---------- */
   var L = SX.lang === "fr"
     ? { engine: "Moteur", trans: "Transmission", drive: "Rouage", fuel: "Carburant",
@@ -137,13 +225,17 @@ SX.ready.then(function () {
         intr: "Interior", doors: "Doors", seats: "Seats", km: "Kilometres", vin: "VIN" };
 
   var locale = SX.lang === "fr" ? "fr-CA" : "en-CA";
+  function economy(value) {
+    var n = Number(value);
+    return isFinite(n) && n > 0 ? n.toFixed(1) + " L/100 km" : null;
+  }
   var specs = [
     [L.engine, v.engine],
     [L.trans, SX.specLabel("transmission", v.transmission)],
     [L.drive, SX.specLabel("drivetrain", v.drivetrain)],
     [L.fuel, SX.specLabel("fuel", v.fuel)],
-    [L.city, v.econCity != null ? Number(v.econCity).toFixed(1) + " L/100 km" : null],
-    [L.hwy, v.econHwy != null ? Number(v.econHwy).toFixed(1) + " L/100 km" : null],
+    [L.city, economy(v.econCity)],
+    [L.hwy, economy(v.econHwy)],
     [L.ext, v.extColor],
     [L.intr, v.intColor],
     [L.doors, v.doors != null ? String(v.doors) : null],
