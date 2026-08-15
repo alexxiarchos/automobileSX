@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T17:53:23.814Z",
+  "updatedAt": "2026-08-15T17:53:51.780Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -791,7 +791,7 @@
       "year": 2018,
       "make": "Volkswagen",
       "model": "Tiguan",
-      "trim": "",
+      "trim": "Comfortline",
       "body": "SUV",
       "price": 9999,
       "km": 194000,
@@ -801,7 +801,7 @@
       "extColor": "White",
       "extHex": "#eceae6",
       "intColor": "Black",
-      "engine": "2.0",
+      "engine": "2.0L Turbo I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -821,12 +821,11 @@
         "Bluetooth",
         "Navigation",
         "Push-Button Start",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "The 2018 Volkswagen Tiguan SE, 4Motion SEL on offer here is a four-door SUV showing 194,000 km. It has a 2.0 engine, an automatic transmission and all-wheel drive. It seats seven.\n\nIt is finished in white with black inside. On the equipment list: backup camera, blind spot monitoring, forward collision warning, automatic emergency braking, automatic high beams, heated seats, leather seats, third-row seating, Bluetooth and navigation.\n\nCome by and take a look in Dorval. We are open seven days a week by appointment and you deal directly with Spiro.",
       "descFr": "Volkswagen Tiguan SE, 4Motion SEL 2018 : un VUS à quatre portes avec 194 000 km au compteur. Il est doté d'un moteur 2.0, d'une transmission automatique et d'un rouage intégral. Il offre sept places.\n\nExtérieur blanc et intérieur en noir. Parmi les équipements : caméra de recul, surveillance des angles morts, alerte de collision avant, freinage d'urgence automatique, feux de route automatiques, sièges chauffants, sièges en cuir, troisième rangée de sièges, Bluetooth et navigation.\n\nPassez le voir à Dorval. Nous sommes ouverts sept jours sur sept sur rendez-vous et vous traitez directement avec Spiro.",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -860,7 +859,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T11:56:54.576Z",
-      "updatedAt": "2026-08-15T04:14:41.420Z",
+      "updatedAt": "2026-08-15T17:53:51.069Z",
       "publishedAt": "2026-08-13T22:45:56.086Z",
       "posts": [
         {
