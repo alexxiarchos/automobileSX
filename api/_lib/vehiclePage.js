@@ -12,6 +12,7 @@ const CATALOGUE = require("../../js/features.js");
 /* The description is composed here rather than read out of a field, so a page
    can never show a paragraph that stopped being true. See js/describe.js. */
 const DESCRIBE = require("../../js/describe.js");
+const MAKES = require("../../js/makes.js");
 
 const PATHS = {
   en: { dir: "vehicles", inventory: "/inventory", contact: "/contact", financing: "/financing" },
@@ -123,7 +124,7 @@ function km(n, lang) {
 }
 
 function title(v) {
-  return [v.year, v.make, v.model].filter(Boolean).join(" ");
+  return [v.year, MAKES.fixMake(v.make), MAKES.fixModel(v.model)].filter(Boolean).join(" ");
 }
 
 function fullName(v) {
@@ -203,8 +204,8 @@ function schema(v, lang) {
     description: metaDescription(v, lang),
     sku: v.stock || undefined,
     itemCondition: "https://schema.org/UsedCondition",
-    brand: { "@type": "Brand", name: v.make },
-    model: v.model,
+    brand: { "@type": "Brand", name: MAKES.fixMake(v.make) },
+    model: MAKES.fixModel(v.model),
     vehicleModelDate: String(v.year || ""),
     mileageFromOdometer: { "@type": "QuantitativeValue", value: v.km, unitCode: "KMT" },
     bodyType: v.body,
@@ -416,6 +417,7 @@ function renderVehiclePage(v, lang) {
 
 <script src="/js/features.js"></script>
 <script src="/js/describe.js"></script>
+<script src="/js/makes.js"></script>
 <script src="/js/data.js"></script>
 <script src="/js/components.js"></script>
 <script src="/js/detail.js" defer></script>

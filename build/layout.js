@@ -236,6 +236,7 @@ ${page.body}
 <footer class="site-footer" id="site-footer">${staticFooter(lang)}</footer>
 <div class="mobile-cta-bar" id="mobile-cta-bar"></div>
 
+<script src="/js/makes.js"></script>
 <script src="/js/data.js"></script>
 <script src="/js/components.js"></script>
 ${scripts}

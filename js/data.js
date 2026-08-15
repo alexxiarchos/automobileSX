@@ -312,6 +312,15 @@ SX.ready = fetch("/api/stock", { cache: "no-cache" })
   })
   .then(function (d) {
     var all = (d && d.vehicles) || [];
+    /* Normalize display spelling in memory only. The admin-controlled JSON
+       remains untouched, but legacy values such as "Bmw" cannot leak into
+       headings, filters or structured page content. */
+    if (window.SX_MAKES) {
+      all.forEach(function (v) {
+        v.make = SX_MAKES.fixMake(v.make);
+        v.model = SX_MAKES.fixModel(v.model);
+      });
+    }
     SX.allVehicles = all.filter(function (v) { return v.status !== "draft"; });
     SX.vehicles = all.filter(function (v) { return !v.status || v.status === "available"; });
   })
@@ -326,7 +335,9 @@ SX.getVehicle = function (id) {
 };
 
 SX.vehicleTitle = function (v) {
-  return v.year + " " + v.make + " " + v.model;
+  var make = window.SX_MAKES ? SX_MAKES.fixMake(v.make) : v.make;
+  var model = window.SX_MAKES ? SX_MAKES.fixModel(v.model) : v.model;
+  return v.year + " " + make + " " + model;
 };
 
 SX.bodyTypes = ["Sedan", "SUV", "Truck", "Coupe", "Hatchback"];

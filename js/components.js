@@ -273,7 +273,8 @@ window.SXUI = (function () {
     return '<svg viewBox="0 0 24 24" fill="' + (filled ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21c-4.8-3.6-8.4-6.8-9.6-9.9C1.2 8 2.6 4.6 6 4.1c1.9-.3 3.8.6 6 2.9 2.2-2.3 4.1-3.2 6-2.9 3.4.5 4.8 3.9 3.6 7-1.2 3.1-4.8 6.3-9.6 9.9z"/></svg>';
   }
 
-  function vehicleCard(v) {
+  function vehicleCard(v, opts) {
+    opts = opts || {};
     var card = document.createElement("article");
     card.className = "vehicle-card";
     var alt = SX.vehicleTitle(v) + " " + (v.trim || "") + (v.extColor ? ", " + v.extColor : "");
@@ -281,7 +282,9 @@ window.SXUI = (function () {
 
     card.innerHTML =
       '<div class="vc-media">' +
-      '<img loading="lazy" src="' + vehicleImage(v, 0) + '" alt="' + alt + '" width="512" height="288">' +
+      '<a href="' + SX.vehicleUrl(v) + '" tabindex="-1" aria-hidden="true">' +
+      '<img ' + (opts.eager ? 'fetchpriority="high"' : 'loading="lazy"') +
+        ' decoding="async" src="' + vehicleImage(v, 0) + '" alt="' + alt + '" width="512" height="288"></a>' +
       (tag ? '<span class="vc-tag">' + tag + "</span>" : "") +
       '<span class="vc-photo-count">▣ ' + photoCount(v) + "</span>" +
       "</div>" +

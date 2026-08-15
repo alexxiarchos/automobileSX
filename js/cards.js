@@ -17,9 +17,9 @@
    free of DOM calls for that reason. */
 
 (function (root, factory) {
-  if (typeof module === "object" && module.exports) module.exports = factory();
-  else root.SX_CARDS = factory();
-})(typeof self !== "undefined" ? self : this, function () {
+  if (typeof module === "object" && module.exports) module.exports = factory(require("./makes.js"));
+  else root.SX_CARDS = factory(root.SX_MAKES);
+})(typeof self !== "undefined" ? self : this, function (makes) {
   "use strict";
 
   var T = {
@@ -67,7 +67,9 @@
   }
 
   function title(v) {
-    return [v.year, v.make, v.model].filter(Boolean).join(" ");
+    var make = makes && makes.fixMake ? makes.fixMake(v.make) : v.make;
+    var model = makes && makes.fixModel ? makes.fixModel(v.model) : v.model;
+    return [v.year, make, model].filter(Boolean).join(" ");
   }
 
   function url(v, lang) {
@@ -103,12 +105,13 @@
      the inventory page, so they load eagerly and everything after them waits.
      Lazy-loading the lead image is the classic way to make a page score worse
      while looking like an optimisation. */
-  function card(v, lang, index) {
+  function card(v, lang, index, eagerCount) {
     var t = T[lang];
     var name = title(v);
     var alt = [name, v.trim, v.extColor].filter(Boolean).join(" ").trim();
     var tag = (v.status === "sold") ? t.sold : (v.tag || "");
-    var eager = (index || 0) < 3;
+    var priorityCount = eagerCount === undefined ? 3 : eagerCount;
+    var eager = (index || 0) < priorityCount;
     var count = (v.images && v.images.length) || 1;
 
     return '<article class="vehicle-card">' +
@@ -145,10 +148,10 @@
       });
   }
 
-  function grid(vehicles, lang, limit) {
+  function grid(vehicles, lang, limit, eagerCount) {
     var list = available(vehicles);
     if (limit) list = list.slice(0, limit);
-    return list.map(function (v, i) { return card(v, lang, i); }).join("");
+    return list.map(function (v, i) { return card(v, lang, i, eagerCount); }).join("");
   }
 
   return {
