@@ -66,9 +66,9 @@
     }
   ];
 
-  /* Labels that older listings may already carry. They are recognised and
-     translated, but are not offered as new choices: "AWD" duplicates the
-     drivetrain field, which the spec table already shows. */
+  /* Labels that older listings may already carry. They are recognised so the
+     admin can retire them cleanly, but are not displayed: "AWD" duplicates the
+     drivetrain field and can contradict it after a correction. */
   var LEGACY = ["AWD"];
 
   var FR = {
@@ -144,11 +144,19 @@
     return FR[c] || c;
   }
 
+  /* Public descriptions, pages and ads all use this list. Legacy drivetrain
+     labels are omitted because the dedicated drivetrain field is authoritative. */
+  function publicList(list) {
+    return (list || []).map(canonical).filter(function (f, i, all) {
+      return f && LEGACY.indexOf(f) === -1 && all.indexOf(f) === i;
+    });
+  }
+
   /* A vehicle's flat feature list becomes display groups, in catalogue order,
      with anything the owner typed himself kept at the end under "Also included"
      rather than dropped. */
   function grouped(list, lang) {
-    var flat = (list || []).map(canonical).filter(Boolean);
+    var flat = publicList(list);
     var seen = {};
     var out = [];
     GROUPS.forEach(function (g) {
@@ -180,6 +188,6 @@
 
   return {
     GROUPS: GROUPS, LEGACY: LEGACY, FR: FR, ALL: ALL,
-    canonical: canonical, isKnown: isKnown, label: label, grouped: grouped
+    canonical: canonical, isKnown: isKnown, label: label, publicList: publicList, grouped: grouped
   };
 });

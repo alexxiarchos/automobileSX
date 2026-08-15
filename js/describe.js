@@ -326,7 +326,7 @@
   }
 
   function featuresSentence(v, lang, n) {
-    var list = (v.features || []).slice(0, 10);
+    var list = FEATURES.publicList(v.features || []).slice(0, 10);
     if (!list.length) return "";
     var phrases = list.map(function (f) { return featurePhrase(f, lang); });
     var text = join(phrases, lang);
