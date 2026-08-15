@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T17:52:43.051Z",
+  "updatedAt": "2026-08-15T17:52:59.262Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -493,13 +493,13 @@
       "body": "SUV",
       "price": 7999,
       "km": 215000,
-      "transmission": "Automatic",
+      "transmission": "CVT",
       "fuel": "Gasoline",
       "drivetrain": "AWD",
       "extColor": "White",
       "extHex": "#eceae6",
       "intColor": "Black",
-      "engine": "2.5",
+      "engine": "2.5L I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -514,12 +514,11 @@
         "Heated Seats",
         "Sunroof",
         "Bluetooth",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "Financement disponible\n\nSubaru Impreza 2019\n\n5️⃣1️⃣4️⃣-8️⃣2️⃣4️⃣-9️⃣1️⃣1️⃣7️⃣\n2044 avenue Chartier Dorval \nHoraires flexible sur rendez-vous\n \n\nSièges chauffants, climatisation, groupe électrique et bien plus encore.\nUne voiture fiable, économique et agréable à conduire au quotidien. aujourd’hui! Contactez-nous pour plus d’informations.",
       "descFr": "",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -545,8 +544,18 @@
         "images/vehicles/2017-subaru-forester-774gh/msem4xst-117.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T12:05:47.668Z",
-      "updatedAt": "2026-08-13T22:40:07.320Z",
+      "updatedAt": "2026-08-15T17:52:58.580Z",
       "publishedAt": "2026-08-13T22:40:07.320Z",
       "posts": [
         {
