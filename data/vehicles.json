@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-08-15T17:54:58.814Z",
+  "updatedAt": "2026-08-15T18:03:59.170Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
       "year": 2016,
       "make": "Kia",
       "model": "Sorento",
-      "trim": "L / LX",
+      "trim": "LX",
       "body": "SUV",
       "price": 9999,
       "km": 156000,
@@ -16,7 +16,7 @@
       "extColor": "Black",
       "extHex": "#141518",
       "intColor": "Grey",
-      "engine": "2.0L",
+      "engine": "2.0L I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -71,7 +71,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-13T18:10:50.902Z",
-      "updatedAt": "2026-08-14T04:46:01.828Z",
+      "updatedAt": "2026-08-15T18:03:58.035Z",
       "publishedAt": "2026-08-13T18:14:14.006Z",
       "posts": [
         {
