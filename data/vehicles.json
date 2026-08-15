@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T18:03:59.170Z",
+  "updatedAt": "2026-08-15T18:22:13.649Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -163,7 +163,7 @@
       "year": 2014,
       "make": "Subaru",
       "model": "Legacy",
-      "trim": "2.5i",
+      "trim": "2.5i Premium",
       "body": "Sedan",
       "price": 4999,
       "km": 214000,
@@ -226,7 +226,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T12:17:11.456Z",
-      "updatedAt": "2026-08-15T17:50:40.778Z",
+      "updatedAt": "2026-08-15T18:22:12.386Z",
       "publishedAt": "2026-08-13T22:36:35.297Z",
       "posts": [
         {
