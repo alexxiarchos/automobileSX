@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T17:54:23.731Z",
+  "updatedAt": "2026-08-15T17:54:36.502Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -1058,17 +1058,17 @@
       "year": 2018,
       "make": "Audi",
       "model": "Q3",
-      "trim": "",
+      "trim": "Komfort",
       "body": "SUV",
       "price": 13999,
       "km": 138000,
       "transmission": "Automatic",
       "fuel": "Gasoline",
       "drivetrain": "AWD",
-      "extColor": "Gris",
-      "extHex": "#6c7178",
-      "intColor": "Gria",
-      "engine": "2.0",
+      "extColor": "Grey",
+      "extHex": "#5c6066",
+      "intColor": "Grey",
+      "engine": "2.0L Turbo I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -1086,12 +1086,11 @@
         "Bluetooth",
         "Apple CarPlay",
         "Navigation",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "This 2018 Audi Q3 quattro Premium, quattro Sport Premium is a four-door SUV with 138,000 km on the odometer. It has a 2.0 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in gris with gria inside. Equipment includes backup camera, parking sensors, automatic high beams, heated seats, leather seats, sunroof, Bluetooth, Apple CarPlay, navigation and cruise control.\n\nCome by and take a look in Dorval. We are open seven days a week by appointment and you deal directly with Spiro.",
       "descFr": "Audi Q3 quattro Premium, quattro Sport Premium 2018, un VUS à quatre portes affichant 138 000 km au compteur. Il est doté d'un moteur 2.0, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur Gris et intérieur en Gria. L'équipement comprend : caméra de recul, capteurs de stationnement, feux de route automatiques, sièges chauffants, sièges en cuir, toit ouvrant, Bluetooth, Apple CarPlay, navigation et régulateur de vitesse.\n\nPassez le voir à Dorval. Nous sommes ouverts sept jours sur sept sur rendez-vous et vous traitez directement avec Spiro.",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -1126,7 +1125,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T11:49:56.989Z",
-      "updatedAt": "2026-08-15T04:15:10.999Z",
+      "updatedAt": "2026-08-15T17:54:35.805Z",
       "publishedAt": "2026-08-13T22:47:00.185Z",
       "posts": [
         {
