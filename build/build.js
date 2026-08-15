@@ -7,6 +7,7 @@ const fs = require("fs");
 const path = require("path");
 const { SITE, ROUTES, FILES, DEALER, renderPage } = require("./layout.js");
 const blocks = require("./blocks.js");
+const { loadLatestInventory } = require("./liveInventory.js");
 const { renderVehiclePages } = require("../api/_lib/vehiclePage.js");
 
 const ROOT = path.join(__dirname, "..");
@@ -42,14 +43,11 @@ async function loadVehicles() {
       : "";
     const repo = process.env.GITHUB_REPO || systemRepo || "alexxiarchos/automobileSX";
     const branch = process.env.GITHUB_BRANCH || "main";
-    const url = "https://raw.githubusercontent.com/" + repo + "/" + branch + "/data/vehicles.json";
-    const response = await fetch(url, { cache: "no-store" });
-    if (!response.ok) throw new Error("Live inventory request failed with HTTP " + response.status);
-    const data = await response.json();
-    if (!data || !Array.isArray(data.vehicles)) {
-      throw new Error("Live inventory returned an invalid data shape");
-    }
-    return data.vehicles;
+    return loadLatestInventory({
+      repo: repo,
+      branch: branch,
+      token: process.env.GITHUB_TOKEN || ""
+    });
   }
   try {
     const raw = fs.readFileSync(path.join(ROOT, "data", "vehicles.json"), "utf8");
