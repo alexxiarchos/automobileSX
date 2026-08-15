@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T17:52:11.060Z",
+  "updatedAt": "2026-08-15T17:52:19.071Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -253,7 +253,7 @@
       "extColor": "Black",
       "extHex": "#141518",
       "intColor": "Brown",
-      "engine": "2.5",
+      "engine": "2.0L I4",
       "econCity": "",
       "econHwy": "",
       "doors": "",
@@ -276,8 +276,7 @@
         "Keyless Entry",
         "Push-Button Start",
         "Cruise Control",
-        "Alloy Wheels",
-        "AWD"
+        "Alloy Wheels"
       ],
       "desc": "Financement disponible,2019 Volvo xc 60 T6 2.0 ,momentum, navigation, caméra, de recul, toit panoramiques , siège, chauffant, ac , groupe électrique\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
       "descFr": "",
@@ -305,8 +304,18 @@
         "images/vehicles/2019-volvo-xc60-zen4s/msemexmp-158.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T12:13:07.748Z",
-      "updatedAt": "2026-08-13T23:11:12.797Z",
+      "updatedAt": "2026-08-15T17:52:18.465Z",
       "publishedAt": "2026-08-13T22:35:39.133Z",
       "posts": [
         {
