@@ -87,6 +87,42 @@ const FR_SPEC = {
 const ADDRESS = "2044 Avenue Chartier, Dorval, QC H9P 1H2";
 const PHONE = "514-824-9117";
 
+function coreDescription(v, lang) {
+  return DESCRIBE.coreText ? DESCRIBE.coreText(v, lang) : DESCRIBE.text(v, lang);
+}
+
+function actionLines(v, lang, target) {
+  const fr = lang === "fr";
+  const lines = [
+    "Automobile SX · " + ADDRESS
+  ];
+
+  if (target === "marketplace") {
+    lines.push(fr
+      ? "Envoyez un message sur cette annonce pour confirmer la disponibilité ou réserver un essai routier."
+      : "Send a message on this listing to confirm availability or book a test drive.");
+    lines.push(fr ? "Vous pouvez aussi appeler ou texter le " + PHONE + "." : "You can also call or text " + PHONE + ".");
+  } else {
+    lines.push(fr
+      ? "Appelez ou textez le " + PHONE + " pour confirmer la disponibilité ou réserver un essai routier."
+      : "Call or text " + PHONE + " to confirm availability or book a test drive.");
+  }
+
+  lines.push(fr
+    ? "Ouvert sept jours sur sept sur rendez-vous. Financement disponible. Nous acceptons les véhicules en échange."
+    : "Open seven days a week by appointment. Financing is available and trade-ins are welcome.");
+
+  if (target === "instagram") {
+    lines.push(fr
+      ? "Tous les détails et les photos sont accessibles par le lien dans notre bio" + (v.stock ? ". Demandez le stock " + v.stock + "." : ".")
+      : "Full details and every photo are available through the link in our bio" + (v.stock ? ". Ask for stock " + v.stock + "." : "."));
+  } else {
+    lines.push((fr ? "Tous les détails et les photos : " : "Full details and every photo: ") + vehicleUrl(v));
+    if (v.stock) lines.push((fr ? "Stock " : "Stock ") + v.stock);
+  }
+  return lines;
+}
+
 function hashtags(v) {
   const tags = ["#AutomobileSX", "#Dorval", "#WestIsland", "#Montreal",
     "#UsedCars", "#AutosUsagees", "#VoitureUsagee"];
@@ -100,68 +136,74 @@ function hashtags(v) {
 /* Two captions, because the two platforms behave differently.
 
    On a Facebook Page a URL in the text is a working link, so the post can send
-   people straight to the vehicle page. In an Instagram caption nothing is
-   clickable - not a link, not a phone number - so printing a long address there
-   wastes the most valuable lines in the post and tells the reader to do
-   something they cannot do. The Instagram version points at the profile link
-   and gives the stock number, which is what someone will quote when they call.
+   people straight to the vehicle page. Instagram caption links are not
+   clickable, so its version keeps the phone and address as useful reference
+   information, points at the profile link and gives the stock number a buyer
+   can quote when they call or message.
 
    Both open with the facts a person needs to decide whether to keep reading:
    year, model, price, kilometres. Instagram hides everything after roughly the
    first line behind "more", so nothing that matters goes below it. */
 
 function captionFacebook(v) {
-  const feats = topFeatures(v, "en", 5);
-  const featsFr = topFeatures(v, "fr", 5);
-
   return [
     title(v) + " - " + money(v.price),
     specLine(v, "en"),
-    feats.length ? "Includes: " + feats.join(", ") : "",
     "",
-    "Full details and every photo: " + vehicleUrl(v),
+    coreDescription(v, "en"),
     "",
-    "Automobile SX · " + ADDRESS,
-    "Call or text " + PHONE + " · open seven days a week by appointment.",
-    v.stock ? "Stock " + v.stock : "",
+    actionLines(v, "en", "facebook").join("\n"),
     "",
     "· · ·",
     "",
     title(v) + " - " + money(v.price),
     specLine(v, "fr"),
-    featsFr.length ? "Équipements : " + featsFr.join(", ") : "",
     "",
-    "Tous les détails et les photos : " + vehicleUrl(v),
-    "Appelez ou textez le " + PHONE + ", sept jours sur sept sur rendez-vous.",
+    coreDescription(v, "fr"),
+    "",
+    actionLines(v, "fr", "facebook").join("\n"),
     "",
     hashtags(v)
   ].join("\n").replace(/\n{3,}/g, "\n\n").trim();
 }
 
-function captionInstagram(v) {
-  const feats = topFeatures(v, "en", 5);
-  const featsFr = topFeatures(v, "fr", 4);
-
+function instagramText(v, includeHashtags, maxCoreParagraphs) {
+  const coreEn = maxCoreParagraphs && DESCRIBE.coreParagraphs
+    ? DESCRIBE.coreParagraphs(v, "en").slice(0, maxCoreParagraphs).join("\n\n")
+    : coreDescription(v, "en");
+  const coreFr = maxCoreParagraphs && DESCRIBE.coreParagraphs
+    ? DESCRIBE.coreParagraphs(v, "fr").slice(0, maxCoreParagraphs).join("\n\n")
+    : coreDescription(v, "fr");
   return [
     title(v) + " - " + money(v.price),
     specLine(v, "en"),
-    feats.length ? "Includes: " + feats.join(", ") : "",
     "",
-    /* No clickable link is possible here, so say where the link is instead of
-       printing one nobody can tap. */
-    "📍 Automobile SX · " + ADDRESS,
-    "📞 Call or text " + PHONE,
-    "🔗 Full details and every photo: link in bio" + (v.stock ? " · ask for stock " + v.stock : ""),
+    coreEn,
+    "",
+    actionLines(v, "en", "instagram").join("\n"),
     "",
     "· · ·",
     "",
     title(v) + " - " + money(v.price),
     specLine(v, "fr"),
-    featsFr.length ? "Équipements : " + featsFr.join(", ") : "",
-    "Appelez ou textez le " + PHONE + " · lien en bio pour toutes les photos.",
     "",
-    hashtags(v)
+    coreFr,
+    "",
+    actionLines(v, "fr", "instagram").join("\n"),
+    "",
+    includeHashtags ? hashtags(v) : ""
   ].join("\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+
+function captionInstagram(v) {
+  /* Instagram caps captions at 2,200 characters. Keep the complete canonical
+     description whenever it fits, then drop optional hashtags, then only the
+     owner-written extra paragraphs. Vehicle facts and both CTA blocks stay. */
+  let out = instagramText(v, true, 0);
+  if (out.length <= 2200) return out;
+  out = instagramText(v, false, 0);
+  if (out.length <= 2200) return out;
+  return instagramText(v, false, 2);
 }
 
 /* Kept for anything that just wants "the caption". */
@@ -172,6 +214,7 @@ function caption(v, target) {
 /* Marketplace is filled in by hand, so give the owner each field separately
    rather than one blob they have to pick apart. */
 function marketplaceListing(v) {
+  const header = title(v) + " - " + money(v.price);
   return {
     title: title(v),
     price: String(Math.round(Number(v.price) || 0)),
@@ -182,16 +225,25 @@ function marketplaceListing(v) {
     transmission: v.transmission || "",
     exteriorColour: v.extColor || "",
     description: [
-      title(v) + " at Automobile SX, 2044 Avenue Chartier, Dorval.",
+      header,
+      specLine(v, "en"),
       "",
-      DESCRIBE.text(v, "en"),
+      coreDescription(v, "en"),
       "",
-      [km(v.km), v.transmission, v.drivetrain, v.fuel].filter(Boolean).join(" · "),
+      actionLines(v, "en", "marketplace").join("\n"),
       "",
-      "More photos and full details: " + vehicleUrl(v),
-      "Call or text Spiro at 514-824-9117. Viewings seven days a week.",
+      "Price excludes applicable taxes and licensing.",
       "",
-      "Price excludes applicable taxes and licensing."
+      "· · ·",
+      "",
+      header,
+      specLine(v, "fr"),
+      "",
+      coreDescription(v, "fr"),
+      "",
+      actionLines(v, "fr", "marketplace").join("\n"),
+      "",
+      "Le prix exclut les taxes applicables et les frais d'immatriculation."
     ].filter(l => l !== null).join("\n").replace(/\n{3,}/g, "\n\n").trim()
   };
 }
