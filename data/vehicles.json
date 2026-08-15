@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T17:54:36.502Z",
+  "updatedAt": "2026-08-15T17:54:58.814Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -1140,7 +1140,7 @@
     {
       "id": "2017-bmw-x3-cqgmi",
       "year": 2017,
-      "make": "Bmw",
+      "make": "BMW",
       "model": "X3",
       "trim": "xDrive28i",
       "body": "SUV",
@@ -1152,7 +1152,7 @@
       "extColor": "Blue",
       "extHex": "#2b4d7e",
       "intColor": "Black",
-      "engine": "2.0L 4-cyl",
+      "engine": "2.0L Turbo I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -1169,12 +1169,11 @@
         "Sunroof",
         "Bluetooth",
         "Navigation",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "The 2017 Bmw X3 xDrive28i on offer here is a four-door SUV showing 131,000 km. It has a 2.0L 4-cyl engine, an automatic transmission and all-wheel drive.\n\nIt is finished in blue with black inside. On the equipment list: backup camera, automatic high beams, heated seats, heated steering wheel, leather seats, sunroof, Bluetooth, navigation, cruise control and AWD.\n\nIt is available now in Dorval. Call 514-824-9117 to arrange a time to come and see it.",
       "descFr": "Bmw X3 xDrive28i 2017 : un VUS à quatre portes avec 131 000 km au compteur. Il est doté d'un moteur 2.0L 4-cyl, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur bleu et intérieur en noir. Parmi les équipements : caméra de recul, feux de route automatiques, sièges chauffants, volant chauffant, sièges en cuir, toit ouvrant, Bluetooth, navigation, régulateur de vitesse et rouage intégral.\n\nIl est disponible dès maintenant à Dorval. Appelez le 514-824-9117 pour fixer un rendez-vous.",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -1199,8 +1198,18 @@
         "images/vehicles/2017-bmw-x3-cqgmi/msdvs6qu-16.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-03T23:47:18.081Z",
-      "updatedAt": "2026-08-13T22:48:01.522Z",
+      "updatedAt": "2026-08-15T17:54:58.080Z",
       "publishedAt": "2026-08-13T22:48:01.523Z",
       "posts": [
         {
