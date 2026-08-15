@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T17:52:19.071Z",
+  "updatedAt": "2026-08-15T17:52:33.168Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -342,7 +342,7 @@
       "extColor": "Black",
       "extHex": "#141518",
       "intColor": "Grey",
-      "engine": "1.8",
+      "engine": "1.8L Turbo I4",
       "econCity": "",
       "econHwy": "",
       "doors": 2,
@@ -354,8 +354,7 @@
         "Backup Camera",
         "Heated Seats",
         "Bluetooth",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "This is a 2017 Volkswagen Golf Trendline, a two-door hatchback with 188,000 km on it. It has a 1.8 engine, a manual transmission and front-wheel drive.\n\nIt is finished in black with grey inside. It is equipped with backup camera, heated seats, Bluetooth, cruise control and AWD.\n\nIt is on the lot in Dorval now and can be seen seven days a week by appointment.",
       "descFr": "Voici ce Volkswagen Golf Trendline 2017, une voiture à hayon à deux portes avec 188 000 km au compteur. Il est doté d'un moteur 1.8, d'une transmission manuelle et de la traction avant.\n\nExtérieur noir et intérieur en gris. Équipements notables : caméra de recul, sièges chauffants, Bluetooth, régulateur de vitesse et rouage intégral.\n\nLe véhicule est présentement sur place à Dorval et peut être vu sept jours sur sept, sur rendez-vous.",
@@ -392,7 +391,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T12:10:04.639Z",
-      "updatedAt": "2026-08-15T04:14:01.492Z",
+      "updatedAt": "2026-08-15T17:52:32.576Z",
       "publishedAt": "2026-08-13T22:37:45.238Z",
       "posts": [
         {
