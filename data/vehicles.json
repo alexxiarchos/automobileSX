@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-14T17:53:55.801Z",
+  "updatedAt": "2026-08-15T04:11:16.073Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -314,11 +314,11 @@
       "year": 2017,
       "make": "Volkswagen",
       "model": "Golf",
-      "trim": "S",
+      "trim": "SS",
       "body": "Hatchback",
       "price": 6499,
       "km": 188000,
-      "transmission": "Automatic",
+      "transmission": "Manual",
       "fuel": "Gasoline",
       "drivetrain": "FWD",
       "extColor": "Black",
@@ -339,9 +339,9 @@
         "Cruise Control",
         "AWD"
       ],
-      "desc": "2017, Volkswagen golf Trendline,1.8 turbo manuelle, ac, groupe électriques\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
-      "descFr": "",
-      "descMode": "manual",
+      "desc": "This is a 2017 Volkswagen Golf Trendline, a two-door hatchback with 188,000 km on it. It has a 1.8 engine, a manual transmission and front-wheel drive.\n\nIt is finished in black with grey inside. It is equipped with backup camera, heated seats, Bluetooth, cruise control and AWD.\n\nIt is on the lot in Dorval now and can be seen seven days a week by appointment.",
+      "descFr": "Voici ce Volkswagen Golf Trendline 2017, une voiture à hayon à deux portes avec 188 000 km au compteur. Il est doté d'un moteur 1.8, d'une transmission manuelle et de la traction avant.\n\nExtérieur noir et intérieur en gris. Équipements notables : caméra de recul, sièges chauffants, Bluetooth, régulateur de vitesse et rouage intégral.\n\nLe véhicule est présentement sur place à Dorval et peut être vu sept jours sur sept, sur rendez-vous.",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -363,8 +363,18 @@
         "images/vehicles/2017-volkswagen-golf-iftqk/msembiah-143.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T12:10:04.639Z",
-      "updatedAt": "2026-08-13T22:37:45.238Z",
+      "updatedAt": "2026-08-15T04:11:14.972Z",
       "publishedAt": "2026-08-13T22:37:45.238Z",
       "posts": [
         {
