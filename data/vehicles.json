@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T04:13:31.354Z",
+  "updatedAt": "2026-08-15T04:14:02.225Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -314,7 +314,7 @@
       "year": 2017,
       "make": "Volkswagen",
       "model": "Golf",
-      "trim": "SS",
+      "trim": "Trendline",
       "body": "Hatchback",
       "price": 6499,
       "km": 188000,
@@ -374,7 +374,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T12:10:04.639Z",
-      "updatedAt": "2026-08-15T04:11:14.972Z",
+      "updatedAt": "2026-08-15T04:14:01.492Z",
       "publishedAt": "2026-08-13T22:37:45.238Z",
       "posts": [
         {
