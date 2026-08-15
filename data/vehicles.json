@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T17:54:03.150Z",
+  "updatedAt": "2026-08-15T17:54:23.731Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -963,17 +963,17 @@
       "year": 2017,
       "make": "Subaru",
       "model": "Outback",
-      "trim": "Premium +M/R",
+      "trim": "2.5i Touring",
       "body": "SUV",
       "price": 9999,
       "km": 191000,
-      "transmission": "Automatic",
+      "transmission": "CVT",
       "fuel": "Gasoline",
       "drivetrain": "AWD",
       "extColor": "White",
       "extHex": "#eceae6",
       "intColor": "Black",
-      "engine": "2.5",
+      "engine": "2.5L I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -990,12 +990,11 @@
         "Bluetooth",
         "Cruise Control",
         "Power Liftgate",
-        "Alloy Wheels",
-        "AWD"
+        "Alloy Wheels"
       ],
       "desc": "Financement disponible 2017, Outback Touring, 2.5 l\n\nNouveau pneus, nouveau freins, roulent très bien, caméra de recul, Bluetooth, air climatisé , toit et groupe électrique \n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
       "descFr": "",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -1019,8 +1018,18 @@
         "images/vehicles/2017-subaru-outback-jcq9w/mselod62-30.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T11:51:51.272Z",
-      "updatedAt": "2026-08-13T22:31:41.104Z",
+      "updatedAt": "2026-08-15T17:54:23.021Z",
       "publishedAt": "2026-08-13T22:31:41.104Z",
       "posts": [
         {
