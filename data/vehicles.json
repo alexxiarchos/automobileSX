@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T17:53:09.078Z",
+  "updatedAt": "2026-08-15T17:53:23.814Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -713,7 +713,7 @@
       "year": 2017,
       "make": "Audi",
       "model": "A4",
-      "trim": "quattro Premium",
+      "trim": "Komfort",
       "body": "Sedan",
       "price": 12999,
       "km": 148000,
@@ -723,7 +723,7 @@
       "extColor": "Blue",
       "extHex": "#2b4d7e",
       "intColor": "Black",
-      "engine": "2.0",
+      "engine": "2.0L Turbo I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -736,12 +736,11 @@
         "Leather Seats",
         "Sunroof",
         "Bluetooth",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "This is a 2017 Audi A4 quattro Premium, a four-door sedan with 148,000 km on it. It has a 2.0 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in blue with black inside. It is equipped with heated seats, leather seats, sunroof, Bluetooth, cruise control and AWD.\n\nIt is on the lot in Dorval now and can be seen seven days a week by appointment.",
       "descFr": "Voici cet Audi A4 quattro Premium 2017, une berline à quatre portes avec 148 000 km au compteur. Il est doté d'un moteur 2.0, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur bleu et intérieur en noir. Équipements notables : sièges chauffants, sièges en cuir, toit ouvrant, Bluetooth, régulateur de vitesse et rouage intégral.\n\nLe véhicule est présentement sur place à Dorval et peut être vu sept jours sur sept, sur rendez-vous.",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -764,8 +763,18 @@
         "images/vehicles/2017-audi-a4-gc6pg/mselw8fk-71.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T11:58:57.539Z",
-      "updatedAt": "2026-08-13T22:45:04.559Z",
+      "updatedAt": "2026-08-15T17:53:23.105Z",
       "publishedAt": "2026-08-13T22:45:04.559Z",
       "posts": [
         {
