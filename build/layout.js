@@ -240,6 +240,7 @@ ${page.body}
 <script src="/js/data.js"></script>
 <script src="/js/components.js"></script>
 ${scripts}
+<script src="/js/metrics.js"></script>
 </body>
 </html>
 `;

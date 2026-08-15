@@ -484,15 +484,24 @@ module.exports = {
 
   privacy: {
     title: "Privacy Policy | Automobile SX Dorval",
-    description: "How Automobile SX handles personal information. We use no analytics, no tracking and no cookies on this website.",
+    description: "How Automobile SX handles personal information and uses privacy-conscious, cookie-free website analytics.",
     h1: "Privacy policy",
     sub: "What we collect, what we do not, and how to reach us about it. Last updated 14 August 2026.",
     body: `
       <p>Automobile SX is a used car dealership at 2044 Avenue Chartier, Dorval, Quebec. This page explains what happens to personal information in connection with this website and our business. It is written to be accurate about how the site actually works rather than to cover every hypothetical.</p>
 
       <h2>What this website collects</h2>
-      <p>This site has <strong>no analytics, no advertising trackers, no marketing pixels and no cookies</strong>. We do not build profiles of visitors, and we cannot tell who you are from browsing our pages.</p>
-      <p>When you use the contact form, the name, email address, phone number, topic, vehicle selection and message you enter are sent to Automobile SX by email. The website does not add that message to an inventory database or marketing list.</p>
+      <p>This site has <strong>no advertising trackers, no marketing pixels and no analytics cookies</strong>. We do not build advertising profiles or track visitors across websites.</p>
+      <p>We use Vercel Web Analytics and Speed Insights to understand aggregate page traffic and real-world site performance. They may process the page path, referring site, approximate country or region, device and browser type, and measurements such as loading speed and layout stability. Vercel states that Web Analytics stores anonymized data, uses no cookies, does not associate activity with an IP address, and resets its visitor hash every 24 hours.</p>
+      <p>Before a page view is sent, this site removes the complete query string and fragment from the URL. We do not send names, email addresses, phone numbers, form contents, messages or other inquiry details to analytics. Analytics runs only on the public automobilesx.ca website, not in the admin panel or deployment previews. Browser Global Privacy Control and Do Not Track signals are respected.</p>
+      <div class="privacy-controls">
+        <p><strong>Anonymous site measurement on this browser:</strong> <span data-metrics-status data-on="On" data-off="Off">On</span></p>
+        <button class="btn btn-outline" type="button" data-metrics-opt-out>Turn off anonymous measurement</button>
+        <button class="btn btn-outline" type="button" data-metrics-opt-in hidden>Allow anonymous measurement</button>
+        <p class="privacy-control-note">Turning it off saves only that preference in this browser. It applies to future page loads and does not affect the website.</p>
+        <noscript><p class="privacy-control-note">Analytics does not load when JavaScript is disabled.</p></noscript>
+      </div>
+      <p>When you use the contact form, the name, contact details, topic, vehicle selection, reply preference and message you enter are sent to Automobile SX by email. The website does not add that message to an inventory database, analytics service or marketing list.</p>
 
       <h2>What we hold, and why</h2>
       <p>If you email, call or text us, we hold what you chose to tell us: your name, your contact details, and whatever you said about the vehicle you are interested in. We use it to answer you and to arrange a viewing or a sale. Nothing more.</p>
@@ -501,10 +510,11 @@ module.exports = {
 
       <h2>Other companies involved</h2>
       <p>Four third parties are involved in running the site, and it is fair that you know what each one sees.</p>
-      <p><strong>Vercel</strong> hosts the website. Like any web host, its servers record standard technical information such as IP addresses when a page is requested.</p>
+      <p><strong>Vercel</strong> hosts the website and provides the anonymous traffic and performance measurements described above. Like any web host, its servers also process standard technical information such as IP addresses when a page is requested.</p>
       <p><strong>Resend</strong> delivers messages submitted through the contact form to our email inbox. It processes the form details for that delivery; copies then remain in our email records so we can answer your inquiry.</p>
       <p><strong>Google</strong> provides the fonts used for the text, and the map on the home and contact pages. Loading a font or a map means your browser contacts Google directly, so Google may receive your IP address and set its own cookies. Google's handling of that is governed by its own privacy policy. If your browser blocks Google, the site still works: the map is replaced by our address and a link.</p>
       <p><strong>Meta</strong> is involved only if you follow a link to our Facebook or Instagram pages, at which point you are on their service and their policies apply.</p>
+      <p>These service providers may process information outside Quebec or Canada under their own security and privacy commitments.</p>
 
       <h2>Your rights in Quebec</h2>
       <p>Under Quebec's <em>Act respecting the protection of personal information in the private sector</em>, as amended by Law 25, you may ask us what personal information we hold about you, ask us to correct it if it is wrong, and ask us to stop using it, subject to the records we are legally required to keep for vehicle sales.</p>

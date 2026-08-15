@@ -483,6 +483,7 @@ function renderVehiclePage(v, lang) {
 <script src="/js/data.js"></script>
 <script src="/js/components.js"></script>
 <script src="/js/detail.js" defer></script>
+<script src="/js/metrics.js"></script>
 </body>
 </html>
 `;
