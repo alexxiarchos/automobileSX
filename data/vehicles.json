@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T18:22:49.342Z",
+  "updatedAt": "2026-08-17T21:26:36.127Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -129,7 +129,7 @@
         "images/vehicles/2019-nissan-kicks-6k9ge/msqy059k-1.jpg",
         "images/vehicles/2019-nissan-kicks-6k9ge/msqy05w1-2.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -141,8 +141,9 @@
         "remarks": ""
       },
       "createdAt": "2026-08-13T03:08:22.042Z",
-      "updatedAt": "2026-08-15T17:52:10.319Z",
+      "updatedAt": "2026-08-17T21:26:35.292Z",
       "publishedAt": "2026-08-13T03:22:07.318Z",
+      "soldAt": "2026-08-17T21:26:35.292Z",
       "posts": [
         {
           "target": "facebook",
