@@ -59,6 +59,8 @@ const DEALER = {
   region: "QC",
   postalCode: "H9P 1H2",
   country: "CA",
+  facebook: "https://www.facebook.com/SXautomobile/",
+  instagram: "https://www.instagram.com/automobile_sx",
   maps: "https://www.google.com/maps/search/?api=1&query=2044+Avenue+Chartier+Dorval+QC",
   /* Verified from the Google listing: the feature id in the search URL
      (0x4cc917d2f1d98cd3:0x50177985c7499902) decodes to this place id, and the
@@ -105,7 +107,11 @@ const dealerSchema = () => ({
   priceRange: "$$",
   /* Only profiles verified to be this business. The Google listing was
      confirmed from the feature id in the owner's own search URL. */
-  sameAs: ["https://www.google.com/maps?cid=5771215062979680514"],
+  sameAs: [
+    "https://www.google.com/maps?cid=5771215062979680514",
+    DEALER.facebook,
+    DEALER.instagram
+  ],
   areaServed: ["Dorval", "West Island", "Pointe-Claire", "Lachine", "Montréal", "Laval"],
   /* availableLanguage is not in scope for AutoDealer: schema.org defines it on
      ContactPoint, Course, LodgingBusiness, ServiceChannel and TouristAttraction
@@ -162,8 +168,11 @@ function staticFooter(lang) {
     .map(([route, label]) => `<li><a href="${ROUTES[lang][route]}">${label}</a></li>`)
     .join("");
   const switchLabel = lang === "en" ? "Voir ce site en français" : "View this site in English";
+  const facebookLabel = lang === "en" ? "Automobile SX on Facebook" : "Automobile SX sur Facebook";
+  const instagramLabel = lang === "en" ? "Automobile SX on Instagram" : "Automobile SX sur Instagram";
   return `<div class="container footer-static">
 <p><strong>${DEALER.name}</strong>, ${DEALER.street}, ${DEALER.city}, ${DEALER.region} ${DEALER.postalCode}. <a href="tel:${DEALER.phoneE164}">${DEALER.phone}</a></p>
+<p class="footer-static-social"><a href="${DEALER.facebook}" aria-label="${facebookLabel}">Facebook</a> · <a href="${DEALER.instagram}" aria-label="${instagramLabel}">Instagram</a></p>
 <ul>${links}<li><a href="${ROUTES[other].home}" hreflang="${other}" lang="${other}">${switchLabel}</a></li></ul>
 </div>`;
 }

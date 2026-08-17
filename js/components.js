@@ -218,6 +218,12 @@ window.SXUI = (function () {
     ].map(function (l) {
       return '<li><a href="' + SX.url(l[0]) + '">' + SX.t(l[1]) + "</a></li>";
     }).join("");
+    var socialLinks =
+      '<div class="footer-social" aria-label="' + SX.t("footer.social") + '">' +
+      '<a href="' + SX.dealer.facebookUrl + '" aria-label="' + SX.t("footer.facebookLabel") + '">' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v2H6v4h3v7h4v-7h3.5l.5-4h-4V9c0-.7.3-1 1-1z"/></svg><span>Facebook</span></a>' +
+      '<a href="' + SX.dealer.instagramUrl + '" aria-label="' + SX.t("footer.instagramLabel") + '">' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm10.5 1.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg><span>Instagram</span></a></div>';
 
     el.innerHTML =
       '<div class="container">' +
@@ -227,6 +233,7 @@ window.SXUI = (function () {
       '<address style="font-style:normal">' + SX.dealer.address1 + "<br>" + SX.dealer.address2 + "<br>" +
       '<a href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a><br>" +
       '<a href="mailto:' + SX.dealer.email + '">' + SX.dealer.email + "</a></address>" +
+      socialLinks +
       '<div class="footer-map">' + mapPlaceholder(SX.lang === "fr") +
       '<a class="footer-map-cta" href="' + SX.dealer.mapsUrl + '" target="_blank" rel="noopener">' +
       (SX.lang === "fr" ? "Itinéraire ↗" : "Get directions ↗") + "</a></div>" +
