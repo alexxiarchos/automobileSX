@@ -212,6 +212,9 @@ textarea { resize: vertical; }
 .vin-row .btn { flex: 0 0 auto; }
 .fh.vin-ok { color: #15803d; }
 .fh.vin-err { color: #b91c1c; }
+.vin-canada-help { margin-top: 8px; }
+.vin-canada-help a { font-weight: 700; color: var(--ink); }
+.vin-canada-help span { margin-left: 4px; }
 
 /* VIN card - the first thing in the editor, because filling it fills the rest */
 .vin-card {

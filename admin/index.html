@@ -82,7 +82,8 @@
                  autocapitalize="characters" autocorrect="off" spellcheck="false">
           <button class="btn btn-small btn-outline" type="button" id="vin-decode">Decode</button>
         </div>
-        <p class="fh" id="vin-status">Paste or type the VIN and it fills in the year, make, model, engine, body, drivetrain and the safety equipment by itself. Everything stays editable, and nothing you have already typed gets overwritten. No VIN? Just fill the form in below.</p>
+        <p class="fh" id="vin-status">Paste or type the VIN to fill reliable basics. Canadian trim, seating and equipment stay yours to confirm, and nothing you already typed gets overwritten. No VIN? Just fill the form in below.</p>
+        <p class="fh vin-canada-help"><a id="vin-canada-check" href="https://www.carfax.ca/tools/vin-decode" target="_blank" rel="noopener">Check Canadian trim free with CARFAX Canada &#8599;</a> <span>The VIN is copied for you to paste there.</span></p>
         <div id="vin-suggest" class="vin-suggest" hidden></div>
       </div>
 
@@ -101,7 +102,7 @@
         <div class="f"><label for="f-make">Make *</label><input id="f-make" type="text" list="makes-list" autocapitalize="words">
           <datalist id="makes-list"></datalist></div>
         <div class="f"><label for="f-model">Model *</label><input id="f-model" type="text" autocapitalize="words"></div>
-        <div class="f"><label for="f-trim">Trim</label><input id="f-trim" type="text" placeholder="e.g. XLE AWD"></div>
+        <div class="f"><label for="f-trim">Canadian trim</label><input id="f-trim" type="text" placeholder="e.g. Trendline or XLE"></div>
         <div class="f"><label for="f-price">Price (CAD) *</label><input id="f-price" type="number" min="0" step="50" inputmode="numeric" placeholder="e.g. 18900"></div>
         <div class="f"><label for="f-km">Mileage (km) *</label><input id="f-km" type="number" min="0" step="100" inputmode="numeric" placeholder="e.g. 84000"></div>
         <div class="f"><label for="f-extcolor">Exterior colour</label><input id="f-extcolor" type="text" placeholder="e.g. Black"></div>
@@ -116,7 +117,7 @@
           <select id="f-body"><option>Sedan</option><option>SUV</option><option>Truck</option><option>Coupe</option><option>Hatchback</option></select></div>
         <div class="f"><label for="f-engine">Engine (optional)</label><input id="f-engine" type="text" placeholder="e.g. 2.5L I4"></div>
         <div class="f"><label for="f-doors">Doors</label><input id="f-doors" type="number" min="2" max="5" inputmode="numeric" placeholder="filled by the VIN"></div>
-        <div class="f"><label for="f-seats">Seats</label><input id="f-seats" type="number" min="2" max="9" inputmode="numeric" placeholder="filled by the VIN"></div>
+        <div class="f"><label for="f-seats">Seats</label><input id="f-seats" type="number" min="2" max="9" inputmode="numeric" placeholder="verify in the vehicle"></div>
         <div class="f"><label for="f-econcity">Fuel economy, city (L/100 km)</label><input id="f-econcity" type="number" min="0" max="30" step="0.1" inputmode="decimal" placeholder="optional, e.g. 9.8"></div>
         <div class="f"><label for="f-econhwy">Fuel economy, highway (L/100 km)</label><input id="f-econhwy" type="number" min="0" max="30" step="0.1" inputmode="decimal" placeholder="optional, e.g. 7.2"></div>
         <div class="f"><label for="f-tag">Homepage tag</label>
@@ -314,12 +315,12 @@
       <h3>Facebook</h3>
       <label class="visually-hidden" for="share-caption">Facebook caption</label>
       <textarea id="share-caption" rows="11"></textarea>
-      <p class="fh">Links work in a Page post, so this one sends people straight to the vehicle page.</p>
+      <p class="fh">Posts up to 10 photos in their current order, with the main photo first. The clickable vehicle link stays in the caption.</p>
 
       <h3>Instagram</h3>
       <label class="visually-hidden" for="share-caption-ig">Instagram caption</label>
       <textarea id="share-caption-ig" rows="11" ></textarea>
-      <p class="fh">Nothing is clickable in an Instagram caption - not links, not phone numbers - so this one points at the link in your bio and gives the stock number instead of printing an address nobody can tap.</p>
+      <p class="fh">Posts a carousel of up to 10 photos in their current order. Instagram caption links are not clickable, so buyers are directed to the link in your bio and given the stock number.</p>
 
       <div class="share-actions">
         <button class="btn btn-small btn-outline" type="button" data-copy="share-caption">Copy Facebook</button>
@@ -329,7 +330,7 @@
       <p class="fh" id="share-status"></p>
 
       <h3>Facebook Marketplace</h3>
-      <p class="fh">Marketplace has no API, so this is paste-ready instead. Copy each field into the Marketplace form.</p>
+      <p class="fh">Marketplace has no API, so this is paste-ready instead. The bilingual description includes the same vehicle facts as the website, your address, the phone number, and a message-this-listing call to action in case Facebook hides the number.</p>
       <div id="share-marketplace"></div>
 
       <h3>Photos</h3>

@@ -340,18 +340,7 @@ SX.ready.then(function () {
         "priceCurrency": "CAD",
         "availability": v.status === "sold" ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
         "url": "https://www.automobilesx.ca" + SX.vehicleUrl(v),
-        "seller": {
-          "@type": "AutoDealer",
-          "name": "Automobile SX",
-          "telephone": "+1-514-824-9117",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "2044 Avenue Chartier",
-            "addressLocality": "Dorval",
-            "addressRegion": "QC",
-            "addressCountry": "CA"
-          }
-        }
+        "seller": { "@id": "https://www.automobilesx.ca/#dealer" }
       }
     };
     var tag = document.createElement("script");

@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-08-14T17:53:55.801Z",
+  "updatedAt": "2026-08-15T18:22:49.342Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
       "year": 2016,
       "make": "Kia",
       "model": "Sorento",
-      "trim": "L / LX",
+      "trim": "LX",
       "body": "SUV",
       "price": 9999,
       "km": 156000,
@@ -16,7 +16,7 @@
       "extColor": "Black",
       "extHex": "#141518",
       "intColor": "Grey",
-      "engine": "2.0L",
+      "engine": "2.0L I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -71,7 +71,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-13T18:10:50.902Z",
-      "updatedAt": "2026-08-14T04:46:01.828Z",
+      "updatedAt": "2026-08-15T18:03:58.035Z",
       "publishedAt": "2026-08-13T18:14:14.006Z",
       "posts": [
         {
@@ -94,7 +94,7 @@
       "make": "Nissan",
       "model": "Kicks",
       "trim": "SV",
-      "body": "Hatchback",
+      "body": "SUV",
       "price": 10999,
       "km": 145000,
       "transmission": "Automatic",
@@ -103,7 +103,7 @@
       "extColor": "Grey",
       "extHex": "#5c6066",
       "intColor": "Grey",
-      "engine": "1.6L",
+      "engine": "1.6L I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -130,8 +130,18 @@
         "images/vehicles/2019-nissan-kicks-6k9ge/msqy05w1-2.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-13T03:08:22.042Z",
-      "updatedAt": "2026-08-13T03:22:07.318Z",
+      "updatedAt": "2026-08-15T17:52:10.319Z",
       "publishedAt": "2026-08-13T03:22:07.318Z",
       "posts": [
         {
@@ -153,17 +163,17 @@
       "year": 2014,
       "make": "Subaru",
       "model": "Legacy",
-      "trim": "quattro Premium, quattro Sport Premium",
-      "body": "SUV",
+      "trim": "2.5i Premium",
+      "body": "Sedan",
       "price": 4999,
       "km": 214000,
-      "transmission": "Automatic",
+      "transmission": "CVT",
       "fuel": "Gasoline",
       "drivetrain": "AWD",
       "extColor": "Grey",
       "extHex": "#5c6066",
       "intColor": "Grey",
-      "engine": "2.5",
+      "engine": "2.5L I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -179,12 +189,11 @@
         "Sunroof",
         "Bluetooth",
         "Remote Start",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "This 2014 Subaru Legacy quattro Premium, quattro Sport Premium is a four-door SUV with 214,000 km on the odometer. It has a 2.5 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in grey with grey inside. Equipment includes backup camera, parking sensors, automatic high beams, heated seats, sunroof, Bluetooth, remote start, cruise control and AWD.\n\nYou can see it at our lot on Avenue Chartier in Dorval, seven days a week by appointment.",
       "descFr": "Subaru Legacy quattro Premium, quattro Sport Premium 2014, un VUS à quatre portes affichant 214 000 km au compteur. Il est doté d'un moteur 2.5, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur gris et intérieur en gris. L'équipement comprend : caméra de recul, capteurs de stationnement, feux de route automatiques, sièges chauffants, toit ouvrant, Bluetooth, démarreur à distance, régulateur de vitesse et rouage intégral.\n\nVous pouvez le voir à notre emplacement de l'avenue Chartier, à Dorval, sept jours sur sept sur rendez-vous.",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -217,7 +226,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T12:17:11.456Z",
-      "updatedAt": "2026-08-14T17:53:55.401Z",
+      "updatedAt": "2026-08-15T18:22:12.386Z",
       "publishedAt": "2026-08-13T22:36:35.297Z",
       "posts": [
         {
@@ -244,7 +253,7 @@
       "extColor": "Black",
       "extHex": "#141518",
       "intColor": "Brown",
-      "engine": "2.5",
+      "engine": "2.0L I4",
       "econCity": "",
       "econHwy": "",
       "doors": "",
@@ -267,8 +276,7 @@
         "Keyless Entry",
         "Push-Button Start",
         "Cruise Control",
-        "Alloy Wheels",
-        "AWD"
+        "Alloy Wheels"
       ],
       "desc": "Financement disponible,2019 Volvo xc 60 T6 2.0 ,momentum, navigation, caméra, de recul, toit panoramiques , siège, chauffant, ac , groupe électrique\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
       "descFr": "",
@@ -296,8 +304,18 @@
         "images/vehicles/2019-volvo-xc60-zen4s/msemexmp-158.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T12:13:07.748Z",
-      "updatedAt": "2026-08-13T23:11:12.797Z",
+      "updatedAt": "2026-08-15T17:52:18.465Z",
       "publishedAt": "2026-08-13T22:35:39.133Z",
       "posts": [
         {
@@ -314,17 +332,17 @@
       "year": 2017,
       "make": "Volkswagen",
       "model": "Golf",
-      "trim": "S",
+      "trim": "Trendline",
       "body": "Hatchback",
       "price": 6499,
       "km": 188000,
-      "transmission": "Automatic",
+      "transmission": "Manual",
       "fuel": "Gasoline",
       "drivetrain": "FWD",
       "extColor": "Black",
       "extHex": "#141518",
       "intColor": "Grey",
-      "engine": "1.8",
+      "engine": "1.8L Turbo I4",
       "econCity": "",
       "econHwy": "",
       "doors": 2,
@@ -336,12 +354,11 @@
         "Backup Camera",
         "Heated Seats",
         "Bluetooth",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
-      "desc": "2017, Volkswagen golf Trendline,1.8 turbo manuelle, ac, groupe électriques\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
-      "descFr": "",
-      "descMode": "manual",
+      "desc": "This is a 2017 Volkswagen Golf Trendline, a two-door hatchback with 188,000 km on it. It has a 1.8 engine, a manual transmission and front-wheel drive.\n\nIt is finished in black with grey inside. It is equipped with backup camera, heated seats, Bluetooth, cruise control and AWD.\n\nIt is on the lot in Dorval now and can be seen seven days a week by appointment.",
+      "descFr": "Voici ce Volkswagen Golf Trendline 2017, une voiture à hayon à deux portes avec 188 000 km au compteur. Il est doté d'un moteur 1.8, d'une transmission manuelle et de la traction avant.\n\nExtérieur noir et intérieur en gris. Équipements notables : caméra de recul, sièges chauffants, Bluetooth, régulateur de vitesse et rouage intégral.\n\nLe véhicule est présentement sur place à Dorval et peut être vu sept jours sur sept, sur rendez-vous.",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -363,8 +380,18 @@
         "images/vehicles/2017-volkswagen-golf-iftqk/msembiah-143.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T12:10:04.639Z",
-      "updatedAt": "2026-08-13T22:37:45.238Z",
+      "updatedAt": "2026-08-15T17:52:32.576Z",
       "publishedAt": "2026-08-13T22:37:45.238Z",
       "posts": [
         {
@@ -387,11 +414,11 @@
       "km": 157000,
       "transmission": "Automatic",
       "fuel": "Gasoline",
-      "drivetrain": "AWD",
+      "drivetrain": "4x4",
       "extColor": "Grey",
       "extHex": "#5c6066",
       "intColor": "Grey",
-      "engine": "3.6",
+      "engine": "3.6L V6",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -403,12 +430,11 @@
         "Heated Seats",
         "Bluetooth",
         "Remote Start",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "2016 GRAND CHEROKEE LAREDO ,3.6K, EXCELLENTE CONDUITE, NOUVEAU FREINS AU 4 ROUE, AC, GROUPE ÉLECTRIQUES, BLUETOOTH\n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
       "descFr": "",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -430,8 +456,18 @@
         "images/vehicles/2016-jeep-grand-cherokee-638hq/msem7x13-130.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T12:07:36.365Z",
-      "updatedAt": "2026-08-13T22:39:14.275Z",
+      "updatedAt": "2026-08-15T17:52:42.298Z",
       "publishedAt": "2026-08-13T22:39:14.275Z",
       "posts": [
         {
@@ -453,17 +489,17 @@
       "year": 2017,
       "make": "Subaru",
       "model": "Forester",
-      "trim": "Limited",
+      "trim": "I",
       "body": "SUV",
       "price": 7999,
       "km": 215000,
-      "transmission": "Automatic",
+      "transmission": "CVT",
       "fuel": "Gasoline",
       "drivetrain": "AWD",
       "extColor": "White",
       "extHex": "#eceae6",
       "intColor": "Black",
-      "engine": "2.5",
+      "engine": "2.5L I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -478,12 +514,11 @@
         "Heated Seats",
         "Sunroof",
         "Bluetooth",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "Financement disponible\n\nSubaru Impreza 2019\n\n5️⃣1️⃣4️⃣-8️⃣2️⃣4️⃣-9️⃣1️⃣1️⃣7️⃣\n2044 avenue Chartier Dorval \nHoraires flexible sur rendez-vous\n \n\nSièges chauffants, climatisation, groupe électrique et bien plus encore.\nUne voiture fiable, économique et agréable à conduire au quotidien. aujourd’hui! Contactez-nous pour plus d’informations.",
       "descFr": "",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -509,8 +544,18 @@
         "images/vehicles/2017-subaru-forester-774gh/msem4xst-117.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T12:05:47.668Z",
-      "updatedAt": "2026-08-13T22:40:07.320Z",
+      "updatedAt": "2026-08-15T18:22:48.543Z",
       "publishedAt": "2026-08-13T22:40:07.320Z",
       "posts": [
         {
@@ -532,17 +577,17 @@
       "year": 2019,
       "make": "Subaru",
       "model": "Impreza",
-      "trim": "Base",
+      "trim": "Convenience",
       "body": "Hatchback",
       "price": 8999,
       "km": 213000,
-      "transmission": "Automatic",
+      "transmission": "CVT",
       "fuel": "Gasoline",
       "drivetrain": "AWD",
       "extColor": "Black",
       "extHex": "#141518",
       "intColor": "Grey",
-      "engine": "2.0",
+      "engine": "2.0L I4",
       "econCity": "",
       "econHwy": "",
       "doors": 5,
@@ -556,12 +601,11 @@
         "Automatic High Beams",
         "Heated Seats",
         "Bluetooth",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "This is a 2019 Subaru Impreza Base, a five-door hatchback with 213,000 km on it. It has a 2.0 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in black with grey inside. It is equipped with backup camera, adaptive cruise control, automatic high beams, heated seats, Bluetooth, cruise control and AWD.\n\nYou can see it at our lot on Avenue Chartier in Dorval, seven days a week by appointment.",
       "descFr": "Voici ce Subaru Impreza Base 2019, une voiture à hayon à cinq portes avec 213 000 km au compteur. Il est doté d'un moteur 2.0, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur noir et intérieur en gris. Équipements notables : caméra de recul, régulateur de vitesse adaptatif, feux de route automatiques, sièges chauffants, Bluetooth, régulateur de vitesse et rouage intégral.\n\nVous pouvez le voir à notre emplacement de l'avenue Chartier, à Dorval, sept jours sur sept sur rendez-vous.",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -583,8 +627,18 @@
         "images/vehicles/2019-suabru-impreza-62zb2/msem25mx-100.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T12:03:14.312Z",
-      "updatedAt": "2026-08-13T22:42:57.151Z",
+      "updatedAt": "2026-08-15T17:53:08.289Z",
       "publishedAt": "2026-08-13T22:42:57.151Z",
       "posts": [
         {
@@ -659,7 +713,7 @@
       "year": 2017,
       "make": "Audi",
       "model": "A4",
-      "trim": "quattro Premium",
+      "trim": "Komfort",
       "body": "Sedan",
       "price": 12999,
       "km": 148000,
@@ -669,7 +723,7 @@
       "extColor": "Blue",
       "extHex": "#2b4d7e",
       "intColor": "Black",
-      "engine": "2.0",
+      "engine": "2.0L Turbo I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -682,12 +736,11 @@
         "Leather Seats",
         "Sunroof",
         "Bluetooth",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "This is a 2017 Audi A4 quattro Premium, a four-door sedan with 148,000 km on it. It has a 2.0 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in blue with black inside. It is equipped with heated seats, leather seats, sunroof, Bluetooth, cruise control and AWD.\n\nIt is on the lot in Dorval now and can be seen seven days a week by appointment.",
       "descFr": "Voici cet Audi A4 quattro Premium 2017, une berline à quatre portes avec 148 000 km au compteur. Il est doté d'un moteur 2.0, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur bleu et intérieur en noir. Équipements notables : sièges chauffants, sièges en cuir, toit ouvrant, Bluetooth, régulateur de vitesse et rouage intégral.\n\nLe véhicule est présentement sur place à Dorval et peut être vu sept jours sur sept, sur rendez-vous.",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -710,8 +763,18 @@
         "images/vehicles/2017-audi-a4-gc6pg/mselw8fk-71.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T11:58:57.539Z",
-      "updatedAt": "2026-08-13T22:45:04.559Z",
+      "updatedAt": "2026-08-15T17:53:23.105Z",
       "publishedAt": "2026-08-13T22:45:04.559Z",
       "posts": [
         {
@@ -728,7 +791,7 @@
       "year": 2018,
       "make": "Volkswagen",
       "model": "Tiguan",
-      "trim": "SE, 4Motion SEL",
+      "trim": "Comfortline",
       "body": "SUV",
       "price": 9999,
       "km": 194000,
@@ -738,7 +801,7 @@
       "extColor": "White",
       "extHex": "#eceae6",
       "intColor": "Black",
-      "engine": "2.0",
+      "engine": "2.0L Turbo I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -758,12 +821,11 @@
         "Bluetooth",
         "Navigation",
         "Push-Button Start",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "The 2018 Volkswagen Tiguan SE, 4Motion SEL on offer here is a four-door SUV showing 194,000 km. It has a 2.0 engine, an automatic transmission and all-wheel drive. It seats seven.\n\nIt is finished in white with black inside. On the equipment list: backup camera, blind spot monitoring, forward collision warning, automatic emergency braking, automatic high beams, heated seats, leather seats, third-row seating, Bluetooth and navigation.\n\nCome by and take a look in Dorval. We are open seven days a week by appointment and you deal directly with Spiro.",
       "descFr": "Volkswagen Tiguan SE, 4Motion SEL 2018 : un VUS à quatre portes avec 194 000 km au compteur. Il est doté d'un moteur 2.0, d'une transmission automatique et d'un rouage intégral. Il offre sept places.\n\nExtérieur blanc et intérieur en noir. Parmi les équipements : caméra de recul, surveillance des angles morts, alerte de collision avant, freinage d'urgence automatique, feux de route automatiques, sièges chauffants, sièges en cuir, troisième rangée de sièges, Bluetooth et navigation.\n\nPassez le voir à Dorval. Nous sommes ouverts sept jours sur sept sur rendez-vous et vous traitez directement avec Spiro.",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -786,8 +848,18 @@
         "images/vehicles/2018-volkswagen-tiguan-ddnvw/mseltqzj-57.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T11:56:54.576Z",
-      "updatedAt": "2026-08-13T22:45:56.086Z",
+      "updatedAt": "2026-08-15T17:53:51.069Z",
       "publishedAt": "2026-08-13T22:45:56.086Z",
       "posts": [
         {
@@ -809,7 +881,7 @@
       "year": 2011,
       "make": "Nissan",
       "model": "Murano",
-      "trim": "",
+      "trim": "SV",
       "body": "SUV",
       "price": 3999,
       "km": 223000,
@@ -819,7 +891,7 @@
       "extColor": "Black",
       "extHex": "#141518",
       "intColor": "Grey",
-      "engine": "3.5",
+      "engine": "3.5L V6",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -832,12 +904,11 @@
         "Heated Seats",
         "Sunroof",
         "Remote Start",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "The 2011 Nissan Murano on offer here is a four-door SUV showing 223,000 km. It has a 3.5 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in black with grey inside. On the equipment list: air conditioning, heated seats, sunroof, remote start, cruise control and AWD.\n\nCome by and take a look in Dorval. We are open seven days a week by appointment and you deal directly with Spiro.",
       "descFr": "Nissan Murano 2011 : un VUS à quatre portes avec 223 000 km au compteur. Il est doté d'un moteur 3.5, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur noir et intérieur en gris. Parmi les équipements : climatisation, sièges chauffants, toit ouvrant, démarreur à distance, régulateur de vitesse et rouage intégral.\n\nPassez le voir à Dorval. Nous sommes ouverts sept jours sur sept sur rendez-vous et vous traitez directement avec Spiro.",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -870,7 +941,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T11:54:58.675Z",
-      "updatedAt": "2026-08-14T17:51:56.784Z",
+      "updatedAt": "2026-08-15T18:22:30.064Z",
       "publishedAt": "2026-08-13T03:07:30.079Z",
       "posts": [
         {
@@ -892,17 +963,17 @@
       "year": 2017,
       "make": "Subaru",
       "model": "Outback",
-      "trim": "Premium +M/R",
+      "trim": "2.5i Touring",
       "body": "SUV",
       "price": 9999,
       "km": 191000,
-      "transmission": "Automatic",
+      "transmission": "CVT",
       "fuel": "Gasoline",
       "drivetrain": "AWD",
       "extColor": "White",
       "extHex": "#eceae6",
       "intColor": "Black",
-      "engine": "2.5",
+      "engine": "2.5L I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -919,12 +990,11 @@
         "Bluetooth",
         "Cruise Control",
         "Power Liftgate",
-        "Alloy Wheels",
-        "AWD"
+        "Alloy Wheels"
       ],
       "desc": "Financement disponible 2017, Outback Touring, 2.5 l\n\nNouveau pneus, nouveau freins, roulent très bien, caméra de recul, Bluetooth, air climatisé , toit et groupe électrique \n\nHORAIRES  FLEXIBLE SUR RENDEZ-VOUS APPEL AU 514 824 9117\n\nAUTOMOBILE SX 2044 AVENUE CHARTIER DORVAL H9P 1H2",
       "descFr": "",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -948,8 +1018,18 @@
         "images/vehicles/2017-subaru-outback-jcq9w/mselod62-30.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T11:51:51.272Z",
-      "updatedAt": "2026-08-13T22:31:41.104Z",
+      "updatedAt": "2026-08-15T17:54:23.021Z",
       "publishedAt": "2026-08-13T22:31:41.104Z",
       "posts": [
         {
@@ -978,17 +1058,17 @@
       "year": 2018,
       "make": "Audi",
       "model": "Q3",
-      "trim": "quattro Premium, quattro Sport Premium",
+      "trim": "Komfort",
       "body": "SUV",
       "price": 13999,
       "km": 138000,
       "transmission": "Automatic",
       "fuel": "Gasoline",
       "drivetrain": "AWD",
-      "extColor": "Gris",
-      "extHex": "#6c7178",
-      "intColor": "Gria",
-      "engine": "2.0",
+      "extColor": "Grey",
+      "extHex": "#5c6066",
+      "intColor": "Grey",
+      "engine": "2.0L Turbo I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -1006,12 +1086,11 @@
         "Bluetooth",
         "Apple CarPlay",
         "Navigation",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "This 2018 Audi Q3 quattro Premium, quattro Sport Premium is a four-door SUV with 138,000 km on the odometer. It has a 2.0 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in gris with gria inside. Equipment includes backup camera, parking sensors, automatic high beams, heated seats, leather seats, sunroof, Bluetooth, Apple CarPlay, navigation and cruise control.\n\nCome by and take a look in Dorval. We are open seven days a week by appointment and you deal directly with Spiro.",
       "descFr": "Audi Q3 quattro Premium, quattro Sport Premium 2018, un VUS à quatre portes affichant 138 000 km au compteur. Il est doté d'un moteur 2.0, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur Gris et intérieur en Gria. L'équipement comprend : caméra de recul, capteurs de stationnement, feux de route automatiques, sièges chauffants, sièges en cuir, toit ouvrant, Bluetooth, Apple CarPlay, navigation et régulateur de vitesse.\n\nPassez le voir à Dorval. Nous sommes ouverts sept jours sur sept sur rendez-vous et vous traitez directement avec Spiro.",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -1035,8 +1114,18 @@
         "images/vehicles/2018-audi-q3-k6tky/mselksdt-15.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-04T11:49:56.989Z",
-      "updatedAt": "2026-08-13T22:47:00.185Z",
+      "updatedAt": "2026-08-15T17:54:35.805Z",
       "publishedAt": "2026-08-13T22:47:00.185Z",
       "posts": [
         {
@@ -1051,7 +1140,7 @@
     {
       "id": "2017-bmw-x3-cqgmi",
       "year": 2017,
-      "make": "Bmw",
+      "make": "BMW",
       "model": "X3",
       "trim": "xDrive28i",
       "body": "SUV",
@@ -1063,7 +1152,7 @@
       "extColor": "Blue",
       "extHex": "#2b4d7e",
       "intColor": "Black",
-      "engine": "2.0L 4-cyl",
+      "engine": "2.0L Turbo I4",
       "econCity": "",
       "econHwy": "",
       "doors": 4,
@@ -1080,12 +1169,11 @@
         "Sunroof",
         "Bluetooth",
         "Navigation",
-        "Cruise Control",
-        "AWD"
+        "Cruise Control"
       ],
       "desc": "The 2017 Bmw X3 xDrive28i on offer here is a four-door SUV showing 131,000 km. It has a 2.0L 4-cyl engine, an automatic transmission and all-wheel drive.\n\nIt is finished in blue with black inside. On the equipment list: backup camera, automatic high beams, heated seats, heated steering wheel, leather seats, sunroof, Bluetooth, navigation, cruise control and AWD.\n\nIt is available now in Dorval. Call 514-824-9117 to arrange a time to come and see it.",
       "descFr": "Bmw X3 xDrive28i 2017 : un VUS à quatre portes avec 131 000 km au compteur. Il est doté d'un moteur 2.0L 4-cyl, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur bleu et intérieur en noir. Parmi les équipements : caméra de recul, feux de route automatiques, sièges chauffants, volant chauffant, sièges en cuir, toit ouvrant, Bluetooth, navigation, régulateur de vitesse et rouage intégral.\n\nIl est disponible dès maintenant à Dorval. Appelez le 514-824-9117 pour fixer un rendez-vous.",
-      "descMode": "manual",
+      "descMode": "auto",
       "descNote": "",
       "descNoteFr": "",
       "draftNotes": {
@@ -1110,8 +1198,18 @@
         "images/vehicles/2017-bmw-x3-cqgmi/msdvs6qu-16.jpg"
       ],
       "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
       "createdAt": "2026-08-03T23:47:18.081Z",
-      "updatedAt": "2026-08-13T22:48:01.522Z",
+      "updatedAt": "2026-08-15T17:54:58.080Z",
       "publishedAt": "2026-08-13T22:48:01.523Z",
       "posts": [
         {

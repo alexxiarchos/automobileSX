@@ -448,6 +448,12 @@ input[type="range"] {
 .footer-hours td { padding: 5px 0; }
 .footer-hours td:last-child { text-align: right; color: var(--mist); }
 .footer-hours .closed td:last-child { color: var(--slate); }
+.footer-social { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 12px; }
+.footer-social a {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--slate); font-size: 13px;
+}
+.footer-social svg { width: 16px; height: 16px; fill: currentColor; flex: 0 0 auto; }
 .newsletter { display: flex; gap: 8px; margin-top: 4px; }
 .newsletter input {
   flex: 1; font: inherit; font-size: 14px; padding: 10px 12px;
@@ -1092,6 +1098,7 @@ input[type="range"] {
    on screen looks like part of the footer rather than a bare list. */
 .footer-static { padding: 40px 0; color: var(--bone); font-size: 14px; }
 .footer-static p { margin: 0 0 14px; color: var(--slate); }
+.footer-static .footer-static-social { margin-top: -6px; }
 .footer-static a { color: var(--bone); }
 .footer-static ul {
   list-style: none; margin: 0; padding: 0;

@@ -496,7 +496,7 @@
     transmission: "f-trans", engine: "f-engine", doors: "f-doors", seats: "f-seats"
   };
 
-  var VIN_HINT = "Paste or type the VIN and it fills in the year, make, model, engine, body, drivetrain and the safety equipment by itself. Everything stays editable, and nothing you have already typed gets overwritten. No VIN? Just fill the form in below.";
+  var VIN_HINT = "Paste or type the VIN to fill reliable basics such as year, make, model, engine, body and transmission. Canadian trim, seating and equipment stay yours to confirm, and nothing you already typed gets overwritten. No VIN? Just fill the form in below.";
 
   var FIELD_LABELS = {
     year: "Year", make: "Make", model: "Model", trim: "Trim", body: "Body style",
@@ -548,18 +548,14 @@
     $("f-vin").value = data.vin;
     slugPreview();
 
-    /* Equipment. "Standard" for this VIN is a fact about the car, so those are
-       ticked. "Optional" only means the factory offered it, so those are offered
-       as one-tap chips instead: the car in the yard is the authority, not the
-       database. Nothing is ever unticked - a decode adds, it never takes away
-       what you already knew. */
-    var ticked = [];
+    /* Equipment from the US VIN database is never ticked automatically for a
+       Canadian listing. Both Standard and Optional values are one-tap visual
+       check suggestions: the car in the yard is the authority. */
     var eq = data.features || {};
-    (eq.confirmed || []).forEach(function (f) {
-      var cb = featureBox(f);
-      if (cb && !cb.checked) { cb.checked = true; ticked.push(f); }
+    var equipmentSuggestions = (eq.confirmed || []).concat(eq.possible || []).filter(function (f, i, all) {
+      return all.indexOf(f) === i;
     });
-    renderVinSuggestions((eq.possible || []).filter(function (f) {
+    renderVinSuggestions(equipmentSuggestions.filter(function (f) {
       var cb = featureBox(f);
       return cb && !cb.checked;
     }));
@@ -567,7 +563,7 @@
     var parts = [];
     if (filled.length) parts.push("Filled: " + filled.join(", ") + ".");
     if (!filled.length) parts.push("Nothing to fill, every decoded field was already set.");
-    if (ticked.length) parts.push("Ticked as standard equipment: " + ticked.join(", ") + ".");
+    if (equipmentSuggestions.length) parts.push("Equipment was suggested for a visual check; nothing was selected automatically.");
     if (skipped.length) parts.push("Left alone: " + skipped.join("; ") + ".");
     var missing = (data.unresolved || []).map(function (k) { return FIELD_LABELS[k] || k; });
     if (missing.length) parts.push("The VIN cannot tell us " + missing.join(", ").toLowerCase() + " - enter those yourself.");
@@ -577,7 +573,7 @@
     var dupe = duplicateVin(data.vin);
     if (dupe) parts.push("Careful: " + dupe + " already has this VIN.");
 
-    vinStatus(parts.join(" "), dupe ? "vin-err" : (filled.length || ticked.length) ? "vin-ok" : null);
+    vinStatus(parts.join(" "), dupe ? "vin-err" : filled.length ? "vin-ok" : null);
     updateQuality();
   }
 
@@ -639,6 +635,16 @@
   }
 
   $("vin-decode").addEventListener("click", runDecode);
+
+  /* CARFAX Canada offers a free Canada-focused decoder in the browser, but no
+     public free API that can safely power the form. Copying the VIN makes that
+     independent trim check a quick paste without scraping a third-party page. */
+  $("vin-canada-check").addEventListener("click", function () {
+    var vin = $("f-vin").value.trim().toUpperCase();
+    if (vin && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(vin).catch(function () { /* manual copy still works */ });
+    }
+  });
 
   /* Pressing Enter in a lone text field would submit the form in some browsers,
      which here means nothing useful. It decodes instead. */
@@ -1046,6 +1052,10 @@
         } else if (!d.image) {
           $("share-status").textContent =
             "This vehicle has no photo, so Instagram will be skipped.";
+        } else {
+          $("share-status").textContent =
+            "Ready to post " + d.imageCount + " photo" + (d.imageCount === 1 ? "" : "s") +
+            (d.totalImageCount > d.imageCount ? " (the first 10 will be used)." : ".");
         }
       })
       .catch(function (e) {
@@ -1079,7 +1089,7 @@
 
   $("share-post").addEventListener("click", function () {
     if (!shareVehicle) return;
-    if (!confirm("Post this to your Facebook Page and Instagram now?")) return;
+    if (!confirm("Post this vehicle and up to 10 photos to your Facebook Page and Instagram now?")) return;
     busy("Posting…");
     api("social", {
       method: "POST",
@@ -1096,7 +1106,10 @@
       var lines = Object.keys(d.results).map(function (k) {
         var r = d.results[k];
         var name = k === "facebook" ? "Facebook" : "Instagram";
-        return name + ": " + (r.ok ? "posted" : "failed, " + r.error);
+        var media = r.ok && r.mediaCount
+          ? " with " + r.mediaCount + " photo" + (r.mediaCount === 1 ? "" : "s")
+          : r.ok && r.mode === "link" ? " with a link preview" : "";
+        return name + ": " + (r.ok ? "posted" + media : "failed, " + r.error);
       });
       $("share-status").textContent = lines.join("  ·  ");
       var allOk = Object.keys(d.results).every(function (k) { return d.results[k].ok; });
@@ -1426,8 +1439,7 @@
   }
 
   /* The catalogue drawn as grouped checkboxes, with two rules:
-     - a legacy label is only shown if this vehicle already carries it, so the
-       list does not grow a "AWD" box that duplicates the drivetrain field
+     - legacy AWD is not shown because drivetrain is already its source of truth
      - anything typed by hand that is not in the catalogue goes back into the
        free-text box rather than disappearing */
   function renderFeatures(flat) {
@@ -1445,11 +1457,6 @@
         '<div class="feature-checks">' + g.items.map(box).join("") + "</div></fieldset>";
     }).join("");
 
-    var legacy = CAT.LEGACY.filter(function (f) { return chosen[f.toLowerCase()]; });
-    if (legacy.length) {
-      html += '<fieldset class="fgroup"><legend>Already on this listing</legend>' +
-        '<div class="feature-checks">' + legacy.map(box).join("") + "</div></fieldset>";
-    }
     $("feature-checks").innerHTML = html;
 
     $("f-features-extra").value = flat.filter(function (x) { return !CAT.isKnown(x); }).join(", ");

@@ -17,6 +17,7 @@ const DESCRIBE = require("../../js/describe.js");
 const MAKES = require("../../js/makes.js");
 const GRAPH = "https://graph.facebook.com/v21.0";
 const TIMEOUT_MS = 20000;
+const MAX_GALLERY_IMAGES = 10;
 
 function cfg() {
   return {
@@ -45,9 +46,15 @@ function title(v) {
 function vehicleUrl(v) {
   return SITE + "/vehicles/" + encodeURIComponent(v.id);
 }
+function imageUrls(v, limit) {
+  const max = Math.max(0, Number(limit) || MAX_GALLERY_IMAGES);
+  return (Array.isArray(v.images) ? v.images : [])
+    .filter(Boolean)
+    .slice(0, max)
+    .map(p => SITE + "/" + String(p).replace(/^\//, ""));
+}
 function firstImage(v) {
-  if (!v.images || !v.images.length) return null;
-  return SITE + "/" + String(v.images[0]).replace(/^\//, "");
+  return imageUrls(v, 1)[0] || null;
 }
 
 const CATALOGUE = require("../../js/features.js");
@@ -87,6 +94,42 @@ const FR_SPEC = {
 const ADDRESS = "2044 Avenue Chartier, Dorval, QC H9P 1H2";
 const PHONE = "514-824-9117";
 
+function coreDescription(v, lang) {
+  return DESCRIBE.coreText ? DESCRIBE.coreText(v, lang) : DESCRIBE.text(v, lang);
+}
+
+function actionLines(v, lang, target) {
+  const fr = lang === "fr";
+  const lines = [
+    "Automobile SX · " + ADDRESS
+  ];
+
+  if (target === "marketplace") {
+    lines.push(fr
+      ? "Envoyez un message sur cette annonce pour confirmer la disponibilité ou réserver un essai routier."
+      : "Send a message on this listing to confirm availability or book a test drive.");
+    lines.push(fr ? "Vous pouvez aussi appeler ou texter le " + PHONE + "." : "You can also call or text " + PHONE + ".");
+  } else {
+    lines.push(fr
+      ? "Appelez ou textez le " + PHONE + " pour confirmer la disponibilité ou réserver un essai routier."
+      : "Call or text " + PHONE + " to confirm availability or book a test drive.");
+  }
+
+  lines.push(fr
+    ? "Ouvert sept jours sur sept sur rendez-vous. Financement disponible. Nous acceptons les véhicules en échange."
+    : "Open seven days a week by appointment. Financing is available and trade-ins are welcome.");
+
+  if (target === "instagram") {
+    lines.push(fr
+      ? "Tous les détails et les photos sont accessibles par le lien dans notre bio" + (v.stock ? ". Demandez le stock " + v.stock + "." : ".")
+      : "Full details and every photo are available through the link in our bio" + (v.stock ? ". Ask for stock " + v.stock + "." : "."));
+  } else {
+    lines.push((fr ? "Tous les détails et les photos : " : "Full details and every photo: ") + vehicleUrl(v));
+    if (v.stock) lines.push((fr ? "Stock " : "Stock ") + v.stock);
+  }
+  return lines;
+}
+
 function hashtags(v) {
   const tags = ["#AutomobileSX", "#Dorval", "#WestIsland", "#Montreal",
     "#UsedCars", "#AutosUsagees", "#VoitureUsagee"];
@@ -100,68 +143,74 @@ function hashtags(v) {
 /* Two captions, because the two platforms behave differently.
 
    On a Facebook Page a URL in the text is a working link, so the post can send
-   people straight to the vehicle page. In an Instagram caption nothing is
-   clickable - not a link, not a phone number - so printing a long address there
-   wastes the most valuable lines in the post and tells the reader to do
-   something they cannot do. The Instagram version points at the profile link
-   and gives the stock number, which is what someone will quote when they call.
+   people straight to the vehicle page. Instagram caption links are not
+   clickable, so its version keeps the phone and address as useful reference
+   information, points at the profile link and gives the stock number a buyer
+   can quote when they call or message.
 
    Both open with the facts a person needs to decide whether to keep reading:
    year, model, price, kilometres. Instagram hides everything after roughly the
    first line behind "more", so nothing that matters goes below it. */
 
 function captionFacebook(v) {
-  const feats = topFeatures(v, "en", 5);
-  const featsFr = topFeatures(v, "fr", 5);
-
   return [
     title(v) + " - " + money(v.price),
     specLine(v, "en"),
-    feats.length ? "Includes: " + feats.join(", ") : "",
     "",
-    "Full details and every photo: " + vehicleUrl(v),
+    coreDescription(v, "en"),
     "",
-    "Automobile SX · " + ADDRESS,
-    "Call or text " + PHONE + " · open seven days a week by appointment.",
-    v.stock ? "Stock " + v.stock : "",
+    actionLines(v, "en", "facebook").join("\n"),
     "",
     "· · ·",
     "",
     title(v) + " - " + money(v.price),
     specLine(v, "fr"),
-    featsFr.length ? "Équipements : " + featsFr.join(", ") : "",
     "",
-    "Tous les détails et les photos : " + vehicleUrl(v),
-    "Appelez ou textez le " + PHONE + ", sept jours sur sept sur rendez-vous.",
+    coreDescription(v, "fr"),
+    "",
+    actionLines(v, "fr", "facebook").join("\n"),
     "",
     hashtags(v)
   ].join("\n").replace(/\n{3,}/g, "\n\n").trim();
 }
 
-function captionInstagram(v) {
-  const feats = topFeatures(v, "en", 5);
-  const featsFr = topFeatures(v, "fr", 4);
-
+function instagramText(v, includeHashtags, maxCoreParagraphs) {
+  const coreEn = maxCoreParagraphs && DESCRIBE.coreParagraphs
+    ? DESCRIBE.coreParagraphs(v, "en").slice(0, maxCoreParagraphs).join("\n\n")
+    : coreDescription(v, "en");
+  const coreFr = maxCoreParagraphs && DESCRIBE.coreParagraphs
+    ? DESCRIBE.coreParagraphs(v, "fr").slice(0, maxCoreParagraphs).join("\n\n")
+    : coreDescription(v, "fr");
   return [
     title(v) + " - " + money(v.price),
     specLine(v, "en"),
-    feats.length ? "Includes: " + feats.join(", ") : "",
     "",
-    /* No clickable link is possible here, so say where the link is instead of
-       printing one nobody can tap. */
-    "📍 Automobile SX · " + ADDRESS,
-    "📞 Call or text " + PHONE,
-    "🔗 Full details and every photo: link in bio" + (v.stock ? " · ask for stock " + v.stock : ""),
+    coreEn,
+    "",
+    actionLines(v, "en", "instagram").join("\n"),
     "",
     "· · ·",
     "",
     title(v) + " - " + money(v.price),
     specLine(v, "fr"),
-    featsFr.length ? "Équipements : " + featsFr.join(", ") : "",
-    "Appelez ou textez le " + PHONE + " · lien en bio pour toutes les photos.",
     "",
-    hashtags(v)
+    coreFr,
+    "",
+    actionLines(v, "fr", "instagram").join("\n"),
+    "",
+    includeHashtags ? hashtags(v) : ""
   ].join("\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+
+function captionInstagram(v) {
+  /* Instagram caps captions at 2,200 characters. Keep the complete canonical
+     description whenever it fits, then drop optional hashtags, then only the
+     owner-written extra paragraphs. Vehicle facts and both CTA blocks stay. */
+  let out = instagramText(v, true, 0);
+  if (out.length <= 2200) return out;
+  out = instagramText(v, false, 0);
+  if (out.length <= 2200) return out;
+  return instagramText(v, false, 2);
 }
 
 /* Kept for anything that just wants "the caption". */
@@ -172,6 +221,7 @@ function caption(v, target) {
 /* Marketplace is filled in by hand, so give the owner each field separately
    rather than one blob they have to pick apart. */
 function marketplaceListing(v) {
+  const header = title(v) + " - " + money(v.price);
   return {
     title: title(v),
     price: String(Math.round(Number(v.price) || 0)),
@@ -182,16 +232,25 @@ function marketplaceListing(v) {
     transmission: v.transmission || "",
     exteriorColour: v.extColor || "",
     description: [
-      title(v) + " at Automobile SX, 2044 Avenue Chartier, Dorval.",
+      header,
+      specLine(v, "en"),
       "",
-      DESCRIBE.text(v, "en"),
+      coreDescription(v, "en"),
       "",
-      [km(v.km), v.transmission, v.drivetrain, v.fuel].filter(Boolean).join(" · "),
+      actionLines(v, "en", "marketplace").join("\n"),
       "",
-      "More photos and full details: " + vehicleUrl(v),
-      "Call or text Spiro at 514-824-9117. Viewings seven days a week.",
+      "Price excludes applicable taxes and licensing.",
       "",
-      "Price excludes applicable taxes and licensing."
+      "· · ·",
+      "",
+      header,
+      specLine(v, "fr"),
+      "",
+      coreDescription(v, "fr"),
+      "",
+      actionLines(v, "fr", "marketplace").join("\n"),
+      "",
+      "Le prix exclut les taxes applicables et les frais d'immatriculation."
     ].filter(l => l !== null).join("\n").replace(/\n{3,}/g, "\n\n").trim()
   };
 }
@@ -217,26 +276,61 @@ async function call(url, options) {
 async function postToFacebook(v, text) {
   const c = cfg();
   if (!c.pageId || !c.token) throw new Error("Facebook is not configured");
-  const params = new URLSearchParams({
-    message: text,
-    link: vehicleUrl(v),
-    access_token: c.token
-  });
+  const url = vehicleUrl(v);
+  const message = String(text || "").includes(url) ? String(text || "") : String(text || "").trim() + "\n\n" + url;
+  const images = imageUrls(v);
+  const reachable = await Promise.all(images.map(imageIsReachable));
+
+  /* Upload Page photos without publishing them individually, then attach them
+     to one feed story. Failed secondary photos are skipped; the main photo
+     remains first. If Meta cannot fetch any photo, retain the old link-preview
+     post instead of losing the announcement altogether. */
+  const uploads = await Promise.all(images.map(async function (image, i) {
+    if (!reachable[i]) return null;
+    try {
+      const params = new URLSearchParams({ url: image, published: "false", access_token: c.token });
+      const out = await call(GRAPH + "/" + c.pageId + "/photos", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params.toString()
+      });
+      return out.id || null;
+    } catch (e) {
+      return null;
+    }
+  }));
+  /* If the chosen cover fails, do not silently make photo two the cover. */
+  const photoIds = uploads[0] ? uploads.filter(Boolean) : [];
+
+  const params = new URLSearchParams({ message: message, access_token: c.token });
+  if (photoIds.length) {
+    photoIds.forEach(function (id, i) {
+      params.set("attached_media[" + i + "]", JSON.stringify({ media_fbid: id }));
+    });
+  } else {
+    params.set("link", url);
+  }
   const out = await call(GRAPH + "/" + c.pageId + "/feed", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: params.toString()
   });
-  return { id: out.id, url: out.id ? "https://www.facebook.com/" + out.id : null };
+  return {
+    id: out.id,
+    url: out.id ? "https://www.facebook.com/" + out.id : null,
+    mediaCount: photoIds.length,
+    mode: photoIds.length ? "gallery" : "link"
+  };
 }
 
 /* Meta has to fetch and process the photo between creating the container and
    publishing it. Publishing too early returns "Media ID is not available", so
    the container's status_code is polled until it reports FINISHED. */
-async function waitForContainer(id, token) {
+async function waitForContainer(id, token, maxWaitMs) {
   const started = Date.now();
+  const maxWait = Number(maxWaitMs) || 40000;
   let lastStatus = "IN_PROGRESS";
-  while (Date.now() - started < 40000) {
+  while (Date.now() - started < maxWait) {
     const s = await call(GRAPH + "/" + id + "?fields=status_code,status&access_token=" +
       encodeURIComponent(token));
     lastStatus = s.status_code || lastStatus;
@@ -246,32 +340,38 @@ async function waitForContainer(id, token) {
     }
     await new Promise(r => setTimeout(r, 2000));
   }
-  throw new Error("Instagram was still processing the photo after 40 seconds. Try again in a minute.");
+  throw new Error("Instagram was still processing the photo. Try again in a minute.");
 }
 
 /* A photo committed by a publish is not on the CDN until Vercel finishes
    deploying, and Meta fetches the URL itself. Checking first turns a cryptic
    Meta error into a sentence that says what to do. */
 async function imageIsReachable(url) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 7000);
   try {
-    const res = await fetch(url, { method: "HEAD" });
+    const res = await fetch(url, { method: "HEAD", signal: controller.signal });
     return res.ok;
   } catch (e) {
     return false;
+  } finally {
+    clearTimeout(timer);
   }
 }
 
-async function postToInstagram(v, text) {
-  const c = cfg();
-  if (!c.igUserId || !c.token) throw new Error("Instagram is not configured");
-  const image = firstImage(v);
-  if (!image) throw new Error("This vehicle has no photo, and Instagram requires one");
+async function publishInstagramContainer(c, containerId) {
+  const publish = new URLSearchParams({
+    creation_id: containerId,
+    access_token: c.token
+  });
+  return call(GRAPH + "/" + c.igUserId + "/media_publish", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: publish.toString()
+  });
+}
 
-  if (!(await imageIsReachable(image))) {
-    throw new Error("The photo is not live on the site yet (" + image +
-      "). Wait a minute for the site to finish updating, then try again.");
-  }
-
+async function postSingleInstagram(c, v, text, image) {
   const create = new URLSearchParams({
     image_url: image,
     caption: text,
@@ -283,19 +383,83 @@ async function postToInstagram(v, text) {
     body: create.toString()
   });
   if (!container.id) throw new Error("Instagram did not return a container id");
-
   await waitForContainer(container.id, c.token);
+  const out = await publishInstagramContainer(c, container.id);
+  return { id: out.id, url: null, mediaCount: 1, mode: "single" };
+}
 
-  const publish = new URLSearchParams({
-    creation_id: container.id,
-    access_token: c.token
-  });
-  const out = await call(GRAPH + "/" + c.igUserId + "/media_publish", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: publish.toString()
-  });
-  return { id: out.id, url: null };
+async function postToInstagram(v, text) {
+  const c = cfg();
+  if (!c.igUserId || !c.token) throw new Error("Instagram is not configured");
+  const images = imageUrls(v);
+  if (!images.length) throw new Error("This vehicle has no photo, and Instagram requires one");
+
+  const checks = await Promise.all(images.map(imageIsReachable));
+  if (!checks[0]) {
+    throw new Error("The main photo is not live on the site yet (" + images[0] +
+      "). Wait a minute for the site to finish updating, then try again.");
+  }
+  const reachable = images.filter(function (image, i) { return checks[i]; });
+  if (reachable.length === 1) return postSingleInstagram(c, v, text, reachable[0]);
+
+  /* A carousel is composed from unpublished child containers. Prepare them in
+     parallel to stay within the function time limit while preserving the admin
+     photo order. The first photo must succeed because it is the chosen cover. */
+  let children;
+  try {
+    children = await Promise.all(reachable.map(async function (image, i) {
+      try {
+        const params = new URLSearchParams({
+          image_url: image,
+          is_carousel_item: "true",
+          access_token: c.token
+        });
+        const out = await call(GRAPH + "/" + c.igUserId + "/media", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: params.toString()
+        });
+        return out.id || null;
+      } catch (e) {
+        if (i === 0) throw e;
+        return null;
+      }
+    }));
+  } catch (e) {
+    /* A rejected cover container means the carousel cannot preserve the chosen
+       main photo. No child is visible yet, so one normal photo is a safe fallback. */
+    return postSingleInstagram(c, v, text, reachable[0]);
+  }
+  const childIds = children.filter(Boolean);
+  if (childIds.length < 2) return postSingleInstagram(c, v, text, reachable[0]);
+
+  let carouselId = "";
+  try {
+    await Promise.all(childIds.map(id => waitForContainer(id, c.token, 15000)));
+    const carouselParams = new URLSearchParams({
+      media_type: "CAROUSEL",
+      caption: text,
+      children: childIds.join(","),
+      access_token: c.token
+    });
+    const carousel = await call(GRAPH + "/" + c.igUserId + "/media", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: carouselParams.toString()
+    });
+    if (!carousel.id) throw new Error("Instagram did not return a carousel container id");
+    await waitForContainer(carousel.id, c.token, 15000);
+    carouselId = carousel.id;
+  } catch (e) {
+    /* Child and parent containers are not visible posts. Before publishing, a
+       processing failure can safely fall back to the proven single-photo path. */
+    return postSingleInstagram(c, v, text, reachable[0]);
+  }
+
+  /* Do not catch or retry the final publish call. If Meta accepted it before a
+     network timeout, retrying could create a duplicate visible post. */
+  const out = await publishInstagramContainer(c, carouselId);
+  return { id: out.id, url: null, mediaCount: childIds.length, mode: "carousel" };
 }
 
 /* Instagram does not give back a link when it publishes, so it is asked for
@@ -463,5 +627,5 @@ module.exports = {
   caption, captionFacebook, captionInstagram, topFeatures, marketplaceListing, configured,
   postToFacebook, postToInstagram, instagramPermalink, deletePost,
   soldNotice, markSoldOnFacebook, markSoldOnInstagram,
-  vehicleUrl, firstImage, title
+  vehicleUrl, imageUrls, firstImage, title, MAX_GALLERY_IMAGES
 };

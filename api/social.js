@@ -37,6 +37,8 @@ module.exports = async function (req, res) {
         title: social.title(v),
         url: social.vehicleUrl(v),
         image: social.firstImage(v),
+        imageCount: social.imageUrls(v).length,
+        totalImageCount: Array.isArray(v.images) ? v.images.filter(Boolean).length : 0,
         caption: social.captionFacebook(v),      /* kept for older clients */
         captions: {
           facebook: social.captionFacebook(v),
