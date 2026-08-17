@@ -1052,6 +1052,10 @@
         } else if (!d.image) {
           $("share-status").textContent =
             "This vehicle has no photo, so Instagram will be skipped.";
+        } else {
+          $("share-status").textContent =
+            "Ready to post " + d.imageCount + " photo" + (d.imageCount === 1 ? "" : "s") +
+            (d.totalImageCount > d.imageCount ? " (the first 10 will be used)." : ".");
         }
       })
       .catch(function (e) {
@@ -1085,7 +1089,7 @@
 
   $("share-post").addEventListener("click", function () {
     if (!shareVehicle) return;
-    if (!confirm("Post this to your Facebook Page and Instagram now?")) return;
+    if (!confirm("Post this vehicle and up to 10 photos to your Facebook Page and Instagram now?")) return;
     busy("Posting…");
     api("social", {
       method: "POST",
@@ -1102,7 +1106,10 @@
       var lines = Object.keys(d.results).map(function (k) {
         var r = d.results[k];
         var name = k === "facebook" ? "Facebook" : "Instagram";
-        return name + ": " + (r.ok ? "posted" : "failed, " + r.error);
+        var media = r.ok && r.mediaCount
+          ? " with " + r.mediaCount + " photo" + (r.mediaCount === 1 ? "" : "s")
+          : r.ok && r.mode === "link" ? " with a link preview" : "";
+        return name + ": " + (r.ok ? "posted" + media : "failed, " + r.error);
       });
       $("share-status").textContent = lines.join("  ·  ");
       var allOk = Object.keys(d.results).every(function (k) { return d.results[k].ok; });
