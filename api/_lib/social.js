@@ -405,24 +405,31 @@ async function postToInstagram(v, text) {
   /* A carousel is composed from unpublished child containers. Prepare them in
      parallel to stay within the function time limit while preserving the admin
      photo order. The first photo must succeed because it is the chosen cover. */
-  const children = await Promise.all(reachable.map(async function (image, i) {
-    try {
-      const params = new URLSearchParams({
-        image_url: image,
-        is_carousel_item: "true",
-        access_token: c.token
-      });
-      const out = await call(GRAPH + "/" + c.igUserId + "/media", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params.toString()
-      });
-      return out.id || null;
-    } catch (e) {
-      if (i === 0) throw e;
-      return null;
-    }
-  }));
+  let children;
+  try {
+    children = await Promise.all(reachable.map(async function (image, i) {
+      try {
+        const params = new URLSearchParams({
+          image_url: image,
+          is_carousel_item: "true",
+          access_token: c.token
+        });
+        const out = await call(GRAPH + "/" + c.igUserId + "/media", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: params.toString()
+        });
+        return out.id || null;
+      } catch (e) {
+        if (i === 0) throw e;
+        return null;
+      }
+    }));
+  } catch (e) {
+    /* A rejected cover container means the carousel cannot preserve the chosen
+       main photo. No child is visible yet, so one normal photo is a safe fallback. */
+    return postSingleInstagram(c, v, text, reachable[0]);
+  }
   const childIds = children.filter(Boolean);
   if (childIds.length < 2) return postSingleInstagram(c, v, text, reachable[0]);
 
