@@ -110,9 +110,12 @@ function staticFooter(lang) {
   const other = lang === "en" ? "fr" : "en";
   const links = FOOTER_NAV[lang].map(l => `<li><a href="${l[0]}">${l[1]}</a></li>`).join("");
   const switchLabel = lang === "en" ? "Voir ce site en français" : "View this site in English";
+  const facebookLabel = lang === "en" ? "Automobile SX on Facebook" : "Automobile SX sur Facebook";
+  const instagramLabel = lang === "en" ? "Automobile SX on Instagram" : "Automobile SX sur Instagram";
   const home = lang === "en" ? "/fr" : "/";
   return `<div class="container footer-static">
 <p><strong>Automobile SX</strong>, 2044 Avenue Chartier, Dorval, QC H9P 1H2. <a href="tel:+1-514-824-9117">514-824-9117</a></p>
+<p class="footer-static-social"><a href="https://www.facebook.com/SXautomobile/" aria-label="${facebookLabel}">Facebook</a> · <a href="https://www.instagram.com/automobile_sx" aria-label="${instagramLabel}">Instagram</a></p>
 <ul>${links}<li><a href="${home}" hreflang="${other}" lang="${other}">${switchLabel}</a></li></ul>
 </div>`;
 }
@@ -285,12 +288,37 @@ function schema(v, lang) {
     "@type": "AutoDealer",
     "@id": SITE + "/#dealer",
     name: "Automobile SX",
+    alternateName: "Automobile SX Vente d'Autos Usagées",
     url: SITE,
+    logo: SITE + "/assets/logo.png",
+    image: SITE + "/assets/og-image.jpg",
     telephone: "+1-514-824-9117",
     email: "Automobilesx@gmail.com",
-    sameAs: ["https://www.google.com/maps?cid=5771215062979680514"],
+    sameAs: [
+      "https://www.google.com/maps?cid=5771215062979680514",
+      "https://www.facebook.com/SXautomobile/",
+      "https://www.instagram.com/automobile_sx"
+    ],
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "https://schema.org/Monday", "https://schema.org/Tuesday", "https://schema.org/Wednesday",
+        "https://schema.org/Thursday", "https://schema.org/Friday", "https://schema.org/Saturday",
+        "https://schema.org/Sunday"
+      ],
+      opens: "10:00",
+      closes: "18:00"
+    },
     geo: { "@type": "GeoCoordinates", latitude: 45.46418333788317, longitude: -73.72416031436669 },
     hasMap: "https://www.google.com/maps?cid=5771215062979680514",
+    priceRange: "$$",
+    areaServed: ["Dorval", "West Island", "Pointe-Claire", "Lachine", "Montréal", "Laval"],
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+1-514-824-9117",
+      contactType: "customer service",
+      availableLanguage: ["en", "fr"]
+    },
     address: {
       "@type": "PostalAddress",
       streetAddress: "2044 Avenue Chartier",
