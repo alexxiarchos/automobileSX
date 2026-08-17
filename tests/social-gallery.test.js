@@ -149,6 +149,39 @@ async function testInstagramSinglePhoto() {
   assert.equal(mediaBody.get("is_carousel_item"), null);
 }
 
+async function testInstagramCarouselCreationFallback() {
+  let singleBody = null;
+  let publishCount = 0;
+  global.fetch = async function (url, options) {
+    if (options && options.method === "HEAD") return response();
+    if (url.includes("/ig-1/media_publish")) {
+      publishCount += 1;
+      return response({ id: "ig-fallback-post" });
+    }
+    if (url.includes("?fields=status_code")) return response({ status_code: "FINISHED" });
+    if (/\/ig-1\/media$/.test(url)) {
+      const params = new URLSearchParams(options.body);
+      if (params.get("is_carousel_item") === "true") {
+        const number = Number(params.get("image_url").match(/photo-(\d+)/)[1]);
+        return number === 1
+          ? response({ error: { message: "carousel cover rejected" } }, false)
+          : response({ id: "unused-child-" + number });
+      }
+      singleBody = params;
+      return response({ id: "ig-fallback-container" });
+    }
+    throw new Error("Unexpected carousel fallback request: " + url);
+  };
+
+  const out = await SOCIAL.postToInstagram(vehicle, "Fallback caption");
+  assert.equal(out.id, "ig-fallback-post");
+  assert.equal(out.mode, "single");
+  assert.equal(out.mediaCount, 1);
+  assert.equal(publishCount, 1, "fallback must create exactly one visible post");
+  assert.equal(singleBody.get("image_url"), SOCIAL.firstImage(vehicle));
+  assert.equal(singleBody.get("is_carousel_item"), null);
+}
+
 async function main() {
   assert.equal(SOCIAL.MAX_GALLERY_IMAGES, 10);
   assert.equal(SOCIAL.imageUrls(vehicle).length, 10);
@@ -158,6 +191,7 @@ async function main() {
   await testFacebookKeepsChosenCover();
   await testInstagramCarousel();
   await testInstagramSinglePhoto();
+  await testInstagramCarouselCreationFallback();
   console.log("Social gallery tests passed.");
 }
 
