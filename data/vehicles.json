@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-17T21:26:47.991Z",
+  "updatedAt": "2026-08-19T23:51:23.398Z",
   "vehicles": [
     {
       "id": "2016-kia-sorento-lmnwf",
@@ -1199,7 +1199,7 @@
         "images/vehicles/2017-bmw-x3-cqgmi/msdvs64l-15.jpg",
         "images/vehicles/2017-bmw-x3-cqgmi/msdvs6qu-16.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -1211,8 +1211,9 @@
         "remarks": ""
       },
       "createdAt": "2026-08-03T23:47:18.081Z",
-      "updatedAt": "2026-08-15T17:54:58.080Z",
+      "updatedAt": "2026-08-19T23:51:22.530Z",
       "publishedAt": "2026-08-13T22:48:01.523Z",
+      "soldAt": "2026-08-19T23:51:22.530Z",
       "posts": [
         {
           "target": "facebook",
