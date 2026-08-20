@@ -18,7 +18,9 @@ const ENDPOINT = "https://api.indexnow.org/indexnow";
 const TIMEOUT_MS = 4000;
 
 const VEHICLE_PATH = { en: "/vehicles/", fr: "/fr/vehicules/" };
-const INVENTORY = ["/inventory", "/fr/inventaire"];
+/* These four pages all contain live inventory links or featured vehicles, so
+   they genuinely change whenever a vehicle changes. */
+const INVENTORY_SURFACES = ["/", "/fr", "/inventory", "/fr/inventaire"];
 
 /* A vehicle is "live" if it is published, matching the sitemap's own rule.
    The fingerprint includes status as well as updatedAt: flipping a car to sold
@@ -36,8 +38,8 @@ function liveMap(vehicles) {
 
 /**
  * Work out which URLs actually changed between two inventory states.
- * Returns absolute URLs, both languages, plus the inventory listing pages,
- * which change whenever anything is added or removed.
+ * Returns absolute URLs, both languages, plus the home and inventory pages,
+ * whose crawlable vehicle links change whenever inventory changes.
  */
 function changedUrls(previousVehicles, currentVehicles) {
   const before = liveMap(previousVehicles);
@@ -58,7 +60,7 @@ function changedUrls(previousVehicles, currentVehicles) {
     urls.push(SITE + VEHICLE_PATH.en + encodeURIComponent(id));
     urls.push(SITE + VEHICLE_PATH.fr + encodeURIComponent(id));
   });
-  INVENTORY.forEach(p => urls.push(SITE + p));
+  INVENTORY_SURFACES.forEach(p => urls.push(SITE + p));
   return urls;
 }
 
