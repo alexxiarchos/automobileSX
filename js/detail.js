@@ -52,10 +52,16 @@ SX.ready.then(function () {
 
   document.getElementById("v-title").textContent = fullName;
   if (v.status === "sold") {
-    var soldTag = document.createElement("p");
-    soldTag.innerHTML = '<span class="vc-tag" style="position:static;display:inline-block">' + SX.t("veh.sold") +
-      '</span> <span style="color:var(--slate);font-size:14px">' + SX.t("veh.soldNote") + "</span>";
-    document.getElementById("v-title").after(soldTag);
+    var soldTag = document.getElementById("sold-summary");
+    if (!soldTag) {
+      soldTag = document.createElement("p");
+      soldTag.id = "sold-summary";
+      soldTag.className = "sold-summary";
+      soldTag.innerHTML = '<span class="vc-tag" style="position:static;display:inline-block">' + SX.t("veh.sold") +
+        '</span> <span>' + SX.t("veh.soldNote") + '</span> <a href="' + SX.url("inventory") + '">' +
+        (SX.lang === "fr" ? "Voir les véhicules disponibles" : "View available inventory") + "</a>";
+      document.getElementById("v-title").after(soldTag);
+    }
   }
   document.getElementById("v-subtitle").textContent =
     (v.extColor ? v.extColor + " · " : "") + SXUI.specLine(v) + (v.stock ? " · " + SX.t("veh.stock") + " " + v.stock : "");
@@ -124,7 +130,12 @@ SX.ready.then(function () {
   /* Composed from the vehicle's own fields by the shared template, exactly as
      the pre-rendered page did a moment ago, so hydrating cannot change a word
      of what the crawler already read. */
-  var descParas = window.SX_DESCRIBE ? SX_DESCRIBE.paragraphs(v, SX.lang)
+  var descParas = window.SX_DESCRIBE
+    ? (v.status === "sold"
+      ? SX_DESCRIBE.coreParagraphs(v, SX.lang).concat(SX.lang === "fr"
+        ? "Ce véhicule a été vendu. Consultez notre inventaire actuel pour voir les véhicules disponibles."
+        : "This vehicle has been sold. Browse our current inventory for available vehicles.")
+      : SX_DESCRIBE.paragraphs(v, SX.lang))
     : (v.desc ? String(v.desc).split(/\n\s*\n/) : []);
   document.getElementById("v-overview").innerHTML =
     descParas.filter(Boolean).map(function (p) { return "<p>" + p + "</p>"; }).join("") ||
