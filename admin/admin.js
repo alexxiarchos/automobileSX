@@ -8,6 +8,7 @@
   var vehicles = [];        /* full inventory incl. drafts */
   var inventoryVersion = ""; /* updatedAt from the source-of-truth inventory */
   var editing = null;       /* working copy of the vehicle in the editor */
+  var originalPrice = 0;    /* saved price when the editor was opened */
   var isNew = false;
   var pendingBlobs = [];    /* [{path, sha}] uploaded but not yet committed */
   var deletePaths = [];     /* image paths to delete on next save */
@@ -1045,8 +1046,12 @@
           mpField("desc", "Description", m.description);
 
         var ready = d.configured.facebook || d.configured.instagram;
-        $("share-post").disabled = !ready;
-        if (!ready) {
+        var available = (d.status || "available") === "available";
+        $("share-post").disabled = !ready || !available;
+        if (!available) {
+          $("share-status").textContent =
+            "This vehicle is sold. Its existing linked posts can be updated, but a new for-sale post cannot be created.";
+        } else if (!ready) {
           $("share-status").textContent =
             "Direct posting is not set up yet, so copy and paste for now. See SOCIAL-SETUP.md.";
         } else if (!d.image) {
@@ -1165,7 +1170,25 @@
      be a decision, not a side effect of updating your own inventory. */
   function offerSoldAnnouncement(v) {
     var posts = realPosts(v);
-    if (!posts.length) return Promise.resolve();
+    var manual = (Array.isArray(v.posts) ? v.posts : []).filter(function (p) { return p && p.manual; });
+    if (!posts.length) {
+      if (!manual.length) return Promise.resolve();
+      if (!confirm("This vehicle was marked as posted manually. The admin has no Facebook or Instagram post ID, so it cannot change those older posts automatically.\n\nCopy a bilingual SOLD update now so you can paste it on the original posts?")) {
+        return Promise.resolve();
+      }
+      return api("social?id=" + encodeURIComponent(v.id)).then(function (d) {
+        var sold = d.lifecycle && d.lifecycle.sold;
+        var text = "FACEBOOK\n\n" + sold.facebook + "\n\nINSTAGRAM COMMENT\n\n" + sold.instagram;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text).then(function () {
+            alert("The SOLD updates were copied. Paste the Facebook section above the old Facebook description, and add the Instagram section as a comment.");
+          });
+        }
+        window.prompt("Copy these SOLD updates:", text);
+      }).catch(function (e) {
+        toast("Could not prepare the SOLD update: " + e.message, "err");
+      });
+    }
 
     var where = [];
     if (posts.some(function (p) { return p.target === "facebook"; })) where.push("Facebook");
@@ -1196,6 +1219,76 @@
       alert("Some posts could not be updated:\n\n" +
         bad.map(function (r) { return r.target + ": " + r.error; }).join("\n") +
         "\n\nYou can still edit or comment on them in the app.");
+    }).catch(function (e) {
+      toast("Could not reach the posts: " + e.message, "err");
+    }).finally(function () { busy(null); });
+  }
+
+  function priceDropText(v, oldPrice, target) {
+    var name = [v.year, v.make, v.model, v.trim].filter(Boolean).join(" ");
+    var stock = v.stock ? " Stock " + v.stock + "." : "";
+    if (target === "instagram") {
+      return "PRICE REDUCED - " + name + " is now " + money(v.price) + " (was " + money(oldPrice) + ")." + stock +
+        "\nSee the current listing through the link in our bio.\n\n" +
+        "PRIX RÉDUIT - " + name + " est maintenant à " + money(v.price) + " (était " + money(oldPrice) + ")." + stock +
+        "\nConsultez l'annonce à jour par le lien dans notre bio.";
+    }
+    return "PRICE REDUCED - " + name + " is now " + money(v.price) + " (was " + money(oldPrice) + ").\n" +
+      "View the updated listing: https://www.automobilesx.ca/vehicles/" + encodeURIComponent(v.id) + "\n\n" +
+      "PRIX RÉDUIT - " + name + " est maintenant à " + money(v.price) + " (était " + money(oldPrice) + ").\n" +
+      "Consultez l'annonce à jour : https://www.automobilesx.ca/vehicles/" + encodeURIComponent(v.id);
+  }
+
+  function offerPriceDropAnnouncement(v, oldPrice) {
+    var posts = realPosts(v);
+    var manual = (Array.isArray(v.posts) ? v.posts : []).filter(function (p) { return p && p.manual; });
+    if (!posts.length) {
+      if (!manual.length) return Promise.resolve();
+      if (!confirm("The price dropped from " + money(oldPrice) + " to " + money(v.price) +
+        ". This vehicle was marked as posted manually, so the admin cannot change those older posts automatically.\n\nCopy a bilingual price-update message now?")) return Promise.resolve();
+      var manualText = "FACEBOOK\n\n" + priceDropText(v, oldPrice, "facebook") +
+        "\n\nINSTAGRAM COMMENT\n\n" + priceDropText(v, oldPrice, "instagram");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(manualText).then(function () {
+          alert("The price-update text was copied. Update the Facebook description and add the Instagram section as a comment.");
+        });
+      }
+      window.prompt("Copy this price update:", manualText);
+      return Promise.resolve();
+    }
+
+    var where = [];
+    if (posts.some(function (p) { return p.target === "facebook"; })) where.push("Facebook");
+    if (posts.some(function (p) { return p.target === "instagram"; })) where.push("Instagram");
+    if (!confirm("The price dropped from " + money(oldPrice) + " to " + money(v.price) + ".\n\n" +
+      "Update the original " + where.join(" and ") + " post" + (where.length > 1 ? "s" : "") + "?\n\n" +
+      "Facebook: the original description and price are updated.\n" +
+      "Instagram: a price-reduction comment is added because captions cannot be edited.\n\n" +
+      "No new feed post will be created.")) return Promise.resolve();
+
+    busy("Updating the posts…");
+    return api("social", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "price-drop", id: v.id, oldPrice: oldPrice, posts: posts })
+    }).then(function (d) {
+      var results = (d && d.results) || [];
+      var bad = results.filter(function (r) { return !r.ok; });
+      var refresh = d && d.refresh;
+      var refreshNote = refresh && refresh.recommended
+        ? "\n\nThis is a " + money(refresh.decrease) + " (" + refresh.percent +
+          "%) reduction on a listing that has been live for " + refresh.daysLive +
+          " days. It is a good candidate for one refreshed gallery post. Open Posts and publish it again when ready. " +
+          "Once the replacement is live, remove the older Facebook post only if it has little engagement."
+        : "";
+      if (!bad.length) {
+        toast("Price updated on the original posts.", "ok");
+        if (refreshNote) alert("The original posts were updated." + refreshNote);
+        return;
+      }
+      alert("Some posts could not be updated:\n\n" +
+        bad.map(function (r) { return r.target + ": " + r.error; }).join("\n") +
+        "\n\nYou can still update them manually in the app." + refreshNote);
     }).catch(function (e) {
       toast("Could not reach the posts: " + e.message, "err");
     }).finally(function () { busy(null); });
@@ -1349,6 +1442,7 @@
 
   function openEditor(v, alreadyInList) {
     editing = v;
+    originalPrice = Number(v.price) || 0;
     isNew = !alreadyInList && vehicles.indexOf(v) === -1;
     $("edit-title").textContent = isNew ? "Add Vehicle" : "Edit Vehicle";
     $("edit-error").hidden = true;
@@ -1616,15 +1710,23 @@
 
   function saveVehicle(status) {
     if (!validate(status === "available")) return;
+    var priceBefore = originalPrice;
+    var wasNew = isNew;
     collectForm();
     editing.status = status;
     markLive(editing, status);
     if (vehicles.indexOf(editing) === -1) vehicles.unshift(editing);
     var label = editing.year + " " + editing.make + " " + editing.model;
-    saveAll((status === "draft" ? "Draft: " : "Publish: ") + label,
+    return saveAll((status === "draft" ? "Draft: " : "Publish: ") + label,
       status === "draft"
         ? "Draft saved. It is not visible on the website."
         : "Published! The website is updating. Your listing will be live in about a minute.")
+      .then(function () {
+        originalPrice = Number(editing.price) || 0;
+        if (!wasNew && status === "available" && priceBefore > Number(editing.price)) {
+          return offerPriceDropAnnouncement(editing, priceBefore);
+        }
+      })
       .then(function () { renderDash(); show("screen-dash"); })
       .catch(function () { /* stay in editor so nothing is lost */ });
   }

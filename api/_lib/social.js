@@ -601,6 +601,114 @@ async function markSoldOnInstagram(v, mediaId) {
   return { id: mediaId, commented: true };
 }
 
+/* A price decrease is useful information, but it is not a new vehicle. Keep it
+   on the original post instead of creating another feed post. Facebook lets us
+   update the post text; Instagram only lets us add a comment. */
+function priceDropNotice(v, oldPrice, target) {
+  const name = title(v);
+  const before = money(oldPrice);
+  const now = money(v.price);
+  const stock = v.stock ? " Stock " + v.stock + "." : "";
+
+  if (target === "instagram") {
+    return [
+      "PRICE REDUCED - " + name + " is now " + now + " (was " + before + ")." + stock,
+      "See the current listing through the link in our bio.",
+      "",
+      "PRIX RÉDUIT - " + name + " est maintenant à " + now + " (était " + before + ")." + stock,
+      "Consultez l'annonce à jour par le lien dans notre bio."
+    ].join("\n");
+  }
+
+  return [
+    "PRICE REDUCED - " + name + " is now " + now + " (was " + before + ").",
+    "View the updated listing: " + vehicleUrl(v),
+    "",
+    "PRIX RÉDUIT - " + name + " est maintenant à " + now + " (était " + before + ").",
+    "Consultez l'annonce à jour : " + vehicleUrl(v)
+  ].join("\n");
+}
+
+/* A refreshed feed post is the exception, not the default. Recommend it only
+   when the listing has had time to go stale and the decrease is meaningful.
+   This returns advice only; it never publishes or deletes anything. */
+function priceRefreshRecommendation(v, oldPrice, now) {
+  const before = Number(oldPrice) || 0;
+  const after = Number(v && v.price) || 0;
+  const decrease = Math.max(0, before - after);
+  const percent = before > 0 ? decrease / before * 100 : 0;
+  const listed = new Date((v && (v.publishedAt || v.createdAt)) || "");
+  const at = now == null ? Date.now() : Number(now);
+  const daysLive = Number.isFinite(listed.getTime())
+    ? Math.max(0, Math.floor((at - listed.getTime()) / 86400000))
+    : null;
+  return {
+    recommended: daysLive !== null && daysLive >= 14 && (decrease >= 750 || percent >= 5),
+    decrease: Math.round(decrease),
+    percent: Math.round(percent * 10) / 10,
+    daysLive: daysLive
+  };
+}
+
+function stripPreviousPriceDrop(message) {
+  if (!/^PRICE REDUCED -/.test(message || "")) return message || "";
+  const end = String(message).lastIndexOf(SITE + "/vehicles/");
+  /* Older notices may not match today's exact wording. The blank line after
+     the bilingual notice is the safe boundary before the preserved caption. */
+  const boundary = String(message).indexOf("\n\n", end >= 0 ? end : 0);
+  return boundary >= 0 ? String(message).slice(boundary + 2) : "";
+}
+
+async function markPriceDropOnFacebook(v, postId, oldPrice) {
+  const c = cfg();
+  if (!c.token) throw new Error("Facebook is not configured");
+  if (!postId) throw new Error("No Facebook post id on this vehicle");
+  if (!(Number(oldPrice) > Number(v.price))) throw new Error("The new price is not lower than the old price");
+
+  let existing = "";
+  try {
+    const cur = await call(GRAPH + "/" + postId + "?fields=message&access_token=" +
+      encodeURIComponent(c.token), { method: "GET" });
+    existing = stripPreviousPriceDrop((cur && cur.message) || "");
+  } catch (e) {
+    existing = "";
+  }
+
+  const before = money(oldPrice);
+  const now = money(v.price);
+  const refreshed = existing
+    ? existing.split(before).join(now)
+    : captionFacebook(v);
+  const params = new URLSearchParams({
+    message: priceDropNotice(v, oldPrice, "facebook") + "\n\n" + refreshed,
+    access_token: c.token
+  });
+  await call(GRAPH + "/" + postId, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: params.toString()
+  });
+  return { id: postId, edited: true };
+}
+
+async function markPriceDropOnInstagram(v, mediaId, oldPrice) {
+  const c = cfg();
+  if (!c.token) throw new Error("Instagram is not configured");
+  if (!mediaId) throw new Error("No Instagram media id on this vehicle");
+  if (!(Number(oldPrice) > Number(v.price))) throw new Error("The new price is not lower than the old price");
+
+  const params = new URLSearchParams({
+    message: priceDropNotice(v, oldPrice, "instagram"),
+    access_token: c.token
+  });
+  await call(GRAPH + "/" + mediaId + "/comments", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: params.toString()
+  });
+  return { id: mediaId, commented: true };
+}
+
 async function deletePost(target, id) {
   const c = cfg();
   if (!c.token) throw new Error("Posting is not configured, so there is no token to delete with.");
@@ -627,5 +735,6 @@ module.exports = {
   caption, captionFacebook, captionInstagram, topFeatures, marketplaceListing, configured,
   postToFacebook, postToInstagram, instagramPermalink, deletePost,
   soldNotice, markSoldOnFacebook, markSoldOnInstagram,
+  priceDropNotice, priceRefreshRecommendation, markPriceDropOnFacebook, markPriceDropOnInstagram,
   vehicleUrl, imageUrls, firstImage, title, MAX_GALLERY_IMAGES
 };

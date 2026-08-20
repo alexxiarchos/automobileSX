@@ -30,7 +30,8 @@ const L = {
     inventory: "Inventory", kilometres: "Kilometres", stock: "Stock #", vin: "VIN",
     plusTaxes: "plus applicable taxes and licensing",
     hoursShort: "Open 10 to 6, seven days, by appointment",
-    sold: "Sold", soldNote: "This vehicle has found a new home. Browse our current inventory below.",
+    sold: "Sold", soldNote: "This vehicle has found a new home.",
+    soldOverview: "This vehicle has been sold. Browse our current inventory for available vehicles.",
     forSale: "for sale", noDesc: "Call us for full details on this vehicle.",
     featuresSoon: "Feature list available at your appointment.",
     engine: "Engine", trans: "Transmission", drive: "Drivetrain", fuel: "Fuel type",
@@ -52,7 +53,8 @@ const L = {
     inventory: "Inventaire", kilometres: "Kilométrage", stock: "N° de stock", vin: "NIV",
     plusTaxes: "plus taxes applicables et immatriculation",
     hoursShort: "Ouvert de 10 h à 18 h, 7 jours, sur rendez-vous",
-    sold: "Vendu", soldNote: "Ce véhicule a trouvé preneur. Consultez notre inventaire actuel ci-dessous.",
+    sold: "Vendu", soldNote: "Ce véhicule a trouvé preneur.",
+    soldOverview: "Ce véhicule a été vendu. Consultez notre inventaire actuel pour voir les véhicules disponibles.",
     forSale: "à vendre", noDesc: "Appelez-nous pour tous les détails sur ce véhicule.",
     featuresSoon: "Liste des équipements disponible lors de votre rendez-vous.",
     engine: "Moteur", trans: "Transmission", drive: "Rouage", fuel: "Carburant",
@@ -346,16 +348,24 @@ function renderVehiclePage(v, lang) {
   const t = L[lang];
   const P = PATHS[lang];
   const name = fullName(v);
-  const pageTitle = `${name} ${t.forSale} | Automobile SX Dorval`;
-  const desc = metaDescription(v, lang);
+  const isSold = v.status === "sold";
+  const pageTitle = isSold
+    ? `${name} ${t.sold.toLowerCase()} | Automobile SX Dorval`
+    : `${name} ${t.forSale} | Automobile SX Dorval`;
+  const desc = isSold
+    ? (lang === "fr"
+      ? `${name} vendu chez Automobile SX à Dorval. ${t.soldOverview}`
+      : `${name} sold by Automobile SX in Dorval. ${t.soldOverview}`)
+    : metaDescription(v, lang);
   const canonical = SITE + "/" + P.dir + "/" + v.id;
   const altLang = lang === "en" ? "fr" : "en";
   const altUrl = "/" + PATHS[altLang].dir + "/" + v.id;
   const bodyLabel = lang === "fr" ? (BODY_FR[v.body] || v.body) : v.body;
-  const isSold = v.status === "sold";
   const viewAvailable = lang === "fr" ? "Voir les véhicules disponibles" : "View available inventory";
   const findSimilar = lang === "fr" ? "Trouver un véhicule semblable" : "Find a similar vehicle";
-  const paras = descParagraphs(v, lang);
+  const paras = isSold
+    ? DESCRIBE.coreParagraphs(v, lang).concat(t.soldOverview)
+    : descParagraphs(v, lang);
   const rows = specRows(v, lang);
   const half = Math.ceil(rows.length / 2);
   const ogImage = (v.images && v.images.length)
@@ -418,11 +428,12 @@ function renderVehiclePage(v, lang) {
   <div class="container detail-layout">
     <div>
       <h1 id="v-title" style="font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:4px">${esc(name)}</h1>
-      ${v.status === "sold" ? `<p><span class="vc-tag" style="position:static;display:inline-block">${esc(t.sold)}</span> <span style="color:var(--slate);font-size:14px">${esc(t.soldNote)}</span></p>` : ""}
+      ${isSold ? `<p class="sold-summary" id="sold-summary"><span class="vc-tag" style="position:static;display:inline-block">${esc(t.sold)}</span> <span>${esc(t.soldNote)}</span> <a href="${P.inventory}">${esc(viewAvailable)}</a></p>` : ""}
       <p id="v-subtitle" style="color:var(--slate);margin-bottom:20px">${esc(subtitle)}</p>
 
       <div class="gallery-main" id="gallery-main">
         <img id="gal-img" src="${esc(imageUrls(v)[0] || "")}" alt="${esc(name)}">
+        ${isSold ? `<div class="gallery-sold" id="gallery-sold"><strong>${esc(t.sold)}</strong><a class="btn btn-red" href="${P.inventory}">${esc(viewAvailable)}</a></div>` : ""}
         <button class="gal-btn gal-prev" id="gal-prev" type="button" aria-label="‹">‹</button>
         <button class="gal-btn gal-next" id="gal-next" type="button" aria-label="›">›</button>
         <span class="gal-counter" id="gal-counter"></span>
