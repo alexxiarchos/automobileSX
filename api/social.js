@@ -45,6 +45,13 @@ module.exports = async function (req, res) {
           instagram: social.captionInstagram(v)
         },
         marketplace: social.marketplaceListing(v),
+        status: v.status || "available",
+        lifecycle: {
+          sold: {
+            facebook: social.soldNotice(v, "facebook"),
+            instagram: social.soldNotice(v, "instagram")
+          }
+        },
         configured: social.configured()
       }));
     }
@@ -94,7 +101,41 @@ module.exports = async function (req, res) {
         return res.end(JSON.stringify({ ok: out.some(function (r) { return r.ok; }), results: out }));
       }
 
+      if (body.action === "price-drop") {
+        const v = await findVehicle(String(body.id || ""));
+        const oldPrice = Number(body.oldPrice);
+        if (!(oldPrice > Number(v.price))) throw new Error("The saved price is not lower than the previous price");
+        const posts = Array.isArray(body.posts) ? body.posts : [];
+        const out = [];
+        for (const p of posts) {
+          const target = String(p.target || "");
+          const postId = String(p.id || "");
+          try {
+            if (target === "facebook") {
+              await social.markPriceDropOnFacebook(v, postId, oldPrice);
+              out.push({ target, postId, ok: true });
+            } else if (target === "instagram") {
+              await social.markPriceDropOnInstagram(v, postId, oldPrice);
+              out.push({ target, postId, ok: true });
+            } else {
+              out.push({ target, postId, ok: false, error: "Unknown platform" });
+            }
+          } catch (e) {
+            out.push({ target, postId, ok: false, error: e.message });
+          }
+        }
+        res.statusCode = 200;
+        return res.end(JSON.stringify({
+          ok: out.some(function (r) { return r.ok; }),
+          results: out,
+          refresh: social.priceRefreshRecommendation(v, oldPrice)
+        }));
+      }
+
       const v = await findVehicle(String(body.id || ""));
+      if ((v.status || "available") !== "available") {
+        throw new Error("Only an available vehicle can be posted as a new listing");
+      }
       const targets = Array.isArray(body.targets) ? body.targets : [];
 
       /* Each platform gets its own text. An override may be sent per platform,
