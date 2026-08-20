@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-08-20T21:16:11.184Z",
+  "updatedAt": "2026-08-20T21:40:51.666Z",
   "vehicles": [
     {
       "id": "2016-hyundai-elantra-199ae",
       "year": 2016,
       "make": "Hyundai",
       "model": "Elantra",
-      "trim": "Gl",
+      "trim": "GL",
       "body": "Hatchback",
       "price": 10999,
       "km": 60500,
@@ -26,9 +26,9 @@
       "tag": "",
       "features": [
         "Air Conditioning",
+        "Heated Seats",
         "Bluetooth",
         "Keyless Entry",
-        "Push-Button Start",
         "Cruise Control"
       ],
       "desc": "",
@@ -52,7 +52,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-20T21:09:32.123Z",
-      "updatedAt": "2026-08-20T21:16:10.567Z",
+      "updatedAt": "2026-08-20T21:40:50.801Z",
       "publishedAt": "2026-08-20T21:10:38.784Z",
       "posts": []
     },
