@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-20T23:41:22.009Z",
+  "updatedAt": "2026-08-21T17:50:18.921Z",
   "vehicles": [
     {
       "id": "2012-toyota-rav4-qjrkw",
@@ -103,7 +103,21 @@
       "draftNotes": {
         "ownership": ""
       },
-      "images": [],
+      "images": [
+        "images/vehicles/2016-hyundai-elantra-199ae/mt38vdab-1.jpg",
+        "images/vehicles/2016-hyundai-elantra-199ae/mt38veov-2.jpg",
+        "images/vehicles/2016-hyundai-elantra-199ae/mt38vfkd-3.jpg",
+        "images/vehicles/2016-hyundai-elantra-199ae/mt38vgcs-4.jpg",
+        "images/vehicles/2016-hyundai-elantra-199ae/mt38vh56-5.jpg",
+        "images/vehicles/2016-hyundai-elantra-199ae/mt38vht9-6.jpg",
+        "images/vehicles/2016-hyundai-elantra-199ae/mt38vin3-7.jpg",
+        "images/vehicles/2016-hyundai-elantra-199ae/mt38vjfk-8.jpg",
+        "images/vehicles/2016-hyundai-elantra-199ae/mt38vk51-9.jpg",
+        "images/vehicles/2016-hyundai-elantra-199ae/mt38vkrv-10.jpg",
+        "images/vehicles/2016-hyundai-elantra-199ae/mt38vlk8-11.jpg",
+        "images/vehicles/2016-hyundai-elantra-199ae/mt38vm6u-12.jpg",
+        "images/vehicles/2016-hyundai-elantra-199ae/mt38vmqt-13.jpg"
+      ],
       "status": "available",
       "opc": {
         "classOverride": "",
@@ -116,7 +130,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-20T21:09:32.123Z",
-      "updatedAt": "2026-08-20T21:40:50.801Z",
+      "updatedAt": "2026-08-21T17:50:17.920Z",
       "publishedAt": "2026-08-20T21:10:38.784Z",
       "posts": []
     },
