@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-24T18:10:22.559Z",
+  "updatedAt": "2026-08-24T18:10:36.308Z",
   "vehicles": [
     {
       "id": "2012-toyota-rav4-qjrkw",
@@ -1010,6 +1010,7 @@
       "updatedAt": "2026-08-24T18:10:21.443Z",
       "publishedAt": "2026-08-13T22:45:56.086Z",
       "soldAt": "2026-08-24T18:10:21.443Z",
+      "soldAnnouncedAt": "2026-08-24T18:10:35.885Z",
       "posts": [
         {
           "target": "facebook",
