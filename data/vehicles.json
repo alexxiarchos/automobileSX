@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-21T17:55:11.476Z",
+  "updatedAt": "2026-08-24T18:10:22.559Z",
   "vehicles": [
     {
       "id": "2012-toyota-rav4-qjrkw",
@@ -995,7 +995,7 @@
         "images/vehicles/2018-volkswagen-tiguan-ddnvw/mseltq9x-56.jpg",
         "images/vehicles/2018-volkswagen-tiguan-ddnvw/mseltqzj-57.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -1007,8 +1007,9 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T11:56:54.576Z",
-      "updatedAt": "2026-08-15T17:53:51.069Z",
+      "updatedAt": "2026-08-24T18:10:21.443Z",
       "publishedAt": "2026-08-13T22:45:56.086Z",
+      "soldAt": "2026-08-24T18:10:21.443Z",
       "posts": [
         {
           "target": "facebook",
