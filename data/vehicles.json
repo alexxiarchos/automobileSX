@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T21:47:42.745Z",
+  "updatedAt": "2026-08-25T23:34:48.791Z",
   "vehicles": [
     {
       "id": "2012-toyota-rav4-qjrkw",
@@ -118,7 +118,7 @@
         "images/vehicles/2016-hyundai-elantra-199ae/mt9742x9-12.jpg",
         "images/vehicles/2016-hyundai-elantra-199ae/mt9743mw-13.jpg"
       ],
-      "status": "draft",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -130,8 +130,9 @@
         "remarks": ""
       },
       "createdAt": "2026-08-20T21:09:32.123Z",
-      "updatedAt": "2026-08-25T21:47:41.900Z",
+      "updatedAt": "2026-08-25T23:34:47.964Z",
       "publishedAt": "2026-08-20T21:10:38.784Z",
+      "soldAt": "2026-08-25T23:34:47.964Z",
       "posts": [
         {
           "target": "facebook",
