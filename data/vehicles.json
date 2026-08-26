@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-26T16:21:10.122Z",
+  "updatedAt": "2026-08-26T16:22:02.002Z",
   "vehicles": [
     {
       "id": "2012-toyota-rav4-qjrkw",
@@ -72,7 +72,20 @@
       "createdAt": "2026-08-20T23:38:46.031Z",
       "updatedAt": "2026-08-26T16:21:09.061Z",
       "publishedAt": "2026-08-20T23:40:09.266Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1144995778279276",
+          "url": "https://www.facebook.com/101868772570376_1144995778279276",
+          "at": "2026-08-26T16:22:01.426Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18105872777601274",
+          "url": "https://www.instagram.com/p/DcgoVM5IIl_/",
+          "at": "2026-08-26T16:22:01.426Z"
+        }
+      ]
     },
     {
       "id": "2016-hyundai-elantra-199ae",
