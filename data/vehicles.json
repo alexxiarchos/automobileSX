@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T23:34:58.791Z",
+  "updatedAt": "2026-08-26T16:21:10.122Z",
   "vehicles": [
     {
       "id": "2012-toyota-rav4-qjrkw",
@@ -48,7 +48,16 @@
       "draftNotes": {
         "ownership": ""
       },
-      "images": [],
+      "images": [
+        "images/vehicles/2012-toyota-rav4-qjrkw/mtaavjbv-1.jpg",
+        "images/vehicles/2012-toyota-rav4-qjrkw/mtaavmit-2.jpg",
+        "images/vehicles/2012-toyota-rav4-qjrkw/mtaavo2r-3.jpg",
+        "images/vehicles/2012-toyota-rav4-qjrkw/mtaavr8f-4.jpg",
+        "images/vehicles/2012-toyota-rav4-qjrkw/mtaavsht-5.jpg",
+        "images/vehicles/2012-toyota-rav4-qjrkw/mtaavvye-6.jpg",
+        "images/vehicles/2012-toyota-rav4-qjrkw/mtaavxcf-7.jpg",
+        "images/vehicles/2012-toyota-rav4-qjrkw/mtaavyhe-8.jpg"
+      ],
       "status": "available",
       "opc": {
         "classOverride": "",
@@ -61,7 +70,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-20T23:38:46.031Z",
-      "updatedAt": "2026-08-20T23:41:21.475Z",
+      "updatedAt": "2026-08-26T16:21:09.061Z",
       "publishedAt": "2026-08-20T23:40:09.266Z",
       "posts": []
     },
