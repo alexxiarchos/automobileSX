@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T23:34:30.923Z",
+  "updatedAt": "2026-08-31T23:35:19.534Z",
   "vehicles": [
     {
       "id": "2017-jaguar-f-type-y0t01",
@@ -56,7 +56,20 @@
       "draftNotes": {
         "ownership": ""
       },
-      "images": [],
+      "images": [
+        "images/vehicles/2017-jaguar-f-type-y0t01/mthvlmsl-1.jpg",
+        "images/vehicles/2017-jaguar-f-type-y0t01/mthvlnvt-2.jpg",
+        "images/vehicles/2017-jaguar-f-type-y0t01/mthvlolh-3.jpg",
+        "images/vehicles/2017-jaguar-f-type-y0t01/mthvlpbg-4.jpg",
+        "images/vehicles/2017-jaguar-f-type-y0t01/mthvlq0y-5.jpg",
+        "images/vehicles/2017-jaguar-f-type-y0t01/mthvlqqd-6.jpg",
+        "images/vehicles/2017-jaguar-f-type-y0t01/mthvlrg8-7.jpg",
+        "images/vehicles/2017-jaguar-f-type-y0t01/mthvlse4-8.jpg",
+        "images/vehicles/2017-jaguar-f-type-y0t01/mthvlt3l-9.jpg",
+        "images/vehicles/2017-jaguar-f-type-y0t01/mthvltqe-10.jpg",
+        "images/vehicles/2017-jaguar-f-type-y0t01/mthvlud6-11.jpg",
+        "images/vehicles/2017-jaguar-f-type-y0t01/mthvlv2h-12.jpg"
+      ],
       "status": "available",
       "opc": {
         "classOverride": "",
@@ -69,7 +82,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-31T23:31:56.417Z",
-      "updatedAt": "2026-08-31T23:34:30.032Z",
+      "updatedAt": "2026-08-31T23:35:19.153Z",
       "publishedAt": "2026-08-31T23:34:30.032Z",
       "posts": []
     },
