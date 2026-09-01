@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-01T00:02:05.955Z",
+  "updatedAt": "2026-09-01T16:41:59.583Z",
   "vehicles": [
     {
       "id": "2017-jaguar-f-type-y0t01",
@@ -896,7 +896,7 @@
         "images/vehicles/2019-suabru-impreza-62zb2/msem253l-99.jpg",
         "images/vehicles/2019-suabru-impreza-62zb2/msem25mx-100.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -908,8 +908,9 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T12:03:14.312Z",
-      "updatedAt": "2026-08-15T17:53:08.289Z",
+      "updatedAt": "2026-09-01T16:41:58.696Z",
       "publishedAt": "2026-08-13T22:42:57.151Z",
+      "soldAt": "2026-09-01T16:41:58.696Z",
       "posts": [
         {
           "target": "facebook",
