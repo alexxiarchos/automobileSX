@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T23:35:19.534Z",
+  "updatedAt": "2026-09-01T00:02:05.955Z",
   "vehicles": [
     {
       "id": "2017-jaguar-f-type-y0t01",
@@ -84,7 +84,20 @@
       "createdAt": "2026-08-31T23:31:56.417Z",
       "updatedAt": "2026-08-31T23:35:19.153Z",
       "publishedAt": "2026-08-31T23:34:30.032Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1149495074496013",
+          "url": "https://www.facebook.com/101868772570376_1149495074496013",
+          "at": "2026-09-01T00:02:05.269Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18053281202567473",
+          "url": "https://www.instagram.com/p/DcuU9KyD6aA/",
+          "at": "2026-09-01T00:02:05.269Z"
+        }
+      ]
     },
     {
       "id": "2012-toyota-rav4-qjrkw",
