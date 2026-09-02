@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-02T15:46:29.853Z",
+  "updatedAt": "2026-09-02T15:46:51.484Z",
   "vehicles": [
     {
       "id": "2017-jaguar-f-type-y0t01",
@@ -1217,6 +1217,7 @@
       "updatedAt": "2026-09-02T15:46:28.823Z",
       "publishedAt": "2026-08-13T03:07:30.079Z",
       "soldAt": "2026-09-02T15:46:28.823Z",
+      "soldAnnouncedAt": "2026-09-02T15:46:51.179Z",
       "posts": [
         {
           "target": "facebook",
