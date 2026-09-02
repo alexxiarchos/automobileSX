@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-01T16:41:59.583Z",
+  "updatedAt": "2026-09-02T15:46:29.853Z",
   "vehicles": [
     {
       "id": "2017-jaguar-f-type-y0t01",
@@ -1202,7 +1202,7 @@
         "images/vehicles/2011-nissan-murano-r71ho/mselqux7-42.jpg",
         "images/vehicles/2011-nissan-murano-r71ho/mselqvhd-43.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -1214,8 +1214,9 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T11:54:58.675Z",
-      "updatedAt": "2026-08-15T18:22:30.064Z",
+      "updatedAt": "2026-09-02T15:46:28.823Z",
       "publishedAt": "2026-08-13T03:07:30.079Z",
+      "soldAt": "2026-09-02T15:46:28.823Z",
       "posts": [
         {
           "target": "facebook",
