@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-02T15:46:51.484Z",
+  "updatedAt": "2026-09-03T22:24:09.584Z",
   "vehicles": [
     {
       "id": "2017-jaguar-f-type-y0t01",
@@ -156,7 +156,7 @@
         "images/vehicles/2012-toyota-rav4-qjrkw/mtaavxcf-7.jpg",
         "images/vehicles/2012-toyota-rav4-qjrkw/mtaavyhe-8.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -168,8 +168,9 @@
         "remarks": ""
       },
       "createdAt": "2026-08-20T23:38:46.031Z",
-      "updatedAt": "2026-08-26T16:21:09.061Z",
+      "updatedAt": "2026-09-03T22:24:08.675Z",
       "publishedAt": "2026-08-20T23:40:09.266Z",
+      "soldAt": "2026-09-03T22:24:08.672Z",
       "posts": [
         {
           "target": "facebook",
