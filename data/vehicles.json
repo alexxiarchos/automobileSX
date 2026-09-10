@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-10T20:01:51.649Z",
+  "updatedAt": "2026-09-10T20:02:38.357Z",
   "vehicles": [
     {
       "id": "2017-nissan-rogue-sport-qpxld",
@@ -84,7 +84,20 @@
       "createdAt": "2026-09-10T19:58:07.940Z",
       "updatedAt": "2026-09-10T20:01:51.432Z",
       "publishedAt": "2026-09-10T20:01:29.663Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1157951490317038",
+          "url": "https://www.facebook.com/101868772570376_1157951490317038",
+          "at": "2026-09-10T20:02:37.998Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18133582315651104",
+          "url": "https://www.instagram.com/p/DdHpgHWGFZe/",
+          "at": "2026-09-10T20:02:37.998Z"
+        }
+      ]
     },
     {
       "id": "2018-audi-q5-ax7p4",
