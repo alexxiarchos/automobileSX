@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-10T19:00:28.094Z",
+  "updatedAt": "2026-09-10T19:01:19.116Z",
   "vehicles": [
     {
       "id": "2018-audi-q5-ax7p4",
@@ -80,7 +80,20 @@
       "createdAt": "2026-09-09T20:29:03.711Z",
       "updatedAt": "2026-09-10T19:00:27.793Z",
       "publishedAt": "2026-09-09T20:30:43.571Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1157914826987371",
+          "url": "https://www.facebook.com/101868772570376_1157914826987371",
+          "at": "2026-09-10T19:01:18.692Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18115577675151955",
+          "url": "https://www.instagram.com/p/DdHidvomorO/",
+          "at": "2026-09-10T19:01:18.692Z"
+        }
+      ]
     },
     {
       "id": "2017-jaguar-f-type-y0t01",
