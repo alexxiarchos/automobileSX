@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-10T20:07:25.788Z",
+  "updatedAt": "2026-09-10T20:08:17.532Z",
   "vehicles": [
     {
       "id": "2017-hyundai-santa-fe-216xz",
@@ -45,7 +45,23 @@
       "draftNotes": {
         "ownership": ""
       },
-      "images": [],
+      "images": [
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvyls8n-18.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylt9n-19.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylu22-20.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvyluxg-21.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylvsl-22.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylwky-23.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylxbf-24.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylybn-25.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylz15-26.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylztm-27.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvym0gf-28.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvym1jx-29.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvym29t-30.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvym322-31.jpg",
+        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvym3uh-32.jpg"
+      ],
       "status": "available",
       "opc": {
         "classOverride": "",
@@ -58,7 +74,7 @@
         "remarks": ""
       },
       "createdAt": "2026-09-10T20:05:19.716Z",
-      "updatedAt": "2026-09-10T20:07:25.378Z",
+      "updatedAt": "2026-09-10T20:08:17.354Z",
       "publishedAt": "2026-09-10T20:07:25.378Z",
       "posts": []
     },
