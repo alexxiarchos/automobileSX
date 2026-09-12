@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-12T19:52:39.139Z",
+  "updatedAt": "2026-09-12T19:52:49.079Z",
   "vehicles": [
     {
       "id": "2017-mercedes-benz-cla-class-giphs",
@@ -157,6 +157,7 @@
       "updatedAt": "2026-09-12T19:52:38.155Z",
       "publishedAt": "2026-09-10T20:07:25.378Z",
       "soldAt": "2026-09-12T19:52:38.155Z",
+      "soldAnnouncedAt": "2026-09-12T19:52:48.679Z",
       "posts": [
         {
           "target": "facebook",
