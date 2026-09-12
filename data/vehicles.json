@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T17:52:20.263Z",
+  "updatedAt": "2026-09-12T19:52:39.139Z",
   "vehicles": [
     {
       "id": "2017-mercedes-benz-cla-class-giphs",
@@ -142,7 +142,7 @@
         "images/vehicles/2017-hyundai-santa-fe-216xz/mtvym322-31.jpg",
         "images/vehicles/2017-hyundai-santa-fe-216xz/mtvym3uh-32.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -154,8 +154,9 @@
         "remarks": ""
       },
       "createdAt": "2026-09-10T20:05:19.716Z",
-      "updatedAt": "2026-09-10T20:08:17.354Z",
+      "updatedAt": "2026-09-12T19:52:38.155Z",
       "publishedAt": "2026-09-10T20:07:25.378Z",
+      "soldAt": "2026-09-12T19:52:38.155Z",
       "posts": [
         {
           "target": "facebook",
