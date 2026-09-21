@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T23:11:40.240Z",
+  "updatedAt": "2026-09-21T23:11:59.146Z",
   "vehicles": [
     {
       "id": "2017-mercedes-benz-cla-class-giphs",
@@ -1013,7 +1013,7 @@
         "images/vehicles/2017-volkswagen-golf-iftqk/msembhkq-142.jpg",
         "images/vehicles/2017-volkswagen-golf-iftqk/msembiah-143.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -1025,8 +1025,9 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T12:10:04.639Z",
-      "updatedAt": "2026-08-15T17:52:32.576Z",
+      "updatedAt": "2026-09-21T23:11:58.771Z",
       "publishedAt": "2026-08-13T22:37:45.238Z",
+      "soldAt": "2026-09-21T23:11:58.771Z",
       "posts": [
         {
           "target": "facebook",
