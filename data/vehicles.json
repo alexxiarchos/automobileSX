@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T23:11:29.681Z",
+  "updatedAt": "2026-09-21T23:11:33.472Z",
   "vehicles": [
     {
       "id": "2017-mercedes-benz-cla-class-giphs",
@@ -236,7 +236,7 @@
         "images/vehicles/2017-nissan-rogue-sport-qpxld/mtvyc4o9-15.jpg",
         "images/vehicles/2017-nissan-rogue-sport-qpxld/mtvyc5ef-16.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -248,8 +248,9 @@
         "remarks": ""
       },
       "createdAt": "2026-09-10T19:58:07.940Z",
-      "updatedAt": "2026-09-10T20:01:51.432Z",
+      "updatedAt": "2026-09-21T23:11:33.236Z",
       "publishedAt": "2026-09-10T20:01:29.663Z",
+      "soldAt": "2026-09-21T23:11:33.236Z",
       "posts": [
         {
           "target": "facebook",
