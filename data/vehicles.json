@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T14:42:56.194Z",
+  "updatedAt": "2026-09-22T14:43:30.453Z",
   "vehicles": [
     {
       "id": "2018-dodge-journey-f0n7h",
@@ -80,7 +80,14 @@
       "createdAt": "2026-09-22T14:39:50.282Z",
       "updatedAt": "2026-09-22T14:42:55.334Z",
       "publishedAt": "2026-09-22T14:42:55.334Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1168009982644522",
+          "url": "https://www.facebook.com/101868772570376_1168009982644522",
+          "at": "2026-09-22T14:43:30.034Z"
+        }
+      ]
     },
     {
       "id": "2017-mercedes-benz-cla-class-giphs",
