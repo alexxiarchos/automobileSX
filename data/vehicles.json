@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-25T17:09:07.530Z",
+  "updatedAt": "2026-09-25T17:09:33.055Z",
   "vehicles": [
     {
       "id": "2017-nissan-rogue-kxtxj",
@@ -87,7 +87,14 @@
       "createdAt": "2026-09-25T17:05:28.800Z",
       "updatedAt": "2026-09-25T17:09:06.385Z",
       "publishedAt": "2026-09-25T17:09:06.386Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1170906365688217",
+          "url": "https://www.facebook.com/101868772570376_1170906365688217",
+          "at": "2026-09-25T17:09:32.726Z"
+        }
+      ]
     },
     {
       "id": "2017-cadillac-xt5-c33m5",
