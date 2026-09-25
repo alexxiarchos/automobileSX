@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-25T14:32:02.275Z",
+  "updatedAt": "2026-09-25T14:35:28.214Z",
   "vehicles": [
     {
       "id": "2017-cadillac-xt5-c33m5",
@@ -90,7 +90,20 @@
       "createdAt": "2026-09-23T22:49:10.382Z",
       "updatedAt": "2026-09-25T14:32:01.827Z",
       "publishedAt": "2026-09-25T14:31:20.460Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1170780719034115",
+          "url": "https://www.facebook.com/101868772570376_1170780719034115",
+          "at": "2026-09-25T14:35:27.824Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18069092912760299",
+          "url": "https://www.instagram.com/p/Ddtr_FPlwMv/",
+          "at": "2026-09-25T14:35:27.824Z"
+        }
+      ]
     },
     {
       "id": "2018-dodge-journey-f0n7h",
