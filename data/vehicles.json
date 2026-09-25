@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T22:51:32.906Z",
+  "updatedAt": "2026-09-25T14:31:21.470Z",
   "vehicles": [
     {
       "id": "2017-cadillac-xt5-c33m5",
@@ -43,9 +43,11 @@
         "Sunroof",
         "Panoramic Roof",
         "Bluetooth",
+        "Touchscreen Display",
         "Navigation",
         "Keyless Entry",
         "Push-Button Start",
+        "Remote Start",
         "Cruise Control",
         "Power Liftgate",
         "Alloy Wheels"
@@ -58,8 +60,23 @@
       "draftNotes": {
         "ownership": ""
       },
-      "images": [],
-      "status": "draft",
+      "images": [
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh25t8e-1.jpg",
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh25uus-2.jpg",
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh25vub-3.jpg",
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh25wtn-4.jpg",
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh25xkc-5.jpg",
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh25yk6-6.jpg",
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh25zjh-7.jpg",
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh260a8-8.jpg",
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh2614y-9.jpg",
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh2620c-10.jpg",
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh262qe-11.jpg",
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh263hs-12.jpg",
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh264h9-13.jpg",
+        "images/vehicles/2017-cadillac-xt5-c33m5/muh265ha-14.jpg"
+      ],
+      "status": "available",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -71,7 +88,8 @@
         "remarks": ""
       },
       "createdAt": "2026-09-23T22:49:10.382Z",
-      "updatedAt": "2026-09-23T22:51:31.908Z",
+      "updatedAt": "2026-09-25T14:31:20.460Z",
+      "publishedAt": "2026-09-25T14:31:20.460Z",
       "posts": []
     },
     {
