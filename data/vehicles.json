@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T20:08:49.829Z",
+  "updatedAt": "2026-10-01T20:08:59.097Z",
   "vehicles": [
     {
       "id": "2017-nissan-rogue-kxtxj",
@@ -732,78 +732,6 @@
           "id": "17954921865213124",
           "url": "https://www.instagram.com/p/Db_mJuEEjVh/",
           "at": "2026-08-13T20:28:01.848Z"
-        }
-      ]
-    },
-    {
-      "id": "2019-nissan-kicks-6k9ge",
-      "year": 2019,
-      "make": "Nissan",
-      "model": "Kicks",
-      "trim": "SV",
-      "body": "SUV",
-      "price": 10999,
-      "km": 145000,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "FWD",
-      "extColor": "Grey",
-      "extHex": "#5c6066",
-      "intColor": "Grey",
-      "engine": "1.6L I4",
-      "econCity": "",
-      "econHwy": "",
-      "doors": 4,
-      "seats": 5,
-      "vin": "3N1CP5CUXKL478505",
-      "stock": "SX-1015",
-      "tag": "",
-      "features": [
-        "Backup Camera",
-        "Air Conditioning",
-        "Heated Seats",
-        "Touchscreen Display"
-      ],
-      "desc": "",
-      "descFr": "",
-      "descMode": "auto",
-      "descNote": "Flexible hours by appointment.\n\nCall 514-824-9117 for more information or to schedule a visit. Financing available.\n\nAutomobile SX\n2044 Avenue Chartier\nDorval, QC H9P 1H2",
-      "descNoteFr": "Horaires flexibles sur rendez-vous.\n\nAppelez le 514-824-9117 pour plus d'informations ou pour planifier une visite. Financement disponible.\n\nAutomobile SX\n2044 avenue Chartier\nDorval, QC H9P 1H2",
-      "draftNotes": {
-        "ownership": ""
-      },
-      "images": [
-        "images/vehicles/2019-nissan-kicks-6k9ge/msqy059k-1.jpg",
-        "images/vehicles/2019-nissan-kicks-6k9ge/msqy05w1-2.jpg"
-      ],
-      "status": "sold",
-      "opc": {
-        "classOverride": "",
-        "priorUse": "personal",
-        "priorOwner": "",
-        "extended": "",
-        "powertrain": "",
-        "manufacturer": "",
-        "repairs": "",
-        "remarks": ""
-      },
-      "createdAt": "2026-08-13T03:08:22.042Z",
-      "updatedAt": "2026-08-17T21:26:35.292Z",
-      "publishedAt": "2026-08-13T03:22:07.318Z",
-      "soldAt": "2026-08-17T21:26:35.292Z",
-      "soldAnnouncedAt": "2026-08-17T21:26:47.684Z",
-      "posts": [
-        {
-          "target": "facebook",
-          "id": "101868772570376_1133324262779761",
-          "url": "https://www.facebook.com/101868772570376_1133324262779761",
-          "at": "2026-08-13T03:23:07.368Z"
-        },
-        {
-          "target": "instagram",
-          "id": "18106668350175568",
-          "url": "https://www.instagram.com/p/Db9w4DFHaUa/",
-          "at": "2026-08-13T03:23:07.368Z"
         }
       ]
     },
