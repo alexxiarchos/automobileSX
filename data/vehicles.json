@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T20:08:39.629Z",
+  "updatedAt": "2026-10-01T20:08:49.829Z",
   "vehicles": [
     {
       "id": "2017-nissan-rogue-kxtxj",
@@ -645,90 +645,6 @@
           "id": "18053281202567473",
           "url": "https://www.instagram.com/p/DcuU9KyD6aA/",
           "at": "2026-09-01T00:02:05.269Z"
-        }
-      ]
-    },
-    {
-      "id": "2016-hyundai-elantra-199ae",
-      "year": 2016,
-      "make": "Hyundai",
-      "model": "Elantra",
-      "trim": "GL",
-      "body": "Hatchback",
-      "price": 11999,
-      "km": 60500,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "FWD",
-      "extColor": "Silver",
-      "extHex": "#c3c6c9",
-      "intColor": "Grey",
-      "engine": "2.0L I4",
-      "econCity": "",
-      "econHwy": "",
-      "doors": 5,
-      "seats": 5,
-      "vin": "KMHD25LH0GU301280",
-      "stock": "SX-1017",
-      "tag": "",
-      "features": [
-        "Air Conditioning",
-        "Heated Seats",
-        "Bluetooth",
-        "Keyless Entry",
-        "Cruise Control"
-      ],
-      "desc": "",
-      "descFr": "",
-      "descMode": "auto",
-      "descNote": "",
-      "descNoteFr": "",
-      "draftNotes": {
-        "ownership": ""
-      },
-      "images": [
-        "images/vehicles/2016-hyundai-elantra-199ae/mt973u2p-1.jpg",
-        "images/vehicles/2016-hyundai-elantra-199ae/mt973vfd-2.jpg",
-        "images/vehicles/2016-hyundai-elantra-199ae/mt973w50-3.jpg",
-        "images/vehicles/2016-hyundai-elantra-199ae/mt973wuj-4.jpg",
-        "images/vehicles/2016-hyundai-elantra-199ae/mt973xn2-5.jpg",
-        "images/vehicles/2016-hyundai-elantra-199ae/mt973ycj-6.jpg",
-        "images/vehicles/2016-hyundai-elantra-199ae/mt973z27-7.jpg",
-        "images/vehicles/2016-hyundai-elantra-199ae/mt97400b-8.jpg",
-        "images/vehicles/2016-hyundai-elantra-199ae/mt9740q0-9.jpg",
-        "images/vehicles/2016-hyundai-elantra-199ae/mt9741if-10.jpg",
-        "images/vehicles/2016-hyundai-elantra-199ae/mt97427v-11.jpg",
-        "images/vehicles/2016-hyundai-elantra-199ae/mt9742x9-12.jpg",
-        "images/vehicles/2016-hyundai-elantra-199ae/mt9743mw-13.jpg"
-      ],
-      "status": "sold",
-      "opc": {
-        "classOverride": "",
-        "priorUse": "personal",
-        "priorOwner": "",
-        "extended": "",
-        "powertrain": "",
-        "manufacturer": "",
-        "repairs": "",
-        "remarks": ""
-      },
-      "createdAt": "2026-08-20T21:09:32.123Z",
-      "updatedAt": "2026-08-25T23:34:47.964Z",
-      "publishedAt": "2026-08-20T21:10:38.784Z",
-      "soldAt": "2026-08-25T23:34:47.964Z",
-      "soldAnnouncedAt": "2026-08-25T23:34:58.501Z",
-      "posts": [
-        {
-          "target": "facebook",
-          "id": "101868772570376_1140753118703542",
-          "url": "https://www.facebook.com/101868772570376_1140753118703542",
-          "at": "2026-08-21T17:55:11.112Z"
-        },
-        {
-          "target": "instagram",
-          "id": "17883541851616449",
-          "url": "https://www.instagram.com/p/DcT7BZTmxCC/",
-          "at": "2026-08-21T17:55:11.112Z"
         }
       ]
     },
