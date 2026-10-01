@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T20:08:59.097Z",
+  "updatedAt": "2026-10-01T20:09:10.320Z",
   "vehicles": [
     {
       "id": "2017-nissan-rogue-kxtxj",
@@ -894,83 +894,6 @@
       "createdAt": "2026-08-04T12:13:07.748Z",
       "updatedAt": "2026-08-15T17:52:18.465Z",
       "publishedAt": "2026-08-13T22:35:39.133Z",
-      "posts": [
-        {
-          "target": "facebook",
-          "id": "",
-          "url": "",
-          "at": "2026-08-13T23:09:55.360Z",
-          "manual": true
-        }
-      ]
-    },
-    {
-      "id": "2017-volkswagen-golf-iftqk",
-      "year": 2017,
-      "make": "Volkswagen",
-      "model": "Golf",
-      "trim": "Trendline",
-      "body": "Hatchback",
-      "price": 6499,
-      "km": 188000,
-      "transmission": "Manual",
-      "fuel": "Gasoline",
-      "drivetrain": "FWD",
-      "extColor": "Black",
-      "extHex": "#141518",
-      "intColor": "Grey",
-      "engine": "1.8L Turbo I4",
-      "econCity": "",
-      "econHwy": "",
-      "doors": 2,
-      "seats": "",
-      "vin": "3VW817AU4HM013270",
-      "stock": "SX-1012",
-      "tag": "",
-      "features": [
-        "Backup Camera",
-        "Heated Seats",
-        "Bluetooth",
-        "Cruise Control"
-      ],
-      "desc": "This is a 2017 Volkswagen Golf Trendline, a two-door hatchback with 188,000 km on it. It has a 1.8 engine, a manual transmission and front-wheel drive.\n\nIt is finished in black with grey inside. It is equipped with backup camera, heated seats, Bluetooth, cruise control and AWD.\n\nIt is on the lot in Dorval now and can be seen seven days a week by appointment.",
-      "descFr": "Voici ce Volkswagen Golf Trendline 2017, une voiture à hayon à deux portes avec 188 000 km au compteur. Il est doté d'un moteur 1.8, d'une transmission manuelle et de la traction avant.\n\nExtérieur noir et intérieur en gris. Équipements notables : caméra de recul, sièges chauffants, Bluetooth, régulateur de vitesse et rouage intégral.\n\nLe véhicule est présentement sur place à Dorval et peut être vu sept jours sur sept, sur rendez-vous.",
-      "descMode": "auto",
-      "descNote": "",
-      "descNoteFr": "",
-      "draftNotes": {
-        "ownership": ""
-      },
-      "images": [
-        "images/vehicles/2017-volkswagen-golf-iftqk/msemb93h-131.jpg",
-        "images/vehicles/2017-volkswagen-golf-iftqk/msemba8h-132.jpg",
-        "images/vehicles/2017-volkswagen-golf-iftqk/msembay5-133.jpg",
-        "images/vehicles/2017-volkswagen-golf-iftqk/msembbqj-134.jpg",
-        "images/vehicles/2017-volkswagen-golf-iftqk/msembciu-135.jpg",
-        "images/vehicles/2017-volkswagen-golf-iftqk/msembd8n-136.jpg",
-        "images/vehicles/2017-volkswagen-golf-iftqk/msembdy9-137.jpg",
-        "images/vehicles/2017-volkswagen-golf-iftqk/msembeqp-138.jpg",
-        "images/vehicles/2017-volkswagen-golf-iftqk/msembfil-139.jpg",
-        "images/vehicles/2017-volkswagen-golf-iftqk/msembg5s-140.jpg",
-        "images/vehicles/2017-volkswagen-golf-iftqk/msembgsm-141.jpg",
-        "images/vehicles/2017-volkswagen-golf-iftqk/msembhkq-142.jpg",
-        "images/vehicles/2017-volkswagen-golf-iftqk/msembiah-143.jpg"
-      ],
-      "status": "sold",
-      "opc": {
-        "classOverride": "",
-        "priorUse": "personal",
-        "priorOwner": "",
-        "extended": "",
-        "powertrain": "",
-        "manufacturer": "",
-        "repairs": "",
-        "remarks": ""
-      },
-      "createdAt": "2026-08-04T12:10:04.639Z",
-      "updatedAt": "2026-09-21T23:11:58.771Z",
-      "publishedAt": "2026-08-13T22:37:45.238Z",
-      "soldAt": "2026-09-21T23:11:58.771Z",
       "posts": [
         {
           "target": "facebook",
