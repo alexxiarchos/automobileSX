@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T20:09:20.234Z",
+  "updatedAt": "2026-10-05T00:24:19.585Z",
   "vehicles": [
     {
       "id": "2017-nissan-rogue-kxtxj",
@@ -352,7 +352,7 @@
         "images/vehicles/2017-mercedes-benz-cla-class-giphs/mtx96uvv-13.jpg",
         "images/vehicles/2017-mercedes-benz-cla-class-giphs/mtx96vlm-14.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -364,8 +364,9 @@
         "remarks": ""
       },
       "createdAt": "2026-09-11T17:49:29.889Z",
-      "updatedAt": "2026-09-11T17:52:19.328Z",
+      "updatedAt": "2026-10-05T00:24:18.732Z",
       "publishedAt": "2026-09-11T17:52:19.328Z",
+      "soldAt": "2026-10-05T00:24:18.732Z",
       "posts": []
     },
     {
