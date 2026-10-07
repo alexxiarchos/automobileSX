@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-07T23:40:32.237Z",
+  "updatedAt": "2026-10-07T23:41:05.126Z",
   "vehicles": [
     {
       "id": "2017-audi-q5-exl5w",
@@ -64,7 +64,7 @@
         "images/vehicles/2017-audi-q5-exl5w/muyr1irq-14.jpg",
         "images/vehicles/2017-audi-q5-exl5w/muyr1jmk-15.jpg"
       ],
-      "status": "draft",
+      "status": "available",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -76,7 +76,8 @@
         "remarks": ""
       },
       "createdAt": "2026-10-07T23:38:08.532Z",
-      "updatedAt": "2026-10-07T23:40:31.440Z",
+      "updatedAt": "2026-10-07T23:41:04.899Z",
+      "publishedAt": "2026-10-07T23:41:04.899Z",
       "posts": []
     },
     {
