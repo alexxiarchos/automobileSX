@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-07T23:41:05.126Z",
+  "updatedAt": "2026-10-07T23:42:33.547Z",
   "vehicles": [
     {
       "id": "2017-audi-q5-exl5w",
@@ -78,7 +78,20 @@
       "createdAt": "2026-10-07T23:38:08.532Z",
       "updatedAt": "2026-10-07T23:41:04.899Z",
       "publishedAt": "2026-10-07T23:41:04.899Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1182766627835524",
+          "url": "https://www.facebook.com/101868772570376_1182766627835524",
+          "at": "2026-10-07T23:42:33.208Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18219650965352346",
+          "url": "https://www.instagram.com/p/DeNkIn0F65Y/",
+          "at": "2026-10-07T23:42:33.209Z"
+        }
+      ]
     },
     {
       "id": "2017-nissan-rogue-kxtxj",
