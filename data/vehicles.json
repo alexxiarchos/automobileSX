@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-14T19:41:50.557Z",
+  "updatedAt": "2026-10-14T19:45:08.606Z",
   "vehicles": [
     {
       "id": "2016-mercedes-benz-b-class-2qik1",
@@ -73,7 +73,20 @@
       "createdAt": "2026-10-14T17:02:44.844Z",
       "updatedAt": "2026-10-14T19:41:49.660Z",
       "publishedAt": "2026-10-14T19:41:49.660Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1189323817179805",
+          "url": "https://www.facebook.com/101868772570376_1189323817179805",
+          "at": "2026-10-14T19:45:08.031Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18076141631729897",
+          "url": "https://www.instagram.com/p/DefKhiNF2At/",
+          "at": "2026-10-14T19:45:08.031Z"
+        }
+      ]
     },
     {
       "id": "2017-audi-q5-exl5w",
