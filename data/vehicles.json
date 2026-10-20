@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T08:04:51.005Z",
+  "updatedAt": "2026-10-20T08:05:02.485Z",
   "vehicles": [
     {
       "id": "2016-mercedes-benz-b-class-2qik1",
@@ -74,6 +74,7 @@
       "updatedAt": "2026-10-20T08:04:49.856Z",
       "publishedAt": "2026-10-14T19:41:49.660Z",
       "soldAt": "2026-10-20T08:04:49.856Z",
+      "soldAnnouncedAt": "2026-10-20T08:05:01.936Z",
       "posts": [
         {
           "target": "facebook",
