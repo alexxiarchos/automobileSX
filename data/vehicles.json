@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T22:56:59.432Z",
+  "updatedAt": "2026-10-20T22:57:09.597Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-atlas-rnl6y",
@@ -1562,90 +1562,6 @@
           "id": "18141754150521769",
           "url": "https://www.instagram.com/p/Db_zHWjmt5P/",
           "at": "2026-08-13T22:21:17.615Z"
-        }
-      ]
-    },
-    {
-      "id": "2011-nissan-murano-r71ho",
-      "year": 2011,
-      "make": "Nissan",
-      "model": "Murano",
-      "trim": "SV",
-      "body": "SUV",
-      "price": 3999,
-      "km": 223000,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Black",
-      "extHex": "#141518",
-      "intColor": "Grey",
-      "engine": "3.5L V6",
-      "econCity": "",
-      "econHwy": "",
-      "doors": 4,
-      "seats": "",
-      "vin": "JN8AZ1MW1BW150573",
-      "stock": "SX-1005",
-      "tag": "",
-      "features": [
-        "Air Conditioning",
-        "Heated Seats",
-        "Sunroof",
-        "Remote Start",
-        "Cruise Control"
-      ],
-      "desc": "The 2011 Nissan Murano on offer here is a four-door SUV showing 223,000 km. It has a 3.5 engine, an automatic transmission and all-wheel drive.\n\nIt is finished in black with grey inside. On the equipment list: air conditioning, heated seats, sunroof, remote start, cruise control and AWD.\n\nCome by and take a look in Dorval. We are open seven days a week by appointment and you deal directly with Spiro.",
-      "descFr": "Nissan Murano 2011 : un VUS à quatre portes avec 223 000 km au compteur. Il est doté d'un moteur 3.5, d'une transmission automatique et d'un rouage intégral.\n\nExtérieur noir et intérieur en gris. Parmi les équipements : climatisation, sièges chauffants, toit ouvrant, démarreur à distance, régulateur de vitesse et rouage intégral.\n\nPassez le voir à Dorval. Nous sommes ouverts sept jours sur sept sur rendez-vous et vous traitez directement avec Spiro.",
-      "descMode": "auto",
-      "descNote": "",
-      "descNoteFr": "",
-      "draftNotes": {
-        "ownership": ""
-      },
-      "images": [
-        "images/vehicles/2011-nissan-murano-r71ho/mselqmvn-31.jpg",
-        "images/vehicles/2011-nissan-murano-r71ho/mselqnto-32.jpg",
-        "images/vehicles/2011-nissan-murano-r71ho/mselqolx-33.jpg",
-        "images/vehicles/2011-nissan-murano-r71ho/mselqp9q-34.jpg",
-        "images/vehicles/2011-nissan-murano-r71ho/mselqpyf-35.jpg",
-        "images/vehicles/2011-nissan-murano-r71ho/mselqqny-36.jpg",
-        "images/vehicles/2011-nissan-murano-r71ho/mselqrgc-37.jpg",
-        "images/vehicles/2011-nissan-murano-r71ho/mselqs35-38.jpg",
-        "images/vehicles/2011-nissan-murano-r71ho/mselqssr-39.jpg",
-        "images/vehicles/2011-nissan-murano-r71ho/mselqtfq-40.jpg",
-        "images/vehicles/2011-nissan-murano-r71ho/mselqu83-41.jpg",
-        "images/vehicles/2011-nissan-murano-r71ho/mselqux7-42.jpg",
-        "images/vehicles/2011-nissan-murano-r71ho/mselqvhd-43.jpg"
-      ],
-      "status": "sold",
-      "opc": {
-        "classOverride": "",
-        "priorUse": "personal",
-        "priorOwner": "",
-        "extended": "",
-        "powertrain": "",
-        "manufacturer": "",
-        "repairs": "",
-        "remarks": ""
-      },
-      "createdAt": "2026-08-04T11:54:58.675Z",
-      "updatedAt": "2026-09-02T15:46:28.823Z",
-      "publishedAt": "2026-08-13T03:07:30.079Z",
-      "soldAt": "2026-09-02T15:46:28.823Z",
-      "soldAnnouncedAt": "2026-09-02T15:46:51.179Z",
-      "posts": [
-        {
-          "target": "facebook",
-          "id": "101868772570376_1134026402709547",
-          "url": "https://www.facebook.com/101868772570376_1134026402709547",
-          "at": "2026-08-13T22:21:43.930Z"
-        },
-        {
-          "target": "instagram",
-          "id": "17984823474018691",
-          "url": "https://www.instagram.com/p/Db_zKsACXtw/",
-          "at": "2026-08-13T22:21:43.930Z"
         }
       ]
     },
