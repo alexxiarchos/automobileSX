@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T22:57:25.673Z",
+  "updatedAt": "2026-10-20T22:57:43.942Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-atlas-rnl6y",
@@ -634,92 +634,6 @@
       "publishedAt": "2026-09-11T17:52:19.328Z",
       "soldAt": "2026-10-05T00:24:18.732Z",
       "posts": []
-    },
-    {
-      "id": "2017-hyundai-santa-fe-216xz",
-      "year": 2017,
-      "make": "Hyundai",
-      "model": "Santa Fe",
-      "trim": "Sport premium",
-      "body": "SUV",
-      "price": 10499,
-      "km": 144000,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Grey",
-      "extHex": "#5c6066",
-      "intColor": "Grey",
-      "engine": "2.4L I4",
-      "econCity": "",
-      "econHwy": "",
-      "doors": 4,
-      "seats": 5,
-      "vin": "5XYZUDLB4HG480775",
-      "stock": "SX-1022",
-      "tag": "",
-      "features": [
-        "Backup Camera",
-        "Air Conditioning",
-        "Dual-Zone Climate Control",
-        "Heated Seats",
-        "Heated Steering Wheel",
-        "Power Driver Seat",
-        "Sunroof",
-        "Bluetooth",
-        "Keyless Entry",
-        "Cruise Control",
-        "Alloy Wheels"
-      ],
-      "desc": "",
-      "descFr": "",
-      "descMode": "auto",
-      "descNote": "",
-      "descNoteFr": "",
-      "draftNotes": {
-        "ownership": ""
-      },
-      "images": [
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvyls8n-18.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylt9n-19.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylu22-20.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvyluxg-21.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylvsl-22.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylwky-23.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylxbf-24.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylybn-25.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylz15-26.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvylztm-27.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvym0gf-28.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvym1jx-29.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvym29t-30.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvym322-31.jpg",
-        "images/vehicles/2017-hyundai-santa-fe-216xz/mtvym3uh-32.jpg"
-      ],
-      "status": "sold",
-      "opc": {
-        "classOverride": "",
-        "priorUse": "personal",
-        "priorOwner": "",
-        "extended": "",
-        "powertrain": "",
-        "manufacturer": "",
-        "repairs": "",
-        "remarks": ""
-      },
-      "createdAt": "2026-09-10T20:05:19.716Z",
-      "updatedAt": "2026-09-21T23:11:22.455Z",
-      "publishedAt": "2026-09-10T20:07:25.378Z",
-      "soldAt": "2026-09-21T23:11:22.455Z",
-      "soldAnnouncedAt": "2026-09-21T23:11:29.494Z",
-      "posts": [
-        {
-          "target": "facebook",
-          "id": "101868772570376_1157955466983307",
-          "url": "https://www.facebook.com/101868772570376_1157955466983307",
-          "at": "2026-09-10T20:08:36.360Z"
-        }
-      ]
     },
     {
       "id": "2018-audi-q5-ax7p4",
