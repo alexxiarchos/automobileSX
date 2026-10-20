@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T22:07:56.583Z",
+  "updatedAt": "2026-10-20T22:08:31.640Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-atlas-rnl6y",
@@ -71,7 +71,20 @@
       "createdAt": "2026-10-20T22:04:34.115Z",
       "updatedAt": "2026-10-20T22:07:56.155Z",
       "publishedAt": "2026-10-20T22:06:56.164Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1195141853264668",
+          "url": "https://www.facebook.com/101868772570376_1195141853264668",
+          "at": "2026-10-20T22:08:31.260Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18645464704036618",
+          "url": "https://www.instagram.com/p/Deu3tf3jFEG/",
+          "at": "2026-10-20T22:08:31.260Z"
+        }
+      ]
     },
     {
       "id": "2016-mercedes-benz-b-class-2qik1",
