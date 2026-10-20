@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-14T19:45:08.606Z",
+  "updatedAt": "2026-10-20T08:04:51.005Z",
   "vehicles": [
     {
       "id": "2016-mercedes-benz-b-class-2qik1",
@@ -59,7 +59,7 @@
         "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imvu9-13.jpg",
         "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imwxe-14.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -71,8 +71,9 @@
         "remarks": ""
       },
       "createdAt": "2026-10-14T17:02:44.844Z",
-      "updatedAt": "2026-10-14T19:41:49.660Z",
+      "updatedAt": "2026-10-20T08:04:49.856Z",
       "publishedAt": "2026-10-14T19:41:49.660Z",
+      "soldAt": "2026-10-20T08:04:49.856Z",
       "posts": [
         {
           "target": "facebook",
