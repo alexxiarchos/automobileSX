@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-21T15:04:03.258Z",
+  "updatedAt": "2026-10-21T15:04:25.280Z",
   "vehicles": [
     {
       "id": "2019-ram-1500-ucj7p",
@@ -8,7 +8,7 @@
       "model": "1500",
       "trim": "Tradesman",
       "body": "Truck",
-      "price": "",
+      "price": 18999,
       "km": 157500,
       "transmission": "Automatic",
       "fuel": "Gasoline",
@@ -54,7 +54,7 @@
         "remarks": ""
       },
       "createdAt": "2026-10-21T15:02:33.784Z",
-      "updatedAt": "2026-10-21T15:04:02.138Z",
+      "updatedAt": "2026-10-21T15:04:24.749Z",
       "posts": []
     },
     {
