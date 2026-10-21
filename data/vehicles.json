@@ -1,6 +1,62 @@
 {
-  "updatedAt": "2026-10-20T23:13:15.706Z",
+  "updatedAt": "2026-10-21T15:04:03.258Z",
   "vehicles": [
+    {
+      "id": "2019-ram-1500-ucj7p",
+      "year": 2019,
+      "make": "RAM",
+      "model": "1500",
+      "trim": "Tradesman",
+      "body": "Truck",
+      "price": "",
+      "km": 157500,
+      "transmission": "Automatic",
+      "fuel": "Gasoline",
+      "drivetrain": "4x4",
+      "extColor": "White",
+      "extHex": "#eceae6",
+      "intColor": "Grey",
+      "engine": "5.7L V8",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 4,
+      "seats": 5,
+      "vin": "1C6SRFNT0KN863365",
+      "stock": "SX-1030",
+      "tag": "",
+      "features": [
+        "Backup Camera",
+        "Air Conditioning",
+        "Dual-Zone Climate Control",
+        "Bluetooth",
+        "Push-Button Start",
+        "Cruise Control",
+        "Alloy Wheels"
+      ],
+      "desc": "",
+      "descFr": "",
+      "descMode": "auto",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
+      "images": [],
+      "status": "draft",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
+      "createdAt": "2026-10-21T15:02:33.784Z",
+      "updatedAt": "2026-10-21T15:04:02.138Z",
+      "posts": []
+    },
     {
       "id": "2018-volkswagen-atlas-rnl6y",
       "year": 2018,
