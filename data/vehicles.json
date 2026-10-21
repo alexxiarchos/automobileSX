@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-21T20:56:12.120Z",
+  "updatedAt": "2026-10-21T20:57:02.565Z",
   "vehicles": [
     {
       "id": "2019-kia-sorento-ddaui",
@@ -652,7 +652,7 @@
         "images/vehicles/2018-dodge-journey-f0n7h/mucs9ncc-13.jpg",
         "images/vehicles/2018-dodge-journey-f0n7h/mucs9o4o-14.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -664,8 +664,9 @@
         "remarks": ""
       },
       "createdAt": "2026-09-22T14:39:50.282Z",
-      "updatedAt": "2026-09-22T14:42:55.334Z",
+      "updatedAt": "2026-10-21T20:57:02.088Z",
       "publishedAt": "2026-09-22T14:42:55.334Z",
+      "soldAt": "2026-10-21T20:57:02.087Z",
       "posts": [
         {
           "target": "facebook",
