@@ -1,6 +1,71 @@
 {
-  "updatedAt": "2026-10-21T15:04:25.280Z",
+  "updatedAt": "2026-10-21T20:56:12.120Z",
   "vehicles": [
+    {
+      "id": "2019-kia-sorento-ddaui",
+      "year": 2019,
+      "make": "Kia",
+      "model": "Sorento",
+      "trim": "Ex",
+      "body": "SUV",
+      "price": 11999,
+      "km": 177000,
+      "transmission": "Automatic",
+      "fuel": "Gasoline",
+      "drivetrain": "AWD",
+      "extColor": "Brown",
+      "extHex": "#4a3a2e",
+      "intColor": "Black",
+      "engine": "3.3L 6-cyl",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 4,
+      "seats": 7,
+      "vin": "5XYPHDA58KG597923",
+      "stock": "SX-1031",
+      "tag": "",
+      "features": [
+        "Air Conditioning",
+        "Dual-Zone Climate Control",
+        "Heated Seats",
+        "Leather Seats",
+        "Power Driver Seat",
+        "Third-Row Seating",
+        "Bluetooth",
+        "Keyless Entry",
+        "Push-Button Start",
+        "Cruise Control",
+        "Alloy Wheels"
+      ],
+      "desc": "",
+      "descFr": "",
+      "descMode": "auto",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
+      "images": [
+        "images/vehicles/2019-kia-sorento-ddaui/mvildkxb-1.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvildm4w-2.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvildmrn-3.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvildnk1-4.jpg"
+      ],
+      "status": "draft",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
+      "createdAt": "2026-10-21T20:54:19.093Z",
+      "updatedAt": "2026-10-21T20:56:11.289Z",
+      "posts": []
+    },
     {
       "id": "2019-ram-1500-ucj7p",
       "year": 2019,
