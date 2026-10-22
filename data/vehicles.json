@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-21T20:57:02.565Z",
+  "updatedAt": "2026-10-22T19:24:04.609Z",
   "vehicles": [
     {
       "id": "2019-kia-sorento-ddaui",
@@ -25,6 +25,7 @@
       "stock": "SX-1031",
       "tag": "",
       "features": [
+        "Backup Camera",
         "Air Conditioning",
         "Dual-Zone Climate Control",
         "Heated Seats",
@@ -46,12 +47,23 @@
         "ownership": ""
       },
       "images": [
-        "images/vehicles/2019-kia-sorento-ddaui/mvildkxb-1.jpg",
-        "images/vehicles/2019-kia-sorento-ddaui/mvildm4w-2.jpg",
-        "images/vehicles/2019-kia-sorento-ddaui/mvildmrn-3.jpg",
-        "images/vehicles/2019-kia-sorento-ddaui/mvildnk1-4.jpg"
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxik7g-1.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxilm0-2.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjximhe-3.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxin9r-4.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxinzv-5.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxiorp-6.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxipn4-7.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxiqif-8.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxir7w-9.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxirxr-10.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxisqj-11.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxitlf-12.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxiuje-13.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxivek-14.jpg",
+        "images/vehicles/2019-kia-sorento-ddaui/mvjxiw9n-15.jpg"
       ],
-      "status": "draft",
+      "status": "available",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -63,7 +75,8 @@
         "remarks": ""
       },
       "createdAt": "2026-10-21T20:54:19.093Z",
-      "updatedAt": "2026-10-21T20:56:11.289Z",
+      "updatedAt": "2026-10-22T19:24:03.786Z",
+      "publishedAt": "2026-10-22T19:24:03.786Z",
       "posts": []
     },
     {
