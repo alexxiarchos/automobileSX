@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T19:25:14.156Z",
+  "updatedAt": "2026-10-24T17:20:24.381Z",
   "vehicles": [
     {
       "id": "2019-kia-sorento-ddaui",
@@ -590,7 +590,7 @@
         "images/vehicles/2017-cadillac-xt5-c33m5/muh264h9-13.jpg",
         "images/vehicles/2017-cadillac-xt5-c33m5/muh265ha-14.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -602,8 +602,9 @@
         "remarks": ""
       },
       "createdAt": "2026-09-23T22:49:10.382Z",
-      "updatedAt": "2026-09-25T14:32:01.827Z",
+      "updatedAt": "2026-10-24T17:20:23.491Z",
       "publishedAt": "2026-09-25T14:31:20.460Z",
+      "soldAt": "2026-10-24T17:20:23.491Z",
       "posts": [
         {
           "target": "facebook",
