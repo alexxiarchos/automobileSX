@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T17:20:24.381Z",
+  "updatedAt": "2026-10-24T17:20:33.919Z",
   "vehicles": [
     {
       "id": "2019-kia-sorento-ddaui",
@@ -605,6 +605,7 @@
       "updatedAt": "2026-10-24T17:20:23.491Z",
       "publishedAt": "2026-09-25T14:31:20.460Z",
       "soldAt": "2026-10-24T17:20:23.491Z",
+      "soldAnnouncedAt": "2026-10-24T17:20:33.698Z",
       "posts": [
         {
           "target": "facebook",
