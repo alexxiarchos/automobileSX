@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-29T20:19:28.762Z",
+  "updatedAt": "2026-10-29T20:20:34.306Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-golf-sportwagen-lx5c3",
@@ -108,6 +108,7 @@
         "Air Conditioning",
         "Dual-Zone Climate Control",
         "Heated Seats",
+        "Heated Steering Wheel",
         "Power Driver Seat",
         "Sunroof",
         "Bluetooth",
@@ -125,8 +126,24 @@
       "draftNotes": {
         "ownership": ""
       },
-      "images": [],
-      "status": "draft",
+      "images": [
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzm6ki-1.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzm8b1-2.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzm9jj-3.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzmaj6-4.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzmbcn-5.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzmc99-6.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzmd8y-7.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzme8f-8.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzmf81-9.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzmg7g-10.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzmgyc-11.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzmhxd-12.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzmioe-13.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzmjey-14.jpg",
+        "images/vehicles/2018-kia-forte-6nh1x/mvtzmked-15.jpg"
+      ],
+      "status": "available",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -138,7 +155,8 @@
         "remarks": ""
       },
       "createdAt": "2026-10-29T15:38:52.094Z",
-      "updatedAt": "2026-10-29T15:40:16.346Z",
+      "updatedAt": "2026-10-29T20:20:33.395Z",
+      "publishedAt": "2026-10-29T20:20:33.395Z",
       "posts": []
     },
     {
