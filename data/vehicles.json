@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T17:20:33.919Z",
+  "updatedAt": "2026-10-29T14:53:29.916Z",
   "vehicles": [
     {
       "id": "2019-kia-sorento-ddaui",
@@ -105,7 +105,7 @@
       "model": "1500",
       "trim": "Tradesman",
       "body": "Truck",
-      "price": 18999,
+      "price": 19999,
       "km": 157500,
       "transmission": "Automatic",
       "fuel": "Gasoline",
@@ -126,7 +126,9 @@
         "Air Conditioning",
         "Dual-Zone Climate Control",
         "Bluetooth",
+        "Keyless Entry",
         "Push-Button Start",
+        "Remote Start",
         "Cruise Control",
         "Alloy Wheels"
       ],
@@ -151,7 +153,7 @@
         "remarks": ""
       },
       "createdAt": "2026-10-21T15:02:33.784Z",
-      "updatedAt": "2026-10-21T15:04:24.749Z",
+      "updatedAt": "2026-10-29T14:53:28.980Z",
       "posts": []
     },
     {
