@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-29T20:13:14.010Z",
+  "updatedAt": "2026-10-29T20:19:28.762Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-golf-sportwagen-lx5c3",
@@ -64,7 +64,7 @@
         "images/vehicles/2018-volkswagen-golf-sportwagen-lx5c3/mvtzd0ue-14.jpg",
         "images/vehicles/2018-volkswagen-golf-sportwagen-lx5c3/mvtzd2ej-15.jpg"
       ],
-      "status": "draft",
+      "status": "available",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -76,7 +76,8 @@
         "remarks": ""
       },
       "createdAt": "2026-10-29T20:09:41.217Z",
-      "updatedAt": "2026-10-29T20:13:13.061Z",
+      "updatedAt": "2026-10-29T20:19:27.857Z",
+      "publishedAt": "2026-10-29T20:19:27.857Z",
       "posts": []
     },
     {
