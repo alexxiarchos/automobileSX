@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-29T22:43:03.969Z",
+  "updatedAt": "2026-10-31T18:16:19.976Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-golf-sportwagen-lx5c3",
@@ -221,7 +221,7 @@
         "images/vehicles/2019-kia-sorento-ddaui/mvjxivek-14.jpg",
         "images/vehicles/2019-kia-sorento-ddaui/mvjxiw9n-15.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -233,8 +233,9 @@
         "remarks": ""
       },
       "createdAt": "2026-10-21T20:54:19.093Z",
-      "updatedAt": "2026-10-22T19:24:03.786Z",
+      "updatedAt": "2026-10-31T18:16:19.133Z",
       "publishedAt": "2026-10-22T19:24:03.786Z",
+      "soldAt": "2026-10-31T18:16:19.133Z",
       "posts": [
         {
           "target": "facebook",
