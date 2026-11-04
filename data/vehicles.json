@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-31T18:17:50.168Z",
+  "updatedAt": "2026-11-04T19:45:36.095Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-golf-sportwagen-lx5c3",
@@ -300,8 +300,23 @@
       "draftNotes": {
         "ownership": ""
       },
-      "images": [],
-      "status": "draft",
+      "images": [
+        "images/vehicles/2019-ram-1500-ucj7p/mw2izugo-1.jpg",
+        "images/vehicles/2019-ram-1500-ucj7p/mw2izwph-2.jpg",
+        "images/vehicles/2019-ram-1500-ucj7p/mw2izxqk-3.jpg",
+        "images/vehicles/2019-ram-1500-ucj7p/mw2izyim-4.jpg",
+        "images/vehicles/2019-ram-1500-ucj7p/mw2izzb0-5.jpg",
+        "images/vehicles/2019-ram-1500-ucj7p/mw2j006h-6.jpg",
+        "images/vehicles/2019-ram-1500-ucj7p/mw2j011r-7.jpg",
+        "images/vehicles/2019-ram-1500-ucj7p/mw2j01u6-8.jpg",
+        "images/vehicles/2019-ram-1500-ucj7p/mw2j02pj-9.jpg",
+        "images/vehicles/2019-ram-1500-ucj7p/mw2j03nw-10.jpg",
+        "images/vehicles/2019-ram-1500-ucj7p/mw2j04rn-11.jpg",
+        "images/vehicles/2019-ram-1500-ucj7p/mw2j05ml-12.jpg",
+        "images/vehicles/2019-ram-1500-ucj7p/mw2j06f3-13.jpg",
+        "images/vehicles/2019-ram-1500-ucj7p/mw2j074g-14.jpg"
+      ],
+      "status": "available",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -313,7 +328,8 @@
         "remarks": ""
       },
       "createdAt": "2026-10-21T15:02:33.784Z",
-      "updatedAt": "2026-10-29T15:28:03.232Z",
+      "updatedAt": "2026-11-04T19:45:35.066Z",
+      "publishedAt": "2026-11-04T19:45:35.066Z",
       "posts": []
     },
     {
