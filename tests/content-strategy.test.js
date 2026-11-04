@@ -122,12 +122,27 @@ for (const unsupported of [
   assert.doesNotMatch(contentSources, unsupported, "unsupported financing or inspection claim remains");
 }
 
-assert.doesNotMatch(contentSources, /walk-ins are welcome|visites sans rendez-vous sont les bienvenues|appointments are recommended|rendez-vous est recommandé/i, "appointment-only policy must be consistent");
-assert.match(contentSources, /Visits are by appointment/, "English appointment-only policy is missing");
-assert.match(contentSources, /Les visites se font sur rendez-vous/, "French appointment-only policy is missing");
-assert.doesNotMatch(contentSources, /we will hold it|we can usually work something out|we handle the registration paperwork|nous le garderons|on peut habituellement s'arranger|nous nous occupons de l'immatriculation/i, "unconfirmed operating promise remains");
-assert.match(contentSources, /Any transport or other arrangement must be agreed case by case/, "neutral English inspection coordination is missing");
-assert.match(contentSources, /Le transport ou toute autre modalité doit être convenu au cas par cas/, "neutral French inspection coordination is missing");
+const policySources = contentSources + "\n" + [
+  "js/data.js",
+  "js/describe.js",
+  "admin/describe.js",
+  "data/vehicles.json",
+  "api/_lib/vehiclePage.js",
+  "api/_lib/social.js"
+].map(read).join("\n");
+
+assert.doesNotMatch(policySources, /Visits are by appointment|Les visites se font sur rendez-vous|Open seven days (?:a week )?by appointment|Ouvert sept jours sur sept sur rendez-vous|By appointment\. Call to book|Sur rendez-vous\. Appelez pour réserver/i, "strict appointment-only wording remains");
+assert.match(policySources, /Appointments are strongly recommended\. Please call ahead to confirm Spiro is available before visiting\./, "confirmed English appointment guidance is missing");
+assert.match(policySources, /Les rendez-vous sont fortement recommandés\. Veuillez appeler avant de vous déplacer pour confirmer la disponibilité de Spiro\./, "confirmed French appointment guidance is missing");
+assert.doesNotMatch(contentSources, /we will hold it|temporary hold|we can usually work something out|we handle the registration paperwork|nous le garderons|retenue temporaire|on peut habituellement s'arranger|nous nous occupons de l'immatriculation/i, "unconfirmed operating promise remains");
+assert.match(contentSources, /Independent inspections are welcome\. Spiro is happy to discuss arrangements with buyers\./, "confirmed English inspection guidance is missing");
+assert.match(contentSources, /Les inspections indépendantes sont les bienvenues\. Spiro discutera volontiers des modalités avec vous\./, "confirmed French inspection guidance is missing");
+assert.match(contentSources, /Vehicles are normally picked up at our Dorval dealership\./, "confirmed English pickup guidance is missing");
+assert.match(contentSources, /Les véhicules sont normalement récupérés chez Automobile SX à Dorval\./, "confirmed French pickup guidance is missing");
+assert.doesNotMatch(contentSources, /free delivery|livraison gratuite|guaranteed delivery|livraison garantie/i, "unsupported delivery promise remains");
+
+assert.match(read("faq.html"), /Appointments are strongly recommended, but they are not mandatory\./, "English FAQ must show the confirmed appointment policy");
+assert.match(read("fr/faq.html"), /Les rendez-vous sont fortement recommandés, mais ils ne sont pas obligatoires\./, "French FAQ must show the confirmed appointment policy");
 
 const frenchVehicle = read("fr/vehicules/2017-audi-q5-exl5w.html");
 assert.doesNotMatch(frenchVehicle, /"color":"(?:Blue|Grey)"/, "French vehicle schema must localize colour");

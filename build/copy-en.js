@@ -19,7 +19,7 @@ const ui = {
   overview: "Overview", specs: "Specifications", features: "Features",
   similar: "Similar vehicles", estimatePayment: "Estimate your payment",
   bookTestDrive: "Book a Test Drive", checkAvailability: "Check Availability",
-  getPreApproved: "Ask about financing", hoursShort: "Open 10 to 6, seven days, by appointment",
+  getPreApproved: "Ask about financing", hoursShort: "Open 10 to 6 daily. Please call ahead to confirm Spiro is available.",
   hours: "Hours", readMore: "Read the guide →"
 };
 
@@ -74,7 +74,7 @@ module.exports = {
     trust: [
       { h: "Personal service", p: "You deal directly with Spiro, from the first phone call to the keys in your hand." },
       { h: "Vente · Achat · Échange", p: "We sell, we buy, and we take trades. Kilometres and condition disclosed up front." },
-      { h: "Open seven days by appointment", p: `10:00 to 18:00 every day, by appointment. Call ${DEALER.phone} ahead so we can confirm the time and have the vehicle ready for you.` },
+      { h: "Open seven days", p: `10:00 to 18:00 every day. Appointments are strongly recommended. Please call ${DEALER.phone} ahead to confirm Spiro is available before visiting.` },
       { h: "Financing options", p: "We work with several lenders. Approval, rate and terms depend on the lender's assessment of each application." }
     ],
     featuredKicker: "In stock now",
@@ -218,7 +218,7 @@ module.exports = {
       <h2>How the appraisal works</h2>
       <ol>
         <li><strong>Tell us about the car.</strong> Year, make, model, trim, kilometres, and anything we should know. Photos help.</li>
-        <li><strong>Bring it by.</strong> A proper appraisal means driving it, putting it on the lot and looking underneath. Fifteen minutes, by appointment.</li>
+        <li><strong>Bring it by.</strong> A proper appraisal means driving it, putting it on the lot and looking underneath. Plan about fifteen minutes and call ahead to confirm Spiro is available.</li>
         <li><strong>Get a number.</strong> We explain how we arrived at it. If it is not for you, no hard feelings and no pressure.</li>
       </ol>
 
@@ -239,7 +239,7 @@ module.exports = {
       <p>That is routine. We contact your lender for the payout amount and handle the settlement. If the car is worth more than you owe, the difference goes toward your next vehicle. If you owe more than it is worth, we will tell you plainly and walk through the options rather than quietly rolling the shortfall into a new loan.</p>
 
       <h2>Get an offer</h2>
-      <p>Call ${DEALER.phone} or <a class="text-link" href="${R.contact}?interest=trade-in">send the details</a>. We are open 10:00 to 18:00 every day, by appointment.</p>
+      <p>Call ${DEALER.phone} or <a class="text-link" href="${R.contact}?interest=trade-in">send the details</a>. We are open 10:00 to 18:00 every day; please call ahead to confirm Spiro is available before visiting.</p>
       <p>Related reading: <a class="text-link" href="${R.g3}">what is my trade-in worth in Quebec?</a></p>
       ${accuracyNote}`
   },
@@ -263,7 +263,7 @@ module.exports = {
 
       <h2>How we choose what goes on the lot</h2>
       <p>We buy vehicles we would be comfortable putting a family member in. That means passing on cars with a story that does not add up, and being upfront about the wear that comes with age and kilometres on the ones we do take. An eight-year-old car with 140,000 km is a good buy at the right price, and pretending otherwise helps nobody.</p>
-      <p>Kilometres, condition and known issues are disclosed before you ask. You are also welcome to have any vehicle inspected by your own mechanic before you commit, and we will make the car available for it.</p>
+      <p>Kilometres, condition and known issues are disclosed before you ask. Independent inspections are welcome. Spiro is happy to discuss arrangements with buyers; please contact us in advance to coordinate an inspection.</p>
 
       <h2>Serving Dorval and the West Island</h2>
       <p>We are minutes from Pointe-Claire, Lachine, Pierrefonds, Kirkland and Montréal-Ouest, and easy to reach from downtown Montreal or Laval. Most customers come from the West Island, and many arrive through someone who bought from us before.</p>
@@ -280,7 +280,7 @@ module.exports = {
     sub: "The questions we actually get asked, answered plainly.",
     faqs: [
       { q: "Do I need an appointment?",
-        a: "Yes. Visits are by appointment. We are open 10:00 to 18:00 seven days a week; call 514-824-9117 ahead so we can confirm the time, have the vehicle ready and give you our full attention when you arrive." },
+        a: "Appointments are strongly recommended, but they are not mandatory. We are open 10:00 to 18:00 seven days a week. Please call ahead to confirm Spiro is available before visiting." },
       { q: "Do you offer financing?",
         a: "Yes. We work with several Canadian lenders and submit your file to the ones that suit it. You will see the rate, the term and the total cost before anything is signed. In Quebec, a dealer cannot require you to finance through them as a condition of the sale." },
       { q: "Can I trade in my car?",
@@ -288,11 +288,11 @@ module.exports = {
       { q: "Is there a warranty on a used car in Quebec?",
         a: "Often, yes, and it is set by law rather than by the dealer. Quebec's Consumer Protection Act sets a warranty of good working order based on the vehicle's age and kilometres: roughly six months or 10,000 km for newer, lower-kilometre vehicles, down to one month or 1,700 km for older ones, and no such warranty on vehicles over seven years old or above 120,000 km. Even then, the general legal warranties of fitness and reasonable durability still apply. The category is shown on the label on the vehicle." },
       { q: "Can I have the car inspected by my own mechanic?",
-        a: `You may request an independent inspection. Choose the garage and <a href="${R.g6}">review what to arrange</a>. Before booking, contact us with the vehicle, garage and proposed time so current availability and access can be confirmed. Any transport or other arrangement must be agreed case by case. The inspection assesses condition at that time; it cannot guarantee future reliability.` },
+        a: `Independent inspections are welcome. Spiro is happy to discuss arrangements with buyers. Please contact us in advance to coordinate an inspection, then <a href="${R.g6}">review what to arrange</a> with the garage. Vehicle access and any transport must be confirmed for the specific inspection. The inspection assesses condition at that time; it cannot guarantee future reliability.` },
       { q: "Can I reserve a vehicle?",
-        a: "Call 514-824-9117 with the vehicle or stock number. Availability and any temporary hold are confirmed case by case; do not assume a vehicle is reserved until you receive confirmation." },
+        a: "Call 514-824-9117 with the vehicle or stock number. Availability can change, and Automobile SX does not publish a general reservation policy online. Confirm the current terms for the specific vehicle directly with Spiro before relying on a reservation." },
       { q: "Do you deliver?",
-        a: "Delivery availability, area, timing and any charge are not stated as a general policy online. Ask about the specific vehicle and destination, and have any agreed arrangement included in writing before purchase." },
+        a: "Vehicles are normally picked up at our Dorval dealership. Need special arrangements? Contact Spiro to discuss what may be possible. Delivery is not guaranteed or advertised as free." },
       { q: "What do I need to register the car?",
         a: "Registration steps depend on the transaction. Before delivery, ask which steps Automobile SX will handle, which steps you must complete, and which documents and fees apply. Confirm the current requirements with the SAAQ." },
       { q: "Do you speak French?",
@@ -548,7 +548,7 @@ module.exports = {
 
       <h2>Start with the actual vehicle</h2>
       <p>Before booking a garage, confirm that the car is still available. Give the dealership the stock number and give the garage the VIN, model, year and kilometres. Tell the garage about any warning light, sound or concern you noticed.</p>
-      <p>Before booking, contact us with the vehicle, garage and proposed time so current availability and access can be confirmed. Any transport or other arrangement must be agreed case by case; do not assume the vehicle can be moved to a garage until that coordination is complete. See the <a class="text-link" href="${R.faq}">buying FAQ</a> for the current wording.</p>
+      <p>Independent inspections are welcome. Spiro is happy to discuss arrangements with buyers. Contact us in advance with the vehicle, garage and proposed time so access and any transport can be coordinated before you book. See the <a class="text-link" href="${R.faq}">buying FAQ</a> for the current wording.</p>
 
       <h2>Ask the garage what its inspection includes</h2>
       <p>CAA-Québec recommends an independent pre-purchase inspection because an ordinary viewing or road test can miss problems. Ask for a written report and confirm the price and scope directly with the inspecting shop. <a href="https://www.caaquebec.com/fr/conseils/acheter-ou-vendre-un-vehicule/vous-achetez-une-voiture-passez-d-abord-a-l-inspection" target="_blank" rel="noopener">Read CAA-Québec's pre-purchase inspection guidance</a>.</p>

@@ -19,7 +19,7 @@ const ui = {
   overview: "Aperçu", specs: "Fiche technique", features: "Équipements",
   similar: "Véhicules semblables", estimatePayment: "Estimez votre paiement",
   bookTestDrive: "Réserver un essai", checkAvailability: "Vérifier la disponibilité",
-  getPreApproved: "Info financement", hoursShort: "Ouvert de 10 h à 18 h, 7 jours, sur rendez-vous",
+  getPreApproved: "Info financement", hoursShort: "Ouvert de 10 h à 18 h tous les jours. Appelez avant de vous déplacer.",
   hours: "Heures", readMore: "Lire le guide →"
 };
 
@@ -63,7 +63,7 @@ module.exports = {
     trust: [
       { h: "Service personnalisé", p: "Vous traitez directement avec Spiro, du premier appel jusqu'aux clés dans votre main." },
       { h: "Vente · Achat · Échange", p: "Nous vendons, nous achetons et nous prenons des reprises. Kilométrage et état divulgués d'avance." },
-      { h: "Ouvert 7 jours sur rendez-vous", p: `De 10 h à 18 h tous les jours, sur rendez-vous. Appelez le ${DEALER.phone} pour confirmer l'heure et nous préparerons le véhicule pour vous.` },
+      { h: "Ouvert 7 jours", p: `De 10 h à 18 h tous les jours. Les rendez-vous sont fortement recommandés. Veuillez appeler le ${DEALER.phone} avant de vous déplacer pour confirmer la disponibilité de Spiro.` },
       { h: "Options de financement", p: "Nous travaillons avec plusieurs prêteurs. L'approbation, le taux et les conditions dépendent de l'analyse de chaque demande." }
     ],
     featuredKicker: "En stock",
@@ -203,7 +203,7 @@ module.exports = {
       <h2>Comment se déroule l'évaluation</h2>
       <ol>
         <li><strong>Parlez-nous du véhicule.</strong> Année, marque, modèle, version, kilométrage et tout ce qu'on devrait savoir. Des photos aident.</li>
-        <li><strong>Passez le montrer.</strong> Une évaluation sérieuse implique de le conduire et de regarder dessous. Quinze minutes, sur rendez-vous.</li>
+        <li><strong>Passez le montrer.</strong> Une évaluation sérieuse implique de le conduire et de regarder dessous. Prévoyez environ quinze minutes et appelez avant de vous déplacer pour confirmer la disponibilité de Spiro.</li>
         <li><strong>Recevez un montant.</strong> Nous expliquons comment nous y arrivons. Si ça ne vous convient pas, aucun problème et aucune pression.</li>
       </ol>
 
@@ -224,7 +224,7 @@ module.exports = {
       <p>C'est courant. Nous obtenons le solde auprès de votre prêteur et gérons le remboursement. Si le véhicule vaut plus que ce que vous devez, la différence s'applique à votre prochain achat. S'il vaut moins, nous vous le dirons clairement et nous examinerons les options plutôt que de glisser discrètement l'écart dans un nouveau prêt.</p>
 
       <h2>Obtenez une offre</h2>
-      <p>Appelez le ${DEALER.phone} ou <a class="text-link" href="${R.contact}?interest=trade-in">envoyez les détails</a>. Ouvert de 10 h à 18 h tous les jours, sur rendez-vous.</p>
+      <p>Appelez le ${DEALER.phone} ou <a class="text-link" href="${R.contact}?interest=trade-in">envoyez les détails</a>. Nous sommes ouverts de 10 h à 18 h tous les jours; veuillez appeler avant de vous déplacer pour confirmer la disponibilité de Spiro.</p>
       <p>À lire aussi : <a class="text-link" href="${R.g3}">quelle est la valeur de ma reprise au Québec ?</a></p>
       ${accuracyNote}`
   },
@@ -248,7 +248,7 @@ module.exports = {
 
       <h2>Comment nous choisissons nos véhicules</h2>
       <p>Nous achetons des véhicules dans lesquels nous mettrions un membre de notre famille. Ça veut dire refuser les autos dont l'historique ne tient pas debout, et être francs sur l'usure normale liée à l'âge et au kilométrage pour celles que nous prenons. Une voiture de huit ans avec 140 000 km est un bon achat au bon prix, et prétendre le contraire n'aide personne.</p>
-      <p>Le kilométrage, l'état et les défauts connus sont divulgués avant même qu'on vous les demande. Vous êtes aussi libre de faire inspecter n'importe quel véhicule par votre propre mécanicien avant de vous engager, et nous rendrons l'auto disponible pour ça.</p>
+      <p>Le kilométrage, l'état et les défauts connus sont divulgués avant même qu'on vous les demande. Les inspections indépendantes sont les bienvenues. Spiro discutera volontiers des modalités avec vous; veuillez communiquer avec nous à l'avance pour coordonner l'inspection.</p>
 
       <h2>Au service de Dorval et de l'Ouest-de-l'Île</h2>
       <p>Nous sommes à quelques minutes de Pointe-Claire, Lachine, Pierrefonds, Kirkland et Montréal-Ouest, et facilement accessibles depuis le centre-ville de Montréal ou Laval. La plupart de nos clients viennent de l'Ouest-de-l'Île, et beaucoup arrivent par une connaissance qui a déjà acheté chez nous.</p>
@@ -265,7 +265,7 @@ module.exports = {
     sub: "Les questions qu'on nous pose vraiment, avec des réponses claires.",
     faqs: [
       { q: "Faut-il un rendez-vous ?",
-        a: "Oui. Les visites se font sur rendez-vous. Nous sommes ouverts de 10 h à 18 h 7 jours sur 7; appelez le 514-824-9117 à l'avance afin de confirmer l'heure, que le véhicule soit prêt et que nous puissions bien vous recevoir." },
+        a: "Les rendez-vous sont fortement recommandés, mais ils ne sont pas obligatoires. Nous sommes ouverts de 10 h à 18 h 7 jours sur 7. Veuillez appeler avant de vous déplacer pour confirmer la disponibilité de Spiro." },
       { q: "Offrez-vous du financement ?",
         a: "Oui. Nous travaillons avec plusieurs prêteurs canadiens et soumettons votre dossier à ceux qui conviennent. Vous verrez le taux, la durée et le coût total avant toute signature. Au Québec, un commerçant ne peut pas exiger que vous financiez chez lui comme condition de la vente." },
       { q: "Puis-je donner mon véhicule en échange ?",
@@ -273,11 +273,11 @@ module.exports = {
       { q: "Y a-t-il une garantie sur une auto usagée au Québec ?",
         a: "Souvent oui, et elle est fixée par la loi plutôt que par le commerçant. La Loi sur la protection du consommateur prévoit une garantie de bon fonctionnement selon l'âge et le kilométrage : environ six mois ou 10 000 km pour les véhicules récents à faible kilométrage, jusqu'à un mois ou 1 700 km pour les plus âgés, et aucune garantie de ce type au-delà de sept ans ou de 120 000 km. Même dans ce dernier cas, les garanties légales générales de qualité et de durabilité s'appliquent toujours. La catégorie est indiquée sur l'étiquette du véhicule." },
       { q: "Puis-je faire inspecter l'auto par mon mécanicien ?",
-        a: `Vous pouvez demander une inspection indépendante. Choisissez le garage et <a href="${R.g6}">voyez quoi organiser</a>. Avant de réserver, transmettez-nous le véhicule, le garage et l'heure proposée afin de confirmer la disponibilité et l'accès. Le transport ou toute autre modalité doit être convenu au cas par cas. L'inspection évalue l'état au moment de l'examen; elle ne garantit pas la fiabilité future.` },
+        a: `Les inspections indépendantes sont les bienvenues. Spiro discutera volontiers des modalités avec vous. Communiquez avec nous à l'avance pour coordonner l'inspection, puis <a href="${R.g6}">voyez quoi organiser</a> avec le garage. L'accès au véhicule et tout transport doivent être confirmés pour l'inspection précise. L'inspection évalue l'état au moment de l'examen; elle ne garantit pas la fiabilité future.` },
       { q: "Puis-je réserver un véhicule ?",
-        a: "Appelez le 514-824-9117 avec le véhicule ou le numéro de stock. La disponibilité et toute retenue temporaire sont confirmées au cas par cas; ne considérez pas le véhicule comme réservé avant d'avoir reçu une confirmation." },
+        a: "Appelez le 514-824-9117 avec le véhicule ou le numéro de stock. La disponibilité peut changer et Automobile SX ne publie pas de politique générale de réservation en ligne. Confirmez directement avec Spiro les conditions applicables au véhicule précis avant de considérer qu'il est réservé." },
       { q: "Faites-vous la livraison ?",
-        a: "La disponibilité, le secteur, le délai et les frais éventuels de livraison ne font pas l'objet d'une politique générale annoncée en ligne. Demandez pour le véhicule et la destination précis, puis faites inscrire par écrit toute entente convenue avant l'achat." },
+        a: "Les véhicules sont normalement récupérés chez Automobile SX à Dorval. Vous avez besoin d'un arrangement particulier? Communiquez avec Spiro pour discuter de ce qui pourrait être possible. La livraison n'est ni garantie ni annoncée comme gratuite." },
       { q: "Que faut-il pour immatriculer le véhicule ?",
         a: "Les étapes d'immatriculation dépendent de la transaction. Avant la livraison, demandez quelles étapes Automobile SX prendra en charge, lesquelles vous devrez accomplir et quels documents et frais s'appliquent. Confirmez les exigences actuelles auprès de la SAAQ." },
       { q: "Parlez-vous anglais ?",
@@ -533,7 +533,7 @@ module.exports = {
 
       <h2>Commencez par le bon véhicule</h2>
       <p>Avant de réserver au garage, confirmez que l'auto est toujours disponible. Transmettez le numéro de stock au commerçant et le NIV, le modèle, l'année et le kilométrage au garage. Signalez les témoins lumineux, les bruits ou les autres éléments qui vous ont préoccupé pendant la visite.</p>
-      <p>Avant de réserver, transmettez-nous le véhicule, le garage et l'heure proposée afin de confirmer la disponibilité et l'accès. Le transport ou toute autre modalité doit être convenu au cas par cas; ne présumez pas que l'auto peut être déplacée vers un garage avant la fin de cette coordination. Consultez la <a class="text-link" href="${R.faq}">FAQ d'achat</a> pour le libellé actuel.</p>
+      <p>Les inspections indépendantes sont les bienvenues. Spiro discutera volontiers des modalités avec vous. Communiquez à l'avance le véhicule, le garage et l'heure proposée afin de coordonner l'accès et tout transport avant de réserver. Consultez la <a class="text-link" href="${R.faq}">FAQ d'achat</a> pour le libellé actuel.</p>
 
       <h2>Demandez ce qui sera inspecté</h2>
       <p>CAA-Québec recommande une inspection indépendante avant l'achat, car une visite ou un essai routier peut laisser passer certains problèmes. Demandez un rapport écrit et faites confirmer le prix et le contenu directement par le garage. <a href="https://www.caaquebec.com/fr/conseils/acheter-ou-vendre-un-vehicule/vous-achetez-une-voiture-passez-d-abord-a-l-inspection" target="_blank" rel="noopener">Consultez les conseils d'inspection préachat de CAA-Québec</a>.</p>

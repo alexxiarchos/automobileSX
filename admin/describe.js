@@ -92,16 +92,16 @@
 
   var CLOSERS = {
     en: [
-      "It is on the lot in Dorval now and can be seen seven days a week by appointment.",
-      "You can see it at our lot on Avenue Chartier in Dorval, seven days a week by appointment.",
-      "It is available now in Dorval. Call 514-824-9117 to arrange a time to come and see it.",
-      "Come by and take a look in Dorval. We are open seven days a week by appointment and you deal directly with Spiro."
+      "It is on the lot in Dorval now. We are open seven days; call ahead to confirm Spiro is available before visiting.",
+      "You can see it at our lot on Avenue Chartier in Dorval. Appointments are strongly recommended, so please call ahead.",
+      "It is available now in Dorval. Call 514-824-9117 to confirm Spiro is available before visiting.",
+      "Come by and take a look in Dorval. We are open seven days; please call ahead to confirm Spiro is available."
     ],
     fr: [
-      "Le véhicule est présentement sur place à Dorval et peut être vu sept jours sur sept, sur rendez-vous.",
-      "Vous pouvez le voir à notre emplacement de l'avenue Chartier, à Dorval, sept jours sur sept sur rendez-vous.",
-      "Il est disponible dès maintenant à Dorval. Appelez le 514-824-9117 pour fixer un rendez-vous.",
-      "Passez le voir à Dorval. Nous sommes ouverts sept jours sur sept sur rendez-vous et vous traitez directement avec Spiro."
+      "Le véhicule est présentement sur place à Dorval. Nous sommes ouverts sept jours; appelez avant de vous déplacer pour confirmer la disponibilité de Spiro.",
+      "Vous pouvez le voir à notre emplacement de l'avenue Chartier, à Dorval. Les rendez-vous sont fortement recommandés; appelez avant de vous déplacer.",
+      "Il est disponible dès maintenant à Dorval. Appelez le 514-824-9117 avant de vous déplacer pour confirmer la disponibilité de Spiro.",
+      "Passez le voir à Dorval. Nous sommes ouverts sept jours; veuillez appeler avant de vous déplacer pour confirmer la disponibilité de Spiro."
     ]
   };
 

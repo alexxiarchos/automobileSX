@@ -266,8 +266,8 @@ SX.dealer = {
   },
   writeReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJ04zZ8dIXyUwRAplJx4V5F1A",
   apptNote: {
-    en: "By appointment. Call to book, reservations welcome.",
-    fr: "Sur rendez-vous. Appelez pour réserver, réservations bienvenues."
+    en: "Appointments are strongly recommended. Please call ahead to confirm Spiro is available before visiting.",
+    fr: "Les rendez-vous sont fortement recommandés. Veuillez appeler avant de vous déplacer pour confirmer la disponibilité de Spiro."
   },
   hours: [
     { day: "Monday", fr: "Lundi", open: "10:00", close: "18:00" },

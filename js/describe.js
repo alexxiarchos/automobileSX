@@ -105,8 +105,8 @@
      NAP information helps a local business page; repeating keywords does not,
      so this says the location once and moves directly to useful buyer actions. */
   var WEBSITE_CONTACT = {
-    en: "Available at Automobile SX, 2044 Avenue Chartier, Dorval, QC H9P 1H2. Call or text 514-824-9117 to confirm availability or book a test drive. Open seven days a week by appointment. Financing is available and trade-ins are welcome.",
-    fr: "Disponible chez Automobile SX au 2044, avenue Chartier, Dorval (Québec) H9P 1H2. Appelez ou textez le 514-824-9117 pour confirmer la disponibilité ou réserver un essai routier. Ouvert sept jours sur sept sur rendez-vous. Financement disponible. Nous acceptons les véhicules en échange."
+    en: "Available at Automobile SX, 2044 Avenue Chartier, Dorval, QC H9P 1H2. Call or text 514-824-9117 to confirm availability or book a test drive. Open seven days a week. Appointments are strongly recommended; please call ahead to confirm Spiro is available. Financing is available and trade-ins are welcome.",
+    fr: "Disponible chez Automobile SX au 2044, avenue Chartier, Dorval (Québec) H9P 1H2. Appelez ou textez le 514-824-9117 pour confirmer la disponibilité ou réserver un essai routier. Ouvert sept jours sur sept. Les rendez-vous sont fortement recommandés; veuillez appeler avant de vous déplacer pour confirmer la disponibilité de Spiro. Financement disponible. Nous acceptons les véhicules en échange."
   };
 
   var OWNERSHIP = {
