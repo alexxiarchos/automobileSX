@@ -288,13 +288,13 @@ module.exports = {
       { q: "Is there a warranty on a used car in Quebec?",
         a: "Often, yes, and it is set by law rather than by the dealer. Quebec's Consumer Protection Act sets a warranty of good working order based on the vehicle's age and kilometres: roughly six months or 10,000 km for newer, lower-kilometre vehicles, down to one month or 1,700 km for older ones, and no such warranty on vehicles over seven years old or above 120,000 km. Even then, the general legal warranties of fitness and reasonable durability still apply. The category is shown on the label on the vehicle." },
       { q: "Can I have the car inspected by my own mechanic?",
-        a: `Yes. Choose the garage and <a href="${R.g6}">review what to arrange for an independent inspection</a>. Contact us first so the vehicle and timing can be coordinated. The inspection assesses its condition at that time; it cannot guarantee future reliability.` },
+        a: `You may request an independent inspection. Choose the garage and <a href="${R.g6}">review what to arrange</a>. Before booking, contact us with the vehicle, garage and proposed time so current availability and access can be confirmed. Any transport or other arrangement must be agreed case by case. The inspection assesses condition at that time; it cannot guarantee future reliability.` },
       { q: "Can I reserve a vehicle?",
-        a: "Yes. Call 514-824-9117 and we will hold it while you arrange financing or book an inspection. We will tell you honestly if someone else is already in line for it." },
+        a: "Call 514-824-9117 with the vehicle or stock number. Availability and any temporary hold are confirmed case by case; do not assume a vehicle is reserved until you receive confirmation." },
       { q: "Do you deliver?",
-        a: "Ask us. Depending on where you are in the Montreal area we can usually work something out. Most customers prefer to pick up at the lot in Dorval so we can go through the vehicle and paperwork together." },
+        a: "Delivery availability, area, timing and any charge are not stated as a general policy online. Ask about the specific vehicle and destination, and have any agreed arrangement included in writing before purchase." },
       { q: "What do I need to register the car?",
-        a: "We handle the registration paperwork with the SAAQ at delivery in most cases, so you usually leave with the car properly plated. Bring your valid Quebec driver's licence and proof of insurance." },
+        a: "Registration steps depend on the transaction. Before delivery, ask which steps Automobile SX will handle, which steps you must complete, and which documents and fees apply. Confirm the current requirements with the SAAQ." },
       { q: "Do you speak French?",
         a: "Oui. Le service est offert en français comme en anglais, à l'oral comme pour les documents." }
     ]
@@ -542,7 +542,7 @@ module.exports = {
 
       <h2>Start with the actual vehicle</h2>
       <p>Before booking a garage, confirm that the car is still available. Give the dealership the stock number and give the garage the VIN, model, year and kilometres. Tell the garage about any warning light, sound or concern you noticed.</p>
-      <p>Automobile SX's current <a class="text-link" href="${R.faq}">buying FAQ</a> welcomes an inspection by your own mechanic. Contact us first to discuss coordinating the vehicle and timing; a garage appointment and a dealership visit need to line up.</p>
+      <p>Before booking, contact us with the vehicle, garage and proposed time so current availability and access can be confirmed. Any transport or other arrangement must be agreed case by case; do not assume the vehicle can be moved to a garage until that coordination is complete. See the <a class="text-link" href="${R.faq}">buying FAQ</a> for the current wording.</p>
 
       <h2>Ask the garage what its inspection includes</h2>
       <p>CAA-Québec recommends an independent pre-purchase inspection because an ordinary viewing or road test can miss problems. Ask for a written report and confirm the price and scope directly with the inspecting shop. <a href="https://www.caaquebec.com/fr/conseils/acheter-ou-vendre-un-vehicule/vous-achetez-une-voiture-passez-d-abord-a-l-inspection" target="_blank" rel="noopener">Read CAA-Québec's pre-purchase inspection guidance</a>.</p>

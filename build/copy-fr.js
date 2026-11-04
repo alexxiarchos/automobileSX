@@ -273,13 +273,13 @@ module.exports = {
       { q: "Y a-t-il une garantie sur une auto usagée au Québec ?",
         a: "Souvent oui, et elle est fixée par la loi plutôt que par le commerçant. La Loi sur la protection du consommateur prévoit une garantie de bon fonctionnement selon l'âge et le kilométrage : environ six mois ou 10 000 km pour les véhicules récents à faible kilométrage, jusqu'à un mois ou 1 700 km pour les plus âgés, et aucune garantie de ce type au-delà de sept ans ou de 120 000 km. Même dans ce dernier cas, les garanties légales générales de qualité et de durabilité s'appliquent toujours. La catégorie est indiquée sur l'étiquette du véhicule." },
       { q: "Puis-je faire inspecter l'auto par mon mécanicien ?",
-        a: `Oui. Choisissez le garage et <a href="${R.g6}">voyez quoi organiser pour une inspection indépendante</a>. Contactez-nous d'abord pour coordonner le véhicule et l'horaire. L'inspection évalue son état au moment de l'examen; elle ne garantit pas sa fiabilité future.` },
+        a: `Vous pouvez demander une inspection indépendante. Choisissez le garage et <a href="${R.g6}">voyez quoi organiser</a>. Avant de réserver, transmettez-nous le véhicule, le garage et l'heure proposée afin de confirmer la disponibilité et l'accès. Le transport ou toute autre modalité doit être convenu au cas par cas. L'inspection évalue l'état au moment de l'examen; elle ne garantit pas la fiabilité future.` },
       { q: "Puis-je réserver un véhicule ?",
-        a: "Oui. Appelez le 514-824-9117 et nous le garderons pendant que vous organisez votre financement ou une inspection. Nous vous dirons honnêtement si quelqu'un d'autre est déjà sur les rangs." },
+        a: "Appelez le 514-824-9117 avec le véhicule ou le numéro de stock. La disponibilité et toute retenue temporaire sont confirmées au cas par cas; ne considérez pas le véhicule comme réservé avant d'avoir reçu une confirmation." },
       { q: "Faites-vous la livraison ?",
-        a: "Demandez-nous. Selon l'endroit où vous êtes dans la région de Montréal, on peut habituellement s'arranger. La plupart des clients préfèrent venir chercher le véhicule à Dorval pour qu'on puisse passer l'auto et les documents ensemble." },
+        a: "La disponibilité, le secteur, le délai et les frais éventuels de livraison ne font pas l'objet d'une politique générale annoncée en ligne. Demandez pour le véhicule et la destination précis, puis faites inscrire par écrit toute entente convenue avant l'achat." },
       { q: "Que faut-il pour immatriculer le véhicule ?",
-        a: "Dans la plupart des cas, nous nous occupons de l'immatriculation auprès de la SAAQ au moment de la livraison, alors vous repartez avec le véhicule correctement immatriculé. Apportez votre permis de conduire québécois valide et votre preuve d'assurance." },
+        a: "Les étapes d'immatriculation dépendent de la transaction. Avant la livraison, demandez quelles étapes Automobile SX prendra en charge, lesquelles vous devrez accomplir et quels documents et frais s'appliquent. Confirmez les exigences actuelles auprès de la SAAQ." },
       { q: "Parlez-vous anglais ?",
         a: "Yes. Service is available in English as well as French, both in person and for documents." }
     ]
@@ -527,7 +527,7 @@ module.exports = {
 
       <h2>Commencez par le bon véhicule</h2>
       <p>Avant de réserver au garage, confirmez que l'auto est toujours disponible. Transmettez le numéro de stock au commerçant et le NIV, le modèle, l'année et le kilométrage au garage. Signalez les témoins lumineux, les bruits ou les autres éléments qui vous ont préoccupé pendant la visite.</p>
-      <p>La <a class="text-link" href="${R.faq}">FAQ d'achat</a> actuelle d'Automobile SX permet une inspection par votre propre mécanicien. Contactez-nous d'abord pour discuter de la coordination du véhicule et de l'horaire : le rendez-vous au garage doit correspondre à la disponibilité de l'auto.</p>
+      <p>Avant de réserver, transmettez-nous le véhicule, le garage et l'heure proposée afin de confirmer la disponibilité et l'accès. Le transport ou toute autre modalité doit être convenu au cas par cas; ne présumez pas que l'auto peut être déplacée vers un garage avant la fin de cette coordination. Consultez la <a class="text-link" href="${R.faq}">FAQ d'achat</a> pour le libellé actuel.</p>
 
       <h2>Demandez ce qui sera inspecté</h2>
       <p>CAA-Québec recommande une inspection indépendante avant l'achat, car une visite ou un essai routier peut laisser passer certains problèmes. Demandez un rapport écrit et faites confirmer le prix et le contenu directement par le garage. <a href="https://www.caaquebec.com/fr/conseils/acheter-ou-vendre-un-vehicule/vous-achetez-une-voiture-passez-d-abord-a-l-inspection" target="_blank" rel="noopener">Consultez les conseils d'inspection préachat de CAA-Québec</a>.</p>

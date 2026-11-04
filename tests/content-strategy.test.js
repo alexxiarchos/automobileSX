@@ -109,6 +109,9 @@ for (const unsupported of [
 assert.doesNotMatch(contentSources, /walk-ins are welcome|visites sans rendez-vous sont les bienvenues|appointments are recommended|rendez-vous est recommandé/i, "appointment-only policy must be consistent");
 assert.match(contentSources, /Visits are by appointment/, "English appointment-only policy is missing");
 assert.match(contentSources, /Les visites se font sur rendez-vous/, "French appointment-only policy is missing");
+assert.doesNotMatch(contentSources, /we will hold it|we can usually work something out|we handle the registration paperwork|nous le garderons|on peut habituellement s'arranger|nous nous occupons de l'immatriculation/i, "unconfirmed operating promise remains");
+assert.match(contentSources, /Any transport or other arrangement must be agreed case by case/, "neutral English inspection coordination is missing");
+assert.match(contentSources, /Le transport ou toute autre modalité doit être convenu au cas par cas/, "neutral French inspection coordination is missing");
 
 const frenchVehicle = read("fr/vehicules/2017-audi-q5-exl5w.html");
 assert.doesNotMatch(frenchVehicle, /"color":"(?:Blue|Grey)"/, "French vehicle schema must localize colour");
