@@ -201,6 +201,7 @@ function inventoryBody(T, cards) {
     <div class="container">
       <h1>${T.inventory.h1}</h1>
       <p class="sub">${T.inventory.sub}</p>
+      ${T.inventory.budgetHelp || ""}
     </div>
   </div>
 

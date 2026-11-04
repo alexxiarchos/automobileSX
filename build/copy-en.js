@@ -35,7 +35,7 @@ const ctaCard = `
   </div>
 </aside>`;
 
-const accuracyNote = `<p class="accuracy-note">Information on this page reflects Quebec rules as of August 2026 and is provided for general guidance only. It is not legal or financial advice. Rules and fees change; confirm current details with the <a href="https://www.opc.gouv.qc.ca" target="_blank" rel="noopener">Office de la protection du consommateur</a>, <a href="https://saaq.gouv.qc.ca" target="_blank" rel="noopener">SAAQ</a> or <a href="https://www.revenuquebec.ca" target="_blank" rel="noopener">Revenu Québec</a>.</p>`;
+const accuracyNote = `<p class="accuracy-note">Information on this page reflects Quebec rules reviewed in November 2026 and is provided for general guidance only. It is not legal or financial advice. Rules and fees change; verify the relevant details with the <a href="https://www.opc.gouv.qc.ca/consommateur/bien-service/vehicule/auto-achat/conseil/occasion-commercant" target="_blank" rel="noopener">Office de la protection du consommateur</a>, <a href="https://saaq.gouv.qc.ca/immatriculation" target="_blank" rel="noopener">SAAQ</a> and <a href="https://www.revenuquebec.ca/en/citizens/consumption-taxes/taxable-zero-rated-or-tax-exempt-goods-and-services/gst-and-qst/transport-and-road-vehicles/road-vehicles-individuals/purchase-of-a-road-vehicle/purchase-of-a-used-road-vehicle-from-a-dealer/" target="_blank" rel="noopener">Revenu Québec</a>.</p>`;
 
 function prose(h1, sub, article) {
   return `
@@ -49,8 +49,10 @@ function prose(h1, sub, article) {
 }
 
 const guideCards = [
+  { h: "Used car budget in Quebec", p: "Work backward from a total limit and compare purchase and ownership costs.", href: R.g5 },
+  { h: "Used car inspection in Dorval", p: "Arrange an independent inspection and use the written findings.", href: R.g6 },
   { h: "Buying a used car in Quebec", p: "Taxes, the legal warranty, the dealer label and what to check before you sign.", href: R.g1 },
-  { h: "Car financing with bad credit", p: "What lenders look for, realistic rates, and the rights you keep in Quebec.", href: R.g2 },
+  { h: "Car financing with bad credit", p: "How to compare a complete financing offer and the rights you keep in Quebec.", href: R.g2 },
   { h: "What is my trade-in worth?", p: "How trade values are set, and the tax saving most buyers miss.", href: R.g3 },
   { h: "Registering a used car", p: "SAAQ paperwork, plates, and what the dealer handles for you.", href: R.g4 }
 ];
@@ -62,7 +64,7 @@ module.exports = {
   ui,
 
   home: {
-    title: "Used Cars in Dorval, QC | Automobile SX | Vente d'Autos Usagées",
+    title: "Used Cars in Dorval, QC | Automobile SX",
     description: "Used cars for sale in Dorval, Quebec. Family-run dealership offering sales, purchases and trades, with financing available. Open 10 to 6, seven days.",
     h1: "Quality used cars in Dorval",
     sub: "A family-run dealership on Avenue Chartier. You deal directly with Spiro throughout the buying process, in English or in French.",
@@ -73,7 +75,7 @@ module.exports = {
       { h: "Personal service", p: "You deal directly with Spiro, from the first phone call to the keys in your hand." },
       { h: "Vente · Achat · Échange", p: "We sell, we buy, and we take trades. Kilometres and condition disclosed up front." },
       { h: "Open seven days", p: `10:00 to 18:00 every day. Appointments are recommended, so call ${DEALER.phone} ahead and we can have the vehicle ready for you.` },
-      { h: "Financing for all credit", p: "Good credit, new credit or bruised credit. We work with several lenders and show you the real numbers." }
+      { h: "Financing options", p: "We work with several lenders. Approval, rate and terms depend on the lender's assessment of each application." }
     ],
     featuredKicker: "In stock now",
     featuredH: "Used cars for sale in Dorval",
@@ -86,7 +88,7 @@ module.exports = {
     tradeKicker: "Vente · Achat · Échange",
     tradeH: "We buy cars too, and a trade cuts your tax bill.",
     tradeBody: `<p>Selling privately means strangers at your door and payment risk. Bring it to us instead and get a straight offer, whether or not you buy anything from us.</p>
-      <p>If you do trade against a purchase, Quebec calculates the sales tax on the price <em>after</em> your trade-in is deducted, so the saving is real money.</p>`,
+      <p>An eligible trade-in can reduce the taxable amount. GST is generally calculated on the sale price less the trade-in credit; QST uses the greater of the vehicle's sale price or estimated value, less that credit. Ask for the actual calculation in writing.</p>`,
     tradeCta: "Get your car appraised",
     guidesKicker: "Straight answers",
     guidesH: "Guides for used-car buyers in Quebec",
@@ -122,6 +124,7 @@ module.exports = {
     description: "Browse used cars, SUVs and trucks for sale at Automobile SX in Dorval, Quebec. Filter by make, body type, price, year and kilometres.",
     h1: "Used cars for sale in Dorval",
     sub: `Every vehicle priced honestly, with kilometres disclosed. Call <a class="text-link" href="tel:+15148249117">${DEALER.phone}</a> to arrange a viewing.`,
+    budgetHelp: `<p class="muted-note">Working with a firm total limit? <a class="text-link" href="${R.g5}">Plan the vehicle price, taxes and other costs first</a>.</p>`,
     note: `<h2>Looking for something we do not have?</h2>
       <p>Our stock turns over constantly and we source vehicles on request. Tell us the make, model, budget and kilometres you are after and we will watch for it. Call ${DEALER.phone} or <a class="text-link" href="${R.contact}">send us the details</a>.</p>`
   },
@@ -160,52 +163,46 @@ module.exports = {
   /* ---------------- Content pages ---------------- */
 
   financing: {
-    title: "Used Car Financing in Dorval, QC | All Credit | Automobile SX",
-    description: "Used car financing in Dorval and the West Island. What lenders look at, which documents to bring, and your rights under Quebec law.",
+    title: "Used Car Financing in Dorval, QC | Automobile SX",
+    description: "Used car financing information for Dorval and the West Island. Compare the complete offer, prepare your documents and understand your Quebec rights.",
     h1: "Used car financing in Dorval",
-    sub: "Good credit, bruised credit, or no Canadian credit file yet. Here is how it actually works.",
+    sub: "Approval, rate and terms depend on the lender and the application. Here is how to prepare and compare an offer.",
     body: `
-      <p>Financing a used car should not feel like a magic trick performed behind a desk. This page explains what lenders look at, what you should bring, and what the law in Quebec guarantees you, so you can walk in knowing roughly where you stand.</p>
+      <p>A monthly payment is only one part of a financing offer. Compare the amount borrowed, the credit rate, the term, the fees and the total obligation before deciding.</p>
 
-      <h2>Financing for all credit situations</h2>
-      <p>We work with several Canadian lenders rather than a single bank, because their criteria differ. We submit your file where we think it fits and tell you exactly what comes back. Rates, terms and approval are decided by the lender, not by us.</p>
+      <h2>Each lender assesses the complete application</h2>
+      <p>Automobile SX works with several Canadian lenders. Their criteria differ, and the lender—not the dealership—decides whether to approve an application and which rate and terms to offer.</p>
       <ul>
-        <li><strong>Established credit.</strong> If your file is clean, you should expect a rate in the single digits on a reasonably recent vehicle.</li>
-        <li><strong>Bruised credit.</strong> Past missed payments, a consumer proposal or a discharged bankruptcy do not automatically mean no. They usually mean a higher rate, and sometimes a down payment.</li>
-        <li><strong>New to Canada.</strong> No Canadian credit history is a very common situation in Montreal and there are lenders set up for exactly it. Proof of steady income does most of the work.</li>
-        <li><strong>First-time buyer.</strong> A modest, well-priced car with an affordable payment is the fastest way to build a credit file that opens better rates later.</li>
+        <li><strong>Credit history is one factor.</strong> There is no score on this site that promises approval or a particular rate.</li>
+        <li><strong>Income and existing obligations matter.</strong> The lender must assess whether the requested credit can be repaid.</li>
+        <li><strong>The vehicle and term matter.</strong> Eligibility can vary with the amount requested and the vehicle selected.</li>
+        <li><strong>A down payment is application-specific.</strong> Do not assume one is required—or that a particular amount will change the result—until it appears in a written offer.</li>
       </ul>
 
-      <h2>What to bring to speed up approval</h2>
-      <p>Quebec law actually requires the lender to assess your ability to repay before signing a credit contract, so this paperwork is not busywork:</p>
+      <h2>Confirm the documents before applying</h2>
+      <p>A lender may ask for documents that verify identity, address, income, banking details or a trade-in. The exact list depends on the application. Ask what is required before sending personal information. Examples can include:</p>
       <ul>
-        <li>Valid Quebec driver's licence</li>
-        <li>Proof of address, such as a Hydro-Québec bill or your lease</li>
-        <li>Recent pay stubs, or your notice of assessment if you are self-employed</li>
-        <li>Bank statements from the last few months</li>
-        <li>A void cheque</li>
-        <li>Trade-in registration and, if it is still financed, the payout statement</li>
+        <li>Government-issued identification and proof of address</li>
+        <li>Documents supporting income or employment</li>
+        <li>Banking information requested for the application</li>
+        <li>Trade-in registration and a current payout statement, if applicable</li>
       </ul>
 
-      <h2>What a used car loan costs right now</h2>
-      <p>Rates move, and they depend on your credit file, the age and kilometres of the vehicle, and the length of the loan. As a rough map of the Canadian market in 2026: strong credit tends to land in the high single digits on a used vehicle, mid credit in the low teens, and subprime files well above that. Federal law caps the criminal rate at 35% APR, and Quebec adds its own rules above a high-cost threshold.</p>
-      <p>Two things worth knowing. Used-car rates generally run <em>higher</em> than new-car rates, because the collateral is worth less, which surprises most buyers. And most lenders will not finance a vehicle past roughly its tenth model year.</p>
+      <h2>Compare the complete written offer</h2>
+      <p>Rates change and an advertised range cannot predict an individual approval. Ask for the rate, payment schedule, financing fees, amount financed, term and total obligation in writing. The <a href="https://www.canada.ca/en/financial-consumer-agency/services/loans/financing-car/shop-around.html" target="_blank" rel="noopener">Financial Consumer Agency of Canada</a> recommends comparing the total cost rather than only the payment or interest rate.</p>
 
-      <h2>Shorter term, less interest</h2>
-      <p>Stretching a loan to 84 or 96 months makes the monthly number look friendly and quietly costs thousands more in interest. It also keeps you owing more than the car is worth for years, which becomes a real problem if you need to change vehicles. The average used-car loan in Canada runs about 60 months, and that is a sensible ceiling for most buyers.</p>
-      <p>Use the estimator on any vehicle page to see the total obligation, not just the payment. The total is the number that matters.</p>
+      <h2>Understand the effect of the term</h2>
+      <p>A longer term can lower each payment while increasing the interest paid over the life of the loan. It can also increase the time you owe more than the vehicle is worth. Compare the same amount and rate over different terms before choosing.</p>
 
       <h2>Your rights in Quebec, in plain language</h2>
       <ul>
-        <li><strong>Financing cannot be forced on you.</strong> Since November 2024, a dealer may not make the purchase of a vehicle conditional on taking their financing, or on buying other products.</li>
-        <li><strong>Extended warranties and add-ons are optional.</strong> Always. If something is presented as mandatory, ask why in writing.</li>
-        <li><strong>You may repay early without penalty</strong> on an instalment sale contract, and the contract must say so.</li>
-        <li><strong>There is a two-day cancellation right</strong> on a dealer-financed purchase. It does not apply if you pay cash or arrange your own bank loan, so decide before you sign in that case.</li>
-        <li><strong>The contract must disclose</strong> the cash price, the down payment, the credit charges, the credit rate, the number of payments and your total obligation. If a number is missing, ask for it.</li>
+        <li><strong>Financing cannot be forced on you.</strong> Quebec prohibits making a road-vehicle purchase conditional on dealer-arranged credit or long-term leasing. <a href="https://www.opc.gouv.qc.ca/consommateur/nouvelles-protections/" target="_blank" rel="noopener">Read the OPC summary</a>.</li>
+        <li><strong>An instalment-sale contract must disclose the complete figures.</strong> That includes the cash price, down payment if any, credit charges, credit rate, total obligation, term and payments. <a href="https://www.opc.gouv.qc.ca/consommateur/bien-service/credit-recouvrement-finance/temperament/contrat/contenu" target="_blank" rel="noopener">See the OPC contract checklist</a>.</li>
+        <li><strong>Early repayment and cancellation rules depend on the contract.</strong> An instalment-sale contract must allow early payment without fees or penalty and normally carries a two-day cancellation right; high-cost credit has different rules. <a href="https://www.opc.gouv.qc.ca/consommateur/bien-service/vehicule/auto-achat/occasion/annulation-contrat" target="_blank" rel="noopener">Check the OPC cancellation guidance</a>.</li>
       </ul>
 
       <h2>Start the conversation</h2>
-      <p>Tell us your situation honestly, including the parts you would rather not mention. It changes which lender we approach, not whether we help. Call ${DEALER.phone} or <a class="text-link" href="${R.contact}?interest=financing">send us a note</a> and we will tell you where you realistically stand.</p>
+      <p>Tell us the vehicle, intended purchase budget and whether you want to discuss financing. Call ${DEALER.phone} or <a class="text-link" href="${R.contact}?interest=financing">send us a note</a>. Any approval, rate, term or down-payment requirement comes from the lender's written offer after assessment.</p>
       <p>Related reading: <a class="text-link" href="${R.g2}">car financing with bad credit in Quebec</a>.</p>
       ${accuracyNote}`
   },
@@ -226,8 +223,8 @@ module.exports = {
       </ol>
 
       <h2>The trade-in tax saving most people miss</h2>
-      <p>This is the part that surprises buyers. In Quebec, when you trade a vehicle in against a purchase at a dealer, the sales tax is calculated on the price <em>after</em> your trade-in value is deducted, not on the full sticker price.</p>
-      <p>Combined GST and QST come to roughly 15%, so on a $6,000 trade-in that mechanism is worth something in the neighbourhood of $900 that a private sale simply does not give you. A private buyer might offer a bit more on paper and still leave you behind once the tax difference is counted. Do that arithmetic before you list it online.</p>
+      <p>An eligible trade-in can reduce the taxable amount, but GST and QST do not always use the same starting figure. GST is generally calculated on the sale price less the trade-in credit. QST is calculated on the greater of the vehicle's sale price or estimated value, less the trade-in credit.</p>
+      <p>Ask for the sale price, trade-in credit, estimated value if applicable, and each tax amount separately. Do not assume the reduction will always equal the trade-in credit multiplied by the combined tax rates. <a href="https://www.revenuquebec.ca/en/citizens/consumption-taxes/taxable-zero-rated-or-tax-exempt-goods-and-services/gst-and-qst/transport-and-road-vehicles/road-vehicles-individuals/trading-in-a-road-vehicle/trade-in-of-a-road-vehicle-between-an-individual-and-a-dealer/" target="_blank" rel="noopener">Review Revenu Québec's trade-in calculation</a>.</p>
 
       <h2>What helps your car appraise well</h2>
       <ul>
@@ -287,11 +284,11 @@ module.exports = {
       { q: "Do you offer financing?",
         a: "Yes. We work with several Canadian lenders and submit your file to the ones that suit it. You will see the rate, the term and the total cost before anything is signed. In Quebec, a dealer cannot require you to finance through them as a condition of the sale." },
       { q: "Can I trade in my car?",
-        a: "Yes, and it usually saves you tax. In Quebec the sales tax on your next vehicle is calculated on the price after the trade-in value is deducted. With combined taxes around 15%, that is real money. We will appraise your vehicle with no obligation to buy from us." },
+        a: "Yes. For an eligible trade-in, GST is generally calculated on the sale price less the trade-in credit. QST uses the greater of the vehicle's sale price or estimated value, less that credit. Ask for the itemized calculation rather than assuming a fixed saving. We will appraise your vehicle with no obligation to buy from us." },
       { q: "Is there a warranty on a used car in Quebec?",
         a: "Often, yes, and it is set by law rather than by the dealer. Quebec's Consumer Protection Act sets a warranty of good working order based on the vehicle's age and kilometres: roughly six months or 10,000 km for newer, lower-kilometre vehicles, down to one month or 1,700 km for older ones, and no such warranty on vehicles over seven years old or above 120,000 km. Even then, the general legal warranties of fitness and reasonable durability still apply. The category is shown on the label on the vehicle." },
       { q: "Can I have the car inspected by my own mechanic?",
-        a: "Absolutely, and we encourage it. Arrange it and we will make the vehicle available. A buyer who has had the car checked is a buyer who sleeps well afterwards." },
+        a: `Yes. Choose the garage and <a href="${R.g6}">review what to arrange for an independent inspection</a>. Contact us first so the vehicle and timing can be coordinated. The inspection assesses its condition at that time; it cannot guarantee future reliability.` },
       { q: "Can I reserve a vehicle?",
         a: "Yes. Call 514-824-9117 and we will hold it while you arrange financing or book an inspection. We will tell you honestly if someone else is already in line for it." },
       { q: "Do you deliver?",
@@ -320,8 +317,8 @@ module.exports = {
       <p>Quebec protects used-car buyers more firmly than most provinces, but only if you know what to look for. This guide covers the parts that actually decide whether a purchase goes well.</p>
 
       <h2>What you will pay in tax</h2>
-      <p>Buying from a dealer, you pay GST at 5% and QST at 9.975%, roughly 15% combined, on the agreed sale price. The advertised price must already include preparation, transport and administration fees; a dealer cannot advertise one number and add those on later. Only the taxes and the small tire environmental duty may be added on top.</p>
-      <p>If you trade a vehicle in, tax is calculated on the price after your trade-in value is deducted, which is the single biggest financial reason to trade rather than sell privately.</p>
+      <p>For a standard taxable dealer purchase, GST is 5% and is generally calculated on the agreed sale price. QST is 9.975% and is calculated on the greater of the agreed sale price or the vehicle's estimated value, unless a specific damaged-or-unusual-wear rule applies. <a href="https://www.revenuquebec.ca/en/citizens/consumption-taxes/taxable-zero-rated-or-tax-exempt-goods-and-services/gst-and-qst/transport-and-road-vehicles/road-vehicles-individuals/purchase-of-a-road-vehicle/purchase-of-a-used-road-vehicle-from-a-dealer/" target="_blank" rel="noopener">Check the current Revenu Québec calculation</a>. The advertised price must already include preparation, transport and administration fees; taxes and the applicable new-tire duty can be added.</p>
+      <p>With an eligible trade-in, GST is generally calculated on the sale price less the trade-in credit. QST uses the greater of the sale price or estimated value, less that credit. Ask for an itemized calculation. If you are planning from a firm limit, use our <a class="text-link" href="${R.g5}">complete purchase-budget worksheet</a>.</p>
 
       <h2>The legal warranty on a used vehicle</h2>
       <p>Quebec's Consumer Protection Act gives most used vehicles bought from a dealer a warranty of good working order, at no extra cost, based on age and kilometres. The thresholds were widened in April 2024, so older articles online understate them:</p>
@@ -337,10 +334,10 @@ module.exports = {
       <p>Every used vehicle at a Quebec dealer must carry a label showing the price, the year, make, model and serial number, the odometer reading, the warranty category, and notice of your right to the previous owner's contact information. It must also disclose prior use as a taxi, driving-school, police or rental vehicle. If a specific part is excluded from the warranty, that has to appear on the label with a repair estimate, or the exclusion does not stand.</p>
 
       <h2>Safety certificates work differently here</h2>
-      <p>If you are arriving from Ontario, adjust your expectations: an ordinary used passenger car sold by a Quebec dealer to a consumer does not require a safety certificate. Mechanical inspection certificates are required in specific situations, such as vehicles brought in from outside Quebec or rebuilt after serious damage. This is exactly why an independent inspection is worth the hundred-odd dollars.</p>
+      <p>If you are arriving from Ontario, adjust your expectations: an ordinary used passenger car sold by a Quebec dealer to a consumer does not require a safety certificate. Mechanical inspection certificates are required in specific situations, such as vehicles brought in from outside Quebec or rebuilt after serious damage. Ask the garage you choose to quote the scope and price of an independent inspection.</p>
 
       <h2>Have it inspected anyway</h2>
-      <p>Any dealer worth buying from will let you take the vehicle to your own mechanic. We do. A pre-purchase inspection tells you what is coming in the next year, which turns a nervous decision into an informed one. If a seller resists, that is your answer.</p>
+      <p>The OPC recommends a road test and an inspection by a mechanic you trust, and states that a dealer must accept the request. An inspection describes the vehicle's observed condition at that time; it cannot promise future reliability. Use our <a class="text-link" href="${R.g6}">Dorval pre-purchase inspection worksheet</a> to coordinate the vehicle, garage and questions.</p>
 
       <h2>Before you sign</h2>
       <p>The contract must show the dealer's OPC permit number, the price, the taxes, the total payable, the warranty details and any trade-in terms. Check that the vehicle identification number on the contract matches the one on the car. Make sure any verbal promise, such as a repair before delivery, is written into the contract.</p>
@@ -354,50 +351,49 @@ module.exports = {
   },
 
   g2: {
-    title: "Car Financing with Bad Credit in Quebec: What to Expect",
-    description: "How used car financing works in Quebec with limited or damaged credit: what lenders check, realistic rates, and the rights you keep.",
+    title: "Bad-Credit Car Financing in Quebec: Compare the Offer",
+    description: "Prepare for used-car financing in Quebec with limited or damaged credit. Compare the full written offer without relying on promised rates or approval.",
     h1: "Car financing with bad credit in Quebec",
-    sub: "What lenders actually look at, what it realistically costs, and the rights you keep.",
+    sub: "Prepare the application, compare the complete offer and keep the rights Quebec law gives you.",
     body: `
-      <p>A damaged credit file feels like a locked door. In practice it is usually a more expensive door, and the price depends on choices you can control.</p>
+      <p>Limited or damaged credit does not produce one standard rate, down payment or decision. Each lender applies its own criteria to the complete application. Treat any estimate as provisional until the lender provides a written offer.</p>
 
-      <h2>What counts as bad credit in Canada</h2>
-      <p>On the Equifax scale of 300 to 900, roughly 760 and up is excellent, 725 to 759 very good, 660 to 724 good, 560 to 659 fair, and below 560 poor. Lenders generally treat under 660 as subprime. There is no legal cutoff, and each lender sets its own floor, so a single declined application tells you very little.</p>
+      <h2>A credit score is not an approval table</h2>
+      <p>Credit scores are one input, not a published lender commitment. This page does not assign score bands, predict approval or quote a rate. Ask which documents are required and let the lender assess the actual file.</p>
 
-      <h2>What subprime lenders actually weigh</h2>
-      <p>Once your score is below prime, lenders stop leaning on it and start looking at stability:</p>
+      <h2>Prepare the information a lender may assess</h2>
+      <p>The exact criteria and documents vary. A lender may consider:</p>
       <ul>
-        <li><strong>Income.</strong> Steady, provable, and enough to carry the payment comfortably.</li>
-        <li><strong>Time at your job.</strong> A few months of history at the same employer carries real weight.</li>
-        <li><strong>Bank statements.</strong> They look for rent and bills clearing on time, and for NSF fees.</li>
-        <li><strong>The vehicle itself.</strong> A sensible, affordable car is easier to approve than a stretch purchase.</li>
-        <li><strong>Down payment.</strong> Not always required, but it improves both approval odds and the rate.</li>
+        <li><strong>Income and existing obligations.</strong> Be ready to provide the documents the lender requests.</li>
+        <li><strong>Credit history.</strong> Review your own report for errors before applying.</li>
+        <li><strong>The requested amount and term.</strong> Compare them with your complete monthly ownership budget.</li>
+        <li><strong>The selected vehicle.</strong> Eligibility may differ by vehicle and lender.</li>
+        <li><strong>A proposed down payment.</strong> Include it only when comparing an actual written offer; no fixed amount guarantees a result.</li>
       </ul>
 
-      <h2>What it costs</h2>
-      <p>Expect a meaningful premium: where strong credit gets high single digits on a used vehicle, a subprime file commonly sits in the mid-teens and can go higher. Federal law caps the criminal rate at 35% APR, and Quebec applies extra requirements above its high-cost credit threshold. Anything approaching those numbers deserves a hard second look.</p>
-      <p>One Quebec detail worth knowing: the credit rate shown on your contract is an all-in figure that includes administration fees, not just the nominal interest. That makes contracts genuinely comparable, so compare that number rather than the payment.</p>
+      <h2>Compare what the offer actually costs</h2>
+      <p>Compare the cash price, amount financed, credit charges, credit rate, payment schedule, term and total obligation. Quebec's OPC explains the required figures in an <a href="https://www.opc.gouv.qc.ca/consommateur/bien-service/credit-recouvrement-finance/temperament/contrat/contenu" target="_blank" rel="noopener">instalment-sale contract</a>. The <a href="https://www.canada.ca/en/financial-consumer-agency/services/loans/financing-car/shop-around.html" target="_blank" rel="noopener">Financial Consumer Agency of Canada</a> recommends comparing multiple complete offers when possible.</p>
 
       <h2>New to Canada with no credit file</h2>
-      <p>No credit history is not bad credit; it is an empty page, and lenders treat it differently. Some banks run newcomer programs that skip the credit-history requirement, usually with a down payment in the 10% to 25% range and limits on how old the vehicle can be. Those vehicle-age limits are the catch on a used-car lot, so newcomer buyers often do better with a specialty lender or a co-signer.</p>
+      <p>No Canadian credit history is different from a history of missed payments, but there is no single newcomer program or requirement that applies to every lender. Ask which identity, residency, income and credit documents are required for the actual application. Do not rely on a promised down-payment percentage or vehicle-age rule unless the lender puts it in the offer.</p>
 
       <h2>Do not let the term hide the cost</h2>
-      <p>The easiest way to make an expensive loan feel affordable is to stretch it. Going from 48 months to 96 cuts the payment substantially and more than doubles the interest, while keeping you underwater for years. If the payment only works at 84 or 96 months, the honest conclusion is usually that the car is too expensive, not that the term is too short.</p>
+      <p>A longer term generally lowers each payment while increasing the interest paid over the loan. Compare the total obligation and consider how long you may owe more than the vehicle is worth. A lower payment alone does not make the offer less expensive.</p>
 
-      <h2>Use it to rebuild</h2>
-      <p>A subprime auto loan reported to the bureaus and paid on time is one of the faster ways to repair a credit file. Many buyers refinance to a much better rate after a year or two of clean payments, and in Quebec an instalment sale contract must let you prepay without penalty, so leaving early costs nothing.</p>
+      <h2>Do not assume a future refinance</h2>
+      <p>Make the decision using the offer you have now. Credit-file changes and future refinancing depend on reporting, payment history, market conditions and a later lender assessment. No dealership can promise when a score will improve or that a cheaper refinance will become available.</p>
 
       <h2>Protect yourself</h2>
       <ul>
-        <li>Financing cannot be a condition of the sale in Quebec, since November 2024.</li>
-        <li>Extended warranties, credit insurance and protection packages are optional. Every one of them increases the amount you finance.</li>
+        <li>Financing cannot be a condition of a road-vehicle sale in Quebec. <a href="https://www.opc.gouv.qc.ca/consommateur/nouvelles-protections/" target="_blank" rel="noopener">Read the OPC summary</a>.</li>
+        <li>Ask whether every warranty, insurance or protection product is optional and how it changes the amount financed.</li>
         <li>Compare the total obligation, not the weekly payment.</li>
         <li>Get the approved rate in writing and check it against the contract.</li>
-        <li>You may repay early without penalty, and the contract must say so.</li>
+        <li>An instalment-sale contract must state the right to repay early without fees or penalty. <a href="https://www.opc.gouv.qc.ca/consommateur/bien-service/credit-recouvrement-finance/temperament/contrat/contenu" target="_blank" rel="noopener">Check the required contract content</a>.</li>
       </ul>
 
       <h2>Talk to us honestly</h2>
-      <p>Tell us the real situation and we will tell you what is realistic. Call ${DEALER.phone} or read <a class="text-link" href="${R.financing}">how financing works at Automobile SX</a>.</p>
+      <p>Tell us which vehicle and purchase budget you want to discuss. Call ${DEALER.phone} or read <a class="text-link" href="${R.financing}">how financing works at Automobile SX</a>. Approval, rate, term and any down-payment requirement come from the lender after assessment.</p>
       ${accuracyNote}`
   },
 
@@ -420,8 +416,8 @@ module.exports = {
       </ul>
 
       <h2>The tax saving is part of the offer</h2>
-      <p>Comparing a trade offer to a private-sale price without counting tax gives you the wrong answer. In Quebec, tax on your next vehicle is calculated after the trade-in is deducted, and combined GST and QST run near 15%.</p>
-      <p>So on an $8,000 trade-in, that mechanism saves roughly $1,200 in tax. A private buyer offering $9,000 is barely ahead of a $8,000 trade once you count it, and that is before the photos, the messages, the no-shows and the payment risk.</p>
+      <p>Comparing a trade offer with a private-sale price can include the tax effect, but the calculation needs both tax bases. For an eligible trade-in, GST is generally calculated on the sale price less the trade-in credit. QST is calculated on the greater of the purchased vehicle's sale price or estimated value, less that credit.</p>
+      <p>Request an itemized purchase quote showing the sale price, estimated value if applicable, trade-in credit and both tax amounts. That gives you the net comparison without assuming that every dollar of trade-in credit always reduces both taxes in the same way. <a href="https://www.revenuquebec.ca/en/citizens/consumption-taxes/taxable-zero-rated-or-tax-exempt-goods-and-services/gst-and-qst/transport-and-road-vehicles/road-vehicles-individuals/trading-in-a-road-vehicle/trade-in-of-a-road-vehicle-between-an-individual-and-a-dealer/" target="_blank" rel="noopener">See Revenu Québec's calculation and conditions</a>.</p>
 
       <h2>Trade in or sell privately?</h2>
       <p><strong>Trading in makes sense</strong> when you are buying another vehicle anyway, when you value the time, when the car has needs you would have to disclose, or when it still has a loan on it.</p>
@@ -480,6 +476,102 @@ module.exports = {
       <p>Keep the bill of sale, the registration certificate and the warranty details together. You will want them for insurance, for your own records, and when you eventually sell or trade the car.</p>
       <p>Next: <a class="text-link" href="${R.g1}">the full guide to buying used in Quebec</a> · <a class="text-link" href="${R.inventory}">browse our inventory</a></p>
       ${accuracyNote}`
+  },
+
+  g5: {
+    title: "Used Car Budget in Quebec: The Full Cost | Automobile SX",
+    description: "Buying a used car with a $15,000 budget? Separate the asking price, taxes and ownership costs before comparing vehicles in Dorval.",
+    h1: "Used car budget in Quebec: what a $15,000 limit really buys",
+    sub: "Work backward from a firm total so the advertised price, taxes and other costs fit the same plan.",
+    byline: "By Automobile SX",
+    schemaType: "BlogPosting",
+    showBreadcrumbs: true,
+    draft: true,
+    body: `
+      <p>A $15,000 purchase budget is not the same as a $15,000 advertised price. Set aside the applicable taxes, registration and any separately budgeted inspection or immediate ownership costs before choosing a vehicle. For a Dorval buyer with a firm spending limit, the useful question is: "What can I buy and prepare for use without exceeding my total budget?"</p>
+
+      <h2>Start with two budgets</h2>
+      <p>Your purchase budget covers getting the vehicle into your name and ready for your needs. Your monthly ownership budget covers keeping it on the road.</p>
+      <p>Write down the following before browsing:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Purchase planning</th><th>Monthly planning</th></tr></thead>
+        <tbody>
+          <tr><td>Vehicle price and applicable taxes</td><td>Loan payment, if financed</td></tr>
+          <tr><td>Registration</td><td>Insurance</td></tr>
+          <tr><td>Independent inspection</td><td>Fuel or charging</td></tr>
+          <tr><td>Immediate work or equipment you choose</td><td>Maintenance reserve</td></tr>
+          <tr><td>A cash reserve you do not want to spend</td><td>Parking and other recurring costs</td></tr>
+        </tbody>
+      </table></div>
+      <p>An inspection fee or insurance quote comes from the provider you select. Do not assume the advertised vehicle price includes either.</p>
+
+      <h2>Work backward from your limit</h2>
+      <p>For a standard taxable dealer purchase, GST is 5% and QST is 9.975%. QST may use the vehicle's estimated value when it is higher than the selling price. Confirm the applicable calculation before relying on a simple percentage. <a href="https://www.revenuquebec.ca/en/citizens/consumption-taxes/taxable-zero-rated-or-tax-exempt-goods-and-services/gst-and-qst/transport-and-road-vehicles/road-vehicles-individuals/purchase-of-a-road-vehicle/purchase-of-a-used-road-vehicle-from-a-dealer/" target="_blank" rel="noopener">Revenu Québec explains purchases from a dealer</a>.</p>
+      <p>Here is an illustrative calculation, not a vehicle offer. Assume both taxes apply to the selling price, with no trade-in:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Item</th><th>Amount</th></tr></thead>
+        <tbody>
+          <tr><td>Total available</td><td>$15,000.00</td></tr>
+          <tr><td>Amount you choose to reserve for other costs</td><td>$1,000.00</td></tr>
+          <tr><td>Remaining for vehicle plus taxes</td><td>$14,000.00</td></tr>
+          <tr><td>Approximate maximum vehicle price: $14,000 / 1.14975</td><td>$12,176.56</td></tr>
+        </tbody>
+      </table></div>
+      <p>The $1,000 reserve is a hypothetical planning choice, not an estimate of registration, inspection, insurance or repair costs. Replace it with your actual figures. A higher QST valuation changes this calculation.</p>
+
+      <h2>Ask for a quote you can compare</h2>
+      <p>Request an itemized written total for the exact vehicle. Ask what is included, what is optional, which amount is used for QST and what remains payable at registration. If you have a trade-in, ask for its value and any outstanding loan balance as separate figures.</p>
+      <p>For financing, compare the amount borrowed, rate, term and total borrowing cost. A smaller payment alone does not establish a cheaper purchase. The <a href="https://www.canada.ca/en/financial-consumer-agency/services/loans/financing-car/shop-around.html" target="_blank" rel="noopener">Financial Consumer Agency of Canada</a> recommends comparing the complete financing offer.</p>
+
+      <h2>Make your shortlist useful</h2>
+      <p>Send your maximum purchase budget, intended monthly limit, preferred body style and planned purchase date. State whether your budget includes taxes. This prevents a conversation about a vehicle that was never within your limit.</p>
+      <p><a class="text-link" href="${R.inventory}">Browse Automobile SX inventory</a>, then <a class="text-link" href="${R.contact}">contact us in Dorval</a> with the vehicle or stock number you want to discuss. For the broader process, read <a class="text-link" href="${R.g1}">buying a used car in Quebec</a>, <a class="text-link" href="${R.g6}">plan an independent inspection</a> or review <a class="text-link" href="${R.financing}">our financing information</a>.</p>`
+  },
+
+  g6: {
+    title: "Used Car Inspection in Dorval | Automobile SX",
+    description: "Arrange an independent inspection before buying a used car in Dorval. Know what to ask the garage, what to bring and how to use the report.",
+    h1: "Used car inspection in Dorval: what to arrange before buying",
+    sub: "Coordinate the actual vehicle, the garage and the questions before you commit.",
+    byline: "By Automobile SX",
+    schemaType: "BlogPosting",
+    showBreadcrumbs: true,
+    draft: true,
+    body: `
+      <p>Arrange an independent inspection before committing to a used car, even if you have already driven it and read its history report. Choose the garage, agree on the inspection scope and coordinate access to the specific vehicle. Use the written findings to decide what you are comfortable buying; an inspection cannot promise future reliability.</p>
+
+      <h2>Start with the actual vehicle</h2>
+      <p>Before booking a garage, confirm that the car is still available. Give the dealership the stock number and give the garage the VIN, model, year and kilometres. Tell the garage about any warning light, sound or concern you noticed.</p>
+      <p>Automobile SX's current <a class="text-link" href="${R.faq}">buying FAQ</a> welcomes an inspection by your own mechanic. Contact us first to discuss coordinating the vehicle and timing; a garage appointment and a dealership visit need to line up.</p>
+
+      <h2>Ask the garage what its inspection includes</h2>
+      <p>CAA-Québec recommends an independent pre-purchase inspection because an ordinary viewing or road test can miss problems. Ask for a written report and confirm the price and scope directly with the inspecting shop. <a href="https://www.caaquebec.com/fr/conseils/acheter-ou-vendre-un-vehicule/vous-achetez-une-voiture-passez-d-abord-a-l-inspection" target="_blank" rel="noopener">Read CAA-Québec's pre-purchase inspection guidance</a>.</p>
+      <p>Use these questions to prepare the appointment:</p>
+      <ul>
+        <li>Will you inspect the underside and explain any corrosion you find?</li>
+        <li>What mechanical and diagnostic checks are included?</li>
+        <li>Will the report distinguish work needed now from items to monitor?</li>
+        <li>Can you provide a written estimate for any recommended work?</li>
+        <li>What cannot be assessed within this inspection?</li>
+      </ul>
+      <p>Do not ask a mechanic simply whether the car is "good." Ask what the observed condition means for your intended use and budget.</p>
+
+      <h2>Keep the paperwork separate from the mechanical check</h2>
+      <p>Bring any available service invoices and vehicle-history report. These can give the inspector useful context, but neither replaces an examination of the car. A mechanical inspection also does not resolve ownership debts by itself. Documentary checks belong alongside it.</p>
+      <p>The OPC's dealer-buying guidance recommends a road test and inspection by a mechanic you trust. It states that a dealer must accept your request to test and inspect the vehicle. <a href="https://www.opc.gouv.qc.ca/consommateur/bien-service/vehicule/auto-achat/conseil/occasion-commercant" target="_blank" rel="noopener">Read the OPC guidance before buying from a dealer</a>.</p>
+
+      <h2>Turn the findings into a decision</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Finding</th><th>Question before buying</th></tr></thead>
+        <tbody>
+          <tr><td>Work recommended before use</td><td>What work, cost and timing does the garage specify?</td></tr>
+          <tr><td>Maintenance due soon</td><td>Can I accommodate it in my ownership budget?</td></tr>
+          <tr><td>An unanswered concern</td><td>What additional assessment is needed?</td></tr>
+          <tr><td>A repair discussed with the seller</td><td>Is the agreed work written into the purchase terms?</td></tr>
+        </tbody>
+      </table></div>
+      <p>You can continue, request clarification, discuss the terms or decide that the vehicle is not suitable. The inspection's value is helping you make that decision with better information.</p>
+      <p><a class="text-link" href="${R.inventory}">Choose a vehicle from our inventory</a>, then <a class="text-link" href="${R.contact}">contact Automobile SX in Dorval</a> with its stock number and your preferred inspection timing. For the broader process, read <a class="text-link" href="${R.g1}">buying a used car in Quebec</a> or use the <a class="text-link" href="${R.g5}">complete purchase-budget worksheet</a>.</p>`
   },
 
   privacy: {

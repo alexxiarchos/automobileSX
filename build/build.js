@@ -74,10 +74,21 @@ function renderCards(vehicles) {
 /* Wrap a written article in the standard page-head + prose layout */
 function prosePage(T, key, extraSchema) {
   const c = T[key];
+  const breadcrumb = c.showBreadcrumbs ? `
+  <div class="container">
+    <nav class="breadcrumb" aria-label="${T.lang === "fr" ? "Fil d'Ariane" : "Breadcrumb"}">
+      <ol>
+        <li><a href="${T.R.home}">${T.lang === "fr" ? "Accueil" : "Home"}</a></li>
+        <li><a href="${T.R.guides}">${T.lang === "fr" ? "Guides d'achat" : "Buying guides"}</a></li>
+        <li aria-current="page">${c.h1}</li>
+      </ol>
+    </nav>
+  </div>` : "";
+  const byline = c.byline ? `<p class="article-byline">${c.byline}</p>` : "";
   return {
-    body: `
+    body: `${breadcrumb}
   <div class="page-head">
-    <div class="container"><h1>${c.h1}</h1><p class="sub">${c.sub}</p></div>
+    <div class="container"><h1>${c.h1}</h1><p class="sub">${c.sub}</p>${byline}</div>
   </div>
   <div class="container prose-layout">
     <article class="prose">${c.body}</article>
@@ -89,18 +100,29 @@ function prosePage(T, key, extraSchema) {
 
 function articleSchema(T, key, lang) {
   const c = T[key];
-  return {
-    "@type": "Article",
+  const canonical = SITE + ROUTES[lang][key];
+  const schema = {
+    "@type": c.schemaType || "Article",
+    "@id": canonical + "#article",
+    url: canonical,
     headline: c.h1,
     description: c.description,
     inLanguage: lang === "fr" ? "fr-CA" : "en-CA",
-    mainEntityOfPage: { "@type": "WebPage", "@id": SITE + ROUTES[lang][key] },
-    image: [SITE + "/assets/og-image.jpg"],
-    datePublished: ARTICLE_DATE,
-    dateModified: ARTICLE_DATE,
-    author: { "@type": "Organization", name: "Automobile SX", url: SITE },
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+    author: {
+      "@type": "Organization",
+      "@id": SITE + "/#dealer",
+      name: "Automobile SX",
+      url: SITE + ROUTES[lang].about
+    },
     publisher: { "@id": SITE + "/#dealer" }
   };
+  if (!c.draft) {
+    schema.image = [SITE + "/assets/og-image.jpg"];
+    schema.datePublished = ARTICLE_DATE;
+    schema.dateModified = ARTICLE_DATE;
+  }
+  return schema;
 }
 
 function guidesBody(T) {
@@ -229,7 +251,7 @@ async function build() {
       }
     ];
 
-    ["g1", "g2", "g3", "g4"].forEach(g => {
+    ["g1", "g2", "g3", "g4", "g5", "g6"].forEach(g => {
       pages.push({
         route: g, title: T[g].title, description: T[g].description,
         ...prosePage(T, g),

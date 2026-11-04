@@ -12,7 +12,9 @@ const ROUTES = {
     g1: "/guides/buying-a-used-car-in-quebec",
     g2: "/guides/car-financing-with-bad-credit-quebec",
     g3: "/guides/what-is-my-trade-in-worth-quebec",
-    g4: "/guides/registering-a-used-car-in-quebec"
+    g4: "/guides/registering-a-used-car-in-quebec",
+    g5: "/guides/used-car-budget-quebec",
+    g6: "/guides/used-car-inspection-dorval"
   },
   fr: {
     home: "/fr", inventory: "/fr/inventaire", vehicle: "/fr/vehicules", financing: "/fr/financement",
@@ -21,7 +23,9 @@ const ROUTES = {
     g1: "/fr/guides/acheter-une-voiture-usagee-au-quebec",
     g2: "/fr/guides/financement-auto-mauvais-credit-quebec",
     g3: "/fr/guides/valeur-de-reprise-quebec",
-    g4: "/fr/guides/immatriculer-une-voiture-usagee-quebec"
+    g4: "/fr/guides/immatriculer-une-voiture-usagee-quebec",
+    g5: "/fr/guides/budget-auto-usagee-quebec",
+    g6: "/fr/guides/inspection-auto-usagee-dorval"
   }
 };
 
@@ -35,7 +39,9 @@ const FILES = {
     g1: "guides/buying-a-used-car-in-quebec.html",
     g2: "guides/car-financing-with-bad-credit-quebec.html",
     g3: "guides/what-is-my-trade-in-worth-quebec.html",
-    g4: "guides/registering-a-used-car-in-quebec.html"
+    g4: "guides/registering-a-used-car-in-quebec.html",
+    g5: "guides/used-car-budget-quebec.html",
+    g6: "guides/used-car-inspection-dorval.html"
   },
   fr: {
     home: "fr/index.html", inventory: "fr/inventaire.html", vehicle: "fr/vehicule.html",
@@ -45,7 +51,9 @@ const FILES = {
     g1: "fr/guides/acheter-une-voiture-usagee-au-quebec.html",
     g2: "fr/guides/financement-auto-mauvais-credit-quebec.html",
     g3: "fr/guides/valeur-de-reprise-quebec.html",
-    g4: "fr/guides/immatriculer-une-voiture-usagee-quebec.html"
+    g4: "fr/guides/immatriculer-une-voiture-usagee-quebec.html",
+    g5: "fr/guides/budget-auto-usagee-quebec.html",
+    g6: "fr/guides/inspection-auto-usagee-dorval.html"
   }
 };
 

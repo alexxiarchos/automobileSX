@@ -378,6 +378,18 @@ SX.specFR = {
   }
 };
 
+SX.colourEN = { "Bleu": "Blue", "Grety": "Grey" };
+SX.colourFR = {
+  "Beige": "Beige", "Black": "Noir", "Black leather": "Cuir noir",
+  "Bleu": "Bleu", "Blue": "Bleu", "Brown": "Brun", "Grey": "Gris", "Grety": "Gris",
+  "Leather": "Cuir", "Red": "Rouge", "White": "Blanc"
+};
+
+SX.colourLabel = function (value) {
+  if (!value) return value;
+  return SX.lang === "fr" ? (SX.colourFR[value] || value) : (SX.colourEN[value] || value);
+};
+
 SX.specLabel = function (kind, value) {
   if (SX.lang !== "fr" || !value) return value;
   var m = SX.specFR[kind];
