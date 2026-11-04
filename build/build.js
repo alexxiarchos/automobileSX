@@ -86,8 +86,13 @@ function prosePage(T, key, extraSchema) {
       </ol>
     </nav>
   </div>` : "";
-  const legacyGuideDates = /^g[1-4]$/.test(key) ? `<p class="article-byline">${T.lang === "fr" ? "Par" : "By"} Automobile SX · ${T.lang === "fr" ? "Publié le" : "Published"} <time datetime="${ARTICLE_PUBLISHED_DATE}">${T.lang === "fr" ? "4 août 2026" : "August 4, 2026"}</time> · ${T.lang === "fr" ? "Mis à jour le" : "Updated"} <time datetime="${ARTICLE_MODIFIED_DATE}">${T.lang === "fr" ? "4 novembre 2026" : "November 4, 2026"}</time></p>` : "";
-  const byline = legacyGuideDates || (c.byline ? `<p class="article-byline">${c.byline}</p>` : "");
+  const publishedDate = /^g[1-4]$/.test(key) ? ARTICLE_PUBLISHED_DATE : c.datePublished;
+  const modifiedDate = /^g[1-4]$/.test(key) ? ARTICLE_MODIFIED_DATE : c.dateModified;
+  const formatDate = date => new Intl.DateTimeFormat(T.lang === "fr" ? "fr-CA" : "en-CA", {
+    year: "numeric", month: "long", day: "numeric", timeZone: "UTC"
+  }).format(new Date(date + "T00:00:00Z"));
+  const datedByline = publishedDate ? `<p class="article-byline">${T.lang === "fr" ? "Par" : "By"} Automobile SX · ${T.lang === "fr" ? "Publié le" : "Published"} <time datetime="${publishedDate}">${formatDate(publishedDate)}</time>${modifiedDate && modifiedDate !== publishedDate ? ` · ${T.lang === "fr" ? "Mis à jour le" : "Updated"} <time datetime="${modifiedDate}">${formatDate(modifiedDate)}</time>` : ""}</p>` : "";
+  const byline = datedByline || (c.byline ? `<p class="article-byline">${c.byline}</p>` : "");
   const heroImage = c.image ? `<figure class="article-hero">
       <img src="${c.image}" alt="${c.imageAlt}" width="1600" height="1200" fetchpriority="high" decoding="async">
       ${c.imageCaption ? `<figcaption>${c.imageCaption}</figcaption>` : ""}

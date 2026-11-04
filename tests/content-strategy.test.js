@@ -82,8 +82,9 @@ for (const pair of PAIRS) {
     assert.equal(article.inLanguage, side === "en" ? "en-CA" : "fr-CA", file + " language");
     assert.equal(article.publisher["@id"], dealer["@id"], file + " publisher reference");
     assert.deepEqual(article.image, ["https://www.automobilesx.ca" + imagePath], file + " structured image");
-    assert.equal(article.datePublished, undefined, file + " draft must not invent a publication date");
-    assert.equal(article.dateModified, undefined, file + " unpublished draft must not claim a modified publication date");
+    assert.equal(article.datePublished, "2026-11-04", file + " publication date");
+    assert.equal(article.dateModified, "2026-11-04", file + " initial modified date");
+    assert.match(html, /<time datetime="2026-11-04">(?:November 4, 2026|4 novembre 2026)<\/time>/, file + " visible publication date");
     assert.equal(breadcrumb.itemListElement.length, 3, file + " breadcrumb depth");
 
     const localLinks = [...html.matchAll(/href="(\/[^"]*)"/g)].map(match => match[1]);
