@@ -52,6 +52,7 @@ for (const pair of PAIRS) {
     const file = pair[side + "File"];
     const url = pair[side + "Url"];
     const counterpart = pair[(side === "en" ? "fr" : "en") + "Url"];
+    const imagePath = pair.enFile.includes("budget") ? "/images/guides/used-car-budget-quebec.jpg" : "/images/guides/used-car-inspection-dorval.jpg";
     const html = read(file);
 
     assert.equal((html.match(/<h1\b/g) || []).length, 1, file + " must have one H1");
@@ -64,6 +65,12 @@ for (const pair of PAIRS) {
     assert.ok(html.includes("window.SX_ALT=" + JSON.stringify(new URL(counterpart).pathname)), file + " language switcher");
     assert.ok(/class="article-byline"/.test(html), file + " visible byline");
     assert.ok(/<nav class="breadcrumb"/.test(html), file + " visible breadcrumb");
+    assert.ok(html.includes(`<img src="${imagePath}" alt="`), file + " visible article image");
+    assert.ok(fs.existsSync(path.join(ROOT, imagePath.replace(/^\//, ""))), file + " article image file");
+    assert.equal(attr(html, /<meta property="og:image"[^>]+>/, "content"), "https://www.automobilesx.ca" + imagePath, file + " OG image");
+    assert.ok(attr(html, /<meta property="og:image:alt"[^>]+>/, "content"), file + " OG image alt");
+    assert.equal(attr(html, /<meta name="twitter:image"[^>]+>/, "content"), "https://www.automobilesx.ca" + imagePath, file + " Twitter image");
+    assert.ok(attr(html, /<meta name="twitter:image:alt"[^>]+>/, "content"), file + " Twitter image alt");
 
     const graph = jsonLdGraphs(html);
     const dealer = graph.find(node => node["@type"] === "AutoDealer");
@@ -74,7 +81,9 @@ for (const pair of PAIRS) {
     assert.equal(article.mainEntityOfPage["@id"], url, file + " mainEntityOfPage");
     assert.equal(article.inLanguage, side === "en" ? "en-CA" : "fr-CA", file + " language");
     assert.equal(article.publisher["@id"], dealer["@id"], file + " publisher reference");
+    assert.deepEqual(article.image, ["https://www.automobilesx.ca" + imagePath], file + " structured image");
     assert.equal(article.datePublished, undefined, file + " draft must not invent a publication date");
+    assert.equal(article.dateModified, undefined, file + " unpublished draft must not claim a modified publication date");
     assert.equal(breadcrumb.itemListElement.length, 3, file + " breadcrumb depth");
 
     const localLinks = [...html.matchAll(/href="(\/[^"]*)"/g)].map(match => match[1]);
@@ -83,6 +92,13 @@ for (const pair of PAIRS) {
     }
   }
 }
+
+const existingGuide = read("guides/buying-a-used-car-in-quebec.html");
+const existingArticle = jsonLdGraphs(existingGuide).find(node => node["@type"] === "Article");
+assert.equal(existingArticle.datePublished, "2026-08-04", "existing guide publication date must remain stable");
+assert.equal(existingArticle.dateModified, "2026-11-04", "existing guide must show this substantive update");
+assert.match(existingGuide, /<time datetime="2026-08-04">August 4, 2026<\/time>/, "existing guide needs a visible publication date");
+assert.match(existingGuide, /<time datetime="2026-11-04">November 4, 2026<\/time>/, "existing guide needs a visible modified date");
 
 const sitemap = JSON.parse(read("sitemap-pages.json"));
 for (const pair of PAIRS) {

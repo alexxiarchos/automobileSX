@@ -13,8 +13,10 @@ const { renderVehiclePages } = require("../api/_lib/vehiclePage.js");
 const ROOT = path.join(__dirname, "..");
 const COPY = { en: require("./copy-en.js"), fr: require("./copy-fr.js") };
 
-/* Stable publication date for the guide articles (they are evergreen). */
-const ARTICLE_DATE = "2026-08-04";
+/* Existing evergreen guides retain their first-publication date. This update
+   materially revised their content, so dateModified reflects this PR. */
+const ARTICLE_PUBLISHED_DATE = "2026-08-04";
+const ARTICLE_MODIFIED_DATE = "2026-11-04";
 
 /* The inventory, baked into the pages that list it.
 
@@ -84,14 +86,19 @@ function prosePage(T, key, extraSchema) {
       </ol>
     </nav>
   </div>` : "";
-  const byline = c.byline ? `<p class="article-byline">${c.byline}</p>` : "";
+  const legacyGuideDates = /^g[1-4]$/.test(key) ? `<p class="article-byline">${T.lang === "fr" ? "Par" : "By"} Automobile SX · ${T.lang === "fr" ? "Publié le" : "Published"} <time datetime="${ARTICLE_PUBLISHED_DATE}">${T.lang === "fr" ? "4 août 2026" : "August 4, 2026"}</time> · ${T.lang === "fr" ? "Mis à jour le" : "Updated"} <time datetime="${ARTICLE_MODIFIED_DATE}">${T.lang === "fr" ? "4 novembre 2026" : "November 4, 2026"}</time></p>` : "";
+  const byline = legacyGuideDates || (c.byline ? `<p class="article-byline">${c.byline}</p>` : "");
+  const heroImage = c.image ? `<figure class="article-hero">
+      <img src="${c.image}" alt="${c.imageAlt}" width="1600" height="1200" fetchpriority="high" decoding="async">
+      ${c.imageCaption ? `<figcaption>${c.imageCaption}</figcaption>` : ""}
+    </figure>` : "";
   return {
     body: `${breadcrumb}
   <div class="page-head">
     <div class="container"><h1>${c.h1}</h1><p class="sub">${c.sub}</p>${byline}</div>
   </div>
   <div class="container prose-layout">
-    <article class="prose">${c.body}</article>
+    <article class="prose">${heroImage}${c.body}</article>
     ${T.asideCard}
   </div>`,
     schema: extraSchema
@@ -117,10 +124,12 @@ function articleSchema(T, key, lang) {
     },
     publisher: { "@id": SITE + "/#dealer" }
   };
+  if (c.image) schema.image = [SITE + c.image];
+  else if (!c.draft) schema.image = [SITE + "/assets/og-image.jpg"];
+  if (c.dateCreated) schema.dateCreated = c.dateCreated;
   if (!c.draft) {
-    schema.image = [SITE + "/assets/og-image.jpg"];
-    schema.datePublished = ARTICLE_DATE;
-    schema.dateModified = ARTICLE_DATE;
+    schema.datePublished = c.datePublished || ARTICLE_PUBLISHED_DATE;
+    schema.dateModified = c.dateModified || ARTICLE_MODIFIED_DATE;
   }
   return schema;
 }
@@ -256,6 +265,8 @@ async function build() {
         route: g, title: T[g].title, description: T[g].description,
         ...prosePage(T, g),
         ogType: "article",
+        ogImage: T[g].image,
+        ogImageAlt: T[g].imageAlt,
         schema: [articleSchema(T, g, lang)],
         breadcrumb: [bcHome, { name: T.guides.h1, route: "guides" }, { name: T[g].h1, route: g }]
       });

@@ -227,8 +227,8 @@ ${page.skipCanonical ? "" : `<link rel="canonical" href="${canonical}">
 <meta property="og:title" content="${page.title}">
 <meta property="og:description" content="${page.description}">
 <meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${SITE}${ogImage}">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="${SITE}${ogImage}">${page.ogImageAlt ? `\n<meta property="og:image:alt" content="${page.ogImageAlt}">` : ""}
+<meta name="twitter:card" content="summary_large_image">${page.ogImage ? `\n<meta name="twitter:image" content="${SITE}${ogImage}">` : ""}${page.ogImageAlt ? `\n<meta name="twitter:image:alt" content="${page.ogImageAlt}">` : ""}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">

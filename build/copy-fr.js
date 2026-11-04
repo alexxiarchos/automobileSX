@@ -472,6 +472,9 @@ module.exports = {
     schemaType: "BlogPosting",
     showBreadcrumbs: true,
     draft: true,
+    image: "/images/guides/used-car-budget-quebec.jpg",
+    imageAlt: "Autos usagées devant Automobile SX à Dorval, dont une Kia Forte grise",
+    imageCaption: "Inventaire actuel d'Automobile SX à Dorval. La disponibilité et les prix changent; comparez les véhicules à partir d'un budget total, et non de cette photo.",
     body: `
       <p>Un budget d'achat de 15 000 $ ne correspond pas à un prix affiché de 15 000 $. Prévoyez les taxes applicables, l'immatriculation et les frais d'inspection ou de mise en service que vous devez payer séparément avant de choisir un véhicule. Pour un acheteur à Dorval, la bonne question est : « Quelle auto puis-je acheter et préparer sans dépasser mon budget total? »</p>
 
@@ -522,6 +525,9 @@ module.exports = {
     schemaType: "BlogPosting",
     showBreadcrumbs: true,
     draft: true,
+    image: "/images/guides/used-car-inspection-dorval.jpg",
+    imageAlt: "Tableau de bord et habitacle avant d'une Volkswagen usagée chez Automobile SX",
+    imageCaption: "Les photos de l'habitacle aident à préparer des questions, mais ne remplacent pas une inspection mécanique indépendante.",
     body: `
       <p>Organisez une inspection indépendante avant de vous engager, même si vous avez déjà conduit l'auto et lu son historique. Choisissez le garage, convenez du contenu de l'inspection et coordonnez l'accès au véhicule précis. Le rapport écrit vous aidera à décider si l'achat vous convient; une inspection ne garantit pas la fiabilité future.</p>
 

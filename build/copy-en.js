@@ -487,6 +487,9 @@ module.exports = {
     schemaType: "BlogPosting",
     showBreadcrumbs: true,
     draft: true,
+    image: "/images/guides/used-car-budget-quebec.jpg",
+    imageAlt: "Used cars outside Automobile SX in Dorval, including a grey Kia Forte",
+    imageCaption: "Current Automobile SX inventory in Dorval. Availability and prices change; use a total budget rather than this photo to compare vehicles.",
     body: `
       <p>A $15,000 purchase budget is not the same as a $15,000 advertised price. Set aside the applicable taxes, registration and any separately budgeted inspection or immediate ownership costs before choosing a vehicle. For a Dorval buyer with a firm spending limit, the useful question is: "What can I buy and prepare for use without exceeding my total budget?"</p>
 
@@ -537,6 +540,9 @@ module.exports = {
     schemaType: "BlogPosting",
     showBreadcrumbs: true,
     draft: true,
+    image: "/images/guides/used-car-inspection-dorval.jpg",
+    imageAlt: "Dashboard and front cabin of a used Volkswagen at Automobile SX",
+    imageCaption: "Interior photos can help prepare questions, but they do not replace an independent mechanical inspection.",
     body: `
       <p>Arrange an independent inspection before committing to a used car, even if you have already driven it and read its history report. Choose the garage, agree on the inspection scope and coordinate access to the specific vehicle. Use the written findings to decide what you are comfortable buying; an inspection cannot promise future reliability.</p>
 
