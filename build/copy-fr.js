@@ -63,7 +63,7 @@ module.exports = {
     trust: [
       { h: "Service personnalisé", p: "Vous traitez directement avec Spiro, du premier appel jusqu'aux clés dans votre main." },
       { h: "Vente · Achat · Échange", p: "Nous vendons, nous achetons et nous prenons des reprises. Kilométrage et état divulgués d'avance." },
-      { h: "Ouvert 7 jours", p: `De 10 h à 18 h tous les jours. Le rendez-vous est recommandé : appelez le ${DEALER.phone} et nous préparerons le véhicule pour vous.` },
+      { h: "Ouvert 7 jours sur rendez-vous", p: `De 10 h à 18 h tous les jours, sur rendez-vous. Appelez le ${DEALER.phone} pour confirmer l'heure et nous préparerons le véhicule pour vous.` },
       { h: "Options de financement", p: "Nous travaillons avec plusieurs prêteurs. L'approbation, le taux et les conditions dépendent de l'analyse de chaque demande." }
     ],
     featuredKicker: "En stock",
@@ -265,7 +265,7 @@ module.exports = {
     sub: "Les questions qu'on nous pose vraiment, avec des réponses claires.",
     faqs: [
       { q: "Faut-il un rendez-vous ?",
-        a: "Pas obligatoirement. Nous sommes ouverts de 10 h à 18 h 7 jours sur 7 et les visites sans rendez-vous sont les bienvenues. Un appel au 514-824-9117 à l'avance est recommandé afin que le véhicule soit prêt et que nous puissions bien vous recevoir." },
+        a: "Oui. Les visites se font sur rendez-vous. Nous sommes ouverts de 10 h à 18 h 7 jours sur 7; appelez le 514-824-9117 à l'avance afin de confirmer l'heure, que le véhicule soit prêt et que nous puissions bien vous recevoir." },
       { q: "Offrez-vous du financement ?",
         a: "Oui. Nous travaillons avec plusieurs prêteurs canadiens et soumettons votre dossier à ceux qui conviennent. Vous verrez le taux, la durée et le coût total avant toute signature. Au Québec, un commerçant ne peut pas exiger que vous financiez chez lui comme condition de la vente." },
       { q: "Puis-je donner mon véhicule en échange ?",

@@ -74,7 +74,7 @@ module.exports = {
     trust: [
       { h: "Personal service", p: "You deal directly with Spiro, from the first phone call to the keys in your hand." },
       { h: "Vente · Achat · Échange", p: "We sell, we buy, and we take trades. Kilometres and condition disclosed up front." },
-      { h: "Open seven days", p: `10:00 to 18:00 every day. Appointments are recommended, so call ${DEALER.phone} ahead and we can have the vehicle ready for you.` },
+      { h: "Open seven days by appointment", p: `10:00 to 18:00 every day, by appointment. Call ${DEALER.phone} ahead so we can confirm the time and have the vehicle ready for you.` },
       { h: "Financing options", p: "We work with several lenders. Approval, rate and terms depend on the lender's assessment of each application." }
     ],
     featuredKicker: "In stock now",
@@ -280,7 +280,7 @@ module.exports = {
     sub: "The questions we actually get asked, answered plainly.",
     faqs: [
       { q: "Do I need an appointment?",
-        a: "Not strictly. We are open 10:00 to 18:00 seven days a week and walk-ins are welcome. Calling 514-824-9117 ahead is recommended so we can have the vehicle ready and give you our full attention when you arrive." },
+        a: "Yes. Visits are by appointment. We are open 10:00 to 18:00 seven days a week; call 514-824-9117 ahead so we can confirm the time, have the vehicle ready and give you our full attention when you arrive." },
       { q: "Do you offer financing?",
         a: "Yes. We work with several Canadian lenders and submit your file to the ones that suit it. You will see the rate, the term and the total cost before anything is signed. In Quebec, a dealer cannot require you to finance through them as a condition of the sale." },
       { q: "Can I trade in my car?",

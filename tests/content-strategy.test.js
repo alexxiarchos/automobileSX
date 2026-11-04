@@ -106,6 +106,10 @@ for (const unsupported of [
   assert.doesNotMatch(contentSources, unsupported, "unsupported financing or inspection claim remains");
 }
 
+assert.doesNotMatch(contentSources, /walk-ins are welcome|visites sans rendez-vous sont les bienvenues|appointments are recommended|rendez-vous est recommandé/i, "appointment-only policy must be consistent");
+assert.match(contentSources, /Visits are by appointment/, "English appointment-only policy is missing");
+assert.match(contentSources, /Les visites se font sur rendez-vous/, "French appointment-only policy is missing");
+
 const frenchVehicle = read("fr/vehicules/2017-audi-q5-exl5w.html");
 assert.doesNotMatch(frenchVehicle, /"color":"(?:Blue|Grey)"/, "French vehicle schema must localize colour");
 assert.match(frenchVehicle, /Couleur extérieure<\/td><td>(?:Bleu|Gris|Noir|Brun|Rouge|Blanc)/, "French vehicle colour must be localized");
