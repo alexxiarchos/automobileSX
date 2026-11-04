@@ -1082,6 +1082,14 @@ input[type="range"] {
 
   .section-head { margin-bottom: 20px; }
   .page-head { padding: clamp(28px, 7vw, 44px) 0; }
+
+  /* Article photos are 4:3; preserve their native ratio on phones.
+     The desktop 16:9 editorial crop remains unchanged. */
+  .article-hero img {
+    aspect-ratio: auto;
+    height: auto;
+    object-fit: contain;
+  }
 }
 
 /* --- Very small phones --- */
