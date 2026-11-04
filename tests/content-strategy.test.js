@@ -1,0 +1,153 @@
+"use strict";
+
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+
+const ROOT = path.join(__dirname, "..");
+
+const PAIRS = [
+  {
+    enFile: "guides/used-car-budget-quebec.html",
+    frFile: "fr/guides/budget-auto-usagee-quebec.html",
+    enUrl: "https://www.automobilesx.ca/guides/used-car-budget-quebec",
+    frUrl: "https://www.automobilesx.ca/fr/guides/budget-auto-usagee-quebec"
+  },
+  {
+    enFile: "guides/used-car-inspection-dorval.html",
+    frFile: "fr/guides/inspection-auto-usagee-dorval.html",
+    enUrl: "https://www.automobilesx.ca/guides/used-car-inspection-dorval",
+    frUrl: "https://www.automobilesx.ca/fr/guides/inspection-auto-usagee-dorval"
+  }
+];
+
+function read(relative) {
+  return fs.readFileSync(path.join(ROOT, relative), "utf8");
+}
+
+function attr(html, selectorPattern, name) {
+  const tag = html.match(selectorPattern);
+  assert.ok(tag, "missing expected tag: " + selectorPattern);
+  const value = tag[0].match(new RegExp(name + '="([^"]+)"'));
+  assert.ok(value, "missing " + name + " on " + tag[0]);
+  return value[1];
+}
+
+function jsonLdGraphs(html) {
+  const scripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+  assert.equal(scripts.length, 1, "each article should have one combined JSON-LD graph");
+  return JSON.parse(scripts[0][1])["@graph"];
+}
+
+function routeFile(href) {
+  const pathname = href.split(/[?#]/)[0];
+  if (pathname === "/") return "index.html";
+  if (pathname === "/fr") return "fr/index.html";
+  if (path.extname(pathname)) return pathname.replace(/^\//, "");
+  return pathname.replace(/^\//, "") + ".html";
+}
+
+for (const pair of PAIRS) {
+  for (const side of ["en", "fr"]) {
+    const file = pair[side + "File"];
+    const url = pair[side + "Url"];
+    const counterpart = pair[(side === "en" ? "fr" : "en") + "Url"];
+    const imagePath = pair.enFile.includes("budget") ? "/images/guides/used-car-budget-quebec.jpg" : "/images/guides/used-car-inspection-dorval.jpg";
+    const html = read(file);
+
+    assert.equal((html.match(/<h1\b/g) || []).length, 1, file + " must have one H1");
+    assert.ok(/<title>[^<]+Automobile SX<\/title>/.test(html), file + " must have an SEO title");
+    assert.ok(/<meta name="description" content="[^"]+">/.test(html), file + " must have a meta description");
+    assert.equal(attr(html, /<link rel="canonical"[^>]+>/, "href"), url, file + " canonical");
+    assert.equal(attr(html, /<link rel="alternate" hreflang="en-CA"[^>]+>/, "href"), pair.enUrl, file + " en-CA alternate");
+    assert.equal(attr(html, /<link rel="alternate" hreflang="fr-CA"[^>]+>/, "href"), pair.frUrl, file + " fr-CA alternate");
+    assert.equal(attr(html, /<link rel="alternate" hreflang="x-default"[^>]+>/, "href"), pair.enUrl, file + " x-default alternate");
+    assert.ok(html.includes("window.SX_ALT=" + JSON.stringify(new URL(counterpart).pathname)), file + " language switcher");
+    assert.ok(/class="article-byline"/.test(html), file + " visible byline");
+    assert.ok(/<nav class="breadcrumb"/.test(html), file + " visible breadcrumb");
+    assert.ok(html.includes(`<img src="${imagePath}" alt="`), file + " visible article image");
+    assert.ok(fs.existsSync(path.join(ROOT, imagePath.replace(/^\//, ""))), file + " article image file");
+    assert.equal(attr(html, /<meta property="og:image"[^>]+>/, "content"), "https://www.automobilesx.ca" + imagePath, file + " OG image");
+    assert.ok(attr(html, /<meta property="og:image:alt"[^>]+>/, "content"), file + " OG image alt");
+    assert.equal(attr(html, /<meta name="twitter:image"[^>]+>/, "content"), "https://www.automobilesx.ca" + imagePath, file + " Twitter image");
+    assert.ok(attr(html, /<meta name="twitter:image:alt"[^>]+>/, "content"), file + " Twitter image alt");
+
+    const graph = jsonLdGraphs(html);
+    const dealer = graph.find(node => node["@type"] === "AutoDealer");
+    const article = graph.find(node => node["@type"] === "BlogPosting");
+    const breadcrumb = graph.find(node => node["@type"] === "BreadcrumbList");
+    assert.equal(dealer["@id"], "https://www.automobilesx.ca/#dealer", file + " stable dealer ID");
+    assert.equal(article.url, url, file + " BlogPosting URL");
+    assert.equal(article.mainEntityOfPage["@id"], url, file + " mainEntityOfPage");
+    assert.equal(article.inLanguage, side === "en" ? "en-CA" : "fr-CA", file + " language");
+    assert.equal(article.publisher["@id"], dealer["@id"], file + " publisher reference");
+    assert.deepEqual(article.image, ["https://www.automobilesx.ca" + imagePath], file + " structured image");
+    assert.equal(article.datePublished, "2026-11-04", file + " publication date");
+    assert.equal(article.dateModified, "2026-11-04", file + " initial modified date");
+    assert.match(html, /<time datetime="2026-11-04">(?:November 4, 2026|4 novembre 2026)<\/time>/, file + " visible publication date");
+    assert.equal(breadcrumb.itemListElement.length, 3, file + " breadcrumb depth");
+
+    const localLinks = [...html.matchAll(/href="(\/[^"]*)"/g)].map(match => match[1]);
+    for (const href of localLinks) {
+      assert.ok(fs.existsSync(path.join(ROOT, routeFile(href))), file + " broken internal link: " + href);
+    }
+  }
+}
+
+const existingGuide = read("guides/buying-a-used-car-in-quebec.html");
+const existingArticle = jsonLdGraphs(existingGuide).find(node => node["@type"] === "Article");
+assert.equal(existingArticle.datePublished, "2026-08-04", "existing guide publication date must remain stable");
+assert.equal(existingArticle.dateModified, "2026-11-04", "existing guide must show this substantive update");
+assert.match(existingGuide, /<time datetime="2026-08-04">August 4, 2026<\/time>/, "existing guide needs a visible publication date");
+assert.match(existingGuide, /<time datetime="2026-11-04">November 4, 2026<\/time>/, "existing guide needs a visible modified date");
+
+const sitemap = JSON.parse(read("sitemap-pages.json"));
+for (const pair of PAIRS) {
+  assert.ok(sitemap.some(item => item.loc === pair.enUrl && item.alt.fr === pair.frUrl), "missing EN sitemap pair");
+  assert.ok(sitemap.some(item => item.loc === pair.frUrl && item.alt.en === pair.enUrl), "missing FR sitemap pair");
+}
+
+assert.equal(Math.round((14000 / 1.14975) * 100) / 100, 12176.56, "budget example changed");
+
+const contentSources = read("build/copy-en.js") + "\n" + read("build/copy-fr.js");
+for (const unsupported of [
+  /high single digits/i,
+  /mid-teens/i,
+  /10% to 25%/i,
+  /10 % à 25 %/i,
+  /fastest way to build a credit file/i,
+  /façon la plus rapide de bâtir un dossier/i,
+  /tells you what is coming in the next year/i,
+  /vous dit ce qui s'en vient dans la prochaine année/i
+]) {
+  assert.doesNotMatch(contentSources, unsupported, "unsupported financing or inspection claim remains");
+}
+
+const policySources = contentSources + "\n" + [
+  "js/data.js",
+  "js/describe.js",
+  "admin/describe.js",
+  "data/vehicles.json",
+  "api/_lib/vehiclePage.js",
+  "api/_lib/social.js"
+].map(read).join("\n");
+
+assert.doesNotMatch(policySources, /Visits are by appointment|Les visites se font sur rendez-vous|Open seven days (?:a week )?by appointment|Ouvert sept jours sur sept sur rendez-vous|By appointment\. Call to book|Sur rendez-vous\. Appelez pour réserver/i, "strict appointment-only wording remains");
+assert.match(policySources, /Appointments are strongly recommended\. Please call ahead to confirm Spiro is available before visiting\./, "confirmed English appointment guidance is missing");
+assert.match(policySources, /Les rendez-vous sont fortement recommandés\. Veuillez appeler avant de vous déplacer pour confirmer la disponibilité de Spiro\./, "confirmed French appointment guidance is missing");
+assert.doesNotMatch(contentSources, /we will hold it|temporary hold|we can usually work something out|we handle the registration paperwork|nous le garderons|retenue temporaire|on peut habituellement s'arranger|nous nous occupons de l'immatriculation/i, "unconfirmed operating promise remains");
+assert.match(contentSources, /Independent inspections are welcome\. Spiro is happy to discuss arrangements with buyers\./, "confirmed English inspection guidance is missing");
+assert.match(contentSources, /Les inspections indépendantes sont les bienvenues\. Spiro discutera volontiers des modalités avec vous\./, "confirmed French inspection guidance is missing");
+assert.match(contentSources, /Vehicles are normally picked up at our Dorval dealership\./, "confirmed English pickup guidance is missing");
+assert.match(contentSources, /Les véhicules sont normalement récupérés chez Automobile SX à Dorval\./, "confirmed French pickup guidance is missing");
+assert.doesNotMatch(contentSources, /free delivery|livraison gratuite|guaranteed delivery|livraison garantie/i, "unsupported delivery promise remains");
+
+assert.match(read("faq.html"), /Appointments are strongly recommended, but they are not mandatory\./, "English FAQ must show the confirmed appointment policy");
+assert.match(read("fr/faq.html"), /Les rendez-vous sont fortement recommandés, mais ils ne sont pas obligatoires\./, "French FAQ must show the confirmed appointment policy");
+
+const frenchVehicle = read("fr/vehicules/2017-audi-q5-exl5w.html");
+assert.doesNotMatch(frenchVehicle, /"color":"(?:Blue|Grey)"/, "French vehicle schema must localize colour");
+assert.match(frenchVehicle, /Couleur extérieure<\/td><td>(?:Bleu|Gris|Noir|Brun|Rouge|Blanc)/, "French vehicle colour must be localized");
+assert.match(frenchVehicle, /href="\/fr\/guides\/inspection-auto-usagee-dorval">Bienvenue<\/a>/, "vehicle page must link to inspection guide");
+
+console.log("Content strategy validation tests passed.");

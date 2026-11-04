@@ -842,6 +842,17 @@ input[type="range"] {
 .prose li strong { font-weight: 700; }
 .prose a { color: var(--ink); border-bottom: 2px solid var(--red); font-weight: 600; }
 .prose a:hover { color: var(--red); }
+.article-byline { margin: 16px 0 0; color: var(--slate); font-size: 14px; font-weight: 600; }
+.article-hero { margin: 0 0 30px; }
+.article-hero img {
+  display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  border-radius: var(--radius); background: var(--mist);
+}
+.article-hero figcaption { margin-top: 9px; color: var(--slate); font-size: 13px; line-height: 1.5; }
+.table-wrap { width: 100%; margin: 0 0 1.5em; overflow-x: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+.prose th, .prose td { padding: 11px 12px; border: 1px solid var(--mist); text-align: left; vertical-align: top; }
+.prose th { background: var(--bone); font-weight: 700; }
 .privacy-controls {
   margin: 24px 0; padding: 20px; border: 1px solid var(--mist);
   border-radius: var(--radius); background: var(--bone);

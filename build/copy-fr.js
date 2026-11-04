@@ -19,7 +19,7 @@ const ui = {
   overview: "Aperçu", specs: "Fiche technique", features: "Équipements",
   similar: "Véhicules semblables", estimatePayment: "Estimez votre paiement",
   bookTestDrive: "Réserver un essai", checkAvailability: "Vérifier la disponibilité",
-  getPreApproved: "Info financement", hoursShort: "Ouvert de 10 h à 18 h, 7 jours, sur rendez-vous",
+  getPreApproved: "Info financement", hoursShort: "Ouvert de 10 h à 18 h tous les jours. Appelez avant de vous déplacer.",
   hours: "Heures", readMore: "Lire le guide →"
 };
 
@@ -35,11 +35,13 @@ const ctaCard = `
   </div>
 </aside>`;
 
-const accuracyNote = `<p class="accuracy-note">L'information de cette page reflète les règles québécoises en vigueur en août 2026 et est fournie à titre indicatif seulement. Il ne s'agit pas d'un avis juridique ou financier. Les règles et les tarifs changent : validez auprès de l'<a href="https://www.opc.gouv.qc.ca" target="_blank" rel="noopener">Office de la protection du consommateur</a>, de la <a href="https://saaq.gouv.qc.ca" target="_blank" rel="noopener">SAAQ</a> ou de <a href="https://www.revenuquebec.ca" target="_blank" rel="noopener">Revenu Québec</a>.</p>`;
+const accuracyNote = `<p class="accuracy-note">L'information de cette page reflète les règles québécoises vérifiées en novembre 2026 et est fournie à titre indicatif seulement. Il ne s'agit pas d'un avis juridique ou financier. Les règles et les tarifs changent : validez les détails pertinents auprès de l'<a href="https://www.opc.gouv.qc.ca/consommateur/bien-service/vehicule/auto-achat/conseil/occasion-commercant" target="_blank" rel="noopener">Office de la protection du consommateur</a>, de la <a href="https://saaq.gouv.qc.ca/immatriculation" target="_blank" rel="noopener">SAAQ</a> et de <a href="https://www.revenuquebec.ca/fr/citoyens/taxes/biens-et-services-taxables-detaxes-ou-exoneres/tps-et-tvq/transport-et-vehicules-routiers/vehicules-routiers-citoyens/achat-dun-vehicule-routier/achat-dun-vehicule-routier-usage-dun-commercant/" target="_blank" rel="noopener">Revenu Québec</a>.</p>`;
 
 const guideCards = [
+  { h: "Budget d'auto usagée au Québec", p: "Partez d'une limite totale et comparez les coûts d'achat et d'utilisation.", href: R.g5 },
+  { h: "Inspection d'une auto usagée à Dorval", p: "Organisez une inspection indépendante et utilisez les constats écrits.", href: R.g6 },
   { h: "Acheter une voiture usagée au Québec", p: "Taxes, garantie légale, étiquette obligatoire et vérifications avant de signer.", href: R.g1 },
-  { h: "Financement avec mauvais crédit", p: "Ce que les prêteurs regardent, les taux réalistes et vos droits au Québec.", href: R.g2 },
+  { h: "Financement avec mauvais crédit", p: "Comment comparer une offre complète et conserver vos droits au Québec.", href: R.g2 },
   { h: "Quelle est la valeur de ma reprise ?", p: "Comment le montant est établi et l'économie de taxes que plusieurs ignorent.", href: R.g3 },
   { h: "Immatriculer une voiture usagée", p: "Les démarches à la SAAQ, les plaques et ce que le commerçant gère pour vous.", href: R.g4 }
 ];
@@ -61,21 +63,21 @@ module.exports = {
     trust: [
       { h: "Service personnalisé", p: "Vous traitez directement avec Spiro, du premier appel jusqu'aux clés dans votre main." },
       { h: "Vente · Achat · Échange", p: "Nous vendons, nous achetons et nous prenons des reprises. Kilométrage et état divulgués d'avance." },
-      { h: "Ouvert 7 jours", p: `De 10 h à 18 h tous les jours. Le rendez-vous est recommandé : appelez le ${DEALER.phone} et nous préparerons le véhicule pour vous.` },
-      { h: "Financement pour tous", p: "Bon crédit, crédit récent ou crédit abîmé. Nous travaillons avec plusieurs prêteurs et vous montrons les vrais chiffres." }
+      { h: "Ouvert 7 jours", p: `De 10 h à 18 h tous les jours. Les rendez-vous sont fortement recommandés. Veuillez appeler le ${DEALER.phone} avant de vous déplacer pour confirmer la disponibilité de Spiro.` },
+      { h: "Options de financement", p: "Nous travaillons avec plusieurs prêteurs. L'approbation, le taux et les conditions dépendent de l'analyse de chaque demande." }
     ],
     featuredKicker: "En stock",
     featuredH: "Voitures d'occasion à vendre à Dorval",
     bodyH: "Parcourir par type de carrosserie",
-    finH: "Financement à Dorval, peu importe votre dossier de crédit.",
-    finBody: `<p>Nouveau au Canada sans dossier de crédit ? Vous vous rebâtissez après une période difficile ? Nous travaillons avec plusieurs prêteurs canadiens et vous donnons le vrai taux et le vrai paiement avant toute signature.</p>
+    finH: "Parlons de financement automobile à Dorval.",
+    finBody: `<p>Nous travaillons avec plusieurs prêteurs canadiens. Chacun analyse le dossier et détermine l'approbation, le taux, la durée et toute mise de fonds exigée. Vous pouvez comparer l'offre écrite avant de décider.</p>
       <p>Et pour être clair sur vos droits : au Québec, un commerçant ne peut pas conditionner la vente d'un véhicule à la conclusion d'un contrat de crédit. Si vous préférez payer comptant ou passer par votre banque, c'est votre choix.</p>`,
     finCta: "Comment fonctionne le financement",
     lotAlt: "Le commerce Automobile SX au 2044 avenue Chartier à Dorval",
     tradeKicker: "Vente · Achat · Échange",
     tradeH: "Nous achetons aussi, et une reprise réduit vos taxes.",
     tradeBody: `<p>Vendre de particulier à particulier, c'est des inconnus chez vous, des essais routiers avec des gens que vous ne connaissez pas et un risque de paiement. Apportez-la-nous : vous obtenez une offre claire, que vous achetiez chez nous ou non.</p>
-      <p>Et si vous donnez le véhicule en échange, le Québec calcule les taxes sur le prix <em>après</em> déduction de votre reprise. L'économie est bien réelle.</p>`,
+      <p>Une reprise admissible peut réduire la base taxable. La TPS est généralement calculée sur le prix de vente moins le crédit de reprise; la TVQ part du plus élevé du prix de vente ou de la valeur estimative, puis soustrait ce crédit. Demandez le calcul réel par écrit.</p>`,
     tradeCta: "Faire évaluer mon véhicule",
     guidesKicker: "Réponses claires",
     guidesH: "Guides pour acheteurs de voitures d'occasion au Québec",
@@ -109,6 +111,7 @@ module.exports = {
     description: "Voitures, VUS et camionnettes d'occasion à vendre chez Automobile SX à Dorval. Filtrez par marque, carrosserie, prix, année et kilométrage.",
     h1: "Autos usagées à vendre à Dorval",
     sub: `Chaque véhicule est affiché à son juste prix, kilométrage divulgué. Appelez le <a class="text-link" href="tel:+15148249117">${DEALER.phone}</a> pour planifier une visite.`,
+    budgetHelp: `<p class="muted-note">Vous avez une limite totale ferme? <a class="text-link" href="${R.g5}">Planifiez d'abord le prix, les taxes et les autres coûts</a>.</p>`,
     note: `<h2>Vous ne trouvez pas ce que vous cherchez ?</h2>
       <p>Notre inventaire change constamment et nous pouvons rechercher un véhicule pour vous. Dites-nous la marque, le modèle, le budget et le kilométrage souhaités et nous allons ouvrir l'œil. Appelez le ${DEALER.phone} ou <a class="text-link" href="${R.contact}">envoyez-nous les détails</a>.</p>`
   },
@@ -145,52 +148,46 @@ module.exports = {
   },
 
   financing: {
-    title: "Financement Auto Usagée à Dorval, QC | Tous Crédits | Automobile SX",
-    description: "Financement d'auto usagée à Dorval et dans l'Ouest-de-l'Île : critères des prêteurs, documents à apporter et vos droits au Québec.",
+    title: "Financement Auto Usagée à Dorval, QC | Automobile SX",
+    description: "Information sur le financement d'auto usagée à Dorval : comparez l'offre complète, préparez vos documents et connaissez vos droits au Québec.",
     h1: "Financement d'auto usagée à Dorval",
-    sub: "Bon crédit, crédit abîmé ou aucun dossier de crédit canadien. Voici comment ça fonctionne vraiment.",
+    sub: "L'approbation, le taux et les conditions dépendent du prêteur et du dossier. Voici comment vous préparer et comparer une offre.",
     body: `
-      <p>Financer une voiture d'occasion ne devrait pas ressembler à un tour de magie exécuté derrière un bureau. Cette page explique ce que les prêteurs examinent, ce que vous devriez apporter et ce que la loi québécoise vous garantit.</p>
+      <p>Le paiement mensuel n'est qu'une partie de l'offre. Comparez le montant emprunté, le taux de crédit, la durée, les frais et l'obligation totale avant de décider.</p>
 
-      <h2>Du financement pour toutes les situations</h2>
-      <p>Nous travaillons avec plusieurs prêteurs canadiens plutôt qu'avec une seule banque, parce que leurs critères diffèrent. Nous soumettons votre dossier là où il convient et nous vous disons exactement ce qui revient. Le taux, la durée et l'approbation relèvent du prêteur, pas de nous.</p>
+      <h2>Chaque prêteur analyse le dossier complet</h2>
+      <p>Automobile SX travaille avec plusieurs prêteurs canadiens. Leurs critères diffèrent, et c'est le prêteur—pas le commerçant—qui décide d'approuver ou non la demande et qui fixe le taux et les conditions.</p>
       <ul>
-        <li><strong>Crédit établi.</strong> Un dossier propre donne généralement un taux à un chiffre sur un véhicule assez récent.</li>
-        <li><strong>Crédit abîmé.</strong> Des retards de paiement, une proposition de consommateur ou une faillite libérée ne signifient pas un refus automatique. Ça signifie habituellement un taux plus élevé, parfois une mise de fonds.</li>
-        <li><strong>Nouvel arrivant.</strong> Ne pas avoir d'historique de crédit canadien est très courant à Montréal, et certains prêteurs sont organisés exactement pour ça. Une preuve de revenu stable fait l'essentiel du travail.</li>
-        <li><strong>Premier achat.</strong> Un véhicule modeste et bien évalué, avec un paiement abordable, reste la façon la plus rapide de bâtir un dossier qui ouvrira de meilleurs taux plus tard.</li>
+        <li><strong>L'historique de crédit est un facteur.</strong> Aucune cote affichée ici ne promet une approbation ou un taux précis.</li>
+        <li><strong>Le revenu et les obligations existantes comptent.</strong> Le prêteur doit évaluer la capacité de rembourser le crédit demandé.</li>
+        <li><strong>Le véhicule et la durée comptent.</strong> L'admissibilité peut varier selon le montant demandé et le véhicule choisi.</li>
+        <li><strong>La mise de fonds dépend du dossier.</strong> Ne présumez pas qu'elle est exigée ni qu'un montant précis changera le résultat avant d'avoir une offre écrite.</li>
       </ul>
 
-      <h2>Les documents à apporter</h2>
-      <p>La loi québécoise oblige le prêteur à évaluer votre capacité de remboursement avant de conclure un contrat de crédit. Cette paperasse n'est donc pas superflue :</p>
+      <h2>Confirmez les documents avant la demande</h2>
+      <p>Un prêteur peut demander des documents pour vérifier l'identité, l'adresse, le revenu, les renseignements bancaires ou la reprise. La liste exacte dépend de la demande. Demandez ce qui est requis avant de transmettre des renseignements personnels. Par exemple :</p>
       <ul>
-        <li>Permis de conduire québécois valide</li>
-        <li>Preuve d'adresse : facture d'Hydro-Québec, bail</li>
-        <li>Talons de paie récents, ou votre avis de cotisation si vous êtes travailleur autonome</li>
-        <li>Relevés bancaires des derniers mois</li>
-        <li>Un spécimen de chèque</li>
-        <li>L'immatriculation de votre véhicule d'échange et, s'il est encore financé, le solde à payer</li>
+        <li>Une pièce d'identité officielle et une preuve d'adresse</li>
+        <li>Les documents demandés pour appuyer le revenu ou l'emploi</li>
+        <li>Les renseignements bancaires nécessaires à la demande</li>
+        <li>L'immatriculation de la reprise et un solde de remboursement à jour, s'il y a lieu</li>
       </ul>
 
-      <h2>Ce que coûte un prêt auto usagée</h2>
-      <p>Les taux bougent et dépendent de votre dossier, de l'âge et du kilométrage du véhicule et de la durée du prêt. En repère pour le marché canadien en 2026 : un bon dossier se situe souvent dans les hauts chiffres simples sur un véhicule d'occasion, un dossier moyen dans le bas de la dizaine, et un dossier sous-optimal nettement plus haut. La loi fédérale plafonne le taux criminel à 35 % et le Québec ajoute des exigences au-delà de son seuil de crédit à coût élevé.</p>
-      <p>Deux choses à savoir. Les taux sur l'occasion sont généralement <em>plus élevés</em> que sur le neuf, parce que la garantie vaut moins, ce qui surprend la plupart des acheteurs. Et la majorité des prêteurs ne financent pas un véhicule au-delà d'environ sa dixième année.</p>
+      <h2>Comparez l'offre écrite complète</h2>
+      <p>Les taux changent et une fourchette publicitaire ne prédit pas une approbation individuelle. Demandez par écrit le taux, l'échéancier, les frais de financement, le montant financé, la durée et l'obligation totale. L'<a href="https://www.canada.ca/fr/agence-consommation-matiere-financiere/services/prets/financer-auto/comparer-financement-automobile.html" target="_blank" rel="noopener">Agence de la consommation en matière financière du Canada</a> recommande de comparer le coût total plutôt que seulement le paiement ou le taux.</p>
 
-      <h2>Durée plus courte, moins d'intérêts</h2>
-      <p>Étirer un prêt à 84 ou 96 mois rend le paiement mensuel sympathique et coûte discrètement des milliers de dollars de plus en intérêts. Ça vous garde aussi en équité négative pendant des années, ce qui devient un vrai problème si vous devez changer de véhicule. Au Canada, la durée moyenne d'un prêt sur véhicule d'occasion tourne autour de 60 mois, et c'est un plafond raisonnable.</p>
-      <p>Utilisez l'estimateur sur chaque fiche de véhicule pour voir l'obligation totale, pas seulement le paiement. C'est le total qui compte.</p>
+      <h2>Comprenez l'effet de la durée</h2>
+      <p>Une durée plus longue peut réduire chaque paiement tout en augmentant les intérêts payés pendant le prêt. Elle peut aussi prolonger la période où vous devez plus que la valeur du véhicule. Comparez le même montant et le même taux sur différentes durées avant de choisir.</p>
 
       <h2>Vos droits au Québec, en clair</h2>
       <ul>
-        <li><strong>Le financement ne peut pas vous être imposé.</strong> Depuis novembre 2024, un commerçant ne peut pas conditionner l'achat d'un véhicule à la conclusion d'un contrat de crédit ni à l'achat d'autres produits.</li>
-        <li><strong>Les garanties prolongées et les extras sont facultatifs.</strong> Toujours. Si on vous les présente comme obligatoires, demandez-le par écrit.</li>
-        <li><strong>Vous pouvez rembourser par anticipation sans pénalité</strong> dans un contrat de vente à tempérament, et le contrat doit le mentionner.</li>
-        <li><strong>Vous avez deux jours pour annuler</strong> un achat financé chez le commerçant. Ce droit ne s'applique pas si vous payez comptant ou utilisez votre propre prêt bancaire.</li>
-        <li><strong>Le contrat doit indiquer</strong> le prix comptant, la mise de fonds, les frais de crédit, le taux de crédit, le nombre de paiements et votre obligation totale. S'il manque un chiffre, exigez-le.</li>
+        <li><strong>Le financement ne peut pas vous être imposé.</strong> Le Québec interdit de conditionner l'achat d'un véhicule routier au crédit organisé par le commerçant ou à la location à long terme. <a href="https://www.opc.gouv.qc.ca/consommateur/nouvelles-protections/" target="_blank" rel="noopener">Consultez le résumé de l'OPC</a>.</li>
+        <li><strong>Le contrat de vente à tempérament doit présenter les chiffres complets.</strong> Cela comprend notamment le prix comptant, la mise de fonds s'il y a lieu, les frais et le taux de crédit, l'obligation totale, la durée et les versements. <a href="https://www.opc.gouv.qc.ca/consommateur/bien-service/credit-recouvrement-finance/temperament/contrat/contenu" target="_blank" rel="noopener">Consultez la liste de l'OPC</a>.</li>
+        <li><strong>Les règles de remboursement anticipé et d'annulation dépendent du contrat.</strong> Un contrat de vente à tempérament doit permettre le remboursement anticipé sans frais ni pénalité et comporte normalement un délai d'annulation de deux jours; le crédit à coût élevé suit des règles différentes. <a href="https://www.opc.gouv.qc.ca/consommateur/bien-service/vehicule/auto-achat/occasion/annulation-contrat" target="_blank" rel="noopener">Vérifiez les règles d'annulation de l'OPC</a>.</li>
       </ul>
 
       <h2>Commençons la conversation</h2>
-      <p>Dites-nous votre situation franchement, y compris les parties que vous préféreriez taire. Ça change le prêteur que nous approchons, pas notre volonté de vous aider. Appelez le ${DEALER.phone} ou <a class="text-link" href="${R.contact}?interest=financing">écrivez-nous</a>.</p>
+      <p>Indiquez le véhicule, votre budget d'achat et si vous souhaitez discuter de financement. Appelez le ${DEALER.phone} ou <a class="text-link" href="${R.contact}?interest=financing">écrivez-nous</a>. Toute approbation, tout taux, toute durée ou toute mise de fonds exigée provient de l'offre écrite du prêteur après son analyse.</p>
       <p>À lire aussi : <a class="text-link" href="${R.g2}">le financement auto avec mauvais crédit au Québec</a>.</p>
       ${accuracyNote}`
   },
@@ -206,13 +203,13 @@ module.exports = {
       <h2>Comment se déroule l'évaluation</h2>
       <ol>
         <li><strong>Parlez-nous du véhicule.</strong> Année, marque, modèle, version, kilométrage et tout ce qu'on devrait savoir. Des photos aident.</li>
-        <li><strong>Passez le montrer.</strong> Une évaluation sérieuse implique de le conduire et de regarder dessous. Quinze minutes, sur rendez-vous.</li>
+        <li><strong>Passez le montrer.</strong> Une évaluation sérieuse implique de le conduire et de regarder dessous. Prévoyez environ quinze minutes et appelez avant de vous déplacer pour confirmer la disponibilité de Spiro.</li>
         <li><strong>Recevez un montant.</strong> Nous expliquons comment nous y arrivons. Si ça ne vous convient pas, aucun problème et aucune pression.</li>
       </ol>
 
       <h2>L'économie de taxes que plusieurs ignorent</h2>
-      <p>C'est la partie qui surprend. Au Québec, quand vous donnez un véhicule en échange lors d'un achat chez un commerçant, les taxes sont calculées sur le prix <em>après</em> déduction de la valeur de votre reprise, et non sur le prix affiché.</p>
-      <p>La TPS et la TVQ combinées avoisinent 15 %. Sur une reprise de 6 000 $, ce mécanisme vaut donc environ 900 $ qu'une vente entre particuliers ne vous donne pas. Un acheteur privé peut offrir un peu plus sur papier et vous laisser quand même perdant une fois la différence de taxes calculée. Faites ce calcul avant d'afficher votre annonce.</p>
+      <p>Une reprise admissible peut réduire la base taxable, mais la TPS et la TVQ ne partent pas toujours du même montant. La TPS est généralement calculée sur le prix de vente moins le crédit de reprise. La TVQ est calculée sur le plus élevé du prix de vente ou de la valeur estimative, moins ce crédit.</p>
+      <p>Demandez séparément le prix de vente, le crédit de reprise, la valeur estimative s'il y a lieu et chaque taxe. Ne présumez pas que la réduction correspond toujours au crédit de reprise multiplié par les taux combinés. <a href="https://www.revenuquebec.ca/en/citizens/consumption-taxes/taxable-zero-rated-or-tax-exempt-goods-and-services/gst-and-qst/transport-and-road-vehicles/road-vehicles-individuals/trading-in-a-road-vehicle/trade-in-of-a-road-vehicle-between-an-individual-and-a-dealer/" target="_blank" rel="noopener">Consultez le calcul de Revenu Québec</a>.</p>
 
       <h2>Ce qui fait monter la valeur</h2>
       <ul>
@@ -227,7 +224,7 @@ module.exports = {
       <p>C'est courant. Nous obtenons le solde auprès de votre prêteur et gérons le remboursement. Si le véhicule vaut plus que ce que vous devez, la différence s'applique à votre prochain achat. S'il vaut moins, nous vous le dirons clairement et nous examinerons les options plutôt que de glisser discrètement l'écart dans un nouveau prêt.</p>
 
       <h2>Obtenez une offre</h2>
-      <p>Appelez le ${DEALER.phone} ou <a class="text-link" href="${R.contact}?interest=trade-in">envoyez les détails</a>. Ouvert de 10 h à 18 h tous les jours, sur rendez-vous.</p>
+      <p>Appelez le ${DEALER.phone} ou <a class="text-link" href="${R.contact}?interest=trade-in">envoyez les détails</a>. Nous sommes ouverts de 10 h à 18 h tous les jours; veuillez appeler avant de vous déplacer pour confirmer la disponibilité de Spiro.</p>
       <p>À lire aussi : <a class="text-link" href="${R.g3}">quelle est la valeur de ma reprise au Québec ?</a></p>
       ${accuracyNote}`
   },
@@ -251,7 +248,7 @@ module.exports = {
 
       <h2>Comment nous choisissons nos véhicules</h2>
       <p>Nous achetons des véhicules dans lesquels nous mettrions un membre de notre famille. Ça veut dire refuser les autos dont l'historique ne tient pas debout, et être francs sur l'usure normale liée à l'âge et au kilométrage pour celles que nous prenons. Une voiture de huit ans avec 140 000 km est un bon achat au bon prix, et prétendre le contraire n'aide personne.</p>
-      <p>Le kilométrage, l'état et les défauts connus sont divulgués avant même qu'on vous les demande. Vous êtes aussi libre de faire inspecter n'importe quel véhicule par votre propre mécanicien avant de vous engager, et nous rendrons l'auto disponible pour ça.</p>
+      <p>Le kilométrage, l'état et les défauts connus sont divulgués avant même qu'on vous les demande. Les inspections indépendantes sont les bienvenues. Spiro discutera volontiers des modalités avec vous; veuillez communiquer avec nous à l'avance pour coordonner l'inspection.</p>
 
       <h2>Au service de Dorval et de l'Ouest-de-l'Île</h2>
       <p>Nous sommes à quelques minutes de Pointe-Claire, Lachine, Pierrefonds, Kirkland et Montréal-Ouest, et facilement accessibles depuis le centre-ville de Montréal ou Laval. La plupart de nos clients viennent de l'Ouest-de-l'Île, et beaucoup arrivent par une connaissance qui a déjà acheté chez nous.</p>
@@ -268,21 +265,21 @@ module.exports = {
     sub: "Les questions qu'on nous pose vraiment, avec des réponses claires.",
     faqs: [
       { q: "Faut-il un rendez-vous ?",
-        a: "Pas obligatoirement. Nous sommes ouverts de 10 h à 18 h 7 jours sur 7 et les visites sans rendez-vous sont les bienvenues. Un appel au 514-824-9117 à l'avance est recommandé afin que le véhicule soit prêt et que nous puissions bien vous recevoir." },
+        a: "Les rendez-vous sont fortement recommandés, mais ils ne sont pas obligatoires. Nous sommes ouverts de 10 h à 18 h 7 jours sur 7. Veuillez appeler avant de vous déplacer pour confirmer la disponibilité de Spiro." },
       { q: "Offrez-vous du financement ?",
         a: "Oui. Nous travaillons avec plusieurs prêteurs canadiens et soumettons votre dossier à ceux qui conviennent. Vous verrez le taux, la durée et le coût total avant toute signature. Au Québec, un commerçant ne peut pas exiger que vous financiez chez lui comme condition de la vente." },
       { q: "Puis-je donner mon véhicule en échange ?",
-        a: "Oui, et ça vous fait généralement économiser des taxes. Au Québec, les taxes sur votre prochain véhicule sont calculées sur le prix après déduction de la valeur de reprise. Avec des taxes combinées d'environ 15 %, l'économie est réelle. Nous évaluons votre véhicule sans obligation d'achat." },
+        a: "Oui. Pour une reprise admissible, la TPS est généralement calculée sur le prix de vente moins le crédit de reprise. La TVQ part du plus élevé du prix de vente ou de la valeur estimative, puis soustrait ce crédit. Demandez le calcul détaillé plutôt que de présumer une économie fixe. Nous évaluons votre véhicule sans obligation d'achat." },
       { q: "Y a-t-il une garantie sur une auto usagée au Québec ?",
         a: "Souvent oui, et elle est fixée par la loi plutôt que par le commerçant. La Loi sur la protection du consommateur prévoit une garantie de bon fonctionnement selon l'âge et le kilométrage : environ six mois ou 10 000 km pour les véhicules récents à faible kilométrage, jusqu'à un mois ou 1 700 km pour les plus âgés, et aucune garantie de ce type au-delà de sept ans ou de 120 000 km. Même dans ce dernier cas, les garanties légales générales de qualité et de durabilité s'appliquent toujours. La catégorie est indiquée sur l'étiquette du véhicule." },
       { q: "Puis-je faire inspecter l'auto par mon mécanicien ?",
-        a: "Absolument, et nous vous y encourageons. Prenez rendez-vous et nous rendrons le véhicule disponible. Un acheteur qui a fait vérifier son auto dort mieux ensuite." },
+        a: `Les inspections indépendantes sont les bienvenues. Spiro discutera volontiers des modalités avec vous. Communiquez avec nous à l'avance pour coordonner l'inspection, puis <a href="${R.g6}">voyez quoi organiser</a> avec le garage. L'accès au véhicule et tout transport doivent être confirmés pour l'inspection précise. L'inspection évalue l'état au moment de l'examen; elle ne garantit pas la fiabilité future.` },
       { q: "Puis-je réserver un véhicule ?",
-        a: "Oui. Appelez le 514-824-9117 et nous le garderons pendant que vous organisez votre financement ou une inspection. Nous vous dirons honnêtement si quelqu'un d'autre est déjà sur les rangs." },
+        a: "Appelez le 514-824-9117 avec le véhicule ou le numéro de stock. La disponibilité peut changer et Automobile SX ne publie pas de politique générale de réservation en ligne. Confirmez directement avec Spiro les conditions applicables au véhicule précis avant de considérer qu'il est réservé." },
       { q: "Faites-vous la livraison ?",
-        a: "Demandez-nous. Selon l'endroit où vous êtes dans la région de Montréal, on peut habituellement s'arranger. La plupart des clients préfèrent venir chercher le véhicule à Dorval pour qu'on puisse passer l'auto et les documents ensemble." },
+        a: "Les véhicules sont normalement récupérés chez Automobile SX à Dorval. Vous avez besoin d'un arrangement particulier? Communiquez avec Spiro pour discuter de ce qui pourrait être possible. La livraison n'est ni garantie ni annoncée comme gratuite." },
       { q: "Que faut-il pour immatriculer le véhicule ?",
-        a: "Dans la plupart des cas, nous nous occupons de l'immatriculation auprès de la SAAQ au moment de la livraison, alors vous repartez avec le véhicule correctement immatriculé. Apportez votre permis de conduire québécois valide et votre preuve d'assurance." },
+        a: "Les étapes d'immatriculation dépendent de la transaction. Avant la livraison, demandez quelles étapes Automobile SX prendra en charge, lesquelles vous devrez accomplir et quels documents et frais s'appliquent. Confirmez les exigences actuelles auprès de la SAAQ." },
       { q: "Parlez-vous anglais ?",
         a: "Yes. Service is available in English as well as French, both in person and for documents." }
     ]
@@ -305,8 +302,8 @@ module.exports = {
       <p>Le Québec protège mieux les acheteurs de véhicules d'occasion que la plupart des provinces, mais seulement si vous savez quoi regarder. Ce guide couvre ce qui détermine réellement si un achat se passe bien.</p>
 
       <h2>Les taxes que vous paierez</h2>
-      <p>Chez un commerçant, vous payez la TPS à 5 % et la TVQ à 9,975 %, soit environ 15 % au total, sur le prix de vente convenu. Le prix annoncé doit déjà inclure la préparation, le transport et les frais d'administration : un commerçant ne peut pas afficher un montant et ajouter ces frais ensuite. Seules les taxes et le droit environnemental sur les pneus peuvent s'ajouter.</p>
-      <p>Si vous donnez un véhicule en échange, les taxes sont calculées sur le prix après déduction de la valeur de reprise. C'est la principale raison financière de faire une reprise plutôt qu'une vente privée.</p>
+      <p>Pour un achat taxable ordinaire chez un commerçant, la TPS est de 5 % et est généralement calculée sur le prix de vente convenu. La TVQ est de 9,975 % et est calculée sur le plus élevé du prix de vente ou de la valeur estimative du véhicule, sauf règle particulière pour un véhicule endommagé ou soumis à une usure anormale. <a href="https://www.revenuquebec.ca/fr/citoyens/taxes/biens-et-services-taxables-detaxes-ou-exoneres/tps-et-tvq/transport-et-vehicules-routiers/vehicules-routiers-citoyens/achat-dun-vehicule-routier/achat-dun-vehicule-routier-usage-dun-commercant/" target="_blank" rel="noopener">Vérifiez le calcul actuel de Revenu Québec</a>. Le prix annoncé doit déjà inclure la préparation, le transport et les frais d'administration; les taxes et le droit applicable sur les pneus neufs peuvent s'ajouter.</p>
+      <p>Avec une reprise admissible, la TPS est généralement calculée sur le prix de vente moins le crédit de reprise. La TVQ part du plus élevé du prix de vente ou de la valeur estimative, puis soustrait ce crédit. Demandez un calcul détaillé. Si votre limite est ferme, utilisez notre <a class="text-link" href="${R.g5}">fiche de budget d'achat complet</a>.</p>
 
       <h2>La garantie légale sur un véhicule d'occasion</h2>
       <p>La Loi sur la protection du consommateur accorde à la plupart des véhicules d'occasion achetés chez un commerçant une garantie de bon fonctionnement, sans frais supplémentaires, selon l'âge et le kilométrage. Les seuils ont été élargis en avril 2024, alors les articles plus anciens en ligne les sous-estiment :</p>
@@ -322,10 +319,10 @@ module.exports = {
       <p>Tout véhicule d'occasion chez un commerçant québécois doit porter une étiquette indiquant le prix, l'année, la marque, le modèle et le numéro de série, le kilométrage, la catégorie de garantie et l'avis de votre droit d'obtenir les coordonnées du propriétaire précédent. Elle doit aussi divulguer un usage antérieur comme taxi, auto-école, véhicule de police ou de location. Si une pièce précise est exclue de la garantie, ça doit figurer sur l'étiquette avec une estimation du coût de réparation, sinon l'exclusion ne tient pas.</p>
 
       <h2>Les certificats de sécurité fonctionnent différemment ici</h2>
-      <p>Si vous arrivez de l'Ontario, ajustez vos attentes : une voiture de promenade usagée vendue par un commerçant québécois à un consommateur n'exige pas de certificat de vérification mécanique. Ces certificats sont requis dans des situations précises, comme les véhicules provenant de l'extérieur du Québec ou reconstruits après un accident grave. C'est exactement pourquoi une inspection indépendante vaut la centaine de dollars qu'elle coûte.</p>
+      <p>Si vous arrivez de l'Ontario, ajustez vos attentes : une voiture de promenade usagée vendue par un commerçant québécois à un consommateur n'exige pas de certificat de vérification mécanique. Ces certificats sont requis dans des situations précises, comme les véhicules provenant de l'extérieur du Québec ou reconstruits après un accident grave. Demandez au garage choisi de confirmer le contenu et le prix de son inspection indépendante.</p>
 
       <h2>Faites-la inspecter quand même</h2>
-      <p>Tout commerçant chez qui il vaut la peine d'acheter vous laissera amener le véhicule chez votre mécanicien. Nous le faisons. Une inspection préachat vous dit ce qui s'en vient dans la prochaine année, ce qui transforme une décision nerveuse en décision éclairée. Si un vendeur résiste, vous avez votre réponse.</p>
+      <p>L'OPC recommande un essai routier et une inspection par un mécanicien de confiance, et précise qu'un commerçant doit accepter la demande. Une inspection décrit l'état observé au moment de l'examen; elle ne garantit pas la fiabilité future. Utilisez notre <a class="text-link" href="${R.g6}">fiche d'inspection préachat à Dorval</a> pour coordonner le véhicule, le garage et vos questions.</p>
 
       <h2>Avant de signer</h2>
       <p>Le contrat doit indiquer le numéro de permis OPC du commerçant, le prix, les taxes, le total à payer, les détails de la garantie et les conditions de reprise s'il y a lieu. Vérifiez que le numéro d'identification du véhicule au contrat correspond à celui sur l'auto. Assurez-vous que toute promesse verbale, comme une réparation avant la livraison, est écrite au contrat.</p>
@@ -339,50 +336,49 @@ module.exports = {
   },
 
   g2: {
-    title: "Financement Auto avec Mauvais Crédit au Québec : à Quoi s'Attendre",
-    description: "Le financement d'auto usagée au Québec avec un crédit limité ou abîmé : critères des prêteurs, taux réalistes et vos droits.",
+    title: "Financement Auto avec Mauvais Crédit : Comparer l'Offre",
+    description: "Préparez un financement d'auto usagée au Québec avec un crédit limité ou abîmé. Comparez l'offre écrite sans promesse de taux ni d'approbation.",
     h1: "Financement auto avec mauvais crédit au Québec",
-    sub: "Ce que les prêteurs regardent vraiment, ce que ça coûte réellement et les droits que vous conservez.",
+    sub: "Préparez la demande, comparez l'offre complète et conservez les droits prévus au Québec.",
     body: `
-      <p>Un dossier de crédit abîmé donne l'impression d'une porte verrouillée. En pratique, c'est habituellement une porte plus chère, et le prix dépend de choix que vous contrôlez.</p>
+      <p>Un crédit limité ou abîmé ne produit pas un taux, une mise de fonds ou une décision standard. Chaque prêteur applique ses propres critères au dossier complet. Considérez toute estimation comme provisoire jusqu'à l'offre écrite du prêteur.</p>
 
-      <h2>Ce qu'on appelle un mauvais crédit au Canada</h2>
-      <p>Sur l'échelle Equifax de 300 à 900, environ 760 et plus est excellent, 725 à 759 très bon, 660 à 724 bon, 560 à 659 moyen, et sous 560 faible. Les prêteurs considèrent généralement qu'en bas de 660 on entre dans le crédit à risque. Il n'existe aucun seuil légal et chaque prêteur fixe le sien, alors un seul refus ne veut pas dire grand-chose.</p>
+      <h2>Une cote de crédit n'est pas un tableau d'approbation</h2>
+      <p>La cote est un élément du dossier, pas un engagement publié du prêteur. Cette page n'attribue pas de catégories de cote, ne prédit pas une approbation et ne cite pas de taux. Demandez les documents requis et laissez le prêteur analyser le dossier réel.</p>
 
-      <h2>Ce que les prêteurs à risque examinent</h2>
-      <p>Une fois sous le seuil du crédit de premier ordre, les prêteurs s'appuient moins sur la cote et davantage sur la stabilité :</p>
+      <h2>Préparez l'information que le prêteur peut analyser</h2>
+      <p>Les critères et les documents exacts varient. Le prêteur peut tenir compte :</p>
       <ul>
-        <li><strong>Le revenu.</strong> Stable, démontrable et suffisant pour porter le paiement confortablement.</li>
-        <li><strong>L'ancienneté d'emploi.</strong> Quelques mois chez le même employeur pèsent réellement.</li>
-        <li><strong>Les relevés bancaires.</strong> On y cherche le loyer et les factures payés à temps, et les frais de chèque sans provision.</li>
-        <li><strong>Le véhicule lui-même.</strong> Une auto raisonnable et abordable s'approuve plus facilement qu'un achat trop ambitieux.</li>
-        <li><strong>La mise de fonds.</strong> Pas toujours exigée, mais elle améliore les chances et le taux.</li>
+        <li><strong>Du revenu et des obligations existantes.</strong> Préparez les documents demandés par le prêteur.</li>
+        <li><strong>De l'historique de crédit.</strong> Vérifiez votre propre dossier pour repérer les erreurs avant la demande.</li>
+        <li><strong>Du montant et de la durée demandés.</strong> Comparez-les avec votre budget mensuel complet.</li>
+        <li><strong>Du véhicule choisi.</strong> L'admissibilité peut varier selon le véhicule et le prêteur.</li>
+        <li><strong>D'une mise de fonds proposée.</strong> Utilisez-la seulement pour comparer une offre réelle; aucun montant fixe ne garantit un résultat.</li>
       </ul>
 
-      <h2>Ce que ça coûte</h2>
-      <p>Attendez-vous à une prime notable : là où un bon dossier obtient des hauts chiffres simples sur un véhicule d'occasion, un dossier à risque se situe souvent au milieu de la dizaine et peut monter plus haut. La loi fédérale plafonne le taux criminel à 35 % et le Québec impose des exigences additionnelles au-delà de son seuil de crédit à coût élevé. Tout ce qui approche ces chiffres mérite un second regard sérieux.</p>
-      <p>Une particularité québécoise utile : le taux de crédit inscrit à votre contrat est un taux tout inclus, qui comprend les frais d'administration et pas seulement l'intérêt nominal. Les contrats deviennent donc vraiment comparables. Comparez ce chiffre plutôt que le paiement.</p>
+      <h2>Comparez le coût réel de l'offre</h2>
+      <p>Comparez le prix comptant, le montant financé, les frais et le taux de crédit, l'échéancier, la durée et l'obligation totale. L'OPC explique les chiffres obligatoires d'un <a href="https://www.opc.gouv.qc.ca/consommateur/bien-service/credit-recouvrement-finance/temperament/contrat/contenu" target="_blank" rel="noopener">contrat de vente à tempérament</a>. L'<a href="https://www.canada.ca/fr/agence-consommation-matiere-financiere/services/prets/financer-auto/comparer-financement-automobile.html" target="_blank" rel="noopener">Agence de la consommation en matière financière du Canada</a> recommande de comparer plusieurs offres complètes lorsque c'est possible.</p>
 
       <h2>Nouvel arrivant sans dossier de crédit</h2>
-      <p>Aucun historique de crédit, ce n'est pas un mauvais crédit : c'est une page blanche, et les prêteurs la traitent différemment. Certaines banques offrent des programmes pour nouveaux arrivants qui n'exigent pas d'historique canadien, généralement avec une mise de fonds de 10 % à 25 % et des limites sur l'âge du véhicule. Ces limites d'âge sont justement l'obstacle chez un commerçant d'occasion : les nouveaux arrivants s'en tirent souvent mieux avec un prêteur spécialisé ou un endosseur.</p>
+      <p>L'absence d'historique canadien est différente d'un historique de paiements manqués, mais aucun programme ni aucune exigence ne s'applique à tous les prêteurs. Demandez les documents d'identité, de résidence, de revenu et de crédit requis pour la demande réelle. Ne vous fiez pas à un pourcentage de mise de fonds ou à une limite d'âge du véhicule sans que le prêteur l'indique dans son offre.</p>
 
       <h2>Ne laissez pas la durée masquer le coût</h2>
-      <p>La façon la plus simple de rendre un prêt cher acceptable, c'est de l'étirer. Passer de 48 à 96 mois réduit fortement le paiement et plus que double les intérêts, tout en vous gardant en équité négative pendant des années. Si le paiement ne fonctionne qu'à 84 ou 96 mois, la conclusion honnête est habituellement que le véhicule est trop cher, pas que la durée est trop courte.</p>
+      <p>Une durée plus longue réduit généralement chaque paiement tout en augmentant les intérêts payés. Comparez l'obligation totale et la période où vous pourriez devoir plus que la valeur du véhicule. Un paiement plus bas ne rend pas, à lui seul, l'offre moins chère.</p>
 
-      <h2>Servez-vous-en pour rebâtir</h2>
-      <p>Un prêt auto à risque déclaré aux bureaux de crédit et payé à temps est l'un des moyens les plus rapides de réparer un dossier. Beaucoup d'acheteurs refinancent à bien meilleur taux après un an ou deux de paiements impeccables, et au Québec un contrat de vente à tempérament doit permettre le remboursement anticipé sans pénalité : sortir plus tôt ne coûte rien.</p>
+      <h2>Ne présumez pas un refinancement futur</h2>
+      <p>Prenez votre décision avec l'offre disponible aujourd'hui. L'évolution du dossier de crédit et un futur refinancement dépendent de la déclaration des paiements, de l'historique, du marché et d'une nouvelle analyse. Aucun commerçant ne peut promettre quand une cote s'améliorera ni qu'un refinancement moins cher sera offert.</p>
 
       <h2>Protégez-vous</h2>
       <ul>
-        <li>Au Québec, le financement ne peut pas être une condition de la vente, depuis novembre 2024.</li>
-        <li>Garanties prolongées, assurance crédit et forfaits de protection sont facultatifs. Chacun augmente le montant financé.</li>
+        <li>Au Québec, le financement ne peut pas être une condition de la vente d'un véhicule routier. <a href="https://www.opc.gouv.qc.ca/consommateur/nouvelles-protections/" target="_blank" rel="noopener">Consultez le résumé de l'OPC</a>.</li>
+        <li>Demandez si chaque garantie, assurance ou forfait de protection est facultatif et comment il modifie le montant financé.</li>
         <li>Comparez l'obligation totale, pas le paiement hebdomadaire.</li>
         <li>Obtenez le taux approuvé par écrit et vérifiez-le au contrat.</li>
-        <li>Vous pouvez rembourser par anticipation sans pénalité, et le contrat doit le dire.</li>
+        <li>Le contrat de vente à tempérament doit indiquer le droit de rembourser avant l'échéance sans frais ni pénalité. <a href="https://www.opc.gouv.qc.ca/consommateur/bien-service/credit-recouvrement-finance/temperament/contrat/contenu" target="_blank" rel="noopener">Vérifiez le contenu obligatoire</a>.</li>
       </ul>
 
       <h2>Parlons-en franchement</h2>
-      <p>Dites-nous la vraie situation et nous vous dirons ce qui est réaliste. Appelez le ${DEALER.phone} ou consultez <a class="text-link" href="${R.financing}">comment fonctionne le financement chez Automobile SX</a>.</p>
+      <p>Indiquez le véhicule et le budget d'achat que vous souhaitez discuter. Appelez le ${DEALER.phone} ou consultez <a class="text-link" href="${R.financing}">comment fonctionne le financement chez Automobile SX</a>. L'approbation, le taux, la durée et toute mise de fonds exigée proviennent du prêteur après son analyse.</p>
       ${accuracyNote}`
   },
 
@@ -405,8 +401,8 @@ module.exports = {
       </ul>
 
       <h2>L'économie de taxes fait partie de l'offre</h2>
-      <p>Comparer une offre de reprise au prix d'une vente privée sans tenir compte des taxes donne la mauvaise réponse. Au Québec, les taxes sur votre prochain véhicule sont calculées après déduction de la reprise, et la TPS et la TVQ combinées frôlent 15 %.</p>
-      <p>Sur une reprise de 8 000 $, ce mécanisme économise donc environ 1 200 $ en taxes. Un acheteur privé qui offre 9 000 $ est à peine devant une reprise de 8 000 $ une fois le calcul fait, et c'est avant les photos, les messages, les rendez-vous manqués et le risque de paiement.</p>
+      <p>La comparaison entre une offre de reprise et un prix de vente privée peut inclure l'effet fiscal, mais elle exige les deux bases de calcul. Pour une reprise admissible, la TPS est généralement calculée sur le prix de vente moins le crédit de reprise. La TVQ est calculée sur le plus élevé du prix de vente ou de la valeur estimative du véhicule acheté, moins ce crédit.</p>
+      <p>Demandez une soumission d'achat détaillée indiquant le prix de vente, la valeur estimative s'il y a lieu, le crédit de reprise et les deux taxes. Vous obtiendrez ainsi une comparaison nette sans présumer que chaque dollar de reprise réduit toujours les deux taxes de la même façon. <a href="https://www.revenuquebec.ca/en/citizens/consumption-taxes/taxable-zero-rated-or-tax-exempt-goods-and-services/gst-and-qst/transport-and-road-vehicles/road-vehicles-individuals/trading-in-a-road-vehicle/trade-in-of-a-road-vehicle-between-an-individual-and-a-dealer/" target="_blank" rel="noopener">Consultez le calcul et les conditions de Revenu Québec</a>.</p>
 
       <h2>Reprise ou vente entre particuliers ?</h2>
       <p><strong>La reprise a du sens</strong> quand vous achetez un autre véhicule de toute façon, quand votre temps a de la valeur, quand l'auto a des besoins que vous devriez divulguer, ou quand il reste un prêt dessus.</p>
@@ -465,6 +461,112 @@ module.exports = {
       <p>Gardez ensemble le contrat de vente, le certificat d'immatriculation et les détails de la garantie. Vous en aurez besoin pour l'assurance, pour vos dossiers et au moment de revendre ou d'échanger le véhicule.</p>
       <p>Ensuite : <a class="text-link" href="${R.g1}">le guide complet de l'achat d'occasion au Québec</a> · <a class="text-link" href="${R.inventory}">voir notre inventaire</a></p>
       ${accuracyNote}`
+  },
+
+  g5: {
+    title: "Budget Auto Usagée au Québec : Coût Total | Automobile SX",
+    description: "Un budget de 15 000 $ pour une auto usagée? Distinguez prix, taxes et coûts d'utilisation avant de comparer les véhicules à Dorval.",
+    h1: "Budget auto usagée au Québec : que permet une limite de 15 000 $?",
+    sub: "Partez d'une limite totale ferme afin d'intégrer le prix affiché, les taxes et les autres coûts au même plan.",
+    byline: "Par Automobile SX",
+    schemaType: "BlogPosting",
+    showBreadcrumbs: true,
+    draft: false,
+    datePublished: "2026-11-04",
+    dateModified: "2026-11-04",
+    image: "/images/guides/used-car-budget-quebec.jpg",
+    imageAlt: "Autos usagées devant Automobile SX à Dorval, dont une Kia Forte grise",
+    imageCaption: "Inventaire actuel d'Automobile SX à Dorval. La disponibilité et les prix changent; comparez les véhicules à partir d'un budget total, et non de cette photo.",
+    body: `
+      <p>Un budget d'achat de 15 000 $ ne correspond pas à un prix affiché de 15 000 $. Prévoyez les taxes applicables, l'immatriculation et les frais d'inspection ou de mise en service que vous devez payer séparément avant de choisir un véhicule. Pour un acheteur à Dorval, la bonne question est : « Quelle auto puis-je acheter et préparer sans dépasser mon budget total? »</p>
+
+      <h2>Commencez par deux budgets</h2>
+      <p>Le budget d'achat couvre l'acquisition du véhicule et sa préparation selon vos besoins. Le budget mensuel couvre son utilisation.</p>
+      <p>Notez ces éléments avant de consulter les annonces :</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>À l'achat</th><th>Chaque mois</th></tr></thead>
+        <tbody>
+          <tr><td>Prix du véhicule et taxes applicables</td><td>Paiement du prêt, s'il y a lieu</td></tr>
+          <tr><td>Immatriculation</td><td>Assurance</td></tr>
+          <tr><td>Inspection indépendante</td><td>Essence ou recharge</td></tr>
+          <tr><td>Travaux immédiats ou équipement choisi</td><td>Réserve pour l'entretien</td></tr>
+          <tr><td>Somme que vous souhaitez conserver</td><td>Stationnement et autres frais récurrents</td></tr>
+        </tbody>
+      </table></div>
+      <p>Le prix d'une inspection ou d'une assurance dépend du fournisseur choisi. Ne présumez pas que ces services sont compris dans le prix affiché.</p>
+
+      <h2>Partez du montant que vous pouvez dépenser</h2>
+      <p>Pour un achat taxable ordinaire chez un commerçant, la TPS est de 5 % et la TVQ de 9,975 %. La TVQ peut être calculée sur la valeur estimative du véhicule si elle dépasse son prix de vente. Faites confirmer le calcul applicable avant d'utiliser un simple pourcentage. <a href="https://www.revenuquebec.ca/fr/citoyens/taxes/biens-et-services-taxables-detaxes-ou-exoneres/tps-et-tvq/transport-et-vehicules-routiers/vehicules-routiers-citoyens/achat-dun-vehicule-routier/achat-dun-vehicule-routier-usage-dun-commercant/" target="_blank" rel="noopener">Revenu Québec explique l'achat chez un commerçant</a>.</p>
+      <p>Voici un exemple de calcul, et non une offre de véhicule. Les deux taxes sont ici appliquées au prix de vente, sans reprise :</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Élément</th><th>Montant</th></tr></thead>
+        <tbody>
+          <tr><td>Budget disponible</td><td>15 000,00 $</td></tr>
+          <tr><td>Réserve choisie pour les autres coûts</td><td>1 000,00 $</td></tr>
+          <tr><td>Solde pour le véhicule et les taxes</td><td>14 000,00 $</td></tr>
+          <tr><td>Prix maximal approximatif : 14 000 $ / 1,14975</td><td>12 176,56 $</td></tr>
+        </tbody>
+      </table></div>
+      <p>La réserve de 1 000 $ est un choix fictif pour illustrer le calcul. Elle ne constitue pas une estimation des frais d'immatriculation, d'inspection, d'assurance ou de réparation. Remplacez-la par vos vrais montants. Une valeur taxable plus élevée pour la TVQ modifiera le résultat.</p>
+
+      <h2>Demandez une soumission comparable</h2>
+      <p>Demandez un total écrit et détaillé pour le véhicule précis. Faites distinguer les éléments inclus, les options, la base de calcul de la TVQ et les sommes à payer lors de l'immatriculation. En cas de reprise, demandez que la valeur offerte et le solde de votre ancien prêt apparaissent séparément.</p>
+      <p>Pour le financement, comparez le capital emprunté, le taux, la durée et le coût total du crédit. Un paiement plus bas ne signifie pas nécessairement un achat moins coûteux. L'<a href="https://www.canada.ca/fr/agence-consommation-matiere-financiere/services/prets/financer-auto/comparer-financement-automobile.html" target="_blank" rel="noopener">Agence de la consommation en matière financière du Canada</a> recommande de comparer l'ensemble de l'offre.</p>
+
+      <h2>Préparez une sélection utile</h2>
+      <p>Indiquez votre budget d'achat maximal, votre limite mensuelle, le type de carrosserie recherché et votre date d'achat prévue. Précisez si les taxes sont comprises dans votre budget. Vous éviterez ainsi de discuter d'un véhicule qui dépasse votre limite dès le départ.</p>
+      <p><a class="text-link" href="${R.inventory}">Consultez l'inventaire Automobile SX</a>, puis <a class="text-link" href="${R.contact}">contactez-nous à Dorval</a> avec le modèle ou le numéro de stock souhaité. Consultez aussi notre <a class="text-link" href="${R.g1}">guide d'achat au Québec</a>, <a class="text-link" href="${R.g6}">préparez une inspection indépendante</a> ou lisez les <a class="text-link" href="${R.financing}">renseignements sur le financement</a>.</p>`
+  },
+
+  g6: {
+    title: "Inspection Auto Usagée à Dorval | Automobile SX",
+    description: "Organisez une inspection indépendante avant l'achat à Dorval. Préparez vos questions, les documents et les points à discuter après le rapport.",
+    h1: "Inspection d'une auto usagée à Dorval : quoi organiser avant l'achat",
+    sub: "Coordonnez le véhicule précis, le garage et vos questions avant de vous engager.",
+    byline: "Par Automobile SX",
+    schemaType: "BlogPosting",
+    showBreadcrumbs: true,
+    draft: false,
+    datePublished: "2026-11-04",
+    dateModified: "2026-11-04",
+    image: "/images/guides/used-car-inspection-dorval.jpg",
+    imageAlt: "Tableau de bord et habitacle avant d'une Volkswagen usagée chez Automobile SX",
+    imageCaption: "Les photos de l'habitacle aident à préparer des questions, mais ne remplacent pas une inspection mécanique indépendante.",
+    body: `
+      <p>Organisez une inspection indépendante avant de vous engager, même si vous avez déjà conduit l'auto et lu son historique. Choisissez le garage, convenez du contenu de l'inspection et coordonnez l'accès au véhicule précis. Le rapport écrit vous aidera à décider si l'achat vous convient; une inspection ne garantit pas la fiabilité future.</p>
+
+      <h2>Commencez par le bon véhicule</h2>
+      <p>Avant de réserver au garage, confirmez que l'auto est toujours disponible. Transmettez le numéro de stock au commerçant et le NIV, le modèle, l'année et le kilométrage au garage. Signalez les témoins lumineux, les bruits ou les autres éléments qui vous ont préoccupé pendant la visite.</p>
+      <p>Les inspections indépendantes sont les bienvenues. Spiro discutera volontiers des modalités avec vous. Communiquez à l'avance le véhicule, le garage et l'heure proposée afin de coordonner l'accès et tout transport avant de réserver. Consultez la <a class="text-link" href="${R.faq}">FAQ d'achat</a> pour le libellé actuel.</p>
+
+      <h2>Demandez ce qui sera inspecté</h2>
+      <p>CAA-Québec recommande une inspection indépendante avant l'achat, car une visite ou un essai routier peut laisser passer certains problèmes. Demandez un rapport écrit et faites confirmer le prix et le contenu directement par le garage. <a href="https://www.caaquebec.com/fr/conseils/acheter-ou-vendre-un-vehicule/vous-achetez-une-voiture-passez-d-abord-a-l-inspection" target="_blank" rel="noopener">Consultez les conseils d'inspection préachat de CAA-Québec</a>.</p>
+      <p>Préparez vos questions :</p>
+      <ul>
+        <li>Inspecterez-vous le dessous du véhicule et la corrosion observée?</li>
+        <li>Quelles vérifications mécaniques et électroniques sont comprises?</li>
+        <li>Le rapport distinguera-t-il les travaux immédiats des points à surveiller?</li>
+        <li>Pouvez-vous chiffrer les travaux recommandés par écrit?</li>
+        <li>Quels éléments ne peuvent pas être évalués pendant cette inspection?</li>
+      </ul>
+      <p>Ne demandez pas seulement si l'auto est « bonne ». Demandez ce que son état signifie pour votre utilisation et votre budget.</p>
+
+      <h2>Distinguez les documents de l'état mécanique</h2>
+      <p>Apportez les factures d'entretien disponibles et le rapport d'historique. Ils peuvent orienter le mécanicien, mais ne remplacent pas l'examen du véhicule. Une inspection mécanique ne règle pas non plus, à elle seule, la question des dettes sur l'auto. Les vérifications documentaires doivent être faites en parallèle.</p>
+      <p>L'OPC recommande l'essai routier et l'inspection par un mécanicien de confiance avant un achat chez un commerçant. Il précise que le commerçant doit accepter votre demande d'essai et d'inspection. <a href="https://www.opc.gouv.qc.ca/consommateur/bien-service/vehicule/auto-achat/conseil/occasion-commercant" target="_blank" rel="noopener">Consultez les conseils de l'OPC</a>.</p>
+
+      <h2>Transformez le rapport en décision</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Constat</th><th>Question avant l'achat</th></tr></thead>
+        <tbody>
+          <tr><td>Travaux recommandés avant l'utilisation</td><td>Quels travaux, quels coûts et quel délai le garage indique-t-il?</td></tr>
+          <tr><td>Entretien à prévoir prochainement</td><td>Mon budget d'utilisation permet-il cette dépense?</td></tr>
+          <tr><td>Point toujours incertain</td><td>Quelle vérification supplémentaire faut-il demander?</td></tr>
+          <tr><td>Réparation discutée avec le vendeur</td><td>L'entente figure-t-elle par écrit dans les conditions d'achat?</td></tr>
+        </tbody>
+      </table></div>
+      <p>Vous pouvez poursuivre, demander des précisions, discuter des conditions ou conclure que le véhicule ne vous convient pas. L'inspection sert à prendre cette décision avec de meilleurs renseignements.</p>
+      <p><a class="text-link" href="${R.inventory}">Choisissez une auto dans notre inventaire</a>, puis <a class="text-link" href="${R.contact}">contactez Automobile SX à Dorval</a> avec son numéro de stock et la période souhaitée pour l'inspection. Pour le processus général, consultez notre <a class="text-link" href="${R.g1}">guide d'achat d'une auto usagée au Québec</a> ou la <a class="text-link" href="${R.g5}">fiche de budget d'achat complet</a>.</p>`
   },
 
   privacy: {

@@ -126,6 +126,24 @@
     }
   },
   {
+    "loc": "https://www.automobilesx.ca/guides/used-car-budget-quebec",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://www.automobilesx.ca/guides/used-car-budget-quebec",
+      "fr": "https://www.automobilesx.ca/fr/guides/budget-auto-usagee-quebec"
+    }
+  },
+  {
+    "loc": "https://www.automobilesx.ca/guides/used-car-inspection-dorval",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://www.automobilesx.ca/guides/used-car-inspection-dorval",
+      "fr": "https://www.automobilesx.ca/fr/guides/inspection-auto-usagee-dorval"
+    }
+  },
+  {
     "loc": "https://www.automobilesx.ca/fr",
     "priority": "1.0",
     "changefreq": "weekly",
@@ -249,6 +267,24 @@
     "alt": {
       "en": "https://www.automobilesx.ca/guides/registering-a-used-car-in-quebec",
       "fr": "https://www.automobilesx.ca/fr/guides/immatriculer-une-voiture-usagee-quebec"
+    }
+  },
+  {
+    "loc": "https://www.automobilesx.ca/fr/guides/budget-auto-usagee-quebec",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://www.automobilesx.ca/guides/used-car-budget-quebec",
+      "fr": "https://www.automobilesx.ca/fr/guides/budget-auto-usagee-quebec"
+    }
+  },
+  {
+    "loc": "https://www.automobilesx.ca/fr/guides/inspection-auto-usagee-dorval",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://www.automobilesx.ca/guides/used-car-inspection-dorval",
+      "fr": "https://www.automobilesx.ca/fr/guides/inspection-auto-usagee-dorval"
     }
   }
 ]

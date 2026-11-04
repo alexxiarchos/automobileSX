@@ -16,8 +16,8 @@ const MAKES = require("../../js/makes.js");
 const OPC = require("../../js/opc.js");
 
 const PATHS = {
-  en: { dir: "vehicles", inventory: "/inventory", contact: "/contact", financing: "/financing", warrantyGuide: "/guides/buying-a-used-car-in-quebec" },
-  fr: { dir: "fr/vehicules", inventory: "/fr/inventaire", contact: "/fr/contact", financing: "/fr/financement", warrantyGuide: "/fr/guides/acheter-une-voiture-usagee-au-quebec" }
+  en: { dir: "vehicles", inventory: "/inventory", contact: "/contact", financing: "/financing", warrantyGuide: "/guides/buying-a-used-car-in-quebec", inspectionGuide: "/guides/used-car-inspection-dorval" },
+  fr: { dir: "fr/vehicules", inventory: "/fr/inventaire", contact: "/fr/contact", financing: "/fr/financement", warrantyGuide: "/fr/guides/acheter-une-voiture-usagee-au-quebec", inspectionGuide: "/fr/guides/inspection-auto-usagee-dorval" }
 };
 
 const L = {
@@ -29,7 +29,7 @@ const L = {
     getPreApproved: "Ask about financing", viewAll: "View all inventory →",
     inventory: "Inventory", kilometres: "Kilometres", stock: "Stock #", vin: "VIN",
     plusTaxes: "plus applicable taxes and licensing",
-    hoursShort: "Open 10 to 6, seven days, by appointment",
+    hoursShort: "Open 10 to 6 daily. Please call ahead to confirm Spiro is available.",
     sold: "Sold", soldNote: "This vehicle has found a new home.",
     soldOverview: "This vehicle has been sold. Browse our current inventory for available vehicles.",
     forSale: "for sale", noDesc: "Call us for full details on this vehicle.",
@@ -52,7 +52,7 @@ const L = {
     getPreApproved: "Info financement", viewAll: "Voir tout l'inventaire →",
     inventory: "Inventaire", kilometres: "Kilométrage", stock: "N° de stock", vin: "NIV",
     plusTaxes: "plus taxes applicables et immatriculation",
-    hoursShort: "Ouvert de 10 h à 18 h, 7 jours, sur rendez-vous",
+    hoursShort: "Ouvert de 10 h à 18 h tous les jours. Appelez avant de vous déplacer.",
     sold: "Vendu", soldNote: "Ce véhicule a trouvé preneur.",
     soldOverview: "Ce véhicule a été vendu. Consultez notre inventaire actuel pour voir les véhicules disponibles.",
     forSale: "à vendre", noDesc: "Appelez-nous pour tous les détails sur ce véhicule.",
@@ -82,6 +82,21 @@ const SPEC_FR = {
   },
   drivetrain: { "FWD": "Traction avant", "AWD": "Intégrale", "RWD": "Propulsion", "4x4": "4x4" }
 };
+
+const COLOUR_EN = {
+  Bleu: "Blue", Grety: "Grey"
+};
+
+const COLOUR_FR = {
+  Beige: "Beige", Black: "Noir", "Black leather": "Cuir noir",
+  Bleu: "Bleu", Blue: "Bleu", Brown: "Brun", Grey: "Gris", Grety: "Gris",
+  Leather: "Cuir", Red: "Rouge", White: "Blanc"
+};
+
+function colourLabel(value, lang) {
+  if (!value) return value;
+  return lang === "fr" ? (COLOUR_FR[value] || value) : (COLOUR_EN[value] || value);
+}
 
 function specLabel(kind, value, lang) {
   if (lang !== "fr" || !value) return value;
@@ -195,8 +210,8 @@ function specRows(v, lang) {
     [t.fuel, specLabel("fuel", v.fuel, lang)],
     [t.city, positiveEconomy(v.econCity)],
     [t.hwy, positiveEconomy(v.econHwy)],
-    [t.ext, v.extColor],
-    [t.intr, v.intColor],
+    [t.ext, colourLabel(v.extColor, lang)],
+    [t.intr, colourLabel(v.intColor, lang)],
     [t.doors, v.doors != null ? String(v.doors) : null],
     [t.seats, v.seats != null ? String(v.seats) : null],
     [t.kilometres, km(v.km, lang)],
@@ -217,7 +232,7 @@ function buyerInfoHtml(v, lang) {
   const item = (label, value) =>
     `<div class="history-item"><div class="h-label">${esc(label)}</div><div class="h-value">${value}</div></div>`;
 
-  items.push(item(t.inspection, `<span class="trust-dot" aria-hidden="true"></span>${esc(t.inspectionValue)}`));
+  items.push(item(t.inspection, `<span class="trust-dot" aria-hidden="true"></span><a href="${P.inspectionGuide}">${esc(t.inspectionValue)}</a>`));
 
   const warrantyClass = (v.opc && v.opc.classOverride) || OPC.classify(v.year, v.km);
   if (warrantyClass) {
@@ -274,7 +289,7 @@ function schema(v, lang) {
     vehicleTransmission: v.transmission,
     fuelType: v.fuel,
     driveWheelConfiguration: v.drivetrain,
-    color: v.extColor || undefined,
+    color: colourLabel(v.extColor, lang) || undefined,
     vehicleIdentificationNumber: v.vin || undefined,
     image: imgs.length ? imgs : undefined,
     offers: {
@@ -372,7 +387,7 @@ function renderVehiclePage(v, lang) {
     ? SITE + "/" + String(v.images[0]).replace(/^\//, "")
     : SITE + "/assets/og-image.jpg";
 
-  const subtitle = [v.extColor, km(v.km, lang),
+  const subtitle = [colourLabel(v.extColor, lang), km(v.km, lang),
     specLabel("transmission", v.transmission, lang),
     specLabel("fuel", v.fuel, lang),
     specLabel("drivetrain", v.drivetrain, lang)]

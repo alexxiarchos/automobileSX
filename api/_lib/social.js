@@ -116,8 +116,8 @@ function actionLines(v, lang, target) {
   }
 
   lines.push(fr
-    ? "Ouvert sept jours sur sept sur rendez-vous. Financement disponible. Nous acceptons les véhicules en échange."
-    : "Open seven days a week by appointment. Financing is available and trade-ins are welcome.");
+    ? "Ouvert sept jours sur sept. Les rendez-vous sont fortement recommandés; appelez avant de vous déplacer. Financement disponible. Nous acceptons les véhicules en échange."
+    : "Open seven days a week. Appointments are strongly recommended; call ahead before visiting. Financing is available and trade-ins are welcome.");
 
   if (target === "instagram") {
     lines.push(fr

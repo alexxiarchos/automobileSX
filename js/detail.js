@@ -64,7 +64,7 @@ SX.ready.then(function () {
     }
   }
   document.getElementById("v-subtitle").textContent =
-    (v.extColor ? v.extColor + " · " : "") + SXUI.specLine(v) + (v.stock ? " · " + SX.t("veh.stock") + " " + v.stock : "");
+    (v.extColor ? SX.colourLabel(v.extColor) + " · " : "") + SXUI.specLine(v) + (v.stock ? " · " + SX.t("veh.stock") + " " + v.stock : "");
 
   /* ---------- Gallery ---------- */
   var images = SXUI.vehicleImages(v);
@@ -147,12 +147,14 @@ SX.ready.then(function () {
         welcome: "Bienvenue", warranty: "Étiquette de garantie du Québec", classLabel: "Classe",
         report: "Historique du véhicule", view: "Voir le rapport ↗", keys: "Clés incluses",
         tires: "Pneus d'hiver", included: "Inclus", notIncluded: "Non inclus",
-        work: "Travaux récents ou note d'état", guide: "/fr/guides/acheter-une-voiture-usagee-au-quebec" }
+        work: "Travaux récents ou note d'état", guide: "/fr/guides/acheter-une-voiture-usagee-au-quebec",
+        inspectionGuide: "/fr/guides/inspection-auto-usagee-dorval" }
     : { title: "History and buyer confidence", inspection: "Independent inspection",
         welcome: "Welcome", warranty: "Quebec warranty label", classLabel: "Class",
         report: "Vehicle history", view: "View report ↗", keys: "Keys included",
         tires: "Winter tires", included: "Included", notIncluded: "Not included",
-        work: "Recent work or condition note", guide: "/guides/buying-a-used-car-in-quebec" };
+        work: "Recent work or condition note", guide: "/guides/buying-a-used-car-in-quebec",
+        inspectionGuide: "/guides/used-car-inspection-dorval" };
   var buyerHeading = document.getElementById("h-buyer");
   var buyerTarget = document.getElementById("v-buyer");
   if (!buyerHeading || !buyerTarget) {
@@ -200,7 +202,7 @@ SX.ready.then(function () {
     buyerBox.appendChild(item);
   }
 
-  buyerItem(buyerCopy.inspection, buyerCopy.welcome, "", true);
+  buyerItem(buyerCopy.inspection, buyerCopy.welcome, buyerCopy.inspectionGuide, true);
   var warrantyClass = (v.opc && v.opc.classOverride) ||
     (window.SX_OPC ? SX_OPC.classify(v.year, v.km) : "");
   if (warrantyClass) buyerItem(buyerCopy.warranty, buyerCopy.classLabel + " " + warrantyClass, buyerCopy.guide);
@@ -247,8 +249,8 @@ SX.ready.then(function () {
     [L.fuel, SX.specLabel("fuel", v.fuel)],
     [L.city, economy(v.econCity)],
     [L.hwy, economy(v.econHwy)],
-    [L.ext, v.extColor],
-    [L.intr, v.intColor],
+    [L.ext, SX.colourLabel(v.extColor)],
+    [L.intr, SX.colourLabel(v.intColor)],
     [L.doors, v.doors != null ? String(v.doors) : null],
     [L.seats, v.seats != null ? String(v.seats) : null],
     [L.km, Number(v.km || 0).toLocaleString(locale) + " km"],
@@ -340,7 +342,7 @@ SX.ready.then(function () {
       "vehicleTransmission": v.transmission,
       "fuelType": v.fuel,
       "driveWheelConfiguration": v.drivetrain,
-      "color": v.extColor || undefined,
+      "color": SX.colourLabel(v.extColor) || undefined,
       "vehicleIdentificationNumber": v.vin || undefined,
       "image": (v.images && v.images.length)
         ? v.images.map(function (p) { return "https://www.automobilesx.ca/" + p.replace(/^\//, ""); })
