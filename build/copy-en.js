@@ -588,7 +588,7 @@ module.exports = {
     title: "Privacy Policy | Automobile SX Dorval",
     description: "How Automobile SX handles personal information, anonymous analytics and optional consent-based GA4 measurement.",
     h1: "Privacy policy",
-    sub: "What we collect, what we do not, and how to reach us about it. Last updated 14 August 2026.",
+    sub: "What we collect, what we do not, and how to reach us about it. Last updated 4 November 2026.",
     body: `
       <p>Automobile SX is a used car dealership at 2044 Avenue Chartier, Dorval, Quebec. This page explains what happens to personal information in connection with this website and our business. It is written to be accurate about how the site actually works rather than to cover every hypothetical.</p>
 
@@ -602,7 +602,7 @@ module.exports = {
         <button class="btn btn-outline" type="button" data-metrics-opt-in hidden>Allow anonymous measurement</button>
         <p class="privacy-control-note">Turning it off saves only that preference in this browser. It applies to future page loads and does not affect the website.</p>
         <p><strong>Optional Google Analytics 4:</strong> <span data-ga4-status data-on="Allowed" data-off="Not allowed" data-unavailable="Not configured">Not configured</span></p>
-        <p class="privacy-control-note">If configured, GA4 uses cookies to measure page views and contact actions. It is off by default and does not load unless you choose to allow it. You can withdraw permission here later.</p>
+        <p class="privacy-control-note">If configured, GA4 uses cookies to measure page views and contact actions. It is off by default and does not load unless you choose to allow it. You can withdraw permission here later. Withdrawing permission stops future GA4 tracking and expires accessible first-party GA4 cookies.</p>
         <button class="btn btn-outline" type="button" data-ga4-consent hidden>Allow GA4 analytics cookies</button>
         <button class="btn btn-outline" type="button" data-ga4-revoke hidden>Stop GA4 analytics</button>
         <noscript><p class="privacy-control-note">Analytics does not load when JavaScript is disabled.</p></noscript>
