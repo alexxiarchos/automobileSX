@@ -5,6 +5,7 @@ on:
     paths:
       - "api/save.js"
       - "api/_lib/listingPages.js"
+      - "api/_lib/vehiclePage.js"
       - "js/metrics.js"
       - "js/contact.js"
       - "build/layout.js"
@@ -31,6 +32,7 @@ jobs:
         run: |
           node --check api/save.js
           node --check api/_lib/listingPages.js
+          node --check api/_lib/vehiclePage.js
           node --check js/metrics.js
           node --check js/contact.js
           node --check build/layout.js
