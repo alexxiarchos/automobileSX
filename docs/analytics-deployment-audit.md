@@ -17,10 +17,11 @@ After deployment, manually test a new vehicle, a price change and a sold vehicle
 - After a privacy review and approval, configure GA4_MEASUREMENT_ID as a Vercel Production environment variable and redeploy.
 - The GA4 script is disabled until a visitor grants separate explicit consent on the EN/FR privacy page. DNT, GPC, an existing measurement opt-out and preview domains disable tracking.
 - GA4 receives query-free page URLs, page paths and limited conversion actions. It never receives form contents or selected vehicle IDs as event parameters.
+- Both generic pages and EN/FR vehicle-detail pages embed the public measurement ID when configured at build or save time. The meta tag by itself does not trigger GA4 without user consent.
 - Events: generate_lead after successful contact form POST, click_to_call on phone links and contact_intent on contact-page links.
 - In GA4, mark generate_lead as a key event and test with GA4 Realtime / DebugView, using synthetic form data only.
 - Review enhanced measurement, consent, retention and applicable Quebec privacy requirements before enabling. This implementation is not a substitute for legal review.
-- Consent can be withdrawn on the privacy page. Previously set GA4 cookies may need to be cleared manually; withdrawal does not delete previously collected data.
+- Consent can be withdrawn on the privacy page. The site stops future GA4 tracking and attempts to expire accessible first-party _ga cookies for the current and parent domains. Previously collected GA4 data is not retroactively deleted. Browser-blocked or inaccessible cookie scopes may require manual removal.
 
 ## Limitations
 GA4 can report identifiable AI referral sessions but cannot isolate Google AI Overview clicks from ordinary Google search. Google Search Console remains the appropriate source for total Google organic clicks.
