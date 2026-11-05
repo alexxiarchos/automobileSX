@@ -1150,7 +1150,12 @@
       inventoryVersion = data.updatedAt || inventoryVersion;
       pendingBlobs = [];
       deletePaths = [];
-      toast(doneMsg || "Saved. The website is updating and will show changes in about a minute.", "ok");
+      if (Array.isArray(data.warnings) && data.warnings.length) {
+        console.warn("Inventory HTML publishing warnings:", data.warnings);
+        toast("Saved to GitHub, but some listing HTML could not be refreshed. Check the Vercel deployment before relying on the public pages.", "err");
+      } else {
+        toast(doneMsg || "Saved to GitHub. Vercel deployment may still be in progress.", "ok");
+      }
       return data;
     }).catch(function (e) {
       toast("Could not save: " + e.message, "err");

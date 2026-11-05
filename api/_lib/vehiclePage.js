@@ -383,6 +383,10 @@ function renderVehiclePage(v, lang) {
     : descParagraphs(v, lang);
   const rows = specRows(v, lang);
   const half = Math.ceil(rows.length / 2);
+  /* Expose only the public GA4 ID. js/metrics.js requires explicit visitor consent. */
+  const ga4Id = /^G-[A-Z0-9]+$/.test(process.env.GA4_MEASUREMENT_ID || "")
+    ? process.env.GA4_MEASUREMENT_ID : "";
+
   const ogImage = (v.images && v.images.length)
     ? SITE + "/" + String(v.images[0]).replace(/^\//, "")
     : SITE + "/assets/og-image.jpg";
@@ -422,7 +426,7 @@ function renderVehiclePage(v, lang) {
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#0D0D0D">
-<script>window.SX_ALT=${JSON.stringify(altUrl)};window.SX_PRERENDERED=true;</script>
+${ga4Id ? `<meta name="sx-ga4-id" content="${ga4Id}">\n` : ""}<script>window.SX_ALT=${JSON.stringify(altUrl)};window.SX_PRERENDERED=true;</script>
 <script type="application/ld+json">${schema(v, lang)}</script>
 </head>
 <body>

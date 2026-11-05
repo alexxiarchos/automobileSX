@@ -586,21 +586,25 @@ module.exports = {
 
   privacy: {
     title: "Privacy Policy | Automobile SX Dorval",
-    description: "How Automobile SX handles personal information and uses privacy-conscious, cookie-free website analytics.",
+    description: "How Automobile SX handles personal information, anonymous analytics and optional consent-based GA4 measurement.",
     h1: "Privacy policy",
-    sub: "What we collect, what we do not, and how to reach us about it. Last updated 14 August 2026.",
+    sub: "What we collect, what we do not, and how to reach us about it. Last updated 4 November 2026.",
     body: `
       <p>Automobile SX is a used car dealership at 2044 Avenue Chartier, Dorval, Quebec. This page explains what happens to personal information in connection with this website and our business. It is written to be accurate about how the site actually works rather than to cover every hypothetical.</p>
 
       <h2>What this website collects</h2>
-      <p>This site has <strong>no advertising trackers, no marketing pixels and no analytics cookies</strong>. We do not build advertising profiles or track visitors across websites.</p>
+      <p>We do not use advertising pixels or build advertising profiles. Our Vercel website measurements do not use analytics cookies. Google Analytics 4 (GA4), if enabled, is entirely optional and only loads after you explicitly agree below. GA4 may set analytics cookies.</p>
       <p>We use Vercel Web Analytics and Speed Insights to understand aggregate page traffic and real-world site performance. They may process the page path, referring site, approximate country or region, device and browser type, and measurements such as loading speed and layout stability. Vercel states that Web Analytics stores anonymized data, uses no cookies, does not associate activity with an IP address, and resets its visitor hash every 24 hours.</p>
-      <p>Before a page view is sent, this site removes the complete query string and fragment from the URL. We do not send names, email addresses, phone numbers, form contents, messages or other inquiry details to analytics. Analytics runs only on the public automobilesx.ca website, not in the admin panel or deployment previews. Browser Global Privacy Control and Do Not Track signals are respected.</p>
+      <p>For analytics page views, we remove query strings and fragments from page URLs. We do not intentionally send names, email addresses, phone numbers, form contents or messages to analytics. GA4, when enabled and explicitly allowed, records page views and limited contact actions including successful contact-form submissions. These events contain no contact details. Analytics is limited to the public site, not the admin panel or deployment previews. Browser Global Privacy Control and Do Not Track signals are respected.</p>
       <div class="privacy-controls">
         <p><strong>Anonymous site measurement on this browser:</strong> <span data-metrics-status data-on="On" data-off="Off">On</span></p>
         <button class="btn btn-outline" type="button" data-metrics-opt-out>Turn off anonymous measurement</button>
         <button class="btn btn-outline" type="button" data-metrics-opt-in hidden>Allow anonymous measurement</button>
         <p class="privacy-control-note">Turning it off saves only that preference in this browser. It applies to future page loads and does not affect the website.</p>
+        <p><strong>Optional Google Analytics 4:</strong> <span data-ga4-status data-on="Allowed" data-off="Not allowed" data-unavailable="Not configured">Not configured</span></p>
+        <p class="privacy-control-note">If configured, GA4 uses cookies to measure page views and contact actions. It is off by default and does not load unless you choose to allow it. You can withdraw permission here later. Withdrawing permission stops future GA4 tracking and expires accessible first-party GA4 cookies.</p>
+        <button class="btn btn-outline" type="button" data-ga4-consent hidden>Allow GA4 analytics cookies</button>
+        <button class="btn btn-outline" type="button" data-ga4-revoke hidden>Stop GA4 analytics</button>
         <noscript><p class="privacy-control-note">Analytics does not load when JavaScript is disabled.</p></noscript>
       </div>
       <p>When you use the contact form, the name, contact details, topic, vehicle selection, reply preference and message you enter are sent to Automobile SX by email. The website does not add that message to an inventory database, analytics service or marketing list.</p>

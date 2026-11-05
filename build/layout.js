@@ -209,6 +209,9 @@ function renderPage(page) {
     .map(s => `<script src="${s}" defer></script>`).join("\n");
 
   const ogImage = page.ogImage || "/assets/og-image.jpg";
+  /* Public GA4 Measurement ID only. The script requires a separate explicit opt-in. */
+  const ga4Id = /^G-[A-Z0-9]+$/.test(process.env.GA4_MEASUREMENT_ID || "")
+    ? process.env.GA4_MEASUREMENT_ID : "";
 
   return `<!DOCTYPE html>
 <html lang="${lang === "fr" ? "fr-CA" : "en-CA"}" data-route="${route}">
@@ -239,6 +242,7 @@ ${page.skipCanonical ? "" : `<link rel="canonical" href="${canonical}">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#0D0D0D">
+${ga4Id ? `<meta name="sx-ga4-id" content="${ga4Id}">` : ""}
 <script>window.SX_ALT=${JSON.stringify(altPath)};</script>
 <script type="application/ld+json">${jsonld}</script>
 </head>
