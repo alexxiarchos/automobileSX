@@ -32,6 +32,32 @@
     return productionHost && !disabled() && ga4Configured &&
       setting(GA4_CONSENT_KEY) === "granted";
   }
+  /* GA4 sets first-party _ga cookies after consent. Revoke permission before
+     clearing these cookies so no further GA4 events are queued. Do not touch
+     unrelated first-party cookies, including the dealer's own preferences. */
+  function clearGa4Cookies() {
+    if (!productionHost) return;
+    var existing;
+    try { existing = document.cookie || ""; } catch (_) { return; }
+    existing.split(";").forEach(function (entry) {
+      var name = entry.split("=")[0].trim();
+      if (!/^_ga(?:_|$)/.test(name)) return;
+      [null, location.hostname, ".automobilesx.ca"].forEach(function (domain) {
+        var expiry = name + "=; Max-Age=0; Path=/; SameSite=Lax; Secure" +
+          (domain ? "; Domain=" + domain : "");
+        try { document.cookie = expiry; }
+        catch (_) { /* Some cookie scopes may be unavailable to this page. */ }
+      });
+    });
+  }
+  function revokeGa4() {
+    saveSetting(GA4_CONSENT_KEY, null);
+    if (typeof window.gtag === "function") {
+      window.gtag("consent", "update", { analytics_storage: "denied" });
+    }
+    clearGa4Cookies();
+    location.reload();
+  }
   function updateControls() {
     var isDisabled = disabled();
     document.querySelectorAll("[data-metrics-status]").forEach(function (el) {
@@ -41,8 +67,7 @@
       button.hidden = isDisabled;
       button.onclick = function () {
         saveSetting(STORAGE_KEY, "1");
-        saveSetting(GA4_CONSENT_KEY, null);
-        location.reload();
+        revokeGa4();
       };
     });
     document.querySelectorAll("[data-metrics-opt-in]").forEach(function (button) {
@@ -62,8 +87,7 @@
     document.querySelectorAll("[data-ga4-revoke]").forEach(function (button) {
       button.hidden = !ga4Allowed();
       button.onclick = function () {
-        saveSetting(GA4_CONSENT_KEY, null);
-        location.reload();
+        revokeGa4();
       };
     });
     document.querySelectorAll("[data-ga4-status]").forEach(function (el) {
