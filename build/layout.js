@@ -241,7 +241,8 @@ ${page.skipCanonical ? "" : `<link rel="canonical" href="${canonical}">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#0D0D0D">\n${ga4Id ? `<meta name="sx-ga4-id" content="${ga4Id}">` : ""}
+<meta name="theme-color" content="#0D0D0D">
+${ga4Id ? `<meta name="sx-ga4-id" content="${ga4Id}">` : ""}
 <script>window.SX_ALT=${JSON.stringify(altPath)};</script>
 <script type="application/ld+json">${jsonld}</script>
 </head>
