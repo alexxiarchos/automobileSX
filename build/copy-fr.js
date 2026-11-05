@@ -571,21 +571,25 @@ module.exports = {
 
   privacy: {
     title: "Politique de confidentialité | Automobile SX Dorval",
-    description: "Comment Automobile SX traite les renseignements personnels et utilise des mesures d'audience sans témoins, axées sur la confidentialité.",
+    description: "Comment Automobile SX protège les renseignements personnels et utilise les mesures anonymes ou GA4 avec consentement.",
     h1: "Politique de confidentialité",
     sub: "Ce que nous recueillons, ce que nous ne recueillons pas, et comment nous joindre à ce sujet. Mise à jour le 14 août 2026.",
     body: `
       <p>Automobile SX est un commerce de véhicules d'occasion situé au 2044, avenue Chartier, à Dorval, au Québec. Cette page explique ce qu'il advient des renseignements personnels en lien avec ce site et notre entreprise. Elle décrit le fonctionnement réel du site plutôt que toutes les situations hypothétiques.</p>
 
       <h2>Ce que ce site recueille</h2>
-      <p>Ce site n'utilise <strong>aucun traceur publicitaire, aucun pixel marketing et aucun témoin d'analyse</strong>. Nous ne créons pas de profils publicitaires et ne suivons pas les visiteurs d'un site à l'autre.</p>
+      <p>Ce site ne comporte aucun pixel publicitaire et ne crée pas de profil publicitaire. Les mesures Vercel n'utilisent pas de témoins d'analyse. Google Analytics 4 (GA4), si configuré, ne se charge qu'après votre consentement explicite ci-dessous. GA4 peut utiliser des témoins d'analyse.</p>
       <p>Nous utilisons Vercel Web Analytics et Speed Insights pour comprendre l'achalandage global des pages et le rendement réel du site. Ces outils peuvent traiter le chemin de la page, le site référent, le pays ou la région approximative, le type d'appareil et de navigateur, ainsi que des mesures comme la vitesse de chargement et la stabilité visuelle. Vercel indique que Web Analytics conserve des données anonymisées, n'utilise aucun témoin, n'associe pas l'activité à une adresse IP et renouvelle son empreinte de visiteur toutes les 24 heures.</p>
-      <p>Avant l'envoi d'une consultation de page, ce site retire toute la chaîne de requête et le fragment de l'adresse URL. Nous n'envoyons aux outils d'analyse aucun nom, adresse courriel, numéro de téléphone, contenu de formulaire, message ou autre détail d'une demande. Les mesures fonctionnent seulement sur le site public automobilesx.ca, jamais dans le panneau d'administration ni sur les aperçus de déploiement. Les signaux Global Privacy Control et Do Not Track du navigateur sont respectés.</p>
+      <p>Pour les consultations de pages mesurées, nous retirons les paramètres et les fragments des adresses URL. Nous n'envoyons volontairement aux outils d'analyse aucun nom, courriel, numéro de téléphone ni contenu des formulaires. Avec votre accord explicite, GA4 mesure les pages consultées et certaines actions de contact, dont l'envoi réussi d'un formulaire, sans transmettre les coordonnées du client. Les mesures ne fonctionnent que sur le site public, jamais dans l'administration ou les aperçus. Les signaux Global Privacy Control et Do Not Track sont respectés.</p>
       <div class="privacy-controls">
         <p><strong>Mesure anonyme du site dans ce navigateur :</strong> <span data-metrics-status data-on="Activée" data-off="Désactivée">Activée</span></p>
         <button class="btn btn-outline" type="button" data-metrics-opt-out>Désactiver la mesure anonyme</button>
         <button class="btn btn-outline" type="button" data-metrics-opt-in hidden>Autoriser la mesure anonyme</button>
         <p class="privacy-control-note">La désactivation enregistre uniquement cette préférence dans ce navigateur. Elle s'applique aux prochaines pages chargées et ne nuit pas au fonctionnement du site.</p>
+        <p><strong>Google Analytics 4 facultatif :</strong> <span data-ga4-status data-on="Autorisé" data-off="Non autorisé" data-unavailable="Non configuré">Non configuré</span></p>
+        <p class="privacy-control-note">Si configuré, GA4 utilise des témoins pour mesurer les consultations et les actions de contact. Il est désactivé par défaut. Vous pouvez retirer votre consentement ici.</p>
+        <button class="btn btn-outline" type="button" data-ga4-consent hidden>Autoriser les témoins GA4</button>
+        <button class="btn btn-outline" type="button" data-ga4-revoke hidden>Arrêter la mesure GA4</button>
         <noscript><p class="privacy-control-note">Les mesures ne sont pas chargées lorsque JavaScript est désactivé.</p></noscript>
       </div>
       <p>Lorsque vous utilisez le formulaire de contact, le nom, les coordonnées, le sujet, le véhicule sélectionné, la préférence de réponse et le message que vous saisissez sont transmis par courriel à Automobile SX. Le site n'ajoute pas ce message à une base de données d'inventaire, à un service d'analyse ni à une liste de marketing.</p>
