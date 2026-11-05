@@ -45,20 +45,31 @@ function replaceRegion(html, inner) {
 
 /* readFile is passed in rather than imported so this stays testable without a
    network, and so the caller decides which branch is being read. */
-async function renderListingPages(vehicles, readFile) {
+async function renderListingPages(vehicles, readFile, reportWarning) {
+  function warn(message) {
+    if (typeof reportWarning === "function") reportWarning(message);
+  }
   const out = [];
   for (const t of TARGETS) {
     let html;
     try {
       html = await readFile(t.path);
     } catch (e) {
-      continue;                       /* page not in the repo yet: skip it */
+      warn("Could not read " + t.path + " for listing regeneration");
+      continue;
     }
-    if (!html) continue;
+    if (!html) {
+      warn("Missing " + t.path + " during listing regeneration");
+      continue;
+    }
 
     const inner = cards.grid(vehicles, t.lang, t.limit || 0, t.eagerCount);
     const next = replaceRegion(html, inner);
-    if (next === null || next === html) continue;   /* no fences, or no change */
+    if (next === null) {
+      warn("Missing inventory card markers in " + t.path);
+      continue;
+    }
+    if (next === html) continue;
     out.push({ path: t.path, content: next });
   }
   return out;
