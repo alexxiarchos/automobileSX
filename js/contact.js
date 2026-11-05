@@ -159,6 +159,8 @@ SX.ready.then(function () {
         })
       });
       if (!response.ok) throw new Error("Contact request failed");
+      /* Only count an actual successful form submission, never failed attempts. */
+      document.dispatchEvent(new Event("sx:contact-success"));
       form.hidden = true;
       var success = document.getElementById("form-success");
       success.style.display = "block";
