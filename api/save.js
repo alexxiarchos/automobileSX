@@ -113,12 +113,18 @@ module.exports = async function (req, res) {
        build time, so the card region is rewritten on every save. Failing to
        update them must never fail the save itself: the inventory JSON is the
        source of truth and the browser still fills the grid either way. */
+    const publishWarnings = [];
     try {
-      const listing = await renderListingPages(live, readTextFile);
+      const listing = await renderListingPages(live, readTextFile, function (warning) {
+        publishWarnings.push(warning);
+      });
       listing.forEach(function (page) {
         newFiles.push({ path: page.path, content: page.content });
       });
-    } catch (e) { /* listing pages left as they were */ }
+    } catch (e) {
+      publishWarnings.push("Could not refresh listing HTML. A successful site rebuild should regenerate it.");
+      console.error("Listing regeneration failed", e && e.message ? e.message : "unknown");
+    }
 
     /* Remove pages for vehicles that were deleted or moved back to draft */
     const liveIds = new Set(live.map(function (v) { return v.id; }));
@@ -151,7 +157,7 @@ module.exports = async function (req, res) {
     }
 
     res.statusCode = 200;
-    res.end(JSON.stringify(Object.assign({}, result, { indexNow: indexNow, updatedAt: json.updatedAt })));
+    res.end(JSON.stringify(Object.assign({}, result, { indexNow: indexNow, updatedAt: json.updatedAt, warnings: publishWarnings })));
   } catch (e) {
     res.statusCode = e.statusCode || 500;
     res.end(JSON.stringify({ error: e.message }));
