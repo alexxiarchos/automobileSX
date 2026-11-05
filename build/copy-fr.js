@@ -573,7 +573,7 @@ module.exports = {
     title: "Politique de confidentialité | Automobile SX Dorval",
     description: "Comment Automobile SX protège les renseignements personnels et utilise les mesures anonymes ou GA4 avec consentement.",
     h1: "Politique de confidentialité",
-    sub: "Ce que nous recueillons, ce que nous ne recueillons pas, et comment nous joindre à ce sujet. Mise à jour le 14 août 2026.",
+    sub: "Ce que nous recueillons, ce que nous ne recueillons pas, et comment nous joindre à ce sujet. Mise à jour le 4 novembre 2026.",
     body: `
       <p>Automobile SX est un commerce de véhicules d'occasion situé au 2044, avenue Chartier, à Dorval, au Québec. Cette page explique ce qu'il advient des renseignements personnels en lien avec ce site et notre entreprise. Elle décrit le fonctionnement réel du site plutôt que toutes les situations hypothétiques.</p>
 
@@ -587,7 +587,7 @@ module.exports = {
         <button class="btn btn-outline" type="button" data-metrics-opt-in hidden>Autoriser la mesure anonyme</button>
         <p class="privacy-control-note">La désactivation enregistre uniquement cette préférence dans ce navigateur. Elle s'applique aux prochaines pages chargées et ne nuit pas au fonctionnement du site.</p>
         <p><strong>Google Analytics 4 facultatif :</strong> <span data-ga4-status data-on="Autorisé" data-off="Non autorisé" data-unavailable="Non configuré">Non configuré</span></p>
-        <p class="privacy-control-note">Si configuré, GA4 utilise des témoins pour mesurer les consultations et les actions de contact. Il est désactivé par défaut. Vous pouvez retirer votre consentement ici.</p>
+        <p class="privacy-control-note">Si configuré, GA4 utilise des témoins pour mesurer les consultations et les actions de contact. Il est désactivé par défaut. Vous pouvez retirer votre consentement ici. Le retrait arrête les mesures futures et supprime les témoins GA4 propriétaires accessibles.</p>
         <button class="btn btn-outline" type="button" data-ga4-consent hidden>Autoriser les témoins GA4</button>
         <button class="btn btn-outline" type="button" data-ga4-revoke hidden>Arrêter la mesure GA4</button>
         <noscript><p class="privacy-control-note">Les mesures ne sont pas chargées lorsque JavaScript est désactivé.</p></noscript>
