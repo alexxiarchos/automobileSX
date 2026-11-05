@@ -95,7 +95,7 @@ test("consented GA4 sends a sanitized page URL and lead event", function () {
   assert.equal(args[0], "event");
   assert.equal(args[1], "generate_lead");
   assert.equal(args[2].page_location, "https://www.automobilesx.ca/contact");
-  assert(!JSON.stringify(result.tags.map(Array.from)).includes("secret"));
+  assert(!JSON.stringify(result.tags.map(function (item) { return Array.from(item); })).includes("secret"));
 });
 
 test("privacy signals and preview deployments disable GA4", function () {
