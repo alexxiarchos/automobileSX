@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T20:44:47.890Z",
+  "updatedAt": "2026-11-06T20:45:32.578Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-golf-sportwagen-lx5c3",
@@ -143,7 +143,7 @@
         "images/vehicles/2018-kia-forte-6nh1x/mvtzmjey-14.jpg",
         "images/vehicles/2018-kia-forte-6nh1x/mvtzmked-15.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -155,8 +155,9 @@
         "remarks": ""
       },
       "createdAt": "2026-10-29T15:38:52.094Z",
-      "updatedAt": "2026-10-29T20:20:33.395Z",
+      "updatedAt": "2026-11-06T20:45:32.193Z",
       "publishedAt": "2026-10-29T20:20:33.395Z",
+      "soldAt": "2026-11-06T20:45:32.193Z",
       "posts": []
     },
     {
