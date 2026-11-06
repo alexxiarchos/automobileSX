@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T20:43:58.835Z",
+  "updatedAt": "2026-11-06T20:44:09.516Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-golf-sportwagen-lx5c3",
@@ -886,102 +886,6 @@
           "id": "101868772570376_1168009982644522",
           "url": "https://www.facebook.com/101868772570376_1168009982644522",
           "at": "2026-09-22T14:43:30.034Z"
-        }
-      ]
-    },
-    {
-      "id": "2018-audi-q5-ax7p4",
-      "year": 2018,
-      "make": "Audi",
-      "model": "Q5",
-      "trim": "",
-      "body": "SUV",
-      "price": 17999,
-      "km": 93000,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Black",
-      "extHex": "#141518",
-      "intColor": "Black",
-      "engine": "2.0L I4",
-      "econCity": "",
-      "econHwy": "",
-      "doors": 4,
-      "seats": 5,
-      "vin": "WA1ANAFY4J2123762",
-      "stock": "SX-1020",
-      "tag": "",
-      "features": [
-        "Backup Camera",
-        "Parking Sensors",
-        "Air Conditioning",
-        "Dual-Zone Climate Control",
-        "Heated Seats",
-        "Leather Seats",
-        "Power Driver Seat",
-        "Memory Seats",
-        "Bluetooth",
-        "Apple CarPlay",
-        "Keyless Entry",
-        "Push-Button Start",
-        "Cruise Control",
-        "Power Liftgate",
-        "Alloy Wheels"
-      ],
-      "desc": "",
-      "descFr": "",
-      "descMode": "auto",
-      "descNote": "",
-      "descNoteFr": "",
-      "draftNotes": {
-        "ownership": ""
-      },
-      "images": [
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw5sir-1.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw5tus-2.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw5us9-3.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw5vp5-4.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw5wpx-5.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw5xld-6.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw5yjj-7.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw5zj5-8.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw60d0-9.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw615p-10.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw61t6-11.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw62i5-12.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw63cn-13.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw6451-14.jpg",
-        "images/vehicles/2018-audi-q5-ax7p4/mtvw64sc-15.jpg"
-      ],
-      "status": "sold",
-      "opc": {
-        "classOverride": "",
-        "priorUse": "personal",
-        "priorOwner": "",
-        "extended": "",
-        "powertrain": "",
-        "manufacturer": "",
-        "repairs": "",
-        "remarks": ""
-      },
-      "createdAt": "2026-09-09T20:29:03.711Z",
-      "updatedAt": "2026-09-14T21:02:54.216Z",
-      "publishedAt": "2026-09-09T20:30:43.571Z",
-      "soldAt": "2026-09-14T21:02:54.216Z",
-      "soldAnnouncedAt": "2026-09-14T21:03:04.869Z",
-      "posts": [
-        {
-          "target": "facebook",
-          "id": "101868772570376_1157914826987371",
-          "url": "https://www.facebook.com/101868772570376_1157914826987371",
-          "at": "2026-09-10T19:01:18.692Z"
-        },
-        {
-          "target": "instagram",
-          "id": "18115577675151955",
-          "url": "https://www.instagram.com/p/DdHidvomorO/",
-          "at": "2026-09-10T19:01:18.692Z"
         }
       ]
     },
