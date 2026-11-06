@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T19:55:02.908Z",
+  "updatedAt": "2026-11-06T20:43:50.404Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-golf-sportwagen-lx5c3",
@@ -669,7 +669,7 @@
         "images/vehicles/2017-nissan-rogue-kxtxj/muh7t1ex-44.jpg",
         "images/vehicles/2017-nissan-rogue-kxtxj/muh7t2jd-45.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -681,8 +681,9 @@
         "remarks": ""
       },
       "createdAt": "2026-09-25T17:05:28.800Z",
-      "updatedAt": "2026-09-25T17:17:39.645Z",
+      "updatedAt": "2026-11-06T20:43:49.173Z",
       "publishedAt": "2026-09-25T17:09:06.386Z",
+      "soldAt": "2026-11-06T20:43:49.173Z",
       "posts": [
         {
           "target": "facebook",
