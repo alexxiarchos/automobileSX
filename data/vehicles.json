@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T20:45:32.578Z",
+  "updatedAt": "2026-11-07T01:07:38.520Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-golf-sportwagen-lx5c3",
@@ -330,7 +330,20 @@
       "createdAt": "2026-10-21T15:02:33.784Z",
       "updatedAt": "2026-11-04T19:45:35.066Z",
       "publishedAt": "2026-11-04T19:45:35.066Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1212104371568416",
+          "url": "https://www.facebook.com/101868772570376_1212104371568416",
+          "at": "2026-11-07T01:07:37.738Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18100070144655217",
+          "url": "https://www.instagram.com/p/Dfa9tzHl08-/",
+          "at": "2026-11-07T01:07:37.738Z"
+        }
+      ]
     },
     {
       "id": "2018-volkswagen-atlas-rnl6y",
