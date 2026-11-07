@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07T01:07:38.520Z",
+  "updatedAt": "2026-11-07T01:08:36.112Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-golf-sportwagen-lx5c3",
@@ -78,7 +78,20 @@
       "createdAt": "2026-10-29T20:09:41.217Z",
       "updatedAt": "2026-10-29T22:43:02.465Z",
       "publishedAt": "2026-10-29T20:19:27.857Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1212106171568236",
+          "url": "https://www.facebook.com/101868772570376_1212106171568236",
+          "at": "2026-11-07T01:08:35.804Z"
+        },
+        {
+          "target": "instagram",
+          "id": "18138392116644882",
+          "url": "https://www.instagram.com/p/Dfa91D_F_hZ/",
+          "at": "2026-11-07T01:08:35.804Z"
+        }
+      ]
     },
     {
       "id": "2018-kia-forte-6nh1x",
