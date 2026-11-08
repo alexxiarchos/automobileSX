@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T18:33:18.929Z",
+  "updatedAt": "2026-11-08T18:33:49.183Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-golf-sportwagen-lx5c3",
@@ -440,95 +440,6 @@
           "id": "18645464704036618",
           "url": "https://www.instagram.com/p/Deu3tf3jFEG/",
           "at": "2026-10-20T22:08:31.260Z"
-        }
-      ]
-    },
-    {
-      "id": "2016-mercedes-benz-b-class-2qik1",
-      "year": 2016,
-      "make": "Mercedes-Benz",
-      "model": "B-Class",
-      "trim": "Sports tourer",
-      "body": "Hatchback",
-      "price": 9999,
-      "km": 77400,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "Black",
-      "extHex": "#141518",
-      "intColor": "Leather",
-      "engine": "2.0L I4",
-      "econCity": "",
-      "econHwy": "",
-      "doors": 5,
-      "seats": 5,
-      "vin": "WDDMH4GB1GJ398614",
-      "stock": "SX-1028",
-      "tag": "",
-      "features": [
-        "Air Conditioning",
-        "Dual-Zone Climate Control",
-        "Heated Seats",
-        "Leather Seats",
-        "Bluetooth",
-        "Keyless Entry",
-        "Push-Button Start",
-        "Cruise Control",
-        "Alloy Wheels"
-      ],
-      "desc": "",
-      "descFr": "",
-      "descMode": "auto",
-      "descNote": "",
-      "descNoteFr": "",
-      "draftNotes": {
-        "ownership": ""
-      },
-      "images": [
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imifn-1.jpg",
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imjz9-2.jpg",
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8iml0m-3.jpg",
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imlym-4.jpg",
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8immy7-5.jpg",
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imo6j-6.jpg",
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imp6j-7.jpg",
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imqet-8.jpg",
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imrdp-9.jpg",
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imsev-10.jpg",
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imtmb-11.jpg",
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imuls-12.jpg",
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imvu9-13.jpg",
-        "images/vehicles/2016-mercedes-benz-b-class-2qik1/mv8imwxe-14.jpg"
-      ],
-      "status": "sold",
-      "opc": {
-        "classOverride": "",
-        "priorUse": "personal",
-        "priorOwner": "",
-        "extended": "",
-        "powertrain": "",
-        "manufacturer": "",
-        "repairs": "",
-        "remarks": ""
-      },
-      "createdAt": "2026-10-14T17:02:44.844Z",
-      "updatedAt": "2026-10-20T08:04:49.856Z",
-      "publishedAt": "2026-10-14T19:41:49.660Z",
-      "soldAt": "2026-10-20T08:04:49.856Z",
-      "soldAnnouncedAt": "2026-10-20T08:05:01.936Z",
-      "posts": [
-        {
-          "target": "facebook",
-          "id": "101868772570376_1189323817179805",
-          "url": "https://www.facebook.com/101868772570376_1189323817179805",
-          "at": "2026-10-14T19:45:08.031Z"
-        },
-        {
-          "target": "instagram",
-          "id": "18076141631729897",
-          "url": "https://www.instagram.com/p/DefKhiNF2At/",
-          "at": "2026-10-14T19:45:08.031Z"
         }
       ]
     },
