@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07T01:08:36.112Z",
+  "updatedAt": "2026-11-08T18:33:18.929Z",
   "vehicles": [
     {
       "id": "2018-volkswagen-golf-sportwagen-lx5c3",
@@ -718,112 +718,6 @@
           "id": "101868772570376_1170906365688217",
           "url": "https://www.facebook.com/101868772570376_1170906365688217",
           "at": "2026-09-25T17:09:32.726Z"
-        }
-      ]
-    },
-    {
-      "id": "2017-cadillac-xt5-c33m5",
-      "year": 2017,
-      "make": "Cadillac",
-      "model": "XT5",
-      "trim": "",
-      "body": "SUV",
-      "price": 16999,
-      "km": 118000,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "AWD",
-      "extColor": "White",
-      "extHex": "#eceae6",
-      "intColor": "Beige",
-      "engine": "3.6L V6",
-      "econCity": "",
-      "econHwy": "",
-      "doors": 4,
-      "seats": 5,
-      "vin": "1GYKNDRSXHZ261885",
-      "stock": "SX-1025",
-      "tag": "",
-      "features": [
-        "Backup Camera",
-        "Parking Sensors",
-        "Blind Spot Monitoring",
-        "Lane Departure Warning",
-        "Lane Keep Assist",
-        "Forward Collision Warning",
-        "Automatic Emergency Braking",
-        "Automatic High Beams",
-        "Air Conditioning",
-        "Dual-Zone Climate Control",
-        "Heated Seats",
-        "Heated Steering Wheel",
-        "Leather Seats",
-        "Power Driver Seat",
-        "Memory Seats",
-        "Sunroof",
-        "Panoramic Roof",
-        "Bluetooth",
-        "Touchscreen Display",
-        "Navigation",
-        "Keyless Entry",
-        "Push-Button Start",
-        "Remote Start",
-        "Cruise Control",
-        "Power Liftgate",
-        "Alloy Wheels"
-      ],
-      "desc": "",
-      "descFr": "",
-      "descMode": "auto",
-      "descNote": "",
-      "descNoteFr": "",
-      "draftNotes": {
-        "ownership": ""
-      },
-      "images": [
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh25t8e-1.jpg",
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh25uus-2.jpg",
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh25vub-3.jpg",
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh25wtn-4.jpg",
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh25xkc-5.jpg",
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh25yk6-6.jpg",
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh25zjh-7.jpg",
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh260a8-8.jpg",
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh2614y-9.jpg",
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh2620c-10.jpg",
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh262qe-11.jpg",
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh263hs-12.jpg",
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh264h9-13.jpg",
-        "images/vehicles/2017-cadillac-xt5-c33m5/muh265ha-14.jpg"
-      ],
-      "status": "sold",
-      "opc": {
-        "classOverride": "",
-        "priorUse": "personal",
-        "priorOwner": "",
-        "extended": "",
-        "powertrain": "",
-        "manufacturer": "",
-        "repairs": "",
-        "remarks": ""
-      },
-      "createdAt": "2026-09-23T22:49:10.382Z",
-      "updatedAt": "2026-10-24T17:20:23.491Z",
-      "publishedAt": "2026-09-25T14:31:20.460Z",
-      "soldAt": "2026-10-24T17:20:23.491Z",
-      "soldAnnouncedAt": "2026-10-24T17:20:33.698Z",
-      "posts": [
-        {
-          "target": "facebook",
-          "id": "101868772570376_1170780719034115",
-          "url": "https://www.facebook.com/101868772570376_1170780719034115",
-          "at": "2026-09-25T14:35:27.824Z"
-        },
-        {
-          "target": "instagram",
-          "id": "18069092912760299",
-          "url": "https://www.instagram.com/p/Ddtr_FPlwMv/",
-          "at": "2026-09-25T14:35:27.824Z"
         }
       ]
     },
