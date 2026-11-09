@@ -126,7 +126,7 @@ test("privacy signals and preview deployments disable GA4", function () {
     assert(!result.scripts.some(function (src) { return src.includes("googletagmanager"); }));
   }
 });
-test("GA4 ID is emitted for generic and both vehicle detail pages, and omitted otherwise", function () {
+test("GA4 ID uses the configured property by default and permits a validated override", function () {
   assert(vehicleFixture, "a published vehicle test fixture is required");
   const original = process.env.GA4_MEASUREMENT_ID;
   try {
@@ -138,11 +138,12 @@ test("GA4 ID is emitted for generic and both vehicle detail pages, and omitted o
       assert.match(page.html, /<meta name="sx-ga4-id" content="G-TEST123">/, page.path);
     }
     delete process.env.GA4_MEASUREMENT_ID;
-    assert.doesNotMatch(renderPage({ route: "contact", lang: "fr", title: "Contact", description: "Contact", body: "" }), /sx-ga4-id/);
+    assert.match(renderPage({ route: "contact", lang: "fr", title: "Contact", description: "Contact", body: "" }), /<meta name="sx-ga4-id" content="G-JR2QS0T6VC">/);
     for (const page of renderVehiclePages(vehicleFixture)) {
-      assert.doesNotMatch(page.html, /sx-ga4-id/, page.path);
+      assert.match(page.html, /<meta name="sx-ga4-id" content="G-JR2QS0T6VC">/, page.path);
     }
     process.env.GA4_MEASUREMENT_ID = "INVALID";
+    assert.doesNotMatch(renderPage({ route: "contact", lang: "fr", title: "Contact", description: "Contact", body: "" }), /sx-ga4-id/);
     for (const page of renderVehiclePages(vehicleFixture)) {
       assert.doesNotMatch(page.html, /sx-ga4-id/, page.path);
     }
