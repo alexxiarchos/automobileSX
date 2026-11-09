@@ -3,6 +3,7 @@
    footer and structured data stay identical across 28 pages and two languages. */
 
 const SITE = "https://www.automobilesx.ca";
+const { ga4MeasurementId } = require("./ga4Config.js");
 
 const ROUTES = {
   en: {
@@ -210,8 +211,7 @@ function renderPage(page) {
 
   const ogImage = page.ogImage || "/assets/og-image.jpg";
   /* Public GA4 Measurement ID only. The script requires a separate explicit opt-in. */
-  const ga4Id = /^G-[A-Z0-9]+$/.test(process.env.GA4_MEASUREMENT_ID || "")
-    ? process.env.GA4_MEASUREMENT_ID : "";
+  const ga4Id = ga4MeasurementId();
 
   return `<!DOCTYPE html>
 <html lang="${lang === "fr" ? "fr-CA" : "en-CA"}" data-route="${route}">
