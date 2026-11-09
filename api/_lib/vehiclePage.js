@@ -4,6 +4,7 @@
    detail.js still runs on top for the gallery, calculator and similar vehicles. */
 
 const SITE = "https://www.automobilesx.ca";
+const { ga4MeasurementId } = require("../../build/ga4Config.js");
 
 /* The same catalogue the admin panel ticks and the browser re-renders with, so
    the pre-rendered French page and the hydrated one agree word for word. */
@@ -384,8 +385,7 @@ function renderVehiclePage(v, lang) {
   const rows = specRows(v, lang);
   const half = Math.ceil(rows.length / 2);
   /* Expose only the public GA4 ID. js/metrics.js requires explicit visitor consent. */
-  const ga4Id = /^G-[A-Z0-9]+$/.test(process.env.GA4_MEASUREMENT_ID || "")
-    ? process.env.GA4_MEASUREMENT_ID : "";
+  const ga4Id = ga4MeasurementId();
 
   const ogImage = (v.images && v.images.length)
     ? SITE + "/" + String(v.images[0]).replace(/^\//, "")
