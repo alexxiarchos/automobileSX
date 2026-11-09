@@ -13,8 +13,9 @@ After deployment, manually test a new vehicle, a price change and a sold vehicle
 
 ## Optional GA4 setup
 - The existing Vercel Analytics remains the default cookieless measurement.
-- Obtain a public measurement ID (format G-...) from your GA4 web stream.
-- After a privacy review and approval, configure GA4_MEASUREMENT_ID as a Vercel Production environment variable and redeploy.
+- The public GA4 measurement ID is configured in `build/ga4Config.js` as `G-JR2QS0T6VC`, so no additional Vercel environment variable is needed.
+- Optionally override it with a valid `GA4_MEASUREMENT_ID` environment variable. An invalid nonempty override disables GA4.
+- Deploying this change makes the ID available to pages, but does not load Google Analytics or send events until the visitor explicitly consents.
 - The GA4 script is disabled until a visitor grants separate explicit consent on the EN/FR privacy page. DNT, GPC, an existing measurement opt-out and preview domains disable tracking.
 - GA4 receives query-free page URLs, page paths and limited conversion actions. It never receives form contents or selected vehicle IDs as event parameters.
 - Both generic pages and EN/FR vehicle-detail pages embed the public measurement ID when configured at build or save time. The meta tag by itself does not trigger GA4 without user consent.
