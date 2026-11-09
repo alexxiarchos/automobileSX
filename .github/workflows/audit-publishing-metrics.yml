@@ -38,7 +38,7 @@ jobs:
           node --check build/layout.js
           node --check build/copy-en.js
           node --check build/copy-fr.js
-      - name: Test publishing warnings and GA4 consent
+      - name: Test publishing and privacy-conscious metrics
         run: node --test tests/publishing-metrics.test.js
       - name: Test inventory snapshot and sitemap coverage
         run: |
