@@ -73,12 +73,12 @@ function renderCards(vehicles) {
 function prosePage(T, key, extraSchema) {
   const c = T[key];
   const breadcrumb = c.showBreadcrumbs ? `
-  <div class="container">
+  <div class="container guide-breadcrumb-wrap">
     <nav class="breadcrumb" aria-label="${T.lang === "fr" ? "Fil d'Ariane" : "Breadcrumb"}">
       <ol>
         <li><a href="${T.R.home}">${T.lang === "fr" ? "Accueil" : "Home"}</a></li>
         <li><a href="${T.R.guides}">${T.lang === "fr" ? "Guides d'achat" : "Buying guides"}</a></li>
-        <li aria-current="page">${c.h1}</li>
+        <li aria-current="page">${c.breadcrumbLabel || c.h1}</li>
       </ol>
     </nav>
   </div>` : "";
@@ -271,7 +271,7 @@ async function build() {
         ogImage: T[g].image,
         ogImageAlt: T[g].imageAlt,
         schema: [articleSchema(T, g, lang)],
-        breadcrumb: [bcHome, { name: T.guides.h1, route: "guides" }, { name: T[g].h1, route: g }]
+        breadcrumb: [bcHome, { name: T.guides.h1, route: "guides" }, { name: T[g].breadcrumbLabel || T[g].h1, route: g }]
       });
     });
 
