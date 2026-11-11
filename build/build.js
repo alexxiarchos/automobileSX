@@ -263,7 +263,7 @@ async function build() {
       }
     ];
 
-    ["g1", "g2", "g3", "g4", "g5", "g6"].forEach(g => {
+    ["g1", "g2", "g3", "g4", "g5", "g6", "g7"].forEach(g => {
       pages.push({
         route: g, title: T[g].title, description: T[g].description,
         ...prosePage(T, g),

@@ -40,6 +40,7 @@ const ctaCard = `
 const accuracyNote = `<p class="accuracy-note">L'information de cette page reflète les règles québécoises vérifiées en novembre 2026 et est fournie à titre indicatif seulement. Il ne s'agit pas d'un avis juridique ou financier. Les règles et les tarifs changent : validez les détails pertinents auprès de l'<a href="https://www.opc.gouv.qc.ca/consommateur/bien-service/vehicule/auto-achat/conseil/occasion-commercant" target="_blank" rel="noopener">Office de la protection du consommateur</a>, de la <a href="https://saaq.gouv.qc.ca/immatriculation" target="_blank" rel="noopener">SAAQ</a> et de <a href="https://www.revenuquebec.ca/fr/citoyens/taxes/biens-et-services-taxables-detaxes-ou-exoneres/tps-et-tvq/transport-et-vehicules-routiers/vehicules-routiers-citoyens/achat-dun-vehicule-routier/achat-dun-vehicule-routier-usage-dun-commercant/" target="_blank" rel="noopener">Revenu Québec</a>.</p>`;
 
 const guideCards = [
+  { h: "Acheter une auto usag\u00e9e en hiver", p: "Comprenez les r\u00e8gles sur les pneus d'hiver et planifiez la pose avant de repartir.", href: R.g7 },
   { h: "Budget d'auto usagée au Québec", p: "Partez d'une limite totale et comparez les coûts d'achat et d'utilisation.", href: R.g5 },
   { h: "Inspection d'une auto usagée à Dorval", p: "Organisez une inspection indépendante et utilisez les constats écrits.", href: R.g6 },
   { h: "Acheter une voiture usagée au Québec", p: "Taxes, garantie légale, étiquette obligatoire et vérifications avant de signer.", href: R.g1 },
@@ -456,8 +457,8 @@ module.exports = {
       <h2>L'assurance avant de partir</h2>
       <p>La couverture pour les blessures corporelles vient du régime public québécois, mais la responsabilité civile et la couverture du véhicule sont privées et obligatoires. Appelez votre assureur avec le numéro d'identification du véhicule avant le jour de la livraison ; la plupart activent la couverture en quelques minutes.</p>
 
-      <h2>La règle des pneus d'hiver pour les nouveaux acheteurs</h2>
-      <p>Les pneus d'hiver sont obligatoires au Québec du 1<sup>er</sup> décembre au 15 mars sur tout véhicule immatriculé ici, sous peine d'amendes de 200 $ à 300 $. Une exemption vaut la peine d'être connue si vous achetez en décembre : un véhicule acquis depuis moins de sept jours est exempté, ce qui vous laisse une semaine pour faire installer les pneus. Ne traitez pas cette semaine comme facultative.</p>
+      <h2>Les pneus d'hiver après l'achat d'une auto usagée</h2>
+      <p>Au Québec, les pneus d'hiver sont généralement obligatoires du 1er décembre au 15 mars. Que vous achetiez chez un commerçant ou d'un particulier, consultez notre <a class="text-link" href="${R.g7}">guide sur les pneus d'hiver à l'achat d'une auto usagée</a> pour comprendre les exemptions et le transit de 10 jours, et planifier la pose avant de repartir.</p>
 
       <h2>Conservez vos documents</h2>
       <p>Gardez ensemble le contrat de vente, le certificat d'immatriculation et les détails de la garantie. Vous en aurez besoin pour l'assurance, pour vos dossiers et au moment de revendre ou d'échanger le véhicule.</p>
@@ -518,6 +519,64 @@ module.exports = {
       <h2>Préparez une sélection utile</h2>
       <p>Indiquez votre budget d'achat maximal, votre limite mensuelle, le type de carrosserie recherché et votre date d'achat prévue. Précisez si les taxes sont comprises dans votre budget. Vous éviterez ainsi de discuter d'un véhicule qui dépasse votre limite dès le départ.</p>
       <p><a class="text-link" href="${R.inventory}">Consultez l'inventaire Automobile SX</a>, puis <a class="text-link" href="${R.contact}">contactez-nous à Dorval</a> avec le modèle ou le numéro de stock souhaité. Consultez aussi notre <a class="text-link" href="${R.g1}">guide d'achat au Québec</a>, <a class="text-link" href="${R.g6}">préparez une inspection indépendante</a> ou lisez les <a class="text-link" href="${R.financing}">renseignements sur le financement</a>.</p>`
+  },
+
+  g7: {
+    title: "Achat d'une auto usag\u00e9e : pneus d'hiver au Qu\u00e9bec",
+    description: "Vous achetez une auto usag\u00e9e au Qu\u00e9bec? Voyez quand les pneus d'hiver sont obligatoires, comment fonctionne l'exemption de 7 jours et quand pr\u00e9voir la pose.",
+    h1: "Acheter une auto usag\u00e9e en hiver au Qu\u00e9bec : peut-on repartir sans pneus d'hiver?",
+    sub: "Les pneus d'hiver obligatoires, l'exemption de sept jours et la pose avant de repartir.",
+    schemaType: "BlogPosting",
+    showBreadcrumbs: true,
+    datePublished: "2026-11-11",
+    dateModified: "2026-11-11",
+    body: `
+      <p>Au Qu&#233;bec, les pneus d'hiver sont g&#233;n&#233;ralement obligatoires du 1er d&#233;cembre au 15 mars. Si vous allez chercher une auto usag&#233;e pendant cette p&#233;riode, pr&#233;voyez faire poser des pneus conformes avant de repartir. Si vous achetez chez un commer&#231;ant, le Qu&#233;bec pr&#233;voit une exception de sept jours suivant la date d'acquisition, &#224; condition d'avoir le contrat de vente ou une copie avec vous. Le transit de 10 jours remis par un commer&#231;ant a sa propre &#233;ch&#233;ance d'immatriculation, et l'exception li&#233;e &#224; ce document est limit&#233;e &#224; sept jours. <a href="https://www.quebec.ca/transports/circulation-securite-routiere/periode-hivernale/pneus-hiver">R&#232;gles qu&#233;b&#233;coises sur les pneus d'hiver</a> | <a href="https://saaq.gouv.qc.ca/immatriculation/immatriculation-temporaire">Immatriculation temporaire &#224; la SAAQ</a></p>
+
+      <h2>Faites poser les pneus d'hiver selon les conditions routi&#232;res</h2>
+
+      <p>Si on pr&#233;voit de la neige, de la pluie vergla&#231;ante ou des routes glac&#233;es, &#231;a vaut la peine de faire poser les pneus d'hiver avant d'aller chercher l'auto, m&#234;me en novembre ou pendant une exemption. Une mince couche de verglas, parfois appel&#233;e glace noire, peut &#234;tre difficile &#224; voir. Avant de partir, consultez la m&#233;t&#233;o et Qu&#233;bec 511 pour votre trajet. Si les conditions sont mauvaises, appelez le vendeur pour convenir d'une pose avant de prendre la route ou pour d&#233;placer le rendez-vous.</p>
+
+      <p><a href="https://www.quebec.ca/transports/circulation-securite-routiere/periode-hivernale/conduite-hiver">Conseils de conduite hivernale du Qu&#233;bec</a></p>
+
+      <h2>Quelle r&#232;gle s'applique &#224; votre achat?</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Votre situation</th><th scope="col">Quoi v&#233;rifier avant de prendre la route</th></tr></thead>
+          <tbody>
+            <tr><td>Vous avez achet&#233; chez un commer&#231;ant</td><td>L'exception de sept jours pour les pneus d'hiver commence &#224; la date d'acquisition. Gardez le contrat de vente ou une copie avec vous.</td></tr>
+            <tr><td>Le commer&#231;ant a d&#233;livr&#233; un certificat d'immatriculation temporaire (transit)</td><td>Le transit du commer&#231;ant peut &#234;tre valide 10 jours pour l'immatriculation. Si le transit est affich&#233; sur l'auto, l'exception li&#233;e &#224; ce document prend fin &#224; l'expiration du transit ou sept jours apr&#232;s sa d&#233;livrance, selon la premi&#232;re &#233;ch&#233;ance.</td></tr>
+            <tr><td>L'auto est immatricul&#233;e et vous attendez la plaque m&#233;tallique</td><td>La plaque provisoire en papier vous permet de circuler en attendant la plaque m&#233;tallique. V&#233;rifiez si une exception distincte pour les pneus d'hiver s'applique &#224; votre situation.</td></tr>
+            <tr><td>Vous avez achet&#233; d'un particulier</td><td>Si vous avez besoin de l'exemption pour les pneus d'hiver, demandez un certificat dans SAAQclic ou &#224; un point de service de la SAAQ. Les sept jours commencent &#224; la date d'acquisition.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><a href="https://www.quebec.ca/transports/circulation-securite-routiere/periode-hivernale/pneus-hiver">R&#232;gles qu&#233;b&#233;coises sur les pneus d'hiver</a> | <a href="https://saaq.gouv.qc.ca/securite-routiere/moyens-deplacement/auto/entretien-securite/pneus-hiver">Certificat d'exemption de la SAAQ</a> | <a href="https://saaq.gouv.qc.ca/immatriculation/immatriculer-vehicule/automobile-habitation-motorisee/auto-habitation-motorisee-neuve-usagee-achetee-chez-commercant">Immatriculation d'une auto achet&#233;e chez un commer&#231;ant</a></p>
+
+      <h2>Et si vous achetez en novembre?</h2>
+
+      <p>Supposons que vous achetez une auto usag&#233;e chez un commer&#231;ant et recevez un transit de 10 jours le 23 novembre. Le 1er d&#233;cembre, plus de sept jours se sont &#233;coul&#233;s depuis l'acquisition et la d&#233;livrance du transit. Le transit peut encore &#234;tre valide pour l'immatriculation, mais les deux exceptions li&#233;es &#224; l'achat et au transit ont pris fin. Si vous comptez rouler le 1er d&#233;cembre, pr&#233;voyez la pose avant cette date, sauf si une autre exemption s'applique. <a href="https://www.quebec.ca/transports/circulation-securite-routiere/periode-hivernale/pneus-hiver">R&#232;gles qu&#233;b&#233;coises sur les pneus d'hiver</a> | <a href="https://saaq.gouv.qc.ca/immatriculation/immatriculation-temporaire">Immatriculation temporaire &#224; la SAAQ</a></p>
+
+      <h2>Quatre questions &#224; poser avant de prendre possession de l'auto</h2>
+
+      <ol>
+        <li><strong>Quels pneus seront install&#233;s quand je viendrai chercher l'auto?</strong> Demandez si les pneus d'hiver seront d&#233;j&#224; mont&#233;s ou s'ils seront remis s&#233;par&#233;ment. Rep&#233;rez le pictogramme de la montagne et du flocon sur le flanc. Les pneus &#224; crampons sont aussi reconnus par les r&#232;gles qu&#233;b&#233;coises.</li>
+        <li><strong>Le prix convenu comprend-il les pneus d'hiver et la pose?</strong> Si des pneus d'hiver font partie de l'entente, demandez au vendeur d'inscrire par &#233;crit le jeu de pneus, les roues et la pose convenues, selon le cas.</li>
+        <li><strong>Les pneus d'hiver sont-ils encore en bon &#233;tat?</strong> Demandez la profondeur de la bande de roulement et la date de fabrication de chacun des quatre pneus. En cas de doute sur leur &#233;tat, faites-les v&#233;rifier dans un atelier.</li>
+        <li><strong>Les pneus d'hiver peuvent-ils &#234;tre pos&#233;s avant la prise de possession?</strong> Si l'auto est chauss&#233;e de pneus d'&#233;t&#233; ou de pneus quatre-saisons ordinaires, confirmez qui s'occupera de la pose et &#224; quel moment.</li>
+      </ol>
+
+      <p><a href="https://www.quebec.ca/transports/circulation-securite-routiere/periode-hivernale/pneus-hiver">R&#232;gles qu&#233;b&#233;coises sur les pneus d'hiver</a> | <a href="https://saaq.gouv.qc.ca/securite-routiere/moyens-deplacement/auto/entretien-securite/pneus-hiver">Conseils de la SAAQ sur l'&#233;tat des pneus</a></p>
+
+      <h2>Achat et installation de pneus d'hiver &#224; Dorval</h2>
+
+      <p>Avant de vous remettre l'auto, on fait le point avec vous sur les pneus d&#233;j&#224; install&#233;s et sur ce qu'il reste &#224; pr&#233;voir. Vous pouvez acheter vos pneus d'hiver vous-m&#234;me ou les faire installer par votre garage habituel. On vous confirme la dimension qui convient &#224; l'auto et on fixe avec vous le moment de venir la chercher.</p>
+
+      <p>Si vous pr&#233;f&#233;rez qu'on s'occupe des d&#233;marches, Spiro peut vous aider &#224; choisir des pneus d'hiver adapt&#233;s &#224; votre auto et &#224; votre budget, puis organiser la pose avec un atelier de la r&#233;gion. On vous confirme le prix des pneus et de l'installation avant de prendre rendez-vous. Si les conditions se d&#233;gradent, on peut ajuster l'heure ou la date de remise de l'auto pour que vous repartiez avec les pneus d&#233;j&#224; install&#233;s.</p>
+
+      <p>Pour les d&#233;marches, consultez notre <a href="${R.g4}">guide d'immatriculation d'une auto usag&#233;e au Qu&#233;bec</a>. <a href="${R.inventory}">Voir les autos usag&#233;es &#224; Dorval</a>.</p>`
   },
 
   g6: {
