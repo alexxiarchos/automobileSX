@@ -208,10 +208,14 @@ SX.ready.then(function () {
 
     var empty = document.getElementById("empty-state");
     empty.hidden = results.length !== 0;
-    if (!hasStock) {
-      empty.querySelector("h2").textContent = SX.t("inv.noStockTitle");
-      empty.querySelector("p").innerHTML = SX.t("inv.noStockBody", '<a class="text-link" href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a>");
-      empty.querySelector("#empty-reset").style.display = "none";
+    /* Populate empty-state copy only when it is actually visible. Keeping
+       default zero-results text in the HTML confuses text-only crawlers. */
+    if (!results.length) {
+      empty.querySelector("h2").textContent = SX.t(hasStock ? "inv.emptyTitle" : "inv.noStockTitle");
+      empty.querySelector("p").innerHTML = hasStock
+        ? SX.t("inv.emptyBody")
+        : SX.t("inv.noStockBody", '<a class="text-link" href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a>");
+      empty.querySelector("#empty-reset").style.display = hasStock ? "" : "none";
     }
 
     var lm = document.getElementById("load-more");
