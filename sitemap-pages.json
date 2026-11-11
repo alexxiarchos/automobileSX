@@ -144,6 +144,15 @@
     }
   },
   {
+    "loc": "https://www.automobilesx.ca/guides/buying-a-used-car-in-winter-quebec",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://www.automobilesx.ca/guides/buying-a-used-car-in-winter-quebec",
+      "fr": "https://www.automobilesx.ca/fr/guides/acheter-auto-usagee-hiver-quebec"
+    }
+  },
+  {
     "loc": "https://www.automobilesx.ca/fr",
     "priority": "1.0",
     "changefreq": "weekly",
@@ -285,6 +294,15 @@
     "alt": {
       "en": "https://www.automobilesx.ca/guides/used-car-inspection-dorval",
       "fr": "https://www.automobilesx.ca/fr/guides/inspection-auto-usagee-dorval"
+    }
+  },
+  {
+    "loc": "https://www.automobilesx.ca/fr/guides/acheter-auto-usagee-hiver-quebec",
+    "priority": "0.7",
+    "changefreq": "monthly",
+    "alt": {
+      "en": "https://www.automobilesx.ca/guides/buying-a-used-car-in-winter-quebec",
+      "fr": "https://www.automobilesx.ca/fr/guides/acheter-auto-usagee-hiver-quebec"
     }
   }
 ]

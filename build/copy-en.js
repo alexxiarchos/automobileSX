@@ -51,6 +51,7 @@ function prose(h1, sub, article) {
 }
 
 const guideCards = [
+  { h: "Buying a used car in winter", p: "Know the winter tire rules and plan installation before pickup.", href: R.g7 },
   { h: "Used car budget in Quebec", p: "Work backward from a total limit and compare purchase and ownership costs.", href: R.g5 },
   { h: "Used car inspection in Dorval", p: "Arrange an independent inspection and use the written findings.", href: R.g6 },
   { h: "Buying a used car in Quebec", p: "Taxes, the legal warranty, the dealer label and what to check before you sign.", href: R.g1 },
@@ -471,8 +472,8 @@ module.exports = {
       <h2>Insurance before you drive away</h2>
       <p>Bodily injury coverage comes through Quebec's public plan, but liability and damage coverage for the vehicle is private and mandatory. Call your insurer with the vehicle identification number before pickup day; most will bind coverage in minutes.</p>
 
-      <h2>The winter tire rule for new buyers</h2>
-      <p>Winter tires are mandatory in Quebec from 1 December to 15 March on every vehicle registered here, with fines from $200 to $300. There is one exemption worth knowing if you are buying in December: a vehicle within seven days of purchase is exempt, which gives you a week to get tires fitted. Do not treat that week as optional.</p>
+      <h2>Winter tires after buying a used car</h2>
+      <p>Quebec generally requires winter tires from December 1 through March 15. If you are buying from a dealer or a private seller, see our <a class="text-link" href="${R.g7}">winter tire rules for used-car buyers</a> for exemption dates, the 10-day transit and how to plan a safe pickup.</p>
 
       <h2>Keep the paperwork</h2>
       <p>Keep the bill of sale, the registration certificate and the warranty details together. You will want them for insurance, for your own records, and when you eventually sell or trade the car.</p>
@@ -533,6 +534,64 @@ module.exports = {
       <h2>Make your shortlist useful</h2>
       <p>Send your maximum purchase budget, intended monthly limit, preferred body style and planned purchase date. State whether your budget includes taxes. This prevents a conversation about a vehicle that was never within your limit.</p>
       <p><a class="text-link" href="${R.inventory}">Browse Automobile SX inventory</a>, then <a class="text-link" href="${R.contact}">contact us in Dorval</a> with the vehicle or stock number you want to discuss. For the broader process, read <a class="text-link" href="${R.g1}">buying a used car in Quebec</a>, <a class="text-link" href="${R.g6}">plan an independent inspection</a> or review <a class="text-link" href="${R.financing}">our financing information</a>.</p>`
+  },
+
+  g7: {
+    title: "Used Car Winter Tire Rules in Quebec | Automobile SX",
+    description: "Buying a used car in Quebec this winter? Learn when winter tires are required, how the 7-day exemption works and how to arrange installation before pickup.",
+    h1: "Buying a used car in winter in Quebec: Can you drive it home without winter tires?",
+    sub: "Quebec's winter tire deadline, the seven-day exemption and how to plan pickup.",
+    schemaType: "BlogPosting",
+    showBreadcrumbs: true,
+    datePublished: "2026-11-11",
+    dateModified: "2026-11-11",
+    body: `
+      <p>Quebec generally requires winter tires from December 1 through March 15. If you're picking up a used car during that period, plan to have compliant tires installed before you drive home. If you bought from a dealer, Quebec allows a seven-day exception after you acquire the car, provided you carry the bill of sale or a copy. A dealer's 10-day transit has its own registration deadline, and the winter tire exception tied to that document is capped at seven days. <a href="https://www.quebec.ca/en/transports/traffic-road-safety/winter-road-safety/requirements-for-winter-tires">Quebec winter tire rules</a> | <a href="https://saaq.gouv.qc.ca/en/vehicle-registration/temporary-registration-certificate">SAAQ temporary registration</a></p>
+
+      <h2>Plan your pickup around road conditions</h2>
+
+      <p>If snow, freezing rain or icy roads are in the forecast, it's worth getting winter tires installed before pickup, even in November or while a legal exemption still applies. Black ice can be hard to see, even when the pavement looks clear. Check the forecast and Quebec 511 for your route before leaving. If conditions are poor, call the seller to arrange installation before you drive home or agree on a better pickup time.</p>
+
+      <p><a href="https://www.quebec.ca/en/transports/traffic-road-safety/winter-road-safety/winter-driving">Quebec winter driving guidance</a></p>
+
+      <h2>Which rule applies to your purchase?</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Your situation</th><th scope="col">What to check before driving</th></tr></thead>
+          <tbody>
+            <tr><td>You bought from a dealer</td><td>The seven-day winter tire exception runs from the acquisition date. Carry the bill of sale or a copy.</td></tr>
+            <tr><td>The dealer issued a temporary registration certificate (transit)</td><td>The dealer transit can be valid for 10 days for registration. If the transit is displayed on the vehicle, the winter tire exception linked to it ends when the transit expires or seven days after issuance, whichever comes first.</td></tr>
+            <tr><td>The car is registered and you're waiting for a metal plate</td><td>The paper licence plate lets you drive while you wait for the metal one. Check whether a separate winter tire exception applies to your situation.</td></tr>
+            <tr><td>You bought from a private seller</td><td>If you need the winter tire exception, request an exemption certificate through SAAQclic or at a SAAQ service outlet. The seven-day period starts on the acquisition date.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><a href="https://www.quebec.ca/en/transports/traffic-road-safety/winter-road-safety/requirements-for-winter-tires">Quebec winter tire rules</a> | <a href="https://saaq.gouv.qc.ca/securite-routiere/moyens-deplacement/auto/entretien-securite/pneus-hiver">SAAQ exemption certificate</a> (French) | <a href="https://saaq.gouv.qc.ca/en/vehicle-registration/registering-vehicle/automobile-or-motor-home/new-or-used-car-or-motor-home-bought-from-a-dealer">SAAQ dealer registration</a></p>
+
+      <h2>What if you buy in November?</h2>
+
+      <p>Say you acquire a used car from a dealer and get a 10-day transit on November 23. On December 1, more than seven days have passed since both the acquisition and the transit's issuance. The transit may still be valid for registration purposes, but neither of those two winter tire exceptions still applies. If you plan to drive on December 1, arrange installation ahead of time unless a different exemption applies. <a href="https://www.quebec.ca/en/transports/traffic-road-safety/winter-road-safety/requirements-for-winter-tires">Quebec winter tire rules</a> | <a href="https://saaq.gouv.qc.ca/en/vehicle-registration/temporary-registration-certificate">SAAQ temporary registration</a></p>
+
+      <h2>Ask these four questions before pickup</h2>
+
+      <ol>
+        <li><strong>Which tires will be mounted when I pick up the car?</strong> Ask whether a winter set is already installed or comes separately. Look for the mountain-and-snowflake symbol on the sidewall. Studded tires are also recognized under Quebec's rules.</li>
+        <li><strong>What exactly is included in the written price?</strong> If winter tires are part of the deal, ask the seller to put the set and any agreed wheels or installation in writing.</li>
+        <li><strong>How much tread is left and how old are the tires?</strong> Ask for the tread depth on all four tires and the date codes. If you're unsure about a used set, ask a tire shop to check it.</li>
+        <li><strong>Can the winter tires be installed before pickup?</strong> If the car is on summer or ordinary all-season tires, confirm who will arrange the installation and when.</li>
+      </ol>
+
+      <p><a href="https://www.quebec.ca/en/transports/traffic-road-safety/winter-road-safety/requirements-for-winter-tires">Quebec winter tire rules</a> | <a href="https://saaq.gouv.qc.ca/securite-routiere/moyens-deplacement/auto/entretien-securite/pneus-hiver">SAAQ tire condition guidance</a></p>
+
+      <h2>Buying and installing winter tires in Dorval</h2>
+
+      <p>We'll go over what's already on the car and make a winter tire plan with you before pickup. If you'd rather buy your own tires or use a shop you trust, we'll confirm the right size and coordinate the pickup timing with you.</p>
+
+      <p>If you'd like us to handle the arrangements, Spiro can help you choose winter tires that suit your car and budget and coordinate installation with a local shop. We'll confirm the price of the tires and installation before booking. If conditions worsen, we can adjust the pickup time or date so the winter tires are already installed when you drive home.</p>
+
+      <p>For the paperwork, see our <a href="${R.g4}">Quebec used-car registration guide</a>. <a href="${R.inventory}">Browse used cars in Dorval</a>.</p>`
   },
 
   g6: {
