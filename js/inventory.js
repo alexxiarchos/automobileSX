@@ -2,6 +2,25 @@
 SX.ready.then(function () {
   "use strict";
 
+  /* Preserve server-rendered cards on feed failure: API errors are not zero stock. */
+  if (SX.loadError) {
+    var status = document.getElementById("result-count");
+    if (status) status.textContent = SX.lang === "fr"
+      ? "Inventaire temporairement indisponible. Les annonces affichees peuvent avoir change. Appelez-nous pour confirmer."
+      : "Live inventory unavailable. Listings shown may have changed. Please call to confirm availability.";
+    var more = document.getElementById("load-more");
+    if (more) more.style.display = "none";
+    var filtersButton = document.getElementById("filters-open");
+    if (filtersButton) filtersButton.disabled = true;
+    var sort = document.getElementById("sort");
+    if (sort) sort.disabled = true;
+    var sidebar = document.getElementById("filter-sidebar");
+    if (sidebar) sidebar.querySelectorAll("input, select, button").forEach(function (control) {
+      control.disabled = true;
+    });
+    return;
+  }
+
   var PAGE_SIZE = 12;
   var shown = PAGE_SIZE;
   var hasStock = SX.vehicles.length > 0;
