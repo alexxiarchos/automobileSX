@@ -270,8 +270,8 @@ function inventoryBody(T, cards) {
       <div class="vehicle-grid" id="inventory-grid"><!--SX:CARDS-->${cards || ""}<!--/SX:CARDS--></div>
 
       <div class="empty-state" id="empty-state" hidden>
-        <h2>${T.ui.emptyTitle}</h2>
-        <p>${T.ui.emptyBody}</p>
+        <h2></h2>
+        <p></p>
         <button class="btn btn-red" id="empty-reset" type="button">${T.ui.emptyReset}</button>
       </div>
 
