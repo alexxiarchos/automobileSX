@@ -9,6 +9,7 @@ const { test } = require("node:test");
 const ROOT = path.join(__dirname, "..");
 
 function element(initialHtml) {
+  const queried = {};
   return {
     innerHTML: initialHtml || "",
     textContent: "",
@@ -18,7 +19,7 @@ function element(initialHtml) {
     children: [],
     addEventListener() {},
     appendChild(child) { this.children.push(child); },
-    querySelector() { return element(); },
+    querySelector(selector) { return queried[selector] || (queried[selector] = element()); },
     querySelectorAll() { return []; },
     classList: { toggle() {} },
     setAttribute() {}
