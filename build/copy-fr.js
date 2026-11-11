@@ -522,6 +522,7 @@ module.exports = {
   },
 
   g7: {
+    breadcrumbLabel: "Pneus d'hiver",
     title: "Achat d'une auto usag\u00e9e : pneus d'hiver au Qu\u00e9bec",
     description: "Vous achetez une auto usag\u00e9e au Qu\u00e9bec? Voyez quand les pneus d'hiver sont obligatoires, comment fonctionne l'exemption de 7 jours et quand pr\u00e9voir la pose.",
     h1: "Acheter une auto usag\u00e9e en hiver au Qu\u00e9bec : peut-on repartir sans pneus d'hiver?",

@@ -828,7 +828,7 @@ input[type="range"] {
 /* Prose / article layout */
 .prose-layout {
   display: grid; grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 56px; padding: 48px 0 72px; align-items: start;
+  gap: 56px; padding-block: 48px 72px; align-items: start;
 }
 .prose { max-width: 72ch; font-size: 17px; line-height: 1.72; }
 .prose h2 {
@@ -842,7 +842,10 @@ input[type="range"] {
 .prose li strong { font-weight: 700; }
 .prose a { color: var(--ink); border-bottom: 2px solid var(--red); font-weight: 600; }
 .prose a:hover { color: var(--red); }
-.article-byline { margin: 16px 0 0; color: var(--slate); font-size: 14px; font-weight: 600; }
+.guide-breadcrumb-wrap .breadcrumb { padding: 12px 0; }
+.guide-breadcrumb-wrap .breadcrumb li + li::before { color: var(--slate); }
+.page-head:has(.article-byline) .sub { color: var(--mist); }
+.article-byline { margin: 16px 0 0; color: var(--mist); font-size: 14px; font-weight: 600; }
 .article-hero { margin: 0 0 30px; }
 .article-hero img {
   display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
@@ -935,7 +938,7 @@ input[type="range"] {
 }
 
 @media (max-width: 1023px) {
-  .prose-layout { grid-template-columns: 1fr; gap: 36px; }
+  .prose-layout { grid-template-columns: minmax(0, 1fr); gap: 36px; }
   .prose-aside { position: static; }
   .card-grid { grid-template-columns: 1fr; }
   .calc-disclosure { grid-template-columns: 1fr; }
@@ -1082,6 +1085,8 @@ input[type="range"] {
 
   .section-head { margin-bottom: 20px; }
   .page-head { padding: clamp(28px, 7vw, 44px) 0; }
+  .page-head:has(.article-byline) { padding-block: 24px; }
+  .prose-layout { padding-block: 28px 48px; }
 
   /* Article photos are 4:3; preserve their native ratio on phones.
      The desktop 16:9 editorial crop remains unchanged. */

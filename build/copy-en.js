@@ -537,6 +537,7 @@ module.exports = {
   },
 
   g7: {
+    breadcrumbLabel: "Winter tire rules",
     title: "Used Car Winter Tire Rules in Quebec | Automobile SX",
     description: "Buying a used car in Quebec this winter? Learn when winter tires are required, how the 7-day exemption works and how to arrange installation before pickup.",
     h1: "Buying a used car in winter in Quebec: Can you drive it home without winter tires?",
