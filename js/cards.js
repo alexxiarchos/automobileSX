@@ -17,9 +17,9 @@
    free of DOM calls for that reason. */
 
 (function (root, factory) {
-  if (typeof module === "object" && module.exports) module.exports = factory(require("./makes.js"));
-  else root.SX_CARDS = factory(root.SX_MAKES);
-})(typeof self !== "undefined" ? self : this, function (makes) {
+  if (typeof module === "object" && module.exports) module.exports = factory(require("./makes.js"), require("./inventory-rules.js"));
+  else root.SX_CARDS = factory(root.SX_MAKES, root.SX_INVENTORY_RULES);
+})(typeof self !== "undefined" ? self : this, function (makes, rules) {
   "use strict";
 
   var T = {
@@ -142,7 +142,7 @@
      itself settles on once it has sorted. */
   function available(vehicles) {
     return (vehicles || [])
-      .filter(function (v) { return v && v.id && (!v.status || v.status === "available"); })
+      .filter(rules.isActive)
       .sort(function (a, b) {
         return String(b.publishedAt || b.createdAt || "")
           .localeCompare(String(a.publishedAt || a.createdAt || ""));

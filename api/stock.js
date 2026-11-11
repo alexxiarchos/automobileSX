@@ -1,7 +1,5 @@
-/* Public, read-only inventory feed.
-   The admin writes the source of truth to GitHub; public pages read that same
-   copy instead of the deployment's potentially stale data/vehicles.json. */
-const { readInventory } = require("./_lib/github.js");
+/* Public feed for interactive features, from the same snapshot as the HTML. */
+const { readPublicInventory, CACHE_CONTROL } = require("./_lib/publicInventory.js");
 const contact = require("./_lib/contact.js");
 
 module.exports = async function (req, res) {
@@ -18,14 +16,11 @@ module.exports = async function (req, res) {
 
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   try {
-    const data = await readInventory();
-    const publicVehicles = (data.vehicles || []).filter(function (v) {
-      return v && v.id && v.status !== "draft";
-    });
+    const data = await readPublicInventory();
     res.statusCode = 200;
-    res.setHeader("Cache-Control", "public, max-age=0, s-maxage=60, must-revalidate");
+    res.setHeader("Cache-Control", CACHE_CONTROL);
     if (req.method === "HEAD") return res.end();
-    res.end(JSON.stringify({ updatedAt: data.updatedAt, vehicles: publicVehicles }));
+    res.end(JSON.stringify(data));
   } catch (error) {
     res.statusCode = 503;
     res.setHeader("Cache-Control", "no-store");

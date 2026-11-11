@@ -3,23 +3,15 @@ name: Publishing and analytics regression tests
 on:
   pull_request:
     paths:
-      - "api/save.js"
-      - "api/_lib/listingPages.js"
-      - "api/_lib/vehiclePage.js"
-      - "js/metrics.js"
-      - "js/contact.js"
-      - "js/home.js"
-      - "js/inventory.js"
-      - "js/data.js"
+      - "api/**"
+      - "build/**"
+      - "js/**"
+      - "tests/**"
+      - "dev-server.js"
       - "robots.txt"
       - "inventory.html"
       - "fr/inventaire.html"
-      - "build/blocks.js"
-      - "tests/inventory-fallback.test.js"
-      - "build/layout.js"
-      - "build/copy-en.js"
-      - "build/copy-fr.js"
-      - "tests/publishing-metrics.test.js"
+      - "vercel.json"
       - ".github/workflows/audit-publishing-metrics.yml"
   workflow_dispatch:
 
@@ -36,25 +28,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Validate updated JavaScript syntax
-        run: |
-          node --check api/save.js
-          node --check api/_lib/listingPages.js
-          node --check api/_lib/vehiclePage.js
-          node --check js/metrics.js
-          node --check js/contact.js
-          node --check js/home.js
-          node --check js/inventory.js
-          node --check js/data.js
-          node --check build/blocks.js
-          node --check build/layout.js
-          node --check build/copy-en.js
-          node --check build/copy-fr.js
-      - name: Test publishing warnings and GA4 consent
-        run: node --test tests/publishing-metrics.test.js
-      - name: Test inventory API failure and crawler fallbacks
-        run: node --test tests/inventory-fallback.test.js
-      - name: Test inventory snapshot and sitemap coverage
-        run: |
-          node tests/live-inventory-build.test.js
-          node --test tests/sitemap-coverage.test.js
+      - name: Check JavaScript syntax
+        run: find api build js tests -name '*.js' -print0 | xargs -0 -n 1 node --check
+      - name: Run regression tests
+        run: node --test tests/*.test.js

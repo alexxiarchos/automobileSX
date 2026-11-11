@@ -83,10 +83,10 @@
   ],
   "functions": {
     "api/sitemap.js": {
-      "includeFiles": "data/**"
+      "includeFiles": "api/_lib/inventory-snapshot.json"
     },
     "api/vehicle.js": {
-      "includeFiles": "data/**"
+      "includeFiles": "api/_lib/inventory-snapshot.json"
     },
     "api/save.js": {
       "includeFiles": "js/**"
@@ -99,6 +99,9 @@
     },
     "api/translate.js": {
       "maxDuration": 30
+    },
+    "api/stock.js": {
+      "includeFiles": "api/_lib/inventory-snapshot.json"
     }
   }
 }

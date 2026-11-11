@@ -15,8 +15,9 @@ test("dynamic sitemap includes every generated EN/FR static page with reciprocal
   vm.runInNewContext(fs.readFileSync(sitemapPath, "utf8"), {
     module: mod,
     require(request) {
-      assert.equal(request, "./_lib/github.js");
-      return { readInventory: async () => ({ vehicles: [] }) };
+      if (request === "../js/inventory-rules.js") return require(request);
+      assert.equal(request, "./_lib/publicInventory.js");
+      return { readPublicInventory: async () => ({ vehicles: [] }) };
     }
   }, { filename: sitemapPath });
 

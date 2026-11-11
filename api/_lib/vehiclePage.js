@@ -270,7 +270,7 @@ function imageUrls(v) {
   return (v.images || []).map(p => SITE + "/" + String(p).replace(/^\//, ""));
 }
 
-function schema(v, lang) {
+function schema(v, lang, description) {
   const imgs = imageUrls(v);
   const canonical = SITE + "/" + PATHS[lang].dir + "/" + v.id;
   const car = {
@@ -278,7 +278,7 @@ function schema(v, lang) {
     "@id": canonical + "#vehicle",
     name: fullName(v),
     url: canonical,
-    description: metaDescription(v, lang),
+    description: description,
     sku: v.stock || undefined,
     itemCondition: "https://schema.org/UsedCondition",
     brand: { "@type": "Brand", name: MAKES.fixMake(v.make) },
@@ -352,14 +352,15 @@ function schema(v, lang) {
       { "@type": "ListItem", position: 2, name: fullName(v), item: SITE + "/" + PATHS[lang].dir + "/" + v.id }
     ]
   };
-  return JSON.stringify({ "@context": "https://schema.org", "@graph": [dealer, car, crumbs] });
+  return JSON.stringify({ "@context": "https://schema.org", "@graph": [dealer, car, crumbs] })
+    .replace(/</g, "\\u003c");
 }
 
 /**
  * Render one vehicle page.
  * @returns {{path: string, html: string}}
  */
-function renderVehiclePage(v, lang) {
+function renderVehiclePage(v, lang, revision) {
   const t = L[lang];
   const P = PATHS[lang];
   const name = fullName(v);
@@ -427,9 +428,9 @@ function renderVehiclePage(v, lang) {
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#0D0D0D">
 ${ga4Id ? `<meta name="sx-ga4-id" content="${ga4Id}">\n` : ""}<script>window.SX_ALT=${JSON.stringify(altUrl)};window.SX_PRERENDERED=true;</script>
-<script type="application/ld+json">${schema(v, lang)}</script>
+<script type="application/ld+json">${schema(v, lang, desc)}</script>
 </head>
-<body>
+<body${revision ? ` data-inventory-revision="${esc(revision)}"` : ""}>
 
 <header class="site-header" id="site-header"></header>
 
@@ -538,6 +539,7 @@ ${ga4Id ? `<meta name="sx-ga4-id" content="${ga4Id}">\n` : ""}<script>window.SX_
 <script src="/js/features.js"></script>
 <script src="/js/describe.js"></script>
 <script src="/js/opc.js"></script>
+<script src="/js/inventory-rules.js"></script>
 <script src="/js/data.js"></script>
 <script src="/js/components.js"></script>
 <script src="/js/detail.js" defer></script>
@@ -550,8 +552,8 @@ ${ga4Id ? `<meta name="sx-ga4-id" content="${ga4Id}">\n` : ""}<script>window.SX_
 }
 
 /** Both language pages for one vehicle */
-function renderVehiclePages(v) {
-  return [renderVehiclePage(v, "en"), renderVehiclePage(v, "fr")];
+function renderVehiclePages(v, revision) {
+  return [renderVehiclePage(v, "en", revision), renderVehiclePage(v, "fr", revision)];
 }
 
 /** File paths for a vehicle, used when deleting */
@@ -559,4 +561,4 @@ function vehiclePagePaths(id) {
   return [PATHS.en.dir + "/" + id + ".html", PATHS.fr.dir + "/" + id + ".html"];
 }
 
-module.exports = { renderVehiclePages, vehiclePagePaths, PATHS };
+module.exports = { renderVehiclePage, renderVehiclePages, vehiclePagePaths, PATHS };

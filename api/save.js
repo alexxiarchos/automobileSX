@@ -5,6 +5,7 @@ const { requireAuth } = require("./_lib/auth.js");
 const { commitInventory, readInventory, readTextFile } = require("./_lib/github.js");
 const { submit, changedUrls } = require("./_lib/indexnow.js");
 const { renderVehiclePages, vehiclePagePaths } = require("./_lib/vehiclePage.js");
+const { isPublic, validate } = require("../js/inventory-rules.js");
 const { renderListingPages } = require("./_lib/listingPages.js");
 const readBody = require("./_lib/body.js");
 
@@ -79,7 +80,17 @@ module.exports = async function (req, res) {
     const body = await readBody(req, 4 * 1024 * 1024);
     const current = await readInventory();
     assertFreshInventory(body.baseUpdatedAt, current.updatedAt);
-    const vehicles = (body.vehicles || []).slice(0, MAX_VEHICLES).map(sanitizeVehicle);
+    if (!Array.isArray(body.vehicles) || body.vehicles.length > MAX_VEHICLES) {
+      res.statusCode = 400;
+      return res.end(JSON.stringify({ error: "Invalid inventory vehicle list" }));
+    }
+    try {
+      validate(body);
+    } catch (error) {
+      res.statusCode = 400;
+      return res.end(JSON.stringify({ error: error.message }));
+    }
+    const vehicles = body.vehicles.map(sanitizeVehicle);
 
     // basic validation: every non-draft vehicle needs the essentials
     for (const v of vehicles) {
@@ -100,7 +111,7 @@ module.exports = async function (req, res) {
 
     /* Pre-render a crawlable page per published vehicle, in both languages,
        so search engines see real titles and specs without running JavaScript. */
-    const live = vehicles.filter(function (v) { return v.status !== "draft"; });
+    const live = vehicles.filter(isPublic);
     const newFiles = [];
     live.forEach(function (v) {
       renderVehiclePages(v).forEach(function (page) {

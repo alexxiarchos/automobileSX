@@ -24,7 +24,7 @@ async function main() {
     }
   });
 
-  assert.deepEqual(vehicles, inventory.vehicles);
+  assert.deepEqual(vehicles, inventory);
   assert.match(calls[0].url, /\/git\/ref\/heads\/main$/);
   assert.match(calls[1].url, new RegExp("[?&]ref=" + SHA + "$"));
   assert(!calls[1].url.endsWith("ref=main"), "inventory must be read from the resolved commit, not a moving branch URL");

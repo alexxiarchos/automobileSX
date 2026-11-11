@@ -115,8 +115,8 @@ const server = http.createServer((req, res) => {
   res.end("Not found: " + p);
 });
 
-server.listen(process.env.PORT || 3000, () => {
-  const port = process.env.PORT || 3000;
+server.listen(Number(process.env.PORT || 3000), () => {
+  const port = server.address().port;
   console.log("Site:  http://localhost:" + port);
   console.log("FR:    http://localhost:" + port + "/fr");
   console.log("Admin: http://localhost:" + port + "/admin  (spiro / test123)");

@@ -205,6 +205,7 @@ function renderPage(page) {
 
   const jsonld = JSON.stringify({ "@context": "https://schema.org", "@graph": graph });
 
+  const usesStock = !page.noindex && ["home", "inventory", "vehicle", "contact"].includes(page.route);
   const scripts = (page.scripts || [])
     .map(s => `<script src="${s}" defer></script>`).join("\n");
 
@@ -242,8 +243,8 @@ ${page.skipCanonical ? "" : `<link rel="canonical" href="${canonical}">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#0D0D0D">
-${ga4Id ? `<meta name="sx-ga4-id" content="${ga4Id}">` : ""}
-<script>window.SX_ALT=${JSON.stringify(altPath)};</script>
+${ga4Id ? `<meta name="sx-ga4-id" content="${ga4Id}">
+` : ""}<script>window.SX_ALT=${JSON.stringify(altPath)};</script>
 <script type="application/ld+json">${jsonld}</script>
 </head>
 <body>
@@ -258,7 +259,7 @@ ${page.body}
 <div class="mobile-cta-bar" id="mobile-cta-bar"></div>
 
 <script src="/js/makes.js"></script>
-<script src="/js/data.js"></script>
+${usesStock ? '<script src="/js/inventory-rules.js"></script>\n' : ""}<script src="/js/data.js"></script>
 <script src="/js/components.js"></script>
 ${scripts}
 <script src="/js/metrics.js"></script>

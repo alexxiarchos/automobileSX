@@ -1,8 +1,6 @@
-/* Dynamic sitemap: every static page in both languages, plus one URL per
-   published vehicle. Served at /sitemap.xml via the rewrite in vercel.json,
-   so it is always current without anyone regenerating anything. */
-
-const { readInventory } = require("./_lib/github.js");
+/* Sitemap for the deployed pages and active vehicle listings. */
+const { readPublicInventory, CACHE_CONTROL } = require("./_lib/publicInventory.js");
+const { isActive } = require("../js/inventory-rules.js");
 
 const SITE = "https://www.automobilesx.ca";
 
@@ -34,7 +32,7 @@ const ROUTES = {
 const VEHICLE_PATH = { en: "/vehicles/", fr: "/fr/vehicules/" };
 
 function esc(s) {
-  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
 function urlEntry(loc, altEn, altFr, changefreq, priority, lastmod, images) {
@@ -44,7 +42,7 @@ function urlEntry(loc, altEn, altFr, changefreq, priority, lastmod, images) {
     '    <xhtml:link rel="alternate" hreflang="en-CA" href="' + esc(altEn) + '"/>',
     '    <xhtml:link rel="alternate" hreflang="fr-CA" href="' + esc(altFr) + '"/>',
     '    <xhtml:link rel="alternate" hreflang="x-default" href="' + esc(altEn) + '"/>',
-    lastmod ? "    <lastmod>" + lastmod + "</lastmod>" : "",
+    lastmod ? "    <lastmod>" + esc(lastmod) + "</lastmod>" : "",
     ...(images || []).map(function (url) {
       return "    <image:image><image:loc>" + esc(url) + "</image:loc></image:image>";
     }),
@@ -53,8 +51,6 @@ function urlEntry(loc, altEn, altFr, changefreq, priority, lastmod, images) {
     "  </url>"
   ].filter(Boolean).join("\n");
 }
-
-async function readVehicles() { return readInventory(); }
 
 module.exports = async function (req, res) {
   const parts = [];
@@ -70,21 +66,26 @@ module.exports = async function (req, res) {
     parts.push(urlEntry(fr, en, fr, freq, priority));
   });
 
-  let data = { vehicles: [] };
-  try { data = await readVehicles(req); } catch (e) { /* keep static pages */ }
+  let data;
+  try {
+    data = await readPublicInventory();
+  } catch (error) {
+    res.statusCode = 503;
+    res.setHeader("Cache-Control", "no-store");
+    return res.end("Sitemap is temporarily unavailable");
+  }
 
-  (data.vehicles || [])
-    .filter(function (v) { return v && v.id && v.status !== "draft"; })
+  data.vehicles
+    .filter(isActive)
     .forEach(function (v) {
       const en = SITE + VEHICLE_PATH.en + encodeURIComponent(v.id);
       const fr = SITE + VEHICLE_PATH.fr + encodeURIComponent(v.id);
-      const pr = v.status === "sold" ? "0.3" : "0.8";
       const lastmod = (v.updatedAt || v.publishedAt || data.updatedAt || "").slice(0, 10) || undefined;
       const images = (v.images || []).slice(0, 1000).map(function (p) {
         return SITE + "/" + String(p).replace(/^\//, "");
       });
-      parts.push(urlEntry(en, en, fr, "weekly", pr, lastmod, images));
-      parts.push(urlEntry(fr, en, fr, "weekly", pr, lastmod, images));
+      parts.push(urlEntry(en, en, fr, "weekly", "0.8", lastmod, images));
+      parts.push(urlEntry(fr, en, fr, "weekly", "0.8", lastmod, images));
     });
 
   const xml =
@@ -93,7 +94,7 @@ module.exports = async function (req, res) {
     parts.join("\n") + "\n</urlset>\n";
 
   res.setHeader("Content-Type", "application/xml; charset=utf-8");
-  res.setHeader("Cache-Control", "public, max-age=0, s-maxage=3600");
+  res.setHeader("Cache-Control", CACHE_CONTROL);
   res.statusCode = 200;
   res.end(xml);
 };

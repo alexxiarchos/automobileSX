@@ -310,38 +310,40 @@ SX.monthly = function (price, down, months, rate) {
 SX.vehicles = [];      /* available only, for listings */
 SX.allVehicles = [];   /* available + sold, resolvable on detail pages */
 
-/* Public pages read the same GitHub-backed inventory as the admin. This keeps
-   a code deployment made from an older checkout from replacing newer stock in
-   the browser after the pre-rendered cards have loaded. */
-SX.ready = fetch("/api/stock", { cache: "no-cache" })
-  .then(function (r) {
-    if (!r.ok) throw new Error("HTTP " + r.status);
-    return r.json();
-  })
-  .then(function (d) {
-    /* A successful HTTP status is not enough to prove that an empty payload
-       means zero stock. Preserve the server-rendered snapshot unless the feed
-       explicitly contains the expected vehicles array. */
-    if (!d || !Array.isArray(d.vehicles)) {
-      throw new Error("Inventory response is missing the vehicles array");
-    }
-    var all = d.vehicles;
-    /* Normalize display spelling in memory only. The admin-controlled JSON
-       remains untouched, but legacy values such as "Bmw" cannot leak into
-       headings, filters or structured page content. */
-    if (window.SX_MAKES) {
-      all.forEach(function (v) {
-        v.make = SX_MAKES.fixMake(v.make);
-        v.model = SX_MAKES.fixModel(v.model);
-      });
-    }
-    SX.allVehicles = all.filter(function (v) { return v.status !== "draft"; });
-    SX.vehicles = all.filter(function (v) { return !v.status || v.status === "available"; });
-  })
-  .catch(function (e) {
-    SX.loadError = e;
-    console.error("Could not load inventory:", e);
-  });
+/* Use the deployed snapshot. Keep the initial HTML if a request crosses
+   a deployment boundary or the feed is unavailable. */
+SX.ready = window.SX_INVENTORY_RULES ? loadStock() : Promise.resolve();
+
+function loadStock() {
+  return fetch("/api/stock", { cache: "no-cache" })
+    .then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
+    .then(function (d) {
+      var rules = window.SX_INVENTORY_RULES;
+      var all = rules.validate(d).vehicles;
+      var rendered = document.querySelector("[data-inventory-revision]");
+      if (rendered && rendered.dataset.inventoryRevision !== d.revision) {
+        throw new Error("Inventory deployment changed during page load");
+      }
+      /* Normalize display spelling in memory only. The admin-controlled JSON
+         remains untouched, but legacy values such as "Bmw" cannot leak into
+         headings, filters or structured page content. */
+      if (window.SX_MAKES) {
+        all.forEach(function (v) {
+          v.make = SX_MAKES.fixMake(v.make);
+          v.model = SX_MAKES.fixModel(v.model);
+        });
+      }
+      SX.allVehicles = all.filter(rules.isPublic);
+      SX.vehicles = all.filter(rules.isActive);
+    })
+    .catch(function (e) {
+      SX.loadError = e;
+      console.error("Could not load inventory:", e);
+    });
+}
 
 SX.getVehicle = function (id) {
   return SX.allVehicles.find(function (v) { return v.id === id; }) ||

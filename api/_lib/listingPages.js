@@ -1,27 +1,27 @@
-/* Automobile SX - keeping the listing pages current between builds.
-
-   The inventory page and the homepage carry their vehicle cards in the HTML,
-   so a crawler arriving with no JavaScript still sees the cars and, more
-   importantly, still sees links to every vehicle page. build/build.js bakes
-   those cards in when the site is built.
-
-   But stock does not change at build time. It changes when Spiro publishes a
-   car or marks one sold, which commits data/vehicles.json and never touches
-   those pages. Left alone, the baked cards would be right the day of a deploy
-   and wrong the day after, which is worse than not having them: a crawler
-   would be handed a confidently stale list.
-
-   So /api/save rewrites the same region on every save. The region is fenced by
-   sentinel comments written into the templates, and only what is between them
-   is replaced. Nothing else about the page is regenerated here, which matters:
-   these are the site's most heavily indexed pages and this file has no business
-   rewriting their copy, their metadata or their structured data.
-
-   If the fences are missing, the page is left exactly as it was. A page that
-   silently keeps working is a better failure than one rewritten by a function
-   that could not find its footing. */
+/* Refresh the checked-in listing markup on admin saves. Vercel still
+   regenerates the deployed pages from its authoritative build snapshot.
+   The markers let an admin save update inventory without rewriting page copy. */
 
 const cards = require("../../js/cards.js");
+const { snapshot } = require("./publicInventory.js");
+const COPY = { en: require("../../build/copy-en.js"), fr: require("../../build/copy-fr.js") };
+
+function inventoryCount(lang, count, revision) {
+  const label = lang === "fr"
+    ? count + (count === 1 ? " v&#233;hicule en stock" : " v&#233;hicules en stock")
+    : count + (count === 1 ? " vehicle in stock" : " vehicles in stock");
+  return '<p class="result-count" data-inventory-count="' + count +
+    '" data-inventory-revision="' + revision + '">' + label + "</p>";
+}
+
+function emptyState(T, count) {
+  const hasCards = count > 0;
+  return `<div class="empty-state" id="empty-state"${hasCards ? " hidden" : ""}>
+        <h2>${hasCards ? "" : T.ui.noStockTitle}</h2>
+        <p>${hasCards ? "" : T.ui.noStockBody}</p>
+        <button class="btn btn-red" id="empty-reset" type="button"${hasCards ? "" : ' style="display:none"'}>${T.ui.emptyReset}</button>
+      </div>`;
+}
 
 const OPEN = "<!--SX:CARDS-->";
 const CLOSE = "<!--/SX:CARDS-->";
@@ -49,6 +49,8 @@ async function renderListingPages(vehicles, readFile, reportWarning) {
   function warn(message) {
     if (typeof reportWarning === "function") reportWarning(message);
   }
+  const inventory = snapshot({ vehicles });
+  const count = cards.available(inventory.vehicles).length;
   const out = [];
   for (const t of TARGETS) {
     let html;
@@ -63,11 +65,18 @@ async function renderListingPages(vehicles, readFile, reportWarning) {
       continue;
     }
 
-    const inner = cards.grid(vehicles, t.lang, t.limit || 0, t.eagerCount);
-    const next = replaceRegion(html, inner);
+    const inner = cards.grid(inventory.vehicles, t.lang, t.limit || 0, t.eagerCount);
+    let next = replaceRegion(html, inner);
     if (next === null) {
       warn("Missing inventory card markers in " + t.path);
       continue;
+    }
+    next = next.replace(/<!--SX:COUNT-->[\s\S]*?<!--\/SX:COUNT-->/,
+      "<!--SX:COUNT-->" + inventoryCount(t.lang, count, inventory.revision) + "<!--/SX:COUNT-->");
+    if (!t.limit) {
+      const copy = COPY[t.lang];
+      next = next.replace(/<!--SX:EMPTY-->[\s\S]*?<!--\/SX:EMPTY-->/,
+        () => "<!--SX:EMPTY-->" + emptyState(copy, count) + "<!--/SX:EMPTY-->");
     }
     if (next === html) continue;
     out.push({ path: t.path, content: next });
@@ -75,4 +84,4 @@ async function renderListingPages(vehicles, readFile, reportWarning) {
   return out;
 }
 
-module.exports = { renderListingPages, TARGETS, OPEN, CLOSE };
+module.exports = { renderListingPages, inventoryCount, emptyState, TARGETS, OPEN, CLOSE };

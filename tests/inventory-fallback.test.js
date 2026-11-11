@@ -61,9 +61,11 @@ function runBrowserScript(file, sx, els) {
   return nodes;
 }
 
-async function loadInventoryData(fetchImpl) {
+async function loadInventoryData(fetchImpl, revision) {
   const context = {
     SX: {},
+    SX_INVENTORY_RULES: require("../js/inventory-rules.js"),
+    document: { querySelector() { return revision ? { dataset: { inventoryRevision: revision } } : null; } },
     fetch: fetchImpl,
     location: { pathname: "/inventory" },
     console: { error() {} }
@@ -131,6 +133,7 @@ test("inventory preserves server-rendered vehicles after the real data fetch rej
   assert.match(nodes["inventory-grid"].innerHTML, /Existing vehicle/);
   assert.equal(writes, 0, "the existing inventory card markup must not be replaced");
   assert.match(result.textContent, /Live inventory unavailable/);
+  assert.equal(result.children[0].href, "/inventory");
   assert.equal(more.style.display, "none");
   assert.equal(filters.disabled, true);
   assert.equal(sort.disabled, true);
@@ -143,6 +146,13 @@ test("a malformed successful response is treated as a feed failure, not zero sto
   });
   assert(sx.loadError);
   assert.match(sx.loadError.message, /vehicles array/);
+});
+
+test("a response from a different deployment cannot replace the HTML snapshot", async () => {
+  const sx = await loadInventoryData(async () => ({
+    ok: true, json: async () => ({ revision: "new-release", vehicles: [] })
+  }), "old-release");
+  assert.match(sx.loadError.message, /deployment changed/);
 });
 
 test("a legitimate zero-vehicle response still renders the actual no-stock state", async () => {
@@ -168,7 +178,7 @@ test("a build with genuine zero inventory emits a crawlable no-stock state", () 
   const { inventoryBody } = require("../build/blocks.js");
   for (const copyFile of ["copy-en.js", "copy-fr.js"]) {
     const copy = require(path.join(ROOT, "build", copyFile));
-    const html = inventoryBody(copy, "");
+    const html = inventoryBody(copy, "", 0, "test");
     assert.match(html, /<div class="empty-state" id="empty-state">/);
     assert.match(html, new RegExp(copy.ui.noStockTitle));
     assert.match(html, /id="empty-reset"[^>]+style="display:none"/);

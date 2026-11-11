@@ -17,6 +17,8 @@ SX.ready.then(function () {
     id = new URLSearchParams(location.search).get("id") || "";
   }
 
+  if (SX.loadError && window.SX_PRERENDERED) return;
+
   var v = SX.getVehicle(id);
   if (!v) { location.replace(SX.url("inventory")); return; }
 

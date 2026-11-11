@@ -5,9 +5,15 @@ SX.ready.then(function () {
   /* Preserve server-rendered cards on feed failure: API errors are not zero stock. */
   if (SX.loadError) {
     var status = document.getElementById("result-count");
-    if (status) status.textContent = SX.lang === "fr"
-      ? "Inventaire temporairement indisponible. Les annonces affichées peuvent avoir changé. Appelez-nous pour confirmer."
-      : "Live inventory unavailable. Listings shown may have changed. Please call to confirm availability.";
+    if (status) {
+      status.textContent = SX.lang === "fr"
+        ? "Inventaire temporairement indisponible. Appelez-nous pour confirmer la disponibilit\u00e9. "
+        : "Live inventory unavailable. Please call to confirm availability. ";
+      var retry = document.createElement("a");
+      retry.href = SX.url("inventory");
+      retry.textContent = SX.lang === "fr" ? "R\u00e9essayer" : "Reload inventory";
+      status.appendChild(retry);
+    }
     var more = document.getElementById("load-more");
     if (more) more.style.display = "none";
     var filtersButton = document.getElementById("filters-open");

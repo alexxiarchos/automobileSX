@@ -8,7 +8,8 @@ const path = require("path");
 const { SITE, ROUTES, FILES, DEALER, renderPage } = require("./layout.js");
 const blocks = require("./blocks.js");
 const { loadLatestInventory } = require("./liveInventory.js");
-const { renderVehiclePages } = require("../api/_lib/vehiclePage.js");
+const { snapshot } = require("../api/_lib/publicInventory.js");
+const { renderVehiclePages, PATHS } = require("../api/_lib/vehiclePage.js");
 
 const ROOT = path.join(__dirname, "..");
 const COPY = { en: require("./copy-en.js"), fr: require("./copy-fr.js") };
@@ -30,8 +31,7 @@ const ARTICLE_MODIFIED_DATE = "2026-11-04";
    code while the live inventory has moved on. A production build fails rather
    than silently publishing a stale or empty grid if that source is unavailable.
 
-   Local builds still use data/vehicles.json when present, so development stays
-   offline-friendly and a code-only checkout can still build empty grids. */
+   Local builds use the checked-out data/vehicles.json and also fail closed. */
 const HOME_FEATURED = 6;
 
 async function loadVehicles() {
@@ -51,12 +51,8 @@ async function loadVehicles() {
       token: process.env.GITHUB_TOKEN || ""
     });
   }
-  try {
-    const raw = fs.readFileSync(path.join(ROOT, "data", "vehicles.json"), "utf8");
-    return JSON.parse(raw).vehicles || [];
-  } catch (e) {
-    return [];
-  }
+  const raw = fs.readFileSync(path.join(ROOT, "data", "vehicles.json"), "utf8");
+  return JSON.parse(raw);
 }
 
 function renderCards(vehicles) {
@@ -188,8 +184,10 @@ function faqSchema(T, lang) {
 }
 
 async function build() {
-  const vehicles = await loadVehicles();
+  const inventory = snapshot(await loadVehicles());
+  const vehicles = inventory.vehicles;
   const CARDS = renderCards(vehicles);
+  const count = require("../js/cards.js").available(vehicles).length;
   let written = 0;
 
   ["en", "fr"].forEach(lang => {
@@ -207,7 +205,7 @@ async function build() {
     const pages = [
       {
         route: "home", title: T.home.title, description: T.home.description,
-        body: blocks.homeBody(T, R, CARDS[lang].featured), scripts: ["/js/home.js"],
+        body: blocks.homeBody(T, R, CARDS[lang].featured, count, inventory.revision), scripts: ["/js/home.js"],
         schema: [{
           "@type": "WebSite", name: "Automobile SX", url: SITE,
           inLanguage: lang === "fr" ? "fr-CA" : "en-CA"
@@ -215,7 +213,7 @@ async function build() {
       },
       {
         route: "inventory", title: T.inventory.title, description: T.inventory.description,
-        body: blocks.inventoryBody(T, CARDS[lang].all), scripts: ["/js/inventory.js"],
+        body: blocks.inventoryBody(T, CARDS[lang].all, count, inventory.revision), scripts: ["/js/inventory.js"],
         breadcrumb: [bcHome, { name: T.ui.filters ? T.inventory.h1 : "Inventory", route: "inventory" }]
       },
       {
@@ -291,16 +289,28 @@ async function build() {
      never the deployment checkout, so a code deploy can apply template and SEO
      improvements without reverting newer inventory changes. These files are
      deployment output only; this does not write back to the inventory source. */
-  vehicles.filter(function (v) {
-    return v && v.id && v.status !== "draft";
-  }).forEach(function (v) {
-    renderVehiclePages(v).forEach(function (page) {
+  // The checkout may contain detail files for listings removed from the live snapshot.
+  const vehicleFiles = new Set();
+  vehicles.forEach(function (v) {
+    renderVehiclePages(v, inventory.revision).forEach(function (page) {
+      vehicleFiles.add(page.path);
       const out = path.join(ROOT, page.path);
       fs.mkdirSync(path.dirname(out), { recursive: true });
       fs.writeFileSync(out, page.html);
       written++;
     });
   });
+
+  Object.values(PATHS).forEach(function ({ dir }) {
+    const folder = path.join(ROOT, dir);
+    if (!fs.existsSync(folder)) return;
+    for (const file of fs.readdirSync(folder)) {
+      if (file.endsWith(".html") && !vehicleFiles.has(dir + "/" + file)) {
+        fs.unlinkSync(path.join(folder, file));
+      }
+    }
+  });
+  fs.writeFileSync(path.join(ROOT, "api/_lib/inventory-snapshot.json"), JSON.stringify(inventory));
 
   /* ---------- Branded 404 (Vercel serves /404.html for unmatched routes) ---------- */
   const notFound = renderPage({
@@ -349,16 +359,8 @@ async function build() {
   });
   fs.writeFileSync(path.join(ROOT, "sitemap-pages.json"), JSON.stringify(staticUrls, null, 2));
 
-  /* ---------- Shells for /api/vehicle ----------
-     api/vehicle.js resolves a vehicle URL that has no pre-rendered file yet
-     (and 301s retired addresses). Bundling the three shells it may need as
-     JSON means the function traces them automatically and never depends on
-     reading HTML off the deployment filesystem. */
-  const shells = {
-    en: fs.readFileSync(path.join(ROOT, FILES.en.vehicle), "utf8"),
-    fr: fs.readFileSync(path.join(ROOT, FILES.fr.vehicle), "utf8"),
-    notFound: fs.readFileSync(path.join(ROOT, "404.html"), "utf8")
-  };
+  // Bundle the branded 404 for the vehicle resolver.
+  const shells = { notFound };
   fs.writeFileSync(path.join(ROOT, "api/_lib/shells.json"), JSON.stringify(shells));
 
   console.log("Generated " + written + " HTML pages and sitemap-pages.json");

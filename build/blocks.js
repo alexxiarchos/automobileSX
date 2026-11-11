@@ -2,6 +2,7 @@
    IDs here must match the ones the page scripts look for. */
 
 const { DEALER } = require("./layout.js");
+const { inventoryCount, emptyState } = require("../api/_lib/listingPages.js");
 
 const phoneLink = `<a href="tel:+15148249117">${DEALER.phone}</a>`;
 
@@ -11,7 +12,7 @@ const phoneLink = `<a href="tel:+15148249117">${DEALER.phone}</a>`;
    same string can be produced at build time or written again later by
    /api/save when stock changes. The sentinels below mark the region that gets
    replaced; nothing else on the page is touched. */
-function homeBody(T, R, cards) {
+function homeBody(T, R, cards, count, revision) {
   return `
   <section class="hero" aria-labelledby="hero-h">
     <div class="hero-bg" aria-hidden="true">
@@ -73,14 +74,15 @@ function homeBody(T, R, cards) {
 
   <section class="section section-mist" aria-labelledby="featured-h">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head">
         <div>
           <span class="kicker">${T.home.featuredKicker}</span>
           <h2 id="featured-h">${T.home.featuredH}</h2>
         </div>
         <a class="text-link" href="${R.inventory}">${T.ui.viewAll}</a>
       </div>
-      <div class="vehicle-grid reveal" id="featured-grid"><!--SX:CARDS-->${cards || ""}<!--/SX:CARDS--></div>
+      <!--SX:COUNT-->${inventoryCount(T.lang, count, revision)}<!--/SX:COUNT-->
+      <div class="vehicle-grid" id="featured-grid"><!--SX:CARDS-->${cards || ""}<!--/SX:CARDS--></div>
     </div>
   </section>
 
@@ -195,8 +197,7 @@ function reviewsBlock(T) {
 }
 
 /* ---------------- Inventory ---------------- */
-function inventoryBody(T, cards) {
-  const hasCards = Boolean(cards && String(cards).trim());
+function inventoryBody(T, cards, count, revision) {
   return `
   <div class="page-head">
     <div class="container">
@@ -253,6 +254,7 @@ function inventoryBody(T, cards) {
     <div class="drawer-overlay" id="drawer-overlay"></div>
 
     <div>
+      <!--SX:COUNT-->${inventoryCount(T.lang, count, revision)}<!--/SX:COUNT-->
       <div class="inventory-toolbar">
         <p class="result-count" id="result-count" role="status" aria-live="polite"></p>
         <div class="toolbar-right">
@@ -270,11 +272,7 @@ function inventoryBody(T, cards) {
       <div class="chip-row" id="chip-row"></div>
       <div class="vehicle-grid" id="inventory-grid"><!--SX:CARDS-->${cards || ""}<!--/SX:CARDS--></div>
 
-      <div class="empty-state" id="empty-state"${hasCards ? " hidden" : ""}>
-        <h2>${hasCards ? "" : T.ui.noStockTitle}</h2>
-        <p>${hasCards ? "" : T.ui.noStockBody}</p>
-        <button class="btn btn-red" id="empty-reset" type="button"${hasCards ? "" : ' style="display:none"'}>${T.ui.emptyReset}</button>
-      </div>
+      <!--SX:EMPTY-->${emptyState(T, count)}<!--/SX:EMPTY-->
 
       <div class="load-more-wrap">
         <button class="btn btn-outline" id="load-more" type="button">${T.ui.loadMore}</button>

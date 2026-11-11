@@ -1,5 +1,7 @@
 "use strict";
 
+const { validate } = require("../js/inventory-rules.js");
+
 const API = "https://api.github.com";
 
 function repoPath(repo) {
@@ -22,7 +24,7 @@ async function githubJson(url, token, fetchImpl) {
   };
   if (token) headers.Authorization = "Bearer " + token;
 
-  const response = await fetchImpl(url, { cache: "no-store", headers: headers });
+  const response = await fetchImpl(url, { cache: "no-store", headers, signal: AbortSignal.timeout(10000) });
   if (!response.ok) {
     throw new Error("Live inventory request failed with HTTP " + response.status);
   }
@@ -58,10 +60,7 @@ async function loadLatestInventory(options) {
   }
 
   const data = JSON.parse(Buffer.from(String(file.content).replace(/\s/g, ""), "base64").toString("utf8"));
-  if (!data || !Array.isArray(data.vehicles)) {
-    throw new Error("Live inventory returned an invalid data shape");
-  }
-  return data.vehicles;
+  return validate(data);
 }
 
 module.exports = { loadLatestInventory };
