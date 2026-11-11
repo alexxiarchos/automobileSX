@@ -40,7 +40,7 @@ SX.ready.then(function () {
     var warning = document.createElement("p");
     warning.className = "muted-note";
     warning.textContent = SX.lang === "fr"
-      ? "Impossible d'actualiser l'inventaire. Appelez-nous pour confirmer la disponibilite des vehicules affiches."
+      ? "Impossible d'actualiser l'inventaire. Appelez-nous pour confirmer la disponibilité des véhicules affichés."
       : "Inventory could not be refreshed. Please call to confirm availability of the listed vehicles.";
     grid.parentNode.insertBefore(warning, grid);
   } else if (grid) {

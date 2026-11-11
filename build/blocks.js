@@ -196,6 +196,7 @@ function reviewsBlock(T) {
 
 /* ---------------- Inventory ---------------- */
 function inventoryBody(T, cards) {
+  const hasCards = Boolean(cards && String(cards).trim());
   return `
   <div class="page-head">
     <div class="container">
@@ -269,10 +270,10 @@ function inventoryBody(T, cards) {
       <div class="chip-row" id="chip-row"></div>
       <div class="vehicle-grid" id="inventory-grid"><!--SX:CARDS-->${cards || ""}<!--/SX:CARDS--></div>
 
-      <div class="empty-state" id="empty-state" hidden>
-        <h2></h2>
-        <p></p>
-        <button class="btn btn-red" id="empty-reset" type="button">${T.ui.emptyReset}</button>
+      <div class="empty-state" id="empty-state"${hasCards ? " hidden" : ""}>
+        <h2>${hasCards ? "" : T.ui.noStockTitle}</h2>
+        <p>${hasCards ? "" : T.ui.noStockBody}</p>
+        <button class="btn btn-red" id="empty-reset" type="button"${hasCards ? "" : ' style="display:none"'}>${T.ui.emptyReset}</button>
       </div>
 
       <div class="load-more-wrap">

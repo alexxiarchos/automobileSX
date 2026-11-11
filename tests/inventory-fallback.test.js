@@ -61,8 +61,33 @@ function runBrowserScript(file, sx, els) {
   return nodes;
 }
 
+async function loadInventoryData(fetchImpl) {
+  const context = {
+    SX: {},
+    fetch: fetchImpl,
+    location: { pathname: "/inventory" },
+    console: { error() {} }
+  };
+  context.window = context;
+  vm.runInNewContext(fs.readFileSync(path.join(ROOT, "js/data.js"), "utf8"), context, {
+    filename: "js/data.js"
+  });
+  await context.SX.ready;
+  return context.SX;
+}
+
+function makeSynchronous(sx) {
+  return Object.assign({}, sx, { ready: { then(fn) { fn(); } } });
+}
+
 test("homepage preserves server-rendered vehicles when the API fails", () => {
   const grid = element('<article class="vehicle-card">Existing vehicle</article>');
+  let writes = 0;
+  let html = grid.innerHTML;
+  Object.defineProperty(grid, "innerHTML", {
+    get() { return html; },
+    set(value) { writes++; html = value; }
+  });
   const notices = [];
   grid.parentNode = { insertBefore(note) { notices.push(note); } };
   const nodes = runBrowserScript("js/home.js", {
@@ -70,12 +95,24 @@ test("homepage preserves server-rendered vehicles when the API fails", () => {
     vehicles: []
   }, { "featured-grid": grid });
   assert.match(nodes["featured-grid"].innerHTML, /Existing vehicle/);
+  assert.equal(writes, 0, "the existing homepage card markup must not be replaced");
   assert.equal(notices.length, 1);
   assert.match(notices[0].textContent, /could not be refreshed/);
 });
 
-test("inventory preserves server-rendered vehicles and disables stale controls on API failure", () => {
+test("inventory preserves server-rendered vehicles after the real data fetch rejects", async () => {
+  const sx = await loadInventoryData(async function () {
+    throw new Error("network unavailable");
+  });
+  assert(sx.loadError);
+
   const grid = element('<article class="vehicle-card">Existing vehicle</article>');
+  let writes = 0;
+  let html = grid.innerHTML;
+  Object.defineProperty(grid, "innerHTML", {
+    get() { return html; },
+    set(value) { writes++; html = value; }
+  });
   const result = element();
   const more = element();
   const filters = element();
@@ -83,10 +120,7 @@ test("inventory preserves server-rendered vehicles and disables stale controls o
   const controls = [element(), element()];
   const sidebar = element();
   sidebar.querySelectorAll = () => controls;
-  const nodes = runBrowserScript("js/inventory.js", {
-    loadError: new Error("503"),
-    vehicles: []
-  }, {
+  const nodes = runBrowserScript("js/inventory.js", makeSynchronous(sx), {
     "inventory-grid": grid,
     "result-count": result,
     "load-more": more,
@@ -95,6 +129,7 @@ test("inventory preserves server-rendered vehicles and disables stale controls o
     "filter-sidebar": sidebar
   });
   assert.match(nodes["inventory-grid"].innerHTML, /Existing vehicle/);
+  assert.equal(writes, 0, "the existing inventory card markup must not be replaced");
   assert.match(result.textContent, /Live inventory unavailable/);
   assert.equal(more.style.display, "none");
   assert.equal(filters.disabled, true);
@@ -102,7 +137,20 @@ test("inventory preserves server-rendered vehicles and disables stale controls o
   assert(controls.every(c => c.disabled));
 });
 
-test("a legitimate zero-vehicle response still renders the actual no-stock state", () => {
+test("a malformed successful response is treated as a feed failure, not zero stock", async () => {
+  const sx = await loadInventoryData(async function () {
+    return { ok: true, json: async function () { return {}; } };
+  });
+  assert(sx.loadError);
+  assert.match(sx.loadError.message, /vehicles array/);
+});
+
+test("a legitimate zero-vehicle response still renders the actual no-stock state", async () => {
+  const sx = await loadInventoryData(async function () {
+    return { ok: true, json: async function () { return { vehicles: [] }; } };
+  });
+  assert.equal(sx.loadError, undefined);
+
   const nodes = new Proxy({}, {
     get(target, key) {
       if (typeof key !== "string") return undefined;
@@ -110,10 +158,21 @@ test("a legitimate zero-vehicle response still renders the actual no-stock state
       return target[key];
     }
   });
-  runBrowserScript("js/inventory.js", { vehicles: [] }, nodes);
+  runBrowserScript("js/inventory.js", makeSynchronous(sx), nodes);
   const empty = nodes["empty-state"];
   assert.equal(empty.hidden, false);
-  assert.equal(empty.querySelector("h2").textContent, "inv.noStockTitle");
+  assert.equal(empty.querySelector("h2").textContent, "New inventory arriving");
+});
+
+test("a build with genuine zero inventory emits a crawlable no-stock state", () => {
+  const { inventoryBody } = require("../build/blocks.js");
+  for (const copyFile of ["copy-en.js", "copy-fr.js"]) {
+    const copy = require(path.join(ROOT, "build", copyFile));
+    const html = inventoryBody(copy, "");
+    assert.match(html, /<div class="empty-state" id="empty-state">/);
+    assert.match(html, new RegExp(copy.ui.noStockTitle));
+    assert.match(html, /id="empty-reset"[^>]+style="display:none"/);
+  }
 });
 
 test("inventory pages do not expose hidden zero-results copy in raw HTML", () => {

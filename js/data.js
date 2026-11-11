@@ -319,7 +319,13 @@ SX.ready = fetch("/api/stock", { cache: "no-cache" })
     return r.json();
   })
   .then(function (d) {
-    var all = (d && d.vehicles) || [];
+    /* A successful HTTP status is not enough to prove that an empty payload
+       means zero stock. Preserve the server-rendered snapshot unless the feed
+       explicitly contains the expected vehicles array. */
+    if (!d || !Array.isArray(d.vehicles)) {
+      throw new Error("Inventory response is missing the vehicles array");
+    }
+    var all = d.vehicles;
     /* Normalize display spelling in memory only. The admin-controlled JSON
        remains untouched, but legacy values such as "Bmw" cannot leak into
        headings, filters or structured page content. */

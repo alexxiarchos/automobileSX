@@ -6,7 +6,7 @@ SX.ready.then(function () {
   if (SX.loadError) {
     var status = document.getElementById("result-count");
     if (status) status.textContent = SX.lang === "fr"
-      ? "Inventaire temporairement indisponible. Les annonces affichees peuvent avoir change. Appelez-nous pour confirmer."
+      ? "Inventaire temporairement indisponible. Les annonces affichées peuvent avoir changé. Appelez-nous pour confirmer."
       : "Live inventory unavailable. Listings shown may have changed. Please call to confirm availability.";
     var more = document.getElementById("load-more");
     if (more) more.style.display = "none";

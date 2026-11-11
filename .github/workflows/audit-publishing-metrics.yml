@@ -10,6 +10,7 @@ on:
       - "js/contact.js"
       - "js/home.js"
       - "js/inventory.js"
+      - "js/data.js"
       - "robots.txt"
       - "inventory.html"
       - "fr/inventaire.html"
@@ -44,6 +45,7 @@ jobs:
           node --check js/contact.js
           node --check js/home.js
           node --check js/inventory.js
+          node --check js/data.js
           node --check build/blocks.js
           node --check build/layout.js
           node --check build/copy-en.js
