@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /api/
+Allow: /api/stock
 Allow: /api/sitemap
 
 Sitemap: https://www.automobilesx.ca/sitemap.xml
