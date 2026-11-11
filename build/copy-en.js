@@ -15,6 +15,8 @@ const ui = {
   sortKm: "Lowest kilometres", sortYear: "Newest year",
   emptyTitle: "No vehicles match those filters",
   emptyBody: "Try widening the price or kilometre range, or clear everything and start over.",
+  noStockTitle: "New inventory arriving",
+  noStockBody: `We are updating our listings. Call <a class="text-link" href="tel:+15148249117">${DEALER.phone}</a> to hear what is on the lot right now.`,
   emptyReset: "Reset all filters", loadMore: "Load more vehicles",
   overview: "Overview", specs: "Specifications", features: "Features",
   similar: "Similar vehicles", estimatePayment: "Estimate your payment",

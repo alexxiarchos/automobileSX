@@ -2,6 +2,25 @@
 SX.ready.then(function () {
   "use strict";
 
+  /* Preserve server-rendered cards on feed failure: API errors are not zero stock. */
+  if (SX.loadError) {
+    var status = document.getElementById("result-count");
+    if (status) status.textContent = SX.lang === "fr"
+      ? "Inventaire temporairement indisponible. Les annonces affichées peuvent avoir changé. Appelez-nous pour confirmer."
+      : "Live inventory unavailable. Listings shown may have changed. Please call to confirm availability.";
+    var more = document.getElementById("load-more");
+    if (more) more.style.display = "none";
+    var filtersButton = document.getElementById("filters-open");
+    if (filtersButton) filtersButton.disabled = true;
+    var sort = document.getElementById("sort");
+    if (sort) sort.disabled = true;
+    var sidebar = document.getElementById("filter-sidebar");
+    if (sidebar) sidebar.querySelectorAll("input, select, button").forEach(function (control) {
+      control.disabled = true;
+    });
+    return;
+  }
+
   var PAGE_SIZE = 12;
   var shown = PAGE_SIZE;
   var hasStock = SX.vehicles.length > 0;
@@ -208,10 +227,14 @@ SX.ready.then(function () {
 
     var empty = document.getElementById("empty-state");
     empty.hidden = results.length !== 0;
-    if (!hasStock) {
-      empty.querySelector("h2").textContent = SX.t("inv.noStockTitle");
-      empty.querySelector("p").innerHTML = SX.t("inv.noStockBody", '<a class="text-link" href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a>");
-      empty.querySelector("#empty-reset").style.display = "none";
+    /* Populate empty-state copy only when it is actually visible. Keeping
+       default zero-results text in the HTML confuses text-only crawlers. */
+    if (!results.length) {
+      empty.querySelector("h2").textContent = SX.t(hasStock ? "inv.emptyTitle" : "inv.noStockTitle");
+      empty.querySelector("p").innerHTML = hasStock
+        ? SX.t("inv.emptyBody")
+        : SX.t("inv.noStockBody", '<a class="text-link" href="' + SX.dealer.phoneHref + '">' + SX.dealer.phone + "</a>");
+      empty.querySelector("#empty-reset").style.display = hasStock ? "" : "none";
     }
 
     var lm = document.getElementById("load-more");

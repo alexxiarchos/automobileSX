@@ -15,6 +15,8 @@ const ui = {
   sortKm: "Kilométrage le plus bas", sortYear: "Année la plus récente",
   emptyTitle: "Aucun véhicule ne correspond à ces filtres",
   emptyBody: "Élargissez la fourchette de prix ou de kilométrage, ou effacez tout et recommencez.",
+  noStockTitle: "Nouveaux véhicules à venir",
+  noStockBody: `Nos annonces sont en cours de mise à jour. Appelez le <a class="text-link" href="tel:+15148249117">${DEALER.phone}</a> pour savoir ce qui est disponible.`,
   emptyReset: "Réinitialiser les filtres", loadMore: "Voir plus de véhicules",
   overview: "Aperçu", specs: "Fiche technique", features: "Équipements",
   similar: "Véhicules semblables", estimatePayment: "Estimez votre paiement",

@@ -5,7 +5,7 @@ SX.ready.then(function () {
   /* Search card */
   var makeSel = document.getElementById("hs-make");
   var modelSel = document.getElementById("hs-model");
-  if (makeSel && modelSel) {
+  if (makeSel && modelSel && !SX.loadError) {
     var makes = Array.from(new Set(SX.vehicles.map(function (v) { return v.make; }))).sort();
     makeSel.innerHTML = '<option value="">' + SX.t("search.any") + "</option>" +
       makes.map(function (m) { return '<option value="' + m + '">' + m + "</option>"; }).join("");
@@ -34,7 +34,16 @@ SX.ready.then(function () {
 
   /* Featured vehicles */
   var grid = document.getElementById("featured-grid");
-  if (grid) {
+  if (grid && SX.loadError) {
+    /* Keep the pre-rendered cards if the live API fails. An API error is
+       not evidence that the dealership has zero vehicles in stock. */
+    var warning = document.createElement("p");
+    warning.className = "muted-note";
+    warning.textContent = SX.lang === "fr"
+      ? "Impossible d'actualiser l'inventaire. Appelez-nous pour confirmer la disponibilité des véhicules affichés."
+      : "Inventory could not be refreshed. Please call to confirm availability of the listed vehicles.";
+    grid.parentNode.insertBefore(warning, grid);
+  } else if (grid) {
     /* Match the server-rendered order exactly so hydration cannot reshuffle
        the cards after a visitor has started looking at them. */
     var featured = SX.vehicles.slice().sort(function (a, b) {
@@ -54,7 +63,7 @@ SX.ready.then(function () {
 
   /* Body type tiles */
   var tiles = document.getElementById("body-tiles");
-  if (tiles) {
+  if (tiles && !SX.loadError) {
     tiles.innerHTML = SX.bodyTypes.map(function (b) {
       var count = SX.vehicles.filter(function (v) { return v.body === b; }).length;
       return '<a class="body-tile" href="' + SX.url("inventory") + "?body=" + encodeURIComponent(b) + '">' +
