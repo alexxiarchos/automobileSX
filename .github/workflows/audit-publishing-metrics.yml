@@ -8,6 +8,13 @@ on:
       - "api/_lib/vehiclePage.js"
       - "js/metrics.js"
       - "js/contact.js"
+      - "js/home.js"
+      - "js/inventory.js"
+      - "robots.txt"
+      - "inventory.html"
+      - "fr/inventaire.html"
+      - "build/blocks.js"
+      - "tests/inventory-fallback.test.js"
       - "build/layout.js"
       - "build/copy-en.js"
       - "build/copy-fr.js"
@@ -35,11 +42,16 @@ jobs:
           node --check api/_lib/vehiclePage.js
           node --check js/metrics.js
           node --check js/contact.js
+          node --check js/home.js
+          node --check js/inventory.js
+          node --check build/blocks.js
           node --check build/layout.js
           node --check build/copy-en.js
           node --check build/copy-fr.js
       - name: Test publishing warnings and GA4 consent
         run: node --test tests/publishing-metrics.test.js
+      - name: Test inventory API failure and crawler fallbacks
+        run: node --test tests/inventory-fallback.test.js
       - name: Test inventory snapshot and sitemap coverage
         run: |
           node tests/live-inventory-build.test.js
