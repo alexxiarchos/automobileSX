@@ -293,6 +293,7 @@ module.exports = {
     description: "Guides en langage clair pour acheter une voiture d'occasion au Québec : taxes, garantie légale, financement, reprise et immatriculation.",
     h1: "Guides pour acheteurs de voitures d'occasion au Québec",
     sub: "Ce que nous expliquons en personne, mis par écrit pour que vous puissiez le lire avant.",
+    winterLink: "Vous allez chercher une auto cet hiver? Consultez les r\u00e8gles sur les pneus d'hiver au Qu\u00e9bec",
     cards: guideCards
   },
 
@@ -306,7 +307,7 @@ module.exports = {
 
       <h2>Les taxes que vous paierez</h2>
       <p>Pour un achat taxable ordinaire chez un commerçant, la TPS est de 5 % et est généralement calculée sur le prix de vente convenu. La TVQ est de 9,975 % et est calculée sur le plus élevé du prix de vente ou de la valeur estimative du véhicule, sauf règle particulière pour un véhicule endommagé ou soumis à une usure anormale. <a href="https://www.revenuquebec.ca/fr/citoyens/taxes/biens-et-services-taxables-detaxes-ou-exoneres/tps-et-tvq/transport-et-vehicules-routiers/vehicules-routiers-citoyens/achat-dun-vehicule-routier/achat-dun-vehicule-routier-usage-dun-commercant/" target="_blank" rel="noopener">Vérifiez le calcul actuel de Revenu Québec</a>. Le prix annoncé doit déjà inclure la préparation, le transport et les frais d'administration; les taxes et le droit applicable sur les pneus neufs peuvent s'ajouter.</p>
-      <p>Avec une reprise admissible, la TPS est généralement calculée sur le prix de vente moins le crédit de reprise. La TVQ part du plus élevé du prix de vente ou de la valeur estimative, puis soustrait ce crédit. Demandez un calcul détaillé. Si votre limite est ferme, utilisez notre <a class="text-link" href="${R.g5}">fiche de budget d'achat complet</a>.</p>
+      <p>Avec une reprise admissible, la TPS est généralement calculée sur le prix de vente moins le crédit de reprise. La TVQ part du plus élevé du prix de vente ou de la valeur estimative, puis soustrait ce crédit. Demandez un calcul détaillé. Si vous avez une auto à donner en échange, voyez <a class="text-link" href="${R.g3}">comment un commerçant détermine sa valeur de reprise</a>. Si votre limite est ferme, <a class="text-link" href="${R.g5}">calculez votre budget d'achat en incluant les taxes et les frais</a>.</p>
 
       <h2>La garantie légale sur un véhicule d'occasion</h2>
       <p>La Loi sur la protection du consommateur accorde à la plupart des véhicules d'occasion achetés chez un commerçant une garantie de bon fonctionnement, sans frais supplémentaires, selon l'âge et le kilométrage. Les seuils ont été élargis en avril 2024, alors les articles plus anciens en ligne les sous-estiment :</p>
@@ -325,7 +326,7 @@ module.exports = {
       <p>Si vous arrivez de l'Ontario, ajustez vos attentes : une voiture de promenade usagée vendue par un commerçant québécois à un consommateur n'exige pas de certificat de vérification mécanique. Ces certificats sont requis dans des situations précises, comme les véhicules provenant de l'extérieur du Québec ou reconstruits après un accident grave. Demandez au garage choisi de confirmer le contenu et le prix de son inspection indépendante.</p>
 
       <h2>Faites-la inspecter quand même</h2>
-      <p>L'OPC recommande un essai routier et une inspection par un mécanicien de confiance, et précise qu'un commerçant doit accepter la demande. Une inspection décrit l'état observé au moment de l'examen; elle ne garantit pas la fiabilité future. Utilisez notre <a class="text-link" href="${R.g6}">fiche d'inspection préachat à Dorval</a> pour coordonner le véhicule, le garage et vos questions.</p>
+      <p>L'OPC recommande un essai routier et une inspection par un mécanicien de confiance, et précise qu'un commerçant doit accepter la demande. Une inspection décrit l'état observé au moment de l'examen; elle ne garantit pas la fiabilité future. Si vous magasinez dans le secteur, voyez comment <a class="text-link" href="${R.g6}">organiser une inspection préachat à Dorval</a>.</p>
 
       <h2>Avant de signer</h2>
       <p>Le contrat doit indiquer le numéro de permis OPC du commerçant, le prix, les taxes, le total à payer, les détails de la garantie et les conditions de reprise s'il y a lieu. Vérifiez que le numéro d'identification du véhicule au contrat correspond à celui sur l'auto. Assurez-vous que toute promesse verbale, comme une réparation avant la livraison, est écrite au contrat.</p>
@@ -334,7 +335,7 @@ module.exports = {
       <p>Si vous financez chez le commerçant, vous avez deux jours pour annuler ce contrat de crédit, et pour un véhicule d'occasion vous pouvez le faire même après en avoir pris livraison, à condition de le rapporter dans le même état. Si vous payez comptant ou passez par votre banque, il n'y a généralement aucun délai de réflexion. Décidez avant que le stylo touche le papier.</p>
 
       <h2>Pour aller plus loin</h2>
-      <p><a class="text-link" href="${R.g4}">Immatriculer le véhicule à la SAAQ</a> · <a class="text-link" href="${R.g2}">Le financement avec un crédit imparfait</a> · <a class="text-link" href="${R.inventory}">Voir notre inventaire</a></p>
+      <p>Avant d'aller chercher votre auto, voyez comment <a class="text-link" href="${R.g4}">immatriculer une auto usagée à la SAAQ</a>. Si vous comparez encore vos options, consultez notre guide sur le <a class="text-link" href="${R.g2}">financement auto avec un mauvais crédit</a> ou <a class="text-link" href="${R.inventory}">voyez les autos usagées à Dorval</a>.</p>
       ${accuracyNote}`
   },
 
