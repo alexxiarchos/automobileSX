@@ -842,8 +842,9 @@ input[type="range"] {
 .prose li strong { font-weight: 700; }
 .prose a { color: var(--ink); border-bottom: 2px solid var(--red); font-weight: 600; }
 .prose a:hover { color: var(--red); }
-.guide-breadcrumb-wrap .breadcrumb { padding: 12px 0; }
-.guide-breadcrumb-wrap .breadcrumb li + li::before { color: var(--slate); }
+.page-head .breadcrumb { padding: 0; margin: 0 0 14px; color: var(--mist); }
+.page-head .breadcrumb a { color: inherit; }
+.page-head .breadcrumb a:hover { color: var(--bone); text-decoration: underline; }
 .page-head:has(.article-byline) .sub { color: var(--mist); }
 .article-byline { margin: 16px 0 0; color: var(--mist); font-size: 14px; font-weight: 600; }
 .article-hero { margin: 0 0 30px; }

@@ -473,7 +473,6 @@ module.exports = {
     sub: "Partez d'une limite totale ferme afin d'intégrer le prix affiché, les taxes et les autres coûts au même plan.",
     byline: "Par Automobile SX",
     schemaType: "BlogPosting",
-    showBreadcrumbs: true,
     draft: false,
     datePublished: "2026-11-04",
     dateModified: "2026-11-04",
@@ -528,7 +527,6 @@ module.exports = {
     h1: "Acheter une auto usag\u00e9e en hiver au Qu\u00e9bec : peut-on repartir sans pneus d'hiver?",
     sub: "Les pneus d'hiver obligatoires, l'exemption de sept jours et la pose avant de repartir.",
     schemaType: "BlogPosting",
-    showBreadcrumbs: true,
     datePublished: "2026-11-11",
     dateModified: "2026-11-11",
     body: `
@@ -587,7 +585,6 @@ module.exports = {
     sub: "Coordonnez le véhicule précis, le garage et vos questions avant de vous engager.",
     byline: "Par Automobile SX",
     schemaType: "BlogPosting",
-    showBreadcrumbs: true,
     draft: false,
     datePublished: "2026-11-04",
     dateModified: "2026-11-04",
