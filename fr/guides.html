@@ -40,11 +40,18 @@
     <div class="container"><h1>Guides pour acheteurs de voitures d'occasion au Québec</h1><p class="sub">Ce que nous expliquons en personne, mis par écrit pour que vous puissiez le lire avant.</p></div>
   </div>
   <div class="container section">
+    <p id="winter-guide-shortcut" hidden><a class="text-link" href="/fr/guides/acheter-auto-usagee-hiver-quebec">Vous allez chercher une auto cet hiver? Consultez les règles sur les pneus d'hiver au Québec</a></p>
+    <script>
+      (() => {
+        const month = new Intl.DateTimeFormat("en-CA", { month: "numeric", timeZone: "America/Toronto" }).format(new Date());
+        document.getElementById("winter-guide-shortcut").hidden = !["11", "12"].includes(month);
+      })();
+    </script>
     <div class="card-grid">
       
-      <a class="link-card" href="/fr/guides/acheter-auto-usagee-hiver-quebec">
-        <h2>Acheter une auto usagée en hiver</h2>
-        <p>Comprenez les règles sur les pneus d'hiver et planifiez la pose avant de repartir.</p>
+      <a class="link-card" href="/fr/guides/acheter-une-voiture-usagee-au-quebec">
+        <h2>Acheter une voiture usagée au Québec</h2>
+        <p>Taxes, garantie légale, étiquette obligatoire et vérifications avant de signer.</p>
         <span class="link-card-cta">Lire le guide →</span>
       </a>
       <a class="link-card" href="/fr/guides/budget-auto-usagee-quebec">
@@ -52,14 +59,9 @@
         <p>Partez d'une limite totale et comparez les coûts d'achat et d'utilisation.</p>
         <span class="link-card-cta">Lire le guide →</span>
       </a>
-      <a class="link-card" href="/fr/guides/inspection-auto-usagee-dorval">
-        <h2>Inspection d'une auto usagée à Dorval</h2>
-        <p>Organisez une inspection indépendante et utilisez les constats écrits.</p>
-        <span class="link-card-cta">Lire le guide →</span>
-      </a>
-      <a class="link-card" href="/fr/guides/acheter-une-voiture-usagee-au-quebec">
-        <h2>Acheter une voiture usagée au Québec</h2>
-        <p>Taxes, garantie légale, étiquette obligatoire et vérifications avant de signer.</p>
+      <a class="link-card" href="/fr/guides/valeur-de-reprise-quebec">
+        <h2>Quelle est la valeur de ma reprise ?</h2>
+        <p>Comment le montant est établi et l'économie de taxes que plusieurs ignorent.</p>
         <span class="link-card-cta">Lire le guide →</span>
       </a>
       <a class="link-card" href="/fr/guides/financement-auto-mauvais-credit-quebec">
@@ -67,14 +69,19 @@
         <p>Comment comparer une offre complète et conserver vos droits au Québec.</p>
         <span class="link-card-cta">Lire le guide →</span>
       </a>
-      <a class="link-card" href="/fr/guides/valeur-de-reprise-quebec">
-        <h2>Quelle est la valeur de ma reprise ?</h2>
-        <p>Comment le montant est établi et l'économie de taxes que plusieurs ignorent.</p>
+      <a class="link-card" href="/fr/guides/inspection-auto-usagee-dorval">
+        <h2>Inspection d'une auto usagée à Dorval</h2>
+        <p>Organisez une inspection indépendante et utilisez les constats écrits.</p>
         <span class="link-card-cta">Lire le guide →</span>
       </a>
       <a class="link-card" href="/fr/guides/immatriculer-une-voiture-usagee-quebec">
         <h2>Immatriculer une voiture usagée</h2>
         <p>Les démarches à la SAAQ, les plaques et ce que le commerçant gère pour vous.</p>
+        <span class="link-card-cta">Lire le guide →</span>
+      </a>
+      <a class="link-card" href="/fr/guides/acheter-auto-usagee-hiver-quebec">
+        <h2>Acheter une auto usagée en hiver</h2>
+        <p>Comprenez les règles sur les pneus d'hiver et planifiez la pose avant de repartir.</p>
         <span class="link-card-cta">Lire le guide →</span>
       </a>
     </div>

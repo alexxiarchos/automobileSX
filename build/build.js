@@ -135,13 +135,24 @@ function articleSchema(T, key, lang) {
 }
 
 function guidesBody(T) {
+  const order = new Map(["g1", "g5", "g3", "g2", "g6", "g4", "g7"].map((key, index) => [T.R[key], index]));
+  const cards = [...T.guides.cards].sort((a, b) =>
+    (order.get(a.href) ?? order.size) - (order.get(b.href) ?? order.size)
+  );
   return `
   <div class="page-head">
     <div class="container"><h1>${T.guides.h1}</h1><p class="sub">${T.guides.sub}</p></div>
   </div>
   <div class="container section">
+    <p id="winter-guide-shortcut" hidden><a class="text-link" href="${T.R.g7}">${T.guides.winterLink}</a></p>
+    <script>
+      (() => {
+        const month = new Intl.DateTimeFormat("en-CA", { month: "numeric", timeZone: "America/Toronto" }).format(new Date());
+        document.getElementById("winter-guide-shortcut").hidden = !["11", "12"].includes(month);
+      })();
+    </script>
     <div class="card-grid">
-      ${T.guides.cards.map(g => `
+      ${cards.map(g => `
       <a class="link-card" href="${g.href}">
         <h2>${g.h}</h2>
         <p>${g.p}</p>
