@@ -72,8 +72,7 @@ function renderCards(vehicles) {
 /* Wrap a written article in the standard page-head + prose layout */
 function prosePage(T, key, extraSchema) {
   const c = T[key];
-  const breadcrumb = c.showBreadcrumbs ? `
-  <div class="container guide-breadcrumb-wrap">
+  const breadcrumb = /^g\d+$/.test(key) ? `
     <nav class="breadcrumb" aria-label="${T.lang === "fr" ? "Fil d'Ariane" : "Breadcrumb"}">
       <ol>
         <li><a href="${T.R.home}">${T.lang === "fr" ? "Accueil" : "Home"}</a></li>
@@ -81,7 +80,7 @@ function prosePage(T, key, extraSchema) {
         <li aria-current="page">${c.breadcrumbLabel || c.h1}</li>
       </ol>
     </nav>
-  </div>` : "";
+    ` : "";
   const publishedDate = /^g[1-4]$/.test(key) ? ARTICLE_PUBLISHED_DATE : c.datePublished;
   const modifiedDate = /^g[1-4]$/.test(key) ? ARTICLE_MODIFIED_DATE : c.dateModified;
   const formatDate = date => new Intl.DateTimeFormat(T.lang === "fr" ? "fr-CA" : "en-CA", {
@@ -94,9 +93,9 @@ function prosePage(T, key, extraSchema) {
       ${c.imageCaption ? `<figcaption>${c.imageCaption}</figcaption>` : ""}
     </figure>` : "";
   return {
-    body: `${breadcrumb}
+    body: `
   <div class="page-head">
-    <div class="container"><h1>${c.h1}</h1><p class="sub">${c.sub}</p>${byline}</div>
+    <div class="container">${breadcrumb}<h1>${c.h1}</h1><p class="sub">${c.sub}</p>${byline}</div>
   </div>
   <div class="container prose-layout">
     <article class="prose">${heroImage}${c.body}</article>

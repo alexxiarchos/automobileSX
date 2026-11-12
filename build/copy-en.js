@@ -488,7 +488,6 @@ module.exports = {
     sub: "Work backward from a firm total so the advertised price, taxes and other costs fit the same plan.",
     byline: "By Automobile SX",
     schemaType: "BlogPosting",
-    showBreadcrumbs: true,
     draft: false,
     datePublished: "2026-11-04",
     dateModified: "2026-11-04",
@@ -543,7 +542,6 @@ module.exports = {
     h1: "Buying a used car in winter in Quebec: Can you drive it home without winter tires?",
     sub: "Quebec's winter tire deadline, the seven-day exemption and how to plan pickup.",
     schemaType: "BlogPosting",
-    showBreadcrumbs: true,
     datePublished: "2026-11-11",
     dateModified: "2026-11-11",
     body: `
@@ -602,7 +600,6 @@ module.exports = {
     sub: "Coordinate the actual vehicle, the garage and the questions before you commit.",
     byline: "By Automobile SX",
     schemaType: "BlogPosting",
-    showBreadcrumbs: true,
     draft: false,
     datePublished: "2026-11-04",
     dateModified: "2026-11-04",
