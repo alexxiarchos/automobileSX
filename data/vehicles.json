@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T18:04:17.344Z",
+  "updatedAt": "2026-11-13T18:05:13.976Z",
   "vehicles": [
     {
       "id": "2010-toyota-corolla-matrix-alxd7",
@@ -65,7 +65,20 @@
       "createdAt": "2026-11-13T18:01:35.356Z",
       "updatedAt": "2026-11-13T18:04:16.404Z",
       "publishedAt": "2026-11-13T18:04:16.404Z",
-      "posts": []
+      "posts": [
+        {
+          "target": "facebook",
+          "id": "101868772570376_1219354130843440",
+          "url": "https://www.facebook.com/101868772570376_1219354130843440",
+          "at": "2026-11-13T18:05:13.598Z"
+        },
+        {
+          "target": "instagram",
+          "id": "17871271020663212",
+          "url": "https://www.instagram.com/p/DfsO8iClyyO/",
+          "at": "2026-11-13T18:05:13.598Z"
+        }
+      ]
     },
     {
       "id": "2016-hyundai-accent-jjk4h",
