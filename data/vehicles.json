@@ -1,6 +1,72 @@
 {
-  "updatedAt": "2026-11-11T20:06:29.135Z",
+  "updatedAt": "2026-11-13T18:04:17.344Z",
   "vehicles": [
+    {
+      "id": "2010-toyota-corolla-matrix-alxd7",
+      "year": 2010,
+      "make": "Toyota",
+      "model": "Corolla Matrix",
+      "trim": "",
+      "body": "Sedan",
+      "price": 2499,
+      "km": 246000,
+      "transmission": "Manual",
+      "fuel": "Gasoline",
+      "drivetrain": "FWD",
+      "extColor": "Grey",
+      "extHex": "#5c6066",
+      "intColor": "Grey",
+      "engine": "1.4L I4",
+      "econCity": "",
+      "econHwy": "",
+      "doors": 5,
+      "seats": "",
+      "vin": "2T1KU4EE2AC338886",
+      "stock": "SX-1035",
+      "tag": "",
+      "features": [
+        "Air Conditioning",
+        "Keyless Entry"
+      ],
+      "desc": "",
+      "descFr": "",
+      "descMode": "auto",
+      "descNote": "",
+      "descNoteFr": "",
+      "draftNotes": {
+        "ownership": ""
+      },
+      "images": [
+        "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacnlp-1.jpg",
+        "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacpbe-2.jpg",
+        "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacq6r-3.jpg",
+        "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacr22-4.jpg",
+        "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacrxd-5.jpg",
+        "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacspo-6.jpg",
+        "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacti5-7.jpg",
+        "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacu7x-8.jpg",
+        "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacv07-9.jpg",
+        "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacvsh-10.jpg",
+        "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacwl7-11.jpg",
+        "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacxah-12.jpg",
+        "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacy0a-13.jpg"
+      ],
+      "status": "available",
+      "opc": {
+        "classOverride": "",
+        "priorUse": "personal",
+        "priorOwner": "",
+        "extended": "",
+        "powertrain": "",
+        "manufacturer": "",
+        "repairs": "",
+        "remarks": ""
+      },
+      "createdAt": "2026-11-13T18:01:35.356Z",
+      "updatedAt": "2026-11-13T18:04:16.404Z",
+      "publishedAt": "2026-11-13T18:04:16.404Z",
+      "posts": []
+    },
     {
       "id": "2016-hyundai-accent-jjk4h",
       "year": 2016,
