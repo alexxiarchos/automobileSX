@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T23:40:42.356Z",
+  "updatedAt": "2026-11-17T23:41:31.418Z",
   "vehicles": [
     {
       "id": "2012-hyundai-elantra-mhto4",
@@ -1337,7 +1337,7 @@
         "images/vehicles/2017-subaru-outback-jcq9w/mselocgl-29.jpg",
         "images/vehicles/2017-subaru-outback-jcq9w/mselod62-30.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -1349,8 +1349,9 @@
         "remarks": ""
       },
       "createdAt": "2026-08-04T11:51:51.272Z",
-      "updatedAt": "2026-08-15T17:54:23.021Z",
+      "updatedAt": "2026-11-17T23:41:30.917Z",
       "publishedAt": "2026-08-13T22:31:41.104Z",
+      "soldAt": "2026-11-17T23:41:30.917Z",
       "posts": [
         {
           "target": "facebook",
