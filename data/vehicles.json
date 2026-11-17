@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T23:34:37.914Z",
+  "updatedAt": "2026-11-17T23:37:19.128Z",
   "vehicles": [
     {
       "id": "2012-hyundai-elantra-mhto4",
@@ -297,86 +297,6 @@
           "at": "2026-11-07T01:08:35.804Z"
         }
       ]
-    },
-    {
-      "id": "2018-kia-forte-6nh1x",
-      "year": 2018,
-      "make": "Kia",
-      "model": "Forte",
-      "trim": "Ex",
-      "body": "Sedan",
-      "price": 7999,
-      "km": 180200,
-      "transmission": "Automatic",
-      "fuel": "Gasoline",
-      "drivetrain": "FWD",
-      "extColor": "Grety",
-      "extHex": "#6c7178",
-      "intColor": "Grey",
-      "engine": "2.0L 4-cyl",
-      "econCity": "",
-      "econHwy": "",
-      "doors": 4,
-      "seats": 5,
-      "vin": "3KPFL4A81JE263488",
-      "stock": "SX-1032",
-      "tag": "",
-      "features": [
-        "Backup Camera",
-        "Air Conditioning",
-        "Dual-Zone Climate Control",
-        "Heated Seats",
-        "Heated Steering Wheel",
-        "Power Driver Seat",
-        "Sunroof",
-        "Bluetooth",
-        "Keyless Entry",
-        "Push-Button Start",
-        "Cruise Control",
-        "Alloy Wheels",
-        "Winter Tires Included"
-      ],
-      "desc": "",
-      "descFr": "",
-      "descMode": "auto",
-      "descNote": "",
-      "descNoteFr": "",
-      "draftNotes": {
-        "ownership": ""
-      },
-      "images": [
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzm6ki-1.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzm8b1-2.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzm9jj-3.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzmaj6-4.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzmbcn-5.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzmc99-6.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzmd8y-7.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzme8f-8.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzmf81-9.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzmg7g-10.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzmgyc-11.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzmhxd-12.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzmioe-13.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzmjey-14.jpg",
-        "images/vehicles/2018-kia-forte-6nh1x/mvtzmked-15.jpg"
-      ],
-      "status": "sold",
-      "opc": {
-        "classOverride": "",
-        "priorUse": "personal",
-        "priorOwner": "",
-        "extended": "",
-        "powertrain": "",
-        "manufacturer": "",
-        "repairs": "",
-        "remarks": ""
-      },
-      "createdAt": "2026-10-29T15:38:52.094Z",
-      "updatedAt": "2026-11-06T20:45:32.193Z",
-      "publishedAt": "2026-10-29T20:20:33.395Z",
-      "soldAt": "2026-11-06T20:45:32.193Z",
-      "posts": []
     },
     {
       "id": "2019-kia-sorento-ddaui",
