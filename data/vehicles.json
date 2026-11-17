@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T20:00:03.423Z",
+  "updatedAt": "2026-11-17T23:34:28.497Z",
   "vehicles": [
     {
       "id": "2012-hyundai-elantra-mhto4",
@@ -104,7 +104,7 @@
         "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacxah-12.jpg",
         "images/vehicles/2010-toyota-corolla-matrix-alxd7/mwfacy0a-13.jpg"
       ],
-      "status": "available",
+      "status": "sold",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -116,8 +116,9 @@
         "remarks": ""
       },
       "createdAt": "2026-11-13T18:01:35.356Z",
-      "updatedAt": "2026-11-13T18:04:16.404Z",
+      "updatedAt": "2026-11-17T23:34:27.515Z",
       "publishedAt": "2026-11-13T18:04:16.404Z",
+      "soldAt": "2026-11-17T23:34:27.515Z",
       "posts": [
         {
           "target": "facebook",
