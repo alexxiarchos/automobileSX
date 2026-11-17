@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T23:41:38.699Z",
+  "updatedAt": "2026-11-17T23:46:40.666Z",
   "vehicles": [
     {
       "id": "2012-hyundai-elantra-mhto4",
@@ -862,7 +862,7 @@
       "model": "Sorento",
       "trim": "LX",
       "body": "SUV",
-      "price": 9999,
+      "price": 8999,
       "km": 156000,
       "transmission": "Automatic",
       "fuel": "Gasoline",
@@ -913,7 +913,7 @@
         "images/vehicles/2016-kia-sorento-lmnwf/msru6wdg-12.jpg",
         "images/vehicles/2016-kia-sorento-lmnwf/msru6x5u-13.jpg"
       ],
-      "status": "available",
+      "status": "draft",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -925,7 +925,7 @@
         "remarks": ""
       },
       "createdAt": "2026-08-13T18:10:50.902Z",
-      "updatedAt": "2026-08-15T18:03:58.035Z",
+      "updatedAt": "2026-11-17T23:46:40.255Z",
       "publishedAt": "2026-08-13T18:14:14.006Z",
       "posts": [
         {
