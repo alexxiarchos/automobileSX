@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T23:34:28.497Z",
+  "updatedAt": "2026-11-17T23:34:37.914Z",
   "vehicles": [
     {
       "id": "2012-hyundai-elantra-mhto4",
@@ -119,6 +119,7 @@
       "updatedAt": "2026-11-17T23:34:27.515Z",
       "publishedAt": "2026-11-13T18:04:16.404Z",
       "soldAt": "2026-11-17T23:34:27.515Z",
+      "soldAnnouncedAt": "2026-11-17T23:34:37.667Z",
       "posts": [
         {
           "target": "facebook",
