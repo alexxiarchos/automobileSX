@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23T22:44:42.412Z",
+  "updatedAt": "2026-11-23T22:45:07.292Z",
   "vehicles": [
     {
       "id": "2012-kia-rondo-bxarf",
@@ -53,7 +53,7 @@
         "images/vehicles/2012-kia-rondo-bxarf/mwtur8t6-13.jpg",
         "images/vehicles/2012-kia-rondo-bxarf/mwtur9m7-14.jpg"
       ],
-      "status": "draft",
+      "status": "available",
       "opc": {
         "classOverride": "",
         "priorUse": "personal",
@@ -65,7 +65,8 @@
         "remarks": ""
       },
       "createdAt": "2026-11-23T22:41:40.229Z",
-      "updatedAt": "2026-11-23T22:44:41.582Z",
+      "updatedAt": "2026-11-23T22:45:06.784Z",
+      "publishedAt": "2026-11-23T22:45:06.784Z",
       "posts": []
     },
     {
