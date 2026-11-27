@@ -313,12 +313,13 @@ module.exports = {
   },
 
   g1: {
+    dateModified: "2026-11-27",
     title: "Buying a Used Car in Quebec: The Complete Guide (2026)",
     description: "What to know before buying a used car in Quebec: GST and QST, the legal warranty categories, the dealer label and inspection rights.",
     h1: "Buying a used car in Quebec",
     sub: "Taxes, the legal warranty, the dealer label, and what to check before you sign.",
     body: `
-      <p>Quebec protects used-car buyers more firmly than most provinces, but only if you know what to look for. This guide covers the parts that actually decide whether a purchase goes well.</p>
+      <p>Before you sign for a used car at a Quebec dealership, match the VIN on the car to the contract, check the warranty category on the windshield label and ask for the total with taxes and any trade-in shown separately. Arrange a road test and an inspection with a mechanic you choose before committing.</p>
 
       <h2>What you will pay in tax</h2>
       <p>For a standard taxable dealer purchase, GST is 5% and is generally calculated on the agreed sale price. QST is 9.975% and is calculated on the greater of the agreed sale price or the vehicle's estimated value, unless a specific damaged-or-unusual-wear rule applies. <a href="https://www.revenuquebec.ca/en/citizens/consumption-taxes/taxable-zero-rated-or-tax-exempt-goods-and-services/gst-and-qst/transport-and-road-vehicles/road-vehicles-individuals/purchase-of-a-road-vehicle/purchase-of-a-used-road-vehicle-from-a-dealer/" target="_blank" rel="noopener">Check the current Revenu Québec calculation</a>. The advertised price must already include preparation, transport and administration fees; taxes and the applicable new-tire duty can be added.</p>
@@ -445,6 +446,7 @@ module.exports = {
   },
 
   g4: {
+    dateModified: "2026-11-27",
     title: "Registering a Used Car in Quebec: SAAQ Guide | Automobile SX",
     description: "How to register a used car bought from a dealer in Quebec: what the dealer handles, what to bring, plates, costs and timelines.",
     h1: "Registering a used car in Quebec",
@@ -471,7 +473,7 @@ module.exports = {
       <p>Rates are set annually, so confirm current figures on the SAAQ site.</p>
 
       <h2>Insurance before you drive away</h2>
-      <p>Bodily injury coverage comes through Quebec's public plan, but liability and damage coverage for the vehicle is private and mandatory. Call your insurer with the vehicle identification number before pickup day; most will bind coverage in minutes.</p>
+      <p>Before pickup, give your insurer the VIN and confirm when your policy takes effect. Quebec requires at least $50,000 in private civil liability coverage for a passenger car. Collision coverage for your own car is optional under Quebec law. See the <a class="text-link" href="https://saaq.gouv.qc.ca/en/vehicle-registration/registering-vehicle/automobile-or-motor-home/new-or-used-car-or-motor-home-bought-from-a-dealer">SAAQ registration and insurance requirements for dealer purchases</a>.</p>
 
       <h2>Winter tires after buying a used car</h2>
       <p>Quebec generally requires winter tires from December 1 through March 15. If you are buying from a dealer or a private seller, see our <a class="text-link" href="${R.g7}">winter tire rules for used-car buyers</a> for exemption dates, the 10-day transit and how to plan a safe pickup.</p>
