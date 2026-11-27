@@ -298,12 +298,13 @@ module.exports = {
   },
 
   g1: {
+    dateModified: "2026-11-27",
     title: "Acheter une Voiture Usagée au Québec : le Guide Complet (2026)",
     description: "À savoir avant d'acheter une auto usagée au Québec : TPS et TVQ, catégories de garantie légale, étiquette obligatoire et inspection.",
     h1: "Acheter une voiture usagée au Québec",
     sub: "Taxes, garantie légale, étiquette du commerçant et vérifications avant de signer.",
     body: `
-      <p>Le Québec protège mieux les acheteurs de véhicules d'occasion que la plupart des provinces, mais seulement si vous savez quoi regarder. Ce guide couvre ce qui détermine réellement si un achat se passe bien.</p>
+      <p>Avant de signer chez un commer&ccedil;ant au Qu&eacute;bec, comparez le num&eacute;ro d'identification du v&eacute;hicule avec celui du contrat. V&eacute;rifiez la cat&eacute;gorie de garantie sur l'&eacute;tiquette du pare-brise et demandez le prix total, avec les taxes et la valeur de reprise indiqu&eacute;es s&eacute;par&eacute;ment. Pr&eacute;voyez un essai routier et une inspection par le m&eacute;canicien de votre choix.</p>
 
       <h2>Les taxes que vous paierez</h2>
       <p>Pour un achat taxable ordinaire chez un commerçant, la TPS est de 5 % et est généralement calculée sur le prix de vente convenu. La TVQ est de 9,975 % et est calculée sur le plus élevé du prix de vente ou de la valeur estimative du véhicule, sauf règle particulière pour un véhicule endommagé ou soumis à une usure anormale. <a href="https://www.revenuquebec.ca/fr/citoyens/taxes/biens-et-services-taxables-detaxes-ou-exoneres/tps-et-tvq/transport-et-vehicules-routiers/vehicules-routiers-citoyens/achat-dun-vehicule-routier/achat-dun-vehicule-routier-usage-dun-commercant/" target="_blank" rel="noopener">Vérifiez le calcul actuel de Revenu Québec</a>. Le prix annoncé doit déjà inclure la préparation, le transport et les frais d'administration; les taxes et le droit applicable sur les pneus neufs peuvent s'ajouter.</p>
@@ -430,6 +431,7 @@ module.exports = {
   },
 
   g4: {
+    dateModified: "2026-11-27",
     title: "Immatriculer une Voiture Usagée au Québec | Automobile SX",
     description: "Immatriculer une auto usagée achetée chez un commerçant au Québec : démarches à la SAAQ, documents, plaques, coûts et délais.",
     h1: "Immatriculer une voiture usagée au Québec",
@@ -456,7 +458,7 @@ module.exports = {
       <p>Les tarifs sont révisés annuellement : validez les montants courants sur le site de la SAAQ.</p>
 
       <h2>L'assurance avant de partir</h2>
-      <p>La couverture pour les blessures corporelles vient du régime public québécois, mais la responsabilité civile et la couverture du véhicule sont privées et obligatoires. Appelez votre assureur avec le numéro d'identification du véhicule avant le jour de la livraison ; la plupart activent la couverture en quelques minutes.</p>
+      <p>Avant la livraison, donnez le num&eacute;ro d'identification du v&eacute;hicule &agrave; votre assureur et confirmez la date de prise d'effet du contrat. Pour une auto de promenade, le Qu&eacute;bec exige une assurance priv&eacute;e en responsabilit&eacute; civile d'au moins 50 000 $. La loi qu&eacute;b&eacute;coise laisse la protection collision pour votre propre auto facultative. Consultez les <a class="text-link" href="https://saaq.gouv.qc.ca/immatriculation/immatriculer-vehicule/automobile-habitation-motorisee/auto-habitation-motorisee-neuve-usagee-achetee-chez-commercant">exigences de la SAAQ pour un achat chez un commer&ccedil;ant</a>.</p>
 
       <h2>Les pneus d'hiver après l'achat d'une auto usagée</h2>
       <p>Au Québec, les pneus d'hiver sont généralement obligatoires du 1er décembre au 15 mars. Que vous achetiez chez un commerçant ou d'un particulier, consultez notre <a class="text-link" href="${R.g7}">guide sur les pneus d'hiver à l'achat d'une auto usagée</a> pour comprendre les exemptions et le transit de 10 jours, et planifier la pose avant de repartir.</p>

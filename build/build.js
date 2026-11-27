@@ -82,7 +82,7 @@ function prosePage(T, key, extraSchema) {
     </nav>
     ` : "";
   const publishedDate = /^g[1-4]$/.test(key) ? ARTICLE_PUBLISHED_DATE : c.datePublished;
-  const modifiedDate = /^g[1-4]$/.test(key) ? ARTICLE_MODIFIED_DATE : c.dateModified;
+  const modifiedDate = c.dateModified || (/^g[1-4]$/.test(key) ? ARTICLE_MODIFIED_DATE : undefined);
   const formatDate = date => new Intl.DateTimeFormat(T.lang === "fr" ? "fr-CA" : "en-CA", {
     year: "numeric", month: "long", day: "numeric", timeZone: "UTC"
   }).format(new Date(date + "T00:00:00Z"));
